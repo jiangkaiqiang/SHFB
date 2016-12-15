@@ -1,3 +1,3 @@
-wlsWeb.controller('news-info',function($http, $location, $scope) {
+wlsWeb.controller('news-info',function($http, $location, $state, $stateParams,$scope) {
 	
 });

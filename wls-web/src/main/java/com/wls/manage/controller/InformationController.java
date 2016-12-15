@@ -74,6 +74,7 @@ public class InformationController extends BaseController {
 		Page<InformationDto> informationDtos = new Page<InformationDto>();
 		for (InformationEntity informationEntity : informationEntities) {
 			InformationDto informationDto = new InformationDto();
+			informationDto.setId(informationEntity.getId());
 			informationDto.setTitle(informationEntity.getTitle());
 			informationDto.setTime(informationEntity.getTime());
 			informationDto.setSource(informationEntity.getSource());

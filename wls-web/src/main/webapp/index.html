@@ -60,6 +60,122 @@
   <script src="assets/js/login-soft.js" type="text/javascript"></script>
   <script src="assets/js/common.js" type="text/javascript"></script>
   <!--END Login-->
+  <script language="javascript">
+$(function (){
+	var url,s;
+	url=window.location.href;
+    var t = url.indexOf('home');
+    if(t>=0){
+	   s=0;
+	}
+	else{
+		var t = url.indexOf('news');
+		if(t>=0){
+	       s=1;
+		}
+		else{
+		    var t = url.indexOf('geek');
+            if(t>=0){
+	           s=2;
+			}
+			else{
+				var t = url.indexOf('post-bar');
+			    if(t>=0){
+			      s=3
+				}
+			    else		
+	              s=4;
+		}
+		}
+    }
+	$("ul#menu li").each(function(index, element){
+		//alert($(this).find("a").text());
+		var currentNav = $(this).children("a:eq(0)").text();
+		console.log(currentNav + " == " + s);
+		if(currentNav == "主页" && s==0){
+			$(this).addClass("current");
+		}
+		if(currentNav == "资讯" && s==1){
+			//alert(123);
+			$(this).addClass("current");
+		}
+		if(currentNav == "创客" && s==2){
+			$(this).addClass("current");
+		}
+		if(currentNav == "创吧" && s==3){
+			 $(this).addClass("current");
+		}
+		if(currentNav == "我的" && s==4){
+			 $(this).addClass("current");
+		}
+		else{
+			//$(this).removeClass("current");
+		}
+			
+	})
+})
+  </script>
+ <script language="javascript">
+$(function (){
+    $('body')
+    .on('click', '#bar_home', function(e) {
+        $("#bar_home").addClass("current");
+		$("#bar_news").removeClass("current");
+		$("#bar_geek").removeClass("current");
+		$("#bar_post-bar").removeClass("current");
+		$("#bar_my-space").removeClass("current");
+		$("#bar_my-space-company").removeClass("current");
+    })
+	.on('click', '#bar_news', function(e) {
+	    $("#bar_home").removeClass("current");
+        $("#bar_news").addClass("current");
+		$("#bar_geek").removeClass("current");
+		$("#bar_post-bar").removeClass("current");
+		$("#bar_my-space").removeClass("current");
+		$("#bar_my-space-company").removeClass("current");
+    })
+	.on('click', '#bar_geek', function(e) {
+	    $("#bar_home").removeClass("current");
+        $("#bar_news").removeClass("current");
+		$("#bar_geek").addClass("current");
+		$("#bar_post-bar").removeClass("current");
+		$("#bar_my-space").removeClass("current");
+		$("#bar_my-space-company").removeClass("current");
+    })
+	.on('click', '#bar_post-bar', function(e) {
+	    $("#bar_home").removeClass("current");
+        $("#bar_news").removeClass("current");
+		$("#bar_geek").removeClass("current");
+		$("#bar_post-bar").addClass("current");
+		$("#bar_my-space").removeClass("current");
+		$("#bar_my-space-company").removeClass("current");
+    })
+	.on('click', '#bar_my-space', function(e) {
+	    $("#bar_home").removeClass("current");
+        $("#bar_news").removeClass("current");
+		$("#bar_geek").removeClass("current");
+		$("#bar_post-bar").removeClass("current");
+		$("#bar_my-space").addClass("current");
+		$("#bar_my-space-company").removeClass("current");
+    })
+	.on('click', '#bar_my-space-company', function(e) {
+	    $("#bar_home").removeClass("current");
+        $("#bar_news").removeClass("current");
+		$("#bar_geek").removeClass("current");
+		$("#bar_post-bar").removeClass("current");
+		$("#bar_my-space").removeClass("current");
+		$("#bar_my-space-company").addClass("current");
+    })
+	.on('click', '#bar_login', function(e) {
+	    $("#bar_home").removeClass("current");
+        $("#bar_news").removeClass("current");
+		$("#bar_geek").removeClass("current");
+		$("#bar_post-bar").removeClass("current");
+		$("#bar_my-space").removeClass("current");
+		$("#bar_my-space-company").removeClass("current");
+    })
+	})
+  </script>
   <script>
     $(document).ready(function() {
       Layout.init();
@@ -97,6 +213,7 @@
 <script src="app/js/post-bar.js" type="text/javascript"></script>
 <script src="app/js/news.js" type="text/javascript"></script>
 <script src="app/js/news-info.js" type="text/javascript"></script>
+<script src="app/js/blog-info.js" type="text/javascript"></script>
 <script src="app/js/post-message.js" type="text/javascript"></script>
 <script src="app/js/my-space-ask.js" type="text/javascript"></script>
 </head>
@@ -108,21 +225,21 @@
       <div class="row">
         <!-- Logo BEGIN -->
         <div class="col-md-2 col-sm-2">
-          <a class="scroll site-logo" href="index.html"><img src="assets/img/logo/logo.png" alt="蔚蓝树"></a>
+          <a class="scroll site-logo" href="#/home"><img src="assets/img/logo/logo.png" alt="蔚蓝树"></a>
         </div>
         <!-- Logo END -->
         <a href="javascript:void(0);" class="mobi-toggler"><i class="fa fa-bars"></i></a>
         <!-- Navigation BEGIN -->
         <div class="col-md-10 pull-right">
-          <ul class="header-navigation">
-            <li class="current"><a href="#/home">首页</a></li>
-            <li><a href="#/news">资讯</a></li>
-            <li><a href="#/geek">创客</a></li>
-            <li><a href="#/post-bar">创吧</a></li>
-            <li><a href="#/my-space"><span ng-show="user != null && user.id != 0 && user.suproleid==1" >我的</span></a></li>
-             <li><a href="#/my-space-company"><span ng-show="user != null && user.id != 0 && user.suproleid==2" >我的</span></a></li>
-            <li><div ng-if="user == null || user == undefined || user == '' ||user.id == undefined"><a href="#/register" style="display: inline; font-size:15px;">注册</a> 
-             |  <a href="/login.html"style="display: inline; font-size:15px;"><span>登录</span></a></div></li>
+          <ul class="header-navigation" id="menu">
+            <li id="bar_home"><a href="#/home">首页</a></li>
+            <li id="bar_news"><a href="#/news">资讯</a></li>
+            <li id="bar_geek"><a href="#/geek">创客</a></li>
+            <li id="bar_post-bar"><a href="#/post-bar">创吧</a></li>
+            <li id="bar_my-space"><a href="#/my-space"><span ng-show="user != null && user.id != 0 && user.suproleid==1" >我的</span></a></li>
+            <li id="bar_my-space-company"><a href="#/my-space-company"><span ng-show="user != null && user.id != 0 && user.suproleid==2" >我的</span></a></li>
+            <li id="bar_login"><div ng-if="user == null || user == undefined || user == '' ||user.id == undefined"><a href="#/register" style="display: inline; font-size:15px;">注册</a> 
+             |  <a href="#/login"style="display: inline; font-size:15px;"><span>登录</span></a></div></li>
             <li ng-click="logout()"><div ng-if="user != null && user.id != 0 && user.id != undefined
             && user != ''"><a style="display: inline; font-size:15px;">注销</a> </div></li>
           </ul>

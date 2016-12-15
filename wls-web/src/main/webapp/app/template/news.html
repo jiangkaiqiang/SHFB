@@ -74,7 +74,7 @@
                       <a ng-click="auditChanged(8)"><input type="radio" name="optionsRadios"  id="optionsRadios0" value="全部" checked> 全部</a>
                   </label><br/>
                   <label class="mt-radio margin-bottom-10">
-                      <a ng-click="auditChanged(1)"><input type="radio" name="optionsRadios" id="optionsRadios1" value="科技类" checked> 科技类</a>
+                      <a ><input type="radio" name="optionsRadios" id="optionsRadios1" value="科技类" > 科技类</a>
                   </label><br/>
                   <label class="mt-radio margin-bottom-10">
                       <a ng-click="auditChanged(2)"><input type="radio" name="optionsRadios" id="optionsRadios2" value="互联网类" > 互联网类</a>
@@ -140,8 +140,8 @@
               <div class="col-md-12 col-sm-12">
               <div class="sidebar-news clearfix" ng-repeat="newdto in AllNews">
               <div class="item" ng-if="newdto.coverpicnum<=1">
-                <a href="" ng-repeat="coverpic in newdto.coverpiclist"><img ng-src="{{coverpic}}" alt=""></a>
-                <h3><a href="news-info.html">{{newdto.title}}</a></h3>
+                <a  ng-repeat="coverpic in newdto.coverpiclist"><img ng-src="{{coverpic}}" alt=""></a>
+                <h3><a ng-click="goNewsInfo(newdto.id)">{{newdto.title}}</a></h3>
                 <div class="news-info">
                 <div class="news-block-tags">
                    <a><i class="fa fa-paper-plane"></i> {{newdto.source}}·</a>
@@ -151,7 +151,7 @@
                 </div>
               </div>
               <div class="item item-pics" ng-if="newdto.coverpicnum>1">
-                <h3><a href="news-info.html">{{newdto.title}}！</a></h3>
+                <h3><a ng-click="goNewsInfo(newdto.id)">{{newdto.title}}！</a></h3>
                 <!-- <a href=""><img src="../../assets/img/portfolio/5.jpg" alt=""></a>
                 <a href=""><img src="../../assets/img/portfolio/6.jpg" alt=""></a>
                 <a href=""><img src="../../assets/img/portfolio/7.jpg" alt=""></a> -->
