@@ -22,6 +22,8 @@ public class InformationDto {
 	
 	private Integer infocategory;
 	
+	private String infocategoryName;
+	
 	private List<String> coverpiclist;
 	
 	private Integer coverpicnum;
@@ -108,5 +110,14 @@ public class InformationDto {
 	public void setCommentEntities(List<CommentEntity> commentEntities) {
 		this.commentEntities = commentEntities;
 	}
+
+	public String getInfocategoryName() {
+		return infocategoryName;
+	}
+
+	public void setInfocategoryName(String infocategoryName) {
+		this.infocategoryName = infocategoryName;
+	}
+
 	
 }
