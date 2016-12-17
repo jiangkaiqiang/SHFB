@@ -1,4 +1,4 @@
-package com.wls.manage.crawler.tengxun;
+package com.wls.manage.crawler.tengxun.tech;
 
 /**
  * Created by haolidong on 2016/11/21.

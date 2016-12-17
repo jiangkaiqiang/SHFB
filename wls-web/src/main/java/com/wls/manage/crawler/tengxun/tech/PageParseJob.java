@@ -1,4 +1,4 @@
-package com.wls.manage.crawler.tengxun;
+package com.wls.manage.crawler.tengxun.tech;
 
 import java.util.ArrayList;
 import java.util.List;

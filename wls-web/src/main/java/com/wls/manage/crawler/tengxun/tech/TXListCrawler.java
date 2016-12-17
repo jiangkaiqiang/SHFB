@@ -1,4 +1,4 @@
-package com.wls.manage.crawler.tengxun;
+package com.wls.manage.crawler.tengxun.tech;
 import java.io.IOException;
 import java.util.logging.Logger;
 
@@ -12,11 +12,11 @@ public class TXListCrawler {
         try{
             Thread.sleep(1000);
             ListCrawlJob crawler =new ListCrawlJob();
-            for (int i = 8; i < 15; i++) {
+            for (int i = 1; i < 10; i++) {
             	if(i<10){
-            		crawler.getUrlList("http://tech.qq.com/l/201611/scroll_0"+i+".htm");
+            		crawler.getUrlList("http://tech.qq.com/l/201610/scroll_0"+i+".htm");
             	}else{
-            		crawler.getUrlList("http://tech.qq.com/l/201611/scroll_"+i+".htm");
+            		crawler.getUrlList("http://tech.qq.com/l/201610/scroll_"+i+".htm");
             	}
             	
 			}
