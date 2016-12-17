@@ -1,4 +1,6 @@
-package com.wls.manage.crawler.tengxun;
+package com.wls.manage.crawler.tengxun.digitech;
+import com.wls.manage.crawler.tengxun.tech.Content;
+import com.wls.manage.crawler.tengxun.tech.TXSciBean;
 import com.wls.manage.service.base.HttpService;
 import com.wls.manage.service.base.impl.HttpServiceImpl;
 
@@ -13,12 +15,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 /**
  * Created by haolidong on 2016/11/21.
  */
-public class genHTML {
+public class genHTMLDigitech {
     public static void Gen(TXSciBean txsci,String time,String title){
     	String HTMLcontent="";
-//        String HTMLcontent="<html><body>";
-//        HTMLcontent+="<h1><font color=\"red\"><p align=\"center\">"+txsci.getTitle()+"</p></font></h1>\n";
-//        HTMLcontent+="<p align=\"right\"><font color=\"gray\">"+txsci.getData()+"</font></p>\n";
         ArrayList<String> as = new ArrayList<String>();
 
         String pic="";
@@ -28,17 +27,7 @@ public class genHTML {
                 HTMLcontent+="<img src=\""+con.getCon()+"\" border=\"0\"/>\n";
                 if(ss.size()<=3){
                 	ss.add(con.getCon());
-                }
-                
-//                if(picCount<=3){
-//                    if(picCount==1){
-//                        pic+=con.getCon();
-//                    }else {
-//                        pic=pic+";"+con.getCon();
-//                    }
-//
-//                }
-                
+                }               
             }else{
                 if(con.getCon().equals(""))continue;
                 HTMLcontent+="<p>"+con.getCon()+"</p>\n";
@@ -51,12 +40,7 @@ public class genHTML {
         }
         System.out.println(pic);
         try{
-            //"main\TxData\Test.html"
-//            FileOutputStream fo = new FileOutputStream(new File(filename));
-//            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fo));
-//            bw.write(HTMLcontent);
-//            System.out.println(pic);
-        	if(!HTMLcontent.equals("")){
+        	if(!HTMLcontent.equals("")&&!pic.equals("")){
         		HttpService httpService = new HttpServiceImpl();
             /**
              * 参数注意！！！！！！
@@ -69,13 +53,7 @@ public class genHTML {
              * 时间注意替换一下吧：2016-01-23 12:10:12格式
              */
             String msg="content="+HTMLcontent+"&infocategory=1&source=腾讯新闻&coverpiclist="+pic+"&title="+title+"&time="+time;
-//            System.out.println(msg);
-//            InformationController infoctl = new InformationController();
             httpService.sendPost("http://localhost:8080/i/information/addInformation", msg,10);
-//            infoctl.addInformation(txsci.getTitle(), HTMLcontent, "科学类", "", pic);
-//            infoctl.findInformationByID(1);
-//            bw.close();
-//            fo.close();
         	}
             
         } catch (Exception e){

@@ -1,4 +1,4 @@
-package com.wls.manage.crawler.tengxun;
+package com.wls.manage.crawler.tengxun.tech;
 
 import java.io.IOException;
 import java.util.logging.Logger;

@@ -1,4 +1,4 @@
-package com.wls.manage.crawler.tengxun;
+package com.wls.manage.crawler.tengxun.tech;
 
 import com.wls.manage.crawler.general.BasicCrawler;
 import org.jsoup.Jsoup;
