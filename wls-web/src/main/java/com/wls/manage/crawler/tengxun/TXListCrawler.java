@@ -12,7 +12,15 @@ public class TXListCrawler {
         try{
             Thread.sleep(1000);
             ListCrawlJob crawler =new ListCrawlJob();
-            crawler.getUrlList("http://tech.qq.com/l/201611/scroll_14.htm");
+            for (int i = 8; i < 15; i++) {
+            	if(i<10){
+            		crawler.getUrlList("http://tech.qq.com/l/201611/scroll_0"+i+".htm");
+            	}else{
+            		crawler.getUrlList("http://tech.qq.com/l/201611/scroll_"+i+".htm");
+            	}
+            	
+			}
+            
             //crawler.getUrlList("http://tech.qq.com/a/20161114/031873.htm");
         } catch (Exception e){
             e.printStackTrace();

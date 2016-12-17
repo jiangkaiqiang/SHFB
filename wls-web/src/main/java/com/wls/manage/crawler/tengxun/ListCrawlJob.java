@@ -6,6 +6,8 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Logger;
 
 /**
@@ -40,7 +42,15 @@ public class ListCrawlJob {
             }*/
             String title =href.text();
             System.out.println(href.attr("href"));
-            System.out.println(title);
+//            System.out.println(title);
+            Element time=ele.select("span[class=pub_time]").first();
+//            System.out.println(time.text());
+            String tme=time.text();
+            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    		String year=df.format(new Date()).substring(0,4);
+            String genTime=year+"-"+tme.substring(0, 2)+"-"+tme.substring(3, 5)+" "+tme.substring(7, 9)+":"+tme.substring(10, 12)+":00";
+//            System.out.println(genTime);
+            PageCrawJob.craw(href.attr("href"), genTime,href.text());
 
         }
 
