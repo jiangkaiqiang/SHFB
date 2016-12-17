@@ -15,6 +15,8 @@ public class PublishEntity {
 	
 	private String title;
 	
+	private String describe;
+	
 	private Integer pubcategory;
 	
     private Date pubtime;//发布时间
@@ -31,12 +33,20 @@ public class PublishEntity {
 		this.id = id;
 	}
 
-	public BigInteger getPublisherid() {
+	public BigInteger getPublisher() {
 		return publisher;
 	}
 
-	public void setPublisherid(BigInteger publisherid) {
-		this.publisher = publisherid;
+	public void setPublisher(BigInteger publisher) {
+		this.publisher = publisher;
+	}
+
+	public String getDescribe() {
+		return describe;
+	}
+
+	public void setDescribe(String describe) {
+		this.describe = describe;
 	}
 
 	public String getTitle() {

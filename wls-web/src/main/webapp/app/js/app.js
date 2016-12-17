@@ -49,6 +49,10 @@ wlsWeb.config(function ($stateProvider, $urlRouterProvider) {
         url: '/register',
         controller: 'register',
         templateUrl: '../../register.html'
+    }).state('login', {
+        url: '/login',
+        controller: 'login',
+        templateUrl: '../../login.html'
     }).state('post-bar', {
         url: '/post-bar',
         controller: 'post-bar',
@@ -62,9 +66,13 @@ wlsWeb.config(function ($stateProvider, $urlRouterProvider) {
         controller: 'post-message',
         templateUrl: 'app/template/post-message.html'
     }).state('news-info', {
-        url: '/news-info',
+        url: '/news-info/:newID',
         controller: 'news-info',
         templateUrl: 'app/template/news-info.html'
+    }).state('blog-info', {
+        url: '/blog-info/:publishID',
+        controller: 'blog-info',
+        templateUrl: 'app/template/blog-info.html'
     }).state('my-space-ask', {
         url: '/my-space-ask/:spaceID',
         controller: 'my-space-ask',

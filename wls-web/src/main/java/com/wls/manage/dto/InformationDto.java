@@ -1,11 +1,15 @@
 package com.wls.manage.dto;
 
+import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
 
 import com.wls.manage.entity.CommentEntity;
 
 public class InformationDto {
+	
+	private BigInteger id;
+	
 	private String title;
 	
 	private String source;
@@ -18,11 +22,22 @@ public class InformationDto {
 	
 	private Integer infocategory;
 	
+	private String infocategoryName;
+	
 	private List<String> coverpiclist;
 	
 	private Integer coverpicnum;
 	
 	private List<CommentEntity> commentEntities;
+	
+
+	public BigInteger getId() {
+		return id;
+	}
+
+	public void setId(BigInteger id) {
+		this.id = id;
+	}
 
 	public String getTitle() {
 		return title;
@@ -95,5 +110,14 @@ public class InformationDto {
 	public void setCommentEntities(List<CommentEntity> commentEntities) {
 		this.commentEntities = commentEntities;
 	}
+
+	public String getInfocategoryName() {
+		return infocategoryName;
+	}
+
+	public void setInfocategoryName(String infocategoryName) {
+		this.infocategoryName = infocategoryName;
+	}
+
 	
 }

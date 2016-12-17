@@ -71,14 +71,41 @@ public class InformationController extends BaseController {
 		keyword = URLDecoder.decode(keyword, "UTF-8");
 		}
 		Page<InformationEntity> informationEntities = informationDao.findAllInformation(audit,keyword);
+		Page<InformationDto> informationDtos = getInformationDtos(informationEntities);
+		return new PageInfo<InformationDto>(informationDtos);
+	}
+	
+	
+	
+	private Page<InformationDto> getInformationDtos(Page<InformationEntity> informationEntities) {
 		Page<InformationDto> informationDtos = new Page<InformationDto>();
 		for (InformationEntity informationEntity : informationEntities) {
 			InformationDto informationDto = new InformationDto();
+			informationDto.setId(informationEntity.getId());
 			informationDto.setTitle(informationEntity.getTitle());
 			informationDto.setTime(informationEntity.getTime());
 			informationDto.setSource(informationEntity.getSource());
 			informationDto.setContent(informationEntity.getContent());
 			informationDto.setInfocategory(Integer.parseInt(informationEntity.getInfocategory()));
+			switch (informationDto.getInfocategory()) {
+			case 1:
+				informationDto.setInfocategoryName("科技类");
+				break;
+			case 2:
+				informationDto.setInfocategoryName("互联网类");
+				break;
+			case 3:
+				informationDto.setInfocategoryName("校园类");
+				break;
+			case 4:
+				informationDto.setInfocategoryName("财经类");
+				break;
+			case 5:
+				informationDto.setInfocategoryName("创业类");
+				break;
+			default:
+				break;
+			}
 			String[] inforCovers = informationEntity.getCoverpiclist().split(";");
 			List<String> infList = new ArrayList<String>();
 			for (String infor : inforCovers) {
@@ -91,10 +118,11 @@ public class InformationController extends BaseController {
 			informationDto.setCommentnum(commentEntities.size());
 			informationDtos.add(informationDto);
 		}
-		return new PageInfo<InformationDto>(informationDtos);
+		return informationDtos;
 	}
-	
-	
+
+
+
 	@RequestMapping(value = "/findInformationsByCate")
 	@ResponseBody
 	public Object findInformationsByCate(@RequestParam(value="pageNum",required=false) Integer pageNum,
@@ -126,8 +154,12 @@ public class InformationController extends BaseController {
 	 */
 	@RequestMapping(value = "/findInformationByID")
 	@ResponseBody
-	public Object findInformationByID(@RequestParam int inforID) {
-		return informationDao.findInformationByID(inforID);
+	public Object findInformationByID(@RequestParam Integer inforID) {
+		InformationEntity informationEntity = informationDao.findInformationByID(inforID);
+		Page<InformationEntity> informationEntities = new Page<InformationEntity>();
+		informationEntities.add(informationEntity);
+		InformationDto informationDto = getInformationDtos(informationEntities).get(0);
+		return informationDto;
 	}
 	
 	/**

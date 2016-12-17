@@ -10,6 +10,8 @@ public class PublishDto {
 	
 	private String title;
 	
+	private String describe;
+	
 	private Integer pubcategory;
 	
     private Date pubtime;//发布时间
@@ -48,6 +50,14 @@ public class PublishDto {
 
 	public void setTitle(String title) {
 		this.title = title;
+	}
+
+	public String getDescribe() {
+		return describe;
+	}
+
+	public void setDescribe(String describe) {
+		this.describe = describe;
 	}
 
 	public Integer getPubcategory() {

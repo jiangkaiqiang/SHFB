@@ -1,4 +1,4 @@
-var app = angular.module('app', []).controller('login',function($http, $location, $scope) {
+wlsWeb.controller('login',function($http, $location, $scope) {
    $scope.login = function() {
 	   if($scope.username!=""&&$scope.password!=""&&
 			   $scope.username!=undefined&&$scope.password!=undefined){

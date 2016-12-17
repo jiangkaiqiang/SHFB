@@ -1,6 +1,7 @@
 package com.wls.manage.controller;
 
 import java.io.UnsupportedEncodingException;
+import java.math.BigInteger;
 import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +21,7 @@ import com.wls.manage.dto.BaseDto;
 import com.wls.manage.dto.PublishDto;
 import com.wls.manage.entity.PublishEntity;
 import com.wls.manage.entity.UserEntity;
+import com.wls.manage.util.ResponseData;
 /**
  * 
  * @author kaiqiang jiang
@@ -59,11 +61,12 @@ public class PublishController extends BaseController {
 			publishDto.setId(publishEntity.getId());
 			publishDto.setContent(publishEntity.getContent());
 			publishDto.setPubcategory(publishEntity.getPubcategory());
-			publishDto.setPublisherid(publishEntity.getPublisherid());
+			publishDto.setPublisherid(publishEntity.getPublisher());
+			publishDto.setDescribe(publishEntity.getDescribe());
 			publishDto.setPubtime(publishEntity.getPubtime());
 			publishDto.setSchoolid(publishEntity.getSchoolid());
 			publishDto.setTitle(publishEntity.getTitle());
-			UserEntity userEntity = userMapper.findUserById(publishEntity.getPublisherid().intValue());
+			UserEntity userEntity = userMapper.findUserById(publishEntity.getPublisher().intValue());
 			publishDto.setPublishername(userEntity.getNickname());
 			publishDto.setPublisheravatar(userEntity.getAvatar());
 			pDtos.add(publishDto);
@@ -131,6 +134,7 @@ public class PublishController extends BaseController {
 		publishEntities.add(publishMapper.findPulishByID(publishID));
 		return getPublishDtos(publishEntities);
 	}
+	
 	/**
 	 * 增加发布
 	 * @param message
@@ -139,8 +143,22 @@ public class PublishController extends BaseController {
 	 */
 	@RequestMapping(value = "/addPublish")
 	@ResponseBody
-	public Object addPublish(PublishEntity publishEntity) throws Exception {
+	public Object findPublishByID(@RequestParam(required = false) String title,//标题
+			@RequestParam(required = false) String describe,
+			@RequestParam(required = false) Integer pubcategory,
+			@RequestParam(required = false) Integer publisher,
+			@RequestParam(required = false) Integer schoolid,
+			@RequestParam(required = false) String content
+			){
+		PublishEntity publishEntity = new PublishEntity();
+		publishEntity.setContent(content);
+		publishEntity.setPubcategory(pubcategory);
+		publishEntity.setDescribe(describe);
+		publishEntity.setPublisher(BigInteger.valueOf(publisher));
+		publishEntity.setSchoolid(schoolid);
+		publishEntity.setTitle(title);
 		publishMapper.insertPublish(publishEntity);
-		return new BaseDto(0);
+		return ResponseData.newSuccess();
 	}
+	
 }

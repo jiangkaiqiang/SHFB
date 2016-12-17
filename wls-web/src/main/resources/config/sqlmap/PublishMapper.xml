@@ -8,6 +8,7 @@
         INSERT INTO `publish`(
 		`publisher`,
 		`title`,
+		`describe`,
 		`pubcategory`,
 		`content`,
 		`schoolid`,
@@ -17,6 +18,7 @@
 		(
 		#{publisher},
 		#{title},
+		#{describe},
 		#{pubcategory},
 		#{content},
 		#{schoolid},
@@ -29,6 +31,9 @@
         <set>
             <if test="title != null" >
                 title = #{title},
+            </if>
+            <if test="describe != null" >
+                describe = #{describe},
             </if>
             <if test="pubcategory != null" >
                 pubcategory = #{pubcategory},

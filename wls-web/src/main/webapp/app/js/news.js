@@ -1,4 +1,4 @@
-wlsWeb.controller('news',function($http, $location, $scope) {
+wlsWeb.controller('news',function($http, $location, $state,$scope) {
 	// 显示最大页数
     $scope.maxSize = 12;
     // 总条目数(默认每页十条)
@@ -37,4 +37,8 @@ wlsWeb.controller('news',function($http, $location, $scope) {
 	$scope.goSearch = function () {
 		$scope.getNews();
     };
+    
+    $scope.goNewsInfo = function(newID) {
+   	 $state.go('news-info', {"newID": newID});
+	};
 });

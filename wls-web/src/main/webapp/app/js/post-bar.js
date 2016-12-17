@@ -1,4 +1,4 @@
-wlsWeb.controller('post-bar',function($http, $location, $scope) {
+wlsWeb.controller('post-bar',function($http, $state, $stateParams,$location, $scope) {
 	// 显示最大页数
     $scope.maxSize = 12;
     // 总条目数(默认每页十条)
@@ -70,4 +70,8 @@ wlsWeb.controller('post-bar',function($http, $location, $scope) {
 	$scope.goSearch = function () {
 		$scope.getPublishs();
     };
+    
+    $scope.goBlogInfo = function(publishID) {
+      	 $state.go('blog-info', {"publishID": publishID});
+   	};
 });
