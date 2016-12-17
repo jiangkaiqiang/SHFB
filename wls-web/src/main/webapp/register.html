@@ -50,7 +50,7 @@
   <script src="assets/js/layout.js" type="text/javascript"></script>
   <script src="assets/js/form-wizard.js"></script>
   <script src="assets/js/common.js" type="text/javascript"></script>
-   <script type="text/javascript" src="../../assets/js/jquery-3.1.0.min.js"></script> 
+<!--   <script type="text/javascript" src="../../assets/js/jquery-3.1.0.min.js"></script> -->
    <script type="text/javascript" src="../../assets/js/angular.min.js"></script>
   <script src="../../app/js/register.js" type="text/javascript"></script>
   <script>
@@ -67,17 +67,9 @@
   <div class="register-block content content-center" id="base_content_container">
     <div class="container">
       <h2>账户<b> 注册</b></h2>
-
       <div class="row padding-top-20">
         <div class="col-md-12">
           <div class="portlet light" id="form_wizard_1">
-            <!--<div class="portlet-title">
-              <div class="caption">
-                <span class="caption-subject blue-chambray bold uppercase">
-                <i class="fa fa-user"></i> 账户注册
-                </span>
-              </div>
-            </div>-->
             <div class="portlet-body form">
               <form action="javascript:;" class="form-horizontal" id="submit_form" method="POST">
                 <div class="form-wizard">
@@ -96,7 +88,7 @@
                           <span class="number">
                           2 </span>
                           <span class="desc">
-                          <i class="fa fa-check"></i> 验证手机号码 </span>
+                          <i class="fa fa-check"></i> 设置账户密码 </span>
                           </a>
                       </li>
                       <li>
@@ -104,20 +96,12 @@
                           <span class="number">
                           3 </span>
                           <span class="desc">
-                          <i class="fa fa-check"></i> 设置用户密码 </span>
-                          </a>
-                      </li>
-                      <li>
-                          <a href="#tab4" data-toggle="tab" class="step">
-                          <span class="number">
-                          4 </span>
-                          <span class="desc">
                           <i class="fa fa-check"></i> 注册成功 </span>
                           </a>
                       </li>
                     </ul>
                     <div id="bar" class="progress progress-striped" role="progressbar">
-                      <div class="progress-bar progress-bar-blue">
+                      <div class="progress-bar progress-bar-blue" style="width:33.33%;">
                       </div>
                     </div>
                     <div class="tab-content">
@@ -131,22 +115,30 @@
                       </div>
                       <div class="tab-pane active" id="tab1">
                       <div class="row padding-top-20 margin-bottom-40">
-                        <div class="col-md-offset-3 col-md-3" id="company_gate">
+                        <div class="col-md-offset-3 col-md-3" id="geek_gate" ng-click="geek_gate()">
                            <h3 class="margin-bottom-20">在校学生</h3>
                           <div class="account-type selected" >
-                           <span ng-click="geek_gate()"><img src="assets/img/icons/student.png" alt="极客入口" title="极客入口"/></span> 
+                           <span><img src="assets/img/icons/student.png" alt="极客入口" title="极客入口"/></span> 
                           </div>
                         </div>
-                        <div class="col-md-3" id="geek_gate">
+                        <div class="col-md-3" id="company_gate" ng-click="company_gate()">
                          <h3 class="margin-bottom-20">企业及其他</h3>
                           <div class="account-type">
-                            <span ng-click="company_gate()"><img src="assets/img/icons/company.png" alt="企业入口" title="企业入口"/></span>
+                            <span ><img src="assets/img/icons/company.png" alt="企业入口" title="企业入口"/></span>
                           </div>
                         </div>
                       </div>
                       </div>
                      
                       <div class="tab-pane" id="tab2">
+					    <div class="form-group">
+                          <label class="control-label col-md-offset-1 col-md-3">用户名 <span class="required">
+                          * </span>
+                          </label>
+                          <div class="col-md-4">
+                            <input type="text" class="form-control"  ng-model="username" name="username"/>
+                          </div>
+                        </div>
                         <div class="form-group">
                           <label class="control-label col-md-offset-1 col-md-3">输入手机号码 <span class="required">
                           * </span>
@@ -170,26 +162,7 @@
                             <input type="text" ng-model="verCode" class="form-control" name=""/>
                           </div>
                         </div>
-                        <div class="form-group">
-                          <label class="control-label col-md-offset-1 col-md-3"> <span class="required">
-                          * </span>
-                          </label>
-                          <div class="col-md-4">
-                            <div class="checkbox-list">
-                              <label><input type="checkbox" checked="checked"/> 创建帐号时，我同意遵守《蔚蓝树服务条款》</label>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="tab-pane" id="tab3">
-                        <div class="form-group">
-                          <label class="control-label col-md-offset-1 col-md-3">用户名 <span class="required">
-                          * </span>
-                          </label>
-                          <div class="col-md-4">
-                            <input type="text" class="form-control"  ng-model="username" name="username"/>
-                          </div>
-                        </div>
+                        
                         <div class="form-group">
                           <label class="control-label col-md-offset-1 col-md-3">输入邮箱 <span class="required">
                           * </span>
@@ -214,8 +187,18 @@
                             <input type="password" class="form-control" ng-model="rpassword"  name="rpassword"/>
                           </div>
                         </div>
-                      </div>
-                      <div class="tab-pane" id="tab4">
+                        <div class="form-group">
+                          <label class="control-label col-md-offset-1 col-md-3"> <span class="required">
+                          * </span>
+                          </label>
+                          <div class="col-md-4">
+                            <div class="checkbox-list">
+                              <label><input type="checkbox" checked="checked"/> 创建帐号时，我同意遵守《蔚蓝树服务条款》</label>
+                            </div>
+                          </div>
+                        </div>
+					  </div>
+                      <div class="tab-pane" id="tab3">
                         <h3 class="block"><i class="fa fa-check-circle-o" style="color:green; font-size:30px;padding:5px;"></i> 恭喜您，注册成功！</h3>
                         <div class="form-group">
                           <label class="control-label col-md-offset-1 col-md-3">用户名:</label>
@@ -244,12 +227,17 @@
                   <div class="form-actions">
                     <div class="row">
                       <div class="col-md-12">
-                        <a href="javascript:;" class="btn default button-previous">
-                        <i class="m-icon-swapleft"></i> 返回 </a>
+                        <span ng-click="back()"><a href="javascript:;" class="btn default button-previous" style="display:none">
+                        <i class="m-icon-swapleft"></i> 返回 </a></span>
+						<span ng-click="back2()"><a href="javascript:;" class="btn default button-previous2" style="display:none">
+                        <i class="m-icon-swapleft"></i> 返回 </a></span>
                         <span ng-click="register()"><a href="javascript:;" class="btn blue button-next" id="button-next">
                         下一步 <i class="m-icon-swapright m-icon-white"></i>
                         </a></span>
-                        <a href="javascript:;" class="btn green button-submit">
+						<span ng-click="register2()" ><a href="javascript:;" class="btn blue button-next2" id="button-next2" style="display:none">
+                        下一步 <i class="m-icon-swapright m-icon-white"></i>
+                        </a></span>
+                        <a href="javascript:;" class="btn green button-submit" style="display:none">
                         完善个人信息 <i class="m-icon-swapright m-icon-white"></i>
                         </a>
                       </div>

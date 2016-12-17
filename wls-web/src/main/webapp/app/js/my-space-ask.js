@@ -77,6 +77,18 @@ wlsWeb.controller('my-space-ask',function($http, $location, $scope,$state, $stat
 				        	$scope.followerNum = $scope.followers.length;
 				        	}
 				     });
+					 $scope.publishNum = 0;
+					 $http.get('/i/publish/findPublishByUserId', {
+				            params: {
+				                "userID": $scope.user.id
+				            }
+				        }).success(function (data) { 
+				        	if(data!=null){
+				        	$scope.publishs = data;
+				        	$scope.publishNum = $scope.publishs.length;
+				        	}
+				     });
+					 
 					 if($scope.user.roleid!=null){
 						 $http.get('/i/user/findRoleById', {
 					            params: {
@@ -198,6 +210,8 @@ wlsWeb.controller('my-space-ask',function($http, $location, $scope,$state, $stat
 	        	}
 	     });
 		};
-		
-		
+
+	    $scope.goBlogInfo = function(publishID) {
+	      	 $state.go('blog-info', {"publishID": publishID});
+	   	};
 });

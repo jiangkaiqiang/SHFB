@@ -147,6 +147,9 @@ a:hover {
 .no-left-padding {
   padding-left: 0 !important;
 }
+.no-right-padding {
+  padding-right: 0 !important;
+}
 .no-top-space {
   padding-top: 0 !important;
   margin-top: 0 !important;
@@ -345,29 +348,6 @@ a:hover {
   height: 100%;
 }
 
-/* panels style */
-/*.panel-default {
-  border-color: #ecf0f1;
-}
-.panel-default > .panel-heading {
-  background: #ecf0f1;
-  border-color: #ecf0f1;
-  color: #333;  
-}
-.panel-default > .panel-heading h4 {
-  font: 300 16px "Open Sans", sans-serif;
-  padding: 0;
-  margin-bottom: 0;
-}
-.panel-default > .panel-heading a {
-  text-decoration: none;
-  color: inherit;
-}
-.panel-default > .panel-heading a:active,
-.panel-default > .panel-heading a:focus {
-  color: inherit;
-}*/
-
 /* Header and header elements */
 .header {
   position: absolute;
@@ -470,7 +450,6 @@ a:hover {
 /* Promo block */
 .promo-block {
   background-color: #fff;
-  margin-top: 70px;
   background-image: url("../img/bg/bg-weilanshu.jpg");
   background-repeat:no-repeat;
   background-size:100%;
@@ -529,61 +508,7 @@ a:hover {
   font-size:16px;
   color: #666666;
 }
-/*.news-block .col-md-3:last-child {
-  border-right: none;
-}
-.news-block .fa {
-  border:2px solid #ccccff;
-  color: #0099ff;
-  width: 99px;
-  height: 99px;  
-  line-height: 1;
-  border-radius: 50%;
-  position: relative;
-  margin-bottom: 29px;
-}
-.news-block .fa:after {
-  bottom: -8px;
-  width: 0; 
-  height: 0;
-  left: 50%;
-  margin-left: -9px;
-  z-index: 2; 
-  content: " "; 
-  display: block; 
-  position: absolute;
-}
 
-.news-block .active .fa:after {
-  bottom: -8px;
-  width: 0; 
-  height: 0;
-  left: 50%;
-  margin-left: -9px;
-  z-index: 2; 
-  content: " "; 
-  display: block; 
-  position: absolute;
-  border-top: 9px solid #ccccff;
-  border-right: 9px solid transparent;
-  border-left: 9px solid transparent;
-}
-
-.news-block .fa {
-  font-size: 38px;
-  padding: 35px 0 0;
-}
-
-.news-block p {
-  margin-bottom: 5px;
-  font-size:16px;
-  color: #666666;
-}
-.news-block  .active p {
-  margin-bottom: 5px;
-  font-size:16px;
-  color: #0066ff;
-}*/
 /* GOB block */
 .job-block {
   background: #0066ff;
@@ -623,6 +548,9 @@ a:hover {
   padding-top: 60px;
 }
 .geek-block h2{
+  color:#fff;
+}
+.geek-block h2 > a{
   color:#fff;
 }
 .geek-block h2:after{
@@ -748,35 +676,6 @@ a:hover {
 .services-block .col-md-3:last-child {
   border-right: none;
 }
-/*.services-block .fa {
-  background: #64AED9;
-  color: #fff;
-  width: 99px;
-  height: 99px;  
-  line-height: 1;
-  border-radius: 50%;
-  position: relative;
-  margin-bottom: 29px;
-}
-.services-block .fa:after {
-  bottom: -8px;
-  width: 0; 
-  height: 0;
-  left: 50%;
-  margin-left: -9px;
-  z-index: 2; 
-  content: " "; 
-  display: block; 
-  position: absolute;
-  border-top: 9px solid #64AED9;
-  border-right: 9px solid transparent;
-  border-left: 9px solid transparent;
-}
-
-.services-block .fa {
-  font-size: 38px;
-  padding: 35px 0 0;
-}*/
 .services-block a{
   color:#0066ff;
   text-decoration:none;
@@ -903,7 +802,7 @@ Pre-Footer and pre-footer elements
   padding-top: 5px;
 }
 .pre-footer .social-icons li a, 
-.pre-footer a.social-icon {
+.pre-footer a .social-icon {
   transition: all 0.1s ease-in-out !important;
   -o-transition: all 0.1s ease-in-out !important;
   -ms-transition: all 0.1s ease-in-out !important;
@@ -1640,6 +1539,7 @@ Sidebar
 
 
 /* product pop up */
+/*
 .product-pop-up {
     padding: 0;
     overflow-x: hidden;
@@ -1664,7 +1564,7 @@ Sidebar
     overflow: hidden;
     padding: 0px 13px 0;
 }
-
+*/
 .weilanshu .nav-tabs {
     text-transform: uppercase;
     font: 16px/1 Microsoft YaHei;    
@@ -1774,7 +1674,7 @@ Sidebar
     margin:15px 0px 5px 215px;
 }
 .sidebar-news .item-pics h3 {
-    font: 500 22px Microsoft YaHei;
+    font: 600 22px Microsoft YaHei;
     /*text-transform: none;*/
     margin:10px 0px 5px 0px;
 }
@@ -1782,6 +1682,7 @@ Sidebar
     color: #666666;
     font: 12px Microsoft YaHei;
     margin:5px 0px 5px 0px;
+	float:left;
 }
 .sidebar-news .item-pics img {
     width: 270px;
@@ -1799,6 +1700,7 @@ Sidebar
     font-weight:500;
 }
 /* BEGIN product page */
+/*
 .product-page {
     background: #fff;
     padding: 22px;
@@ -1979,7 +1881,9 @@ table .product-quantity .input-group {
     background-position: 0 -38px;
     opacity: 1;
 }
+*/
 /* compare goods */
+/*
 .compare-goods tr:first-child td.compare-info,
 .compare-goods tr:first-child td.compare-item {
     background: no-repeat;
@@ -2044,7 +1948,7 @@ table .product-quantity .input-group {
     background: #A8AEB3;
     padding: 6px 13px; 
 }
-
+*/
 .weilanshu .sidebar {
     font: 15px Microsoft YaHei;
     color: #3E4D5C;
@@ -2218,6 +2122,7 @@ table .product-quantity .input-group {
     border-width: 1px 1px 3px;
     border-color: #e3e4e5;
     border-style: solid;
+	
 }
 .geeks-list .geek-item-img{
   float: left;
@@ -2228,9 +2133,10 @@ table .product-quantity .input-group {
 .geeks-list .geek-item-img-v{
     position: absolute;
     transform: translate3d(-26px,35px,0);
-    -webkit-transform: translate3d(-26px,35px,0);
-    -moz-transform: translate3d(-26px,35px,0);
-    -o-transform: translate3d(-26px,35px,0);
+    -webkit-transform: translate3d(-26px,35px,0); /* Safari 和 Chrome */
+    -moz-transform: translate3d(-26px,35px,0);/* Firefox */
+    -o-transform: translate3d(-26px,35px,0);/* Opera */
+	-ms-transform: translate3d(-26px,35px,0); /* IE 9 */
 }
 .geeks-list .geek-item .geek-item-content{
     float: left;
@@ -2311,6 +2217,7 @@ table .product-quantity .input-group {
     -webkit-transform: translate3d(-26px,35px,0);
     -moz-transform: translate3d(-26px,35px,0);
     -o-transform: translate3d(-26px,35px,0);
+	-ms-transform: translate3d(-26px,35px,0); /* IE 9 */
 }
 .blogs-list .blog-item .blog-item-name{
     display: block;

@@ -47,7 +47,7 @@
 	
      <select id="findPublishByUserId" parameterType="map" resultType="PublishEntity">
 		SELECT *
-		FROM `publish` WHERE `publisherid` = #{userID}
+		FROM `publish` WHERE `publisher` = #{userID}
 	</select>
 	
 	<select id="findPulishByID" parameterType="map" resultType="PublishEntity">

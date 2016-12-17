@@ -144,7 +144,7 @@
           </div> 
           <div class="portlet-body"> 
            <!-- BEGIN PRODUCT LIST --> 
-           <div class="row blogs-list margin-bottom-20"> 
+           <div class="row blogs-list margin-bottom-20" ng-repeat="publish in publishs"> 
             <div class="col-md-7 margin-bottom-20"> 
              <div class="blog-item col-md-12"> 
               <div class="col-md-12"> 
@@ -152,59 +152,22 @@
                <div class="blog-item-body col-md-10 margin-bottom-10"> 
                 <div class="blog-item-body-title"> 
                  <div class="col-md-12"> 
-                  <a class="blog-item-name" href="blog-info.html">考考你，这副“崇明美食牌”认识几个？</a> 
-                  <span class="blog-item-time"><i class="fa fa-clock-o"></i> 1小时以前 来自#hhhh#</span> 
+                  <a class="blog-item-name" ng-click="goBlogInfo(publish.id)">{{publish.title}}</a> 
+                  <span class="blog-item-time"><i class="fa fa-clock-o"></i> {{publish.pubtime}} ###来自{{publish.publishername}}</span> 
                  </div> 
                 </div> 
                 <div class="blog-item-body-info col-md-12"> 
-                 <p>【考考你，这副“崇明美食牌”认识几个？】秋高气爽人气旺，橘黄蟹肥稻米香。金秋时节是崇明一年中最好的季节，闻名遐迩的崇明美食更是散发出了令人难以抵挡的诱惑！今天，崇明金秋美食节将拉开帷幕，活动持续一个月。寻找崇明生态美食之前，不妨先来看看这副牌你认识多少？尝过多少？最喜欢哪手牌？</p> 
+                 <p>{{publish.describe}}
                  <img src="../../assets/img/facts.jpg" width="300px" /> 
                 </div> 
                </div> 
               </div> 
               <div class="col-md-12 blog-item-action"> 
                <div class="col-md-4"> 
-                <span><a href="blog-info.html#comments"><i class="fa fa-comments"></i> 评论100</a></span> 
+                <span><a href="blog-info.html#comments"><i class="fa fa-comments"></i> 评论{{publish.commentnum}}</a></span> 
                </div> 
                <div class="col-md-4 line"> 
-                <span><a><i class="fa fa-thumbs-up"></i> 点赞</a></span> 
-               </div> 
-               <div class="col-md-4"> 
-                <span class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="1000" data-close-others="true" aria-expanded="false"><a><i class="fa fa-share-alt"></i> 分享</a></span> 
-                <ul class="dropdown-menu" role="menu"> 
-                 <li> <a href="javascript:;"> <i class="fa fa-wechat"></i> 微信 </a> </li> 
-                 <li> <a href="javascript:;"> <i class="fa fa-weibo"></i> 新浪微博</a> </li> 
-                 <li> <a href="javascript:;"> <i class="fa fa-qq"></i> QQ</a> </li> 
-                 <li> <a href="javascript:;"> <i class="fa fa-star"></i> QQ空间 </a> </li> 
-                </ul> 
-               </div> 
-              </div> 
-             </div> 
-            </div> 
-
-            <div class="col-md-7 margin-bottom-20"> 
-             <div class="blog-item col-md-12"> 
-              <div class="col-md-12"> 
-               <a href="" ><img class="blog-item-img" src="../../assets/img/people/4.jpg" /></a> 
-               <div class="blog-item-body col-md-10 margin-bottom-10"> 
-                <div class="blog-item-body-title"> 
-                 <div class="col-md-11"> 
-                  <a class="blog-item-name" target="_blank" href="#">考考你，这副“崇明美食牌”认识几个？</a> 
-                  <span class="blog-item-time"><i class="fa fa-clock-o"></i> 1小时以前 来自#hhhh#</span> 
-                 </div> 
-                </div> 
-                <div class="blog-item-body-info col-md-12"> 
-                 <p>【考考你，这副“崇明美食牌”认识几个？】秋高气爽人气旺，橘黄蟹肥稻米香。金秋时节是崇明一年中最好的季节，闻名遐迩的崇明美食更是散发出了令人难以抵挡的诱惑！今天，崇明金秋美食节将拉开帷幕，活动持续一个月。寻找崇明生态美食之前，不妨先来看看这副牌你认识多少？尝过多少？最喜欢哪手牌？</p> 
-                 <img src="../../assets/img/facts.jpg" width="300px" /> 
-                </div> 
-               </div> 
-              </div> 
-              <div class="col-md-12 blog-item-action"> 
-               <div class="col-md-4"> 
-                <span><a href="blog-info.html"><i class="fa fa-comments"></i> 评论50</a></span> 
-               </div> 
-               <div class="col-md-4 line"> 
-                <span><a class="thumbs-up" id="thumbs_up"><i class="fa fa-thumbs-up"></i> 已点赞</a></span> 
+                <span><a><i class="fa fa-thumbs-up"></i> 点赞10</a></span> 
                </div> 
                <div class="col-md-4"> 
                 <span class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="1000" data-close-others="true" aria-expanded="false"><a><i class="fa fa-share-alt"></i> 分享</a></span> 

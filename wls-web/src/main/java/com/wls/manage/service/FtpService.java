@@ -6,15 +6,15 @@ import com.wls.manage.dto.UploadFileEntity;
 
 public interface FtpService {
 
-	public final static String HOST = "10.25.192.102";
+	//public final static String HOST = "10.25.192.102";
 
-	public final static String PUB_HOST = "139.196.189.93";
+	public final static String PUB_HOST = "42.121.130.177";
 
 	public final static String USER_NAME = "pwftp";
 
 	public final static String PASSWORD = "!@QWaszx0o";
 
-	public final static int PORT = 2021;
+	public final static int PORT = 21;
 
 	public final static String BASEDIR = "/data";
 
