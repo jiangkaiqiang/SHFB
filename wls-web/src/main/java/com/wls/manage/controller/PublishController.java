@@ -15,10 +15,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.wls.manage.dao.CommentMapper;
 import com.wls.manage.dao.PublishMapper;
 import com.wls.manage.dao.UserMapper;
-import com.wls.manage.dto.BaseDto;
 import com.wls.manage.dto.PublishDto;
+import com.wls.manage.entity.CommentEntity;
 import com.wls.manage.entity.PublishEntity;
 import com.wls.manage.entity.UserEntity;
 import com.wls.manage.util.ResponseData;
@@ -35,6 +36,8 @@ public class PublishController extends BaseController {
 	private UserMapper userMapper;
 	@Autowired
 	private PublishMapper publishMapper;
+	@Autowired
+	private CommentMapper commentMapper;
 	
 	/**
 	 * 为前台user查询通知提供服务
@@ -61,6 +64,25 @@ public class PublishController extends BaseController {
 			publishDto.setId(publishEntity.getId());
 			publishDto.setContent(publishEntity.getContent());
 			publishDto.setPubcategory(publishEntity.getPubcategory());
+			switch (publishDto.getPubcategory()) {
+			case 1:
+				publishDto.setPubcategoryname("科技类");
+				break;
+			case 2:
+				publishDto.setPubcategoryname("互联网类");
+				break;
+			case 3:
+				publishDto.setPubcategoryname("校园类");
+				break;
+			case 4:
+				publishDto.setPubcategoryname("财经类");
+				break;
+			case 5:
+				publishDto.setPubcategoryname("创业类");
+				break;
+			default:
+				break;
+			}
 			publishDto.setPublisherid(publishEntity.getPublisher());
 			publishDto.setDescribe(publishEntity.getDescribe());
 			publishDto.setPubtime(publishEntity.getPubtime());
@@ -69,6 +91,9 @@ public class PublishController extends BaseController {
 			UserEntity userEntity = userMapper.findUserById(publishEntity.getPublisher().intValue());
 			publishDto.setPublishername(userEntity.getNickname());
 			publishDto.setPublisheravatar(userEntity.getAvatar());
+			List<CommentEntity> commentEntities = commentMapper.findCommentsByCommentId(publishEntity.getId().intValue(), 1);
+			publishDto.setCommentEntities(commentEntities);
+			publishDto.setCommentnum(commentEntities.size());
 			pDtos.add(publishDto);
 		}
 		return pDtos;
@@ -132,7 +157,7 @@ public class PublishController extends BaseController {
 	public Object findPublishByID(@RequestParam int publishID) {
 		ArrayList<PublishEntity> publishEntities = new ArrayList<PublishEntity>();
 		publishEntities.add(publishMapper.findPulishByID(publishID));
-		return getPublishDtos(publishEntities);
+		return getPublishDtos(publishEntities).get(0);
 	}
 	
 	/**

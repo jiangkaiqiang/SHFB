@@ -2,6 +2,9 @@ package com.wls.manage.dto;
 
 import java.math.BigInteger;
 import java.util.Date;
+import java.util.List;
+
+import com.wls.manage.entity.CommentEntity;
 
 public class PublishDto {
     private BigInteger id;
@@ -13,6 +16,8 @@ public class PublishDto {
 	private String describe;
 	
 	private Integer pubcategory;
+	
+	private String pubcategoryname;
 	
     private Date pubtime;//发布时间
 	
@@ -27,6 +32,8 @@ public class PublishDto {
 	private String publishername;
 	
 	private String publisheravatar;
+	
+	private List<CommentEntity> commentEntities;
 
 	public BigInteger getId() {
 		return id;
@@ -66,6 +73,14 @@ public class PublishDto {
 
 	public void setPubcategory(Integer pubcategory) {
 		this.pubcategory = pubcategory;
+	}
+
+	public String getPubcategoryname() {
+		return pubcategoryname;
+	}
+
+	public void setPubcategoryname(String pubcategoryname) {
+		this.pubcategoryname = pubcategoryname;
 	}
 
 	public Date getPubtime() {
@@ -122,6 +137,14 @@ public class PublishDto {
 
 	public void setPublisheravatar(String publisheravatar) {
 		this.publisheravatar = publisheravatar;
+	}
+
+	public List<CommentEntity> getCommentEntities() {
+		return commentEntities;
+	}
+
+	public void setCommentEntities(List<CommentEntity> commentEntities) {
+		this.commentEntities = commentEntities;
 	}
 	
 }
