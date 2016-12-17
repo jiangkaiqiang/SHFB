@@ -8,7 +8,7 @@ import java.util.logging.Logger;
  */
 public class PageCrawJob {
     private static Logger logger = Logger.getLogger(PageCrawJob.class.getName());
-    public static void main(String[] args){
+    public static void craw(String url,String time,String title){
         try{
             Thread.sleep(1000);
             PageParseJob crawler =new PageParseJob();
@@ -16,7 +16,8 @@ public class PageCrawJob {
             //crawler.parse("http://tech.qq.com/a/20161114/031873.htm");
             //crawler.parse("http://tech.qq.com/a/20161121/003033.htm");
             //crawler.parse("http://tech.qq.com/a/20161121/002314.htm");
-            crawler.parse("http://tech.qq.com/a/20161111/027076.htm");
+//            crawler.parse("http://tech.qq.com/a/20161111/027076.htm");
+            crawler.parse(url,time,title);
         } catch (Exception e){
             e.printStackTrace();
         }
