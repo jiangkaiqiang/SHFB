@@ -204,6 +204,7 @@
                           <label class="control-label col-md-offset-1 col-md-3">用户名:</label>
                           <div class="col-md-4">
                             <p class="form-control-static" data-display="username">
+                            {{username}}
                             </p>
                           </div>
                         </div>
@@ -211,6 +212,7 @@
                           <label class="control-label col-md-offset-1 col-md-3">手机:</label>
                           <div class="col-md-4">
                             <p class="form-control-static" data-display="phone">
+                            {{telephone}}
                             </p>
                           </div>
                         </div>
@@ -218,6 +220,7 @@
                           <label class="control-label col-md-offset-1 col-md-3">邮箱:</label>
                           <div class="col-md-4">
                             <p class="form-control-static" data-display="email">
+                            {{email}}
                             </p>
                           </div>
                         </div>
@@ -237,7 +240,7 @@
 						<span ng-click="register2()" ><a href="javascript:;" class="btn blue button-next2" id="button-next2" style="display:none">
                         下一步 <i class="m-icon-swapright m-icon-white"></i>
                         </a></span>
-                        <a href="javascript:;" class="btn green button-submit" style="display:none">
+                        <a ng-click="loginGoSpace()" class="btn green button-submit" style="display:none">
                         完善个人信息 <i class="m-icon-swapright m-icon-white"></i>
                         </a>
                       </div>

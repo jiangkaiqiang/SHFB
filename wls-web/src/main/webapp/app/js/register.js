@@ -23,30 +23,6 @@ wlsWeb.controller('register',function($http, $location, $scope) {
     	}
    };
    $scope.register = function() {
-	   if( $scope.username==undefined&&$scope.telephone!=undefined){
-		   $http.get( "/i/user/verifySignUpCode",{
- 	    		params : {telephone : $scope.telephone}
- 	    	}).success(function(data) {
- 	    		if(data.success){
- 	    			
- 	    		}
- 	    		alert(data.message);
- 		   });
-	   }
-	   else if( $scope.username!=undefined&&$scope.email!=undefined&&$scope.password!=undefined){
-  			$http.get( "/i/user/signup",{
-  				params : {
-  					username : $scope.username,
-  					password :  $scope.password,
-  					rpassword : $scope.rpassword,
-  	    			telephone : $scope.telephone,
-  	    			email : $scope.email,
-  	    			suproleid : $scope.suproleid
-  	    			}
-  	    	}).success(function(data) {
-  	    		alert(data.message);
-  		   });
-  	   }
 	   $('#form_wizard_1').find('.button-previous').show();
 	   $('#form_wizard_1').find('.button-next2').show();
 	   $('#form_wizard_1').find('.button-next').hide();
@@ -55,14 +31,63 @@ wlsWeb.controller('register',function($http, $location, $scope) {
 	   $('#form_wizard_1').find('#bar div').css("width","66.67%");
   };
   $scope.register2 = function() {
-	  $('#form_wizard_1').find('.button-previous').hide();
-	  $('#form_wizard_1').find('.button-previous2').show();
-	  $('#form_wizard_1').find('.button-submit').show();
-	  $('#form_wizard_1').find('.button-next2').hide();
-	  $('#form_wizard_1').find('#tab3').addClass("active");
-      $('#form_wizard_1').find('#tab2').removeClass("active");
-	  $('#form_wizard_1').find('#bar div').css("width","100%"); 
-  }
+	  if($scope.username==null||$scope.verCode==null||
+			  $scope.email==null||$scope.password==null||$scope.rpassword==null){
+		  alert("所填信息不能为空！");
+		  return;
+	  }
+	  if($scope.password!=$scope.rpassword){
+		  alert("两次密码不一致！");
+		  return;
+	  }
+	 $http.get( "/i/user/verifySignUpCode",{
+	    		params : {signUpCode : $scope.verCode}
+	    	}).success(function(data) {
+	    		if(data.success){
+	    			$http.get( "/i/user/signup",{
+	     				params : {
+	     					username : $scope.username,
+	     					password :  $scope.password,
+	     					rpassword : $scope.rpassword,
+	     	    			telephone : $scope.telephone,
+	     	    			email : $scope.email,
+	     	    			suproleid : $scope.suproleid
+	     	    			}
+	     	    	}).success(function(data) {
+	     	    		if(data.success){
+	     	    			 $('#form_wizard_1').find('.button-previous').hide();
+	     	    			  $('#form_wizard_1').find('.button-previous2').show();
+	     	    			  $('#form_wizard_1').find('.button-submit').show();
+	     	    			  $('#form_wizard_1').find('.button-next2').hide();
+	     	    			  $('#form_wizard_1').find('#tab3').addClass("active");
+	     	    		      $('#form_wizard_1').find('#tab2').removeClass("active");
+	     	    			  $('#form_wizard_1').find('#bar div').css("width","100%"); 
+	     	    		}
+	     	    		else{
+	     	    			alert("注册失败");
+	     	    		}
+	     		   });
+	    		}
+	    		else{
+	    			alert(data.message);
+	    		}
+	    	
+		   });
+	  };
+  
+  $scope.loginGoSpace = function() {
+	  $http.get("/i/user/login",{
+   		params : {
+   			userName : $scope.username,
+   			password : $scope.password
+   			}
+   	}).success(function(data) {
+   		if(data.success){
+   			window.location.href="#/my-space";
+   		}
+	   });
+  };
+  
   $scope.back = function() {
 	  $('#form_wizard_1').find('.button-previous').hide();
 	  $('#form_wizard_1').find('.button-previous2').hide();
@@ -72,7 +97,7 @@ wlsWeb.controller('register',function($http, $location, $scope) {
 	  $('#form_wizard_1').find('#tab1').addClass("active");
       $('#form_wizard_1').find('#tab2').removeClass("active");
 	  $('#form_wizard_1').find('#bar div').css("width","33.33%");  
-  }
+  };
   $scope.back2 = function() {
 	  $('#form_wizard_1').find('.button-previous2').hide();
 	  $('#form_wizard_1').find('.button-previous').show();
@@ -82,6 +107,6 @@ wlsWeb.controller('register',function($http, $location, $scope) {
 	  $('#form_wizard_1').find('#tab2').addClass("active");
       $('#form_wizard_1').find('#tab3').removeClass("active");
 	  $('#form_wizard_1').find('#bar div').css("width","66.67%");  
-  }
+  };
 
 });

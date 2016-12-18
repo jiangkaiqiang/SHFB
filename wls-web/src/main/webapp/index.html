@@ -60,8 +60,10 @@
             <li id="bar_news"><a href="#/news">资讯</a></li>
             <li id="bar_geek"><a href="#/geek">创客</a></li>
             <li id="bar_post-bar"><a href="#/post-bar">创吧</a></li>
-            <li id="bar_my-space"><a href="#/my-space"><span ng-show="user != null && user.id != 0 && user.suproleid==1" >我的</span></a></li>
-            <li id="bar_my-space-company"><a href="#/my-space-company"><span ng-show="user != null && user.id != 0 && user.suproleid==2" >我的</span></a></li>
+            <li id="bar_my-space"><a href="#/my-space"><span ng-show="user != null && user.id != 0 && user.suproleid==1&& user.id != undefined
+            && user != ''" >我的</span></a></li>
+            <li id="bar_my-space-company"><a href="#/my-space-company"><span ng-show="user != null && user.id != 0 && user.suproleid==2&& user.id != undefined
+            && user != ''" >我的</span></a></li>
             <li id="bar_login"><div ng-if="user == null || user == undefined || user == '' ||user.id == undefined"><a href="#/register" style="display: inline; font-size:15px;">注册</a> 
              |  <a href="#/login"style="display: inline; font-size:15px;"><span>登录</span></a></div></li>
             <li ng-click="logout()"><div ng-if="user != null && user.id != 0 && user.id != undefined
@@ -268,6 +270,8 @@ $(function (){
 <script src="bower_components/bootstrap/js/carousel.js"></script>
 <script src="bower_components/bootstrap/js/bootstrap-datetimepicker.min.js"></script>
 <script src="bower_components/angular/ngRemoteValidate.0.6.1.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../ueditor/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../ueditor/ueditor.all.min.js"> </script>
   <!--  <script src="app/js/index.js" type="text/javascript"></script> -->
 <script src="app/js/app.js" type="text/javascript"></script>
 <script src="app/js/home.js" type="text/javascript"></script>

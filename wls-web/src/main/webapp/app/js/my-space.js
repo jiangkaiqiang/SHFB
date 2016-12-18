@@ -61,6 +61,17 @@ wlsWeb.controller('my-space',function($http, $location, $scope) {
 				        		$scope.jobs = data.data;
 				        	}
 				     });
+					 $scope.publishNum = 0;
+					 $http.get('/i/publish/findPublishByUserId', {
+				            params: {
+				                "userID": $scope.user.id
+				            }
+				        }).success(function (data) { 
+				        	if(data!=null){
+				        	$scope.publishs = data;
+				        	$scope.publishNum = $scope.publishs.length;
+				        	}
+				     });
 					 $http.get('/i/city/findCitysByProvinceId', {
 				            params: {
 				                "provinceID": $scope.user.provinceid

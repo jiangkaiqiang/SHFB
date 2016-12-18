@@ -1,7 +1,9 @@
 wlsWeb.controller('login',function($http, $location, $scope) {
    $scope.login = function() {
-	   if($scope.username!=""&&$scope.password!=""&&
-			   $scope.username!=undefined&&$scope.password!=undefined){
+	   if($scope.username!=""&&
+			   $scope.password!=""&&
+			   $scope.username!=undefined&&
+			   $scope.password!=undefined){
 		   $http.get("/i/user/login",{
  	    		params : {
  	    			userName : $scope.username,
@@ -13,7 +15,7 @@ wlsWeb.controller('login',function($http, $location, $scope) {
  	    			window.location.href="#/home";
  	    		}
  	    		else{
- 	    			
+ 	    			alert("用户名或密码错误");
  	    		}
  		   });
 	   }
