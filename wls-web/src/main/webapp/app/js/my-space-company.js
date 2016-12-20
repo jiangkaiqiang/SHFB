@@ -18,7 +18,22 @@ wlsWeb.controller('my-space-company',function($http, $location, $scope) {
 					else if($scope.user.score>=500){
 						$scope.level = 3;
 					}
-					//$("#tab-1").addClass("in active");
+					$http.get('/i/message/findMessageByReceiverId', {
+			            params: {
+			                "userID": $scope.user.id
+			            }
+			        }).success(function (data) { 
+			        	$scope.messages = data;
+			        	$scope.messageNum = $scope.messages.length;
+			     });
+					$http.get('/i/user/findFollowerByUserId', {
+			            params: {
+			                "userID": $scope.user.id
+			            }
+			        }).success(function (data) { 
+			        	$scope.followers = data;
+			        	$scope.followerNum = $scope.followers.length;
+			     });
 				 }
 				else{
 					alert("请先登录");
@@ -61,18 +76,35 @@ wlsWeb.controller('my-space-company',function($http, $location, $scope) {
 	    		}
 		   });
 	   };
-	   $scope.myspace = function() {
-		      if($scope.user!=undefined&&$scope.user!=null&&$scope.user.id!=undefined){
-		    	  if($scope.user.suproleid==1){
-		    		  window.location.href="app/template/my-space.html";
-		    	  }
-		    	  else if($scope.user.suproleid==2){
-		    		  window.location.href="app/template/my-space-company.html";
-		    	  }
-		      }
-		      else{
-		    	 alert("请先登录"); 
-		    	 window.location.href="index.html";
-		      }
-		   };
+	   $scope.deleteMessage  = function(messageID) {
+		   if(delcfm()){
+	    	$http.get( "/i/message/deleteMessage",{
+	    		params : {
+	    			msgID : messageID,
+	    			messageSenderID : $scope.user.id
+	    			}
+	    	}).success(function(data) {
+	    		alert("删除成功");
+	    		$scope.messages = data;
+	        	$scope.messageNum = $scope.messages.length;
+		   });
+		   }
+	   };
+	   
+	   $scope.messageResponse  = function(messageID,messageReceiverID,msgcategory
+			   ,resopnseMsg) {
+	    	$http.get( "/i/message/messageResponse",{
+	    		params : {
+	    			messageID : messageID,
+	    			messageReceiverID : messageReceiverID,
+	    			messageResponse : resopnseMsg,
+	    			msgcategory : msgcategory,
+	    			messageSenderID : $scope.user.id
+	    		}
+	    	}).success(function(data) {
+	    		alert("回复成功");
+	    		$scope.messages = data;
+	        	$scope.messageNum = $scope.messages.length;
+		   });
+	   };
 });

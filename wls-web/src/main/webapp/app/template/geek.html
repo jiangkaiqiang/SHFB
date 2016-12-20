@@ -88,7 +88,7 @@
        <!-- BEGIN SIDEBAR --> 
        <div class="sidebar col-md-3 col-sm-5"> 
 		<div class="geek_mune" style="position:fixed; background:#fff; padding:18px 90px 40px 20px;">
-            <div class="mt-radio-list col-md-12">
+            <!-- <div class="mt-radio-list col-md-12">
                  <label class="mt-radio margin-bottom-10">
                       <a ng-click="auditChanged(8)"><input type="radio" name="optionsRadios"  id="optionsRadios0" value="全部" checked> 全部</a>
                   </label><br/>
@@ -110,6 +110,12 @@
                   <label class="mt-radio margin-bottom-10">
                       <a ng-click="auditChanged(6)"> <input type="radio" name="optionsRadios"  id="optionsRadios6" value="技术控" > 技术控</a>
                   </label><br/>
+              </div> -->
+              
+              <div class="mt-radio-list col-md-10"  ng-repeat="cate in AllCategory">
+                 <label class="mt-radio margin-bottom-8">
+                      <a ng-click="auditChanged(cate.id)"><input type="radio" name="optionsRadios" ng-checked="optAudit==cate.id"  id="optionsRadios" value="{{cate.id}}">{{cate.name}}</a>
+                  </label><br>
               </div>
               
             </div>

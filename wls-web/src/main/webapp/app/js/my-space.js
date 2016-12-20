@@ -414,7 +414,7 @@ wlsWeb.controller('my-space',function($http, $location, $scope) {
 									   };
 									   
 									   
-									   $scope.deleteResume  = function(messageID) {
+									   $scope.deleteMessage  = function(messageID) {
 										   if(delcfm()){
 									    	$http.get( "/i/message/deleteMessage",{
 									    		params : {

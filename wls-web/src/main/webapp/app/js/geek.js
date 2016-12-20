@@ -9,6 +9,15 @@ wlsWeb.controller('geek',function($http, $location,$rootScope, $scope,$state, $s
 	$scope.optAudit = 8;
 	$scope.citys = [];
 	$scope.schools = [];
+	$scope.AllCategory = [
+	                      {id:"8",name:"全部"},
+	                      {id:"1",name:"设计狮"},
+	                      {id:"2",name:"程序猿"},
+	                      {id:"3",name:"学霸"},
+	                      {id:"4",name:"墨客"},
+	                      {id:"5",name:"极客"},
+	                      {id:"6",name:"技术控"}
+	];
 	 // 获取当前geek的列表
     $scope.getUsers = function() {
 		$http({

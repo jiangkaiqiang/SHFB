@@ -36,7 +36,6 @@
   <![endif]--> 
   <!-- Load JavaScripts at the bottom, because it will reduce page load time --> 
   <!-- Core plugins BEGIN (For ALL pages) --> 
-  <script src="../../assets/js/jquery.min.js" type="text/javascript"></script> 
   <script src="../../assets/js/jquery-migrate.min.js" type="text/javascript"></script> 
   <script src="../../assets/js/bootstrap.min.js" type="text/javascript"></script> 
   <script src="../../assets/js/jquery.nav.js"></script> 
@@ -804,7 +803,7 @@
               <!--  <span class="badge badge-empty badge-success"></span> 已读  -->
               <a class="btn" ng-if="message.msgcategory=='2'" ng-click="messageResponse(message.id,message.senderid,message.msgcategory)">同意</a>
               <a class="btn" ng-if="message.msgcategory=='1'" id="quick_reply">回复</a>
-              <a class="btn" ng-click="deleteResume(message.id)">删除</a>
+              <a class="btn" ng-click="deleteMessage(message.id)">删除</a>
                </span> 
               </div> 
               <div class="item-body">

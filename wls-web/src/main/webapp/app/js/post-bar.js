@@ -7,6 +7,14 @@ wlsWeb.controller('post-bar',function($http, $state, $stateParams,$location, $sc
     $scope.bigCurrentPage = 1;
 	$scope.AllPublishs = [];
 	$scope.optAudit = 8;
+	$scope.AllCategory = [
+	                      {id:"8",name:"全部"},
+	                      {id:"1",name:"科技类"},
+	                      {id:"2",name:"互联网类"},
+	                      {id:"3",name:"校园类"},
+	                      {id:"4",name:"财经类"},
+	                      {id:"5",name:"创业类"}
+	];
 	 // 获取当前geek的列表
     $scope.getPublishs = function() {
 		$http({
@@ -31,11 +39,13 @@ wlsWeb.controller('post-bar',function($http, $state, $stateParams,$location, $sc
         var sh = {"sh_id":-1,"sh_shool":"全部学校"};
     	 $scope.schools.push(sh);
     	 $scope.schools = sortJson($scope.schools,"sh_id");
-    	 $scope.schoolid = -1;
+    	 $scope.curschool = data[0];
+    	 $scope.schools[0].isOn = true;
     });
     
  // 根据学校查询
-    $scope.schoolSelected = function () {
+    $scope.schoolSelected = function (curschool) {
+    	$scope.schoolid = curschool.sh_id;
     	$scope.getPublishs();
     };
     

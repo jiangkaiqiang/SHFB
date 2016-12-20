@@ -7,6 +7,14 @@ wlsWeb.controller('news',function($http, $location, $state,$scope) {
     $scope.bigCurrentPage = 1;
 	$scope.AllNews = [];
 	$scope.optAudit = 8;
+	$scope.AllCategory = [
+	                      {id:"8",name:"全部"},
+	                      {id:"1",name:"科技类"},
+	                      {id:"2",name:"互联网类"},
+	                      {id:"3",name:"校园类"},
+	                      {id:"4",name:"财经类"},
+	                      {id:"5",name:"创业类"}
+	];
 	 // 获取当前news的列表
     $scope.getNews = function() {
 		$http({

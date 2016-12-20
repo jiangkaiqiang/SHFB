@@ -12,7 +12,7 @@ wlsWeb.controller('login',function($http, $location, $scope) {
  	    	}).success(function(data) {
  	    		if(data.success){
  	    			alert("登录成功");
- 	    			window.location.href="#/home";
+ 	    			
  	    		}
  	    		else{
  	    			alert("用户名或密码错误");

@@ -67,7 +67,7 @@
 			    id!=#{userid}
 			</if>
 			<if test="audit != null">
-			    roleid=#{audit}
+			    AND roleid=#{audit}
 			</if>
 			<if test="provinceid != null">
 			    AND provinceid=#{provinceid}

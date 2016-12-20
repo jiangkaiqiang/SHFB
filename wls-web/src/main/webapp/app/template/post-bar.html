@@ -86,7 +86,7 @@
       <!-- BEGIN SIDEBAR --> 
       <div class="sidebar col-md-3 col-sm-5"> 
        <div class="post_bar_mune" style="position:fixed; background:#fff; padding:18px 90px 40px 20px;">
-              <div class="mt-radio-list col-md-12">
+              <!-- <div class="mt-radio-list col-md-12">
                   <label class="mt-radio margin-bottom-10">
                       <a ng-click="auditChanged(8)"><input type="radio" name="optionsRadios"  id="optionsRadios0" value="全部" checked> 全部</a>
                   </label><br/>
@@ -105,6 +105,11 @@
                   <label class="mt-radio margin-bottom-10">
                       <a ng-click="auditChanged(5)"><input type="radio"  name="optionsRadios" id="optionsRadios5" value="创业类" > 创业类</a>
                   </label><br/>
+              </div> -->
+               <div class="mt-radio-list col-md-10"  ng-repeat="cate in AllCategory">
+                 <label class="mt-radio margin-bottom-8">
+                      <a ng-click="auditChanged(cate.id)"><input type="radio" name="optionsRadios" ng-checked="optAudit==cate.id"  id="optionsRadios" value="{{cate.id}}">{{cate.name}}</a>
+                  </label><br>
               </div>
             </div> 
       </div> 
@@ -121,10 +126,16 @@
                                     ng-disabled="editable" ng-change="citySelected(cityid)"
                                     ng-options="x.ci_id as x.ci_city for x in citys"></select> -->
           <!-- <input type="text" id="cityChoice" class="form-control" placeholder="请选择地区"/> -->
-           <select id=""  style="height:35px !important" ng-model="schoolid"
+           <!-- <select id=""  style="height:35px !important" ng-model="schoolid"
                                     ng-disabled="editable"
                                     ng-change="schoolSelected(schoolid)"
-                                    ng-options="x.sh_id as x.sh_shool for x in schools"> </select>
+                                    ng-options="x.sh_id as x.sh_shool for x in schools"> </select> -->
+           <div class="form-group">
+           <div isteven-multi-select selection-mode="single" input-model="schools" 
+            output-model="curschool" button-label="sh_shool" item-label="sh_shool"
+            tick-property="isOn" helper-elements="filter" max-height="200px" 
+            on-item-click="schoolSelected(curschool)" class="form-group"></div>
+            </div>
           </div> 
           <div class="col-md-3"> 
            <div class="input-group"> 
