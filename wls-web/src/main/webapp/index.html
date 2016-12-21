@@ -40,6 +40,7 @@
   <link href="assets/css/login-soft.css" rel="stylesheet" type="text/css">
   <link href="assets/css/components-rounded.css" id="style_components" rel="stylesheet" type="text/css">
   <link rel="stylesheet" type="text/css" href="bower_components/angular-multi-select-master/isteven-multi-select.css" />
+  <script type="text/javascript" src="assets/js/smartpaginator.js"></script>
   <!-- End login -->
 </head>
 <!--DOC: menu-always-on-top class to the body element to set menu on top -->
@@ -61,10 +62,11 @@
             <li id="bar_news"><a href="#/news">资讯</a></li>
             <li id="bar_geek"><a href="#/geek">创客</a></li>
             <li id="bar_post-bar"><a href="#/post-bar">创吧</a></li>
-            <li id="bar_my-space"><a href="#/my-space"><span ng-show="user != null && user.id != 0 && user.suproleid==1&& user.id != undefined
+            <li id="bar_my-space" ng-click="goSpace()" ><a>我的</a></li>
+           <!--  <li id="bar_my-space"><a href="#/my-space"><span ng-show="user != null && user.id != 0 && user.suproleid==1&& user.id != undefined
             && user != ''" >我的</span></a></li>
             <li id="bar_my-space-company"><a href="#/my-space-company"><span ng-show="user != null && user.id != 0 && user.suproleid==2&& user.id != undefined
-            && user != ''" >我的</span></a></li>
+            && user != ''" >我的</span></a></li> -->
             <li id="bar_login"><div ng-if="user == null || user == undefined || user == '' ||user.id == undefined"><a href="#/register" style="display: inline; font-size:15px;">注册</a> 
              |  <a href="#/login"style="display: inline; font-size:15px;"><span>登录</span></a></div></li>
             <li ng-click="logout()"><div ng-if="user != null && user.id != 0 && user.id != undefined
@@ -107,7 +109,7 @@
   <![endif]-->
   <!-- Load JavaScripts at the bottom, because it will reduce page load time -->
   <!-- Core plugins BEGIN (For ALL pages) -->
- <script src="assets/js/jquery.min.js" type="text/javascript"></script>
+<script src="assets/js/jquery.min.js" type="text/javascript"></script>  
   <script src="assets/js/jquery-migrate.min.js" type="text/javascript"></script>
   <script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
   <!-- Core plugins END (For ALL pages) -->
@@ -126,7 +128,7 @@
   <script type="text/javascript" src="assets/js/additional-methods.min.js"></script>
   <script type="text/javascript" src="assets/js/jquery.bootstrap.wizard.min.js"></script>
   <script type="text/javascript" src="assets/js/select2.min.js"></script>
-  <script src="../../assets/js/smartpaginator.js"></script>
+<!--   <script src="../../assets/js/smartpaginator.js"></script> -->
   <script src="assets/js/form-wizard.js"></script>
 <!-- end register -->
   <script language="javascript">
@@ -254,27 +256,22 @@ $(function (){
     });
   </script>
 <!-- END JAVASCRIPTS -->
-<script type="text/javascript" src="../../assets/js/jquery-3.1.0.min.js"></script>
+ <script type="text/javascript" src="../../assets/js/jquery-3.1.0.min.js"></script> 
+ 
 <script src="bower_components/angular/angular.min.js"></script>
+<script src="bower_components/angular-multi-select-master/isteven-multi-select.js"></script>
 <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
-<script src="bower_components/angular-cookies/angular-cookies.min.js"></script>
 <script src="bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
 <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js?"></script>
 <script src="bower_components/angular/ng-file-upload.min.js"></script>
 <script src="bower_components/angular/ng-file-upload-shim.min.js"></script>
-<script src="bower_components/highlightjs/highlight.pack.js"></script>
-<script src="bower_components/angular-bootstrap-checkbox/angular-bootstrap-checkbox.js"></script>
 <script src="bower_components/angular-xeditable/dist/js/xeditable.js"></script>
-<script src="bower_components/angular-multi-select-master/isteven-multi-select.js"></script>
-<script src="bower_components/angucomplete/angucomplete.js"></script>
-<script src="bower_components/at-table/dist/angular-table.min.js"></script>
+
+<!-- <script src="bower_components/angucomplete/angucomplete.js"></script> -->
 <script src="bower_components/jquery/dist/jquery.js"></script>
-<script src="bower_components/bootstrap/js/carousel.js"></script>
-<script src="bower_components/bootstrap/js/bootstrap-datetimepicker.min.js"></script>
-<script src="bower_components/angular/ngRemoteValidate.0.6.1.min.js"></script>
+<!-- <script src="bower_components/angular/ngRemoteValidate.0.6.1.min.js"></script> -->
 <script type="text/javascript" charset="utf-8" src="../../ueditor/ueditor.config.js"></script>
 <script type="text/javascript" charset="utf-8" src="../../ueditor/ueditor.all.min.js"> </script>
-  <!--  <script src="app/js/index.js" type="text/javascript"></script> -->
 <script src="app/js/app.js" type="text/javascript"></script>
 <script src="app/js/home.js" type="text/javascript"></script>
 <script src="app/js/geek.js" type="text/javascript"></script>

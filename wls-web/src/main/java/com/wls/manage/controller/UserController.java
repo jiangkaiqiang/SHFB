@@ -74,7 +74,7 @@ public class UserController extends BaseController {
 	
 	@RequestMapping(value = "/login")
 	@ResponseBody
-	public ResponseData<String> login(HttpServletRequest request, String userName, String password) {
+	public Object login(HttpServletRequest request, String userName, String password) {
 		if(StringUtil.isnotNull(userName)&&StringUtil.isnotNull(password)){
 			UserEntity user = userDao.findUser(userName, EncodeUtil.encodeByMD5(password));
 			if (user != null) {

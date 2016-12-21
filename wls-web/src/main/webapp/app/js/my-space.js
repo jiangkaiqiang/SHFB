@@ -1,4 +1,4 @@
-wlsWeb.controller('my-space',function($http, $location, $scope) {
+wlsWeb.controller('my-space',function($http, $location, $scope,$state) {
 	 $scope.load = function(){
 	    	$http.get( "/i/user/findUser").success(function(data,status,config,headers){
 					 if(data!=null&&data.id!=undefined){
@@ -155,7 +155,7 @@ wlsWeb.controller('my-space',function($http, $location, $scope) {
 					 }
 					else{
 						alert("请先登录");
-						window.location.href="../../login.html";
+						window.location.href="#/login";
 					}
 			    });
 		   };
@@ -226,7 +226,7 @@ wlsWeb.controller('my-space',function($http, $location, $scope) {
 		    	}).success(function(data) {
 		    		if(data.success){
 		    			alert("信息修改成功");
-		    			window.location.reload();
+		    			$state.reload();
 		    		}
 		    		else{
 		    			alert("信息修改失败");
@@ -241,6 +241,10 @@ wlsWeb.controller('my-space',function($http, $location, $scope) {
 		        return true;
 		}
 		
+	   $scope.cancel = function () {
+		   $state.reload();
+	   };
+	   
 	    $scope.deleteEducate = function (educateID) {
 	    	if(delcfm()){
 	    	$http.get('/i/user/deleteEducate', {
@@ -405,7 +409,7 @@ wlsWeb.controller('my-space',function($http, $location, $scope) {
 									    	}).success(function(data) {
 									    		if(data.success){
 									    			alert("简历修改成功");
-									    			window.location.reload();
+									    			$state.reload();
 									    		}
 									    		else{
 									    			alert("简历修改失败");

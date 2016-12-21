@@ -105,7 +105,7 @@
            </div> 
            <div class="pull-right"> 
             <a class="btn default" id="edit_info">编辑</a> 
-            <a class="btn default" id="edit_info_concel" style="display:none">取消</a> 
+            <a class="btn default" id="edit_info_concel" ng-click="cancel()" style="display:none">取消</a> 
             <a class="btn default" id="edit_info_save" ng-click="saveInfo()" style="display:none">保存</a> 
            </div> 
           </div> 
@@ -195,7 +195,7 @@
            <div class="caption caption-md"> 
             <i class="icon-bar-chart theme-font hide"></i> 
             <span class="caption-subject font-blue-madison bold uppercase">已发布作品</span> 
-            <span class="caption-helper">1个</span> 
+            <span class="caption-helper">{{publishNum}}个</span> 
            </div> 
           </div> 
           <div class="portlet-body"> 

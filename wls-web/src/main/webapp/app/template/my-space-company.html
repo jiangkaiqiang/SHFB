@@ -101,7 +101,9 @@
                <a data-toggle="modal" href="#edit_logo" title="点击修改logo"> <img src="../../assets/img/logo/logo.png" /> </a> 
               </div> 
               <div class="business-card-body col-md-8"> 
-               <h2>{{user.realname}}
+               <h2>
+               <span ng-if="user.realname!=undefined">{{user.realname}}</span>
+               <span ng-if="user.realname==undefined">未命名</span>
                <span>{{user.position}}</span> 
                </h2> 
                <span><i class="fa  fa-mobile-phone"></i> {{user.telephone}}</span> 

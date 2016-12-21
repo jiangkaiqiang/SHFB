@@ -1,6 +1,6 @@
-var wlsWeb = angular.module('WlsWeb', ['ui.bootstrap', 'ui.router', 'ui.checkbox',
-    'ngCookies', 'xeditable', 'isteven-multi-select', 'angucomplete', 'angular-table','ngFileUpload','remoteValidation']);
-angular.element(document).ready(function ($ngCookies, $http, $rootScope) {
+var wlsWeb = angular.module('WlsWeb', ['ui.bootstrap', 'ui.router',
+     'xeditable',  'ngFileUpload']);
+angular.element(document).ready(function ( $http, $rootScope) {
 	angular.bootstrap(document, ['WlsWeb']);
 });
 wlsWeb.run(function (editableOptions, userService, $location) {
@@ -21,6 +21,19 @@ wlsWeb.factory('userService',['$rootScope','$http', function($rootScope,$http){
 	            });
 	        	window.location.href="#/home";
 	        };
+	        $rootScope.goSpace = function() {
+	        	if($rootScope.user.id==undefined){
+	        		alert("请先登录");
+	        	}
+	        	else{
+	        		if($rootScope.user.suproleid==1){
+	        			window.location.href="#/my-space";
+	        		}
+	        		else{
+	        			window.location.href="#/my-space-company";
+	        		}
+	        	}
+	        };
 	    },
 	};
 }]);
@@ -28,6 +41,7 @@ wlsWeb.factory('userService',['$rootScope','$http', function($rootScope,$http){
 
 wlsWeb.config(function ($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise("/home");
+    
     //index
     $stateProvider.state('home', {
         url: '/home',
