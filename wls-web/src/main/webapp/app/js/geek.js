@@ -8,7 +8,6 @@ wlsWeb.controller('geek',function($http, $location,$rootScope, $scope,$state, $s
 	$scope.Allusers = [];
 	$scope.optAudit = 8;
 	$scope.citys = [];
-	$scope.schools = [];
 	$scope.AllCategory = [
 	                      {id:"8",name:"全部"},
 	                      {id:"1",name:"设计狮"},
@@ -48,28 +47,15 @@ wlsWeb.controller('geek',function($http, $location,$rootScope, $scope,$state, $s
         $scope.provinceid = -1;
     });
 
-   // 获取城市列表
-    $http.get('/i/city/findCityList').success(function (data) {
-    	 $scope.citys = data;
-         var ci = {"ci_id":-1,"ci_city":"全部城市"};
+        var ci = {"ci_id":-1,"ci_city":"全部城市"};
      	$scope.citys.push(ci);
      	$scope.citys = sortJson($scope.citys,"ci_id");
      	$scope.cityid = -1;
-    });
-    
-    // 获取学校列表
-    $http.get('/i/city/findSchoolList').success(function (data) {
-    	$scope.schools = data;
-        var sh = {"sh_id":-1,"sh_shool":"全部学校"};
-    	 $scope.schools.push(sh);
-    	$scope.schools = sortJson($scope.schools,"sh_id");
-    	 $scope.schoolid = -1;
-    });
     
     // 根据省ID查询城市列表
     $scope.provinceSelected = function () {
     	$scope.cityid = -1;
-    	$scope.schoolid = -1;
+    	$scope.schools = undefined;
     	$scope.getUsers();
         $http.get('/i/city/findCitysByProvinceId', {
             params: {

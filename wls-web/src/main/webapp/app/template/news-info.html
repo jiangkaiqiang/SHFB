@@ -77,8 +77,8 @@
           <span class="input-group-btn"> <button class="btn btn-primary" type="button">评论</button> </span> 
          </div> 
          <div class="col-md-11 form-group input-group" style="display:none" id="input_comment2"> 
-          <textarea class="form-control" rows="3"></textarea> 
-          <p class="pull-right padding-top-10"><button class="btn btn-primary" type="submit" id="comment_btn">评论</button></p> 
+          <textarea ng-model="commentDetail" class="form-control" rows="3"></textarea> 
+          <p class="pull-right padding-top-10"><button class="btn btn-primary" ng-click="newsComment()" id="comment_btn">评论</button></p> 
          </div> 
         </div> 
         <div class="comments"> 

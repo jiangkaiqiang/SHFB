@@ -27,7 +27,7 @@ wlsWeb.controller('news',function($http, $location, $state,$scope) {
 				keyword : encodeURI($scope.keyword,"UTF-8"),
 			}
 		}).success(function(data) {
-			$scope.bigTotalItems = data.total;
+			$scope.bigTotalItems = data.size;
 			$scope.AllNews = data.list;
 		});
 	};

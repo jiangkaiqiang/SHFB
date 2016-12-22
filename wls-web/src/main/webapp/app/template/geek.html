@@ -128,12 +128,13 @@
               <select id=""  style="height:35px !important"
                ng-model="provinceid" ng-disabled="editable"
                                      ng-change="provinceSelected(provinceid)"
-                                     ng-options="x.pr_id as x.pr_province for x in provinces"></select>
+                                     ng-options="x.pr_id as x.pr_province for x in provinces">
+                                    </select>
               <select id="" style="height:35px !important" ng-model="cityid"
                                     ng-disabled="editable" ng-change="citySelected(cityid)"
                                     ng-options="x.ci_id as x.ci_city for x in citys"></select>
           <!-- <input type="text" id="cityChoice" class="form-control" placeholder="请选择地区"/> -->
-           <select id="" style="height:35px !important" ng-model="schoolid"
+           <select id="" ng-if="schools!=undefined" style="height:35px !important" ng-model="schoolid"
                                     ng-disabled="editable"
                                     ng-change="schoolSelected(schoolid)"
                                     ng-options="x.sh_id as x.sh_shool for x in schools"> </select>

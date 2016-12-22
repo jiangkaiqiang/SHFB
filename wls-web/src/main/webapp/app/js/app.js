@@ -1,4 +1,4 @@
-var wlsWeb = angular.module('WlsWeb', ['ui.bootstrap', 'ui.router',
+var wlsWeb = angular.module('WlsWeb', ['ui.router',
      'xeditable',  'ngFileUpload']);
 angular.element(document).ready(function ( $http, $rootScope) {
 	angular.bootstrap(document, ['WlsWeb']);
