@@ -23,6 +23,7 @@ public class ListCrawlJobDigitech {
         String content = "";
         try {
             content=BasicCrawler.crawlPage(linkUrl,"gb2312");
+            System.out.println("ok!");
             //content=BasicCrawler.crawlPage(linkUrl);
         }catch (Exception e){
             e.printStackTrace();
