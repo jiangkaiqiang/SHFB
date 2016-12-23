@@ -63,7 +63,7 @@ public class InformationController extends BaseController {
 			audit = null;
 		}
 		pageNum = pageNum == null? 1:pageNum;
-		pageSize = pageSize==null? 10:pageSize;
+		pageSize = pageSize==null? 12:pageSize;
 		PageHelper.startPage(pageNum, pageSize);
 		if(keyword.equals("undefined")||keyword.equals(""))
 			keyword = null;

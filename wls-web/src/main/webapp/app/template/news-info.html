@@ -73,12 +73,12 @@
           <a href=""><img class="img-responsive" alt="" src="../../assets/img/people/user.jpg"/></a>
          </div> 
          <div class="col-md-11 form-group input-group" id="input_comment1"> 
-          <input type="text" class="form-control" /> 
-          <span class="input-group-btn"> <button class="btn btn-primary" type="button">评论</button> </span> 
+          <input ng-model="commentDetail" type="text" class="form-control" /> 
+          <span class="input-group-btn"> <button class="btn btn-primary" ng-click="newsComment(information.id)"  type="button">评论</button> </span> 
          </div> 
          <div class="col-md-11 form-group input-group" style="display:none" id="input_comment2"> 
-          <textarea ng-model="commentDetail" class="form-control" rows="3"></textarea> 
-          <p class="pull-right padding-top-10"><button class="btn btn-primary" ng-click="newsComment()" id="comment_btn">评论</button></p> 
+          <textarea  class="form-control" rows="3"></textarea> 
+          <p class="pull-right padding-top-10"><button class="btn btn-primary" id="comment_btn">评论</button></p> 
          </div> 
         </div> 
         <div class="comments"> 
@@ -94,9 +94,9 @@
             <a class="pull-left" id="open_reple">&nbsp;&nbsp;· 1条回复 <i class="fa fa-angle-up"></i> </a>
             <a class="pull-left" id="close_reple" style="display:none">&nbsp;&nbsp;· 收起回复 <i class="fa fa-angle-down"></i></a>
            </div> 
-           <div class="col-md-9 no-padding">
+          <!--  <div class="col-md-9 no-padding">
             <span class="pull-right"><a href="#">95<i class="fa fa-thumbs-o-up"></i> 赞</a> <a href="#">举报</a></span>
-           </div>
+           </div> -->
            <div class="col-md-12 no-padding" id="reply_area"></div>
            <div class="col-md-12 no-padding" id="comment_second" style="display:none">
              <div class="item-comment row"> 

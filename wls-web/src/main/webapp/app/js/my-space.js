@@ -42,6 +42,17 @@ wlsWeb.controller('my-space',function($http, $location, $scope,$state) {
 				        	if(data.success){
 				        		$scope.skills = data.data;
 				        	}
+				        	else{
+				        		$scope.skills = undefined;
+				        		if($scope.user.nickname==undefined||$scope.user.age==undefined
+										||$scope.user.sex==undefined||$scope.user.cityid==undefined
+										||$scope.user.provinceid==undefined||$scope.user.schoolid==undefined
+										||$scope.user.major==undefined||$scope.user.interest==undefined
+										||$scope.user.roleid==undefined||$scope.user.signature==undefined||$scope.skills==undefined
+										){
+									alert("请完善个人信息，否则将不会出现在极客的搜索列表之中");
+								}
+				        	}
 				     });
 					 $http.get('/i/user/findHonorByUserID', {
 				            params: {
@@ -136,13 +147,14 @@ wlsWeb.controller('my-space',function($http, $location, $scope,$state) {
 					else{
 							 $scope.userSchool = '';
 						 }
-					 if($scope.user.sex==0){
+					  if($scope.user.sex==0){
 							$scope.user.sex = "男";
 						}
-						else{
+					  else if($scope.user.sex==1){
 							$scope.user.sex = "女";
 						}
-						if($scope.user.score<100){
+						if($scope.user.score==undefined||$scope.user.score==null||
+								$scope.user.score<100){
 							$scope.level = 1;
 						}
 						else if($scope.user.score<500&&$scope.user.score>=100){
@@ -151,7 +163,6 @@ wlsWeb.controller('my-space',function($http, $location, $scope,$state) {
 						else if($scope.user.score>=500){
 							$scope.level = 3;
 						}
-						//$("#tab-1").addClass("in active");
 					 }
 					else{
 						alert("请先登录");

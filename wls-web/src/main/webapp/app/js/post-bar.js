@@ -79,7 +79,7 @@ wlsWeb.controller('post-bar',function($http, $state, $stateParams,$location, $sc
          	 $scope.schools.push(sh);
          	 $scope.schools = sortJson($scope.schools,"sh_id");
         });
-    	$scope.getPublishs
+    	$scope.getPublishs();
     };
     
  // 根据学校查询

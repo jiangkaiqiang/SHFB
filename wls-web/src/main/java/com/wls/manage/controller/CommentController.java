@@ -29,6 +29,6 @@ public class CommentController {
     	comment.setFlag(flag);
     	comment.setCommentid(BigInteger.valueOf(commentid));
     	commentMapper.insertComment(comment);
-    	return ResponseData.newSuccess("发布成功");
+    	return ResponseData.newSuccess("评论成功");
     }
 }

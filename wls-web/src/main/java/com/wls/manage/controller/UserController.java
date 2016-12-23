@@ -247,21 +247,29 @@ public class UserController extends BaseController {
 		List<UserDto> userDtos = new ArrayList<UserDto>();
 		for (int i = 0; i < userEntities.size(); i++) {
 			UserEntity userEntity = userEntities.get(i);
+			List<SkillEntity> skillEntities = skillMapper.findSkillByUserId(userEntity.getId().intValue());
+			if(userEntity.getNickname()!=null&&userEntity.getAge()!=null&&userEntity.getSex()!=null
+					&&userEntity.getCityid()!=null&&userEntity.getProvinceid()!=null&&
+					userEntity.getSchoolid()!=null&&userEntity.getMajor()!=null
+					&&userEntity.getInterest()!=null&&userEntity.getRoleid()!=null&&
+					userEntity.getSignature()!=null&&!skillEntities.isEmpty()){
 			UserDto userDto = new UserDto();
 			userDto.setId(userEntity.getId());
 			userDto.setAvatar(userEntity.getAvatar());
-			if(userEntity.getSignature()==null){
+			userDto.setSignature(userEntity.getSignature());
+			userDto.setNickname(userEntity.getNickname());
+			/*if(userEntity.getSignature()==null){
 				userDto.setSignature("该用户还没有留下自己的签名");
 			}
 			else {
 				userDto.setSignature(userEntity.getSignature());
-			}
-			if (userEntity.getNickname()==null) {
+			}*/
+			/*if (userEntity.getNickname()==null) {
 				userDto.setNickname("游客"+userEntity.getId());
 			}
 			else {
 				userDto.setNickname(userEntity.getNickname());
-			}
+			}*/
 			
 			if (userEntity.getScore()!=null) {
 				if(userEntity.getScore().intValue()<100){
@@ -275,10 +283,11 @@ public class UserController extends BaseController {
 				}
 			}
 			else {
-				userDto.setLevel(0);
+				userDto.setLevel(1);
 			}
-			userDto.setSkillEntities(skillMapper.findSkillByUserId(userEntity.getId().intValue()));
+			userDto.setSkillEntities(skillEntities);
 			userDtos.add(userDto);
+			}
 		}
 		return new PageInfo<UserDto>(userDtos);
 		

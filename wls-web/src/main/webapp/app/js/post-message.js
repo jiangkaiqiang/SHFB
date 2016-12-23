@@ -1,4 +1,8 @@
 wlsWeb.controller('post-message',function($http, $location,$rootScope, $state,$scope) {
+	if($rootScope.user==null||$rootScope.user.id==undefined){
+		alert("请先登录");
+		window.location.href="#/login";
+	}
 	// 获取学校列表
     $http.get('/i/city/findSchoolList').success(function (data) {
     	$scope.schools = data;

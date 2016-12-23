@@ -11,17 +11,23 @@ wlsWeb.controller('news-info',function($http, $location, $state, $rootScope,$sta
 			   });
 		   };
 		$scope.load();
-		$scope.newsComment = function(){
-			if($rootScope.user.id==undefined){
+		$scope.newsComment = function(infoID){
+			if($rootScope.user==null||$rootScope.user.id==undefined){
 				alert("请先登录!");
 			}
-			$http.get('/i/information/findInformationByID', {
+			if($scope.commentDetail==undefined||$scope.commentDetail==""){
+				alert("请输入评论内容");
+			}
+			$http.get('/i/comment/insertComment', {
 	            params: {
 	                "userID": $rootScope.user.id,
-	                "commentDetail" : $scope.commentDetail
+	                "commentDetail" : $scope.commentDetail,
+	                "commentid" : infoID,
+	                "flag" : 0
 	            }
 	        }).success(function(data){
 	        	alert(data.message);
+	        	$state.reload();	
 	      });
 		};
 });

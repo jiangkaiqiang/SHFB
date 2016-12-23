@@ -33,6 +33,7 @@ wlsWeb.controller('news',function($http, $location, $state,$scope) {
 	};
     
 	$scope.pageChanged = function() {
+		$scope.bigCurrentPage = $scope.bigCurrentPage+1;
 		$scope.getNews();
 	};
 	$scope.getNews();
