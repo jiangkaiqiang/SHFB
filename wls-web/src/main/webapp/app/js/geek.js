@@ -56,7 +56,7 @@ wlsWeb.controller('geek',function($http, $location,$rootScope, $scope,$state, $s
     $scope.provinceSelected = function () {
     	$scope.cityid = -1;
     	$scope.schools = undefined;
-    	$scope.getUsers();
+    	broswerHeight();
         $http.get('/i/city/findCitysByProvinceId', {
             params: {
                 "provinceID": $scope.provinceid

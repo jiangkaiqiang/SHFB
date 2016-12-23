@@ -1645,9 +1645,9 @@ Sidebar
 .sidebar-news .item {
     width: 100%;
     overflow: hidden;
-    padding-bottom: 15px;
-    margin-bottom: 15px;
-    border-bottom: solid 1px #eee;
+    padding-bottom: 15px !important;
+    margin-bottom: 15px !important;
+    border-bottom: solid 1px #ddd !important;
 }
 .sidebar-news .item:last-child {
     margin-bottom: 0;

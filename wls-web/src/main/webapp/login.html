@@ -1,45 +1,19 @@
 <!-- BEGIN HEAD -->
 <head>
-<meta charset="utf-8"/>
-<title>蔚蓝树 | 登录</title>
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<meta http-equiv="Content-type" content="text/html; charset=utf-8">
-<meta content="" name="description"/>
-<meta content="" name="author"/>
-<!-- BEGIN GLOBAL MANDATORY STYLES -->
-<link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-<link href="assets/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-<!-- END GLOBAL MANDATORY STYLES -->
-<!-- BEGIN PAGE LEVEL STYLES -->
 <link href="assets/css/login-soft.css" rel="stylesheet" type="text/css">
-<!-- END PAGE LEVEL SCRIPTS -->
-<!-- BEGIN THEME STYLES -->
-<link href="assets/css/components-rounded.css" id="style_components" rel="stylesheet" type="text/css">
-<!-- END THEME STYLES -->
-<link href="assets/css/style.css" rel="stylesheet">
-  <link href="assets/css/style-responsive.css" rel="stylesheet">
-<link rel="shortcut icon" href="assets/img/favicon.ico"/>
-
-<!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
-<!-- BEGIN CORE PLUGINS -->
-<!--[if lt IE 9]>
-<script src="../../assets/global/plugins/respond.min.js"></script>
-<script src="../../assets/global/plugins/excanvas.min.js"></script> 
-<![endif]-->
- <script src="assets/js/jquery.min.js" type="text/javascript"></script> 
- <script src="assets/js/jquery.validate.min.js" type="text/javascript"></script>
+<script src="assets/js/jquery.validate.min.js" type="text/javascript"></script>
 <script src="assets/js/login-soft.js" type="text/javascript"></script>
-<script src="assets/js/common.js" type="text/javascript"></script> 
-<!-- <script type="text/javascript" src="../../assets/js/jquery-3.1.0.min.js"></script> 
-<script type="text/javascript" src="../../assets/js/angular.min.js"></script>
-<script src="app/js/login.js" type="text/javascript"></script>  -->
-<!-- END PAGE LEVEL SCRIPTS -->
+
 <script>
 jQuery(document).ready(function() {     
+ 
  Login.init();
- CommonObj.init();
 });
+ var realityHeight = parseInt($("#base_content_container2").outerHeight()); // 内容高度
+    var bodyHeight = Math.max( window.innerHeight, document.body.clientHeight );
+    if((bodyHeight - 80) > realityHeight){
+    $("#base_content_container2").css("height",(bodyHeight - 140));
+    }
 </script>
 <!-- END JAVASCRIPTS -->
 </head>
@@ -47,7 +21,7 @@ jQuery(document).ready(function() {
 <!-- BEGIN BODY -->
 <body class="menu-always-on-top">
 <!-- BEGIN LOGO -->
-<div class="login" id="base_content_container">
+<div class="login" id="base_content_container2">
 <div class="logo">
     <a href="#/home">
   <!--  <img src="assets/img/logo/logo-white.png" alt="" width="150px"/>-->
