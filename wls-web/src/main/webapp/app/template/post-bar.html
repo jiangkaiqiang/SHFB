@@ -32,8 +32,8 @@
               </div> -->
                <div class="mt-radio-list col-md-12" >
                <div  ng-repeat="cate in AllCategory">
-                 <label class="mt-radio margin-bottom-8">
-                      <a ng-click="auditChanged(cate.id)"><input type="radio" name="optionsRadios" ng-checked="optAudit==cate.id"  id="optionsRadios" value="{{cate.id}}">{{cate.name}}</a>
+                 <label class="mt-radio margin-bottom-8" ng-click="auditChanged(cate.id)">
+                      <a ><input type="radio" name="optionsRadios" ng-checked="optAudit==cate.id"  id="optionsRadios" value="{{cate.id}}">{{cate.name}}</a>
                   </label><br>
                   </div>
               </div>
@@ -43,23 +43,17 @@
       <div class="col-md-9 col-sm-7"> 
        <div class="content-search margin-bottom-20"> 
         <div class="row"> 
-         <div class="col-md-6"> 
-           <!-- <div class="form-group">
-           <div isteven-multi-select selection-mode="single" input-model="schools" 
-            output-model="curschool" button-label="sh_shool" item-label="sh_shool"
-            tick-property="isOn" helper-elements="filter" max-height="200px" 
-            on-item-click="schoolSelected(curschool)" class="form-group"></div>
-            </div> -->
-            <select id=""  style="height:35px !important"
+         <div class="col-md-8"> 
+            <select id=""  style="height:35px ;width:150px"
                ng-model="provinceid" ng-disabled="editable"
                                      ng-change="provinceSelected(provinceid)"
                                      ng-options="x.pr_id as x.pr_province for x in provinces">
                                     </select>
-              <select id="" style="height:35px !important" ng-model="cityid"
+              <select id="" style="height:35px ;width:150px" ng-model="cityid"
                                     ng-disabled="editable" ng-change="citySelected(cityid)"
                                     ng-options="x.ci_id as x.ci_city for x in citys"></select>
           <!-- <input type="text" id="cityChoice" class="form-control" placeholder="请选择地区"/> -->
-           <select id="" ng-if="schools!=undefined" style="height:35px !important" ng-model="schoolid"
+           <select id="" ng-if="schools!=undefined" style="height:35px" ng-model="schoolid"
                                     ng-disabled="editable"
                                     ng-change="schoolSelected(schoolid)"
                                     ng-options="x.sh_id as x.sh_shool for x in schools"> </select>
@@ -98,7 +92,7 @@
           </div> 
           <div class="col-md-12 blog-item-action"> 
            <div class="col-md-4">
-            <span><a><i class="fa fa-comments"></i> 评论{{publish.commentnum}}</a></span>
+            <span><a ng-click="goBlogInfo(publish.id)"><i class="fa fa-comments"></i> 评论{{publish.commentnum}}</a></span>
            </div> 
            <div class="col-md-4 line">
             <span><a><i class="fa fa-thumbs-up"></i> 点赞10</a></span>

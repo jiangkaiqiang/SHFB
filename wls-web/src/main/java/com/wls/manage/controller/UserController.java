@@ -376,16 +376,16 @@ public class UserController extends BaseController {
 			@RequestParam(value="phone",required=false)String phone,
 			@RequestParam(value="email",required=false)String email,
 			@RequestParam(value="signature",required=false)String signature,
-			@RequestParam(value="sex",required=false)int sex,
+			@RequestParam(value="sex",required=false)Integer sex,
 			
-			@RequestParam(value="pr_id",required=false)int pr_id,
-			@RequestParam(value="ci_id",required=false)int ci_id,
-			@RequestParam(value="sh_id",required=false)int sh_id,
+			@RequestParam(value="pr_id",required=false)Integer pr_id,
+			@RequestParam(value="ci_id",required=false)Integer ci_id,
+			@RequestParam(value="sh_id",required=false)Integer sh_id,
 			@RequestParam(value="major",required=false)String major,
-			@RequestParam(value="roleid",required=false)int roleid,
+			@RequestParam(value="roleid",required=false)Integer roleid,
 			@RequestParam(value="nickname",required=false)String nickname,
 			@RequestParam(value="interest",required=false)String interest,
-			@RequestParam(value="age",required=false)int age,
+			@RequestParam(value="age",required=false)Integer age,
 			
 			
 			@RequestParam(value="intention",required=false)String intention

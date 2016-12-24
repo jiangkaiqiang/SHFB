@@ -37,8 +37,8 @@
               </div> -->
                <div class="mt-radio-list col-md-12"  >
                <div ng-repeat="cate in AllCategory">
-                 <label class="mt-radio margin-bottom-8" >
-                      <a ng-click="auditChanged(cate.id)"><input type="radio" name="optionsRadios" ng-checked="optAudit==cate.id"  id="optionsRadios" value="{{cate.id}}">{{cate.name}}</a>
+                 <label class="mt-radio margin-bottom-8" ng-click="auditChanged(cate.id)" >
+                      <a ><input type="radio" name="optionsRadios" ng-checked="optAudit==cate.id"  id="optionsRadios" value="{{cate.id}}">{{cate.name}}</a>
                   </label><br></div>
               </div>
             </div>

@@ -2328,6 +2328,23 @@ table .product-quantity .input-group {
 .news-info li i {
     color: #0066ff;
 }
+#inforContent  p{
+	display: block;
+	font-size: 16px;
+	text-indent:2em;
+	line-height:2;
+    -webkit-margin-before: 16px;
+    -webkit-margin-after: 16px;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+}
+#inforContent  img{
+	display: block;
+    margin:0 auto;
+	padding-top:10px;
+	padding-bottom:10px;
+}
+
 .post-comment img{
   float: left;
   width: 36px;

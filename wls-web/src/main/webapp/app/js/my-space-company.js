@@ -1,4 +1,4 @@
-wlsWeb.controller('my-space-company',function($http, $location, $scope) {
+wlsWeb.controller('my-space-company',function($http, $location, $scope, $state) {
     $scope.load = function(){
     	$http.get( "/i/user/findUser").success(function(data,status,config,headers){
 				 if(data){
@@ -37,7 +37,7 @@ wlsWeb.controller('my-space-company',function($http, $location, $scope) {
 				 }
 				else{
 					alert("请先登录");
-					window.location.href="../../login.html";
+					window.location.href="#/login";
 				}
 		    });
 	   };
@@ -69,7 +69,7 @@ wlsWeb.controller('my-space-company',function($http, $location, $scope) {
 	    	}).success(function(data) {
 	    		if(data.success){
 	    			alert("信息修改成功");
-	    			window.location.reload();
+	    			$state.reload();
 	    		}
 	    		else{
 	    			alert("信息修改失败");
