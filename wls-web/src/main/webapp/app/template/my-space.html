@@ -97,12 +97,14 @@
              <tr> 
               <td class="datasheet-features-type">兴趣爱好：</td> 
               <td class="datasheet-features-type2">{{user.interest}}</td> 
-              <td class="datasheet-features-type">角色：</td> 
+              <td class="datasheet-features-type">身份：</td> 
               <td class="datasheet-features-type2">{{userRole}}</td> 
              </tr> 
              <tr> 
               <td class="datasheet-features-type">个性签名：</td> 
-              <td class="datasheet-features-type2"colspan="3">{{user.signature}}</td> 
+              <td class="datasheet-features-type2">{{user.signature}}</td> 
+              <td class="datasheet-features-type">技能：</td> 
+              <td class="datasheet-features-type2">{{user.skill1}},{{user.skill2}}</td> 
              </tr> 
             </tbody> 
            </table> 
@@ -137,7 +139,7 @@
              <tr> 
               <td class="datasheet-features-type">兴趣爱好：</td> 
               <td><input type="text" class="form-control" placeholder="兴趣爱好" ng-model="user.interest" /></td> 
-              <td class="datasheet-features-type">技能：</td> 
+              <td class="datasheet-features-type">身份：</td> 
               <td>
               <select id=""  style="height:35px !important"
                ng-model="user.roleid" ng-disabled="editable"
@@ -145,7 +147,10 @@
              </tr> 
              <tr> 
               <td class="datasheet-features-type">个性签名：</td> 
-              <td colspan="3"><input type="text" class="form-control" placeholder="个性签名：" ng-model="user.signature" /></td> 
+              <td ><input type="text" class="form-control" placeholder="个性签名：" ng-model="user.signature" /></td>
+              <td class="datasheet-features-type">技能：</td> 
+              <td ><input type="text" style="width:100px" class="form-control" placeholder="技能一" ng-model="user.skill1" />
+                   <input type="text" style="width:100px" class="form-control" placeholder="技能二" ng-model="user.skill2" /> </td>
              </tr> 
             </tbody> 
            </table> 
@@ -749,8 +754,8 @@
            <a href="my-space-ask.html" class="col-md-2 pull-left padding-left-0"><img class="geek-item-img" src="../../assets/img/people/1.jpg" /> <img class="geek-item-img-v" src="../../assets/img/vip.png" /></a> 
            <p class="geek-item-content col-md-6"> <a class="geek-item-name" target="_blank" href="my-space-ask.html">{{user.nickname}}</a> <span class="badge bg-yellow-casablanca">Lv {{user.level}}</span> <span class="geek-item-desc">{{user.signature}}</span> </p> 
            <div class="geek-item-tags col-md-3"> 
-            <span class="bgblue" ng-repeat="skill in user.skillEntities"> 
-            {{skill.skill}} </span> 
+           <span ng-if="user.skill1!=undefined&&user.skill1!=''" class="bgblue"> {{user.skill1}} </span> 
+            <span ng-if="user.skill2!=undefined&&user.skill2!=''" class="bgyellow"> {{user.skill2}} </span> 
            </div> 
             </div> 
             </div> 

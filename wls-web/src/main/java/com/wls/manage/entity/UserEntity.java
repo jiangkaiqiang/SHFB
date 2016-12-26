@@ -64,7 +64,9 @@ public class UserEntity {
 	
 	private String interest;
 	
-	private String skill;
+	private String skill1;
+	
+	private String skill2;
 	
 	private String major;
 	
@@ -288,12 +290,21 @@ public class UserEntity {
 		this.interest = interest;
 	}
 
-	public String getSkill() {
-		return skill;
+
+	public String getSkill1() {
+		return skill1;
 	}
 
-	public void setSkill(String skill) {
-		this.skill = skill;
+	public void setSkill1(String skill1) {
+		this.skill1 = skill1;
+	}
+
+	public String getSkill2() {
+		return skill2;
+	}
+
+	public void setSkill2(String skill2) {
+		this.skill2 = skill2;
 	}
 
 	public String getMajor() {

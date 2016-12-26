@@ -63,7 +63,8 @@
 			 <span class="geek-item-desc">{{user.signature}}</span> 
 			</div> 
            <div class="geek-item-tags col-md-3"> 
-            <span class="bgblue" ng-repeat="skill in user.skillEntities"> {{skill.skill}} </span> 
+            <span ng-if="user.skill1!=undefined&&user.skill1!=''" class="bgblue"> {{user.skill1}} </span> 
+            <span ng-if="user.skill2!=undefined&&user.skill2!=''" class="bgyellow"> {{user.skill2}} </span> 
            </div> 
            </div>
 	
@@ -73,7 +74,7 @@
         <!-- END PRODUCT LIST --> 
         <!-- BEGIN PAGINATOR -->
             <div class="row">
-              <div class="col-md-4 col-sm-4 items-info">共10条</div>
+              <div class="col-md-4 col-sm-4 items-info">共{{bigTotalItems}}条</div>
               <div class="col-md-8 col-sm-8">
                 <ul class="pagination pull-right">
                   <li><a href="#">&laquo;</a></li>

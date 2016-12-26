@@ -230,7 +230,9 @@ wlsWeb.controller('my-space',function($http, $location,$rootScope, $scope,$state
 		    			roleid : $scope.user.roleid,
 		    			nickname : $scope.user.nickname,
 		    			interest : $scope.user.interest,
-		    			age : $scope.user.age
+		    			age : $scope.user.age,
+		    			skill1 : $scope.user.skill1,
+		    			skill2 : $scope.user.skill2
 		    		}
 		    	}).success(function(data) {
 		    		if(data.success){
@@ -413,11 +415,12 @@ wlsWeb.controller('my-space',function($http, $location,$rootScope, $scope,$state
 									    			age : $scope.user.age,
 									    			address : $scope.user.address,
 									    			telephone : $scope.user.telephone,
+									    			introduction : $scope.user.introduction,
 									    			email : $scope.user.email
 									    		}
 									    	}).success(function(data) {
 									    		if(data.success){
-									    			alert("简历修改成功");
+									    			/*alert("简历修改成功");*/
 									    			$state.reload();
 									    		}
 									    		else{
@@ -453,7 +456,7 @@ wlsWeb.controller('my-space',function($http, $location,$rootScope, $scope,$state
 									    			messageSenderID : $scope.user.id
 									    		}
 									    	}).success(function(data) {
-									    		alert("回复成功");
+									    		/*alert("回复成功");*/
 									    		$scope.messages = data;
 									        	$scope.messageNum = $scope.messages.length;
 										   });

@@ -89,8 +89,11 @@ public class PublishController extends BaseController {
 			publishDto.setSchoolid(publishEntity.getSchoolid());
 			publishDto.setTitle(publishEntity.getTitle());
 			UserEntity userEntity = userMapper.findUserById(publishEntity.getPublisher().intValue());
-			publishDto.setPublishername(userEntity.getNickname());
-			publishDto.setPublisheravatar(userEntity.getAvatar());
+			if (userEntity!=null) {
+				publishDto.setPublishername(userEntity.getNickname());
+				publishDto.setPublisheravatar(userEntity.getAvatar());
+			}
+		
 			List<CommentEntity> commentEntities = commentMapper.findCommentsByCommentId(publishEntity.getId().intValue(), 1);
 			publishDto.setCommentEntities(commentEntities);
 			publishDto.setCommentnum(commentEntities.size());

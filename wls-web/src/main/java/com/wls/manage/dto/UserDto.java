@@ -12,7 +12,9 @@ public class UserDto {
 	
 	private String signature;
 	
-	private List<SkillEntity> skillEntities;
+	private String skill1;
+	
+	private String skill2;
 	
 	private Integer level;
 	
@@ -43,12 +45,21 @@ public class UserDto {
 		this.signature = signature;
 	}
 
-	public List<SkillEntity> getSkillEntities() {
-		return skillEntities;
+
+	public String getSkill1() {
+		return skill1;
 	}
 
-	public void setSkillEntities(List<SkillEntity> skillEntities) {
-		this.skillEntities = skillEntities;
+	public void setSkill1(String skill1) {
+		this.skill1 = skill1;
+	}
+
+	public String getSkill2() {
+		return skill2;
+	}
+
+	public void setSkill2(String skill2) {
+		this.skill2 = skill2;
 	}
 
 	public Integer getLevel() {

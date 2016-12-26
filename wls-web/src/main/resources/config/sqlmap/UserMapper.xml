@@ -50,7 +50,8 @@
 	         <if test="position      !=null and position    !=''">   position   =#{position     },</if>
 	         <if test="signature     !=null and signature   !=''">   signature  =#{signature    },</if>
 	         <if test="interest     !=null and interest   !=''">   interest  =#{interest    },</if>
-	         <if test="skill   !=null and skill !=''"> skill  =#{skill  },</if> 
+	         <if test="skill1   !=null and skill1 !=''"> skill1  =#{skill1  },</if> 
+	         <if test="skill2   !=null and skill2 !=''"> skill2  =#{skill2 },</if> 
 	         <if test="major      !=null and major    !=''">   major   =#{major     },</if>
 	         <if test="intention     !=null and intention   !=''">   intention  =#{intention    },</if>
 	         <if test="introduction     !=null and introduction   !=''">   introduction  =#{introduction    },</if>

@@ -73,14 +73,16 @@ public class MessageController extends BaseController {
 			messageDto.setSenderid(messageEntity.getSenderid());
 			UserEntity senderEntity  = userMapper.findUserById(messageEntity.getSenderid().intValue());
 			UserEntity ReceiverEntity  = userMapper.findUserById(messageEntity.getReceiverid().intValue());
-			messageDto.setReceiveravatar(ReceiverEntity.getAvatar());
-			messageDto.setReceivername(ReceiverEntity.getNickname());
-			messageDto.setSenderavatar(senderEntity.getAvatar());
-			if (senderEntity.getNickname()==null) {
-				messageDto.setSendername("游客"+senderEntity.getId());
-			}
-			else {
-				messageDto.setSendername(senderEntity.getNickname());
+			if(ReceiverEntity!=null&&senderEntity!=null){
+				messageDto.setReceiveravatar(ReceiverEntity.getAvatar());
+				messageDto.setReceivername(ReceiverEntity.getNickname());
+				messageDto.setSenderavatar(senderEntity.getAvatar());
+				if (senderEntity.getNickname()==null) {
+					messageDto.setSendername("游客"+senderEntity.getId());
+				}
+				else {
+					messageDto.setSendername(senderEntity.getNickname());
+				}
 			}
 			messageDtos.add(messageDto);
 		}

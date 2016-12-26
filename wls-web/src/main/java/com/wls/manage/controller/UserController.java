@@ -247,30 +247,19 @@ public class UserController extends BaseController {
 		List<UserDto> userDtos = new ArrayList<UserDto>();
 		for (int i = 0; i < userEntities.size(); i++) {
 			UserEntity userEntity = userEntities.get(i);
-			List<SkillEntity> skillEntities = skillMapper.findSkillByUserId(userEntity.getId().intValue());
 			if(userEntity.getNickname()!=null&&userEntity.getAge()!=null&&userEntity.getSex()!=null
 					&&userEntity.getCityid()!=null&&userEntity.getProvinceid()!=null&&
 					userEntity.getSchoolid()!=null&&userEntity.getMajor()!=null
 					&&userEntity.getInterest()!=null&&userEntity.getRoleid()!=null&&
-					userEntity.getSignature()!=null&&!skillEntities.isEmpty()){
+					userEntity.getSignature()!=null&&(userEntity.getSkill1()!=null||
+					userEntity.getSkill2()!=null)){
 			UserDto userDto = new UserDto();
 			userDto.setId(userEntity.getId());
 			userDto.setAvatar(userEntity.getAvatar());
 			userDto.setSignature(userEntity.getSignature());
 			userDto.setNickname(userEntity.getNickname());
-			/*if(userEntity.getSignature()==null){
-				userDto.setSignature("该用户还没有留下自己的签名");
-			}
-			else {
-				userDto.setSignature(userEntity.getSignature());
-			}*/
-			/*if (userEntity.getNickname()==null) {
-				userDto.setNickname("游客"+userEntity.getId());
-			}
-			else {
-				userDto.setNickname(userEntity.getNickname());
-			}*/
-			
+			userDto.setSkill1(userEntity.getSkill1());
+			userDto.setSkill2(userEntity.getSkill2());
 			if (userEntity.getScore()!=null) {
 				if(userEntity.getScore().intValue()<100){
 					userDto.setLevel(1);
@@ -285,7 +274,6 @@ public class UserController extends BaseController {
 			else {
 				userDto.setLevel(1);
 			}
-			userDto.setSkillEntities(skillEntities);
 			userDtos.add(userDto);
 			}
 		}
@@ -385,6 +373,8 @@ public class UserController extends BaseController {
 			@RequestParam(value="roleid",required=false)Integer roleid,
 			@RequestParam(value="nickname",required=false)String nickname,
 			@RequestParam(value="interest",required=false)String interest,
+			@RequestParam(value="skill1",required=false)String skill1,
+			@RequestParam(value="skill2",required=false)String skill2,
 			@RequestParam(value="age",required=false)Integer age,
 			
 			
@@ -412,6 +402,8 @@ public class UserController extends BaseController {
 		user.setNickname(nickname);
 		user.setInterest(interest);
 		user.setAge(age);
+		user.setSkill1(skill1);
+		user.setSkill2(skill2);
 		
 		user.setIntention(intention);
 		if(!user.getId().equals(0)){
@@ -433,6 +425,7 @@ public class UserController extends BaseController {
 	@ResponseBody
 	public Object updateResume(HttpServletRequest request, 
 			@RequestParam(value="realname",required=false)String realname,
+			@RequestParam(value="introduction",required=false)String introduction,
 			@RequestParam(value="telephone",required=false)String telephone,
 			@RequestParam(value="address",required=false)String address,
 			@RequestParam(value="email",required=false)String email,
@@ -448,6 +441,7 @@ public class UserController extends BaseController {
 		user.setTelephone(telephone);
 		user.setEmail(email);
 		user.setAge(age);
+		user.setIntroduction(introduction);
 		user.setIntention(intention);
 		if(!user.getId().equals(0)){
 			if(StringUtil.isnotNull(user.getPassword()))
@@ -583,9 +577,10 @@ public class UserController extends BaseController {
 						else {
 							userDto.setLevel(0);
 						}
-						userDto.setSkillEntities(skillMapper.findSkillByUserId(userEntity.getId().intValue()));
+						userDto.setSkill1(userEntity.getSkill1());
+						userDto.setSkill2(userEntity.getSkill2());
+						userDtos.add(userDto);
 					}
-					userDtos.add(userDto);
 				}
 			}
 	        return userDtos;
