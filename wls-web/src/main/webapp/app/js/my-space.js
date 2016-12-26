@@ -1,7 +1,8 @@
 wlsWeb.controller('my-space',function($http, $location,$rootScope, $scope,$state) {
 	 $scope.load = function(){
-			if($rootScope.user!=null&&$rootScope.user.id!=undefined){
-					 $scope.user = $rootScope.user;
+		 $http.get('/i/user/findUser').success(function (data) {
+			if(data!=null&&data.id!=undefined){
+					 $scope.user = data;
 					 /*$scope.educates = {};
 					 $scope.skills = {};
 					 $scope.honors = {};
@@ -43,14 +44,6 @@ wlsWeb.controller('my-space',function($http, $location,$rootScope, $scope,$state
 				        	}
 				        	else{
 				        		$scope.skills = undefined;
-				        		if($scope.user.nickname==undefined||$scope.user.age==undefined
-										||$scope.user.sex==undefined||$scope.user.cityid==undefined
-										||$scope.user.provinceid==undefined||$scope.user.schoolid==undefined
-										||$scope.user.major==undefined||$scope.user.interest==undefined
-										||$scope.user.roleid==undefined||$scope.user.signature==undefined||$scope.skills==undefined
-										){
-									alert("请完善个人信息，否则将不会出现在极客的搜索列表之中");
-								}
 				        	}
 				     });
 					 $http.get('/i/user/findHonorByUserID', {
@@ -162,11 +155,21 @@ wlsWeb.controller('my-space',function($http, $location,$rootScope, $scope,$state
 						else if($scope.user.score>=500){
 							$scope.level = 3;
 						}
+						if($scope.user.nickname==undefined||$scope.user.age==undefined
+								||$scope.user.sex==undefined||$scope.user.cityid==undefined
+								||$scope.user.provinceid==undefined||$scope.user.schoolid==undefined
+								||$scope.user.major==undefined||$scope.user.interest==undefined
+								||$scope.user.roleid==undefined||$scope.user.signature==undefined||
+								($scope.user.skill1==undefined&&$scope.user.skill2==undefined)
+								){
+							alert("请完善个人信息，否则将不会出现在极客的搜索列表之中");
+						}
 					 }
 					else{
 						alert("请先登录");
 						window.location.href="#/login";
 					}
+	        });
 		   };
 		$scope.load();
 		 // 获取省列表
@@ -420,7 +423,7 @@ wlsWeb.controller('my-space',function($http, $location,$rootScope, $scope,$state
 									    		}
 									    	}).success(function(data) {
 									    		if(data.success){
-									    			/*alert("简历修改成功");*/
+									    			alert("简历修改成功");
 									    			$state.reload();
 									    		}
 									    		else{

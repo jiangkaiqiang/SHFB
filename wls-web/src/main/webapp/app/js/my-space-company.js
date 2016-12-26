@@ -1,7 +1,8 @@
-wlsWeb.controller('my-space-company',function($http, $location, $scope, $state) {
+wlsWeb.controller('my-space-company',function($http, $location,$rootScope, $scope, $state) {
     $scope.load = function(){
-			if($rootScope.user!=null&&$rootScope.user.id!=undefined){
-				 $scope.user = $rootScope.user;
+    	$http.get('/i/user/findUser').success(function (data) {
+			if(data!=null&&data.id!=undefined){
+				 $scope.user = data;
 				 if($scope.user.sex==0){
 						$scope.user.sex = "男";
 					}
@@ -16,6 +17,9 @@ wlsWeb.controller('my-space-company',function($http, $location, $scope, $state) 
 					}
 					else if($scope.user.score>=500){
 						$scope.level = 3;
+					}
+					else{
+						$scope.level = 1;
 					}
 					$http.get('/i/message/findMessageByReceiverId', {
 			            params: {
@@ -38,6 +42,7 @@ wlsWeb.controller('my-space-company',function($http, $location, $scope, $state) 
 					alert("请先登录");
 					window.location.href="#/login";
 				}
+    	 });
 	   };
 	$scope.load();
 	$scope.logout = function() {

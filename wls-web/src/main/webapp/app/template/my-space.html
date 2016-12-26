@@ -276,7 +276,7 @@
 
 				  <div ng-if="educates!=undefined&&educates!=''" class="timeline-body" ng-repeat="educate in educates"> 
                    <h2>{{educate.starttime}} 至{{educate.endtime}}</h2> 
-                   <span>学校{{educate.school}}</span> 
+                   <span>{{educate.school}}</span> 
                    <div class="timeline-content">
                      {{educate.describe}}
                    </div> 
@@ -612,7 +612,7 @@
                   </div> 
                   <div class="timeline-body"> 
                    <div class="timeline-content"> 
-                    <textarea class="form-control" rows="3">{{user.introduction}}</textarea> 
+                    <textarea class="form-control" rows="3" ng-model="user.introduction"></textarea> 
                    </div> 
                   </div> </li> 
                  <li> 
@@ -968,7 +968,7 @@
   <!-- /.modal -->   
 
   <!--send_message--> 
-  <div class="send-message" style="display:none;" id="send-message"> 
+  <!-- <div class="send-message" style="display:none;" id="send-message"> 
    <div class="col-md-12 padding-top-10 message-title"> 
     <div class="col-md-11 no-padding">
       呵呵呵 
@@ -1004,6 +1004,6 @@
      <span class="input-group-btn"> <button class="btn btn-primary" type="button">发送</button> </span> 
     </div> 
    </div> 
-  </div> 
+  </div>  -->
  </div> 
  </body>

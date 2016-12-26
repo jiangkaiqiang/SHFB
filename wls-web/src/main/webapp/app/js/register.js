@@ -83,13 +83,13 @@ wlsWeb.controller('register',function($http, $location, $scope) {
    			}
    	}).success(function(data) {
    		if(data.success){
-   			$rootScope.user = data;
    			if($scope.suproleid==1){
-   				  window.location.reload();
+   				window.location.reload();
     			  window.location.href="#/my-space";
+    			  
    			}
    			else{
-   				window.location.reload();
+   			 window.location.reload();
    			    window.location.href="#/my-space-company";
    			}
    		}
