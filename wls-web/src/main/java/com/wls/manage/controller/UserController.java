@@ -475,7 +475,7 @@ public class UserController extends BaseController {
 			String fileName = String.format("user%s_%s.%s", user.getId(), new Date().getTime(), "jpg");
 			UploadFileEntity uploadFileEntity = new UploadFileEntity(fileName, useravatar, dir);
 			ftpService.uploadFile(uploadFileEntity);
-			user.setAvatar(FtpService.READ_URL+dir + "/" + fileName);
+			user.setAvatar(FtpService.READ_URL+dir + "/" + fileName);//http://42.121.130.177:8089/picture/user/1124/3456789.png
 			this.userDao.updateUser(user);
 			UserEntity	ol_user = this.userDao.findUserById(user.getId().intValue());
 			ol_user.setPassword("********");
@@ -546,43 +546,47 @@ public class UserController extends BaseController {
 	
 	 @RequestMapping(value = "/findFollowerByUserId", method = RequestMethod.GET)
 	 @ResponseBody
-	 public Object findFollowerByUserId(@RequestParam int userID) {
+	 public Object findFollowerByUserId(@RequestParam Integer userID) {
 		    List<FollowEntity> followEntities = followMapper.findFollowByUserId(userID);
 		    List<UserDto> userDtos = new ArrayList<UserDto>();
-		    for (int i = 0; i < followEntities.size(); i++) {
-		    	UserEntity userEntity = userDao.findUserById(followEntities.get(i).getFollowedid().intValue());
-				UserDto userDto = new UserDto();
-				userDto.setId(userEntity.getId());
-				userDto.setAvatar(userEntity.getAvatar());
-				if(userEntity.getSignature()==null){
-					userDto.setSignature("该用户还没有留下自己的签名");
-				}
-				else {
-					userDto.setSignature(userEntity.getSignature());
-				}
-				if (userEntity.getNickname()==null) {
-					userDto.setNickname("游客"+userEntity.getId());
-				}
-				else {
-					userDto.setNickname(userEntity.getNickname());
-				}
-				
-				if (userEntity.getScore()!=null) {
-					if(userEntity.getScore().intValue()<100){
-						userDto.setLevel(1);
+		    if (!followEntities.isEmpty()) {
+		    	for (int i = 0; i < followEntities.size(); i++) {
+			    	UserEntity userEntity = userDao.findUserById(followEntities.get(i).getFollowedid().intValue());
+					UserDto userDto = new UserDto();
+					if (userEntity!=null) {
+						userDto.setId(userEntity.getId());
+						userDto.setAvatar(userEntity.getAvatar());
+						if(userEntity.getSignature()==null){
+							userDto.setSignature("该用户还没有留下自己的签名");
+						}
+						else {
+							userDto.setSignature(userEntity.getSignature());
+						}
+						if (userEntity.getNickname()==null) {
+							userDto.setNickname("游客"+userEntity.getId());
+						}
+						else {
+							userDto.setNickname(userEntity.getNickname());
+						}
+						
+						if (userEntity.getScore()!=null) {
+							if(userEntity.getScore().intValue()<100){
+								userDto.setLevel(1);
+							}
+							else if (userEntity.getScore().intValue()>=100&&userEntity.getScore().intValue()<500) {
+								userDto.setLevel(2);
+							}
+							else if (userEntity.getScore().intValue()>=500) {
+								userDto.setLevel(3);
+							}
+						}
+						else {
+							userDto.setLevel(0);
+						}
+						userDto.setSkillEntities(skillMapper.findSkillByUserId(userEntity.getId().intValue()));
 					}
-					else if (userEntity.getScore().intValue()>=100&&userEntity.getScore().intValue()<500) {
-						userDto.setLevel(2);
-					}
-					else if (userEntity.getScore().intValue()>=500) {
-						userDto.setLevel(3);
-					}
+					userDtos.add(userDto);
 				}
-				else {
-					userDto.setLevel(0);
-				}
-				userDto.setSkillEntities(skillMapper.findSkillByUserId(userEntity.getId().intValue()));
-				userDtos.add(userDto);
 			}
 	        return userDtos;
      }

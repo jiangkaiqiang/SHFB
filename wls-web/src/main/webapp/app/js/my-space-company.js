@@ -1,8 +1,7 @@
 wlsWeb.controller('my-space-company',function($http, $location, $scope, $state) {
     $scope.load = function(){
-    	$http.get( "/i/user/findUser").success(function(data,status,config,headers){
-				 if(data){
-				 $scope.user = data;
+			if($rootScope.user!=null&&$rootScope.user.id!=undefined){
+				 $scope.user = $rootScope.user;
 				 if($scope.user.sex==0){
 						$scope.user.sex = "男";
 					}
@@ -39,7 +38,6 @@ wlsWeb.controller('my-space-company',function($http, $location, $scope, $state) 
 					alert("请先登录");
 					window.location.href="#/login";
 				}
-		    });
 	   };
 	$scope.load();
 	$scope.logout = function() {

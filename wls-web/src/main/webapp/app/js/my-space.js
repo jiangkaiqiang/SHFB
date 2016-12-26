@@ -1,12 +1,11 @@
-wlsWeb.controller('my-space',function($http, $location, $scope,$state) {
+wlsWeb.controller('my-space',function($http, $location,$rootScope, $scope,$state) {
 	 $scope.load = function(){
-	    	$http.get( "/i/user/findUser").success(function(data,status,config,headers){
-					 if(data!=null&&data.id!=undefined){
-					 $scope.user = data;
-					 $scope.educates = {};
+			if($rootScope.user!=null&&$rootScope.user.id!=undefined){
+					 $scope.user = $rootScope.user;
+					 /*$scope.educates = {};
 					 $scope.skills = {};
 					 $scope.honors = {};
-					 $scope.jobs = {};
+					 $scope.jobs = {};*/
 					 $scope.skilldegree=0;
 					 $scope.followerNum = 0;
 					 $http.get('/i/user/findFollowerByUserId', {
@@ -168,7 +167,6 @@ wlsWeb.controller('my-space',function($http, $location, $scope,$state) {
 						alert("请先登录");
 						window.location.href="#/login";
 					}
-			    });
 		   };
 		$scope.load();
 		 // 获取省列表

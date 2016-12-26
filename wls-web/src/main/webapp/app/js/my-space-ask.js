@@ -5,7 +5,7 @@ wlsWeb.controller('my-space-ask',function($http, $location, $scope,$state, $stat
 	            params: {
 	                "spaceUserID": $scope.spaceID
 	            }
-	        }).success(function(data,status,config,headers){
+	        }).success(function(data){
 			    if(data!=null&&data.id!=undefined){
 					 $scope.user = data;
 					 $http.get('/i/user/askFollowFlag', {

@@ -10,26 +10,6 @@
       <!-- BEGIN SIDEBAR --> 
       <div class="sidebar col-md-3 col-sm-5"> 
        <div class="post_bar_mune" style="position:fixed; background:#fff; padding:18px 90px 40px 20px;">
-              <!-- <div class="mt-radio-list col-md-12">
-                  <label class="mt-radio margin-bottom-10">
-                      <a ng-click="auditChanged(8)"><input type="radio" name="optionsRadios"  id="optionsRadios0" value="全部" checked> 全部</a>
-                  </label><br/>
-                  <label class="mt-radio margin-bottom-10">
-                      <a ng-click="auditChanged(1)"><input type="radio"  name="optionsRadios" id="optionsRadios1" value="科技类" > 科技类</a>
-                  </label><br/>
-                  <label class="mt-radio margin-bottom-10">
-                      <a ng-click="auditChanged(2)"><input type="radio"  name="optionsRadios" id="optionsRadios2" value="互联网类" > 互联网类</a>
-                  </label><br/>
-                  <label class="mt-radio margin-bottom-10">
-                      <a ng-click="auditChanged(3)"><input type="radio"  name="optionsRadios" id="optionsRadios3" value="校园类" > 校园类</a>
-                  </label><br/>
-                  <label class="mt-radio margin-bottom-10">
-                      <a ng-click="auditChanged(4)"><input type="radio"  name="optionsRadios" id="optionsRadios4" value="财经类" > 财经类</a>
-                  </label><br/>
-                  <label class="mt-radio margin-bottom-10">
-                      <a ng-click="auditChanged(5)"><input type="radio"  name="optionsRadios" id="optionsRadios5" value="创业类" > 创业类</a>
-                  </label><br/>
-              </div> -->
                <div class="mt-radio-list col-md-12" >
                <div  ng-repeat="cate in AllCategory">
                  <label class="mt-radio margin-bottom-8" ng-click="auditChanged(cate.id)">
@@ -86,7 +66,7 @@
             <div class="blog-item-body-info col-md-12"> 
              <p>{{publish.describe}}
              </p> 
-             <img src="../../assets/img/facts.jpg"/> 
+             <img src="{{publish.pubcover}}"/> 
             </div> 
            </div> 
           </div> 
