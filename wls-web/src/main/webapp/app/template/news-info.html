@@ -38,15 +38,20 @@
            <a href=""><img class="img-responsive" alt="" src="../../assets/img/people/1.jpg" width="60px" /></a>
           </div> 
           <div class="col-md-11 no-left-padding"> 
-           <h4>蔚蓝头条 <span>{{comment.commenttime}}<span></span></span></h4> 
+           <h4>蔚蓝头条 <span>{{comment.commenttime}}<span></h4> 
            <p>{{comment.content}}</p> 
            <div class="col-md-3 no-padding">
-            <a class="pull-left" id="reply">回复</a>  
-            <a class="pull-left" id="open_reple">&nbsp;&nbsp;· 1条回复 <i class="fa fa-angle-up"></i> </a>
-            <a class="pull-left" id="close_reple" style="display:none">&nbsp;&nbsp;· 收起回复 <i class="fa fa-angle-down"></i></a>
+            <a class="pull-left" id="reply-{{comment.id}}" ng-click="responseComment(comment.id)">回复</a>  
+            <a class="pull-left" id="open_reple-{{comment.id}}" ng-click="openReple(comment.id)">&nbsp;&nbsp;· 1条回复 <i class="fa fa-angle-up"></i> </a>
+            <a class="pull-left" id="close_reple-{{comment.id}}" style="display:none" ng-click="closeReple(comment.id)">&nbsp;&nbsp;· 收起回复 <i class="fa fa-angle-down"></i></a>
            </div> 
-           <div class="col-md-12 no-padding" id="reply_area"></div>
-           <div class="col-md-12 no-padding" id="comment_second" style="display:none">
+           <div class="col-md-12 no-padding" id="reply_area-{{comment.id}}" style="display:none">
+		     <div class="form-group input-group padding-top-10"> 
+              <input type="text" class="form-control" /> 
+              <span class="input-group-btn"> <button class="btn btn-primary" type="button" id="reply_btn">回复</button> </span>
+             </div> 
+		   </div>
+           <div class="col-md-12 no-padding" id="comment_second-{{comment.id}}" style="display:none">
              <div class="item-comment row"> 
               <div class="col-md-1">
                <a href=""><img class="img-responsive" alt="" src="../../assets/img/people/1.jpg" width="60px" /></a>
@@ -55,9 +60,9 @@
                <h4>蔚蓝头条 <span>5小时以前<span></span></span></h4> 
                <p>清华大学校长邱勇、党委书记陈旭还专程到家中看望宋平、清华大学校长邱勇、党委书记陈旭还专程到家中看望宋平、清华大学校长邱勇、党委书记陈旭还专程到家中看望宋平、</p> 
                <div class="col-md-3 no-padding">
-                <a class="pull-left" id="reply_second">回复</a>
+                <a class="pull-left" id="reply_second-{{comment.id}}" ng-click="responseCommentSecond(comment.id)">回复</a>
                </div> 
-               <div class="col-md-12 no-padding" id="reply_area_second" style="display:none">
+               <div class="col-md-12 no-padding" id="reply_area_second-{{comment.id}}" style="display:none">
                  <div class="form-group input-group padding-top-10"> 
                    <input type="text" class="form-control" /> 
                    <span class="input-group-btn"> <button class="btn btn-primary" type="button" id="reply_btn">回复</button> </span>
