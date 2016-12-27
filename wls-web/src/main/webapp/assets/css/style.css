@@ -2343,6 +2343,8 @@ table .product-quantity .input-group {
     margin:0 auto;
 	padding-top:10px;
 	padding-bottom:10px;
+	max-width:650px;
+	max-height:650px;
 }
 
 .post-comment img{

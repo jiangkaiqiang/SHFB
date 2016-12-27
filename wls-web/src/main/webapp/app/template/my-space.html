@@ -24,10 +24,10 @@
   </script>    
     <style>
   .timeline-content{
-     min-height:100px;
+     min-height:50px;
   }
   .timeline-body{
-     min-height:100px;
+     min-height:50px;
   }
   </style>
  </head> 
@@ -281,8 +281,8 @@
                      {{educate.describe}}
                    </div> 
                    <div class="timeline-footer"> 
-                    <span>{{educate.major}} </span> | <span ng-if="educate.fulltime==1">非</span> 
-                    <span> 全日制 </span>  |  <span>{{educate.degree}}</span>
+                    <a class="nav-link pull-left"><span>{{educate.major}} </span> | <span ng-if="educate.fulltime==1">非</span> 
+                    <span> 全日制 </span>  |  <span>{{educate.degree}}</span></a>
                    </div> 
                   </div> 
 				  <div class="timeline-body" ng-if="educates==undefined||educates==''"> 
@@ -460,9 +460,9 @@
                      <label class="col-md-2 control-label">时间</label> 
                      <div class="col-md-4"> 
                       <div class="input-group input-xsmall"> 
-                      <input  ng-model="educatestarttime" class="form-control form-control-inline input-small date-picker" size="10" type="text" value="" data-date-format="yyyy-mm-dd" placeholder="起始时间" >
+                      <input  id="educatestarttime" class="form-control form-control-inline input-small date-picker" size="10" type="text"  data-date-format="yyyy-mm-dd" placeholder="起始时间" >
                       <span class="input-group-addon"> 至 </span>
-                      <input ng-model="educateendtime" class="form-control form-control-inline input-small date-picker" size="10" type="text" value="" data-date-format="yyyy-mm-dd" placeholder="结束时间" >
+                      <input id="educateendtime" class="form-control form-control-inline input-small date-picker" size="10" type="text" data-date-format="yyyy-mm-dd" placeholder="结束时间" >
                      </div> 
                      </div>
                     </div> 
@@ -504,6 +504,13 @@
                   <div class="timeline-icon" id="body_edu_icon"> 
                    <i class="fa fa-mortar-board "></i> 
                   </div> 
+				  <div class="timeline-body" ng-if="educates==undefined||educates==''"> 
+                   <h2>开始时间 至 结束时间</h2> 
+                   <span>学校</span> 
+                   <div class="timeline-content">
+				   课程描述···
+                   </div> 
+                  </div>
                   <div class="timeline-body" ng-repeat="educate in educates"> 
                    <h2>{{educate.starttime}}至{{educate.endtime}} </h2> 
                    <span>{{educate.school}}</span> 
@@ -519,7 +526,7 @@
                     <span> 全日制 </span>  |  <span>{{educate.degree}}</span>
                    </div> 
                   </div>
-                   </li> 
+                 </li> 
                  <li> 
                   <div class="timeline-time"> 
                    <span class="time"> 工作经历</span> 
@@ -531,15 +538,22 @@
                   <div class="timeline-icon"> 
                    <i class="fa fa-mortar-board "></i> 
                   </div> 
+				  <div class="timeline-body" ng-if="jobs==undefined||jobs==''"> 
+                   <h2>开始时间 至 结束时间</h2> 
+                   <span>公司名称</span> 
+                   <div class="timeline-content">
+                                                               职位描述···
+                   </div> 
+                  </div> 
                   <div class="timeline-body-form" id="work_form" style="display:none"> 
                    <div class="form-horizontal form-body padding-top-20"> 
                     <div class="form-group"> 
                      <label class="col-md-2 control-label">时间</label> 
                      <div class="col-md-4"> 
                       <div class="input-group input-xsmall"> 
-                      <input class="form-control form-control-inline input-small date-picker" ng-model="jobstarttime"  size="10" type="text" value="" data-date-format="yyyy-mm-dd" placeholder="起始时间" >
+                      <input class="form-control form-control-inline input-small date-picker" id="jobstarttime"  size="10" type="text"  data-date-format="yyyy-mm-dd" placeholder="起始时间" >
                       <span class="input-group-addon"> 至 </span>
-                      <input class="form-control form-control-inline input-small date-picker" ng-model="jobendtime" size="10" type="text" value="" data-date-format="yyyy-mm-dd" placeholder="结束时间" >
+                      <input class="form-control form-control-inline input-small date-picker" id="jobendtime" size="10" type="text"  data-date-format="yyyy-mm-dd" placeholder="结束时间" >
                       </div>
                      </div> 
                     </div> 
@@ -626,15 +640,19 @@
                   <div class="timeline-icon"> 
                    <i class="fa fa-user"></i> 
                   </div> 
+				  <div class="timeline-body" ng-if="honors==undefined||honors==''"> 
+                   <h2>开始时间 至 结束时间</h2> 
+                   <span class="honor_text">所获荣誉.......</span> 
+                 </div> 
                   <div class="timeline-body-form" id="honor_form" style="display:none"> 
                    <div class="form-horizontal form-body padding-top-20"> 
                     <div class="form-group"> 
                      <label class="col-md-2 control-label">时间</label> 
                      <div class="col-md-8"> 
                       <div class="input-group input-xsmall"> 
-                      <input class="form-control form-control-inline input-medium date-picker" ng-model="honorstarttime" size="10" type="text" value="" data-date-format="yyyy-mm-dd" placeholder="起始时间" >
+                      <input class="form-control form-control-inline input-medium date-picker" id="honorstarttime" size="10" type="text"  data-date-format="yyyy-mm-dd" placeholder="起始时间" >
                       <span class="input-group-addon"> 至 </span>
-                      <input class="form-control form-control-inline input-medium date-picker" ng-model="honorendtime" size="10" type="text" value="" data-date-format="yyyy-mm-dd" placeholder="结束时间" >
+                      <input class="form-control form-control-inline input-medium date-picker" id="honorendtime" size="10" type="text"  data-date-format="yyyy-mm-dd" placeholder="结束时间" >
                      </div> 
                      </div> 
                     </div> 

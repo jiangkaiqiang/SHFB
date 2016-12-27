@@ -278,8 +278,8 @@ wlsWeb.controller('my-space',function($http, $location,$rootScope, $scope,$state
 			   $scope.educatefulltime=0;
 			    	$http.get( "/i/user/addEducate",{
 			    		params : {
-			    			educatestarttime : $scope.educatestarttime,
-			    			educateendtime : $scope.educateendtime,
+			    			educatestarttime : $("#educatestarttime")[0].value,
+			    			educateendtime : $("#educateendtime")[0].value,
 			    			educateschool : $scope.educateschool,
 			    			educatedegree : $scope.educatedegree,
 			    			educatefulltime : $scope.educatefulltime,
@@ -289,6 +289,9 @@ wlsWeb.controller('my-space',function($http, $location,$rootScope, $scope,$state
 			    		}
 			    	}).success(function(data) {
 			    		if(data.success){
+			    			 $("#education_form").css("display","none");
+			    		       $("#body_edu").css("display","");
+			    		       $("#body_edu_icon").css("display","");
 			    			alert("教育经历添加成功");
 			    			 $scope.educates = data.data;
 			    		}
@@ -318,8 +321,8 @@ wlsWeb.controller('my-space',function($http, $location,$rootScope, $scope,$state
 				   $scope.saveJob = function() {
 					    	$http.get( "/i/user/addJob",{
 					    		params : {
-					    			jobstarttime : $scope.jobstarttime,
-					    			jobendtime : $scope.jobendtime,
+					    			jobstarttime : $("#jobstarttime")[0].value,
+					    			jobendtime : $("#jobendtime")[0].value,
 					    			jobcompany : $scope.jobcompany,
 					    			jobposition : $scope.jobposition,
 					    			jobcompanysize : $scope.jobcompanysize,
@@ -330,6 +333,7 @@ wlsWeb.controller('my-space',function($http, $location,$rootScope, $scope,$state
 					    		}
 					    	}).success(function(data) {
 					    		if(data.success){
+					    			 $("#work_form").css("display","none");
 					    			alert("工作经历添加成功");
 					    			 $scope.jobs = data.data;
 					    		}
@@ -359,13 +363,14 @@ wlsWeb.controller('my-space',function($http, $location,$rootScope, $scope,$state
 						   $scope.saveHonor = function() {
 							    	$http.get( "/i/user/addHonor",{
 							    		params : {
-							    			honorstarttime : $scope.honorstarttime,
-							    			honorendtime : $scope.honorendtime,
+							    			honorstarttime : $("#honorstarttime")[0].value,
+							    			honorendtime : $("#honorendtime")[0].value,
 							    			honorhonor : $scope.honorhonor,
 							    			honoruserid : $scope.user.id
 							    		}
 							    	}).success(function(data) {
 							    		if(data.success){
+							    			 $("#honor_form").css("display","none");
 							    			alert("所获荣誉添加成功");
 							    			$scope.honors = data.data;
 							    		}
@@ -400,6 +405,7 @@ wlsWeb.controller('my-space',function($http, $location,$rootScope, $scope,$state
 									    		}
 									    	}).success(function(data) {
 									    		if(data.success){
+									    			 $("#skill_form").css("display","none");
 									    			alert("技能添加成功");
 									    			$scope.skills = data.data;
 									    		}

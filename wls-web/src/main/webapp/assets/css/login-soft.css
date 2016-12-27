@@ -3,7 +3,7 @@ Login page
 ***/
 /* logo page */
 .login {
-  background-color: #0066ff !important;
+  /* background-color: #0066ff !important; */
   background: url(../img/bg/bg-login.jpg) no-repeat;
   background-size:100%;
   opacity: 1;
