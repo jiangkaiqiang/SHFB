@@ -19,11 +19,15 @@ wlsWeb.controller('geek',function($http, $location,$rootScope, $scope,$state, $s
 	];
 	 // 获取当前geek的列表
     $scope.getUsers = function() {
+    	var rootUserid = 0;
+    	if($rootScope.user!=null&&$rootScope.user.id!=undefined){
+    		rootUserid = $rootScope.user.id;
+    	}
 		$http({
 			method : 'POST',
 			url : '/i/user/findUserList',
 			params : {
-				userid : $rootScope.user.id,
+				userid : rootUserid,
 				pageNum : $scope.bigCurrentPage,
 				pageSize : $scope.maxSize,
 				provinceid  : $scope.provinceid,

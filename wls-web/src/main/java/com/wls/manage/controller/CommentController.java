@@ -22,7 +22,7 @@ public class CommentController {
     
     @RequestMapping(value = "/insertComment", method = RequestMethod.GET)
     @ResponseBody
-    public Object findProvinceList(Integer userID,String commentDetail,Integer commentid,Integer flag) {
+    public Object insertComment(Integer userID,String commentDetail,Integer commentid,Integer flag) {
     	CommentEntity comment = new CommentEntity();
     	comment.setCommenterid(BigInteger.valueOf(userID));
     	comment.setContent(commentDetail);
