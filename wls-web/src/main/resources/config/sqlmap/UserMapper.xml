@@ -84,7 +84,11 @@
 		    </if>
 		    <if test="suproleid != 0">
 		        AND  suproleid = #{suproleid}
-		    </if>		    
+		    </if>	
+		    AND (nickname is not null) AND (age is not null) AND (sex is not null)
+		    AND (cityid is not null) AND (provinceid is not null) AND (schoolid is not null)
+		    AND (major is not null) AND (interest is not null) AND (roleid is not null)
+		    AND (signature is not null) AND (skill1 is not null OR skill2 is not null)
 		 </where>
          order by `registertime` desc
     </select>

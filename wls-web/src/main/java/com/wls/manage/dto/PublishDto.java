@@ -27,13 +27,15 @@ public class PublishDto {
 	
 	private Integer commentnum;
 	
-	private Integer praiseNum;
-	
 	private String publishername;
 	
 	private String publisheravatar;
 	
 	private List<CommentEntity> commentEntities;
+	
+	private Integer praisenum;
+	
+	private Integer praiseflag;
 
 	public BigInteger getId() {
 		return id;
@@ -115,14 +117,6 @@ public class PublishDto {
 		this.commentnum = commentnum;
 	}
 
-	public Integer getPraiseNum() {
-		return praiseNum;
-	}
-
-	public void setPraiseNum(Integer praiseNum) {
-		this.praiseNum = praiseNum;
-	}
-
 	public String getPublishername() {
 		return publishername;
 	}
@@ -145,6 +139,22 @@ public class PublishDto {
 
 	public void setCommentEntities(List<CommentEntity> commentEntities) {
 		this.commentEntities = commentEntities;
+	}
+
+	public Integer getPraisenum() {
+		return praisenum;
+	}
+
+	public void setPraisenum(Integer praisenum) {
+		this.praisenum = praisenum;
+	}
+
+	public Integer getPraiseflag() {
+		return praiseflag;
+	}
+
+	public void setPraiseflag(Integer praiseflag) {
+		this.praiseflag = praiseflag;
 	}
 	
 }

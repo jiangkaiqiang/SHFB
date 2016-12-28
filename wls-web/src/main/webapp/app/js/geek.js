@@ -1,8 +1,8 @@
 wlsWeb.controller('geek',function($http, $location,$rootScope, $scope,$state, $stateParams) {
 	// 显示最大页数
-    $scope.maxSize = 12;
+    $scope.maxSize = 10;
     // 总条目数(默认每页十条)
-    $scope.bigTotalItems = 12;
+    $scope.bigTotalItems = 10;
     // 当前页
     $scope.bigCurrentPage = 1;
 	$scope.Allusers = [];
@@ -37,9 +37,36 @@ wlsWeb.controller('geek',function($http, $location,$rootScope, $scope,$state, $s
 				keyword : encodeURI($scope.keyword,"UTF-8"),
 			}
 		}).success(function(data) {
-			$scope.bigTotalItems = data.total;
+			$scope.bigTotalItems = data.size;
+			$scope.numPages = data.pages;
 			$scope.Allusers = data.list;
 		});
+	};
+	
+	$scope.firstPage = function() {
+		$scope.bigCurrentPage = 1;
+		$scope.getUsers();
+	};
+	
+	$scope.endPage = function() {
+		$scope.bigCurrentPage = $scope.numPages;
+		$scope.getUsers();
+	};
+	
+	$scope.pagedes = function() {
+		if($scope.bigCurrentPage>1){
+			$scope.bigCurrentPage = $scope.bigCurrentPage-1;
+			$scope.getUsers();
+		}
+		   
+	};
+	
+	$scope.pageadd = function() {
+		if($scope.bigCurrentPage<$scope.numPages){
+			$scope.bigCurrentPage = $scope.bigCurrentPage+1;
+			$scope.getUsers();
+		}
+		  
 	};
 	
 	 // 获取省列表

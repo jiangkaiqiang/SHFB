@@ -42,7 +42,7 @@ wlsWeb.controller('post-message',function($http, $location,$rootScope, $state,$s
 	            params: {
 	            	'title' : $scope.title,
 	            	'describe' : $scope.describe,
-					'pubcategory' : $('input[name="optionsRadios2"]:checked').val(),
+					'pubcategory' : $('input[name="optionsRadios3"]:checked').val(),
 					//'publisher' : $rootScope.user.id,
 					'publisher' : 4,
 					'content' : $scope.content,

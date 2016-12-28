@@ -74,16 +74,14 @@
         <!-- END PRODUCT LIST --> 
         <!-- BEGIN PAGINATOR -->
             <div class="row">
-              <div class="col-md-4 col-sm-4 items-info">共{{bigTotalItems}}条</div>
+              <div class="col-md-4 col-sm-4 items-info">共{{numPages}}页</div>
               <div class="col-md-8 col-sm-8">
                 <ul class="pagination pull-right">
-                  <li><a href="#">&laquo;</a></li>
-                  <li><a href="#">1</a></li>
-                  <li><span>2</span></li>
-                  <li><a href="#">3</a></li>
-                  <li><a href="#">4</a></li>
-                  <li><a href="#">5</a></li>
-                  <li><a href="#">&raquo;</a></li>
+                  <li><a ng-click="firstPage()">首页</a></li>
+                  <li><a ng-click="pagedes()">上一页</a></li>
+                  <li><a>第{{bigCurrentPage}}页</a></li>
+                  <li><a ng-click="pageadd()">下一页</a></li>
+                  <li><a ng-click="endPage()">末页</a></li>
                 </ul>
               </div>
             </div>

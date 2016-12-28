@@ -200,7 +200,6 @@ var handleActions = function(){
     })
     /*发帖 全选or校园频道*/
     .on('click', '#optionsRadios2', function(e) {
-    	alert("11");
         $("#select_school").css("display","");
     })
     /*校验表单   login*/

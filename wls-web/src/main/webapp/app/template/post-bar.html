@@ -64,8 +64,8 @@
              </div> 
             </div> 
             <div class="blog-item-body-info col-md-12"> 
-             <p>{{publish.describe}}
-             </p> 
+             <!-- <p>{{publish.describe}}
+             </p>  -->
              <img src="{{publish.pubcover}}"/> 
             </div> 
            </div> 
@@ -75,12 +75,11 @@
             <span><a ng-click="goBlogInfo(publish.id)"><i class="fa fa-comments"></i> 评论{{publish.commentnum}}</a></span>
            </div> 
            <div class="col-md-4 line">
-            <span><a><i class="fa fa-thumbs-up"></i> 点赞10</a></span>
+            <span><a><i class="fa fa-thumbs-up"></i> 点赞{{publish.praisenum}}</a></span>
            </div> 
            <div class="col-md-4" id="ckepop">
-            <span class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="1000" data-close-others="true" aria-expanded="false"><a><i class="fa fa-share-alt"></i> 分享</a></span>
-            
-            <ul class="dropdown-menu" role="menu">
+            <span class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="1000" data-close-others="true" aria-expanded="false"><a ng-click="goBlogInfo(publish.id)"><i class="fa fa-share-alt"></i> 分享</a></span>
+            <!-- <ul class="dropdown-menu" role="menu">
                 <li>
                     <a class="jiathis_button_weixin"> 微信 </a>
                 </li>
@@ -96,7 +95,7 @@
                     <a href="javascript:;">
                     <i class="fa fa-star"></i> QQ空间 </a>
                 </li>
-            </ul>
+            </ul> -->
             <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1" charset="utf-8"></script>
            </div> 
           </div> 
@@ -104,6 +103,19 @@
         </div> 
        </div> 
        <!-- END PRODUCT LIST --> 
+        <!-- BEGIN PAGINATOR -->
+          <div class="row">
+              <div class="col-md-4 col-sm-4 items-info">共{{numPages}}页</div>
+              <div class="col-md-8 col-sm-8">
+                <ul class="pagination pull-right">
+                  <li><a ng-click="firstPage()">首页</a></li>
+                  <li><a ng-click="pagedes()">上一页</a></li>
+                  <li><a>第{{bigCurrentPage}}页</a></li>
+                  <li><a ng-click="pageadd()">下一页</a></li>
+                  <li><a ng-click="endPage()">末页</a></li>
+                </ul>
+              </div>
+            </div> 
       </div> 
       <!-- END CONTENT --> 
      </div> 

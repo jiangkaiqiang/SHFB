@@ -1,6 +1,7 @@
 package com.wls.manage.dao;
 
-import com.github.pagehelper.Page;
+import java.util.List;
+
 import com.wls.manage.entity.CommentEntity;
 import org.apache.ibatis.annotations.Param;
 /**
@@ -13,9 +14,9 @@ public interface CommentMapper {
 
     public void insertComment(CommentEntity comment);
 
-	Page<CommentEntity> findCommentsByCommenterId(@Param("commenterID") int commenterID);
+	List<CommentEntity> findCommentsByCommenterId(@Param("commenterID") int commenterID);
 	
-	Page<CommentEntity> findCommentsByCommentId(@Param("commentID") int commentID, 
+	List<CommentEntity> findCommentsByCommentId(@Param("commentID") int commentID, 
 			@Param("flag") int flag);
 	
 	int deleteByCommentID(int commentID);

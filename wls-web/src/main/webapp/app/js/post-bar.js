@@ -1,8 +1,8 @@
-wlsWeb.controller('post-bar',function($http, $state, $stateParams,$location, $scope) {
+wlsWeb.controller('post-bar',function($http, $state,$rootScope, $stateParams,$location, $scope) {
 	// 显示最大页数
-    $scope.maxSize = 12;
+    $scope.maxSize = 10;
     // 总条目数(默认每页十条)
-    $scope.bigTotalItems = 12;
+    $scope.bigTotalItems = 10;
     // 当前页
     $scope.bigCurrentPage = 1;
 	$scope.AllPublishs = [];
@@ -18,10 +18,15 @@ wlsWeb.controller('post-bar',function($http, $state, $stateParams,$location, $sc
 	];
 	 // 获取当前geek的列表
     $scope.getPublishs = function() {
+    	var userID = 0;
+    	if($rootScope.user!=null&&$rootScope.user.id!=undefined){
+    		userID = $rootScope.user.id;
+    	}
 		$http({
 			method : 'POST',
 			url : '/i/publish/findPublishList',
 			params : {
+				userID : userID,
 				pageNum : $scope.bigCurrentPage,
 				pageSize : $scope.maxSize,
 				schoolid  : $scope.schoolid,
@@ -29,11 +34,38 @@ wlsWeb.controller('post-bar',function($http, $state, $stateParams,$location, $sc
 				keyword : encodeURI($scope.keyword,"UTF-8"),
 			}
 		}).success(function(data) {
-			$scope.bigTotalItems = data.total;
+			$scope.bigTotalItems = data.size;
+			$scope.numPages = data.pages;
 			$scope.AllPublishs = data.list;
 		});
 	};
 
+	$scope.firstPage = function() {
+		$scope.bigCurrentPage = 1;
+		$scope.getPublishs();
+	};
+	
+	$scope.endPage = function() {
+		$scope.bigCurrentPage = $scope.numPages;
+		$scope.getPublishs();
+	};
+	
+	$scope.pagedes = function() {
+		if($scope.bigCurrentPage>1){
+			$scope.bigCurrentPage = $scope.bigCurrentPage-1;
+			$scope.getPublishs();
+		}
+		   
+	};
+	
+	$scope.pageadd = function() {
+		if($scope.bigCurrentPage<$scope.numPages){
+			$scope.bigCurrentPage = $scope.bigCurrentPage+1;
+			$scope.getPublishs();
+		}
+		  
+	};
+	
 	 // 获取省列表
     $http.get('/i/city/findProvinceList').success(function (data) {
     	$scope.provinces = data;

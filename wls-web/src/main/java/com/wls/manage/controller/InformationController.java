@@ -72,6 +72,9 @@ public class InformationController extends BaseController {
 		}
 		Page<InformationEntity> informationEntities = informationDao.findAllInformation(audit,keyword);
 		Page<InformationDto> informationDtos = getInformationDtos(informationEntities);
+		informationDtos.setPageSize(informationEntities.getPageSize());
+		informationDtos.setPages(informationEntities.getPages());
+		informationDtos.setTotal(informationEntities.getTotal());
 		return new PageInfo<InformationDto>(informationDtos);
 	}
 	

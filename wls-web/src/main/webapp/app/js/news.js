@@ -1,8 +1,8 @@
 wlsWeb.controller('news',function($http, $location, $state,$scope) {
 	// 显示最大页数
-    $scope.maxSize = 12;
+    $scope.maxSize = 10;
     // 总条目数(默认每页十条)
-    $scope.bigTotalItems = 12;
+    $scope.bigTotalItems = 10;
     // 当前页
     $scope.bigCurrentPage = 1;
 	$scope.AllNews = [];
@@ -14,6 +14,13 @@ wlsWeb.controller('news',function($http, $location, $state,$scope) {
 	                      {id:"3",name:"校园类"},
 	                      {id:"4",name:"财经类"},
 	                      {id:"5",name:"创业类"}
+	];
+	$scope.AllSize = [
+	                      {id:10,value:"10"},
+	                      {id:20,value:"20"},
+	                      {id:30,value:"30"},
+	                      {id:40,value:"40"},
+	                      {id:50,value:"50"}
 	];
 	 // 获取当前news的列表
     $scope.getNews = function() {
@@ -28,14 +35,37 @@ wlsWeb.controller('news',function($http, $location, $state,$scope) {
 			}
 		}).success(function(data) {
 			$scope.bigTotalItems = data.size;
+			$scope.numPages = data.pages;
 			$scope.AllNews = data.list;
 		});
 	};
     
-	$scope.pageChanged = function() {
-		$scope.bigCurrentPage = $scope.bigCurrentPage+1;
+	$scope.firstPage = function() {
+		$scope.bigCurrentPage = 1;
 		$scope.getNews();
 	};
+	
+	$scope.endPage = function() {
+		$scope.bigCurrentPage = $scope.numPages;
+		$scope.getNews();
+	};
+	
+	$scope.pagedes = function() {
+		if($scope.bigCurrentPage>1){
+			$scope.bigCurrentPage = $scope.bigCurrentPage-1;
+			$scope.getNews();
+		}
+		   
+	};
+	
+	$scope.pageadd = function() {
+		if($scope.bigCurrentPage<$scope.numPages){
+			$scope.bigCurrentPage = $scope.bigCurrentPage+1;
+			 $scope.getNews();
+		}
+		  
+	};
+	
 	$scope.getNews();
 
 	$scope.auditChanged = function(optAudit) {
@@ -44,6 +74,11 @@ wlsWeb.controller('news',function($http, $location, $state,$scope) {
 	};
     
 	$scope.goSearch = function () {
+		$scope.getNews();
+    };
+    
+    $scope.showNewsNum = function (num) {
+    	$scope.maxSize = num;
 		$scope.getNews();
     };
     

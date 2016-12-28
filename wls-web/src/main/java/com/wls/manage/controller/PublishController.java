@@ -16,10 +16,12 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.wls.manage.dao.CommentMapper;
+import com.wls.manage.dao.PraiseMapper;
 import com.wls.manage.dao.PublishMapper;
 import com.wls.manage.dao.UserMapper;
 import com.wls.manage.dto.PublishDto;
 import com.wls.manage.entity.CommentEntity;
+import com.wls.manage.entity.PraiseEntity;
 import com.wls.manage.entity.PublishEntity;
 import com.wls.manage.entity.UserEntity;
 import com.wls.manage.util.ResponseData;
@@ -38,6 +40,8 @@ public class PublishController extends BaseController {
 	private PublishMapper publishMapper;
 	@Autowired
 	private CommentMapper commentMapper;
+	@Autowired
+	private PraiseMapper praiseMapper;
 	
 	/**
 	 * 为前台user查询通知提供服务
@@ -56,9 +60,8 @@ public class PublishController extends BaseController {
 		return pDtos;
 	}
 	
-	
-	private List<PublishDto> getPublishDtos(List<PublishEntity> publishEntities) {
-		List<PublishDto> pDtos = new ArrayList<PublishDto>();
+	private Page<PublishDto> getPublishDtos(List<PublishEntity> publishEntities,Integer userID) {
+		Page<PublishDto> pDtos = new Page<PublishDto>();
 		for (PublishEntity publishEntity : publishEntities) {
 			PublishDto publishDto = new PublishDto();
 			publishDto.setId(publishEntity.getId());
@@ -97,6 +100,62 @@ public class PublishController extends BaseController {
 			List<CommentEntity> commentEntities = commentMapper.findCommentsByCommentId(publishEntity.getId().intValue(), 1);
 			publishDto.setCommentEntities(commentEntities);
 			publishDto.setCommentnum(commentEntities.size());
+			List<PraiseEntity> praiseEntities = praiseMapper.findPraisesByPublishId(publishEntity.getId().intValue());
+			publishDto.setPraisenum(praiseEntities.size());
+			for (PraiseEntity praiseEntity : praiseEntities) {
+				if (praiseEntity.getPraiserid().intValue()==userID.intValue()) {
+					publishDto.setPraiseflag(1);
+					break;
+				}
+			}
+			pDtos.add(publishDto);
+		}
+		return pDtos;
+	}
+	
+	
+	private Page<PublishDto> getPublishDtos(List<PublishEntity> publishEntities) {
+		Page<PublishDto> pDtos = new Page<PublishDto>();
+		for (PublishEntity publishEntity : publishEntities) {
+			PublishDto publishDto = new PublishDto();
+			publishDto.setId(publishEntity.getId());
+			publishDto.setContent(publishEntity.getContent());
+			publishDto.setPubcategory(publishEntity.getPubcategory());
+			switch (publishDto.getPubcategory()) {
+			case 1:
+				publishDto.setPubcategoryname("科技类");
+				break;
+			case 2:
+				publishDto.setPubcategoryname("互联网类");
+				break;
+			case 3:
+				publishDto.setPubcategoryname("校园类");
+				break;
+			case 4:
+				publishDto.setPubcategoryname("财经类");
+				break;
+			case 5:
+				publishDto.setPubcategoryname("创业类");
+				break;
+			default:
+				break;
+			}
+			publishDto.setPublisherid(publishEntity.getPublisher());
+			publishDto.setDescribe(publishEntity.getDescribe());
+			publishDto.setPubtime(publishEntity.getPubtime());
+			publishDto.setSchoolid(publishEntity.getSchoolid());
+			publishDto.setTitle(publishEntity.getTitle());
+			UserEntity userEntity = userMapper.findUserById(publishEntity.getPublisher().intValue());
+			if (userEntity!=null) {
+				publishDto.setPublishername(userEntity.getNickname());
+				publishDto.setPublisheravatar(userEntity.getAvatar());
+			}
+		
+			List<CommentEntity> commentEntities = commentMapper.findCommentsByCommentId(publishEntity.getId().intValue(), 1);
+			publishDto.setCommentEntities(commentEntities);
+			publishDto.setCommentnum(commentEntities.size());
+			List<PraiseEntity> praiseEntities = praiseMapper.findPraisesByPublishId(publishEntity.getId().intValue());
+			publishDto.setPraisenum(praiseEntities.size());
 			pDtos.add(publishDto);
 		}
 		return pDtos;
@@ -113,7 +172,9 @@ public class PublishController extends BaseController {
 	 */
 	@RequestMapping(value = "/findPublishList")
 	@ResponseBody
-	public Object findPublishList(@RequestParam(value="pageNum",required=false) Integer pageNum,
+	public Object findPublishList(
+			@RequestParam(value="userID",required=false) Integer userID,
+			@RequestParam(value="pageNum",required=false) Integer pageNum,
 			@RequestParam(value="pageSize") Integer pageSize, 
 			@RequestParam(value="audit", required=false) Integer audit,
 			@RequestParam(value="schoolid", required=false) Integer schoolid,
@@ -134,7 +195,11 @@ public class PublishController extends BaseController {
 		}
 		PageHelper.startPage(pageNum, pageSize);
 		Page<PublishEntity> publishEntities = publishMapper.findPublishList(audit, keyword, schoolid);
-	    return new PageInfo<PublishDto>(getPublishDtos(publishEntities));
+		Page<PublishDto> publishDtos = getPublishDtos(publishEntities,userID);
+		publishDtos.setPageSize(publishEntities.getPageSize());
+		publishDtos.setPages(publishEntities.getPages());
+		publishDtos.setTotal(publishEntities.getTotal());
+	    return new PageInfo<PublishDto>(publishDtos);
 	}
 	
 	/**

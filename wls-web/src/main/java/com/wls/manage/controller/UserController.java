@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.taobao.api.ApiException;
@@ -243,16 +244,10 @@ public class UserController extends BaseController {
 		else{
 		keyword = URLDecoder.decode(keyword, "UTF-8");
 		}
-		List<UserEntity> userEntities = userDao.findAllUser(audit,keyword,1,provinceid,cityid,schoolid,userid);
-		List<UserDto> userDtos = new ArrayList<UserDto>();
+		Page<UserEntity> userEntities = userDao.findAllUser(audit,keyword,1,provinceid,cityid,schoolid,userid);
+		Page<UserDto> userDtos = new Page<UserDto>();
 		for (int i = 0; i < userEntities.size(); i++) {
 			UserEntity userEntity = userEntities.get(i);
-			if(userEntity.getNickname()!=null&&userEntity.getAge()!=null&&userEntity.getSex()!=null
-					&&userEntity.getCityid()!=null&&userEntity.getProvinceid()!=null&&
-					userEntity.getSchoolid()!=null&&userEntity.getMajor()!=null
-					&&userEntity.getInterest()!=null&&userEntity.getRoleid()!=null&&
-					userEntity.getSignature()!=null&&(userEntity.getSkill1()!=null||
-					userEntity.getSkill2()!=null)){
 			UserDto userDto = new UserDto();
 			userDto.setId(userEntity.getId());
 			userDto.setAvatar(userEntity.getAvatar());
@@ -275,8 +270,10 @@ public class UserController extends BaseController {
 				userDto.setLevel(1);
 			}
 			userDtos.add(userDto);
-			}
 		}
+		userDtos.setPageSize(userEntities.getPageSize());
+		userDtos.setPages(userEntities.getPages());
+		userDtos.setTotal(userEntities.getTotal());
 		return new PageInfo<UserDto>(userDtos);
 		
 	}
