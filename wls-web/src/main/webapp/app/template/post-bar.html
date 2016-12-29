@@ -75,7 +75,8 @@
             <span><a ng-click="goBlogInfo(publish.id)"><i class="fa fa-comments"></i> 评论{{publish.commentnum}}</a></span>
            </div> 
            <div class="col-md-4 line">
-            <span><a><i class="fa fa-thumbs-up"></i> 点赞{{publish.praisenum}}</a></span>
+            <span ng-if="publish.praiseflag==1"><a style="color:#64AED9"><i style="color:#64AED9" class="fa fa-thumbs-up"></i> 点赞{{publish.praisenum}}</a></span>
+            <span ng-if="publish.praiseflag!=1" ng-click="praiseBlog(publish.id)"><a><i class="fa fa-thumbs-up"></i> 点赞{{publish.praisenum}}</a></span>
            </div> 
            <div class="col-md-4" id="ckepop">
             <span class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="1000" data-close-others="true" aria-expanded="false"><a ng-click="goBlogInfo(publish.id)"><i class="fa fa-share-alt"></i> 分享</a></span>
@@ -96,7 +97,7 @@
                     <i class="fa fa-star"></i> QQ空间 </a>
                 </li>
             </ul> -->
-            <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1" charset="utf-8"></script>
+            <!-- <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1" charset="utf-8"></script> -->
            </div> 
           </div> 
          </div> 

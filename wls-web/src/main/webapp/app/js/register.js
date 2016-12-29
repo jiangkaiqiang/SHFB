@@ -1,4 +1,4 @@
-wlsWeb.controller('register',function($http, $location, $scope) {
+wlsWeb.controller('register',function($http, $location, $scope,$rootScope) {
 	$scope.suproleid = 1;
 	$scope.company_gate = function() {
        $scope.suproleid = 2;
@@ -83,13 +83,14 @@ wlsWeb.controller('register',function($http, $location, $scope) {
    			}
    	}).success(function(data) {
    		if(data.success){
+   		   $http.get('/i/user/findUser').success(function (data) {
+				$rootScope.user = data;
+			});
    			if($scope.suproleid==1){
-   				window.location.reload();
-    			  window.location.href="#/my-space";
+    			 window.location.href="#/my-space";
     			  
    			}
    			else{
-   			 window.location.reload();
    			    window.location.href="#/my-space-company";
    			}
    		}

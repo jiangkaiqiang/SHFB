@@ -209,9 +209,25 @@ public class PublishController extends BaseController {
 	 */
 	@RequestMapping(value = "/deletePublish")
 	@ResponseBody
-	public Object deletePublish(int publishID,int userID) {
+	public Object deletePublish(Integer publishID,Integer userID) {
 		 publishMapper.deletePublish(publishID);
 		 return getPublishDtos(publishMapper.findPublishByUserId(userID));
+	}
+	
+	/**
+	 * 点赞发布
+	 * @param publishID
+	 * @param userID
+	 * @return
+	 */
+	@RequestMapping(value = "/praisePublish")
+	@ResponseBody
+	public Object praisePublish(Integer publishID,Integer userID) {
+		PraiseEntity praiseEntity = new PraiseEntity();
+		praiseEntity.setPraiseid(BigInteger.valueOf(publishID));
+		praiseEntity.setPraiserid(BigInteger.valueOf(userID));
+		praiseMapper.insertPraise(praiseEntity);
+		return ResponseData.newSuccess();
 	}
 	
 	/**

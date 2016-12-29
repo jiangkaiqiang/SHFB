@@ -152,6 +152,21 @@ wlsWeb.controller('post-bar',function($http, $state,$rootScope, $stateParams,$lo
 		$scope.getPublishs();
     };
     
+    $scope.praiseBlog = function (publishID) {
+    	if($rootScope.user==null||$rootScope.user.id==undefined){
+    		alert("请先登录再点赞");
+    		return;
+    	}
+    	$http.get('/i/publish/praisePublish', {
+            params: {
+                "publishID": publishID,
+                "userID": $rootScope.user.id
+            }
+        }).success(function (data) {
+        	$scope.getPublishs();
+        });
+    };
+    
     $scope.goBlogInfo = function(publishID) {
       	 $state.go('blog-info', {"publishID": publishID});
    	};

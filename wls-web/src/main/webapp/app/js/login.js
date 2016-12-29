@@ -1,4 +1,4 @@
-wlsWeb.controller('login',function($http, $location, $scope) {
+wlsWeb.controller('login',function($http, $location, $scope, $rootScope) {
    $scope.login = function() {
 	   if($scope.username!=""&&
 			   $scope.password!=""&&
@@ -12,7 +12,9 @@ wlsWeb.controller('login',function($http, $location, $scope) {
  	    	}).success(function(data) {
  	    		if(data.success){
  	    			alert("登录成功");
- 	    			window.location.reload();
+ 	    			 $http.get('/i/user/findUser').success(function (data) {
+ 	    				$rootScope.user = data;
+ 	    			});
  	    			window.location.href="#/home";
  	    		}
  	    		else{
