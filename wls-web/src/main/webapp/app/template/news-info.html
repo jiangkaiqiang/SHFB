@@ -4,9 +4,9 @@
    <div class="main"> 
     <div class="container"> 
      <ul class="breadcrumb" style="background-color:#f1f2f3"> 
-      <li><a href="#/home">首页</a></li> 
-      <li><a href="#/news">资讯</a></li> 
-      <li class="active">资讯详情</li> 
+      <li><a href="#/home">棣栭〉</a></li> 
+      <li><a href="#/news">璧勮</a></li> 
+      <li class="active">璧勮璇︽儏</li> 
      </ul> 
      <!-- BEGIN SIDEBAR & CONTENT --> 
      <div class="row margin-bottom-40"> 
@@ -18,18 +18,28 @@
         <i class="fa fa-calendar"></i> {{information.time}}&nbsp;&nbsp;&nbsp;&nbsp;
          <i class="fa fa-tags"></i>{{information.infocategoryName}} </p> 
          <div id="inforContent"></div>
+         <!-- JiaThis Button BEGIN -->
+         <div id="ckepop">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tsina">新浪微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1" charset="utf-8"></script>
+</div> 
+         
         <div class="post-comment row"> 
-         <h2><span>{{information.commentnum}}</span> 条评论</h2> 
+         <h2><span>{{information.commentnum}}</span> 鏉¤瘎璁�/h2> 
          <div class="col-md-1">
           <a href=""><img class="img-responsive" alt="" src="../../assets/img/people/user.jpg"/></a>
          </div> 
          <div class="col-md-11 form-group input-group" id="input_comment1"> 
           <input  type="text" class="form-control" /> 
-          <span class="input-group-btn"> <button class="btn btn-primary"   type="button">评论</button> </span> 
+          <span class="input-group-btn"> <button class="btn btn-primary"   type="button">璇勮</button> </span> 
          </div> 
          <div class="col-md-11 form-group input-group" style="display:none" id="input_comment2"> 
           <textarea ng-model="commentDetail" class="form-control" rows="3"></textarea> 
-          <p class="pull-right padding-top-10"><button ng-click="newsComment(information.id)" class="btn btn-primary" id="comment_btn">评论</button></p> 
+          <p class="pull-right padding-top-10"><button ng-click="newsComment(information.id)" class="btn btn-primary" id="comment_btn">璇勮</button></p> 
          </div> 
         </div> 
         <div class="comments"> 
@@ -41,14 +51,14 @@
            <h4>{{comment.usernickname}} <span>{{comment.commenttime}}<span></h4> 
            <p>{{comment.content}}</p> 
            <div class="col-md-3 no-padding">
-            <a class="pull-left" id="reply-{{comment.id}}" ng-click="responseComment(comment.id)">回复</a>  
-            <a class="pull-left" id="open_reple-{{comment.id}}" ng-click="openReple(comment.id)">&nbsp;&nbsp;· {{comment.responsenum}}条回复 <i class="fa fa-angle-up"></i> </a>
-            <a class="pull-left" id="close_reple-{{comment.id}}" style="display:none" ng-click="closeReple(comment.id)">&nbsp;&nbsp;· 收起回复 <i class="fa fa-angle-down"></i></a>
+            <a class="pull-left" id="reply-{{comment.id}}" ng-click="responseComment(comment.id)">鍥炲</a>  
+            <a class="pull-left" id="open_reple-{{comment.id}}" ng-click="openReple(comment.id)">&nbsp;&nbsp;路 {{comment.responsenum}}鏉″洖澶�<i class="fa fa-angle-up"></i> </a>
+            <a class="pull-left" id="close_reple-{{comment.id}}" style="display:none" ng-click="closeReple(comment.id)">&nbsp;&nbsp;路 鏀惰捣鍥炲 <i class="fa fa-angle-down"></i></a>
            </div> 
            <div class="col-md-12 no-padding" id="reply_area-{{comment.id}}" style="display:none">
 		     <div class="form-group input-group padding-top-10"> 
               <input type="text" class="form-control" ng-model="firstResponse"/> 
-              <span class="input-group-btn"> <button class="btn btn-primary" ng-click="responseFirst(comment.id,firstResponse)" type="button" id="reply_btn">回复</button> </span>
+              <span class="input-group-btn"> <button class="btn btn-primary" ng-click="responseFirst(comment.id,firstResponse)" type="button" id="reply_btn">鍥炲</button> </span>
              </div> 
 		   </div>
 		   
@@ -61,12 +71,12 @@
                <h4>{{response.usernickname}} <span>{{response.responsetime}}<span></span></span></h4> 
                <p>{{response.content}}</p> 
                <div class="col-md-3 no-padding">
-                <a class="pull-left" id="reply_second-{{comment.id}}" ng-click="responseCommentSecond(comment.id)">回复</a>
+                <a class="pull-left" id="reply_second-{{comment.id}}" ng-click="responseCommentSecond(comment.id)">鍥炲</a>
                </div> 
                <div class="col-md-12 no-padding" id="reply_area_second-{{comment.id}}" style="display:none">
                  <div class="form-group input-group padding-top-10"> 
                    <input type="text" class="form-control" ng-model="secondResponse"/> 
-                   <span class="input-group-btn"> <button class="btn btn-primary" type="button" ng-click="responseSecond(response.usernickname,comment.id,secondResponse)" id="reply_btn">回复</button> </span>
+                   <span class="input-group-btn"> <button class="btn btn-primary" type="button" ng-click="responseSecond(response.usernickname,comment.id,secondResponse)" id="reply_btn">鍥炲</button> </span>
                  </div> 
                </div>
               </div> 
@@ -84,7 +94,7 @@
         <div class="portlet-title"> 
          <div class="caption"> 
           <i class="fa fa-bookmark font-blue"></i> 
-          <span class="caption-subject font-blue bold uppercase">热门推荐</span> 
+          <span class="caption-subject font-blue bold uppercase">鐑棬鎺ㄨ崘</span> 
          </div> 
         </div> 
         <div class="portlet-body"> 
@@ -93,7 +103,7 @@
            <a href=""><img class="img-responsive" alt="" src="../../assets/img/people/1.jpg" /></a> 
           </div> 
           <div class="col-md-9 no-left-padding"> 
-           <h4><a href="news-info.html">支付宝逆天功能上线，用户笑了，马化腾慌了！</a></h4> 
+           <h4><a href="news-info.html">鏀粯瀹濋�澶╁姛鑳戒笂绾匡紝鐢ㄦ埛绗戜簡锛岄┈鍖栬吘鎱屼簡锛�/a></h4> 
           </div> 
          </div> 
          <div class="row margin-bottom-10 item-news-info"> 
@@ -101,7 +111,7 @@
            <a href=""><img class="img-responsive" alt="" src="../../assets/img/people/2.jpg" /></a> 
           </div> 
           <div class="col-md-9 no-left-padding"> 
-           <h4><a href="news-info.html">支付宝逆天功能上线，用户笑了，马化腾慌了！</a></h4> 
+           <h4><a href="news-info.html">鏀粯瀹濋�澶╁姛鑳戒笂绾匡紝鐢ㄦ埛绗戜簡锛岄┈鍖栬吘鎱屼簡锛�/a></h4> 
           </div> 
          </div> 
          <div class="row margin-bottom-10 item-news-info"> 
@@ -109,7 +119,7 @@
            <a href=""><img class="img-responsive" alt="" src="../../assets/img/people/3.jpg" /></a> 
           </div> 
           <div class="col-md-9 no-left-padding"> 
-           <h4><a href="news-info.html">支付宝逆天功能上线，用户笑了，马化腾慌了！</a></h4> 
+           <h4><a href="news-info.html">鏀粯瀹濋�澶╁姛鑳戒笂绾匡紝鐢ㄦ埛绗戜簡锛岄┈鍖栬吘鎱屼簡锛�/a></h4> 
           </div> 
          </div> 
          <div class="row margin-bottom-10 item-news-info"> 
@@ -117,7 +127,7 @@
            <a href=""><img class="img-responsive" alt="" src="../../assets/img/people/4.jpg" /></a> 
           </div> 
           <div class="col-md-9 no-left-padding"> 
-           <h4><a href="news-info.html">支付宝逆天功能上线，用户笑了，马化腾慌了！</a></h4> 
+           <h4><a href="news-info.html">鏀粯瀹濋�澶╁姛鑳戒笂绾匡紝鐢ㄦ埛绗戜簡锛岄┈鍖栬吘鎱屼簡锛�/a></h4> 
           </div> 
          </div> 
          <div class="row margin-bottom-10 item-news-info"> 
@@ -125,7 +135,7 @@
            <a href=""><img class="img-responsive" alt="" src="../../assets/img/people/5.jpg" /></a> 
           </div> 
           <div class="col-md-9 no-left-padding"> 
-           <h4><a href="news-info.html">支付宝逆天功能上线，用户笑了，马化腾慌了！</a></h4> 
+           <h4><a href="news-info.html">鏀粯瀹濋�澶╁姛鑳戒笂绾匡紝鐢ㄦ埛绗戜簡锛岄┈鍖栬吘鎱屼簡锛�/a></h4> 
           </div> 
          </div> 
          <div class="row margin-bottom-10 item-news-info"> 
@@ -133,7 +143,7 @@
            <a href=""><img class="img-responsive" alt="" src="../../assets/img/people/6.jpg" /></a> 
           </div> 
           <div class="col-md-9 no-left-padding"> 
-           <h4><a href="news-info.html">支付宝逆天功能上线，用户笑了，马化腾慌了！</a></h4> 
+           <h4><a href="news-info.html">鏀粯瀹濋�澶╁姛鑳戒笂绾匡紝鐢ㄦ埛绗戜簡锛岄┈鍖栬吘鎱屼簡锛�/a></h4> 
           </div> 
          </div> 
          <div class="row margin-bottom-10 item-news-info"> 
@@ -141,7 +151,7 @@
            <a href=""><img class="img-responsive" alt="" src="../../assets/img/people/7.jpg" /></a> 
           </div> 
           <div class="col-md-9 no-left-padding"> 
-           <h4><a href="news-info.html">支付宝逆天功能上线，用户笑了，马化腾慌了！</a></h4> 
+           <h4><a href="news-info.html">鏀粯瀹濋�澶╁姛鑳戒笂绾匡紝鐢ㄦ埛绗戜簡锛岄┈鍖栬吘鎱屼簡锛�/a></h4> 
           </div> 
          </div> 
          <div class="row margin-bottom-10 item-news-info"> 
@@ -149,7 +159,7 @@
            <a href=""><img class="img-responsive" alt="" src="../../assets/img/people/8.jpg" /></a> 
           </div> 
           <div class="col-md-9 no-left-padding"> 
-           <h4><a href="news-info.html">支付宝逆天功能上线，用户笑了，马化腾慌了！</a></h4> 
+           <h4><a href="news-info.html">鏀粯瀹濋�澶╁姛鑳戒笂绾匡紝鐢ㄦ埛绗戜簡锛岄┈鍖栬吘鎱屼簡锛�/a></h4> 
           </div> 
          </div> 
          <div class="row margin-bottom-10 item-news-info"> 
@@ -157,7 +167,7 @@
            <a href=""><img class="img-responsive" alt="" src="../../assets/img/people/9.jpg" /></a> 
           </div> 
           <div class="col-md-9 no-left-padding"> 
-           <h4><a href="news-info.html">支付宝逆天功能上线，用户笑了，马化腾慌了！</a></h4> 
+           <h4><a href="news-info.html">鏀粯瀹濋�澶╁姛鑳戒笂绾匡紝鐢ㄦ埛绗戜簡锛岄┈鍖栬吘鎱屼簡锛�/a></h4> 
           </div> 
          </div> 
          <div class="row margin-bottom-10 item-news-info"> 
@@ -165,7 +175,7 @@
            <a href=""><img class="img-responsive" alt="" src="../../assets/img/people/10.jpg" /></a> 
           </div> 
           <div class="col-md-9 no-left-padding"> 
-           <h4><a href="news-info.html">支付宝逆天功能上线，用户笑了，马化腾慌了！</a></h4> 
+           <h4><a href="news-info.html">鏀粯瀹濋�澶╁姛鑳戒笂绾匡紝鐢ㄦ埛绗戜簡锛岄┈鍖栬吘鎱屼簡锛�/a></h4> 
           </div> 
          </div> 
         </div> 
@@ -182,13 +192,13 @@
      <div class="modal-content"> 
       <div class="modal-header"> 
        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button> 
-       <h4 class="modal-title">评论成功</h4> 
+       <h4 class="modal-title">璇勮鎴愬姛</h4> 
       </div> 
       <div class="modal-body"> 
-       <i class="fa fa-check-circle-o" style="color:green; font-size:20px;padding:5px;"></i>评论成功！ 
+       <i class="fa fa-check-circle-o" style="color:green; font-size:20px;padding:5px;"></i>璇勮鎴愬姛锛�
       </div> 
       <div class="modal-footer"> 
-       <button type="button" class="btn default" data-dismiss="modal">关闭</button> 
+       <button type="button" class="btn default" data-dismiss="modal">鍏抽棴</button> 
       </div> 
      </div> 
      <!-- /.modal-content --> 
@@ -202,13 +212,13 @@
      <div class="modal-content"> 
       <div class="modal-header"> 
        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button> 
-       <h4 class="modal-title">回复成功</h4> 
+       <h4 class="modal-title">鍥炲鎴愬姛</h4> 
       </div> 
       <div class="modal-body"> 
-       <i class="fa fa-check-circle-o" style="color:green; font-size:20px;padding:5px;"></i>回复成功！ 
+       <i class="fa fa-check-circle-o" style="color:green; font-size:20px;padding:5px;"></i>鍥炲鎴愬姛锛�
       </div> 
       <div class="modal-footer"> 
-       <button type="button" class="btn default" data-dismiss="modal">关闭</button> 
+       <button type="button" class="btn default" data-dismiss="modal">鍏抽棴</button> 
       </div> 
      </div> 
      <!-- /.modal-content --> 
