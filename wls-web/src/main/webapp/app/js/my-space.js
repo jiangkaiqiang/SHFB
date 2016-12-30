@@ -1,4 +1,4 @@
-wlsWeb.controller('my-space',function($http, $location,$rootScope, $scope,$state) {
+wlsWeb.controller('my-space',function($http, $location,$rootScope, $scope,$state,Upload) {
 	 $scope.load = function(){
 		 $http.get('/i/user/findUser').success(function (data) {
 			if(data!=null&&data.id!=undefined){
@@ -247,6 +247,22 @@ wlsWeb.controller('my-space',function($http, $location,$rootScope, $scope,$state
 		    		}
 			   });
 		   };
+		   
+		  
+		   
+		   $scope.updateAvatar = function(useravatar) {
+			   data = {
+					   useravatar: useravatar
+		            };
+			   Upload.upload({
+	               url: '/i/user/updateAvatar',
+	               headers :{ 'Content-Transfer-Encoding': 'utf-8' },
+	               data: data
+	           }).then(function (resp) {
+	        	   alert("头像上传成功");
+	    		   $state.reload();
+	           });
+	       };
 		   
 	   function delcfm() {
 		        if (!confirm("确认要删除？")) {

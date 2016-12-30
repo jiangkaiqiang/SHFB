@@ -51,7 +51,7 @@ import com.wls.manage.util.TelephoneVerifyUtil;
 @Controller
 @RequestMapping(value = "/user")
 public class UserController extends BaseController {
-	private static String baseDir = "picture";
+	private static String baseDir = "data";
 	@Autowired
 	private UserMapper userDao;
 	@Autowired
@@ -462,7 +462,7 @@ public class UserController extends BaseController {
 		UserEntity old_user = (UserEntity)request.getSession().getAttribute("user");
 		user.setId(old_user.getId());
 		if(useravatar!=null){
-			String dir = String.format("%s/user/%s", baseDir, user.getId());
+			String dir = String.format("%s/user/avatar/%s", baseDir, user.getId());
 			String fileName = String.format("user%s_%s.%s", user.getId(), new Date().getTime(), "jpg");
 			UploadFileEntity uploadFileEntity = new UploadFileEntity(fileName, useravatar, dir);
 			ftpService.uploadFile(uploadFileEntity);

@@ -37,10 +37,14 @@
    <div class="title-wrapper" id="img_bg_space"> 
     <div class="container"> 
      <div class="container-inner"> 
-      <em> <a data-toggle="modal" href="#edit_img"><img src="../../assets/img/people/1.jpg" alt="头像" title="点击修改头像" />
-      </a> <p>{{user.nickname}} <span ng-if="user.sex=='男'"><i class="fa fa-male"></i></span> <span ng-if="user.sex=='女'"><i class="fa fa-female"></i></span> 
+      <em> 
+      <a data-toggle="modal" href="#edit_img">
+      <img ng-if="user.avatar==null||user.avatar==undefined" src="../../assets/img/people/1.jpg" alt="头像" title="点击修改头像" />
+      <img ng-if="user.avatar!=null||user.avatar!=undefined" src="{{user.avatar}}" alt="头像" title="点击修改头像" />
+      </a> 
+      <p>{{user.nickname}} <span ng-if="user.sex=='男'"><i class="fa fa-male"></i></span> <span ng-if="user.sex=='女'"><i class="fa fa-female"></i></span> 
       <span class="badge bg-yellow-casablanca">Lv {{level}}</span></p>
-       <p style="font-size:14px">{{user.signature}}</p>
+      <p style="font-size:14px">{{user.signature}}</p>
       <a class="btn red" ><i class="fa fa-plus"></i> 关注({{followerNum}})</a> 
       <!-- <a href="#unattention_me" data-toggle="modal" class="btn red" id="attention" style="display:none"><i class="fa fa-check"></i> 已关注</a>  -->
       <a href="#" class="btn red" ><i class="fa fa-comment"></i> 私信({{messageNum}})</a> </em> 
@@ -90,7 +94,7 @@
              </tr> 
              <tr> 
               <td class="datasheet-features-type">年龄：</td> 
-              <td class="datasheet-features-type2">{{user.age}}</td> 
+               <td class="datasheet-features-type2">{{user.age}}</td> 
               <td class="datasheet-features-type">专业：</td> 
               <td class="datasheet-features-type2">{{user.major}}</td> 
              </tr> 
@@ -854,7 +858,7 @@
           <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px; line-height: 150px;"> 
           </div> 
           <div> 
-           <span class="btn default btn-file"> <span class="fileinput-new"> 选择图片 </span> <span class="fileinput-exists"> 更改 </span> <input type="hidden" /><input type="file" name="..." /> </span> 
+           <span class="btn default btn-file"> <span class="fileinput-new"> 选择图片 </span> <span class="fileinput-exists"> 更改 </span> <input type="hidden" /><input type="file" ng-model="useravatar" name="..." /> </span> 
            <a href="javascript:;" class="btn red fileinput-exists" data-dismiss="fileinput"> 删除 </a> 
           </div> 
          </div> 
@@ -863,7 +867,7 @@
       </div> 
       <div class="modal-footer"> 
        <button type="button" class="btn default" data-dismiss="modal">关闭</button> 
-       <button type="button" class="btn blue">确定</button> 
+       <button type="button" class="btn blue" ng-click="updateAvatar(useravatar)">确定</button> 
       </div> 
      </div> 
      <!-- /.modal-content --> 
