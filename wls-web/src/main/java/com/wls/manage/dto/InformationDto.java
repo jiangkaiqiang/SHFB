@@ -28,7 +28,7 @@ public class InformationDto {
 	
 	private Integer coverpicnum;
 	
-	private List<CommentEntity> commentEntities;
+	private List<CommentDto> commentDtos;
 	
 
 	public BigInteger getId() {
@@ -103,12 +103,13 @@ public class InformationDto {
 		this.coverpicnum = coverpicnum;
 	}
 
-	public List<CommentEntity> getCommentEntities() {
-		return commentEntities;
+
+	public List<CommentDto> getCommentDtos() {
+		return commentDtos;
 	}
 
-	public void setCommentEntities(List<CommentEntity> commentEntities) {
-		this.commentEntities = commentEntities;
+	public void setCommentDtos(List<CommentDto> commentDtos) {
+		this.commentDtos = commentDtos;
 	}
 
 	public String getInfocategoryName() {

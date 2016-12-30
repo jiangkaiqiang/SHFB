@@ -21,11 +21,17 @@ import com.github.pagehelper.PageInfo;
 import com.wls.manage.dao.CommentMapper;
 import com.wls.manage.dao.InforCategoryMapper;
 import com.wls.manage.dao.InformationMapper;
+import com.wls.manage.dao.ResponseMapper;
+import com.wls.manage.dao.UserMapper;
 import com.wls.manage.dto.BaseDto;
+import com.wls.manage.dto.CommentDto;
 import com.wls.manage.dto.InformationDto;
+import com.wls.manage.dto.ResponseDto;
 import com.wls.manage.dto.UploadFileEntity;
 import com.wls.manage.entity.CommentEntity;
 import com.wls.manage.entity.InformationEntity;
+import com.wls.manage.entity.ResponseEntity;
+import com.wls.manage.entity.UserEntity;
 import com.wls.manage.service.FtpService;
 import com.wls.manage.util.ResponseData;
 /**
@@ -44,6 +50,10 @@ public class InformationController extends BaseController {
 	private InformationMapper informationDao;
 	@Autowired
 	private CommentMapper commentMapper;
+	@Autowired
+	private UserMapper userMapper;
+	@Autowired
+	private ResponseMapper responseMapper;
 	/**
 	 * 提供查询服务
 	 * @param pageNum
@@ -95,16 +105,16 @@ public class InformationController extends BaseController {
 				informationDto.setInfocategoryName("科技类");
 				break;
 			case 2:
-				informationDto.setInfocategoryName("互联网类");
+				informationDto.setInfocategoryName("文娱类");
 				break;
 			case 3:
-				informationDto.setInfocategoryName("校园类");
+				informationDto.setInfocategoryName("创业类");
 				break;
 			case 4:
-				informationDto.setInfocategoryName("财经类");
+				informationDto.setInfocategoryName("时事类");
 				break;
 			case 5:
-				informationDto.setInfocategoryName("创业类");
+				informationDto.setInfocategoryName("校园类");
 				break;
 			default:
 				break;
@@ -117,8 +127,43 @@ public class InformationController extends BaseController {
 			informationDto.setCoverpiclist(infList);
 			informationDto.setCoverpicnum(infList.size());
 			List<CommentEntity> commentEntities = commentMapper.findCommentsByCommentId(informationEntity.getId().intValue(), 0);
-			informationDto.setCommentEntities(commentEntities);
-			informationDto.setCommentnum(commentEntities.size());
+			List<CommentDto> commentDtos = new ArrayList<CommentDto>();
+		    if (commentEntities!=null&&!commentEntities.isEmpty()) {
+				for (CommentEntity commentEntity : commentEntities) {
+					CommentDto commentDto = new CommentDto();
+					commentDto.setCommenterid(commentEntity.getCommenterid());
+					commentDto.setCommentid(commentEntity.getCommentid());
+					commentDto.setCommenttime(commentEntity.getCommenttime());
+					commentDto.setContent(commentEntity.getContent());
+					commentDto.setFlag(commentEntity.getFlag());
+					commentDto.setId(commentEntity.getId());
+					UserEntity commentuserEntity = userMapper.findUserById(commentEntity.getCommenterid().intValue());
+					commentDto.setUseravatar(commentuserEntity.getAvatar());
+					commentDto.setUsernickname(commentuserEntity.getNickname());
+					List<ResponseEntity> responseEntities = responseMapper.findresponsesByResponseId(commentEntity.getId().intValue());
+					List<ResponseDto> responseDtos = new ArrayList<ResponseDto>();
+					if (responseEntities!=null&&!responseEntities.isEmpty()) {
+						for (ResponseEntity responseEntity : responseEntities) {
+						   ResponseDto responseDto = new ResponseDto();
+						   responseDto.setContent(responseEntity.getContent());
+						   responseDto.setFlag(responseEntity.getFlag());
+						   responseDto.setId(responseEntity.getId());
+						   responseDto.setResponseid(responseEntity.getResponseid());
+						   responseDto.setResponserid(responseEntity.getResponserid());
+						   responseDto.setResponsetime(responseEntity.getResponsetime());
+						   UserEntity responseuserEntity = userMapper.findUserById(responseEntity.getResponserid().intValue());
+						   responseDto.setUseravatar(responseuserEntity.getAvatar());
+						   responseDto.setUsernickname(responseuserEntity.getNickname());
+						   responseDtos.add(responseDto);
+						}	
+					}
+					commentDto.setResponsenum(responseDtos.size());
+                    commentDto.setResponseDtos(responseDtos);
+                    commentDtos.add(commentDto);
+				}
+			}
+			informationDto.setCommentDtos(commentDtos);
+			informationDto.setCommentnum(commentDtos.size());
 			informationDtos.add(informationDto);
 		}
 		return informationDtos;

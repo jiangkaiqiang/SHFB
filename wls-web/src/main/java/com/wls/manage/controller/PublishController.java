@@ -18,11 +18,15 @@ import com.github.pagehelper.PageInfo;
 import com.wls.manage.dao.CommentMapper;
 import com.wls.manage.dao.PraiseMapper;
 import com.wls.manage.dao.PublishMapper;
+import com.wls.manage.dao.ResponseMapper;
 import com.wls.manage.dao.UserMapper;
+import com.wls.manage.dto.CommentDto;
 import com.wls.manage.dto.PublishDto;
+import com.wls.manage.dto.ResponseDto;
 import com.wls.manage.entity.CommentEntity;
 import com.wls.manage.entity.PraiseEntity;
 import com.wls.manage.entity.PublishEntity;
+import com.wls.manage.entity.ResponseEntity;
 import com.wls.manage.entity.UserEntity;
 import com.wls.manage.util.ResponseData;
 /**
@@ -42,6 +46,8 @@ public class PublishController extends BaseController {
 	private CommentMapper commentMapper;
 	@Autowired
 	private PraiseMapper praiseMapper;
+	@Autowired
+	private ResponseMapper responseMapper;
 	
 	/**
 	 * 为前台user查询通知提供服务
@@ -98,8 +104,44 @@ public class PublishController extends BaseController {
 			}
 		
 			List<CommentEntity> commentEntities = commentMapper.findCommentsByCommentId(publishEntity.getId().intValue(), 1);
-			publishDto.setCommentEntities(commentEntities);
-			publishDto.setCommentnum(commentEntities.size());
+			List<CommentDto> commentDtos = new ArrayList<CommentDto>();
+		    if (commentEntities!=null&&!commentEntities.isEmpty()) {
+				for (CommentEntity commentEntity : commentEntities) {
+					CommentDto commentDto = new CommentDto();
+					commentDto.setCommenterid(commentEntity.getCommenterid());
+					commentDto.setCommentid(commentEntity.getCommentid());
+					commentDto.setCommenttime(commentEntity.getCommenttime());
+					commentDto.setContent(commentEntity.getContent());
+					commentDto.setFlag(commentEntity.getFlag());
+					commentDto.setId(commentEntity.getId());
+					UserEntity commentuserEntity = userMapper.findUserById(commentEntity.getCommenterid().intValue());
+					commentDto.setUseravatar(commentuserEntity.getAvatar());
+					commentDto.setUsernickname(commentuserEntity.getNickname());
+					List<ResponseEntity> responseEntities = responseMapper.findresponsesByResponseId(commentEntity.getId().intValue());
+					List<ResponseDto> responseDtos = new ArrayList<ResponseDto>();
+					if (responseEntities!=null&&!responseEntities.isEmpty()) {
+						for (ResponseEntity responseEntity : responseEntities) {
+						   ResponseDto responseDto = new ResponseDto();
+						   responseDto.setContent(responseEntity.getContent());
+						   responseDto.setFlag(responseEntity.getFlag());
+						   responseDto.setId(responseEntity.getId());
+						   responseDto.setResponseid(responseEntity.getResponseid());
+						   responseDto.setResponserid(responseEntity.getResponserid());
+						   responseDto.setResponsetime(responseEntity.getResponsetime());
+						   UserEntity responseuserEntity = userMapper.findUserById(responseEntity.getResponserid().intValue());
+						   responseDto.setUseravatar(responseuserEntity.getAvatar());
+						   responseDto.setUsernickname(responseuserEntity.getNickname());
+						   responseDtos.add(responseDto);
+						}	
+					}
+					commentDto.setResponsenum(responseDtos.size());
+                    commentDto.setResponseDtos(responseDtos);
+                    commentDtos.add(commentDto);
+				}
+			}
+		    
+			publishDto.setCommentDtos(commentDtos);
+			publishDto.setCommentnum(commentDtos.size());
 			List<PraiseEntity> praiseEntities = praiseMapper.findPraisesByPublishId(publishEntity.getId().intValue());
 			publishDto.setPraisenum(praiseEntities.size());
 			for (PraiseEntity praiseEntity : praiseEntities) {
@@ -152,8 +194,44 @@ public class PublishController extends BaseController {
 			}
 		
 			List<CommentEntity> commentEntities = commentMapper.findCommentsByCommentId(publishEntity.getId().intValue(), 1);
-			publishDto.setCommentEntities(commentEntities);
-			publishDto.setCommentnum(commentEntities.size());
+			List<CommentDto> commentDtos = new ArrayList<CommentDto>();
+		    if (commentEntities!=null&&!commentEntities.isEmpty()) {
+				for (CommentEntity commentEntity : commentEntities) {
+					CommentDto commentDto = new CommentDto();
+					commentDto.setCommenterid(commentEntity.getCommenterid());
+					commentDto.setCommentid(commentEntity.getCommentid());
+					commentDto.setCommenttime(commentEntity.getCommenttime());
+					commentDto.setContent(commentEntity.getContent());
+					commentDto.setFlag(commentEntity.getFlag());
+					commentDto.setId(commentEntity.getId());
+					UserEntity commentuserEntity = userMapper.findUserById(commentEntity.getCommenterid().intValue());
+					commentDto.setUseravatar(commentuserEntity.getAvatar());
+					commentDto.setUsernickname(commentuserEntity.getNickname());
+					List<ResponseEntity> responseEntities = responseMapper.findresponsesByResponseId(commentEntity.getId().intValue());
+					List<ResponseDto> responseDtos = new ArrayList<ResponseDto>();
+					if (responseEntities!=null&&!responseEntities.isEmpty()) {
+						for (ResponseEntity responseEntity : responseEntities) {
+						   ResponseDto responseDto = new ResponseDto();
+						   responseDto.setContent(responseEntity.getContent());
+						   responseDto.setFlag(responseEntity.getFlag());
+						   responseDto.setId(responseEntity.getId());
+						   responseDto.setResponseid(responseEntity.getResponseid());
+						   responseDto.setResponserid(responseEntity.getResponserid());
+						   responseDto.setResponsetime(responseEntity.getResponsetime());
+						   UserEntity responseuserEntity = userMapper.findUserById(responseEntity.getResponserid().intValue());
+						   responseDto.setUseravatar(responseuserEntity.getAvatar());
+						   responseDto.setUsernickname(responseuserEntity.getNickname());
+						   responseDtos.add(responseDto);
+						}	
+					}
+					commentDto.setResponsenum(responseDtos.size());
+                    commentDto.setResponseDtos(responseDtos);
+                    commentDtos.add(commentDto);
+				}
+			}
+		    
+			publishDto.setCommentDtos(commentDtos);
+			publishDto.setCommentnum(commentDtos.size());
 			List<PraiseEntity> praiseEntities = praiseMapper.findPraisesByPublishId(publishEntity.getId().intValue());
 			publishDto.setPraisenum(praiseEntities.size());
 			pDtos.add(publishDto);

@@ -31,7 +31,7 @@ public class PublishDto {
 	
 	private String publisheravatar;
 	
-	private List<CommentEntity> commentEntities;
+	private List<CommentDto> commentDtos;
 	
 	private Integer praisenum;
 	
@@ -133,12 +133,14 @@ public class PublishDto {
 		this.publisheravatar = publisheravatar;
 	}
 
-	public List<CommentEntity> getCommentEntities() {
-		return commentEntities;
+	
+
+	public List<CommentDto> getCommentDtos() {
+		return commentDtos;
 	}
 
-	public void setCommentEntities(List<CommentEntity> commentEntities) {
-		this.commentEntities = commentEntities;
+	public void setCommentDtos(List<CommentDto> commentDtos) {
+		this.commentDtos = commentDtos;
 	}
 
 	public Integer getPraisenum() {

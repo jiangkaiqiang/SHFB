@@ -20,7 +20,7 @@ public class CommentController {
     @Autowired
     private CommentMapper commentMapper;
     
-    @RequestMapping(value = "/insertComment", method = RequestMethod.GET)
+    @RequestMapping(value = "/insertComment")
     @ResponseBody
     public Object insertComment(Integer userID,String commentDetail,Integer commentid,Integer flag) {
     	CommentEntity comment = new CommentEntity();
