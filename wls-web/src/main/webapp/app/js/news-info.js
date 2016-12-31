@@ -94,8 +94,9 @@ wlsWeb.controller('news-info',function($http, $location, $state, $rootScope,$sta
             $("#comment_second-"+commentID).css("display","none");
             $("#reply_area_second-"+commentID).css("display","none");
         };
-        $scope.responseCommentSecond = function(commentID){
-            $("#reply_area_second-"+commentID).css("display","");
+        $scope.responseCommentSecond = function(responseID,commentID){
+			/*alert(responseID+"   commentID="+commentID);*/
+            $("#reply_area_second-"+responseID).css("display","");
             $("#reply_area-"+commentID).css("display","none");
         };
 });

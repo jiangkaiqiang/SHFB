@@ -1,4 +1,4 @@
- <!--DOC: menu-always-on-top class to the body element to set menu on top --> 
+﻿ <!--DOC: menu-always-on-top class to the body element to set menu on top --> 
  <body class="menu-always-on-top"> 
   <div class="weilanshu" id="base_content_container"> 
    <div class="main"> 
@@ -17,6 +17,14 @@
         <p><i class="fa fa-user"></i> {{publish.publishername}} &nbsp;&nbsp;&nbsp;&nbsp; <i class="fa fa-calendar"></i> {{publish.pubtime}} 
         &nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-tags"></i> {{publish.pubcategoryname}}</p> 
         <div id="pubContent"></div>
+     <div id="ckepop">
+           <span class="jiathis_txt">分享到：</span>
+            <a class="jiathis_button_weixin">微信</a>
+           <a class="jiathis_button_qzone">QQ空间</a>
+           <a class="jiathis_button_tsina">新浪微博</a>
+           <a class="jiathis_button_douban">豆瓣</a>
+           <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1" charset="utf-8"></script>
+     </div> 
         <div class="post-comment row" id="comments"> 
          <h2><span>{{publish.commentnum}}</span> 条评论</h2> 
          <div class="col-md-1">
@@ -60,9 +68,9 @@
                <h4>{{response.usernickname}} <span>{{response.responsetime}}<span></span></span></h4> 
                <p>{{response.content}}</p> 
                <div class="col-md-3 no-padding">
-                <a class="pull-left" id="reply_second-{{comment.id}}" ng-click="responseCommentSecond(comment.id)">回复</a>
+                <a class="pull-left" id="reply_second-{{response.id}}" ng-click="responseCommentSecond(response.id,comment.id)">回复</a>
                </div> 
-               <div class="col-md-12 no-padding" id="reply_area_second-{{comment.id}}" style="display:none">
+               <div class="col-md-12 no-padding" id="reply_area_second-{{response.id}}" style="display:none">
                  <div class="form-group input-group padding-top-10"> 
                    <input type="text" class="form-control" ng-model="secondResponse"/> 
                    <span class="input-group-btn"> <button class="btn btn-primary" type="button" ng-click="responseSecond(response.usernickname,comment.id,secondResponse)" id="reply_btn">回复</button> </span>
