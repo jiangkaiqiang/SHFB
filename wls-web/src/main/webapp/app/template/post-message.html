@@ -1,5 +1,15 @@
  <head>
-  
+   <!-- END PAGE LEVEL PLUGINS -->
+ <script type="text/javascript" charset="utf-8" src="../../ueditor/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../ueditor/ueditor.all.min.js"> </script>
+  <script>
+  var ue = UE.getEditor('container');
+  /*发帖 全选or校园频道*/
+   $('body')
+    .on('click', '#optionsRadios2', function(e) {
+        $("#select_school").css("display","");
+    })
+  </script> 
   <style>
   .note-insert button{
     border:solid 1px #FF5400; 
@@ -14,17 +24,6 @@
     margin-bottom: 10px;
   }
   </style> 
- <!-- END PAGE LEVEL PLUGINS -->
- <script type="text/javascript" charset="utf-8" src="../../ueditor/ueditor.config.js"></script>
-<script type="text/javascript" charset="utf-8" src="../../ueditor/ueditor.all.min.js"> </script>
-  <script>
-  var ue = UE.getEditor('container');
-  /*发帖 全选or校园频道*/
-   $('body')
-    .on('click', '#optionsRadios2', function(e) {
-        $("#select_school").css("display","");
-    })
-  </script> 
  </head> 
  <body class="menu-always-on-top"> 
   <!-- post-message block BEGIN --> 

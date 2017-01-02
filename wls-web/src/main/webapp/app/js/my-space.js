@@ -491,6 +491,30 @@ wlsWeb.controller('my-space',function($http, $location,$rootScope, $scope,$state
 									        	$scope.messageNum = $scope.messages.length;
 										   });
 									   };
+									   
+									   $scope.deletePublish  = function(publishID) {
+										   if(delcfm()){
+									    	$http.get( "/i/publish/deletePublish",{
+									    		params : {
+									    			publishID : publishID,
+									    			userID : $scope.user.id
+									    			}
+									    	}).success(function(data) {
+									    		alert("删除成功");
+									    		$scope.publishs = data;
+									        	$scope.publishNum = $scope.publishs.length;
+										   });
+										   }
+									   };
+									   
+									   $scope.goUserSpace = function(userID) {
+									    	 $state.go('my-space-ask', {"spaceID": userID});
+										};
+									    
+									   
+									   $scope.goBlogInfo = function(publishID) {
+									      	 $state.go('blog-info', {"publishID": publishID});
+									   	};
 									   $scope.Preview=function(){ //打印预览
 										   $("#resume").jqprint();
 										};

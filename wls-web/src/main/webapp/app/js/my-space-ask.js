@@ -238,4 +238,7 @@ wlsWeb.controller('my-space-ask',function($http, $location, $scope,$state, $stat
 	        	}
 	     });
 		};
+		$scope.goUserSpace = function(userID) {
+	    	 $state.go('my-space-ask', {"spaceID": userID});
+		};
 });

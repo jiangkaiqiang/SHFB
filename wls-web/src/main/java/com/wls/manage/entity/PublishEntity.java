@@ -17,6 +17,8 @@ public class PublishEntity {
 	
 	private String describe;
 	
+	private String pubcover;
+	
 	private Integer pubcategory;
 	
     private Date pubtime;//发布时间
@@ -88,6 +90,13 @@ public class PublishEntity {
 	public void setSchoolid(Integer schoolid) {
 		this.schoolid = schoolid;
 	}
-	
+
+	public String getPubcover() {
+		return pubcover;
+	}
+
+	public void setPubcover(String pubcover) {
+		this.pubcover = pubcover;
+	}
 	
 }

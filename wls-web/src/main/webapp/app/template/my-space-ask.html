@@ -18,7 +18,7 @@
    <div class="title-wrapper" id="img_bg_space"> 
     <div class="container"> 
      <div class="container-inner"> 
-      <em> <img src="../../assets/img/people/1.jpg" alt="头像" title="用户头像头像" />
+      <em> <img src="{{user.avatar}}" alt="头像" title="用户头像头像" />
        <p>{{user.nickname}} <span ng-if="user.sex=='男'"><i class="fa fa-male"></i></span> <span ng-if="user.sex=='女'"><i class="fa fa-female"></i></span> 
        <span class="badge bg-yellow-casablanca">Lv {{level}}</span></p>
        <p style="font-size:14px">{{user.signature}}</p>
@@ -126,13 +126,13 @@
                 <span><a><i class="fa fa-thumbs-up"></i> 点赞10</a></span> 
                </div> 
                <div class="col-md-4"> 
-                <span class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="1000" data-close-others="true" aria-expanded="false"><a><i class="fa fa-share-alt"></i> 分享</a></span> 
-                <ul class="dropdown-menu" role="menu"> 
+                <span><a><i class="fa fa-share-alt"></i> 分享</a></span> 
+                <!-- <ul class="dropdown-menu" role="menu"> 
                  <li> <a href="javascript:;"> <i class="fa fa-wechat"></i> 微信 </a> </li> 
                  <li> <a href="javascript:;"> <i class="fa fa-weibo"></i> 新浪微博</a> </li> 
                  <li> <a href="javascript:;"> <i class="fa fa-qq"></i> QQ</a> </li> 
                  <li> <a href="javascript:;"> <i class="fa fa-star"></i> QQ空间 </a> </li> 
-                </ul> 
+                </ul>  -->
                </div> 
               </div> 
              </div> 
@@ -331,8 +331,8 @@
            <div class="row geeks-list margin-bottom-20"> 
            <div class="col-md-6 margin-bottom-20"  ng-repeat="user in followers"> 
              <div class="geek-item col-md-12"> 
-            <a href="my-space-ask.html" class="col-md-2 pull-left padding-left-0"><img class="geek-item-img" src="../../assets/img/people/1.jpg" /> <img class="geek-item-img-v" src="../../assets/img/vip.png" /></a> 
-           <p class="geek-item-content col-md-6"> <a class="geek-item-name" target="_blank" href="my-space-ask.html">{{user.nickname}}</a> <span class="badge bg-yellow-casablanca">Lv {{user.level}}</span> <span class="geek-item-desc">{{user.signature}}</span> </p> 
+           <a ng-click="goUserSpace(user.id)" class="col-md-2 pull-left padding-left-0"><img class="geek-item-img" src="{{user.avatar}}" /></a> 
+           <p class="geek-item-content col-md-6"> <a ng-click="goUserSpace(user.id)" class="geek-item-name" target="_blank" >{{user.nickname}}</a> <span class="badge bg-yellow-casablanca">Lv {{user.level}}</span> <span class="geek-item-desc">{{user.signature}}</span> </p> 
            <div class="geek-item-tags col-md-3"> 
            <span ng-if="user.skill1!=undefined&&user.skill1!=''" class="bgblue"> {{user.skill1}} </span> 
             <span ng-if="user.skill2!=undefined&&user.skill2!=''" class="bgyellow"> {{user.skill2}} </span> 

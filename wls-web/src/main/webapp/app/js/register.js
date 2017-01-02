@@ -51,7 +51,8 @@ wlsWeb.controller('register',function($http, $location, $scope,$rootScope) {
 	     					rpassword : $scope.rpassword,
 	     	    			telephone : $scope.telephone,
 	     	    			email : $scope.email,
-	     	    			suproleid : $scope.suproleid
+	     	    			suproleid : $scope.suproleid,
+	     	    			avatar : "../../assets/img/people/"+Math.round(Math.random()*9+6)+".jpg"
 	     	    			}
 	     	    	}).success(function(data) {
 	     	    		if(data.success){

@@ -12,6 +12,7 @@
 		`telephone`,
 		`email`,
 		`suproleid`,
+		`avatar`,
 		`registertime`
 		)
 		VALUE 
@@ -21,6 +22,7 @@
 		#{telephone},
 		#{email},
 		#{suproleid},
+		#{avatar},
 		now()
 		)
     </insert>
@@ -64,12 +66,12 @@
     <select id="findAllUser" parameterType="int" resultType="UserEntity">
          SELECT * FROM `user`
 		 <where> 
-		 <if test="userid != null">
-			    id!=#{userid}
-			</if>
-			<if test="audit != null">
-			    AND roleid=#{audit}
-			</if>
+		 <if test="audit != null">
+			     roleid=#{audit}
+		 </if>
+		 <!-- <if test="userid != null">
+			   AND id!=#{userid}
+			</if> -->
 			<if test="provinceid != null">
 			    AND provinceid=#{provinceid}
 			</if>

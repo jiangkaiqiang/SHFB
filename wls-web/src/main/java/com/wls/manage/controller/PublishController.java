@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.wls.manage.crawler.tengxun.tech.PageParseJob;
 import com.wls.manage.dao.CommentMapper;
 import com.wls.manage.dao.PraiseMapper;
 import com.wls.manage.dao.PublishMapper;
@@ -338,12 +339,16 @@ public class PublishController extends BaseController {
 			@RequestParam(required = false) String content
 			){
 		PublishEntity publishEntity = new PublishEntity();
+		List<String> publishCovers = PageParseJob.getHtmlImgs(content);
 		publishEntity.setContent(content);
 		publishEntity.setPubcategory(pubcategory);
 		publishEntity.setDescribe(describe);
 		publishEntity.setPublisher(BigInteger.valueOf(publisher));
 		publishEntity.setSchoolid(schoolid);
 		publishEntity.setTitle(title);
+		if (publishCovers!=null&&!publishCovers.isEmpty()) {
+			publishEntity.setPubcover(publishCovers.get(0));
+		}
 		publishMapper.insertPublish(publishEntity);
 		return ResponseData.newSuccess();
 	}

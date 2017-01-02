@@ -333,7 +333,8 @@ public class UserController extends BaseController {
 	
 	@RequestMapping(value = "/signup")
 	@ResponseBody
-	public Object signup(HttpServletRequest request,String username, String password,String rpassword, String email,String telephone,Integer suproleid) throws ApiException {
+	public Object signup(HttpServletRequest request,String username, String password,String rpassword, String email,String telephone,Integer suproleid
+			,String avatar) throws ApiException {
 		if (username == null || password == null ) {
 			return ResponseData.newFailure("用户名和密码输入不能为空"); 
 		}
@@ -346,6 +347,7 @@ public class UserController extends BaseController {
 		userEntity.setEmail(email);
 		userEntity.setTelephone(telephone);
 		userEntity.setSuproleid(suproleid);
+		userEntity.setAvatar(avatar);
 		userDao.insertUser(userEntity);
 		return ResponseData.newSuccess("注册成功");
 	}
@@ -572,7 +574,7 @@ public class UserController extends BaseController {
 							}
 						}
 						else {
-							userDto.setLevel(0);
+							userDto.setLevel(1);
 						}
 						userDto.setSkill1(userEntity.getSkill1());
 						userDto.setSkill2(userEntity.getSkill2());
