@@ -250,7 +250,12 @@ wlsWeb.controller('my-space',function($http, $location,$rootScope, $scope,$state
 		   
 		  
 		   
-		   $scope.updateAvatar = function(useravatar) {
+		   $scope.updateAvatar = function() {
+			   var useravatar = $("#useravatar").val();
+			   if(useravatar==null||useravatar==undefined){
+				   alert("请选择图片");
+				   return;
+			   }
 			   data = {
 					   useravatar: useravatar
 		            };
@@ -489,5 +494,8 @@ wlsWeb.controller('my-space',function($http, $location,$rootScope, $scope,$state
 									   $scope.Preview=function(){ //打印预览
 										   $("#resume").jqprint();
 										};
+										 $scope.responseMessage = function(messageID){
+									            $("#reply_area-"+messageID).css("display","");
+									    };
 
 });

@@ -110,4 +110,7 @@ wlsWeb.controller('my-space-company',function($http, $location,$rootScope, $scop
 	        	$scope.messageNum = $scope.messages.length;
 		   });
 	   };
+		 $scope.responseMessage = function(messageID){
+	            $("#reply_area-"+messageID).css("display","");
+	    };
 });

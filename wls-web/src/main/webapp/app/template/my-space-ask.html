@@ -79,7 +79,9 @@
              </tr> 
              <tr> 
               <td class="datasheet-features-type">个性签名：</td> 
-              <td class="datasheet-features-type2"colspan="3">{{user.signature}}</td> 
+              <td class="datasheet-features-type2">{{user.signature}}</td> 
+              <td class="datasheet-features-type">技能：</td> 
+              <td class="datasheet-features-type2">{{user.skill1}},{{user.skill2}}</td> 
              </tr> 
             </tbody>
            </table> 
@@ -424,8 +426,8 @@
      <a href=""><img alt="" src="../../assets/img/people/1.jpg" width="35px" /></a> 
     </div> 
     <div class="col-md-10 form-group input-group no-padding"> 
-     <input type="text" class="form-control" /> 
-     <span class="input-group-btn"> <button class="btn btn-primary" type="button">发送</button> </span> 
+     <input type="text" class="form-control" ng-model="messageContent"/> 
+     <span class="input-group-btn"> <button class="btn btn-primary" ng-click="sendMessage()" type="button">发送</button> </span> 
     </div> 
    </div> 
   </div> 

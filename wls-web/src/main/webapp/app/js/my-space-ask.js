@@ -214,4 +214,28 @@ wlsWeb.controller('my-space-ask',function($http, $location, $scope,$state, $stat
 	    $scope.goBlogInfo = function(publishID) {
 	      	 $state.go('blog-info', {"publishID": publishID});
 	   	};
+	   	
+	   	$scope.sendMessage = function(){
+	   		if($rootScope.user==null||$rootScope.user.id==undefined){
+	   			alert("请先登录");
+	   			return;
+	   		}
+			$http.get('/i/message/addMessage', {
+	            params: {
+	            	"messageSenderID" :$rootScope.user.id,
+	                "messageReceiverID": $scope.spaceID,
+	                "msgcategory" : 1,
+	                "messageContent" : $scope.messageContent
+	            }
+	        }).success(function (data) {  
+	        	if(data.success){
+	        		alert(data.message);
+	        		$state.reload();
+	        	}
+	        	else{
+	        		alert(data.message);
+	        		$state.reload();
+	        	}
+	     });
+		};
 });
