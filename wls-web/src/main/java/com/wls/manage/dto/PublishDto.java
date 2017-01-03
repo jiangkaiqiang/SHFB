@@ -36,6 +36,8 @@ public class PublishDto {
 	private Integer praisenum;
 	
 	private Integer praiseflag;
+	
+	private String pubcover;
 
 	public BigInteger getId() {
 		return id;
@@ -157,6 +159,14 @@ public class PublishDto {
 
 	public void setPraiseflag(Integer praiseflag) {
 		this.praiseflag = praiseflag;
+	}
+
+	public String getPubcover() {
+		return pubcover;
+	}
+
+	public void setPubcover(String pubcover) {
+		this.pubcover = pubcover;
 	}
 	
 }

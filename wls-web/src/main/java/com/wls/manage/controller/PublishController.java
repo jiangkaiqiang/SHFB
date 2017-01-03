@@ -29,6 +29,7 @@ import com.wls.manage.entity.PraiseEntity;
 import com.wls.manage.entity.PublishEntity;
 import com.wls.manage.entity.ResponseEntity;
 import com.wls.manage.entity.UserEntity;
+import com.wls.manage.util.PageParseUtil;
 import com.wls.manage.util.ResponseData;
 /**
  * 
@@ -98,6 +99,7 @@ public class PublishController extends BaseController {
 			publishDto.setPubtime(publishEntity.getPubtime());
 			publishDto.setSchoolid(publishEntity.getSchoolid());
 			publishDto.setTitle(publishEntity.getTitle());
+			publishDto.setPubcover(publishEntity.getPubcover());
 			UserEntity userEntity = userMapper.findUserById(publishEntity.getPublisher().intValue());
 			if (userEntity!=null) {
 				publishDto.setPublishername(userEntity.getNickname());
@@ -188,6 +190,7 @@ public class PublishController extends BaseController {
 			publishDto.setPubtime(publishEntity.getPubtime());
 			publishDto.setSchoolid(publishEntity.getSchoolid());
 			publishDto.setTitle(publishEntity.getTitle());
+			publishDto.setPubcover(publishEntity.getPubcover());
 			UserEntity userEntity = userMapper.findUserById(publishEntity.getPublisher().intValue());
 			if (userEntity!=null) {
 				publishDto.setPublishername(userEntity.getNickname());
@@ -339,7 +342,8 @@ public class PublishController extends BaseController {
 			@RequestParam(required = false) String content
 			){
 		PublishEntity publishEntity = new PublishEntity();
-		List<String> publishCovers = PageParseJob.getHtmlImgs(content);
+		PageParseUtil pageParseUtil = new PageParseUtil();
+		List<String> publishCovers = pageParseUtil.parse(content);
 		publishEntity.setContent(content);
 		publishEntity.setPubcategory(pubcategory);
 		publishEntity.setDescribe(describe);
