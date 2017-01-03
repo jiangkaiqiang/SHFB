@@ -46,6 +46,7 @@
 	         <if test="nickname   !=null and nickname !=''"> nickname  =#{nickname  },</if> 
 	         <if test="email      !=null and email    !=''">   email   =#{email     },</if>
 	         <if test="avatar     !=null and avatar   !=''">   avatar  =#{avatar    },</if>
+	         <if test="photo     !=null and photo   !=''">   photo  =#{photo    },</if>
 	         <if test="score     !=null and score   !=''">   score  =#{score    },</if>
 	         <if test="company   !=null and company !=''"> company  =#{company  },</if>
 	         <if test="phone   !=null and phone !=''"> phone  =#{phone  },</if> 

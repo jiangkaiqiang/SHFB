@@ -1,4 +1,4 @@
-wlsWeb.controller('my-space-company',function($http, $location,$rootScope, $scope, $state) {
+wlsWeb.controller('my-space-company',function($http, $location,$rootScope, $scope, $state,Upload) {
     $scope.load = function(){
     	$http.get('/i/user/findUser').success(function (data) {
 			if(data!=null&&data.id!=undefined){
@@ -79,6 +79,44 @@ wlsWeb.controller('my-space-company',function($http, $location,$rootScope, $scop
 	    		}
 		   });
 	   };
+	   
+	   $scope.updateAvatar = function() {
+		   var useravatar = $('#useravatar').get(0).files[0];
+		   if(useravatar==null||useravatar==undefined){
+			   alert("请选择图片");
+			   return;
+		   }
+		   data = {
+				   useravatar: useravatar
+	            };
+		   Upload.upload({
+               url: '/i/user/updateAvatar',
+               headers :{ 'Content-Transfer-Encoding': 'utf-8' },
+               data: data
+           }).then(function (resp) {
+    		   $state.reload();
+           });
+       };
+       
+       
+       $scope.updatePhoto = function() {
+		   var userphoto = $('#userphoto').get(0).files[0];
+		   if(userphoto==null||userphoto==undefined){
+			   alert("请选择图片");
+			   return;
+		   }
+		   data = {
+				   userphoto: userphoto
+	            };
+		   Upload.upload({
+               url: '/i/user/updatePhoto',
+               headers :{ 'Content-Transfer-Encoding': 'utf-8' },
+               data: data
+           }).then(function (resp) {
+        	   $state.reload();
+           });
+       };
+	   
 	   $scope.deleteMessage  = function(messageID) {
 		   if(delcfm()){
 	    	$http.get( "/i/message/deleteMessage",{

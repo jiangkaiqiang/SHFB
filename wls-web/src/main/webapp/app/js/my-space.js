@@ -172,6 +172,13 @@ wlsWeb.controller('my-space',function($http, $location,$rootScope, $scope,$state
 	        });
 		   };
 		$scope.load();
+		
+		
+		$scope.refreshUser = function(){
+			 $http.get('/i/user/findUser').success(function (data) {
+						 $scope.user = data;
+			 });
+		 };
 		 // 获取省列表
 	    $http.get('/i/city/findProvinceList').success(function (data) {
 	        $scope.provinces = data;
@@ -251,7 +258,7 @@ wlsWeb.controller('my-space',function($http, $location,$rootScope, $scope,$state
 		  
 		   
 		   $scope.updateAvatar = function() {
-			   var useravatar = $("#useravatar").val();
+			   var useravatar = $('#useravatar').get(0).files[0];
 			   if(useravatar==null||useravatar==undefined){
 				   alert("请选择图片");
 				   return;
@@ -264,8 +271,27 @@ wlsWeb.controller('my-space',function($http, $location,$rootScope, $scope,$state
 	               headers :{ 'Content-Transfer-Encoding': 'utf-8' },
 	               data: data
 	           }).then(function (resp) {
-	        	   alert("头像上传成功");
 	    		   $state.reload();
+	           });
+	       };
+	       
+	       
+	       $scope.updatePhoto = function() {
+			   var userphoto = $('#userphoto').get(0).files[0];
+			   if(userphoto==null||userphoto==undefined){
+				   alert("请选择图片");
+				   return;
+			   }
+			   data = {
+					   userphoto: userphoto
+		            };
+			   Upload.upload({
+	               url: '/i/user/updatePhoto',
+	               headers :{ 'Content-Transfer-Encoding': 'utf-8' },
+	               data: data
+	           }).then(function (resp) {
+	        	   $scope.refreshUser();
+	        	   $("#edit_photo").modal("hide");
 	           });
 	       };
 		   
@@ -450,8 +476,13 @@ wlsWeb.controller('my-space',function($http, $location,$rootScope, $scope,$state
 									    		}
 									    	}).success(function(data) {
 									    		if(data.success){
-									    			alert("简历修改成功");
-									    			$state.reload();
+									    			$('#save_resume_alter').modal("show");
+									    			$scope.refreshUser();
+									    			$("#edit_education").css("display","");
+									    		    $("#cancel_education").css("display","none");
+									    		    $("#save_education").css("display","none");
+									    		    $("#resume").css("display","");
+									    		    $("#resume_edit").css("display","none");
 									    		}
 									    		else{
 									    			alert("简历修改失败");
@@ -486,7 +517,7 @@ wlsWeb.controller('my-space',function($http, $location,$rootScope, $scope,$state
 									    			messageSenderID : $scope.user.id
 									    		}
 									    	}).success(function(data) {
-									    		/*alert("回复成功");*/
+									    		$("#quick_reply_alter").modal("show");
 									    		$scope.messages = data;
 									        	$scope.messageNum = $scope.messages.length;
 										   });

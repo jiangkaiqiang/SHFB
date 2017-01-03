@@ -51,7 +51,7 @@ import com.wls.manage.util.TelephoneVerifyUtil;
 @Controller
 @RequestMapping(value = "/user")
 public class UserController extends BaseController {
-	private static String baseDir = "data";
+	private static String baseDir = "picture";
 	@Autowired
 	private UserMapper userDao;
 	@Autowired
@@ -468,7 +468,7 @@ public class UserController extends BaseController {
 			String fileName = String.format("user%s_%s.%s", user.getId(), new Date().getTime(), "jpg");
 			UploadFileEntity uploadFileEntity = new UploadFileEntity(fileName, useravatar, dir);
 			ftpService.uploadFile(uploadFileEntity);
-			user.setAvatar(FtpService.READ_URL+dir + "/" + fileName);//http://42.121.130.177:8089/picture/user/1124/3456789.png
+			user.setAvatar(FtpService.READ_URL+"data/"+dir + "/" + fileName);//http://42.121.130.177:8089/picture/user/1124/3456789.png
 			this.userDao.updateUser(user);
 			UserEntity	ol_user = this.userDao.findUserById(user.getId().intValue());
 			ol_user.setPassword("********");
@@ -478,7 +478,26 @@ public class UserController extends BaseController {
 		return ResponseData.newFailure();
 	}
 	
-	
+	@RequestMapping(value = "/updatePhoto")
+	@ResponseBody
+	public Object updatePhoto(HttpServletRequest request, @RequestParam(required = false) MultipartFile userphoto) throws ApiException {
+		UserEntity user = new UserEntity();
+		UserEntity old_user = (UserEntity)request.getSession().getAttribute("user");
+		user.setId(old_user.getId());
+		if(userphoto!=null){
+			String dir = String.format("%s/user/photo/%s", baseDir, user.getId());
+			String fileName = String.format("user%s_%s.%s", user.getId(), new Date().getTime(), "jpg");
+			UploadFileEntity uploadFileEntity = new UploadFileEntity(fileName, userphoto, dir);
+			ftpService.uploadFile(uploadFileEntity);
+			user.setPhoto(FtpService.READ_URL+"data/"+dir + "/" + fileName);//http://42.121.130.177:8089/picture/user/1124/3456789.png
+			this.userDao.updateUser(user);
+			UserEntity	ol_user = this.userDao.findUserById(user.getId().intValue());
+			ol_user.setPassword("********");
+			request.getSession().setAttribute("user",ol_user);
+			return ResponseData.newSuccess(ol_user);
+		}
+		return ResponseData.newFailure();
+	}
 	
 	@RequestMapping(value = "/checkOldPassword")
 	@ResponseBody

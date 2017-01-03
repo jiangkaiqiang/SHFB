@@ -41,7 +41,6 @@
      <div class="container-inner"> 
       <em> 
       <a data-toggle="modal" href="#edit_img">
-      <img ng-if="user.avatar==null||user.avatar==undefined" src="../../assets/img/people/1.jpg" alt="头像" title="点击修改头像" />
       <img ng-if="user.avatar!=null&&user.avatar!=undefined" src="{{user.avatar}}" alt="头像" title="点击修改头像" />
       </a> 
       <p>{{user.nickname}} <span ng-if="user.sex=='男'"><i class="fa fa-male"></i></span> <span ng-if="user.sex=='女'"><i class="fa fa-female"></i></span> 
@@ -238,7 +237,7 @@
               <div class="row"> 
                <div class="resume-basic col-md-12 margin-bottom-20"> 
                 <div class="col-md-3"> 
-                 <img src="../../assets/img/user.png" class="photo" alt="照片" /> 
+                 <img src="{{user.photo}}" class="photo" alt="照片" /> 
                 </div> 
                 <div class="col-md-9 no-padding"> 
                  <div class="col-md-12 no-padding margin-bottom-70"> 
@@ -411,7 +410,7 @@
                <div class="resume-basic col-md-12 margin-bottom-20"> 
                 <div class="col-md-3"> 
                  <a data-toggle="modal" href="#edit_photo" class="resume-basic-img">
-                   <img src="../../assets/img/user.png" class="photo" title="点击上传照片" />
+                   <img src="{{user.photo}}" class="photo" title="点击上传照片" />
                    <div class="layer"><i class="fa fa-edit"></i></div>
                  </a> 
                 </div> 
@@ -869,7 +868,7 @@
       </div> 
       <div class="modal-footer"> 
        <button type="button" class="btn default" data-dismiss="modal">关闭</button> 
-       <button type="button" class="btn blue" ng-click="updateAvatar(useravatar)">确定</button> 
+       <button type="button" class="btn blue" ng-click="updateAvatar()">确定</button> 
       </div> 
      </div> 
      <!-- /.modal-content --> 
@@ -893,7 +892,7 @@
           <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px; line-height: 150px;"> 
           </div> 
           <div> 
-           <span class="btn default btn-file"> <span class="fileinput-new"> 选择图片 </span> <span class="fileinput-exists"> 更改 </span> <input type="hidden" /><input type="file" name="..." /> </span> 
+           <span class="btn default btn-file"> <span class="fileinput-new"> 选择图片 </span> <span class="fileinput-exists"> 更改 </span> <input type="hidden" /><input type="file" id="userphoto" ng-model="userphoto"  /> </span> 
            <a href="javascript:;" class="btn red fileinput-exists" data-dismiss="fileinput"> 删除 </a> 
           </div> 
          </div> 
@@ -902,7 +901,7 @@
       </div> 
       <div class="modal-footer"> 
        <button type="button" class="btn default" data-dismiss="modal">关闭</button> 
-       <button type="button" class="btn blue">确定</button> 
+       <button type="button" ng-click="updatePhoto()" class="btn blue">确定</button> 
       </div> 
      </div> 
      <!-- /.modal-content --> 

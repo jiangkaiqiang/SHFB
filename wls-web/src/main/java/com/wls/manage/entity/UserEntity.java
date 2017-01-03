@@ -73,6 +73,8 @@ public class UserEntity {
 	private String intention;
 	
 	private String introduction;
+	
+	private String photo;
 
 	public BigInteger getId() {
 		return id;
@@ -329,6 +331,14 @@ public class UserEntity {
 
 	public void setIntroduction(String introduction) {
 		this.introduction = introduction;
+	}
+
+	public String getPhoto() {
+		return photo;
+	}
+
+	public void setPhoto(String photo) {
+		this.photo = photo;
 	}
 	
 }

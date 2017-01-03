@@ -28,7 +28,7 @@ wlsWeb.controller('blog-info',function($http, $rootScope,$location,$state, $stat
                     "flag" : 1
                 }
             }).success(function(data){
-                alert(data.message);
+            	$("#comment_alter").modal("show");
                 $scope.load();    
           });
         };
@@ -49,7 +49,7 @@ wlsWeb.controller('blog-info',function($http, $rootScope,$location,$state, $stat
                         "flag" : 0
                     }
                 }).success(function(data){
-                    alert(data.message);
+                	$("#reply_alter").modal("show");
                     $scope.load();   
               });
             };
@@ -71,7 +71,7 @@ wlsWeb.controller('blog-info',function($http, $rootScope,$location,$state, $stat
                         "flag" : 0
                     }
                 }).success(function(data){
-                    alert(data.message);
+                	$("#reply_alter").modal("show");
                     $scope.load();   
               });
             };

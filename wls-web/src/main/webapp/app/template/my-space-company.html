@@ -1,12 +1,15 @@
  <!-- Head BEGIN -->
  <head> 
   <link href="../../assets/css/plugins.css" rel="stylesheet" type="text/css" /> 
+  <link rel="stylesheet" type="text/css" href="../../assets/css/bootstrap-fileinput.css" /> 
   <link href="../../assets/css/timeline-old.css" rel="stylesheet" type="text/css" /> 
   <script src="../../assets/js/common.js" type="text/javascript"></script>
+  <script src="../../assets/js/bootstrap.min.js" type="text/javascript"></script>
   <script src="../../assets/js/bootstrap-hover-dropdown.min.js" type="text/javascript"></script> 
   <script src="../../assets/js/jquery.slimscroll.min.js" type="text/javascript"></script> 
   <script src="../../assets/js/jquery.uniform.min.js" type="text/javascript"></script> 
   <script type="text/javascript" src="../../assets/js/jquery.mockjax.js"></script> 
+  <script src="../../assets/js/bootstrap-fileinput.js" type="text/javascript"></script> 
   <script>
     jQuery(document).ready(function() {   
     CommonObj.init();  
@@ -19,7 +22,7 @@
    <div class="title-wrapper-company"> 
     <div class="container"> 
      <div class="container-inner"> 
-      <em> <a data-toggle="modal" href="#edit_img" title="修改LOGO"><img src="{{user.avatar}}" alt="头像" title="点击修改头像" /></a> 
+      <em> <a data-toggle="modal" href="#edit_logo" title="修改LOGO"><img src="{{user.avatar}}" alt="头像" title="点击修改头像" /></a> 
       <p>{{user.username}} <span ng-if="user.sex=='男'"><i class="fa fa-male"></i></span> <span ng-if="user.sex=='女'"><i class="fa fa-female"></i></span> 
       <span class="badge bg-yellow-casablanca">Lv {{level}}</span></p>
        <p ng-if="user.signature!=undefined" style="font-size:14px">{{user.signature}}</p> 
@@ -59,7 +62,11 @@
             <div class="col-md-5"> 
              <div class="business-card col-md-12" id="card_body"> 
               <div class="business-card-line col-md-4"> 
-               <a data-toggle="modal" href="#edit_logo" title="点击修改logo"> <img src="../../assets/img/logo/logo.png" /> </a> 
+               <a data-toggle="modal" href="#edit_img" ng-if="user.photo==null||user.photo==undefined" title="点击修改logo" >
+                <img src="../../assets/img/logo/logo.png" /> 
+                 </a> 
+               <a data-toggle="modal" href="#edit_img" ng-if="user.photo!=null&&user.photo!=undefined" title="点击修改logo" >
+                <img src="{{user.photo}}" /> </a> 
               </div> 
               <div class="business-card-body col-md-8"> 
                <h2>
@@ -79,8 +86,12 @@
              </div> 
              <div class="business-card col-md-12" id="edit_card_body" style="display:none"> 
               <div class="business-card-line col-md-4"> 
-               <a data-toggle="modal" href="#edit_logo"  class="business-card-img" title="点击修改logo"> 
+               <a  ng-if="user.photo==null||user.photo==undefined" data-toggle="modal" href="#edit_img"  class="business-card-img" title="点击修改logo"> 
                  <img src="../../assets/img/logo/logo.png" /> 
+                 <div class="layer"><i class="fa fa-edit"></i></div>
+               </a> 
+               <a  ng-if="user.photo!=null&&user.photo!=undefined" data-toggle="modal" href="#edit_img"  class="business-card-img" title="点击修改logo"> 
+                 <img src="{{user.photo}}" /> 
                  <div class="layer"><i class="fa fa-edit"></i></div>
                </a> 
               </div> 
@@ -204,7 +215,7 @@
           <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px; line-height: 150px;"> 
           </div> 
           <div> 
-           <span class="btn default btn-file"> <span class="fileinput-new"> 选择图片 </span> <span class="fileinput-exists"> 更改 </span> <input type="hidden" /><input type="file" name="..." /> </span> 
+           <span class="btn default btn-file"> <span class="fileinput-new"> 选择图片 </span> <span class="fileinput-exists"> 更改 </span> <input type="hidden" /><input type="file" id="useravatar" ng-model="useravatar" /> </span> 
            <a href="javascript:;" class="btn red fileinput-exists" data-dismiss="fileinput"> 删除 </a> 
           </div> 
          </div> 
@@ -213,7 +224,7 @@
       </div> 
       <div class="modal-footer"> 
        <button type="button" class="btn default" data-dismiss="modal">关闭</button> 
-       <button type="button" class="btn blue">确定</button> 
+       <button type="button" ng-click="updateAvatar()" class="btn blue">确定</button> 
       </div> 
      </div> 
      <!-- /.modal-content --> 
@@ -241,7 +252,7 @@
           <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px; line-height: 150px;"> 
           </div> 
           <div> 
-           <span class="btn default btn-file"> <span class="fileinput-new"> 选择图片 </span> <span class="fileinput-exists"> 更改 </span> <input type="hidden" /><input type="file" name="..." /> </span> 
+           <span class="btn default btn-file"> <span class="fileinput-new"> 选择图片 </span> <span class="fileinput-exists"> 更改 </span> <input type="hidden" /><input type="file" id="userphoto" ng-model="userphoto"  /> </span> 
            <a href="javascript:;" class="btn red fileinput-exists" data-dismiss="fileinput"> 删除 </a> 
           </div> 
          </div> 
@@ -250,7 +261,7 @@
       </div> 
       <div class="modal-footer"> 
        <button type="button" class="btn default" data-dismiss="modal">关闭</button> 
-       <button type="button" class="btn blue">确定</button> 
+       <button type="button" ng-click="updatePhoto()" class="btn blue">确定</button> 
       </div> 
      </div> 
      <!-- /.modal-content --> 
@@ -300,7 +311,7 @@
    <!-- /.modal --> 
   </div> 
   <!--send_message--> 
-  <div class="send-message" style="display:none;" id="send-message"> 
+ <!--  <div class="send-message" style="display:none;" id="send-message"> 
    <div class="col-md-12 padding-top-10 message-title"> 
     <div class="col-md-11 no-padding">
       呵呵呵 
@@ -336,6 +347,6 @@
      <span class="input-group-btn"> <button class="btn btn-primary" type="button">发送</button> </span> 
     </div> 
    </div> 
-  </div> 
+  </div>  -->
   <!-- Global js END -->  
  </body>

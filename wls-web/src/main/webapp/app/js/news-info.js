@@ -28,7 +28,7 @@ wlsWeb.controller('news-info',function($http, $location, $state, $rootScope,$sta
                     "flag" : 0
                 }
             }).success(function(data){
-                alert(data.message);
+            	$("#comment_alter").modal("show");
                 $scope.load();   
           });
         };
@@ -51,7 +51,7 @@ wlsWeb.controller('news-info',function($http, $location, $state, $rootScope,$sta
                     "flag" : 0
                 }
             }).success(function(data){
-                alert(data.message);
+            	$("#reply_alter").modal("show");
                 $scope.load();   
           });
         };
@@ -73,7 +73,7 @@ wlsWeb.controller('news-info',function($http, $location, $state, $rootScope,$sta
                     "flag" : 0
                 }
             }).success(function(data){
-                alert(data.message);
+            	$("#reply_alter").modal("show");
                 $scope.load();   
           });
         };

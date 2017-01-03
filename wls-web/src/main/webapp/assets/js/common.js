@@ -50,9 +50,9 @@ var handleActions = function(){
        $("#input_comment1").css("display","none");
        $("#input_comment2").css("display","");
     })
-    .on('click', '#comment_btn', function(e) {
+    /*.on('click', '#comment_btn', function(e) {
         $("#comment_alter").modal("show");
-    })
+    })*/
     .on('click', '#reply', function(e) {
        var RHTML= ""
        RHTML += '<div class="form-group input-group padding-top-10"> ';
@@ -61,9 +61,9 @@ var handleActions = function(){
        RHTML += '</div> ';
        $("#reply_area").html(RHTML);
     })
-    .on('click', '#reply_btn', function(e) {
+   /* .on('click', '#reply_btn', function(e) {
         $("#reply_alter").modal("show");
-    })
+    })*/
     .on('click', '#open_reple', function(e) { 
        $("#open_reple").css("display","none");
        $("#close_reple").css("display","");
@@ -135,9 +135,9 @@ var handleActions = function(){
        $("#resume").css("display","");
        $("#resume_edit").css("display","none");
     })
-    .on('click', '#save_education', function(e) {
+   /* .on('click', '#save_education', function(e) {
          $('#save_resume_alter').modal("show");
-    })
+    })*/
     /*新增教育*/
     .on('click', '#add_education', function(e) {
         
@@ -195,9 +195,9 @@ var handleActions = function(){
     .on('click', '#quick_reply', function(e) {
         $("#input_quick_reply").css("display","");
     })
-    .on('click', '#quick_reply_btn', function(e) {
+   /* .on('click', '#quick_reply_btn', function(e) {
         $("#quick_reply_alter").modal("show");
-    })
+    })*/
     /*发帖 全选or校园频道*/
     .on('click', '#optionsRadios2', function(e) {
         $("#select_school").css("display","");

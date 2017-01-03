@@ -167,7 +167,7 @@ wlsWeb.controller('my-space-ask',function($http, $location, $scope,$state, $stat
 	        }).success(function (data) {  
 	        	if(data.success){
 	        		$scope.askFollowFlag = true;
-	        		alert("关注成功");
+	        		/*$("#attention_me").modal("show");*/
 	        	}
 	        	else{
 	        		alert(data.message);
@@ -183,8 +183,8 @@ wlsWeb.controller('my-space-ask',function($http, $location, $scope,$state, $stat
 	            }
 	        }).success(function (data) {  
 	        	if(data.success){
-	        		alert("已取消关注");
 	        		$scope.askFollowFlag = false;
+	        		/*$("#unattention_me").modal("show");*/
 	        	}
 	        	else{
 	        		alert(data.message);
