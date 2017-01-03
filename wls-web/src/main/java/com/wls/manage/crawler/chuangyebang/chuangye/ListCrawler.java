@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.logging.Logger;
 
 import com.wls.manage.dto.NewInfomationDto;
+import com.wls.manage.service.base.HttpService;
+import com.wls.manage.service.base.impl.HttpServiceImpl;
 
 /**
  * Created by haolidong on 2016/11/12.
@@ -15,14 +17,19 @@ public class ListCrawler {
         logger.info("Start Crawl Pages on www.toutiao.com");      //今日头条科技类
         ListCrawlJob crawler =new ListCrawlJob();
         crawler.getUrlList("http://api.cyzone.cn/index.php?m=content&c=index&a=init&tpl=index_page&page=2");
-        int count=0;
+//        int count=0;
         for(NewInfomationDto ni:crawler.an){
-            if(count++==2)break;
+//            if(count++==2)break;
             ni.setContent(new PageCrawJob().pageCraw(ni.getHref()));
         }
-
+        
+        
         for(NewInfomationDto ni:crawler.an){
-            System.out.println(ni.getContent());
+        	HttpService httpService = new HttpServiceImpl();
+        	String msg="content="+ni.getContent()+"&infocategory=5&source=创业邦&coverpiclist="+ni.getPic()+"&title="+ni.getTitle()+"&time="+ni.getTime();
+            httpService.sendPost("http://localhost:8080/i/information/addInformation", msg,10);
+//            System.out.println(ni.getContent());
+//            System.out.println(ni.get);
         }
 
     }

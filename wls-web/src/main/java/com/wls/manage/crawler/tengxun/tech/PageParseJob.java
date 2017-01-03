@@ -33,6 +33,7 @@ public class PageParseJob {
     }
     public static void main(String[] args) {
 //    	getHtmlImgs("http://view.news.qq.com/original/legacyintouch/d577.html");
+    	
 	}
     
     private static List<String> getImageUrl(String HTML) {  

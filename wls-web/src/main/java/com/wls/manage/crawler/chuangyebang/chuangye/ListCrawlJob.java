@@ -54,8 +54,6 @@ public class ListCrawlJob {
             } catch (Exception e){
                 e.printStackTrace();
             }
-
         }
-
     }
 }
