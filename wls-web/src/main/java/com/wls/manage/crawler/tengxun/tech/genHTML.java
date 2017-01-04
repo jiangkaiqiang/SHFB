@@ -1,4 +1,6 @@
 package com.wls.manage.crawler.tengxun.tech;
+import com.wls.manage.dao.InformationMapper;
+import com.wls.manage.entity.InformationEntity;
 import com.wls.manage.service.base.HttpService;
 import com.wls.manage.service.base.impl.HttpServiceImpl;
 
@@ -6,15 +8,20 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.beans.factory.annotation.Autowired;
+
 
 /**
  * Created by haolidong on 2016/11/21.
  */
 public class genHTML {
-    public static void Gen(TXSciBean txsci,String time,String title){
+	@Autowired
+	private InformationMapper informationMapper;
+    public void Gen(TXSciBean txsci,String time,String title){
     	String HTMLcontent="";
 //        String HTMLcontent="<html><body>";
 //        HTMLcontent+="<h1><font color=\"red\"><p align=\"center\">"+txsci.getTitle()+"</p></font></h1>\n";
@@ -68,10 +75,21 @@ public class genHTML {
 			 String time//添加时间
              * 时间注意替换一下吧：2016-01-23 12:10:12格式
              */
-            String msg="content="+HTMLcontent+"&infocategory=5&source=腾讯新闻&coverpiclist="+pic+"&title="+title+"&time="+time;
+				InformationEntity informationEntity = new InformationEntity();
+				informationEntity.setContent(HTMLcontent);
+				informationEntity.setCoverpiclist(pic);
+				informationEntity.setInfocategory("5");
+				informationEntity.setSource("腾讯新闻");
+				informationEntity.setTitle(title);
+				SimpleDateFormat sdf = new SimpleDateFormat(
+						"yyyy-MM-dd HH:mm:ss");
+				Date date = sdf.parse(time);
+				informationEntity.setTime(date);
+				informationMapper.insertInformation(informationEntity);
+           /* String msg="content="+HTMLcontent+"&infocategory=5&source=腾讯新闻&coverpiclist="+pic+"&title="+title+"&time="+time;
 //            System.out.println(msg);
 //            InformationController infoctl = new InformationController();
-            httpService.sendPost("http://localhost:8080/i/information/addInformation", msg,10);
+            httpService.sendPost("http://localhost:8080/i/information/addInformation", msg,10);*/
 //            infoctl.addInformation(txsci.getTitle(), HTMLcontent, "科学类", "", pic);
 //            infoctl.findInformationByID(1);
 //            bw.close();
