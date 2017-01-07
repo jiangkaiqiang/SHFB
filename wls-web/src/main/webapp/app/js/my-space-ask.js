@@ -23,10 +23,10 @@ wlsWeb.controller('my-space-ask',function($http, $location, $scope,$state, $stat
 					            }
 					        }).success(function (data) { 
 					        	$scope.askResumeFlag = data;
-					        	$scope.educates = {};
+					        	/*$scope.educates = {};
 								$scope.skills = {};
 								$scope.honors = {};
-								$scope.jobs = {};
+								$scope.jobs = {};*/
 								if($scope.askResumeFlag==true){
 									 $http.get('/i/user/findEducateByUserID', {
 								            params: {

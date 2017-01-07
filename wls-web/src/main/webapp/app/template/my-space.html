@@ -178,7 +178,7 @@
             <div class="col-md-7 margin-bottom-20"> 
              <div class="blog-item col-md-12"> 
               <div class="col-md-12"> 
-               <a href="" ><img class="blog-item-img" src="{{publish.publisheravatar}}" /> <img class="blog-item-img-v" src="../../assets/img/vip.png" /></a> 
+               <a href="" ><img class="blog-item-img" src="{{publish.publisheravatar}}" /></a> 
                <div class="blog-item-body col-md-10 margin-bottom-10"> 
                 <div class="blog-item-body-title"> 
                  <div class="col-md-12"> 
@@ -236,8 +236,11 @@
              <div class="portlet-body"> 
               <div class="row"> 
                <div class="resume-basic col-md-12 margin-bottom-20"> 
-                <div class="col-md-3"> 
+                <div class="col-md-3" ng-if="user.photo!=undefined"> 
                  <img src="{{user.photo}}" class="photo" alt="照片" /> 
+                </div> 
+                 <div class="col-md-3" ng-if="user.photo==undefined"> 
+                 <img src="../../assets/img/user.png" class="photo" alt="照片" /> 
                 </div> 
                 <div class="col-md-9 no-padding"> 
                  <div class="col-md-12 no-padding margin-bottom-70"> 
@@ -252,17 +255,26 @@
                   </div> 
                  </div> 
                  <div class="resume-basic-info col-md-12"> 
-                  <div class="col-md-2"> 
-                   <i class="fa fa-user"></i> {{user.age}}岁 
+                 <div class="col-md-1"> 
+                        {{user.sex}}
                   </div> 
                   <div class="col-md-2"> 
-                   <i class="fa fa-map-marker"></i> {{user.address}}
+                  <i class="fa fa-user"></i>
+                    <span ng-if="user.age!=undefined&&user.age!=''">{{user.age}}岁 </span>
+                   <span ng-if="user.age==undefined||user.age==''">年龄</span>
+                  </div> 
+                  <div class="col-md-2"> 
+                   <i class="fa fa-map-marker"></i> 
+                   <span ng-if="user.address!=undefined&&user.address!=''">{{user.address}}</span>
+                   <span ng-if="user.address==undefined||user.address==''">地址</span>
                   </div> 
                   <div class="col-md-3"> 
                    <i class="fa fa-mobile"></i> {{user.telephone}}
                   </div> 
-                  <div class="col-md-5"> 
-                   <i class="fa fa-envelope-o"></i> {{user.email}}
+                  <div class="col-md-4"> 
+                   <i class="fa fa-envelope-o"></i> 
+                   <span ng-if="user.email!=undefined&&user.email!=''">{{user.email}}</span>
+                   <span ng-if="user.email==undefined||user.email==''">邮箱</span>
                   </div> 
                  </div> 
                 </div> 
@@ -426,8 +438,12 @@
                   </div> 
                  </div> 
                  <div class="resume-basic-info col-md-12"> 
-                  <div class="col-md-3 input-icon"> 
-                   <i class="fa fa-user"></i> 
+                 <div class="col-md-2 input-icon"> 
+                 <select id="" class="form-control" ng-model="user.sex"><option>男</option><option>女</option></select>
+                 </div>
+                  <div class="col-md-2 input-icon"> 
+                  <i class="fa fa-user"></i>
+                  <!--  <span ng-if="user.sex=='男'||user.sex==undefined"><i class="fa fa-male"></i></span> <span ng-if="user.sex=='女'"><i class="fa fa-female"></i></span>  -->
                    <input type="text" class="form-control" placeholder="年龄" ng-model="user.age"  /> 
                   </div> 
                   <div class="col-md-3 input-icon"> 
@@ -438,7 +454,7 @@
                    <i class="fa fa-mobile"></i> 
                    <input type="text" class="form-control" placeholder="手机" ng-model="user.telephone" /> 
                   </div> 
-                  <div class="col-md-3 input-icon"> 
+                  <div class="col-md-2 input-icon"> 
                    <i class="fa fa-envelope-o"></i> 
                    <input type="text" class="form-control" placeholder="邮箱" ng-model="user.email" /> 
                   </div> 

@@ -31,7 +31,8 @@
         <div class="post-comment row" id="comments"> 
          <h2><span>{{publish.commentnum}}</span> 条评论</h2> 
          <div class="col-md-1">
-          <a href=""><img class="img-responsive" alt="" src="{{user.avatar}}"/></a>
+          <a href="" ng-if="user.avatar!=undefined"><img class="img-responsive" alt="" src="{{user.avatar}}"/></a>
+          <a href="" ng-if="user.avatar==undefined"><img class="img-responsive" alt="" src="../../assets/img/people/user.jpg"/></a>
          </div> 
          <div class="col-md-11 form-group input-group" id="input_comment1"> 
           <input type="text" class="form-control" /> 

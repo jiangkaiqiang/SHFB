@@ -2347,6 +2347,15 @@ table .product-quantity .input-group {
 	max-height:650px;
 }
 
+#pubContent  img{
+	display: block;
+    margin:0 auto;
+	padding-top:10px;
+	padding-bottom:10px;
+	max-width:650px;
+	max-height:650px;
+}
+
 .post-comment img{
   float: left;
   width: 36px;

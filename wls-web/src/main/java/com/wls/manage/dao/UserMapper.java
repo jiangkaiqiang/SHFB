@@ -11,11 +11,15 @@ public interface UserMapper {
 
 	UserEntity findUserByName(@Param("username") String username);
 
+	UserEntity findUserByTelephone(@Param("telephone") String telephone);
+	
 	UserEntity findUserById(@Param("id") int id);
 
 	void insertUser(UserEntity userEntity);
 	
 	void updateUser(UserEntity userEntity);
+	
+	void updateUserPwd( @Param("password")String password, @Param("telephone")String telephone);
 	
 	Page<UserEntity> findAllUser(@Param("audit")Integer audit, @Param("keyword")String keyword,@Param("suproleid")int suproleid,
 			@Param("provinceid")Integer provinceid,@Param("cityid")Integer cityid,@Param("schoolid")Integer schoolid

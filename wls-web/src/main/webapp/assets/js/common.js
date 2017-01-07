@@ -1,7 +1,7 @@
 var CommonObj = function () {
     
 //倒计时
-function resetCode(){
+/*function resetCode(){
     $('#J_getCode').hide();
     $('#J_second').html('60');
     $('#J_resetCode').show();
@@ -17,7 +17,7 @@ function resetCode(){
             $('#J_resetCode').hide();
         }
     },1000);
-}
+}*/
 //屏幕高度
 var broswerHeight = function(){
     var realityHeight = parseInt($("#base_content_container").outerHeight()); // 内容高度
@@ -102,7 +102,7 @@ var handleActions = function(){
        $("#edit_info_concel").css("display","");
        $("#edit_info_tab_edit").css("display","");
     })
-    .on('click', '#edit_info_save', function(e) {
+    /*.on('click', '#edit_info_save', function(e) {
         
        $("#edit_info_tab").css("display","");
        $("#edit_info").css("display","");
@@ -117,7 +117,7 @@ var handleActions = function(){
        $("#edit_info_save").css("display","none");
        $("#edit_info_concel").css("display","none");
        $("#edit_info_tab_edit").css("display","none");
-    })
+    })*/
     /*简历*/
     .on('click', '#edit_education', function(e) {
         

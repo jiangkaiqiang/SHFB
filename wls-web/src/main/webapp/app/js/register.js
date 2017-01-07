@@ -11,16 +11,25 @@ wlsWeb.controller('register',function($http, $location, $scope,$rootScope) {
          $('#company_gate div').removeClass("selected");
     };
     $scope.getVerCode = function() {
-      if($scope.telephone!=undefined){
-    	$http.get( "/i/user/sendSignUpCode",{
-    		params : {telephone : $scope.telephone}
-    	}).success(function(data) {
-			alert(data.message);
+      if($scope.telephone==undefined){ 
+    	  alert("手机号不能为空");
+    	  return;
+      }
+      $http.get( "/i/user/userTelephoneVerify",{
+  		params : {telephone : $scope.telephone}
+  	   }).success(function(data) {
+  		   if(data.success){
+  			 resetCode();
+  			 $http.get( "/i/user/sendSignUpCode",{
+  	    		params : {telephone : $scope.telephone}
+  	    	  }).success(function(data) {
+  				alert(data.message);
+  		      });
+  		   }
+  		   else{
+  				alert(data.message);
+  		   }
 	   });
-       }
-    	else{
-    		alert("请先输入手机号");
-    	}
    };
    $scope.register = function() {
 	   $('#form_wizard_1').find('.button-previous').show();
@@ -32,7 +41,8 @@ wlsWeb.controller('register',function($http, $location, $scope,$rootScope) {
   };
   $scope.register2 = function() {
 	  if($scope.username==null||$scope.verCode==null||
-			  $scope.email==null||$scope.password==null||$scope.rpassword==null){
+			  /*$scope.email==null||*/
+			  $scope.password==null||$scope.rpassword==null){
 		  alert("所填信息不能为空！");
 		  return;
 	  }
@@ -40,17 +50,22 @@ wlsWeb.controller('register',function($http, $location, $scope,$rootScope) {
 		  alert("两次密码不一致！");
 		  return;
 	  }
-	 $http.get( "/i/user/verifySignUpCode",{
+	  
+	  $http.get( "/i/user/existenceUserName",{
+  		params : {userName : $scope.username}
+  	  }).success(function(data) {
+  		  if(data.success){ 
+	         $http.get( "/i/user/verifySignUpCode",{
 	    		params : {signUpCode : $scope.verCode}
-	    	}).success(function(data) {
-	    		if(data.success){
+	        	}).success(function(data) {
+	    	    	if(data.success){
 	    			$http.get( "/i/user/signup",{
 	     				params : {
 	     					username : $scope.username,
 	     					password :  $scope.password,
 	     					rpassword : $scope.rpassword,
 	     	    			telephone : $scope.telephone,
-	     	    			email : $scope.email,
+	     	    			email : "",
 	     	    			suproleid : $scope.suproleid,
 	     	    			avatar : "../../assets/img/people/"+Math.round(Math.random()*9+6)+".jpg"
 	     	    			}
@@ -72,9 +87,13 @@ wlsWeb.controller('register',function($http, $location, $scope,$rootScope) {
 	    		else{
 	    			alert(data.message);
 	    		}
-	    	
 		   });
-	  };
+  		}
+		else{
+			alert(data.message);
+		}
+  	   });
+	};
   
   $scope.loginGoSpace = function() {
 	  $http.get("/i/user/login",{
@@ -118,5 +137,21 @@ wlsWeb.controller('register',function($http, $location, $scope,$rootScope) {
       $('#form_wizard_1').find('#tab3').removeClass("active");
 	  $('#form_wizard_1').find('#bar div').css("width","66.67%");  
   };
-
+  function resetCode(){
+	    $('#J_getCode').hide();
+	    $('#J_second').html('60');
+	    $('#J_resetCode').show();
+	    var second = 60;
+	    var timer = null;
+	    timer = setInterval(function(){
+	        second -= 1;
+	        if(second >0 ){
+	            $('#J_second').html(second);
+	        }else{
+	            clearInterval(timer);
+	            $('#J_getCode').show();
+	            $('#J_resetCode').hide();
+	        }
+	    },1000);
+	}
 });

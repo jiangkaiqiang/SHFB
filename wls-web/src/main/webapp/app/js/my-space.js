@@ -222,6 +222,10 @@ wlsWeb.controller('my-space',function($http, $location,$rootScope, $scope,$state
 	        });
 	    };
 		$scope.saveInfo = function() {
+			if($scope.user.skill1.length>4||$scope.user.skill2.length>4){
+				alert("技能不能超过4个字");
+				return;
+			}
 			if($scope.user.sex=="男"){
 				$scope.sex = 0;
 			}

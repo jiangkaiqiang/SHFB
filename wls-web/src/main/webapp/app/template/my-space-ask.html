@@ -162,16 +162,20 @@
           <div class="portlet-body"> 
            <div id="resume" style="padding-top:55px; background:#ebedec;"> 
             <div class="portlet light" style="background:#ebedec !important;"> 
-             <div class="portlet-body"> 
+              <div class="portlet-body"> 
               <div class="row"> 
                <div class="resume-basic col-md-12 margin-bottom-20"> 
-                <div class="col-md-3"> 
+                <div class="col-md-3" ng-if="user.photo!=undefined"> 
+                 <img src="{{user.photo}}" class="photo" alt="照片" /> 
+                </div> 
+                 <div class="col-md-3" ng-if="user.photo==undefined"> 
                  <img src="../../assets/img/user.png" class="photo" alt="照片" /> 
                 </div> 
                 <div class="col-md-9 no-padding"> 
                  <div class="col-md-12 no-padding margin-bottom-70"> 
                   <div class="col-md-4"> 
-                   <h2>{{user.realname}}</h2> 
+                   <h2 ng-if="user.realname!=undefined&&user.realname!=''">{{user.realname}}</h2> 
+                   <h2 ng-if="user.realname==undefined||user.realname==''">姓名</h2> 
                    <span>求职意向：{{user.intention}}</span> 
                   </div> 
                   <div class="col-md-8"> 
@@ -180,17 +184,26 @@
                   </div> 
                  </div> 
                  <div class="resume-basic-info col-md-12"> 
-                  <div class="col-md-2"> 
-                   <i class="fa fa-user"></i> {{user.age}}岁 
+                 <div class="col-md-1"> 
+                        {{user.sex}}
                   </div> 
                   <div class="col-md-2"> 
-                   <i class="fa fa-map-marker"></i> {{user.address}}
+                  <i class="fa fa-user"></i>
+                    <span ng-if="user.age!=undefined&&user.age!=''">{{user.age}}岁 </span>
+                   <span ng-if="user.age==undefined||user.age==''">年龄</span>
+                  </div> 
+                  <div class="col-md-2"> 
+                   <i class="fa fa-map-marker"></i> 
+                   <span ng-if="user.address!=undefined&&user.address!=''">{{user.address}}</span>
+                   <span ng-if="user.address==undefined||user.address==''">地址</span>
                   </div> 
                   <div class="col-md-3"> 
-                   <i class="fa fa-mobile"></i> {{user.telephone}} 
+                   <i class="fa fa-mobile"></i> {{user.telephone}}
                   </div> 
-                  <div class="col-md-5"> 
-                   <i class="fa fa-envelope-o"></i> {{user.email}}
+                  <div class="col-md-4"> 
+                   <i class="fa fa-envelope-o"></i> 
+                   <span ng-if="user.email!=undefined&&user.email!=''">{{user.email}}</span>
+                   <span ng-if="user.email==undefined||user.email==''">邮箱</span>
                   </div> 
                  </div> 
                 </div> 
@@ -206,26 +219,35 @@
                   <div class="timeline-icon"> 
                    <i class="fa fa-mortar-board "></i> 
                   </div> 
-                  <div class="timeline-body" ng-repeat="educate in educates"> 
-                   <h2>{{educate.starttime}}至{{educate.endtime}} </h2> 
+
+				  <div ng-if="educates!=undefined&&educates!=''" class="timeline-body" ng-repeat="educate in educates"> 
+                   <h2>{{educate.starttime}} 至{{educate.endtime}}</h2> 
                    <span>{{educate.school}}</span> 
                    <div class="timeline-content">
                      {{educate.describe}}
                    </div> 
                    <div class="timeline-footer"> 
-                    <span>{{educate.major}} </span> | <span ng-if="educate.fulltime==1">非</span> 
-                    <span> 全日制 </span>  |  <span>{{educate.degree}}</span>
+                    <a class="nav-link pull-left"><span>{{educate.major}} </span> | <span ng-if="educate.fulltime==1">非</span> 
+                    <span> 全日制 </span>  |  <span>{{educate.degree}}</span></a>
                    </div> 
-                  </div> </li> 
+                  </div> 
+				  <div class="timeline-body" ng-if="educates==undefined||educates==''"> 
+                   <h2>开始时间 至 结束时间</h2> 
+                   <span>学校</span> 
+                   <div class="timeline-content">
+				   课程描述···
+                   </div> 
+                  </div>
+				 </li> 
                  <li> 
                   <div class="timeline-time"> 
                    <span class="time"> 工作经历</span> 
                    <span class="time-en"> WORK</span> 
                   </div>  
                   <div class="timeline-icon"> 
-                   <i class="fa fa-user"></i> 
+                   <i class="fa fa-bank"></i> 
                   </div> 
-                  <div class="timeline-body" ng-repeat="job in jobs"> 
+                  <div ng-if="jobs!=undefined&&jobs!=''" class="timeline-body" ng-repeat="job in jobs"> 
                    <h2>{{job.starttime}}至{{job.endtime}} </h2> 
                    <span>{{job.company}}</span>|<span>{{job.companysize}}</span>|
                    <span>{{job.companynature}}</span> |  <span>{{job.industry}}</span> 
@@ -234,6 +256,13 @@
                    </div> 
                    <div class="timeline-footer"> 
                     <a href="javascript:;" class="nav-link pull-left"> 担任职位：{{job.position}} </a> 
+                   </div> 
+                  </div> 
+				  <div class="timeline-body" ng-if="jobs==undefined||jobs==''"> 
+                   <h2>开始时间 至 结束时间</h2> 
+                   <span>公司名称</span> 
+                   <div class="timeline-content">
+                                                               职位描述···
                    </div> 
                   </div> 
                   <div class="timeline-icon"> 
@@ -245,11 +274,14 @@
                    <span class="time-en"> EVALUATION</span> 
                   </div> 
                   <div class="timeline-icon"> 
-                   <i class="fa fa-user"></i> 
+                   <i class="fa fa-comment"></i> 
                   </div> 
                   <div class="timeline-body"> 
-                   <div class="timeline-content"> 
-                   {{user.introduction}}
+                   <div class="timeline-content" ng-if="user.introduction==undefined||user.introduction==''" > 
+                                                    本人性格、专项技能等方面的描述···
+                   </div> 
+                    <div ng-if="user.introduction!=undefined&&user.introduction!=''" class="timeline-content"> 
+                     {{user.introduction}}
                    </div> 
                   </div> 
                  </li> 
@@ -259,11 +291,15 @@
                    <span class="time-en"> HONOR</span> 
                   </div> 
                   <div class="timeline-icon"> 
-                   <i class="fa fa-user"></i> 
+                   <i class="fa fa-trophy"></i> 
                   </div>  
-                  <div class="timeline-body" ng-repeat="honor in honors"> 
+                  <div class="timeline-body" ng-if="honors!=undefined&&honors!=''" ng-repeat="honor in honors"> 
                    <h2>{{honor.starttime}}至{{honor.endtime}}</h2> 
                    <span class="honor_text">{{honor.honor}}</span> 
+                 </div> 
+                 <div class="timeline-body" ng-if="honors==undefined||honors==''"> 
+                   <h2>开始时间 至 结束时间</h2> 
+                   <span class="honor_text">所获荣誉.......</span> 
                  </div> 
                   </li> 
                  <li> 
@@ -272,7 +308,7 @@
                    <span class="time-en"> SKILL</span> 
                   </div> 
                   <div class="timeline-icon"> 
-                   <i class="fa fa-user"></i> 
+                   <i class="fa fa-tag"></i> 
                   </div> 
                   <div class="timeline-body"> 
                    <h2>技能列表</h2> 

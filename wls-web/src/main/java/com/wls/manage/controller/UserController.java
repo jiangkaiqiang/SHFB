@@ -277,13 +277,7 @@ public class UserController extends BaseController {
 		return new PageInfo<UserDto>(userDtos);
 		
 	}
-	@RequestMapping(value = "/userNameVerify", method = RequestMethod.POST)
-	@ResponseBody
-	public Object userNameVerify(HttpServletRequest request, String username) throws ApiException {
-		if(userDao.findUserByName(username)==null)
-			return true;
-		return false;
-	}
+	
 	
 	@RequestMapping(value = "/checkVerifyCode")
 	@ResponseBody
@@ -308,6 +302,17 @@ public class UserController extends BaseController {
 		return ResponseData.newFailure("请填写手机号"); 
 	}
 	
+	@RequestMapping(value = "/sendPwdVerifyCode")
+	@ResponseBody
+	public Object sendPwdVerifyCode(HttpServletRequest request,@RequestParam(value="telephonenum",required=false) String telephonenum) throws ApiException {
+		if(telephonenum!=null&&!telephonenum.equals("")){
+			TelephoneVerifyUtil teleVerify = new TelephoneVerifyUtil();
+			String pwdverifycode = teleVerify.identityVerify(telephonenum);
+			request.getSession().setAttribute("pwdverifycode", pwdverifycode);
+			return ResponseData.newSuccess("验证码已发送"); 
+		}
+		return ResponseData.newFailure("请填写手机号"); 
+	}
 	
 	@RequestMapping(value = "/verifySignUpCode")
 	@ResponseBody
@@ -319,7 +324,17 @@ public class UserController extends BaseController {
 			return ResponseData.newSuccess("验证码验证成功");
 	}
 	
-	@RequestMapping(value = "/identityVerify", method = RequestMethod.POST)
+	@RequestMapping(value = "/pwdCodeVerify")
+	@ResponseBody
+	public Object pwdCodeVerify(HttpServletRequest request, String pwdverifycode) throws ApiException {
+		String sessyzm=""+request.getSession().getAttribute("pwdverifycode");
+		if(pwdverifycode==null||!(sessyzm).equalsIgnoreCase(pwdverifycode))
+			return ResponseData.newFailure("验证码输入错误");
+		else 
+			return ResponseData.newSuccess("验证码验证成功");
+	}
+	
+	/*@RequestMapping(value = "/identityVerify", method = RequestMethod.POST)
 	@ResponseBody
 	public Object identityVerify(HttpServletRequest request, String telephone) throws ApiException {
 		if(telephone!=null&&!telephone.equals("")){
@@ -329,7 +344,7 @@ public class UserController extends BaseController {
 			return ResponseData.newSuccess("验证码已发送"); 
 		}
 		return ResponseData.newFailure("请填写手机号"); 
-	}
+	}*/
 	
 	@RequestMapping(value = "/signup")
 	@ResponseBody
@@ -525,6 +540,20 @@ public class UserController extends BaseController {
 	}
 	
 	/**
+	 * 检查手机是不是已经注册
+	 * @param request
+	 * @param telephone
+	 * @return
+	 * @throws ApiException
+	 */
+	@RequestMapping(value = "/userTelephoneVerify")
+	@ResponseBody
+	public Object userTelephoneVerify(HttpServletRequest request, String telephone) throws ApiException {
+		if(userDao.findUserByTelephone(telephone)==null)
+			return ResponseData.newSuccess("该手机号还未注册任何账号");
+		return ResponseData.newFailure("该手机号已经注册过了");
+	}
+	/**
 	 * 检查用户名是否占用
 	 * @param request true：表示当前用户名已存在或为null->不能注册
 	 * @param userName
@@ -532,9 +561,10 @@ public class UserController extends BaseController {
 	 */
 	@RequestMapping(value = "/existenceUserName")
 	@ResponseBody
-	public boolean existenceUserName(HttpServletRequest request,String userName){
-		if(StringUtil.isNull(userName)){return true;}
-	    return this.userDao.existenceUserName(userName)>0;
+	public Object existenceUserName(HttpServletRequest request,String userName){
+		if(userDao.findUserByName(userName)==null)
+			return ResponseData.newSuccess("用户名可以使用");
+		return ResponseData.newFailure("用户名已经存在");
 	}
 	
 	
@@ -775,5 +805,18 @@ public class UserController extends BaseController {
 		skillEntity.setUserid(BigInteger.valueOf(skilluserid));
 		skillMapper.insertSkill(skillEntity);
 		return ResponseData.newSuccess(skillMapper.findSkillByUserId(skilluserid));
+	}
+	
+	
+	
+	@RequestMapping(value = "/updateUserPwd")
+	@ResponseBody
+	public Object updateUserPwd(HttpServletRequest request, 
+			@RequestParam(value="changepwd",required=false)String changepwd,
+			@RequestParam(value="telephone",required=false)String telephone
+			) throws ApiException {
+		String password = EncodeUtil.encodeByMD5(changepwd);
+		userDao.updateUserPwd(password, telephone);
+	    return ResponseData.newSuccess("密码修改成功");
 	}
 }

@@ -64,6 +64,15 @@
         where id = ${id}
     </update>
     
+    
+    <update id="updateUserPwd" parameterType="map" >
+        update user
+        <set>
+	         <if test="password     !=null and password   !=''">   password  =#{password    }</if>
+        </set>
+        where telephone = ${telephone}
+    </update>
+    
     <select id="findAllUser" parameterType="int" resultType="UserEntity">
          SELECT * FROM `user`
 		 <where> 
@@ -106,6 +115,10 @@
 	<select id="findUserByName" parameterType="map" resultType="UserEntity">
 		SELECT u.* FROM user u 
 		WHERE u.`username` = #{username}
+	</select>
+	<select id="findUserByTelephone" parameterType="map" resultType="UserEntity">
+		SELECT u.* FROM user u 
+		WHERE u.`telephone` = #{telephone}
 	</select>
     <select id="findUserById" parameterType="map" resultType="UserEntity">
 		SELECT u.* FROM user u 

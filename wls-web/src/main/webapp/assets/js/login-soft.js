@@ -309,11 +309,11 @@ var Login = function () {
 	            }
 	        });
 
-	        jQuery('#reset-password').click(function () {
+	        /*jQuery('#reset-password').click(function () {
 	            jQuery('.login-form').hide();
 	            jQuery('.reset-form').show();
 				jQuery('.forget-form').hide();
-	        });
+	        });*/
 
 	}
 

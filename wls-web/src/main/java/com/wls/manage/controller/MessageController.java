@@ -183,6 +183,12 @@ public class MessageController extends BaseController {
 			messageDao.insertMessage(messageEntity);
 		}
 		if (msgcategory.equals("2")) {
+			MessageEntity messageEntity = new MessageEntity();
+			messageEntity.setContent("同意您查看简历");
+			messageEntity.setMsgcategory("1");
+			messageEntity.setReceiverid(BigInteger.valueOf(messageReceiverID));
+			messageEntity.setSenderid(BigInteger.valueOf(messageSenderID));
+			messageDao.insertMessage(messageEntity);
 			ResumeVisEntity resumeVisEntity = new ResumeVisEntity();
 			resumeVisEntity.setOwnerid(BigInteger.valueOf(messageSenderID));
 			resumeVisEntity.setVisiblerid(BigInteger.valueOf(messageReceiverID));
