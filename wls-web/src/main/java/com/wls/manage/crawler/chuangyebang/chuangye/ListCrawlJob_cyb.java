@@ -17,10 +17,10 @@ import com.wls.manage.dto.NewInfomationDto;
 /**
  * Created by haolidong on 2016/11/12.
  */
-public class ListCrawlJob {
+public class ListCrawlJob_cyb {
 
     public List<NewInfomationDto> an = new ArrayList<NewInfomationDto>();
-    private static Logger logger = Logger.getLogger(ListCrawler.class.getName());
+    private static Logger logger = Logger.getLogger(ListCrawler_cyb.class.getName());
     public  void getUrlList(String linkUrl) {
         //爬取列表页面
         logger.info("Start crawl list page:" + linkUrl);
@@ -44,13 +44,8 @@ public class ListCrawlJob {
                 Element img=ele.select("div[class=item-pic pull-left] img[src]").first();
                 Element title=ele.select("div[class=item-intro] a[class=item-title]").first();
                 Element time=ele.select("div[class=item-intro] div[class=item-push-info] span[data-time]").first();
-//                System.out.println(href.attr("href"));
-//                System.out.println(img.attr("src"));
-//                System.out.println(title.text());
                 Date date = new Date(Long.parseLong(time.attr("data-time"))*1000);
-//                System.out.println(date);
-                String transtime=date.getMonth()+"-"+date.getDay()+" "+date.getHours()+":"+date.getMinutes();
-                an.add(new NewInfomationDto("", img.attr("src"), transtime, title.text(),href.attr("href")));
+                an.add(new NewInfomationDto("", img.attr("src"), date, title.text(),href.attr("href"),""));
             } catch (Exception e){
                 e.printStackTrace();
             }

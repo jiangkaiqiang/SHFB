@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.wls.manage.crawler.chuangyebang.chuangye.ListCrawler_cyb;
 import com.wls.manage.dao.CommentMapper;
 import com.wls.manage.dao.InforCategoryMapper;
 import com.wls.manage.dao.InformationMapper;
@@ -26,6 +27,7 @@ import com.wls.manage.dao.UserMapper;
 import com.wls.manage.dto.BaseDto;
 import com.wls.manage.dto.CommentDto;
 import com.wls.manage.dto.InformationDto;
+import com.wls.manage.dto.NewInfomationDto;
 import com.wls.manage.dto.ResponseDto;
 import com.wls.manage.dto.UploadFileEntity;
 import com.wls.manage.entity.CommentEntity;
@@ -220,19 +222,19 @@ public class InformationController extends BaseController {
 	@ResponseBody
 	public Object addInformation( 
 			/*@RequestParam(required = false) MultipartFile uploadcoverpic,*/
-			@RequestParam(required = false) String title,//标题
+			/*@RequestParam(required = false) String title,//标题
 			@RequestParam(required = false) String content,//内容
 			@RequestParam(required = false) String infocategory,//分类：“1”：科技类，“2”：互联网类，3：校园类；4：财经类；5：创业类  注意：，这个地方用数字不要用字符串
 			@RequestParam(required = false) String source,//来源：腾讯新闻 等等
 			@RequestParam(required = false) String coverpiclist,//封面图片：解析几张放在这，用特殊字符隔开，注意：就只有一张，零张和三张这三种情况，如果有大于三张那就只取三张，大于一张少于三张就去一张，没有就0张
 			@RequestParam(required = false) String time//添加时间
-			) throws Exception {
+*/			) throws Exception {
 		/**
 		 * 此处注释掉图片上传至ftp服务器，下次开发可能用到
 		 */
-		if (title == null || content == null) {
+		/*if (title == null || content == null) {
 			return ResponseData.newFailure("标题和内容不能为空");
-		}
+		}*/
 		/*String dir = String.format("%s/infor/%s", baseDir, information.getId());
 		if (uploadcoverpic != null) {
 			*//**
@@ -246,16 +248,19 @@ public class InformationController extends BaseController {
 		else {
 			  throw new Exception("资讯上传图片时，封面图片为空异常");
 		}*/
-	    InformationEntity informationEntity = new InformationEntity();
-	    informationEntity.setContent(content);
-	    informationEntity.setCoverpiclist(coverpiclist);
-	    informationEntity.setInfocategory(infocategory);
-	    informationEntity.setSource(source);
-	    informationEntity.setTitle(title);
-	    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-	    Date date = sdf.parse(time);
-	    informationEntity.setTime(date);
-	    informationDao.insertInformation(informationEntity);
+		ListCrawler_cyb listCrawler = new ListCrawler_cyb();
+		List<NewInfomationDto> newInfomationDtos = listCrawler.parse();
+		for (NewInfomationDto newInfomationDto : newInfomationDtos) {
+			 InformationEntity informationEntity = new InformationEntity();
+			    informationEntity.setContent(newInfomationDto.getContent());
+			    informationEntity.setCoverpiclist(newInfomationDto.getPic());
+			    informationEntity.setInfocategory("3");
+			    informationEntity.setSource("创业邦");
+			    informationEntity.setTitle(newInfomationDto.getTitle());
+			    
+			    informationEntity.setTime(newInfomationDto.getTime());
+			    informationDao.insertInformation(informationEntity);
+		}
 		return ResponseData.newSuccess("添加成功");
 	}
 	
