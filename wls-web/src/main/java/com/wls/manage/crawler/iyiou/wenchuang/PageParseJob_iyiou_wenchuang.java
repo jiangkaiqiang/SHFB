@@ -33,7 +33,9 @@ public class PageParseJob_iyiou_wenchuang {
     	Element post_thumbnail  = doc.select("div[id=post_content] div[id=post_thumbnail]").first();
     	Elements post_description  = doc.select("div[id=post_content] div[id=post_description] p");
     	Element dateElement = doc.select("div[id=post_info] div[id=post_date]").first();
-    	
+    	Element sourceElement = doc.select("div[id=post_info] div[id=post_source]").first();
+    	Element authorElement = doc.select("div[id=post_info] div[id=post_author]").first();
+    	ni.setSource(sourceElement.text()+"\t"+authorElement.text());
     	String dateString = dateElement.text();
 //    	System.out.println(dateString);
     	String contentString=introduction.toString()+"\n"+post_thumbnail.toString()+"\n"+
@@ -48,6 +50,7 @@ public class PageParseJob_iyiou_wenchuang {
 			
 		}
     		ni.setContent(contentString+"</div>");
+    		
         	SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
         	try {
 				Date date=sdf.parse(dateString);

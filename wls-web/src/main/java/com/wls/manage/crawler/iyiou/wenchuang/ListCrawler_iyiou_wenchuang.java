@@ -30,7 +30,7 @@ public class ListCrawler_iyiou_wenchuang {
     public static void main(String[] args) throws ParseException {
     	List<NewInfomationDto> an =new ListCrawler_iyiou_wenchuang().parse();
     	for(NewInfomationDto ni:an){
-    		System.out.println(ni.getTime());
+    		System.out.println(ni.getSource());
     	}
 	}
 }
