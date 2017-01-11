@@ -69,6 +69,11 @@
 		FROM `information` WHERE `id` = #{inforID}
 	</select>
 	
+	<select id="findInformationByTitle" parameterType="map" resultType="InformationEntity">
+		SELECT *
+		FROM `information` WHERE `title` = #{inforTitle}
+	</select>
+	
 	<select id="findInformationByCategory" parameterType="map" resultType="InformationEntity">
 		SELECT *
 		FROM `information` WHERE `infocategory` = #{infocategory} order by `time` desc 

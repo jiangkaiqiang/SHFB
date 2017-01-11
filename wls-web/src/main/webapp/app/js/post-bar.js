@@ -8,6 +8,7 @@ wlsWeb.controller('post-bar',function($http, $state,$rootScope, $stateParams,$lo
 	$scope.AllPublishs = [];
 	$scope.optAudit = 8;
 	$scope.citys = [];
+	$scope.schools = [];
 	$scope.AllCategory = [
 	                      {id:"8",name:"全部"},
 	                      {id:"1",name:"科技类"},
@@ -77,14 +78,20 @@ wlsWeb.controller('post-bar',function($http, $state,$rootScope, $stateParams,$lo
 
         var ci = {"ci_id":-1,"ci_city":"全部城市"};
      	$scope.citys.push(ci);
-     	$scope.citys = sortJson($scope.citys,"ci_id");
+     	//$scope.citys = sortJson($scope.citys,"ci_id");
      	$scope.cityid = -1;
+     	
+     	var sh = {"sh_id":-1,"sh_shool":"全部学校"};
+     	$scope.schools.push(sh);
+     	//$scope.schools = sortJson($scope.schools,"sh_id");
+     	$scope.schoolid = -1;
     
     // 根据省ID查询城市列表
     $scope.provinceSelected = function () {
+    	$scope.schools = [];
+    	$scope.schools.push(sh);
     	$scope.cityid = -1;
     	$scope.schoolid = -1;
-    	$scope.schools = undefined;
         $http.get('/i/city/findCitysByProvinceId', {
             params: {
                 "provinceID": $scope.provinceid

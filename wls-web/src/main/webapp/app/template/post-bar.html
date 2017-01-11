@@ -33,7 +33,7 @@
                                     ng-disabled="editable" ng-change="citySelected(cityid)"
                                     ng-options="x.ci_id as x.ci_city for x in citys"></select>
           <!-- <input type="text" id="cityChoice" class="form-control" placeholder="请选择地区"/> -->
-           <select id="" ng-if="schools!=undefined" style="height:35px" ng-model="schoolid"
+           <select id="" style="height:35px;width:150px" ng-model="schoolid"
                                     ng-disabled="editable"
                                     ng-change="schoolSelected(schoolid)"
                                     ng-options="x.sh_id as x.sh_shool for x in schools"> </select>

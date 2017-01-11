@@ -14,6 +14,8 @@ public interface InformationMapper {
 
 	InformationEntity findInformationByID(@Param("inforID") int inforID);
 	
+	InformationEntity findInformationByTitle(@Param("inforTitle") String inforTitle);
+	
 	Page<InformationEntity> findAllInformation(@Param("audit")Integer audit,@Param("keyword")String keyword);
 	
 	Page<InformationEntity> findInformationByCategory(@Param("infocategory") String infocategory);

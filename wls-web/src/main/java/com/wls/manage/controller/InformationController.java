@@ -19,6 +19,10 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.wls.manage.crawler.chuangyebang.chuangye.ListCrawler_cyb;
+import com.wls.manage.crawler.iresearch.events.ListCrawler_iresearch;
+import com.wls.manage.crawler.iyiou.heikeji.ListCrawler_iyiou_heikeji;
+import com.wls.manage.crawler.iyiou.wenchuang.ListCrawler_iyiou_wenchuang;
+import com.wls.manage.crawler.studentonline.psychology.ListCrawler_stuonline;
 import com.wls.manage.dao.CommentMapper;
 import com.wls.manage.dao.InforCategoryMapper;
 import com.wls.manage.dao.InformationMapper;
@@ -212,15 +216,94 @@ public class InformationController extends BaseController {
 		return informationDto;
 	}
 	
+
 	/**
-	 * 添加资讯公用服务
+	 * 将数据插入数据库，需要传入NewInfomationDto和自己设置的分类：1：科技类，2：文娱类，3：创业类，4：时事类，5：校园类
+	 * @param newInfomationDtos
+	 * @param category
+	 */
+	public void insertInformationByType(List<NewInfomationDto> newInfomationDtos,String category) {
+		for (NewInfomationDto newInfomationDto : newInfomationDtos) {
+			 InformationEntity informationEntity = new InformationEntity();
+			    informationEntity.setContent(newInfomationDto.getContent());
+			    informationEntity.setCoverpiclist(newInfomationDto.getPic());
+			    informationEntity.setInfocategory(category);
+			    informationEntity.setSource(newInfomationDto.getSource());
+			    informationEntity.setTitle(newInfomationDto.getTitle());
+			    informationEntity.setTime(newInfomationDto.getTime());
+			    //数据库去重
+			    if (informationDao.findInformationByTitle(informationEntity.getTitle())==null) {
+			    	 informationDao.insertInformation(informationEntity);
+				}
+		}
+	}
+	
+	
+	/**
+	 * C校园网-心理
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/addInformationWithCXiaoYuanPsy")
+	@ResponseBody
+	public Object addInformationWithCXiaoYuanPsy() throws Exception {
+		ListCrawler_stuonline listCrawler = new ListCrawler_stuonline();
+		List<NewInfomationDto> newInfomationDtos = listCrawler.parse();
+		insertInformationByType(newInfomationDtos,"5");
+		return ResponseData.newSuccess("添加成功");
+	}
+	
+	/**
+	 * 亿欧网-文创
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/addInformationWithYiouWenChuang")
+	@ResponseBody
+	public Object addInformationWithYiouWenChuang() throws Exception {
+		ListCrawler_iyiou_wenchuang listCrawler = new ListCrawler_iyiou_wenchuang();
+		List<NewInfomationDto> newInfomationDtos = listCrawler.parse();
+		insertInformationByType(newInfomationDtos,"2");
+		return ResponseData.newSuccess("添加成功");
+	}
+	
+	/**
+	 * 亿欧网-黑科技
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/addInformationWithYiouKeJi")
+	@ResponseBody
+	public Object addInformationWithYiouKeJi() throws Exception {
+		ListCrawler_iyiou_heikeji listCrawler = new ListCrawler_iyiou_heikeji();
+		List<NewInfomationDto> newInfomationDtos = listCrawler.parse();
+		insertInformationByType(newInfomationDtos,"1");
+		return ResponseData.newSuccess("添加成功");
+	}
+	
+	/**
+	 * 艾瑞
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/addInformationWithIresearch")
+	@ResponseBody
+	public Object addInformationWithIresearch() throws Exception {
+		ListCrawler_iresearch listCrawler = new ListCrawler_iresearch();
+		List<NewInfomationDto> newInfomationDtos = listCrawler.parse();
+		insertInformationByType(newInfomationDtos,"4");
+		return ResponseData.newSuccess("添加成功");
+	}
+	
+	/**
+	 * 创业邦
 	 * @param information
 	 * @return
 	 * @throws Exception 
 	 */
-	@RequestMapping(value = "/addInformation")
+	@RequestMapping(value = "/addInformationWithChuangyebang")
 	@ResponseBody
-	public Object addInformation( 
+	public Object addInformationWithChuangyebang( 
 			/*@RequestParam(required = false) MultipartFile uploadcoverpic,*/
 			/*@RequestParam(required = false) String title,//标题
 			@RequestParam(required = false) String content,//内容
@@ -250,17 +333,7 @@ public class InformationController extends BaseController {
 		}*/
 		ListCrawler_cyb listCrawler = new ListCrawler_cyb();
 		List<NewInfomationDto> newInfomationDtos = listCrawler.parse();
-		for (NewInfomationDto newInfomationDto : newInfomationDtos) {
-			 InformationEntity informationEntity = new InformationEntity();
-			    informationEntity.setContent(newInfomationDto.getContent());
-			    informationEntity.setCoverpiclist(newInfomationDto.getPic());
-			    informationEntity.setInfocategory("3");
-			    informationEntity.setSource("创业邦");
-			    informationEntity.setTitle(newInfomationDto.getTitle());
-			    
-			    informationEntity.setTime(newInfomationDto.getTime());
-			    informationDao.insertInformation(informationEntity);
-		}
+		insertInformationByType(newInfomationDtos,"3");
 		return ResponseData.newSuccess("添加成功");
 	}
 	

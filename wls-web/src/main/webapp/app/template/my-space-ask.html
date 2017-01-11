@@ -115,8 +115,8 @@
                  </div> 
                 </div> 
                 <div class="blog-item-body-info col-md-12"> 
-                 <p>{{publish.describe}}
-                 <img src="../../assets/img/facts.jpg" width="300px" /> 
+                 <!-- <p>{{publish.describe}} -->
+                  <img ng-if="publish.pubcover!=null&&publish.pubcover!=undefined&&publish.pubcover!=''" src="{{publish.pubcover}}"/> 
                 </div> 
                </div> 
               </div> 
@@ -125,7 +125,7 @@
                 <span><a href="blog-info.html#comments"><i class="fa fa-comments"></i> 评论{{publish.commentnum}}</a></span> 
                </div> 
                <div class="col-md-4 line"> 
-                <span><a><i class="fa fa-thumbs-up"></i> 点赞10</a></span> 
+                <span><a><i class="fa fa-thumbs-up"></i> 点赞{{publish.praisenum}}</a></span> 
                </div> 
                <div class="col-md-4"> 
                 <span><a><i class="fa fa-share-alt"></i> 分享</a></span> 

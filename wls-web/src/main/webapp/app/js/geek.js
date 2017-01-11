@@ -8,6 +8,7 @@ wlsWeb.controller('geek',function($http, $location,$rootScope, $scope,$state, $s
 	$scope.Allusers = [];
 	$scope.optAudit = 8;
 	$scope.citys = [];
+	$scope.schools = [];
 	$scope.AllCategory = [
 	                      {id:"8",name:"全部"},
 	                      {id:"1",name:"设计狮"},
@@ -76,17 +77,27 @@ wlsWeb.controller('geek',function($http, $location,$rootScope, $scope,$state, $s
     	$scope.provinces.push(pro);
     	$scope.provinces = sortJson($scope.provinces,"pr_id");
         $scope.provinceid = -1;
+       /* $scope.curprovince = data[0];
+        $scope.provinces[0].isOn = true;*/
     });
 
         var ci = {"ci_id":-1,"ci_city":"全部城市"};
      	$scope.citys.push(ci);
-     	$scope.citys = sortJson($scope.citys,"ci_id");
+     	//$scope.citys = sortJson($scope.citys,"ci_id");
      	$scope.cityid = -1;
+     	
+     	var sh = {"sh_id":-1,"sh_shool":"全部学校"};
+     	$scope.schools.push(sh);
+     	//$scope.schools = sortJson($scope.schools,"sh_id");
+     	$scope.schoolid = -1;
     
     // 根据省ID查询城市列表
     $scope.provinceSelected = function () {
+    	$scope.schools = [];
+    	$scope.schools.push(sh);
     	$scope.cityid = -1;
-    	$scope.schools = undefined;
+    	$scope.schoolid = -1;
+    	//$scope.schools = sortJson($scope.schools,"sh_id");
     	$scope.getUsers();
         $http.get('/i/city/findCitysByProvinceId', {
             params: {
