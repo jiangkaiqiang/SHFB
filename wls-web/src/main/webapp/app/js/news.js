@@ -5,29 +5,58 @@ wlsWeb.controller('news',function($http, $location, $state,$scope,$interval) {
      var s=date.getSeconds();
      if(h==12&&m==0&&s==0){
           callFunction();
-                                                                   
      }*/
 	//定时任务插入爬取数据到数据库
 	$scope.chuangyebang = $interval(function(){
-		$http.get('/i/information/addInformationWithChuangyebang').success(function (data) {
+		 var date=new Date();
+	     var h=date.getHours();
+	     var m=date.getMinutes();
+	     var s=date.getSeconds();
+	     if(h==23&&m==39&&s==0){
+		   $http.get('/i/information/addInformationWithChuangyebang').success(function (data) {
 	    });
-	}, 100000);
+	   }
+	}, 1000);
 	$scope.iresearch = $interval(function(){
-		$http.get('/i/information/addInformationWithIresearch').success(function (data) {
+		 var date=new Date();
+	     var h=date.getHours();
+	     var m=date.getMinutes();
+	     var s=date.getSeconds();
+	     if(h==23&&m==54&&s==0){
+		 $http.get('/i/information/addInformationWithIresearch').success(function (data) {
 	    });
-	}, 200000);
+	    }
+	}, 1000);
 	$scope.yiouKeJi = $interval(function(){
+		 var date=new Date();
+	     var h=date.getHours();
+	     var m=date.getMinutes();
+	     var s=date.getSeconds();
+	     if(h==23&&m==57&&s==0){
 		$http.get('/i/information/addInformationWithYiouKeJi').success(function (data) {
 	    });
-	}, 300000);
+	     }
+	}, 1000);
 	$scope.yiouWenChuang = $interval(function(){
+		 var date=new Date();
+	     var h=date.getHours();
+	     var m=date.getMinutes();
+	     var s=date.getSeconds();
+	     if(h==23&&m==48&&s==0){
 		$http.get('/i/information/addInformationWithYiouWenChuang').success(function (data) {
 	    });
-	}, 400000);
+	     }
+	}, 1000);
 	$scope.cXiaoYuanPsy = $interval(function(){
-		$http.get('/i/information/addInformationWithCXiaoYuanPsy').success(function (data) {
+		 var date=new Date();
+	     var h=date.getHours();
+	     var m=date.getMinutes();
+	     var s=date.getSeconds();
+	     if(h==23&&m==51&&s==0){
+		  $http.get('/i/information/addInformationWithCXiaoYuanPsy').success(function (data) {
 	    });
-	}, 500000);
+	    }
+	}, 1000);
 	// 显示最大页数
     $scope.maxSize = 10;
     // 总条目数(默认每页十条)
