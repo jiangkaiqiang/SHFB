@@ -1,10 +1,5 @@
 package com.wls.manage.crawler.chinanews.entertainment;
 
-import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Logger;
-
 import com.wls.manage.dto.NewInfomationDto;
 
 /**
@@ -25,7 +20,7 @@ public class PageCrawJob_chinaenter {
 
     public static void main(String args[]){
     	NewInfomationDto ni = new NewInfomationDto();
-    	ni.setHref("http://campus.univs.cn/xl/2016/1214/1151626.shtml");
+    	ni.setHref("http://www.chinanews.com/yl/2017/01-11/8120924.shtml");
     	new PageCrawJob_chinaenter().pageCraw(ni);
 //        System.out.println(new PageCrawJob_cyb().pageCraw("http://www.cyzone.cn/a/20161230/307006.html"));
     }

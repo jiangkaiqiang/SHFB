@@ -20,7 +20,8 @@ public class PageParseJob_chinaenter {
     public  void parse(NewInfomationDto ni){
         String content = "";
         try {
-            content= BasicCrawler.crawlPage(ni.getHref(),"utf-8");
+            content= BasicCrawler.crawlPage(ni.getHref(),"gb2312");
+//            System.out.println(content);
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -29,28 +30,18 @@ public class PageParseJob_chinaenter {
     }
 
     private  void parseNews(Document doc,NewInfomationDto ni) {
-    	Element source  = doc.select("div[class=e-op] span[class=orgin]").first();
-//    	Element editorElement = doc.select("div[class=e-op] span[class=editor]").first();
-        Element desc = doc.select("div[class=bd-con]").first();
-        Element dateElement = doc.select("div[class=e-op] span[class=time]").first();
-        if(desc!=null){
-        	ni.setContent(desc.toString());
-        }
-        if(source != null){
-        	ni.setSource(source.text());
-        }
-        if(dateElement != null){
-        	SimpleDateFormat sdf=new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss");
-        	try {
-				Date date=sdf.parse(dateElement.text());
-				ni.setTime(date);
-//					System.out.println(date);
-			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-        
-        }
+    	Element content  = doc.select("div[class=left_zw]").first();
+    	Element source  = doc.select("div[class=left-t]").first();
+    	ni.setContent(content.toString());
+    	String compound = source.text().replaceAll("参与互动", "");
+    	int index = compound.indexOf("来源：");
+    	String sourceString="";
+    	if (index>=0) {
+    		sourceString = compound.substring(index+"来源：".length());
+		}
+//    	System.out.println(sourceString);
+//    	System.out.println(sourceString);
+    	ni.setSource(sourceString);
     }
 
 

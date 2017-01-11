@@ -1,6 +1,8 @@
 package com.wls.manage.crawler.chinanews.entertainment;
 
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -38,35 +40,29 @@ public class ListCrawlJob_chinaenter {
     private  void processListType(Document doc, String linkUrl){
         Elements tables=doc.select("div[class=con2] table[class=12v]");
         for (Element element : tables) {
-        	Element timeElement = element.select("tbody tr td[align=right]").first();
-        	Element href = element.select("tbody tr td[class] a[href]").first();
+        	Element hrefElement = element.select("tbody tr td[class] a[href]").first();
         	Element imgElement = element.select("tbody tr td[rowspan] img[src]").first();
         	Element dateElement = element.select("tbody tr td[align=right]").first();
 //        	 System.out.println(timeElement.text());
-        	System.out.println(href.attr("href").replaceAll("\n", "").trim());
-        	System.out.println(href.text().replaceAll("\n", "").trim());
+        	String href=hrefElement.attr("href").replaceAll("\n", "").trim();
+        	String title=hrefElement.text().replaceAll("\n", "").trim();
+//        	System.out.println(dateElement.text());
+        	String imgString="";
         	if(imgElement!=null){
-        		System.out.println("------------>:"+imgElement.attr("src"));
+        		imgString=imgElement.attr("src");
         	}
+        	
+        	
+        	SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        	try {
+				Date date=sdf.parse(dateElement.text());
+				an.add(new NewInfomationDto("", imgString, date, title, href));
+//				System.out.println(date);
+//					System.out.println(date);
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
-        
-        
-       
-//        System.out.println(href.attr("href"));
-//        System.out.println(href.text());
-//        if(img!=null){
-//        	 System.out.println(img);
-//        }
-        
-        
-       
-        //        for (Element ele:eles){
-//        	System.out.println(ele);
-////        	Element href = ele.select("h3 a[href]").first();
-//////        	System.out.println(href.attr("href"));
-//////        	System.out.println(href.text());
-////        	Element img = ele.select("dl[class=item-info] img[src]").first();
-////        	an.add(new NewInfomationDto("", img.attr("src"), href.text(), href.attr("href"), ""));
-//        }
     }
 }

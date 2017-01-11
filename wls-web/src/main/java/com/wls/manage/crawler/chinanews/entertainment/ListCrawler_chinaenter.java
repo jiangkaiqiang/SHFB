@@ -18,20 +18,19 @@ public class ListCrawler_chinaenter {
     private static Logger logger = Logger.getLogger(ListCrawler_chinaenter.class.getName());
     public ListCrawlJob_chinaenter lj;
     public List<NewInfomationDto> parse() throws ParseException {
-    	 logger.info("Start Crawl Pages on 中国大学生在线");   
+    	 logger.info("Start Crawl Pages on 中国新闻网");   
          ListCrawlJob_chinaenter crawler =new ListCrawlJob_chinaenter();
          crawler.getUrlList("http://channel.chinanews.com/cns/cl/yl-mxnd.shtml?pager=0");
-//         for(NewInfomationDto ni:crawler.an){
-//             new PageCrawJob_chinaenter().pageCraw(ni);
-//         }
-         
+         for(NewInfomationDto ni:crawler.an){
+             new PageCrawJob_chinaenter().pageCraw(ni);
+         }  
          return crawler.an;
 	}
     
     public static void main(String[] args) throws ParseException {
     	List<NewInfomationDto> an =new ListCrawler_chinaenter().parse();
-//    	for(NewInfomationDto ni:an){
-//    		System.out.println(ni.getSource());
-//    	}
+    	for(NewInfomationDto ni:an){
+    		System.out.println(ni.getSource()+":"+ni.getTitle());
+    	}
 	}
 }
