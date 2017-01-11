@@ -41,9 +41,9 @@ public class PageParseJob_iresearch {
 		}
     	
     	if(ls.size()==3){
-    		ni.setSource(ls.get(0)+"\t"+ls.get(1));
+    		ni.setSource(ls.get(0).replaceAll("来源：", "")+"\t"+ls.get(1).replaceAll("作者：", ""));
     	}else{
-    		ni.setSource(ls.get(0));
+    		ni.setSource(ls.get(0).replaceAll("来源：", ""));
     	}   	
     	Element contentElement = doc.select("div[class=m-article]").first();
     	ni.setContent(contentElement.toString());

@@ -36,13 +36,27 @@ public class ListCrawlJob_chinaenter {
     }
 
     private  void processListType(Document doc, String linkUrl){
-        Element img=doc.select("div[class=con2] table[class=12v] tbody tr td a[href] img[src]").first();
-        Element href=doc.select("div[class=con2] table[class=12v] tbody tr td a[href]").first();
+        Elements tables=doc.select("div[class=con2] table[class=12v]");
+        for (Element element : tables) {
+        	Element timeElement = element.select("tbody tr td[align=right]").first();
+        	Element href = element.select("tbody tr td[class] a[href]").first();
+        	Element imgElement = element.select("tbody tr td[rowspan] img[src]").first();
+        	Element dateElement = element.select("tbody tr td[align=right]").first();
+//        	 System.out.println(timeElement.text());
+        	System.out.println(href.attr("href").replaceAll("\n", "").trim());
+        	System.out.println(href.text().replaceAll("\n", "").trim());
+        	if(imgElement!=null){
+        		System.out.println("------------>:"+imgElement.attr("src"));
+        	}
+		}
+        
+        
+       
 //        System.out.println(href.attr("href"));
 //        System.out.println(href.text());
-        if(img!=null){
-        	 System.out.println(img);
-        }
+//        if(img!=null){
+//        	 System.out.println(img);
+//        }
         
         
        
