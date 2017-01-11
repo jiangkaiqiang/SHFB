@@ -37,7 +37,7 @@ public class PageParseJob_stuonline {
         	ni.setContent(desc.toString());
         }
         if(source != null){
-        	ni.setSource(source.text());
+        	ni.setSource(source.text().replaceAll("来源：", ""));
         }
         if(dateElement != null){
         	SimpleDateFormat sdf=new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss");
