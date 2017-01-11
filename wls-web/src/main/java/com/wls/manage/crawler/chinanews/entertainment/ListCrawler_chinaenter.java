@@ -30,7 +30,7 @@ public class ListCrawler_chinaenter {
     public static void main(String[] args) throws ParseException {
     	List<NewInfomationDto> an =new ListCrawler_chinaenter().parse();
     	for(NewInfomationDto ni:an){
-    		System.out.println(ni.getSource()+":"+ni.getTitle());
+    		System.out.println(ni.getSource()+":"+ni.getTime());
     	}
 	}
 }

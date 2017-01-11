@@ -15,7 +15,7 @@ import java.util.Date;
 /**
  * Created by haolidong on 2016/11/14.
  */
-public class PageParseJob_chinaenter {
+public class PageParseJob_txscitec {
 
     public  void parse(NewInfomationDto ni){
         String content = "";
@@ -30,18 +30,22 @@ public class PageParseJob_chinaenter {
     }
 
     private  void parseNews(Document doc,NewInfomationDto ni) {
-    	Element content  = doc.select("div[class=left_zw]").first();
-    	Element source  = doc.select("div[class=left-t]").first();
-    	ni.setContent(content.toString());
-    	String compound = source.text().replaceAll("参与互动", "");
-    	int index = compound.indexOf("来源：");
-    	String sourceString="";
-    	if (index>=0) {
-    		sourceString = compound.substring(index+"来源：".length());
-		}
-//    	System.out.println(sourceString);
-//    	System.out.println(sourceString);
-    	ni.setSource(sourceString);
+    	Element source  = doc.select("div[class=a_Info] span[class=a_source]").first();
+    	Element time  = doc.select("div[class=a_Info] span[class=a_time]").first();
+    	Element content  = doc.select("div[class=Cnt-Main-Article-QQ]").first();
+    	if(content!=null){
+//	    	System.out.println(ni.getTitle());
+	    	ni.setContent(content.toString());
+	    	ni.setSource(source.text());
+	    	SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
+	    	try {
+				Date date=sdf.parse(time.text());
+				ni.setTime(date);
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+    	}
+    	
     }
 
 
