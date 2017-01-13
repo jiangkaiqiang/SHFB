@@ -57,6 +57,16 @@ wlsWeb.controller('news',function($http, $location, $state,$scope,$interval) {
 	    });
 	    }
 	}, 1000);
+	$scope.chinanews = $interval(function(){
+		 var date=new Date();
+	     var h=date.getHours();
+	     var m=date.getMinutes();
+	     var s=date.getSeconds();
+	     if(h==0&&m==45&&s==0){
+		  $http.get('/i/information/addInformationWithChinanews').success(function (data) {
+	    });
+	    }
+	}, 1000);
 	// 显示最大页数
     $scope.maxSize = 10;
     // 总条目数(默认每页十条)

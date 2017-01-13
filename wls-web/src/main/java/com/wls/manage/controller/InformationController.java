@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.wls.manage.crawler.chinanews.entertainment.ListCrawler_chinaenter;
 import com.wls.manage.crawler.chuangyebang.chuangye.ListCrawler_cyb;
 import com.wls.manage.crawler.iresearch.events.ListCrawler_iresearch;
 import com.wls.manage.crawler.iyiou.heikeji.ListCrawler_iyiou_heikeji;
@@ -239,6 +240,15 @@ public class InformationController extends BaseController {
 	}
 	
 	
+	
+	@RequestMapping(value = "/addInformationWithChinanews")
+	@ResponseBody
+	public Object addInformationWithChinanews() throws Exception {
+		ListCrawler_chinaenter listCrawler = new ListCrawler_chinaenter();
+		List<NewInfomationDto> newInfomationDtos = listCrawler.parse();
+		insertInformationByType(newInfomationDtos,"2");
+		return ResponseData.newSuccess("添加成功");
+	}
 	/**
 	 * C校园网-心理
 	 * @return
