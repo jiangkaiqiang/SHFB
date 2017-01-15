@@ -12,7 +12,7 @@ wlsWeb.controller('news',function($http, $location, $state,$scope,$interval) {
 	     var h=date.getHours();
 	     var m=date.getMinutes();
 	     var s=date.getSeconds();
-	     if(h==0&&m==30&&s==0){
+	     if(h==12&&m==20&&s==0){
 		   $http.get('/i/information/addInformationWithChuangyebang').success(function (data) {
 	    });
 	   }
@@ -22,7 +22,7 @@ wlsWeb.controller('news',function($http, $location, $state,$scope,$interval) {
 	     var h=date.getHours();
 	     var m=date.getMinutes();
 	     var s=date.getSeconds();
-	     if(h==0&&m==33&&s==0){
+	     if(h==12&&m==23&&s==0){
 		 $http.get('/i/information/addInformationWithIresearch').success(function (data) {
 	    });
 	    }
@@ -32,7 +32,7 @@ wlsWeb.controller('news',function($http, $location, $state,$scope,$interval) {
 	     var h=date.getHours();
 	     var m=date.getMinutes();
 	     var s=date.getSeconds();
-	     if(h==0&&m==36&&s==0){
+	     if(h==12&&m==26&&s==0){
 		$http.get('/i/information/addInformationWithYiouKeJi').success(function (data) {
 	    });
 	     }
@@ -42,7 +42,7 @@ wlsWeb.controller('news',function($http, $location, $state,$scope,$interval) {
 	     var h=date.getHours();
 	     var m=date.getMinutes();
 	     var s=date.getSeconds();
-	     if(h==0&&m==39&&s==0){
+	     if(h==12&&m==29&&s==0){
 		$http.get('/i/information/addInformationWithYiouWenChuang').success(function (data) {
 	    });
 	     }
@@ -52,7 +52,7 @@ wlsWeb.controller('news',function($http, $location, $state,$scope,$interval) {
 	     var h=date.getHours();
 	     var m=date.getMinutes();
 	     var s=date.getSeconds();
-	     if(h==0&&m==42&&s==0){
+	     if(h==12&&m==32&&s==0){
 		  $http.get('/i/information/addInformationWithCXiaoYuanPsy').success(function (data) {
 	    });
 	    }
@@ -62,7 +62,7 @@ wlsWeb.controller('news',function($http, $location, $state,$scope,$interval) {
 	     var h=date.getHours();
 	     var m=date.getMinutes();
 	     var s=date.getSeconds();
-	     if(h==0&&m==45&&s==0){
+	     if(h==12&&m==35&&s==0){
 		  $http.get('/i/information/addInformationWithChinanews').success(function (data) {
 	    });
 	    }

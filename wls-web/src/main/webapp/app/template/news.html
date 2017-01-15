@@ -67,7 +67,7 @@
               <div class="col-md-12 col-sm-12">
               <div class="sidebar-news clearfix" ng-repeat="newdto in AllNews">
               <div class="item" ng-if="newdto.coverpicnum<=1">
-                <a  ng-repeat="coverpic in newdto.coverpiclist"><img ng-src="{{coverpic}}" alt=""></a>
+                <a ng-if="newdto.coverpiclist!=''&&newdto.coverpiclist!=undefined"  ng-repeat="coverpic in newdto.coverpiclist"><img ng-src="{{coverpic}}" alt=""></a>
                 <h3><a ng-click="goNewsInfo(newdto.id)">{{newdto.title}}</a></h3>
                 <div class="news-info">
                 <div class="news-block-tags">
