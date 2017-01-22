@@ -1,11 +1,4 @@
 wlsWeb.controller('news',function($http, $location, $state,$scope,$interval) {
-	 /*var date=new Date();
-     var h=date.getHours();
-     var m=date.getMinutes();
-     var s=date.getSeconds();
-     if(h==12&&m==0&&s==0){
-          callFunction();
-     }*/
 	$scope.defaultCoverPic = "../../assets/img/portfolio/"+Math.round(Math.random()*9+1)+".jpg";
 	//定时任务插入爬取数据到数据库
 	$scope.chuangyebang = $interval(function(){
@@ -65,6 +58,16 @@ wlsWeb.controller('news',function($http, $location, $state,$scope,$interval) {
 	     var s=date.getSeconds();
 	     if(h==12&&m==35&&s==0){
 		  $http.get('/i/information/addInformationWithChinanews').success(function (data) {
+	    });
+	    }
+	}, 1000);
+	$scope.tengxunTech = $interval(function(){
+		 var date=new Date();
+	     var h=date.getHours();
+	     var m=date.getMinutes();
+	     var s=date.getSeconds();
+	     if(h==19&&m==45&&s==0){
+		  $http.get('/i/information/addInformationWithTengxunTech').success(function (data) {
 	    });
 	    }
 	}, 1000);

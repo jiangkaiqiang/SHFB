@@ -24,6 +24,7 @@ import com.wls.manage.crawler.iresearch.events.ListCrawler_iresearch;
 import com.wls.manage.crawler.iyiou.heikeji.ListCrawler_iyiou_heikeji;
 import com.wls.manage.crawler.iyiou.wenchuang.ListCrawler_iyiou_wenchuang;
 import com.wls.manage.crawler.studentonline.psychology.ListCrawler_stuonline;
+import com.wls.manage.crawler.tengxun.scitech.ListCrawler_txscitec;
 import com.wls.manage.dao.CommentMapper;
 import com.wls.manage.dao.InforCategoryMapper;
 import com.wls.manage.dao.InformationMapper;
@@ -244,8 +245,24 @@ public class InformationController extends BaseController {
 		}
 	}
 	
-	
-	
+	/**
+	 * 腾讯新闻科技类
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/addInformationWithTengxunTech")
+	@ResponseBody
+	public Object addInformationWithTengxunTech() throws Exception {
+		ListCrawler_txscitec listCrawler = new ListCrawler_txscitec();
+		List<NewInfomationDto> newInfomationDtos = listCrawler.parse();
+		insertInformationByType(newInfomationDtos,"1");
+		return ResponseData.newSuccess("添加成功");
+	}
+	/**
+	 * 中国新闻网
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping(value = "/addInformationWithChinanews")
 	@ResponseBody
 	public Object addInformationWithChinanews() throws Exception {
