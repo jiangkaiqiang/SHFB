@@ -40,7 +40,7 @@
     <div class="container"> 
      <div class="container-inner"> 
       <em> 
-      <a data-toggle="modal" href="#edit_img">
+      <a data-toggle="modal" id="btn_edit_img">
       <img ng-if="user.avatar!=null&&user.avatar!=undefined" src="{{user.avatar}}" alt="头像" title="点击修改头像" />
       </a> 
       <p>{{user.nickname}} <span ng-if="user.sex=='男'"><i class="fa fa-male"></i></span> <span ng-if="user.sex=='女'"><i class="fa fa-female"></i></span> 
@@ -62,7 +62,8 @@
         <li><a href="#tab-2" data-toggle="tab">作品</a></li> 
         <li><a href="#tab-3" data-toggle="tab">简历</a></li> 
         <li><a href="#tab-4" data-toggle="tab">关注</a></li> 
-        <li><a href="#tab-5" data-toggle="tab">消息</a></li> 
+        <li><a href="#tab-5" data-toggle="tab">消息
+            <span class="badge badge-danger">{{messageNum}} </span></a></li>
        </ul> 
        <div id="myTabContent" class="tab-content"> 
         <div class="tab-pane fade row in active" id="tab-1"> 
@@ -421,7 +422,7 @@
               <div class="row"> 
                <div class="resume-basic col-md-12 margin-bottom-20"> 
                 <div class="col-md-3"> 
-                 <a data-toggle="modal" href="#edit_photo" class="resume-basic-img">
+                 <a data-toggle="modal" id="btn_edit_photo" class="resume-basic-img">
                    <img src="{{user.photo}}" class="photo" title="点击上传照片" />
                    <div class="layer"><i class="fa fa-edit"></i></div>
                  </a> 
@@ -925,46 +926,6 @@
     <!-- /.modal-dialog --> 
    </div> 
    <!-- /.modal --> 
-   <!--attention_me--> 
-   <div class="modal fade" id="attention_me" tabindex="-1" role="basic" aria-hidden="true"> 
-    <div class="modal-dialog"> 
-     <div class="modal-content"> 
-      <div class="modal-header"> 
-       <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button> 
-       <h4 class="modal-title">关注成功</h4> 
-      </div> 
-      <div class="modal-body"> 
-       <i class="fa fa-check-circle-o" style="color:green; font-size:20px;padding:5px;"></i> 关注成功！ 
-      </div> 
-      <div class="modal-footer"> 
-       <button type="button" class="btn default" data-dismiss="modal">关闭</button> 
-      </div> 
-     </div> 
-     <!-- /.modal-content --> 
-    </div> 
-    <!-- /.modal-dialog --> 
-   </div> 
-   <!-- /.modal --> 
-   <!--unattention_me--> 
-   <div class="modal fade" id="unattention_me" tabindex="-1" role="basic" aria-hidden="true"> 
-    <div class="modal-dialog"> 
-     <div class="modal-content"> 
-      <div class="modal-header"> 
-       <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button> 
-       <h4 class="modal-title">取消关注</h4> 
-      </div> 
-      <div class="modal-body"> 
-       <i class="fa fa-check-circle-o" style="color:green; font-size:20px;padding:5px;"></i> 已取消关注！ 
-      </div> 
-      <div class="modal-footer"> 
-       <button type="button" class="btn default" data-dismiss="modal">关闭</button> 
-      </div> 
-     </div> 
-     <!-- /.modal-content --> 
-    </div> 
-    <!-- /.modal-dialog --> 
-   </div> 
-   <!-- /.modal --> 
    <!--quick_reply_alter--> 
    <div class="modal fade" id="quick_reply_alter" tabindex="-1" role="basic" aria-hidden="true"> 
     <div class="modal-dialog"> 
@@ -1005,44 +966,5 @@
     <!-- /.modal-dialog --> 
    </div>
   <!-- /.modal -->   
-
-  <!--send_message--> 
-  <!-- <div class="send-message" style="display:none;" id="send-message"> 
-   <div class="col-md-12 padding-top-10 message-title"> 
-    <div class="col-md-11 no-padding">
-      呵呵呵 
-    </div> 
-    <div class="col-md-1 no-padding"> 
-     <a class="pull-right" id="colse_message"> &times; </a> 
-    </div> 
-   </div> 
-   <div class="col-md-12 padding-top-10 message-body"> 
-    <div class="col-md-2 no-padding"> 
-     <a href="" class="pull-left"><img alt="" src="../../assets/img/people/2.jpg" width="35px" /></a> 
-    </div> 
-    <div class="col-md-10 no-padding"> 
-     <span class="left-span"></span> 
-     <p class="left-p pull-left">你好！！！</p> 
-    </div> 
-    <div class="col-md-12 padding-top-10 message-body"> 
-     <div class="col-md-10 no-padding"> 
-      <span class="right-span"></span> 
-      <p class="right-p pull-right">你好！！！ </p> 
-     </div> 
-     <div class="col-md-2 no-padding"> 
-      <a href="" class="pull-right"><img alt="" src="../../assets/img/people/1.jpg" width="35px" /></a> 
-     </div> 
-    </div> 
-   </div> 
-   <div class="col-md-12 padding-top-10 message-footer"> 
-    <div class="col-md-2 no-padding"> 
-     <a href=""><img alt="" src="../../assets/img/people/1.jpg" width="35px" /></a> 
-    </div> 
-    <div class="col-md-10 form-group input-group no-padding"> 
-     <input type="text" class="form-control" /> 
-     <span class="input-group-btn"> <button class="btn btn-primary" type="button">发送</button> </span> 
-    </div> 
-   </div> 
-  </div>  -->
  </div> 
  </body>

@@ -6,6 +6,7 @@ wlsWeb.controller('news',function($http, $location, $state,$scope,$interval) {
      if(h==12&&m==0&&s==0){
           callFunction();
      }*/
+	$scope.defaultCoverPic = "../../assets/img/portfolio/"+Math.round(Math.random()*9+1)+".jpg";
 	//定时任务插入爬取数据到数据库
 	$scope.chuangyebang = $interval(function(){
 		 var date=new Date();

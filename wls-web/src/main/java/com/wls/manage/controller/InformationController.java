@@ -126,13 +126,18 @@ public class InformationController extends BaseController {
 			default:
 				break;
 			}
-			String[] inforCovers = informationEntity.getCoverpiclist().split(";");
-			List<String> infList = new ArrayList<String>();
-			for (String infor : inforCovers) {
-				infList.add(infor);
+			if (!informationEntity.getCoverpiclist().equals("")) {
+				String[] inforCovers = informationEntity.getCoverpiclist().split(";");
+				List<String> infList = new ArrayList<String>();
+				for (String infor : inforCovers) {
+					infList.add(infor);
+				}
+				informationDto.setCoverpiclist(infList);
+				informationDto.setCoverpicnum(infList.size());
 			}
-			informationDto.setCoverpiclist(infList);
-			informationDto.setCoverpicnum(infList.size());
+			else {
+				informationDto.setCoverpicnum(0);
+			}
 			List<CommentEntity> commentEntities = commentMapper.findCommentsByCommentId(informationEntity.getId().intValue(), 0);
 			List<CommentDto> commentDtos = new ArrayList<CommentDto>();
 		    if (commentEntities!=null&&!commentEntities.isEmpty()) {

@@ -22,7 +22,7 @@
    <div class="title-wrapper-company"> 
     <div class="container"> 
      <div class="container-inner"> 
-      <em> <a data-toggle="modal" href="#edit_logo" title="修改LOGO"><img src="{{user.avatar}}" alt="头像" title="点击修改头像" /></a> 
+      <em> <a data-toggle="modal" id="btn_edit_logo_com" title="修改LOGO"><img src="{{user.avatar}}" alt="头像" title="点击修改头像" /></a> 
       <p>{{user.username}} <span ng-if="user.sex=='男'"><i class="fa fa-male"></i></span> <span ng-if="user.sex=='女'"><i class="fa fa-female"></i></span> 
       <span class="badge bg-yellow-casablanca">Lv {{level}}</span></p>
        <p ng-if="user.signature!=undefined" style="font-size:14px">{{user.signature}}</p> 
@@ -41,7 +41,8 @@
        <ul id="myTab" class="nav nav-tabs"> 
         <li class="active"><a href="#tab-1" data-toggle="tab">基本资料</a></li> 
         <li><a href="#tab-2" data-toggle="tab">关注</a></li> 
-        <li><a href="#tab-3" data-toggle="tab">消息</a></li> 
+        <li><a href="#tab-3" data-toggle="tab">消息
+        <span class="badge badge-danger">{{messageNum}} </span></a></li> 
        </ul> 
        <div id="myTabContent" class="tab-content"> 
         <div class="tab-pane fade row in active" id="tab-1"> 
@@ -62,10 +63,10 @@
             <div class="col-md-5"> 
              <div class="business-card col-md-12" id="card_body"> 
               <div class="business-card-line col-md-4"> 
-               <a data-toggle="modal" href="#edit_img" ng-if="user.photo==null||user.photo==undefined" title="点击修改logo" >
+               <a data-toggle="modal" id="btn_edit_img_com" ng-if="user.photo==null||user.photo==undefined" title="点击修改logo" >
                 <img src="../../assets/img/logo/logo.png" /> 
                  </a> 
-               <a data-toggle="modal" href="#edit_img" ng-if="user.photo!=null&&user.photo!=undefined" title="点击修改logo" >
+               <a data-toggle="modal" id="btn_edit_img_com" ng-if="user.photo!=null&&user.photo!=undefined" title="点击修改logo" >
                 <img src="{{user.photo}}" /> </a> 
               </div> 
               <div class="business-card-body col-md-8"> 
@@ -200,7 +201,7 @@
        </div> 
       </div> 
       <!--edit_img--> 
-   <div class="modal fade" id="edit_logo" tabindex="-1" role="basic" aria-hidden="true"> 
+   <div class="modal fade" id="edit_logo_com" tabindex="-1" role="basic" aria-hidden="true"> 
     <div class="modal-dialog"> 
      <div class="modal-content"> 
       <div class="modal-header"> 
@@ -237,7 +238,7 @@
     </div> 
    </div> 
    <!--edit_img--> 
-   <div class="modal fade" id="edit_img" tabindex="-1" role="basic" aria-hidden="true"> 
+   <div class="modal fade" id="edit_img_com" tabindex="-1" role="basic" aria-hidden="true"> 
     <div class="modal-dialog"> 
      <div class="modal-content"> 
       <div class="modal-header"> 
@@ -270,83 +271,5 @@
    </div> 
    <!-- /.modal --> 
    <!--attention_me--> 
-   <div class="modal fade" id="attention_me" tabindex="-1" role="basic" aria-hidden="true"> 
-    <div class="modal-dialog"> 
-     <div class="modal-content"> 
-      <div class="modal-header"> 
-       <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button> 
-       <h4 class="modal-title">关注成功</h4> 
-      </div> 
-      <div class="modal-body"> 
-       <i class="fa fa-check-circle-o" style="color:green; font-size:20px;padding:5px;"></i> 关注成功！ 
-      </div> 
-      <div class="modal-footer"> 
-       <button type="button" class="btn default" data-dismiss="modal">关闭</button> 
-      </div> 
-     </div> 
-     <!-- /.modal-content --> 
-    </div> 
-    <!-- /.modal-dialog --> 
-   </div> 
-   <!-- /.modal --> 
-   <!--save_card_alter--> 
-  <!--  <div class="modal fade" id="save_card_alter" tabindex="-1" role="basic" aria-hidden="true"> 
-    <div class="modal-dialog"> 
-     <div class="modal-content"> 
-      <div class="modal-header"> 
-       <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button> 
-       <h4 class="modal-title">保存成功</h4> 
-      </div> 
-      <div class="modal-body"> 
-       <i class="fa fa-check-circle-o" style="color:green; font-size:20px;padding:5px;"></i> 名片保存成功！ 
-      </div> 
-      <div class="modal-footer"> 
-       <button type="button" class="btn default" data-dismiss="modal">关闭</button> 
-      </div> 
-     </div> 
-     /.modal-content 
-    </div> 
-    /.modal-dialog 
-   </div>  -->
-   <!-- /.modal --> 
-  </div> 
-  <!--send_message--> 
- <!--  <div class="send-message" style="display:none;" id="send-message"> 
-   <div class="col-md-12 padding-top-10 message-title"> 
-    <div class="col-md-11 no-padding">
-      呵呵呵 
-    </div> 
-    <div class="col-md-1 no-padding"> 
-     <a class="pull-right" id="colse_message"> &times; </a> 
-    </div> 
-   </div> 
-   <div class="col-md-12 padding-top-10 message-body"> 
-    <div class="col-md-2 no-padding"> 
-     <a href="" class="pull-left"><img alt="" src="../../assets/img/people/2.jpg" width="35px" /></a> 
-    </div> 
-    <div class="col-md-10 no-padding"> 
-     <span class="left-span"></span> 
-     <p class="left-p pull-left">你好！！！</p> 
-    </div> 
-    <div class="col-md-12 padding-top-10 message-body"> 
-     <div class="col-md-10 no-padding"> 
-      <span class="right-span"></span> 
-      <p class="right-p pull-right">你好！！！ </p> 
-     </div> 
-     <div class="col-md-2 no-padding"> 
-      <a href="" class="pull-right"><img alt="" src="../../assets/img/people/1.jpg" width="35px" /></a> 
-     </div> 
-    </div> 
-   </div> 
-   <div class="col-md-12 padding-top-10 message-footer"> 
-    <div class="col-md-2 no-padding"> 
-     <a href=""><img alt="" src="../../assets/img/people/1.jpg" width="35px" /></a> 
-    </div> 
-    <div class="col-md-10 form-group input-group no-padding"> 
-     <input type="text" class="form-control" /> 
-     <span class="input-group-btn"> <button class="btn btn-primary" type="button">发送</button> </span> 
-    </div> 
-   </div> 
-  </div>  -->
   <!-- Global js END -->  
  </body>

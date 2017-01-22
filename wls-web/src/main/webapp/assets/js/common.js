@@ -230,7 +230,19 @@ var handleActions = function(){
     .on('click', '#save_card_btn', function(e) {
         $("#save_card_alter").modal("show");
     })
-}
+    .on('click', '#btn_edit_logo_com', function(e) {
+        $("#edit_logo_com").modal("show");
+    })
+    .on('click', '#btn_edit_img_com', function(e) {
+        $("#edit_img_com").modal("show");
+    })
+    .on('click', '#btn_edit_img', function(e) {
+        $("#edit_img").modal("show");
+    })
+    .on('click', '#btn_edit_photo', function(e) {
+        $("#edit_photo").modal("show");
+    });
+};
 
 return {
 
