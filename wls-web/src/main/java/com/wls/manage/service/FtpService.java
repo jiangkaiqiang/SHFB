@@ -20,7 +20,9 @@ public interface FtpService {
 
 	public final static int READPORT = 8089;
 	
-	public final static String READ_URL = "ftp://pwftp:!@QWaszx0o@filestorage-weilanshu.xyz/";
+	//public final static String READ_URL = "ftp://pwftp:!@QWaszx0o@filestorage-weilanshu.xyz/";
+	
+	public final static String READ_URL = "http://42.121.130.177:8080/";
 	
 	//public final static String READ_URL = "http://139.196.189.93:8089/";
 	
