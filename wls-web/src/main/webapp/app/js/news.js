@@ -1,5 +1,5 @@
 wlsWeb.controller('news',function($http, $location, $state,$scope,$interval) {
-	$scope.defaultCoverPic = "../../assets/img/portfolio/"+Math.round(Math.random()*9+1)+".jpg";
+	$scope.defaultCoverPic = "../../assets/img/portfolio/1.jpg";
 	//定时任务插入爬取数据到数据库
 	$scope.chuangyebang = $interval(function(){
 		 var date=new Date();

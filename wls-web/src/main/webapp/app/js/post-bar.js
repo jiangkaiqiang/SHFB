@@ -17,6 +17,15 @@ wlsWeb.controller('post-bar',function($http, $state,$rootScope, $stateParams,$lo
 	                      {id:"4",name:"财经类"},
 	                      {id:"5",name:"创业类"}
 	];
+    $scope.goPostMessage = function() {
+    	if($rootScope.user!=null&&$rootScope.user.id!=undefined){
+    		window.location.href="#/post-message";
+    	}
+    	else{
+    		alert("请先登录");
+    		window.location.href="#/login";
+    	}  
+	};
 	 // 获取当前geek的列表
     $scope.getPublishs = function() {
     	var userID = 0;

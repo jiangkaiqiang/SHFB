@@ -4,8 +4,8 @@
  <link href="../../assets/css/bootstrap-select.css" rel="stylesheet">
  <link href="../../assets/css/bootstrap.min.css" rel="stylesheet">
  <link href="../../assets/js/bootstrap.min.js" rel="stylesheet"> -->
- <!--  <link rel="stylesheet" type="text/css" href="../../bower_components/angular-multi-select-master/isteven-multi-select.css" />
-  <script src="../../bower_components/angular-multi-select-master/isteven-multi-select.js"></script>  -->
+ <!-- <link rel="stylesheet" type="text/css" href="../../bower_components/angular-multi-select-master/isteven-multi-select.css" />
+  <script src="../../bower_components/angular-multi-select-master/isteven-multi-select.js"></script>   -->
  <body class="menu-always-on-top" > 
   <!--BEGIN--> 
   <div class="weilanshu" id="base_content_container"> 
@@ -32,17 +32,16 @@
         <div class="content-search margin-bottom-20"> 
          <div class="row"> 
            <div class="col-md-8"> 
-           <!--  <div class="form-group">
-           <div isteven-multi-select selection-mode="single" input-model="provinces" 
+           <!-- <div isteven-multi-select selection-mode="single" input-model="provinces" 
             output-model="curprovince" button-label="pr_province" item-label="pr_province"
+            helper-elements="filter"
             tick-property="isOn"  max-height="200px" 
-            on-item-click="provinceSelected(provinceid)" class="form-group"></div>
-            </div>  -->
+            on-item-click="provinceSelected(curprovince)" class="form-group"></div> -->
                <select id=""  style="height:35px; width:150px"
                ng-model="provinceid" ng-disabled="editable"
                                      ng-change="provinceSelected(provinceid)"
                                      ng-options="x.pr_id as x.pr_province for x in provinces">
-                                    </select> 
+                                    </select>  
               <select id="" style="height:35px; width:150px" ng-model="cityid"
                                     ng-disabled="editable" ng-change="citySelected(cityid)"
                                     ng-options="x.ci_id as x.ci_city for x in citys"></select>

@@ -77,7 +77,7 @@ wlsWeb.controller('geek',function($http, $location,$rootScope, $scope,$state, $s
     	$scope.provinces.push(pro);
     	$scope.provinces = sortJson($scope.provinces,"pr_id");
         $scope.provinceid = -1;
-       /* $scope.curprovince = data[0];
+      /*  $scope.curprovince = data[0];
         $scope.provinces[0].isOn = true;*/
     });
 
