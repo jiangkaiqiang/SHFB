@@ -87,11 +87,11 @@
              </div> 
              <div class="business-card col-md-12" id="edit_card_body" style="display:none"> 
               <div class="business-card-line col-md-4"> 
-               <a  ng-if="user.photo==null||user.photo==undefined" data-toggle="modal" href="#edit_img"  class="business-card-img" title="点击修改logo"> 
+               <a  ng-if="user.photo==null||user.photo==undefined" data-toggle="modal" id="btn_edit_img_com"  class="business-card-img" title="点击修改logo"> 
                  <img src="../../assets/img/logo/logo.png" /> 
                  <div class="layer"><i class="fa fa-edit"></i></div>
                </a> 
-               <a  ng-if="user.photo!=null&&user.photo!=undefined" data-toggle="modal" href="#edit_img"  class="business-card-img" title="点击修改logo"> 
+               <a  ng-if="user.photo!=null&&user.photo!=undefined" data-toggle="modal" id="btn_edit_img_com"  class="business-card-img" title="点击修改logo"> 
                  <img src="{{user.photo}}" /> 
                  <div class="layer"><i class="fa fa-edit"></i></div>
                </a> 
@@ -243,7 +243,7 @@
      <div class="modal-content"> 
       <div class="modal-header"> 
        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button> 
-       <h4 class="modal-title">修改头像</h4> 
+       <h4 class="modal-title">修改简历头像</h4> 
       </div> 
       <div class="row modal-body"> 
        <div class="col-md-12 form-group "> 
