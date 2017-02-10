@@ -1,9 +1,9 @@
  <head>
    <!-- END PAGE LEVEL PLUGINS -->
- <script type="text/javascript" charset="utf-8" src="../../ueditor/ueditor.config.js"></script>
-<script type="text/javascript" charset="utf-8" src="../../ueditor/ueditor.all.min.js"> </script>
+ <!-- <script type="text/javascript" charset="utf-8" src="../../ueditor/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../ueditor/ueditor.all.min.js"> </script> -->
   <script>
-  var ue = UE.getEditor('container');
+ // var ue = UE.getEditor('container');
   /*发帖 全选or校园频道*/
    $('body')
     .on('click', '#optionsRadios2', function(e) {
@@ -23,6 +23,86 @@
     font-weight: 400;
     margin-bottom: 10px;
   }
+   #picfiles {
+	width: 85px;
+	height: 122px;
+	border: medium none;
+	margin-top: -60px;
+	margin-left :20px;
+   }
+  .picfile {
+	position: relative;
+	display: inline-block;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	overflow: hidden;
+	line-height: 29px;
+	width: 85px;
+	height: 29px;
+	text-indent: 2em;
+	font-size: 9pt;
+	background: url(../../assets/img/image-upload.png) no-repeat center
+}	
+.videofile {
+	position: relative;
+	display: inline-block;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	overflow: hidden;
+	line-height: 29px;
+	width: 85px;
+	height: 29px;
+	text-indent: 2em;
+	font-size: 9pt;
+	background: url(../../assets/img/image-upload.png) no-repeat center
+}	
+.appendix {
+	position: relative;
+	display: inline-block;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	overflow: hidden;
+	line-height: 29px;
+	width: 85px;
+	height: 29px;
+	text-indent: 2em;
+	font-size: 9pt;
+	background: url(../../assets/img/image-upload.png) no-repeat center
+}
+.pic_list {
+	width: 1000px;
+	overflow: hidden;
+}
+.pic_list .thumb{
+	height: 100px;
+    width: auto;
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+.pic_list span img {
+	height: 100px;
+	width: auto;
+	margin-left: 10px;
+	margin-bottom: 10px;
+}
+.pic_list span i {
+	position: absolute;
+	cursor: pointer;
+	color: #fff;
+	border-radius: 3px;
+	background: rgba(0, 0, 0, .5);
+	margin-left: -21px;
+	width: 18px;
+	height: 18px;
+	text-align: center;
+	opacity: .6;
+	line-height: 13px;
+	font: normal normal normal 18px/1 FontAwesome
+}
+.pic_list span:hover i{
+	color:red;
+	opacity:1;
+}	
   </style> 
  </head> 
  <body class="menu-always-on-top"> 
@@ -41,12 +121,37 @@
           <input type="text" class="form-control" ng-model="title" placeholder="输入作品标题" /> 
          </div> 
         </div> 
-        <!-- <div class="col-md-12 form-group">  
-         <label class="col-md-1 control-label no-padding" style="font-size:16px">作品简介：</label> 
+         <div class="col-md-12 form-group">  
+         <label class="col-md-1 control-label no-padding" style="font-size:16px">作品内容：</label> 
          <div class="col-md-4"> 
-          <input type="text" class="form-control" ng-model="describe" placeholder="输入作品简单介绍" /> 
+         <textarea style="width:700px" ng-model="content" class="form-control ng-pristine ng-untouched ng-valid" rows="4"
+         placeholder="输入作品内容......"></textarea>
          </div> 
-        </div> -->
+        </div> 
+         <div class="col-md-12 form-group">  
+         <label class="col-md-1 control-label no-padding" style="font-size:16px">作品图片：</label> 
+         <div class="col-md-4"> 
+		 <a href="javascript:;" class="picfile">选择图片<input type="file" id="picfiles" ngf-select="addPicFiles()" ng-model="picfiles"  ngf-multiple="true" name="picfiles" ></a>
+		 <output id="pic_list" class="pic_list"><span ng-repeat="file in totalPicFiles"><img class="thumb" ngf-src="file" title="{{file.name}}"><i ng-click="dropPicFile(file)">×</i></span></output>
+         </div> 
+        </div>
+        
+        <div class="col-md-12 form-group">  
+         <label class="col-md-1 control-label no-padding" style="font-size:16px">作品视频：</label> 
+         <div class="col-md-4"> 
+          <a href="javascript:;" class="videofile">选择视频<input type="file" id="videofiles" ngf-select="addVideoFiles($videofiles)" ng-model="videofiles"  ngf-multiple="true" name="videofiles" ></a>
+		 <output id="video_list" class="video_list"><span ng-repeat="file in totalVideoFiles"><img class="thumb" ngf-src="file" title="{{file.name}}"><i ng-click="dropVideoFile(file)">×</i></span></output>
+         </div> 
+        </div>
+        
+        <div class="col-md-12 form-group">  
+         <label class="col-md-1 control-label no-padding" style="font-size:16px">作品附件：</label> 
+         <div class="col-md-4"> 
+          <a href="javascript:;" class="appendix">选择附件<input type="file" id="appendixs" ngf-select="addAppendixss($appendixs)" ng-model="appendixs"  ngf-multiple="true" name="appendixs" ></a>
+		 <output id="appendix_list" class="appendix_list"><span ng-repeat="file in totalAppendixFiles"><img class="thumb" ngf-src="file" title="{{file.name}}"><i ng-click="dropAppendixFile(file)">×</i></span></output>
+         </div> 
+        </div>
+         
         <div class="col-md-12 form-group"> 
          <label class="col-md-1 control-label no-padding" style="font-size:16px">发布范围：</label> 
           <div class="mt-radio-inline col-md-9">
@@ -85,12 +190,12 @@
               </label>
           </div>
 		</div> 
-
-       </div> 
-       <div class="col-md-12 margin-bottom-20">
+       </div> 	
+       
+       <!-- <div class="col-md-12 margin-bottom-20">
        <script id="container" name="content" type="text/plain">
       </script>
-       </div>
+       </div> -->
       <div class="content-center">
       <a class="btn blue" ng-click="pubSubmit()">发布</a> 
       <a class="btn grey" href="#/post-bar">返回</a>

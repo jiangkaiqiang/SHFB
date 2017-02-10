@@ -1,4 +1,4 @@
-wlsWeb.controller('post-message',function($http, $location,$rootScope, $state,$scope) {
+wlsWeb.controller('post-message',function($http, $location,$rootScope, Upload,$state,$scope) {
 	if($rootScope.user==null||$rootScope.user.id==undefined){
 		alert("请先登录");
 		window.location.href="#/login";
@@ -23,6 +23,21 @@ wlsWeb.controller('post-message',function($http, $location,$rootScope, $state,$s
         };
         return json;
     };
+    $scope.totalPicFiles = [];
+    $scope.addPicFiles = function () {
+		if($scope.picfiles.length==0){return;};
+		var allfiles = $scope.totalPicFiles.concat($scope.picfiles);
+		if(allfiles.length>10){alert("最多选择10张！");return;}
+        $scope.totalPicFiles=allfiles; 
+    };
+    $scope.dropPicFile = function(picFile){
+        angular.forEach($scope.totalPicFiles,function(item, key){
+            if(item == picFile){
+                $scope.totalPicFiles.splice(key,1); return false;
+            }
+        });
+    };
+    
     function checkInput() {
 		var flag = true;
 		// 检查必须填写项
@@ -36,7 +51,7 @@ wlsWeb.controller('post-message',function($http, $location,$rootScope, $state,$s
 	}
     $scope.pubSubmit = function() {
 		//alert(UE.getEditor('container').getContent());
-		$scope.content = UE.getEditor('container').getContent();
+		//$scope.content = UE.getEditor('container').getContent();
 		if (checkInput()) {
 			$http.get('/i/publish/addPublish', {
 	            params: {
