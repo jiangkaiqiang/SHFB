@@ -21,14 +21,7 @@ wlsWeb.controller('my-space-company',function($http, $location,$rootScope, $scop
 					else{
 						$scope.level = 1;
 					}
-					$http.get('/i/message/findMessageByReceiverId', {
-			            params: {
-			                "userID": $scope.user.id
-			            }
-			        }).success(function (data) { 
-			        	$scope.messages = data;
-			        	$scope.messageNum = $scope.messages.length;
-			     });
+					$scope.findMessageByReceiverId();
 					$http.get('/i/user/findFollowerByUserId', {
 			            params: {
 			                "userID": $scope.user.id
@@ -45,6 +38,16 @@ wlsWeb.controller('my-space-company',function($http, $location,$rootScope, $scop
     	 });
 	   };
 	$scope.load();
+	$scope.findMessageByReceiverId = function(){
+		 $http.get('/i/message/findMessageByReceiverId', {
+	            params: {
+	                "userID": $scope.user.id
+	            }
+	        }).success(function (data) { 
+	        	$scope.messages = data;
+	        	$scope.messageNum = $scope.messages.length;
+	     });
+	 };
 	$scope.logout = function() {
 		   $http.get( "/i/user/logout").success(function(data){
 			   window.location.reload();
@@ -126,8 +129,7 @@ wlsWeb.controller('my-space-company',function($http, $location,$rootScope, $scop
 	    			}
 	    	}).success(function(data) {
 	    		alert("删除成功");
-	    		$scope.messages = data;
-	        	$scope.messageNum = $scope.messages.length;
+	    		$scope.findMessageByReceiverId();
 		   });
 		   }
 	   };
@@ -144,8 +146,7 @@ wlsWeb.controller('my-space-company',function($http, $location,$rootScope, $scop
 	    		}
 	    	}).success(function(data) {
 	    		alert("回复成功");
-	    		$scope.messages = data;
-	        	$scope.messageNum = $scope.messages.length;
+	    		$scope.findMessageByReceiverId();
 		   });
 	   };
 	   $scope.goUserSpace = function(userID) {

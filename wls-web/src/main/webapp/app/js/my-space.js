@@ -17,14 +17,7 @@ wlsWeb.controller('my-space',function($http, $location,$rootScope, $scope,$state
 				        	$scope.followers = data;
 				        	$scope.followerNum = $scope.followers.length;
 				     });
-					 $http.get('/i/message/findMessageByReceiverId', {
-				            params: {
-				                "userID": $scope.user.id
-				            }
-				        }).success(function (data) { 
-				        	$scope.messages = data;
-				        	$scope.messageNum = $scope.messages.length;
-				     });
+					 $scope.findMessageByReceiverId();
 					 $http.get('/i/user/findEducateByUserID', {
 				            params: {
 				                "userID": $scope.user.id
@@ -178,6 +171,17 @@ wlsWeb.controller('my-space',function($http, $location,$rootScope, $scope,$state
 			 $http.get('/i/user/findUser').success(function (data) {
 						 $scope.user = data;
 			 });
+		 };
+		 
+		 $scope.findMessageByReceiverId = function(){
+			 $http.get('/i/message/findMessageByReceiverId', {
+		            params: {
+		                "userID": $scope.user.id
+		            }
+		        }).success(function (data) { 
+		        	$scope.messages = data;
+		        	$scope.messageNum = $scope.messages.length;
+		     });
 		 };
 		 // 获取省列表
 	    $http.get('/i/city/findProvinceList').success(function (data) {
@@ -504,8 +508,7 @@ wlsWeb.controller('my-space',function($http, $location,$rootScope, $scope,$state
 									    			}
 									    	}).success(function(data) {
 									    		alert("删除成功");
-									    		$scope.messages = data;
-									        	$scope.messageNum = $scope.messages.length;
+									    		$scope.findMessageByReceiverId();
 										   });
 										   }
 									   };
@@ -522,8 +525,7 @@ wlsWeb.controller('my-space',function($http, $location,$rootScope, $scope,$state
 									    		}
 									    	}).success(function(data) {
 									    		$("#quick_reply_alter").modal("show");
-									    		$scope.messages = data;
-									        	$scope.messageNum = $scope.messages.length;
+									    		$scope.findMessageByReceiverId();
 										   });
 									   };
 									   

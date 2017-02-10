@@ -118,7 +118,7 @@ public class MessageController extends BaseController {
 	@ResponseBody
 	public Object deleteMessage(int msgID,Integer messageSenderID) {
 		 messageDao.deleteMessage(msgID);
-		 return  messageDao.findMessageByReceiverID(messageSenderID);
+		 return ResponseData.newSuccess("删除成功");
 	}
 	
 	/**
@@ -195,7 +195,7 @@ public class MessageController extends BaseController {
 			resumeVisMapper.insertResumeVis(resumeVisEntity);
 		}
 		messageDao.deleteMessage(messageID);
-		return messageDao.findMessageByReceiverID(messageSenderID);
+		return ResponseData.newSuccess("回复成功");
 	}
 	
 	/**
