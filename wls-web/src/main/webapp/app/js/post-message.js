@@ -25,6 +25,7 @@ wlsWeb.controller('post-message',function($http, $location,$rootScope, Upload,$s
     };
     $scope.totalPicFiles = [];
     $scope.totalAppendixs = [];
+    $scope.totalVideoFiles = [];
     $scope.addPicFiles = function () {
 		if($scope.picfiles.length==0){return;};
 		var allfiles = $scope.totalPicFiles.concat($scope.picfiles);
@@ -48,6 +49,20 @@ wlsWeb.controller('post-message',function($http, $location,$rootScope, Upload,$s
         angular.forEach($scope.totalAppendixs,function(item, key){
             if(item == file){
                 $scope.totalAppendixs.splice(key,1); return false;
+            }
+        });
+    };
+    
+    $scope.addVideoFiles = function () {
+		if($scope.videofiles.length==0){return;};
+		var allfiles = $scope.totalVideoFiles.concat($scope.videofiles);
+		if(allfiles.length>2){alert("最多选择2个！");return;}
+        $scope.totalVideoFiles=allfiles; 
+    };
+    $scope.dropVideoFile = function(file){
+        angular.forEach($scope.totalVideoFiles,function(item, key){
+            if(item == file){
+                $scope.totalVideoFiles.splice(key,1); return false;
             }
         });
     };

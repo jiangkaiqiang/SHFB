@@ -59,7 +59,7 @@
            <div class="blog-item-body col-md-11 margin-bottom-10"> 
             <div class="blog-item-body-title"> 
              <div class="col-md-12"> 
-              <a class="blog-item-name" ng-click="goBlogInfo(publish.id)">{{publish.title}}</a> 
+              <a style="font-size:16px;" ng-click="goBlogInfo(publish.id)"><strong>{{publish.title}}</strong></a> 
               <span class="blog-item-time"><i class="fa fa-clock-o"></i> {{publish.pubtime}} ###来自{{publish.publishername}}</span> 
              </div> 
             </div> 
@@ -78,7 +78,7 @@
             <span><a ng-click="goBlogInfo(publish.id)"><i class="fa fa-comments"></i> 评论{{publish.commentnum}}</a></span>
            </div> 
            <div class="col-md-4 line">
-            <span ng-if="publish.praiseflag==1"><a style="color:#64AED9"><i style="color:#64AED9" class="fa fa-thumbs-up"></i> 点赞{{publish.praisenum}}</a></span>
+            <span ng-if="publish.praiseflag==1"><a style="color:#64AED9"><i style="color:#64AED9" class="fa fa-thumbs-up"></i> 已赞{{publish.praisenum}}</a></span>
             <span ng-if="publish.praiseflag!=1" ng-click="praiseBlog(publish.id)"><a><i class="fa fa-thumbs-up"></i> 点赞{{publish.praisenum}}</a></span>
            </div> 
            <div class="col-md-4" id="ckepop">
