@@ -20,7 +20,7 @@ public class ListCrawler_iyiou_wenchuang {
     public List<NewInfomationDto> parse() throws ParseException {
     	 logger.info("Start Crawl Pages on 艾瑞网");   
          ListCrawlJob_iyiou_wenchuang crawler =new ListCrawlJob_iyiou_wenchuang();
-         crawler.getUrlList("http://www.iyiou.com/i/wenchuang/page/2.html");
+         crawler.getUrlList("http://www.iyiou.com/i/wenchuang/page/1.html");
          for(NewInfomationDto ni:crawler.an){
              new PageCrawJob_iyiou_wenchuang().pageCraw(ni);
          }

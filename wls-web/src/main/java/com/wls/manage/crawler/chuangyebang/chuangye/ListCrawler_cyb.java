@@ -20,7 +20,7 @@ public class ListCrawler_cyb {
     public List<NewInfomationDto> parse() throws ParseException {
     	 logger.info("Start Crawl Pages on www.toutiao.com");   
          ListCrawlJob_cyb crawler =new ListCrawlJob_cyb();
-         crawler.getUrlList("http://api.cyzone.cn/index.php?m=content&c=index&a=init&tpl=index_page&page=2");
+         crawler.getUrlList("http://api.cyzone.cn/index.php?m=content&c=index&a=init&tpl=index_page&page=1");
          for(NewInfomationDto ni:crawler.an){
              new PageCrawJob_cyb().pageCraw(ni);
          }
