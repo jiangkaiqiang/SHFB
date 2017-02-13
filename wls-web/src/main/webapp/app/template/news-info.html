@@ -39,7 +39,7 @@
         <div class="comments"> 
          <div class="item-comment row"  ng-repeat="comment in information.commentDtos"> 
            <div class="col-md-1">
-           <a href=""><img class="img-responsive" alt="" src="{{comment.useravatar}}" width="60px" /></a>
+           <a ng-click="goUserSpace(comment.commenterid)"><img class="img-responsive" alt="" src="{{comment.useravatar}}" width="60px" /></a>
           </div> 
           <div class="col-md-11 no-left-padding"> 
            <h4>{{comment.usernickname}} <span>{{comment.commenttime}}<span></h4> 
@@ -59,7 +59,7 @@
            <div class="col-md-12 no-padding" id="comment_second-{{comment.id}}" style="display:none" >
              <div class="item-comment row" ng-repeat="response in comment.responseDtos"> 
               <div class="col-md-1">
-               <a href=""><img class="img-responsive" alt="" src="{{response.useravatar}}" width="60px" /></a>
+               <a ng-click="goUserSpace(response.responserid)"><img class="img-responsive" alt="" src="{{response.useravatar}}" width="60px" /></a>
               </div> 
               <div class="col-md-11 no-left-padding"> 
                <h4>{{response.usernickname}} <span>{{response.responsetime}}<span></span></span></h4> 

@@ -182,7 +182,9 @@ wlsWeb.controller('post-bar',function($http, $state,$rootScope, $stateParams,$lo
         	$scope.getPublishs();
         });
     };
-    
+    $scope.goUserSpace = function(userID) {
+   	 $state.go('my-space-ask', {"spaceID": userID});
+	};
     $scope.goBlogInfo = function(publishID) {
       	 $state.go('blog-info', {"publishID": publishID});
    	};

@@ -99,4 +99,7 @@ wlsWeb.controller('news-info',function($http, $location, $state, $rootScope,$sta
             $("#reply_area_second-"+responseID).css("display","");
             $("#reply_area-"+commentID).css("display","none");
         };
+        $scope.goUserSpace = function(userID) {
+          	 $state.go('my-space-ask', {"spaceID": userID});
+       	};
 });

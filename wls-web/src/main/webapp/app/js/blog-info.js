@@ -97,4 +97,7 @@ wlsWeb.controller('blog-info',function($http, $rootScope,$location,$state, $stat
                 $("#reply_area_second-"+responseID).css("display","");
                 $("#reply_area-"+commentID).css("display","none");
             };
+            $scope.goUserSpace = function(userID) {
+              	 $state.go('my-space-ask', {"spaceID": userID});
+           	};
 });
