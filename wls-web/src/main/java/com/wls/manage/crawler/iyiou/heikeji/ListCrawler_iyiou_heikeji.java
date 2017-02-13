@@ -20,7 +20,7 @@ public class ListCrawler_iyiou_heikeji {
     public List<NewInfomationDto> parse() throws ParseException {
     	 logger.info("Start Crawl Pages on 艾瑞网");   
          ListCrawlJob_iyiou_heikeji crawler =new ListCrawlJob_iyiou_heikeji();
-         crawler.getUrlList("http://www.iyiou.com/i/heikeji/page/2.html");
+         crawler.getUrlList("http://www.iyiou.com/i/heikeji/page/1.html");
          for(NewInfomationDto ni:crawler.an){
              new PageCrawJob_iyiou_heikeji().pageCraw(ni);
          }

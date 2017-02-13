@@ -20,7 +20,7 @@ public class ListCrawler_iresearch {
     public List<NewInfomationDto> parse() throws ParseException {
     	 logger.info("Start Crawl Pages on 艾瑞网");   
          ListCrawlJob_iresearch crawler =new ListCrawlJob_iresearch();
-         crawler.getUrlList("http://www.iresearch.cn/include/pages/redis.aspx?specialId=399&lastId=news.266380");
+         crawler.getUrlList("http://www.iresearch.cn/include/pages/redis.aspx?specialId=399&lastId=news.2663800");
          for(NewInfomationDto ni:crawler.an){
              new PageCrawJob_iresearch().pageCraw(ni);
          }

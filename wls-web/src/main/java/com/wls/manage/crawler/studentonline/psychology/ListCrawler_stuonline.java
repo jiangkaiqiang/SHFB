@@ -20,7 +20,7 @@ public class ListCrawler_stuonline {
     public List<NewInfomationDto> parse() throws ParseException {
     	 logger.info("Start Crawl Pages on 中国大学生在线");   
          ListCrawlJob_stuonline crawler =new ListCrawlJob_stuonline();
-         crawler.getUrlList("http://campus.univs.cn/xl/2.shtml");
+         crawler.getUrlList("http://campus.univs.cn/xl/1.shtml");
          for(NewInfomationDto ni:crawler.an){
              new PageCrawJob_stuonline().pageCraw(ni);
          }
