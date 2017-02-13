@@ -5,7 +5,9 @@ body {
   font: 300 14px/1.4 Microsoft YaHei;
   background: #fff;
 }
-
+#base_content_container{
+	min-height:560px;
+}
 /* h1-h6 */
 .content h1, .content h2 {
   font: 400 37px Microsoft YaHei;
@@ -111,6 +113,7 @@ a:hover {
   font-size: 0; 
   line-height: 0; 
   overflow: hidden;
+
 }
 .block-center {
   display: block;
@@ -2409,7 +2412,7 @@ table .product-quantity .input-group {
 }
 .business-card-line img{
   padding: 40px 0px;
-  max-width:140px;
+  max-width:120px;
   margin:auto;
   position:absolute;
   z-index:99;

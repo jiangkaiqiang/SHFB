@@ -189,7 +189,9 @@
                 </div> 
                 <div class="blog-item-body-info col-md-12"> 
                <!--   <p>{{publish.describe}} -->
-                <img ng-if="publish.pubcover!=null&&publish.pubcover!=undefined&&publish.pubcover!=''" src="{{publish.pubcover}}"/> 
+                <div ng-if="publish.pubCovers!=null&&publish.pubCovers!=undefined&&publish.pubCovers!=''" ng-repeat="pubcover in publish.pubCovers">
+                 <img src="{{pubcover}}"/> 
+             </div>
                 </div> 
                </div> 
               </div> 

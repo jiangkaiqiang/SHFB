@@ -13,6 +13,7 @@
 		`pubcategory`,
 		`content`,
 		`schoolid`,
+		`appendixs`,
 		`pubtime`
 		)
 		VALUE 
@@ -24,6 +25,7 @@
 		#{pubcategory},
 		#{content},
 		#{schoolid},
+		#{appendixs},
 		now()
 		)
     </insert>
@@ -49,7 +51,7 @@
 	
      <select id="findPublishByUserId" parameterType="map" resultType="PublishEntity">
 		SELECT *
-		FROM `publish` WHERE `publisher` = #{userID}
+		FROM `publish` WHERE `publisher` = #{userID} order by `pubtime` desc
 	</select>
 	
 	<select id="findPulishByID" parameterType="map" resultType="PublishEntity">

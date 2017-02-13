@@ -26,6 +26,8 @@ public class PublishEntity {
 	private String content;
 	
 	private Integer schoolid;
+	
+	private String appendixs;
 
 	public BigInteger getId() {
 		return id;
@@ -97,6 +99,14 @@ public class PublishEntity {
 
 	public void setPubcover(String pubcover) {
 		this.pubcover = pubcover;
+	}
+
+	public String getAppendixs() {
+		return appendixs;
+	}
+
+	public void setAppendixs(String appendixs) {
+		this.appendixs = appendixs;
 	}
 	
 }

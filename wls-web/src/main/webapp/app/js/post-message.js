@@ -24,10 +24,11 @@ wlsWeb.controller('post-message',function($http, $location,$rootScope, Upload,$s
         return json;
     };
     $scope.totalPicFiles = [];
+    $scope.totalAppendixs = [];
     $scope.addPicFiles = function () {
 		if($scope.picfiles.length==0){return;};
 		var allfiles = $scope.totalPicFiles.concat($scope.picfiles);
-		if(allfiles.length>10){alert("最多选择10张！");return;}
+		if(allfiles.length>6){alert("最多选择6张！");return;}
         $scope.totalPicFiles=allfiles; 
     };
     $scope.dropPicFile = function(picFile){
@@ -37,7 +38,19 @@ wlsWeb.controller('post-message',function($http, $location,$rootScope, Upload,$s
             }
         });
     };
-    
+    $scope.addAppendixs = function () {
+		if($scope.appendixs.length==0){return;};
+		var allfiles = $scope.totalAppendixs.concat($scope.appendixs);
+		if(allfiles.length>3){alert("最多选择3个！");return;}
+        $scope.totalAppendixs=allfiles; 
+    };
+    $scope.dropAppendixFile = function(file){
+        angular.forEach($scope.totalAppendixs,function(item, key){
+            if(item == file){
+                $scope.totalAppendixs.splice(key,1); return false;
+            }
+        });
+    };
     function checkInput() {
 		var flag = true;
 		// 检查必须填写项
@@ -53,20 +66,29 @@ wlsWeb.controller('post-message',function($http, $location,$rootScope, Upload,$s
 		//alert(UE.getEditor('container').getContent());
 		//$scope.content = UE.getEditor('container').getContent();
 		if (checkInput()) {
-			$http.get('/i/publish/addPublish', {
-	            params: {
-	            	'title' : $scope.title,
-	            	'describe' : $scope.describe,
-					'pubcategory' : $('input[name="optionsRadios3"]:checked').val(),
-					//'publisher' : $rootScope.user.id,
-					'publisher' : 4,
-					'content' : $scope.content,
-					'schoolid' : $scope.schoolid
-	            }
-	        }).success(function (data) {
+			   data = {
+					    'title' : $scope.title,
+		            	'describe' : $scope.describe,
+						'pubcategory' : $('input[name="optionsRadios3"]:checked').val(),
+						//'publisher' : $rootScope.user.id,
+						'publisher' : $rootScope.user.id,
+						'content' : $scope.content,
+						'schoolid' : $scope.schoolid
+		            };
+		            for(var i = 0; i < $scope.totalPicFiles.length; i++){
+		                data["picFile" + i] = $scope.totalPicFiles[i];
+		            }
+		            for(var i = 0; i < $scope.totalAppendixs.length; i++){
+		                data["appendix" + i] = $scope.totalAppendixs[i];
+		            }
+		       Upload.upload({
+		                url: '/i/publish/addPublish',
+		                headers :{ 'Content-Transfer-Encoding': 'utf-8' },
+		                data: data
+		            }).success(function (data) {
 	            if(data.success){
 	            	alert("发布成功");
-	            	$state.reload();
+	            	window.location.href="#/post-bar";
 	            }
 	        });
 		} else {

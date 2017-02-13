@@ -4,6 +4,7 @@ import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.net.URLDecoder;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
@@ -20,14 +22,17 @@ import com.wls.manage.dao.PraiseMapper;
 import com.wls.manage.dao.PublishMapper;
 import com.wls.manage.dao.ResponseMapper;
 import com.wls.manage.dao.UserMapper;
+import com.wls.manage.dto.AppendixDto;
 import com.wls.manage.dto.CommentDto;
 import com.wls.manage.dto.PublishDto;
 import com.wls.manage.dto.ResponseDto;
+import com.wls.manage.dto.UploadFileEntity;
 import com.wls.manage.entity.CommentEntity;
 import com.wls.manage.entity.PraiseEntity;
 import com.wls.manage.entity.PublishEntity;
 import com.wls.manage.entity.ResponseEntity;
 import com.wls.manage.entity.UserEntity;
+import com.wls.manage.service.FtpService;
 import com.wls.manage.util.PageParseUtil;
 import com.wls.manage.util.ResponseData;
 /**
@@ -49,7 +54,9 @@ public class PublishController extends BaseController {
 	private PraiseMapper praiseMapper;
 	@Autowired
 	private ResponseMapper responseMapper;
-	
+	private static String baseDir = "picture";
+	@Autowired
+	private FtpService ftpService;
 	/**
 	 * 为前台user查询通知提供服务
 	 * @param pageNum
@@ -99,6 +106,45 @@ public class PublishController extends BaseController {
 			publishDto.setSchoolid(publishEntity.getSchoolid());
 			publishDto.setTitle(publishEntity.getTitle());
 			publishDto.setPubcover(publishEntity.getPubcover());
+			/**
+			 * 将图片的字符串转化为list
+			 */
+			if (publishEntity.getPubcover()!=null&&publishEntity.getPubcover()!="") {
+				String[] pubPicFiles = publishEntity.getPubcover().split(";");
+				List<String> picFiles = new ArrayList<String>(); 
+				List<String> pubCovers = new ArrayList<String>();
+				for (String pubPicFile : pubPicFiles) {
+					if (pubPicFile!=null&&pubPicFile!="") {
+						picFiles.add(pubPicFile);
+					}
+				}
+				if (picFiles!=null&&!picFiles.isEmpty()&&picFiles.size()==1) {
+					pubCovers.add(picFiles.get(0));
+				}
+				if (picFiles!=null&&!picFiles.isEmpty()&&picFiles.size()>=2) {
+					for (int i = 0; i < 2; i++) {
+						pubCovers.add(picFiles.get(i));
+					}
+				}
+				publishDto.setPicFiles(picFiles);
+				publishDto.setPubCovers(pubCovers);
+			}
+			/**
+			 * 将附件String转化成dto类
+			 */
+			if (publishEntity.getAppendixs()!=null&&publishEntity.getAppendixs()!="") {
+				String[] appendixStrings = publishEntity.getAppendixs().split(">");
+				List<AppendixDto> appendixDtos = new ArrayList<AppendixDto>();
+				for (String appendix : appendixStrings) {
+					if (appendix!=null&&appendix!="") {
+						AppendixDto appendixDto = new AppendixDto();
+						appendixDto.setName(appendix.split("<")[0]);
+						appendixDto.setUrl(appendix.split("<")[1]);
+						appendixDtos.add(appendixDto);
+					}
+				}
+				publishDto.setAppendixDtos(appendixDtos);
+			}
 			UserEntity userEntity = userMapper.findUserById(publishEntity.getPublisher().intValue());
 			if (userEntity!=null) {
 				publishDto.setPublishername(userEntity.getNickname());
@@ -190,6 +236,45 @@ public class PublishController extends BaseController {
 			publishDto.setSchoolid(publishEntity.getSchoolid());
 			publishDto.setTitle(publishEntity.getTitle());
 			publishDto.setPubcover(publishEntity.getPubcover());
+			/**
+			 * 将图片的字符串转化为list
+			 */
+			if (publishEntity.getPubcover()!=null&&publishEntity.getPubcover()!="") {
+				String[] pubPicFiles = publishEntity.getPubcover().split(";");
+				List<String> picFiles = new ArrayList<String>(); 
+				List<String> pubCovers = new ArrayList<String>();
+				for (String pubPicFile : pubPicFiles) {
+					if (pubPicFile!=null&&pubPicFile!="") {
+						picFiles.add(pubPicFile);
+					}
+				}
+				if (picFiles!=null&&!picFiles.isEmpty()&&picFiles.size()==1) {
+					pubCovers.add(picFiles.get(0));
+				}
+				if (picFiles!=null&&!picFiles.isEmpty()&&picFiles.size()>=2) {
+					for (int i = 0; i < 2; i++) {
+						pubCovers.add(picFiles.get(i));
+					}
+				}
+				publishDto.setPicFiles(picFiles);
+				publishDto.setPubCovers(pubCovers);
+			}
+			/**
+			 * 将附件String转化成dto类
+			 */
+			if (publishEntity.getAppendixs()!=null&&publishEntity.getAppendixs()!="") {
+				String[] appendixStrings = publishEntity.getAppendixs().split(">");
+				List<AppendixDto> appendixDtos = new ArrayList<AppendixDto>();
+				for (String appendix : appendixStrings) {
+					if (appendix!=null&&appendix!="") {
+						AppendixDto appendixDto = new AppendixDto();
+						appendixDto.setName(appendix.split("<")[0]);
+						appendixDto.setUrl(appendix.split("<")[1]);
+						appendixDtos.add(appendixDto);
+					}
+				}
+				publishDto.setAppendixDtos(appendixDtos);
+			}
 			UserEntity userEntity = userMapper.findUserById(publishEntity.getPublisher().intValue());
 			if (userEntity!=null) {
 				publishDto.setPublishername(userEntity.getNickname());
@@ -338,20 +423,56 @@ public class PublishController extends BaseController {
 			@RequestParam(required = false) Integer pubcategory,
 			@RequestParam(required = false) Integer publisher,
 			@RequestParam(required = false) Integer schoolid,
-			@RequestParam(required = false) String content
+			@RequestParam(required = false) String content, 
+			@RequestParam(required = false) MultipartFile picFile0,
+			@RequestParam(required = false) MultipartFile picFile1,
+			@RequestParam(required = false) MultipartFile picFile2,
+			@RequestParam(required = false) MultipartFile picFile3,
+			@RequestParam(required = false) MultipartFile picFile4,
+			@RequestParam(required = false) MultipartFile picFile5,
+			@RequestParam(required = false) MultipartFile appendix0,
+			@RequestParam(required = false) MultipartFile appendix1,
+			@RequestParam(required = false) MultipartFile appendix2
 			){
+		MultipartFile[] picFiles = {picFile5, picFile4, picFile3, picFile2, picFile1,picFile0};
+		MultipartFile[] appendixs = {appendix2, appendix1, appendix0};
 		PublishEntity publishEntity = new PublishEntity();
-		PageParseUtil pageParseUtil = new PageParseUtil();
-		List<String> publishCovers = pageParseUtil.parse(content);
+		//PageParseUtil pageParseUtil = new PageParseUtil();
+		//List<String> publishCovers = pageParseUtil.parse(content);
 		publishEntity.setContent(content);
 		publishEntity.setPubcategory(pubcategory);
 		publishEntity.setDescribe(describe);
 		publishEntity.setPublisher(BigInteger.valueOf(publisher));
 		publishEntity.setSchoolid(schoolid);
 		publishEntity.setTitle(title);
-		if (publishCovers!=null&&!publishCovers.isEmpty()) {
-			publishEntity.setPubcover(publishCovers.get(0));
+		String picFile = "";
+		String appendixString = "";
+		for (MultipartFile file : picFiles) {
+			if (file == null) {
+				continue;
+			}
+			String dir = String.format("%s/publish/picFile", baseDir);
+			String fileName = String.format("pic_%s.%s", new Date().getTime(), "jpg");
+			UploadFileEntity uploadFileEntity = new UploadFileEntity(fileName, file, dir);
+			ftpService.uploadFile(uploadFileEntity);
+			picFile = picFile + FtpService.READ_URL+"data/"+dir + "/" + fileName+";";
 		}
+		for (MultipartFile file : appendixs) {
+			if (file == null) {
+				continue;
+			}
+			String prefix=file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".")+1);
+			String dir = String.format("%s/publish/appendixs", baseDir);
+			String fileName = String.format("apd_%s.%s", new Date().getTime(), prefix);
+			UploadFileEntity uploadFileEntity = new UploadFileEntity(fileName, file, dir);
+			ftpService.uploadFile(uploadFileEntity);
+			appendixString = appendixString +file.getOriginalFilename()+"<"+FtpService.READ_URL+"data/"+dir + "/" + fileName+">";
+		}
+		publishEntity.setPubcover(picFile);
+		publishEntity.setAppendixs(appendixString);
+		/*if (publishCovers!=null&&!publishCovers.isEmpty()) {
+			publishEntity.setPubcover(publishCovers.get(0));
+		}*/
 		publishMapper.insertPublish(publishEntity);
 		return ResponseData.newSuccess();
 	}

@@ -22,7 +22,15 @@
         <h3 class="padding-top-20 margin-bottom-20">{{publish.title}}</h3> 
         <p><i class="fa fa-user"></i> {{publish.publishername}} &nbsp;&nbsp;&nbsp;&nbsp; <i class="fa fa-calendar"></i> {{publish.pubtime}} 
         &nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-tags"></i> {{publish.pubcategoryname}}</p> 
-        <div id="pubContent"></div>
+        <div>{{publish.content}}</div>
+        <h3 ng-if="publish.picFiles!=null&&publish.picFiles!=undefined&&publish.picFiles!=''">作品图片</h3>
+        <div id="pubContent" ng-if="publish.picFiles!=null&&publish.picFiles!=undefined&&publish.picFiles!=''" ng-repeat="pubfile in publish.picFiles">
+                 <img src="{{pubfile}}"/> 
+        </div>
+        <h3 ng-if="publish.appendixDtos!=null&&publish.appendixDtos!=undefined&&publish.appendixDtos!=''">附件下载</h3>
+        <div ng-if="publish.appendixDtos!=null&&publish.appendixDtos!=undefined&&publish.appendixDtos!=''" ng-repeat="appendix in publish.appendixDtos">
+                <a href="{{appendix.url}}">{{appendix.name}}</a>
+        </div>
      <div id="ckepop">
            <span class="jiathis_txt">分享到：</span>
             <a class="jiathis_button_weixin">微信</a>

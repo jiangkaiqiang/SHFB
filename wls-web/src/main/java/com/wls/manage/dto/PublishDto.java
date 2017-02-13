@@ -37,8 +37,13 @@ public class PublishDto {
 	
 	private Integer praiseflag;
 	
-	private String pubcover;
+	private String pubcover;//上传的全部图片，字符串以；分隔
+	
+	private List<String> pubCovers;//显示在列表的封面图片
+	
+	private List<String> picFiles;//显示在作品内部的全部图片
 
+	private List<AppendixDto> appendixDtos;
 	public BigInteger getId() {
 		return id;
 	}
@@ -167,6 +172,30 @@ public class PublishDto {
 
 	public void setPubcover(String pubcover) {
 		this.pubcover = pubcover;
+	}
+
+	public List<String> getPubCovers() {
+		return pubCovers;
+	}
+
+	public void setPubCovers(List<String> pubCovers) {
+		this.pubCovers = pubCovers;
+	}
+
+	public List<String> getPicFiles() {
+		return picFiles;
+	}
+
+	public void setPicFiles(List<String> picFiles) {
+		this.picFiles = picFiles;
+	}
+
+	public List<AppendixDto> getAppendixDtos() {
+		return appendixDtos;
+	}
+
+	public void setAppendixDtos(List<AppendixDto> appendixDtos) {
+		this.appendixDtos = appendixDtos;
 	}
 	
 }
