@@ -67,9 +67,9 @@
               <div class="col-md-12 col-sm-12">
               <div class="sidebar-news clearfix" ng-repeat="newdto in AllNews">
               <div class="item" ng-if="newdto.coverpicnum<1">
-              <a><img ng-src="{{defaultCoverPic}}" alt=""></a>
-                <h3 ><a ng-click="goNewsInfo(newdto.id)">{{newdto.title}}</a></h3>
-                <div class="news-info">
+              <!-- <a><img ng-src="{{defaultCoverPic}}" alt=""></a> -->
+                <h3 style="margin-left: 0;"><a ng-click="goNewsInfo(newdto.id)">{{newdto.title}}</a></h3>
+                <div class="news-info" style="margin-left: 0;">
                 <div class="news-block-tags">
                    <a><i class="fa fa-paper-plane"></i> {{newdto.source}}·</a>
                    <a> <i class="fa fa-comments"></i> {{newdto.commentnum}}评论 · </a>

@@ -1643,13 +1643,12 @@ Sidebar
 /* sidebar news */
 .sidebar-news {
     background: #fff;
-    padding: 15px 15px 20px;
+    padding: 0 15px;
 }
 .sidebar-news .item {
     width: 100%;
     overflow: hidden;
     padding-bottom: 15px !important;
-    margin-bottom: 15px !important;
     border-bottom: solid 1px #ddd !important;
 }
 .sidebar-news .item:last-child {
@@ -1665,6 +1664,7 @@ Sidebar
     width: 200px;
     height: 100px;
     float: left;
+    margin-top: 15px;
 }
 .sidebar-news h3 {
     font: 600 18px Microsoft YaHei;
@@ -2355,8 +2355,7 @@ table .product-quantity .input-group {
     margin:0 auto;
 	padding-top:10px;
 	padding-bottom:10px;
-	max-width:650px;
-	max-height:650px;
+	width:100%;
 }
 
 .post-comment img{
@@ -2533,3 +2532,4 @@ table .product-quantity .input-group {
 .datasheet-features-type2{
     width:40% !important;
   }
+/*带搜索栏的下拉框 2017-02-16*/

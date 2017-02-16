@@ -1,4 +1,7 @@
  <!--DOC: menu-always-on-top class to the body element to set menu on top --> 
+  <link href="../../assets/css/jquery.searchableSelect.css" rel="stylesheet">
+  <script src="../../assets/js/jquery.min.js" type="text/javascript"></script>
+  <script src="../../assets/js/jquery.searchableSelect.js" type="text/javascript"></script>
  <body class="menu-always-on-top"> 
   <!--BEGIN--> 
   <div class="weilanshu" id="base_content_container"> 
@@ -67,7 +70,7 @@
              <p style="display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 3;
                 overflow: hidden;">{{publish.content}}
              </p> 
-             <div ng-if="publish.pubCovers!=null&&publish.pubCovers!=undefined&&publish.pubCovers!=''" ng-repeat="pubcover in publish.pubCovers">
+             <div style="display: inline-block;" ng-if="publish.pubCovers!=null&&publish.pubCovers!=undefined&&publish.pubCovers!=''" ng-repeat="pubcover in publish.pubCovers">
                  <img src="{{pubcover}}"/> 
              </div>
             </div> 
@@ -127,6 +130,11 @@
     </div> 
    </div> 
   </div> 
+   <script>
+		$(function(){
+			$('select').searchableSelect();
+		});
+    </script>
   <!--END --> 
   <!-- Global js END -->  
  </body>

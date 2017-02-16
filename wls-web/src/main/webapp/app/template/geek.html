@@ -7,6 +7,9 @@
  <link href="../../assets/css/bootstrap-select.css" rel="stylesheet">
  <link href="../../assets/css/bootstrap.min.css" rel="stylesheet">
  <link href="../../assets/js/bootstrap.min.js" rel="stylesheet">  -->
+  <link href="../../assets/css/jquery.searchableSelect.css" rel="stylesheet">
+  <script src="../../assets/js/jquery.min.js" type="text/javascript"></script>
+  <script src="../../assets/js/jquery.searchableSelect.js" type="text/javascript"></script>
  <body class="menu-always-on-top" > 
   <!--BEGIN--> 
   <div class="weilanshu" id="base_content_container"> 
@@ -125,5 +128,10 @@
     </div> 
    </div> 
   </div> 
+  <script>
+		$(function(){
+			$('select').searchableSelect();
+		});
+    </script>
   <!--END --> 
  </body>
