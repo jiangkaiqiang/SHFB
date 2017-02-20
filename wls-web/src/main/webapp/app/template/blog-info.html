@@ -32,14 +32,17 @@
        		 </div>
         </div>
         <div style="margin: 15px 0;">
+	        <h4 ng-if="publish.pubVideo!=null&&publish.pubVideo!=undefined&&publish.pubVideo!=''" class="well well-sm">作品视频</h4>
+	        <div ng-if="publish.pubVideo!=null&&publish.pubVideo!=undefined&&publish.pubVideo!=''" ng-repeat="video in publish.pubVideo">
+	                <video width="320" height="240" autoplay="autoplay" controls="controls" src="{{video}}" loop="-1"></video>
+	        </div>
+        </div>
+        <div style="margin: 15px 0;">
 	        <h4 ng-if="publish.appendixDtos!=null&&publish.appendixDtos!=undefined&&publish.appendixDtos!=''" class="well well-sm">附件下载</h4>
 	        <div ng-if="publish.appendixDtos!=null&&publish.appendixDtos!=undefined&&publish.appendixDtos!=''" ng-repeat="appendix in publish.appendixDtos">
 	                <a href="{{appendix.url}}" style="font-size: 14px;text-decoration: underline;">{{appendix.name}}</a>
 	        </div>
         </div>
-       <!--  <video width="320" height="240" controls>
-        <source src="http://42.121.130.177:8080/data/ueditor/20170202/1486036140539024030.mp4" type="video/mp4"></source>
-        </video> -->
      <div id="ckepop">
            <span class="jiathis_txt">分享到：</span>
             <a class="jiathis_button_weixin">微信</a>

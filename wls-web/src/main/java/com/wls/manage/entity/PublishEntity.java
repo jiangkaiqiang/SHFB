@@ -28,6 +28,8 @@ public class PublishEntity {
 	private Integer schoolid;
 	
 	private String appendixs;
+	
+	private String pubvideo;
 
 	public BigInteger getId() {
 		return id;
@@ -108,5 +110,14 @@ public class PublishEntity {
 	public void setAppendixs(String appendixs) {
 		this.appendixs = appendixs;
 	}
+
+	public String getPubvideo() {
+		return pubvideo;
+	}
+
+	public void setPubvideo(String pubvideo) {
+		this.pubvideo = pubvideo;
+	}
+
 	
 }

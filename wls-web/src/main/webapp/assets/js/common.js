@@ -184,9 +184,9 @@ var handleActions = function(){
        $("#skill_form").css("display","none");
     })
      
-    /*.on('click', '#optionsRadios1', function(e) {
+    .on('click', '#optionsRadios1', function(e) {
         $("#select_school").css("display","none");
-    })*/
+    })
     /*简历编辑保存*/
     .on('click', '#save_education', function(e) {
         $('#save_education_alter').modal("show");

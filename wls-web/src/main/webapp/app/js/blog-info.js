@@ -7,7 +7,7 @@ wlsWeb.controller('blog-info',function($http, $rootScope,$location,$state, $stat
                 }
             }).success(function(data,status,config,headers){
                    $scope.publish = data;
-                   document.getElementById("pubContent").innerHTML=$scope.publish.content;
+                  /* document.getElementById("pubContent").innerHTML=$scope.publish.content;*/
                });
            };
         $scope.load();

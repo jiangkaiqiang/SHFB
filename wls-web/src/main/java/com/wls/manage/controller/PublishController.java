@@ -33,7 +33,6 @@ import com.wls.manage.entity.PublishEntity;
 import com.wls.manage.entity.ResponseEntity;
 import com.wls.manage.entity.UserEntity;
 import com.wls.manage.service.FtpService;
-import com.wls.manage.util.PageParseUtil;
 import com.wls.manage.util.ResponseData;
 /**
  * 
@@ -128,6 +127,19 @@ public class PublishController extends BaseController {
 				}
 				publishDto.setPicFiles(picFiles);
 				publishDto.setPubCovers(pubCovers);
+			}
+			/**
+			 * 将视频的字符串转化为list
+			 */
+			if (publishEntity.getPubvideo()!=null&&publishEntity.getPubvideo()!="") {
+				String[] pubVideoFiles = publishEntity.getPubvideo().split(";");
+				List<String> picVideos = new ArrayList<String>(); 
+				for (String pubFile : pubVideoFiles) {
+					if (pubFile!=null&&pubFile!="") {
+						picVideos.add(pubFile);
+					}
+				}
+				publishDto.setPubVideo(picVideos);
 			}
 			/**
 			 * 将附件String转化成dto类
@@ -258,6 +270,19 @@ public class PublishController extends BaseController {
 				}
 				publishDto.setPicFiles(picFiles);
 				publishDto.setPubCovers(pubCovers);
+			}
+			/**
+			 * 将视频的字符串转化为list
+			 */
+			if (publishEntity.getPubvideo()!=null&&publishEntity.getPubvideo()!="") {
+				String[] pubVideoFiles = publishEntity.getPubvideo().split(";");
+				List<String> picVideos = new ArrayList<String>(); 
+				for (String pubFile : pubVideoFiles) {
+					if (pubFile!=null&&pubFile!="") {
+						picVideos.add(pubFile);
+					}
+				}
+				publishDto.setPubVideo(picVideos);
 			}
 			/**
 			 * 将附件String转化成dto类
@@ -418,7 +443,7 @@ public class PublishController extends BaseController {
 	 */
 	@RequestMapping(value = "/addPublish")
 	@ResponseBody
-	public Object findPublishByID(@RequestParam(required = false) String title,//标题
+	public Object addPublish(@RequestParam(required = false) String title,//标题
 			@RequestParam(required = false) String describe,
 			@RequestParam(required = false) Integer pubcategory,
 			@RequestParam(required = false) Integer publisher,
@@ -432,10 +457,13 @@ public class PublishController extends BaseController {
 			@RequestParam(required = false) MultipartFile picFile5,
 			@RequestParam(required = false) MultipartFile appendix0,
 			@RequestParam(required = false) MultipartFile appendix1,
-			@RequestParam(required = false) MultipartFile appendix2
+			@RequestParam(required = false) MultipartFile appendix2,
+			@RequestParam(required = false) MultipartFile videoFile0,
+			@RequestParam(required = false) MultipartFile videoFile1
 			){
 		MultipartFile[] picFiles = {picFile5, picFile4, picFile3, picFile2, picFile1,picFile0};
 		MultipartFile[] appendixs = {appendix2, appendix1, appendix0};
+		MultipartFile[] videoFiles = {videoFile0, videoFile1};
 		PublishEntity publishEntity = new PublishEntity();
 		//PageParseUtil pageParseUtil = new PageParseUtil();
 		//List<String> publishCovers = pageParseUtil.parse(content);
@@ -447,6 +475,7 @@ public class PublishController extends BaseController {
 		publishEntity.setTitle(title);
 		String picFile = "";
 		String appendixString = "";
+		String videoFile = "";
 		for (MultipartFile file : picFiles) {
 			if (file == null) {
 				continue;
@@ -456,6 +485,17 @@ public class PublishController extends BaseController {
 			UploadFileEntity uploadFileEntity = new UploadFileEntity(fileName, file, dir);
 			ftpService.uploadFile(uploadFileEntity);
 			picFile = picFile + FtpService.READ_URL+"data/"+dir + "/" + fileName+";";
+		}
+		for (MultipartFile file : videoFiles) {
+			if (file == null) {
+				continue;
+			}
+			String prefix=file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".")+1);
+			String dir = String.format("%s/publish/videoFile", baseDir);
+			String fileName = String.format("video_%s.%s", new Date().getTime(), prefix);
+			UploadFileEntity uploadFileEntity = new UploadFileEntity(fileName, file, dir);
+			ftpService.uploadFile(uploadFileEntity);
+			videoFile = videoFile + FtpService.READ_URL+"data/"+dir + "/" + fileName+";";
 		}
 		for (MultipartFile file : appendixs) {
 			if (file == null) {
@@ -470,6 +510,7 @@ public class PublishController extends BaseController {
 		}
 		publishEntity.setPubcover(picFile);
 		publishEntity.setAppendixs(appendixString);
+		publishEntity.setPubvideo(videoFile);
 		/*if (publishCovers!=null&&!publishCovers.isEmpty()) {
 			publishEntity.setPubcover(publishCovers.get(0));
 		}*/

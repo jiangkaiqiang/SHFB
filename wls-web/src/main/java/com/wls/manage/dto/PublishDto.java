@@ -42,6 +42,8 @@ public class PublishDto {
 	private List<String> pubCovers;//显示在列表的封面图片
 	
 	private List<String> picFiles;//显示在作品内部的全部图片
+	
+	private List<String> pubVideo;
 
 	private List<AppendixDto> appendixDtos;
 	public BigInteger getId() {
@@ -196,6 +198,14 @@ public class PublishDto {
 
 	public void setAppendixDtos(List<AppendixDto> appendixDtos) {
 		this.appendixDtos = appendixDtos;
+	}
+
+	public List<String> getPubVideo() {
+		return pubVideo;
+	}
+
+	public void setPubVideo(List<String> pubVideo) {
+		this.pubVideo = pubVideo;
 	}
 	
 }

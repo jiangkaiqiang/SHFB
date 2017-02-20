@@ -61,7 +61,9 @@
             <li id="bar_news"><a href="#/news">资讯</a></li>
             <li id="bar_geek"><a href="#/geek">创客</a></li>
             <li id="bar_post-bar"><a href="#/post-bar">创吧</a></li>
-            <li id="bar_my-space" ng-click="goSpace()" ><a>我的</a></li>
+            <li id="bar_my-space" ng-click="goSpace()" ><a ng-if="user == null || user == undefined || user == '' ||user.id == undefined">我的</a>
+            <a ng-if="user != null && user.id != 0 && user.id != undefined
+            && user != ''"><img style="width: 35px;height: 35px;border-radius: 150px !important;" src="{{user.avatar}}" /></a></li>
            <!--  <li id="bar_my-space"><a href="#/my-space"><span ng-show="user != null && user.id != 0 && user.suproleid==1&& user.id != undefined
             && user != ''" >我的</span></a></li>
             <li id="bar_my-space-company"><a href="#/my-space-company"><span ng-show="user != null && user.id != 0 && user.suproleid==2&& user.id != undefined

@@ -96,6 +96,9 @@ wlsWeb.controller('post-message',function($http, $location,$rootScope, Upload,$s
 		            for(var i = 0; i < $scope.totalAppendixs.length; i++){
 		                data["appendix" + i] = $scope.totalAppendixs[i];
 		            }
+		            for(var i = 0; i < $scope.totalVideoFiles.length; i++){
+		                data["videoFile" + i] = $scope.totalVideoFiles[i];
+		            }
 		       Upload.upload({
 		                url: '/i/publish/addPublish',
 		                headers :{ 'Content-Transfer-Encoding': 'utf-8' },

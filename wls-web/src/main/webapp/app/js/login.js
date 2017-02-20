@@ -11,11 +11,10 @@ wlsWeb.controller('login',function($http, $location, $scope,$state,  $rootScope)
  	    			}
  	    	}).success(function(data) {
  	    		if(data.success){
- 	    			alert("登录成功");
  	    			 $http.get('/i/user/findUser').success(function (data) {
  	    				$rootScope.user = data;
  	    			});
- 	    			window.location.href="#/home";
+ 	    			window.location.href="#/my-space";
  	    		}
  	    		else{
  	    			alert("用户名或密码错误");
