@@ -103,7 +103,7 @@
           <div class="portlet-body"> 
            <!-- BEGIN PRODUCT LIST --> 
            <div class="row blogs-list margin-bottom-20" ng-repeat="publish in publishs"> 
-            <div class="col-md-7 margin-bottom-20"> 
+            <div class="col-md-9 margin-bottom-20"> 
              <div class="blog-item col-md-12"> 
               <div class="col-md-12"> 
                <a href="" ><img class="blog-item-img" src="../../assets/img/people/1.jpg" /> <img class="blog-item-img-v" src="../../assets/img/vip.png" /></a> 
@@ -115,8 +115,10 @@
                  </div> 
                 </div> 
                 <div class="blog-item-body-info col-md-12"> 
-                 <!-- <p>{{publish.describe}} -->
-                   <div ng-if="publish.pubCovers!=null&&publish.pubCovers!=undefined&&publish.pubCovers!=''" ng-repeat="pubcover in publish.pubCovers">
+                  <p style="display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 3;
+                overflow: hidden;">{{publish.content}}
+             </p> 
+             <div style="display: inline-block;" ng-if="publish.pubCovers!=null&&publish.pubCovers!=undefined&&publish.pubCovers!=''" ng-repeat="pubcover in publish.pubCovers">
                  <img src="{{pubcover}}"/> 
              </div>
                 </div> 
