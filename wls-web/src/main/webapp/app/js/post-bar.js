@@ -171,6 +171,7 @@ wlsWeb.controller('post-bar',function($http, $state,$rootScope, $stateParams,$lo
     $scope.praiseBlog = function (publishID) {
     	if($rootScope.user==null||$rootScope.user.id==undefined){
     		alert("请先登录再点赞");
+    		window.location.href="#/login";
     		return;
     	}
     	$http.get('/i/publish/praisePublish', {

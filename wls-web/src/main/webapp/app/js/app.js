@@ -24,6 +24,7 @@ wlsWeb.factory('userService',['$rootScope','$http', function($rootScope,$http){
 	        $rootScope.goSpace = function() {
 	        	if($rootScope.user.id==undefined){
 	        		alert("请先登录");
+	        		window.location.href="#/login";
 	        	}
 	        	else{
 	        		if($rootScope.user.suproleid==1){
