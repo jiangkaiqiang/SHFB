@@ -78,7 +78,7 @@ public class PublishController extends BaseController {
 		for (PublishEntity publishEntity : publishEntities) {
 			PublishDto publishDto = new PublishDto();
 			publishDto.setId(publishEntity.getId());
-			publishDto.setContent(publishEntity.getContent());
+			publishDto.setContent(publishEntity.getContent().replaceAll("\r\n", "<br>"));
 			publishDto.setPubcategory(publishEntity.getPubcategory());
 			switch (publishDto.getPubcategory()) {
 			case 1:
@@ -221,7 +221,7 @@ public class PublishController extends BaseController {
 		for (PublishEntity publishEntity : publishEntities) {
 			PublishDto publishDto = new PublishDto();
 			publishDto.setId(publishEntity.getId());
-			publishDto.setContent(publishEntity.getContent());
+			publishDto.setContent(publishEntity.getContent().replaceAll("\r\n", "<br>"));
 			publishDto.setPubcategory(publishEntity.getPubcategory());
 			switch (publishDto.getPubcategory()) {
 			case 1:

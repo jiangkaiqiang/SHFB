@@ -11,11 +11,10 @@ wlsWeb.controller('post-bar',function($http, $state,$rootScope, $stateParams,$lo
 	$scope.schools = [];
 	$scope.AllCategory = [
 	                      {id:"8",name:"全部"},
-	                      {id:"1",name:"科技类"},
-	                      {id:"2",name:"互联网类"},
-	                      {id:"3",name:"校园类"},
-	                      {id:"4",name:"财经类"},
-	                      {id:"5",name:"创业类"}
+	                      {id:"1",name:"创意作品"},
+	                      {id:"2",name:"知识分享"},
+	                      {id:"3",name:"问答互助"},
+	                      {id:"4",name:"校园招聘"}
 	];
     $scope.goPostMessage = function() {
     	if($rootScope.user!=null&&$rootScope.user.id!=undefined){

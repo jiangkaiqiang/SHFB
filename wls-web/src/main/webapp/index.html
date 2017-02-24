@@ -60,7 +60,7 @@
             <li id="bar_home"><a href="#/home">首页</a></li>
             <li id="bar_news"><a href="#/news">资讯</a></li>
             <li id="bar_geek"><a href="#/geek">创客</a></li>
-            <li id="bar_post-bar"><a href="#/post-bar">创吧</a></li>
+            <li id="bar_post-bar"><a href="#/post-bar">树屋</a></li>
             <li id="bar_my-space" ng-click="goSpace()" ><a ng-if="user == null || user == undefined || user == '' ||user.id == undefined">我的</a>
             <a ng-if="user != null && user.id != 0 && user.id != undefined
             && user != ''"><img style="width: 35px;height: 35px;border-radius: 150px !important;" src="{{user.avatar}}" /></a></li>
@@ -94,7 +94,7 @@
         <!-- BEGIN SOCIAL ICONS -->
         <div class="col-md-6 col-sm-6">
           <div class="pull-right copyright">
-            <a href="javascript:void(0);">免责</a>
+            <a href="javascript:void(0);">声明</a>
             <span>|</span>
             <a href="javascript:void(0);">关于我们</a>
             <span>|</span>
@@ -158,7 +158,7 @@ $(function (){
 			else{
 				var t = url.indexOf('post-bar');
 			    if(t>=0){
-			      s=3
+			      s=3;
 				}
 			    else		
 	              s=4;
@@ -169,7 +169,7 @@ $(function (){
 		//alert($(this).find("a").text());
 		var currentNav = $(this).children("a:eq(0)").text();
 		//console.log(currentNav + " == " + s);
-		if(currentNav == "主页" && s==0){
+		if(currentNav == "首页" && s==0){
 			$(this).addClass("current");
 		}
 		if(currentNav == "资讯" && s==1){
@@ -179,7 +179,7 @@ $(function (){
 		if(currentNav == "创客" && s==2){
 			$(this).addClass("current");
 		}
-		if(currentNav == "创吧" && s==3){
+		if(currentNav == "树屋" && s==3){
 			 $(this).addClass("current");
 		}
 		if(currentNav == "我的" && s==4){

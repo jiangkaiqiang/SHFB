@@ -155,7 +155,7 @@ wlsWeb.controller('my-space',function($http, $location,$rootScope, $scope,$state
 								||$scope.user.roleid==undefined||$scope.user.signature==undefined||
 								($scope.user.skill1==undefined&&$scope.user.skill2==undefined)
 								){
-							alert("请完善个人信息，否则将不会出现在极客的搜索列表之中");
+							$("#personsal-info_alter").modal("show");
 						}
 					 }
 					else{
@@ -230,6 +230,10 @@ wlsWeb.controller('my-space',function($http, $location,$rootScope, $scope,$state
 				alert("技能不能超过4个字");
 				return;
 			}
+			if($scope.user.interest.length>15){
+				alert("兴趣爱好不能超过15个字");
+				return;
+			}
 			if($scope.user.sex=="男"){
 				$scope.sex = 0;
 			}
@@ -254,7 +258,6 @@ wlsWeb.controller('my-space',function($http, $location,$rootScope, $scope,$state
 		    		}
 		    	}).success(function(data) {
 		    		if(data.success){
-		    			alert("信息修改成功");
 		    			$state.reload();
 		    		}
 		    		else{

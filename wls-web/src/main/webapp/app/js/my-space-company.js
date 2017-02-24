@@ -74,7 +74,6 @@ wlsWeb.controller('my-space-company',function($http, $location,$rootScope, $scop
 	    		}
 	    	}).success(function(data) {
 	    		if(data.success){
-	    			alert("信息修改成功");
 	    			$state.reload();
 	    		}
 	    		else{

@@ -23,7 +23,7 @@
         <h4 class="margin-bottom-20 well well-sm">{{publish.title}}</h4> 
         <p><i class="fa fa-user"></i> {{publish.publishername}} &nbsp;&nbsp;&nbsp;&nbsp; <i class="fa fa-calendar"></i> {{publish.pubtime}} 
         &nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-tags"></i> {{publish.pubcategoryname}}</p> 
-        <div style="font-size: 14px;line-height: 1.75;text-indent: 2em;margin: 15px 0;">{{publish.content}}</div>
+        <div id="pubContent" style="font-size: 14px;line-height: 1.75;margin: 15px 0;"></div>
         <h4 ng-if="publish.picFiles!=null&&publish.picFiles!=undefined&&publish.picFiles!=''" class="well well-sm">作品图片</h4>
         <div class="row">
 	        <div id="pubContent" ng-if="publish.picFiles!=null&&publish.picFiles!=undefined&&publish.picFiles!=''" style="background: #fff;"
