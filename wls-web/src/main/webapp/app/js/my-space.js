@@ -279,7 +279,7 @@ wlsWeb.controller('my-space',function($http, $location,$rootScope, $scope,$state
 	               headers :{ 'Content-Transfer-Encoding': 'utf-8' },
 	               data: data
 	           }).then(function (resp) {
-	    		   $state.reload();
+	    		   window.location.reload();
 	           });
 	       };
 	       

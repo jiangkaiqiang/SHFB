@@ -60,6 +60,7 @@
 		    <if test="keyword != null">
 		        AND title like "%"#{keyword}"%"
 		    </if>
+		    AND coverpiclist is not null AND coverpiclist != ''
 		 </where>
          order by `time` desc
     </select>

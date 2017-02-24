@@ -109,6 +109,9 @@ public class UserController extends BaseController {
 		if (askUserID==null) {
 			return false;
 		}
+		if(spaceUserID.intValue()==askUserID.intValue()){
+			return true;
+		}
 		List<ResumeVisEntity> resumeVisEntities = resumeVisMapper.findvisibleridByOwnerId(spaceUserID);
 		for (ResumeVisEntity resumeVisEntity : resumeVisEntities) {
 			if (askUserID.intValue()==resumeVisEntity.getVisiblerid().intValue()) {

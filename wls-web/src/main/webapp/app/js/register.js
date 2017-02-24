@@ -105,14 +105,14 @@ wlsWeb.controller('register',function($http, $location, $scope,$rootScope) {
    		if(data.success){
    		   $http.get('/i/user/findUser').success(function (data) {
 				$rootScope.user = data;
+				if($rootScope.user.suproleid==1){
+	    			 window.location.href="#/my-space";
+	    			  
+	   			}
+	   			else{
+	   			    window.location.href="#/my-space-company";
+	   			}
 			});
-   			if($scope.suproleid==1){
-    			 window.location.href="#/my-space";
-    			  
-   			}
-   			else{
-   			    window.location.href="#/my-space-company";
-   			}
    		}
 	   });
   };

@@ -35,10 +35,11 @@ public class TaskJob {
     public void job6() {  
         HttpService httpService = new HttpServiceImpl();
         httpService.sendGet(url+"/i/information/addInformationWithChinanews",20000);
-    }  
+    } 
+    /*
     @Scheduled(cron = "0 48 23 * * ?")  
     public void job7() {  
         HttpService httpService = new HttpServiceImpl();
         httpService.sendGet(url+"/i/information/addInformationWithTengxunTech",20000);
-    }  
+    }  */
 }

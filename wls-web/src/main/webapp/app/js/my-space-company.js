@@ -97,7 +97,7 @@ wlsWeb.controller('my-space-company',function($http, $location,$rootScope, $scop
                headers :{ 'Content-Transfer-Encoding': 'utf-8' },
                data: data
            }).then(function (resp) {
-    		   $state.reload();
+        	   window.location.reload();
            });
        };
        
