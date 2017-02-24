@@ -325,7 +325,7 @@ wlsWeb.controller('my-space',function($http, $location,$rootScope, $scope,$state
 	            }
 	        }).success(function (data) {
 	        	if(data.success){
-	    			alert("删除成功");
+	    			//alert("删除成功");
 	    			$scope.educates = data.data;
 	    		}
 	        });
@@ -350,7 +350,7 @@ wlsWeb.controller('my-space',function($http, $location,$rootScope, $scope,$state
 			    			 $("#education_form").css("display","none");
 			    		       $("#body_edu").css("display","");
 			    		       $("#body_edu_icon").css("display","");
-			    			alert("教育经历添加成功");
+			    			//alert("教育经历添加成功");
 			    			 $scope.educates = data.data;
 			    		}
 			    		else{
@@ -369,7 +369,7 @@ wlsWeb.controller('my-space',function($http, $location,$rootScope, $scope,$state
 			            }
 			        }).success(function (data) {
 			        	if(data.success){
-			    			alert("删除成功");
+			    			//alert("删除成功");
 			    			 $scope.jobs = data.data;
 			    		}
 			        });
@@ -392,7 +392,7 @@ wlsWeb.controller('my-space',function($http, $location,$rootScope, $scope,$state
 					    	}).success(function(data) {
 					    		if(data.success){
 					    			 $("#work_form").css("display","none");
-					    			alert("工作经历添加成功");
+					    			//alert("工作经历添加成功");
 					    			 $scope.jobs = data.data;
 					    		}
 					    		else{
@@ -411,7 +411,7 @@ wlsWeb.controller('my-space',function($http, $location,$rootScope, $scope,$state
 					            }
 					        }).success(function (data) {
 					        	if(data.success){
-					    			alert("删除成功");
+					    			//alert("删除成功");
 					    			$scope.honors = data.data;
 					    		}
 					        });
@@ -429,7 +429,7 @@ wlsWeb.controller('my-space',function($http, $location,$rootScope, $scope,$state
 							    	}).success(function(data) {
 							    		if(data.success){
 							    			 $("#honor_form").css("display","none");
-							    			alert("所获荣誉添加成功");
+							    			//alert("所获荣誉添加成功");
 							    			$scope.honors = data.data;
 							    		}
 							    		else{
@@ -447,7 +447,7 @@ wlsWeb.controller('my-space',function($http, $location,$rootScope, $scope,$state
 							            }
 							        }).success(function (data) {
 							        	if(data.success){
-							    			alert("删除成功");
+							    			//alert("删除成功");
 							    			$scope.skills = data.data;
 							    		}
 							        });
@@ -464,7 +464,7 @@ wlsWeb.controller('my-space',function($http, $location,$rootScope, $scope,$state
 									    	}).success(function(data) {
 									    		if(data.success){
 									    			 $("#skill_form").css("display","none");
-									    			alert("技能添加成功");
+									    			//alert("技能添加成功");
 									    			$scope.skills = data.data;
 									    		}
 									    		else{
@@ -510,7 +510,7 @@ wlsWeb.controller('my-space',function($http, $location,$rootScope, $scope,$state
 									    			messageSenderID : $scope.user.id
 									    			}
 									    	}).success(function(data) {
-									    		alert("删除成功");
+									    		//alert("删除成功");
 									    		$scope.findMessageByReceiverId();
 										   });
 										   }
@@ -540,7 +540,7 @@ wlsWeb.controller('my-space',function($http, $location,$rootScope, $scope,$state
 									    			userID : $scope.user.id
 									    			}
 									    	}).success(function(data) {
-									    		alert("删除成功");
+									    		//alert("删除成功");
 									    		$scope.publishs = data;
 									        	$scope.publishNum = $scope.publishs.length;
 										   });

@@ -127,7 +127,7 @@ wlsWeb.controller('my-space-company',function($http, $location,$rootScope, $scop
 	    			messageSenderID : $scope.user.id
 	    			}
 	    	}).success(function(data) {
-	    		alert("删除成功");
+	    		//alert("删除成功");
 	    		$scope.findMessageByReceiverId();
 		   });
 		   }
