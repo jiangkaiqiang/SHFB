@@ -67,21 +67,20 @@ public class CometUtil extends ConnectListener implements ServletContextListener
      */
     public void pushTo(MessageEntity comet){
         try {
-            ConnectEvent connEvent = (ConnectEvent) CacheManager.getContent(comet.getReceiverid()+"").getValue();
+            ConnectEvent connEvent = (ConnectEvent) CacheManager.getContent(comet.getReceiverid().intValue()+"").getValue();
             final CometConnection conn = connEvent.getConn();
                //建立连接和用户的关系  
-               doCache(conn,comet.getReceiverid()+"");
+               doCache(conn,comet.getReceiverid().intValue()+"");
                final String connId = conn.getId(); 
                CometEngine engine = CometContext.getInstance().getEngine();
                if (CacheManager.getContent(connId).isExpired()) {  
-                   doCache(conn,comet.getReceiverid()+"");  
+                   doCache(conn,comet.getReceiverid().intValue()+"");  
                }
                //推送到指定的客户端  
               engine.sendTo(Constant.CHANNEL_MSGCOUNT, engine.getConnection(connId), 1);
-              engine.sendTo(Constant.CHANNEL_MSG_DATA, engine.getConnection(connId), comet.getReceiverid());
+              engine.sendTo(Constant.CHANNEL_MSG_DATA, engine.getConnection(connId), comet.getReceiverid().intValue());
         } catch (Exception e) {
             // TODO: handle exception
-            System.out.println(e.getMessage());
         }
     }
 }

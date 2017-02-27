@@ -38,6 +38,15 @@ wlsWeb.factory('userService',['$rootScope','$http', function($rootScope,$http){
 	};
 }]);
 
+JS.Engine.start('conn');
+JS.Engine.on(
+        { 
+           msgData : function(msgData){
+        	   $(".msgPush").show();
+        	   setTimeout(function(){$(".msgPush").hide();}, 3000);
+           },
+       }
+   );
 
 wlsWeb.config(function ($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise("/home");

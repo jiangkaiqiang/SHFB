@@ -21,6 +21,7 @@ import com.wls.manage.dto.MessageDto;
 import com.wls.manage.entity.MessageEntity;
 import com.wls.manage.entity.ResumeVisEntity;
 import com.wls.manage.entity.UserEntity;
+import com.wls.manage.util.CometUtil;
 import com.wls.manage.util.ResponseData;
 /**
  * 
@@ -154,6 +155,8 @@ public class MessageController extends BaseController {
 		messageEntity.setReceiverid(BigInteger.valueOf(messageReceiverID));
 		messageEntity.setSenderid(BigInteger.valueOf(messageSenderID));
 		messageDao.insertMessage(messageEntity);
+		CometUtil cometUtil = new CometUtil();
+		cometUtil.pushTo(messageEntity);
 		if (msgcategory.equals("1")) {
 			return ResponseData.newSuccess("消息已发送，等待对方回复");
 		}

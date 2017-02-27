@@ -78,7 +78,7 @@
 
 	
 
-	<!--  <listener>
+	  <listener>
 
         <description>Comet4J容器侦听</description>
 
@@ -113,7 +113,7 @@
         <url-pattern>/conn</url-pattern>
 
     </servlet-mapping>  
- -->
+ 
 
 
 	<filter>  
