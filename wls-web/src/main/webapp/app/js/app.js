@@ -42,8 +42,8 @@ JS.Engine.start('conn');
 JS.Engine.on(
         { 
            msgData : function(msgData){
-        	   $(".msgPush").show();
-        	   setTimeout(function(){$(".msgPush").hide();}, 3000);
+        	   $("#msgPush").show();
+        	   setTimeout(function(){$("#msgPush").hide();}, 3000);
            },
        }
    );
