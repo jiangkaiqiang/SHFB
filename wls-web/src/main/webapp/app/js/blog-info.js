@@ -98,6 +98,21 @@ wlsWeb.controller('blog-info',function($http, $rootScope,$location,$state, $stat
                 $("#reply_area-"+commentID).css("display","none");
             };
             $scope.goUserSpace = function(userID) {
-              	 $state.go('my-space-ask', {"spaceID": userID});
+            	$http.get('/i/user/findUserByID', {
+    	            params: {
+    	                "spaceUserID": userID
+    	            }
+    	        }).success(function(data){
+    				 $scope.user = data;
+    				 if($scope.user.suproleid==1){
+    					 $state.go('my-space-ask', {"spaceID": userID});
+    				 }
+    				 else if($scope.user.suproleid==2){
+    					 $state.go('my-space-company-ask', {"spaceID": userID});
+    				 }
+    				 else{
+    					 alert("用户不存在！！");
+    				 }
+        	 });
            	};
 });

@@ -23,7 +23,7 @@
     <div class="container"> 
      <div class="container-inner"> 
       <em> <a data-toggle="modal" id="btn_edit_logo_com" title="修改LOGO"><img src="{{user.avatar}}" alt="头像" title="点击修改头像" /></a> 
-      <p>{{user.username}} <span ng-if="user.sex=='男'"><i class="fa fa-male"></i></span> <span ng-if="user.sex=='女'"><i class="fa fa-female"></i></span> 
+      <p>{{user.nickname}} <span ng-if="user.sex=='男'"><i class="fa fa-male"></i></span> <span ng-if="user.sex=='女'"><i class="fa fa-female"></i></span> 
       <span class="badge bg-yellow-casablanca">Lv {{level}}</span></p>
        <p ng-if="user.signature!=undefined" style="font-size:14px">{{user.signature}}</p> 
        <p ng-if="user.signature==undefined" style="font-size:14px">此处为您的个性签名，可在名片中编辑。。。</p> 
@@ -71,8 +71,8 @@
               </div> 
               <div class="business-card-body col-md-8"> 
                <h2>
-               <span ng-if="user.realname!=undefined">{{user.realname}}</span>
-               <span ng-if="user.realname==undefined">编辑姓名</span>
+               <span ng-if="user.nickname!=undefined">{{user.nickname}}</span>
+               <span ng-if="user.nickname==undefined">编辑姓名</span>
                <span ng-if="user.position!=undefined">{{user.position}}</span> 
                <span ng-if="user.position==undefined">编辑职位</span> 
                </h2> 
@@ -97,7 +97,7 @@
                </a> 
               </div> 
               <div class="business-card-body col-md-8"> 
-               <p><b>姓名:</b><input type="text" class="form-control" placeholder="姓名" ng-model="user.realname" /></p>
+               <p><b>姓名:</b><input type="text" class="form-control" placeholder="姓名" ng-model="user.nickname" /></p>
                <p><b>性别:</b><select id="editsexselect" class="form-control" ng-model="user.sex" ><option>男</option><option>女</option></select></p>
                <p><b>职位:</b><input type="text" class="form-control" placeholder="职位" ng-model="user.position"  /></p>   
                <p><b>手机:</b><input type="text" class="form-control" placeholder="手机" ng-model="user.telephone"  /></p> 

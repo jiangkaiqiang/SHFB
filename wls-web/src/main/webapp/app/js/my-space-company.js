@@ -62,7 +62,7 @@ wlsWeb.controller('my-space-company',function($http, $location,$rootScope, $scop
 		}
 	    	$http.get( "/i/user/updateUser",{
 	    		params : {
-	    			realname : $scope.user.realname,
+	    			nickname : $scope.user.nickname,
 	    			telephone : $scope.user.telephone,
 	    			position: $scope.user.position,
 	    			company : $scope.user.company,
@@ -149,7 +149,22 @@ wlsWeb.controller('my-space-company',function($http, $location,$rootScope, $scop
 		   });
 	   };
 	   $scope.goUserSpace = function(userID) {
-	    	 $state.go('my-space-ask', {"spaceID": userID});
+		   $http.get('/i/user/findUserByID', {
+	            params: {
+	                "spaceUserID": userID
+	            }
+	        }).success(function(data){
+				 $scope.user = data;
+				 if($scope.user.suproleid==1){
+					 $state.go('my-space-ask', {"spaceID": userID});
+				 }
+				 else if($scope.user.suproleid==2){
+					 $state.go('my-space-company-ask', {"spaceID": userID});
+				 }
+				 else{
+					 alert("用户不存在！！");
+				 }
+   	 });
 		};
 	    
 		 $scope.responseMessage = function(messageID){

@@ -152,7 +152,12 @@ public class InformationController extends BaseController {
 					commentDto.setId(commentEntity.getId());
 					UserEntity commentuserEntity = userMapper.findUserById(commentEntity.getCommenterid().intValue());
 					commentDto.setUseravatar(commentuserEntity.getAvatar());
-					commentDto.setUsernickname(commentuserEntity.getNickname());
+					if (commentuserEntity.getNickname()==null) {
+						commentDto.setUsernickname("游客"+commentuserEntity.getId());
+					}
+					else{
+							commentDto.setUsernickname(commentuserEntity.getNickname());
+					}
 					List<ResponseEntity> responseEntities = responseMapper.findresponsesByResponseId(commentEntity.getId().intValue());
 					List<ResponseDto> responseDtos = new ArrayList<ResponseDto>();
 					if (responseEntities!=null&&!responseEntities.isEmpty()) {
@@ -166,7 +171,12 @@ public class InformationController extends BaseController {
 						   responseDto.setResponsetime(responseEntity.getResponsetime());
 						   UserEntity responseuserEntity = userMapper.findUserById(responseEntity.getResponserid().intValue());
 						   responseDto.setUseravatar(responseuserEntity.getAvatar());
-						   responseDto.setUsernickname(responseuserEntity.getNickname());
+						   if (responseuserEntity.getNickname()==null) {
+							   responseDto.setUsernickname("游客"+responseuserEntity.getId());
+						   }
+						   else {
+							   responseDto.setUsernickname(responseuserEntity.getNickname());
+						   }
 						   responseDtos.add(responseDto);
 						}	
 					}

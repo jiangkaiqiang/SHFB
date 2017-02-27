@@ -159,7 +159,12 @@ public class PublishController extends BaseController {
 			}
 			UserEntity userEntity = userMapper.findUserById(publishEntity.getPublisher().intValue());
 			if (userEntity!=null) {
-				publishDto.setPublishername(userEntity.getNickname());
+				if (userEntity.getNickname()==null) {
+					publishDto.setPublishername("游客"+userEntity.getId());
+				}
+				else {
+					publishDto.setPublishername(userEntity.getNickname());
+				}
 				publishDto.setPublisheravatar(userEntity.getAvatar());
 			}
 		
@@ -176,7 +181,12 @@ public class PublishController extends BaseController {
 					commentDto.setId(commentEntity.getId());
 					UserEntity commentuserEntity = userMapper.findUserById(commentEntity.getCommenterid().intValue());
 					commentDto.setUseravatar(commentuserEntity.getAvatar());
-					commentDto.setUsernickname(commentuserEntity.getNickname());
+					if (commentuserEntity.getNickname()==null) {
+						commentDto.setUsernickname("游客"+commentuserEntity.getId());
+					}
+					else{
+							commentDto.setUsernickname(commentuserEntity.getNickname());
+					}
 					List<ResponseEntity> responseEntities = responseMapper.findresponsesByResponseId(commentEntity.getId().intValue());
 					List<ResponseDto> responseDtos = new ArrayList<ResponseDto>();
 					if (responseEntities!=null&&!responseEntities.isEmpty()) {
@@ -190,7 +200,12 @@ public class PublishController extends BaseController {
 						   responseDto.setResponsetime(responseEntity.getResponsetime());
 						   UserEntity responseuserEntity = userMapper.findUserById(responseEntity.getResponserid().intValue());
 						   responseDto.setUseravatar(responseuserEntity.getAvatar());
-						   responseDto.setUsernickname(responseuserEntity.getNickname());
+						   if (responseuserEntity.getNickname()==null) {
+							   responseDto.setUsernickname("游客"+responseuserEntity.getId());
+						   }
+						   else {
+							   responseDto.setUsernickname(responseuserEntity.getNickname());
+						   }
 						   responseDtos.add(responseDto);
 						}	
 					}
@@ -302,7 +317,12 @@ public class PublishController extends BaseController {
 			}
 			UserEntity userEntity = userMapper.findUserById(publishEntity.getPublisher().intValue());
 			if (userEntity!=null) {
-				publishDto.setPublishername(userEntity.getNickname());
+				if (userEntity.getNickname()==null) {
+					publishDto.setPublishername("游客"+userEntity.getId());
+				}
+				else {
+					publishDto.setPublishername(userEntity.getNickname());
+				}
 				publishDto.setPublisheravatar(userEntity.getAvatar());
 			}
 		
@@ -319,7 +339,12 @@ public class PublishController extends BaseController {
 					commentDto.setId(commentEntity.getId());
 					UserEntity commentuserEntity = userMapper.findUserById(commentEntity.getCommenterid().intValue());
 					commentDto.setUseravatar(commentuserEntity.getAvatar());
-					commentDto.setUsernickname(commentuserEntity.getNickname());
+					if (commentuserEntity.getNickname()==null) {
+						commentDto.setUsernickname("游客"+commentuserEntity.getId());
+					}
+					else{
+							commentDto.setUsernickname(commentuserEntity.getNickname());
+					}
 					List<ResponseEntity> responseEntities = responseMapper.findresponsesByResponseId(commentEntity.getId().intValue());
 					List<ResponseDto> responseDtos = new ArrayList<ResponseDto>();
 					if (responseEntities!=null&&!responseEntities.isEmpty()) {
@@ -333,7 +358,12 @@ public class PublishController extends BaseController {
 						   responseDto.setResponsetime(responseEntity.getResponsetime());
 						   UserEntity responseuserEntity = userMapper.findUserById(responseEntity.getResponserid().intValue());
 						   responseDto.setUseravatar(responseuserEntity.getAvatar());
-						   responseDto.setUsernickname(responseuserEntity.getNickname());
+						   if (responseuserEntity.getNickname()==null) {
+							   responseDto.setUsernickname("游客"+responseuserEntity.getId());
+						   }
+						   else {
+							   responseDto.setUsernickname(responseuserEntity.getNickname());
+						   }
 						   responseDtos.add(responseDto);
 						}	
 					}

@@ -153,7 +153,9 @@ wlsWeb.controller('my-space-ask',function($http, $location, $scope,$state, $stat
 						else if($scope.user.score>=500){
 							$scope.level = 3;
 						}
-						//$("#tab-1").addClass("in active");
+						else{
+							$scope.level = 1;
+						}
 					 }
 			    });
 		   };
@@ -239,6 +241,21 @@ wlsWeb.controller('my-space-ask',function($http, $location, $scope,$state, $stat
 	     });
 		};
 		$scope.goUserSpace = function(userID) {
-	    	 $state.go('my-space-ask', {"spaceID": userID});
+			$http.get('/i/user/findUserByID', {
+	            params: {
+	                "spaceUserID": userID
+	            }
+	        }).success(function(data){
+				 $scope.user = data;
+				 if($scope.user.suproleid==1){
+					 $state.go('my-space-ask', {"spaceID": userID});
+				 }
+				 else if($scope.user.suproleid==2){
+					 $state.go('my-space-company-ask', {"spaceID": userID});
+				 }
+				 else{
+					 alert("用户不存在！！");
+				 }
+    	 });
 		};
 });

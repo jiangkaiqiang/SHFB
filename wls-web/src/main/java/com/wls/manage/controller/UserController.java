@@ -610,10 +610,9 @@ public class UserController extends BaseController {
 						if (userEntity.getNickname()==null) {
 							userDto.setNickname("游客"+userEntity.getId());
 						}
-						else {
-							userDto.setNickname(userEntity.getNickname());
+						else{
+						    userDto.setNickname(userEntity.getNickname());
 						}
-						
 						if (userEntity.getScore()!=null) {
 							if(userEntity.getScore().intValue()<100){
 								userDto.setLevel(1);

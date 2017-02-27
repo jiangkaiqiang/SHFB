@@ -91,5 +91,9 @@ wlsWeb.config(function ($stateProvider, $urlRouterProvider) {
         url: '/my-space-ask/:spaceID',
         controller: 'my-space-ask',
         templateUrl: 'app/template/my-space-ask.html'
+    }).state('my-space-company-ask', {
+        url: '/my-space-company-ask/:spaceID',
+        controller: 'my-space-company-ask',
+        templateUrl: 'app/template/my-space-company-ask.html'
     });
 });
