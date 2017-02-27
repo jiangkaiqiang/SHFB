@@ -184,6 +184,7 @@ public class MessageController extends BaseController {
 			messageEntity.setReceiverid(BigInteger.valueOf(messageReceiverID));
 			messageEntity.setSenderid(BigInteger.valueOf(messageSenderID));
 			messageDao.insertMessage(messageEntity);
+			new CometUtil().pushTo(messageEntity);
 		}
 		if (msgcategory.equals("2")) {
 			MessageEntity messageEntity = new MessageEntity();
@@ -196,6 +197,7 @@ public class MessageController extends BaseController {
 			resumeVisEntity.setOwnerid(BigInteger.valueOf(messageSenderID));
 			resumeVisEntity.setVisiblerid(BigInteger.valueOf(messageReceiverID));
 			resumeVisMapper.insertResumeVis(resumeVisEntity);
+			new CometUtil().pushTo(messageEntity);
 		}
 		messageDao.deleteMessage(messageID);
 		return ResponseData.newSuccess("回复成功");

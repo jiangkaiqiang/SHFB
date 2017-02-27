@@ -195,7 +195,7 @@ wlsWeb.controller('my-space-ask',function($http, $location, $scope,$state, $stat
 		};
 		
 		$scope.askResume = function(){
-			$http.get('/i/message/addMessage', {
+			$http.post('/i/message/addMessage', {
 	            params: {
 	            	"messageSenderID" :$rootScope.user.id,
 	                "messageReceiverID": $scope.spaceID,
