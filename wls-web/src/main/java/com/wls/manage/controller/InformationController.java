@@ -18,11 +18,13 @@ import org.springframework.web.multipart.MultipartFile;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.wls.manage.crawler.baijia.ListCrawler_baijia;
 import com.wls.manage.crawler.chinanews.entertainment.ListCrawler_chinaenter;
 import com.wls.manage.crawler.chuangyebang.chuangye.ListCrawler_cyb;
 import com.wls.manage.crawler.iresearch.events.ListCrawler_iresearch;
 import com.wls.manage.crawler.iyiou.heikeji.ListCrawler_iyiou_heikeji;
 import com.wls.manage.crawler.iyiou.wenchuang.ListCrawler_iyiou_wenchuang;
+import com.wls.manage.crawler.ly.ListCrawler_ly;
 import com.wls.manage.crawler.studentonline.psychology.ListCrawler_stuonline;
 import com.wls.manage.crawler.tengxun.scitech.ListCrawler_txscitec;
 import com.wls.manage.dao.CommentMapper;
@@ -255,6 +257,33 @@ public class InformationController extends BaseController {
 		}
 	}
 	
+	
+	/**
+	 * 百度百家前沿技术-科技类1
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/addInformationWithBJ")
+	@ResponseBody
+	public Object addInformationWithBJ() throws Exception {
+		ListCrawler_baijia listCrawler = new ListCrawler_baijia();
+		List<NewInfomationDto> newInfomationDtos = listCrawler.parse();
+		insertInformationByType(newInfomationDtos,"1");
+		return ResponseData.newSuccess("添加成功");
+	}
+	/**
+	 * 猎云网-创业3
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/addInformationWithLY")
+	@ResponseBody
+	public Object addInformationWithLY() throws Exception {
+		ListCrawler_ly listCrawler = new ListCrawler_ly();
+		List<NewInfomationDto> newInfomationDtos = listCrawler.parse();
+		insertInformationByType(newInfomationDtos,"3");
+		return ResponseData.newSuccess("添加成功");
+	}
 	/**
 	 * 腾讯新闻科技类
 	 * @return
