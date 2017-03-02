@@ -1,4 +1,12 @@
 wlsWeb.controller('register',function($http, $location, $scope,$rootScope) {
+	if($rootScope.user!=undefined&&$rootScope.user.id!=undefined){
+		   if($rootScope.user.suproleid==1){
+	    			 window.location.href="#/my-space";
+	   			}
+	   			else{
+	   			    window.location.href="#/my-space-company";
+	   			}
+	}
 	$scope.suproleid = 1;
 	$scope.company_gate = function() {
        $scope.suproleid = 2;
@@ -107,7 +115,6 @@ wlsWeb.controller('register',function($http, $location, $scope,$rootScope) {
 				$rootScope.user = data;
 				if($rootScope.user.suproleid==1){
 	    			 window.location.href="#/my-space";
-	    			  
 	   			}
 	   			else{
 	   			    window.location.href="#/my-space-company";

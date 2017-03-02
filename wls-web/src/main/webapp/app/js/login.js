@@ -1,4 +1,12 @@
 wlsWeb.controller('login',function($http, $location, $scope,$state,  $rootScope) {
+   if($rootScope.user!=undefined&&$rootScope.user.id!=undefined){
+	   if($rootScope.user.suproleid==1){
+    			 window.location.href="#/my-space";
+   			}
+   			else{
+   			    window.location.href="#/my-space-company";
+   			}
+   }
    $scope.login = function() {
 	   if($scope.username!=""&&
 			   $scope.password!=""&&
@@ -14,11 +22,11 @@ wlsWeb.controller('login',function($http, $location, $scope,$state,  $rootScope)
  	    			 $http.get('/i/user/findUser').success(function (data) {
  	    				$rootScope.user = data;
  	    				if($rootScope.user.suproleid==1){
- 	   	      			 window.location.href="#/my-space";
- 	   	     			}
- 	   	     			else{
- 	   	     			    window.location.href="#/my-space-company";
- 	   	     			}
+ 	  	    			 window.location.href="#/my-space";
+ 	  	   			}
+ 	  	   			else{
+ 	  	   			    window.location.href="#/my-space-company";
+ 	  	   			}
  	    			});
  	    		}
  	    		else{

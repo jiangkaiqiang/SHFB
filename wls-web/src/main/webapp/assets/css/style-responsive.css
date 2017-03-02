@@ -234,7 +234,7 @@
 	-ms-transform: translate3d(-20px,15px,0); /* IE 9 */
 }
 .geeks-list .geek-item .geek-item-content{
-    float: left;
+    /*float: left;*/
     overflow: hidden;
 }
 .geeks-list .geek-item .geek-item-name{
@@ -269,9 +269,24 @@
     margin: 0 2px 5px 0;
     display: block;
 }
+.item h3{
+	padding-top:20px;
+}
+.news-block-tags em{
+	display:none !important;
+}
+.geek-item-tags{
+	  display:none !important;
+    }
+	.blog-item-body{
+		padding-left:60px;
+	}
 }
 /*<=767*/
 @media (max-width: 767px) {
+	.login {
+    background-size:auto !important;
+    }
 	.choose-us-block .img-responsive {
 	  margin: 0 auto;
 	}
@@ -298,6 +313,9 @@
 }
 /*<=600*/
 @media (max-width: 600px) {
+	.login {
+    background-size:auto !important;
+    }
 	.large_bold_white{
 		margin-top: 70px;
 		font-size:40px;
@@ -320,6 +338,9 @@
 		position:relative !important;
 		margin-bottom:10px;
 	}
+	.item h3{
+	padding-top:17px;
+    }
 }
 /*<=480*/
 @media (max-width: 480px) {
@@ -339,6 +360,27 @@
 	.promo-like-text {
 	  display:none;
 	}
+	.item h3{
+	padding-top:15px;
+    }
+	.news-block-tags{
+	display:none !important;
+    }
+	.geek-item-tags{
+	  display:none !important;
+    }
+	.business-card-line img{
+	  width:80% !important;
+	}
+	.blog-item-body-title  .blog-item-time{
+		display:none !important;
+	}
+	.blog-item-body img{
+		width:100% !important;
+	}
+	.login {
+    background-size:auto !important;
+    }
 }
 /*<=400*/
 @media (max-width: 400px) {
@@ -371,6 +413,7 @@
     font: 10px Microsoft YaHei;
     margin:0px 0px 5px 95px;
 }
+
 }
 /*<=320*/
 @media (max-width: 320px) {

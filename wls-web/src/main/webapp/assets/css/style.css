@@ -2142,7 +2142,7 @@ table .product-quantity .input-group {
 	-ms-transform: translate3d(-26px,35px,0); /* IE 9 */
 }
 .geeks-list .geek-item .geek-item-content{
-    float: left;
+    /*float: left;*/
     overflow: hidden;
 }
 .geeks-list .geek-item .geek-item-name{
@@ -2346,8 +2346,7 @@ table .product-quantity .input-group {
     margin:0 auto;
 	padding-top:10px;
 	padding-bottom:10px;
-	max-width:650px;
-	max-height:650px;
+	width:100%;
 }
 
 #pubContent  img{
@@ -2533,3 +2532,7 @@ table .product-quantity .input-group {
     width:40% !important;
   }
 /*带搜索栏的下拉框 2017-02-16*/
+.searchSelect{
+  height:35px; 
+  width:150px;
+}

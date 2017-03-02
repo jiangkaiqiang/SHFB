@@ -35,7 +35,7 @@
        <div class="col-md-9 col-sm-7"> 
         <div class="content-search margin-bottom-20"> 
          <div class="row"> 
-           <div class="col-md-8"> 
+           <div class="col-md-8 padding-top-10"> 
       <!--   <select id="" class="selectpicker bla bla bli" data-live-search="true">  
         <option selected>全部</option>  
         <option>上海</option>  
@@ -59,21 +59,21 @@
             helper-elements="filter"
             tick-property="isOn"  max-height="200px" 
             on-item-click="provinceSelected(curprovince)" class="form-group"></div> -->
-               <select id=""  style="height:35px; width:150px"
+               <select id=""  class="searchSelect"
                ng-model="provinceid" ng-disabled="editable"
                                      ng-change="provinceSelected(provinceid)"
                                      ng-options="x.pr_id as x.pr_province for x in provinces">
                                     </select>  
-              <select id="" style="height:35px; width:150px" ng-model="cityid"
+              <select id="" class="searchSelect" ng-model="cityid"
                                     ng-disabled="editable" ng-change="citySelected(cityid)"
                                     ng-options="x.ci_id as x.ci_city for x in citys"></select>
           <!-- <input type="text" id="cityChoice" class="form-control" placeholder="请选择地区"/> -->
-           <select id="" style="height:35px;width:150px" ng-model="schoolid"
+           <select id="" class="searchSelect" ng-model="schoolid"
                                     ng-disabled="editable"
                                     ng-change="schoolSelected(schoolid)"
                                     ng-options="x.sh_id as x.sh_shool for x in schools"> </select>
           </div> 
-          <div class="col-md-4"> 
+          <div class="col-md-4 padding-top-10"> 
            <div class="input-group"> 
             <input type="text" placeholder="输入关键词" ng-model="keyword" class="form-control" /> 
             <span class="input-group-btn"> <button class="btn btn-primary" ng-click="goSearch()" type="submit">搜索</button> </span> 
@@ -87,7 +87,7 @@
           <div class="col-md-6" ng-repeat="user in Allusers"> 
 		   
 		   <div class="geek-item col-md-12 margin-bottom-20">
-           <div ng-click="goUserSpace(user.id)" class="col-md-2 pull-left padding-left-0">
+           <div ng-click="goUserSpace(user.id)" class="">
 		     <a><img class="geek-item-img" src="{{user.avatar}}" /> </a>
 			 <!-- <img class="geek-item-img-v" src="../../assets/img/vip.png" /> -->
 		   </div> 

@@ -57,15 +57,15 @@
           <div class="portlet-body"> 
            <div class="row"> 
             <div class="col-md-5"> 
-             <div class="business-card col-md-12" id="card_body"> 
-              <div class="business-card-line col-md-4"> 
+             <div class="business-card col-md-12 col-sm-12 col-xs-12" id="card_body"> 
+              <div class="business-card-line col-md-4 col-sm-4 col-xs-4"> 
                <a data-toggle="modal" id="btn_edit_img_com" ng-if="user.photo==null||user.photo==undefined"  >
                 <img src="../../assets/img/logo/logo.png" /> 
                  </a> 
                <a  ng-if="user.photo!=null&&user.photo!=undefined"  >
                 <img src="{{user.photo}}" /> </a> 
               </div> 
-              <div class="business-card-body col-md-8"> 
+              <div class="business-card-body col-md-8 col-sm-8 col-xs-8"> 
                <h2>
                <span ng-if="user.nickname!=undefined">{{user.nickname}}</span>
                <span ng-if="user.nickname==undefined">姓名</span>

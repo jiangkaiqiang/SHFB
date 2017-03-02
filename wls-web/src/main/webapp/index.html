@@ -101,10 +101,10 @@
         <!-- Navigation BEGIN -->
         <div class="col-md-10 pull-right">
           <ul class="header-navigation" id="menu">
-            <li id="bar_home"><a href="#/home">首页</a></li>
-            <li id="bar_news"><a href="#/news">资讯</a></li>
-            <li id="bar_geek"><a href="#/geek">创客</a></li>
-            <li id="bar_post-bar"><a href="#/post-bar">树屋</a></li>
+            <li id="bar_home" ng-click="goHome()" ><a>首页</a></li>
+            <li id="bar_news" ng-click="goNews()"><a>资讯</a></li>
+            <li id="bar_geek" ng-click="goGeek()"><a>创客</a></li>
+            <li id="bar_post-bar" ng-click="goPostbar()"><a>树屋</a></li>
             <li id="bar_my-space" ng-click="goSpace()" ><a ng-if="user == null || user == undefined || user == '' ||user.id == undefined">我的</a>
             <a ng-if="user != null && user.id != 0 && user.id != undefined
             && user != ''"><img style="width: 35px;height: 35px;border-radius: 150px !important;" src="{{user.avatar}}" /></a></li>
@@ -112,8 +112,8 @@
             && user != ''" >我的</span></a></li>
             <li id="bar_my-space-company"><a href="#/my-space-company"><span ng-show="user != null && user.id != 0 && user.suproleid==2&& user.id != undefined
             && user != ''" >我的</span></a></li> -->
-            <li id="bar_login"><div ng-if="user == null || user == undefined || user == '' ||user.id == undefined"><a href="#/register" style="display: inline; font-size:15px;">注册</a> 
-             |  <a href="#/login"style="display: inline; font-size:15px;"><span>登录</span></a></div></li>
+            <li id="bar_login"><div ng-if="user == null || user == undefined || user == '' ||user.id == undefined"><a ng-click="goRegister()" style="display: inline; font-size:15px;">注册</a> 
+             |  <a ng-click="goLogin()" style="display: inline; font-size:15px;"><span>登录</span></a></div></li>
             <li ng-click="logout()"><div ng-if="user != null && user.id != 0 && user.id != undefined
             && user != ''"><a style="display: inline; font-size:15px;">注销</a> </div></li>
           </ul>
@@ -170,11 +170,12 @@
   <!-- Core plugins END (For ALL pages) -->
   <!-- Core plugins BEGIN (required only for current page) -->
   <script src="assets/js/jquery.nav.js"></script>
+  <script src="assets/js/layout.js" type="text/javascript"></script>
   <!-- Core plugins END (required only for current page) -->
   <!-- Global js BEGIN -->
    <!-- <script src="assets/js/metronic.js" type="text/javascript"></script> 
   <script src="../../assets/js/demo.js" type="text/javascript"></script> 
-  <script src="assets/js/layout.js" type="text/javascript"></script>-->
+  -->
   <!-- Core plugins END (required only for current page) -->
   <!--Begin Login-->
   <!-- <script src="assets/js/jquery.validate.min.js" type="text/javascript"></script> -->
@@ -192,11 +193,8 @@
 $(function (){
 	var url,s;
 	url=window.location.href;
-    var t = url.indexOf('home');
-    if(t>=0){
-	   s=0;
-	}
-	else{
+   
+
 		var t = url.indexOf('news');
 		if(t>=0){
 	       s=1;
@@ -211,11 +209,18 @@ $(function (){
 			    if(t>=0){
 			      s=3;
 				}
-			    else		
-	              s=4;
+			    else{
+			      var t = url.indexOf('');
+                       if(t>=0){
+	                      s=0;
+	                       }
+	                    else
+	                        s=4;
+			     }		
+	             
 		}
 		}
-    }
+
 	$("ul#menu li").each(function(index, element){
 		//alert($(this).find("a").text());
 		var currentNav = $(this).children("a:eq(0)").text();
@@ -309,8 +314,8 @@ function pushClose(){
   </script>
   <script>
     $(document).ready(function() {
-      /*Layout.init();
-      Metronic.init();
+      Layout.init();
+      /*Metronic.init();
       Demo.init(); */
 	  CommonObj.init();
     });

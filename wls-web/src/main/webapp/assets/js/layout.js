@@ -218,9 +218,9 @@ var Layout = function () {
             //handlePromoBlock();
             //handleParallax();
             handleScrolling();
-            handleNavItemCurrent();
+            //handleNavItemCurrent();
             handleHeaderPosition();
-            handleBootstrap();
+            //handleBootstrap();
             handleCounter();
             handleGo2Top();
             handlePortfolioSorting();

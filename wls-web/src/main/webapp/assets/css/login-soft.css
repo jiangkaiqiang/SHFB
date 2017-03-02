@@ -171,6 +171,7 @@ Login page
   .login .content {
     padding: 30px;
     width: 222px;
+	margin-top:80px;
   }
 
   .login .content h3 {
@@ -180,4 +181,9 @@ Login page
   .login .checkbox {
     font-size: 13px;
   }
+  .login .content .create-account {
+  border-top: 1px dotted #eee;
+  padding-top: 0px;
+  margin-top: 0px;
+}
 }

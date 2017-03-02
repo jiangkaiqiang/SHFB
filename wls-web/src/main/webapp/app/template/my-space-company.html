@@ -61,15 +61,15 @@
           <div class="portlet-body"> 
            <div class="row"> 
             <div class="col-md-5"> 
-             <div class="business-card col-md-12" id="card_body"> 
-              <div class="business-card-line col-md-4"> 
+             <div class="business-card col-md-12 col-sm-12 col-xs-12" id="card_body"> 
+              <div class="business-card-line col-md-4 col-sm-4 col-xs-4"> 
                <a data-toggle="modal" id="btn_edit_img_com" ng-if="user.photo==null||user.photo==undefined" title="点击修改logo" >
                 <img src="../../assets/img/logo/logo.png" /> 
                  </a> 
                <a data-toggle="modal" id="btn_edit_img_com" ng-if="user.photo!=null&&user.photo!=undefined" title="点击修改logo" >
                 <img src="{{user.photo}}" /> </a> 
               </div> 
-              <div class="business-card-body col-md-8"> 
+              <div class="business-card-body col-md-8 col-sm-8 col-xs-8"> 
                <h2>
                <span ng-if="user.nickname!=undefined">{{user.nickname}}</span>
                <span ng-if="user.nickname==undefined">编辑姓名</span>
@@ -85,8 +85,8 @@
                <p><b>邮箱:</b>{{user.email}}</p> 
               </div> 
              </div> 
-             <div class="business-card col-md-12" id="edit_card_body" style="display:none"> 
-              <div class="business-card-line col-md-4"> 
+             <div class="business-card col-md-12 col-sm-12 col-xs-12" id="edit_card_body" style="display:none"> 
+              <div class="business-card-line col-md-4 col-sm-4 col-xs-4"> 
                <a  ng-if="user.photo==null||user.photo==undefined" data-toggle="modal" id="btn_edit_img_com"  class="business-card-img" title="点击修改logo"> 
                  <img src="../../assets/img/logo/logo.png" /> 
                  <div class="layer"><i class="fa fa-edit"></i></div>
@@ -96,7 +96,7 @@
                  <div class="layer"><i class="fa fa-edit"></i></div>
                </a> 
               </div> 
-              <div class="business-card-body col-md-8"> 
+              <div class="business-card-body col-md-8 col-sm-8 col-xs-8"> 
                <p><b>姓名:</b><input type="text" class="form-control" placeholder="姓名" ng-model="user.nickname" /></p>
                <p><b>性别:</b><select id="editsexselect" class="form-control" ng-model="user.sex" ><option>男</option><option>女</option></select></p>
                <p><b>职位:</b><input type="text" class="form-control" placeholder="职位" ng-model="user.position"  /></p>   

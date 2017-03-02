@@ -1,3 +1,12 @@
+JS.Engine.start('conn');
+JS.Engine.on(
+        { 
+           msgData : function(msgData){
+        	   $("#msgPush").show();
+        	   setTimeout(function(){$("#msgPush").hide();}, 3000);
+           },
+       }
+   );
 var wlsWeb = angular.module('WlsWeb', ['ui.router',
      'xeditable',  'ngFileUpload']);
 angular.element(document).ready(function ( $http, $rootScope) {
@@ -19,7 +28,7 @@ wlsWeb.factory('userService',['$rootScope','$http', function($rootScope,$http){
 	        	$http.get('/i/user/logout').success(function(data){
 	        		$rootScope.user = null;
 	            });
-	        	window.location.href="#/home";
+	        	window.location.href="";
 	        };
 	        $rootScope.goSpace = function() {
 	        	if($rootScope.user.id==undefined){
@@ -34,26 +43,34 @@ wlsWeb.factory('userService',['$rootScope','$http', function($rootScope,$http){
 	        		}
 	        	}
 	        };
+	        $rootScope.goHome = function() {
+	        	window.location.href="";
+	        };
+	        $rootScope.goNews = function() {
+	        	window.location.href="#/news";
+	        };
+	        $rootScope.goGeek = function() {
+	        	window.location.href="#/geek";
+	        };
+	        $rootScope.goPostbar = function() {
+	        	window.location.href="#/post-bar";
+	        };
+	        $rootScope.goLogin = function() {
+	        	window.location.href="#/login";
+	        };
+	        $rootScope.goRegister = function() {
+	        	window.location.href="#/register";
+	        };
 	    },
 	};
 }]);
 
-JS.Engine.start('conn');
-JS.Engine.on(
-        { 
-           msgData : function(msgData){
-        	   $("#msgPush").show();
-        	   setTimeout(function(){$("#msgPush").hide();}, 3000);
-           },
-       }
-   );
-
 wlsWeb.config(function ($stateProvider, $urlRouterProvider) {
-    $urlRouterProvider.otherwise("/home");
+    $urlRouterProvider.otherwise("");
     
     //index
     $stateProvider.state('home', {
-        url: '/home',
+        url: '',
         controller: 'home',
         templateUrl: '../../home.html'
     }).state('geek', {
