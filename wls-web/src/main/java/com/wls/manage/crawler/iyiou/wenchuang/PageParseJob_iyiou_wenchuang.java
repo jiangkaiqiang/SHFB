@@ -2,6 +2,7 @@ package com.wls.manage.crawler.iyiou.wenchuang;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import org.jsoup.Jsoup;
@@ -12,6 +13,7 @@ import org.jsoup.select.Elements;
 import com.wls.manage.crawler.general.BasicCrawler;
 import com.wls.manage.dto.NewInfomationDto;
 
+import com.wls.manage.util.TimeUtil;
 /**
  * Created by haolidong on 2016/11/14.
  */
@@ -53,8 +55,16 @@ public class PageParseJob_iyiou_wenchuang {
     		
         	SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
         	try {
-				Date date=sdf.parse(dateString);
-				ni.setTime(date);
+        		
+        		if(TimeUtil.isContainsChinese(dateString)){
+        			Date newdate = Calendar.getInstance().getTime();
+        			ni.setTime(newdate);
+        		}else {
+					Date date=sdf.parse(dateString);
+					ni.setTime(date);
+				}
+        		
+				
 //				System.out.println(date);
 //					System.out.println(date);
 			} catch (ParseException e) {

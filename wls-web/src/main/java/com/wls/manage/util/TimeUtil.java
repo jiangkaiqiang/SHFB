@@ -7,6 +7,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by sunqiunian on 15/11/17.
@@ -17,6 +19,17 @@ public class TimeUtil {
 	public static SimpleDateFormat	datefm	= new java.text.SimpleDateFormat("yyyy-MM-dd");
 	public static SimpleDateFormat	datefmnyr	= new java.text.SimpleDateFormat("yyyy年MM月dd日");
 	public static SimpleDateFormat	dateFormat	= new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	private static String regEx = "[\\u4e00-\\u9fa5]";
+	private static Pattern pat = Pattern.compile(regEx);
+	
+	public static boolean isContainsChinese(String str){
+		Matcher matcher = pat.matcher(str);
+		boolean flg = false;
+		if (matcher.find())  {
+		flg = true;
+		}
+		return flg;
+	}
     
 	public static String  getDateTime(){return	TimeUtil.dateFormat.format(new Date());}//获得时间
     /**
