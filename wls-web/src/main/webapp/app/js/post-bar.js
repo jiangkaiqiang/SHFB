@@ -25,7 +25,7 @@ wlsWeb.controller('post-bar',function($http, $state,$rootScope, $stateParams,$lo
     		window.location.href="#/login";
     	}  
 	};
-	 // 获取当前geek的列表
+	 // 获取当前publish的列表
     $scope.getPublishs = function() {
     	var userID = 0;
     	if($rootScope.user!=null&&$rootScope.user.id!=undefined){

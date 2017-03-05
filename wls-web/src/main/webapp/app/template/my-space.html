@@ -23,7 +23,7 @@
      CommonObj.init();  
      ComponentsPickers.init();
     });
-  </script>    
+  </script> 
     <style>
   .timeline-content{
      min-height:50px;
@@ -58,11 +58,11 @@
      <div class="row"> 
       <div class="product-page-content margin-bottom-20"> 
        <ul id="myTab" class="nav nav-tabs"> 
-        <li class="active"><a href="#tab-1" data-toggle="tab">基本资料</a></li> 
-        <li><a href="#tab-2" data-toggle="tab">作品</a></li> 
-        <li><a href="#tab-3" data-toggle="tab">简历</a></li> 
-        <li><a href="#tab-4" data-toggle="tab">关注</a></li> 
-        <li><a href="#tab-5" data-toggle="tab">消息
+        <li class="active"><a href="#tab-1" data-toggle="tab" id="btn1">基本资料</a></li> 
+        <li><a href="#tab-2" data-toggle="tab" id="btn2">作品</a></li> 
+        <li><a href="#tab-3" data-toggle="tab" id="btn3">简历</a></li> 
+        <li><a href="#tab-4" data-toggle="tab" id="btn4">关注</a></li> 
+        <li><a href="#tab-5" data-toggle="tab" id="btn5">消息
             <span class="badge badge-danger">{{messageNum}} </span></a></li>
        </ul> 
        <div id="myTabContent" class="tab-content"> 
@@ -177,34 +177,34 @@
            <!-- BEGIN PRODUCT LIST --> 
             <div class="row blogs-list margin-bottom-20" ng-repeat="publish in publishs"> 
             <div class="col-md-9 margin-bottom-20"> 
-             <div class="blog-item col-md-12"> 
-              <div class="col-md-12"> 
+             <div class="blog-item col-md-12 col-sm-12 col-xs-12"> 
+              <div class="col-md-12 col-sm-12 col-xs-12 no-padding"> 
                <a href="" ><img class="blog-item-img" src="{{publish.publisheravatar}}" /></a> 
-               <div class="blog-item-body col-md-10 margin-bottom-10"> 
+               <div class="blog-item-body col-md-10 margin-bottom-10 "> 
                 <div class="blog-item-body-title"> 
-                 <div class="col-md-12"> 
+                 <div class="col-md-12 col-sm-12 col-xs-12 "> 
                   <a class="blog-item-name" ng-click="goBlogInfo(publish.id)">{{publish.title}}</a> 
                   <span class="blog-item-time"><i class="fa fa-clock-o"></i> {{publish.pubtime}} ###来自{{publish.publishername}}</span> 
                  </div> 
                 </div> 
-              <div class="blog-item-body-info col-md-12"> 
+              <div class="blog-item-body-info col-md-12 col-sm-12 col-xs-12 "> 
                   <p style="display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 3;
                 overflow: hidden;">{{publish.content}}
              </p> 
-             <div style="display: inline-block;" ng-if="publish.pubCovers!=null&&publish.pubCovers!=undefined&&publish.pubCovers!=''" ng-repeat="pubcover in publish.pubCovers">
+             <div class="no-padding" style="display: inline-block;" ng-if="publish.pubCovers!=null&&publish.pubCovers!=undefined&&publish.pubCovers!=''" ng-repeat="pubcover in publish.pubCovers">
                  <img src="{{pubcover}}"/> 
              </div>
                 </div> 
                 </div> 
                </div> 
-              <div class="col-md-12 blog-item-action"> 
-               <div class="col-md-4"> 
-                <span><a><i class="fa fa-comments"></i> 评论{{publish.commentnum}}</a></span> 
+              <div class="col-md-12 col-sm-12 col-xs-12  blog-item-action"> 
+               <div class="col-md-4 col-sm-4 col-xs-4 "> 
+                 <span><a ng-click="goBlogInfo(publish.id)"><i class="fa fa-comments"></i> 评论{{publish.commentnum}}</a></span>
                </div> 
-               <div class="col-md-4 line"> 
-                <span><a><i class="fa fa-thumbs-up"></i> 点赞{{publish.praisenum}}</a></span> 
+               <div class="col-md-4 col-sm-4 col-xs-4 line"> 
+                 <span><a style="color:#64AED9"><i style="color:#64AED9" class="fa fa-thumbs-up"></i> 已赞{{publish.praisenum}}</a></span>
                </div> 
-               <div class="col-md-4"> 
+               <div class="col-md-4 col-sm-4 col-xs-4"> 
                 <span ng-click="deletePublish(publish.id)"><a>删除</a></span> 
                 <!-- <ul class="dropdown-menu" role="menu"> 
                  <li> <a href="javascript:;"> <i class="fa fa-wechat"></i> 微信 </a> </li> 
@@ -254,7 +254,7 @@
                    <h2 ng-if="user.realname==undefined||user.realname==''">姓名</h2> 
                    <span>求职意向：{{user.intention}}</span> 
                   </div> 
-                  <div class="col-md-8"> 
+                  <div class="col-md-8 resume-img"> 
                    <img src="../../assets/img/personal-resume.png" class="pull-right" height="100px" /> 
                    <a href="http://www.weilanshu.com/#/my-space-ask/{{user.id}}" class="resume-basic-info pull-right">个人空间：http://www.weilanshu.com/#/my-space-ask/{{user.id}}</a> 
                   </div> 

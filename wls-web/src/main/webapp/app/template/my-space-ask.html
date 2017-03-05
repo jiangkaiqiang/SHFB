@@ -38,10 +38,10 @@
      <div class="row"> 
       <div class="product-page-content margin-bottom-20"> 
        <ul id="myTab" class="nav nav-tabs"> 
-        <li class="active"><a href="#tab-1" data-toggle="tab">基本资料</a></li> 
-        <li><a href="#tab-2" data-toggle="tab">作品</a></li> 
-        <li><a href="#tab-3" data-toggle="tab">简历</a></li> 
-        <li><a href="#tab-4" data-toggle="tab">关注</a></li>
+        <li class="active"><a href="#tab-1" data-toggle="tab" id="btn1">基本资料</a></li> 
+        <li><a href="#tab-2" data-toggle="tab" id="btn2">作品</a></li> 
+        <li><a href="#tab-3" data-toggle="tab" id="btn3">简历</a></li> 
+        <li><a href="#tab-4" data-toggle="tab" id="btn4">关注</a></li>
        </ul> 
        <div id="myTabContent" class="tab-content"> 
         <div class="tab-pane fade row in active" id="tab-1"> 
@@ -126,19 +126,13 @@
               </div> 
               <div class="col-md-12 blog-item-action"> 
                <div class="col-md-4"> 
-                <span><a href="blog-info.html#comments"><i class="fa fa-comments"></i> 评论{{publish.commentnum}}</a></span> 
+                <span><a ng-click="goBlogInfo(publish.id)"><i class="fa fa-comments"></i> 评论{{publish.commentnum}}</a></span>
                </div> 
                <div class="col-md-4 line"> 
-                <span><a><i class="fa fa-thumbs-up"></i> 点赞{{publish.praisenum}}</a></span> 
+               <span><a style="color:#64AED9"><i style="color:#64AED9" class="fa fa-thumbs-up"></i> 已赞{{publish.praisenum}}</a></span>
                </div> 
                <div class="col-md-4"> 
-                <span><a><i class="fa fa-share-alt"></i> 分享</a></span> 
-                <!-- <ul class="dropdown-menu" role="menu"> 
-                 <li> <a href="javascript:;"> <i class="fa fa-wechat"></i> 微信 </a> </li> 
-                 <li> <a href="javascript:;"> <i class="fa fa-weibo"></i> 新浪微博</a> </li> 
-                 <li> <a href="javascript:;"> <i class="fa fa-qq"></i> QQ</a> </li> 
-                 <li> <a href="javascript:;"> <i class="fa fa-star"></i> QQ空间 </a> </li> 
-                </ul>  -->
+                 <span><a ng-click="goBlogInfo(publish.id)"><i class="fa fa-share-alt"></i> 分享</a></span>
                </div> 
               </div> 
              </div> 
@@ -182,7 +176,7 @@
                    <h2 ng-if="user.realname==undefined||user.realname==''">姓名</h2> 
                    <span>求职意向：{{user.intention}}</span> 
                   </div> 
-                  <div class="col-md-8"> 
+                  <div class="col-md-8 resume-img"> 
                    <img src="../../assets/img/personal-resume.png" class="pull-right" height="100px" /> 
                    <a href="http://www.weilanshu.com/#/my-space-ask/{{user.id}}" class="resume-basic-info pull-right">个人空间：http://www.weilanshu.com/#/my-space-ask/{{user.id}}</a> 
                   </div> 

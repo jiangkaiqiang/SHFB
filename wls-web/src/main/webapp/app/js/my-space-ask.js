@@ -212,7 +212,7 @@ wlsWeb.controller('my-space-ask',function($http, $location, $scope,$state, $stat
 	        	}
 	     });
 		};
-
+		
 	    $scope.goBlogInfo = function(publishID) {
 	      	 $state.go('blog-info', {"publishID": publishID});
 	   	};

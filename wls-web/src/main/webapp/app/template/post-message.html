@@ -206,7 +206,7 @@
  </head> 
  <body class="menu-always-on-top"> 
   <!-- post-message block BEGIN --> 
-  <div class="post-message-block content" id="base_content_container1"> 
+  <div class="post-message-block content" id="base_content_container"> 
    <div class="container"> 
     <h2>我要<b> 发布</b></h2> 
     <div class="row padding-top-30"> 
@@ -223,7 +223,7 @@
          <div class="col-md-12 form-group">  
          <label class="col-md-1 control-label no-padding" style="font-size:16px">作品内容：</label> 
          <div class="col-md-4"> 
-         <textarea style="width:700px" ng-model="content" class="form-control ng-pristine ng-untouched ng-valid" rows="4"
+         <textarea ng-model="content" class="form-control ng-pristine ng-untouched ng-valid" rows="4"
          placeholder="输入作品内容......"></textarea>
          </div> 
         </div> 
@@ -234,15 +234,7 @@
 		 <output id="pic_list" class="pic_list"><span ng-repeat="file in totalPicFiles"><img class="thumb" ngf-src="file" title="{{file.name}}"><i ng-click="dropPicFile(file)">×</i></span></output>
          </div> 
         </div>
-        
-        <!-- <div class="col-md-12 form-group">  
-         <label class="col-md-1 control-label no-padding" style="font-size:16px">作品视频：</label> 
-         <div class="col-md-4"> 
-          <a href="javascript:;" class="videofile">选择视频<input type="file" id="videofiles" ngf-select="addVideoFiles()" ng-model="videofiles"  ngf-multiple="true" name="videofiles" ></a>
-		 <output id="video_list" class="video_list"><span ng-repeat="file in totalVideoFiles"><span class="thumb">{{file.name}}</span><i ng-click="dropVideoFile(file)">×</i><br></span></output>
-         </div> 
-        </div> -->
-        
+
         <div class="col-md-12 form-group">  
          <label class="col-md-1 control-label no-padding" style="font-size:16px">作品附件：</label> 
          <div class="col-md-4"> 

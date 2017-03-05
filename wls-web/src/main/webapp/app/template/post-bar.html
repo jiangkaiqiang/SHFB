@@ -27,16 +27,16 @@
        <div class="content-search margin-bottom-20"> 
         <div class="row"> 
          <div class="col-md-10 padding-top-10"> 
-            <select id=""  style="height:35px ;width:150px"
+            <select id=""  class="searchSelect"
                ng-model="provinceid" ng-disabled="editable"
                                      ng-change="provinceSelected(provinceid)"
                                      ng-options="x.pr_id as x.pr_province for x in provinces">
                                     </select>
-              <select id="" style="height:35px ;width:150px" ng-model="cityid"
+              <select id="" class="searchSelect" ng-model="cityid"
                                     ng-disabled="editable" ng-change="citySelected(cityid)"
                                     ng-options="x.ci_id as x.ci_city for x in citys"></select>
           <!-- <input type="text" id="cityChoice" class="form-control" placeholder="请选择地区"/> -->
-           <select id="" style="height:35px;width:150px" ng-model="schoolid"
+           <select id="" class="searchSelect" ng-model="schoolid"
                                     ng-disabled="editable"
                                     ng-change="schoolSelected(schoolid)"
                                     ng-options="x.sh_id as x.sh_shool for x in schools"> </select>
@@ -87,25 +87,7 @@
             <span ng-if="publish.praiseflag!=1" ng-click="praiseBlog(publish.id)"><a><i class="fa fa-thumbs-up"></i> 点赞{{publish.praisenum}}</a></span>
            </div> 
            <div class="col-md-4 col-sm-4 col-xs-4" id="ckepop">
-            <span class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="1000" data-close-others="true" aria-expanded="false"><a ng-click="goBlogInfo(publish.id)"><i class="fa fa-share-alt"></i> 分享</a></span>
-            <!-- <ul class="dropdown-menu" role="menu">
-                <li>
-                    <a class="jiathis_button_weixin"> 微信 </a>
-                </li>
-                <li>
-                    <a href="javascript:;">
-                    <i class="fa fa-weibo"></i> 新浪微博</a>
-                </li>
-                <li>
-                    <a href="javascript:;">
-                    <i class="fa fa-qq"></i> QQ</a>
-                </li>
-                <li>
-                    <a href="javascript:;">
-                    <i class="fa fa-star"></i> QQ空间 </a>
-                </li>
-            </ul> -->
-            <!-- <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1" charset="utf-8"></script> -->
+            <span><a ng-click="goBlogInfo(publish.id)"><i class="fa fa-share-alt"></i> 分享</a></span>
            </div> 
           </div> 
          </div> 

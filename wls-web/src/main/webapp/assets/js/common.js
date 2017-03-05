@@ -37,6 +37,21 @@ var handleActions = function(){
     .on('click', '#J_getCode', function(e) {
       resetCode();
     })
+	.on('click', '#btn1', function(e) {
+        broswerHeight();
+    })
+	.on('click', '#btn2', function(e) {
+        broswerHeight();
+    })
+	.on('click', '#btn3', function(e) {
+        broswerHeight();
+    })
+	.on('click', '#btn4', function(e) {
+        broswerHeight();
+    })
+	.on('click', '#btn5', function(e) {
+        broswerHeight();
+    })
     /*注册 角色切换*/
     .on('click', '#company_gate', function(e) {
        $('#company_gate div').addClass("selected");
