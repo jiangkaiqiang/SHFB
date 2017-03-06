@@ -9,6 +9,8 @@ wlsWeb.controller('post-bar',function($http, $state,$rootScope, $stateParams,$lo
 	$scope.optAudit = 8;
 	$scope.citys = [];
 	$scope.schools = [];
+	$scope.cityid = -1;
+	$scope.provinceid = -1;
 	$scope.AllCategory = [
 	                      {id:"8",name:"全部"},
 	                      {id:"1",name:"创意作品"},
@@ -75,7 +77,7 @@ wlsWeb.controller('post-bar',function($http, $state,$rootScope, $stateParams,$lo
 		  
 	};
 	
-	 // 获取省列表
+	/* // 获取省列表
     $http.get('/i/city/findProvinceList').success(function (data) {
     	$scope.provinces = data;
     	var pro = {"pr_id":-1,"pr_province":"全部省份"};
@@ -147,8 +149,84 @@ wlsWeb.controller('post-bar',function($http, $state,$rootScope, $stateParams,$lo
             };
         };
         return json;
+    };*/
+    
+	$scope.searchProvince = function(provincename){
+    	if(provincename==''){
+    		$("#PostProvinceUl").css("display","none");
+    		$scope.provinceid = -1;
+    		$scope.getPublishs();
+    	}
+    	else{
+    		 $http.get('/i/city/findProvinceByName', {
+    	            params: {
+    	                "provinceName": provincename
+    	            }
+    	        }).success(function (data) {
+     	    	$scope.totalProvinces = data;
+     	    	$("#PostProvinceUl").css("display","");
+     	    });
+    	}
+    };
+    $scope.chooseProvince = function(province){
+    	$scope.provincename = province.pr_province;
+    	$("#PostProvinceUl").css("display","none");
+    	$scope.provinceid = province.pr_id;
+    	$scope.getPublishs();
     };
     
+	
+    $scope.searchCity = function(cityname){
+    	if(cityname==''){
+    		$("#PostCityUl").css("display","none");
+    		$scope.cityid = -1;
+    		$scope.getPublishs();
+    	}
+    	else{
+    		 $http.get('/i/city/findCityByNameAndProvinceId', {
+    	            params: {
+    	                "cityName": cityname,
+    	                "provinceID": $scope.provinceid
+    	            }
+    	        }).success(function (data) {
+     	    	$scope.totalCitys = data;
+     	    	$("#PostCityUl").css("display","");
+     	    });
+    	}
+    };
+    $scope.chooseCity = function(city){
+    	$scope.cityname = city.ci_city;
+    	$("#PostCityUl").css("display","none");
+    	$scope.cityid = city.ci_id;
+    	$scope.getPublishs();
+    };
+    
+    
+	  $scope.searchSchool = function(schoolname){
+	    	if(schoolname==''){
+	    		$("#PostSchoolUl").css("display","none");
+	    		$scope.schoolid = -1;
+	    		$scope.getPublishs();
+	    	}
+	    	else{
+	    		 $http.get('/i/city/findSchoolByNameAndCityId', {
+	    	            params: {
+	    	                "schoolName": schoolname,
+	    	                "cityID": $scope.cityid
+	    	            }
+	    	        }).success(function (data) {
+	     	    	$scope.totalSchools = data;
+	     	    	$("#PostSchoolUl").css("display","");
+	     	    });
+	    	}
+	    };
+	    $scope.chooseSchool = function(school){
+	    	$scope.schoolname = school.sh_shool;
+	    	$("#PostSchoolUl").css("display","none");
+	    	$scope.schoolid = school.sh_id;
+	    	$scope.getPublishs();
+	    };
+	
     $scope.goUserSpace = function(userID) {
     	window.location.href="#/my-space-ask?id="+userID;
 	};

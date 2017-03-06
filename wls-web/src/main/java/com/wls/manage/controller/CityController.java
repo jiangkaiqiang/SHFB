@@ -73,5 +73,47 @@ public class CityController {
         return cityListDao.findSchoolById(schoolID);
     }
     
+    @RequestMapping(value = "/findSchoolByName", method = RequestMethod.GET)
+    @ResponseBody
+    public Object findSchoolByName(@RequestParam String schoolName) {
+    	if (schoolName!=null) {
+    		 return cityListDao.findSchoolByName(schoolName);
+		}
+    	else{
+    		return null;
+    	}
+    }
     
+    @RequestMapping(value = "/findProvinceByName", method = RequestMethod.GET)
+    @ResponseBody
+    public Object findProvinceByName(@RequestParam String provinceName) {
+    	if (provinceName!=null) {
+    		 return cityListDao.findProvinceByName(provinceName);
+		}
+    	else{
+    		return null;
+    	}
+    }
+    
+    @RequestMapping(value = "/findCityByNameAndProvinceId", method = RequestMethod.GET)
+    @ResponseBody
+    public Object findCityByNameAndProvinceId(@RequestParam Integer provinceID,@RequestParam String cityName) {
+    	if (cityName!=null) {
+    		 return cityListDao.findCityByNameAndProvinceId(cityName,provinceID);
+		}
+    	else{
+    		return null;
+    	}
+    }
+    
+    @RequestMapping(value = "/findSchoolByNameAndCityId", method = RequestMethod.GET)
+    @ResponseBody
+    public Object findSchoolByNameAndCityId(@RequestParam Integer cityID,@RequestParam String schoolName) {
+    	if (schoolName!=null) {
+    		 return cityListDao.findSchoolByNameAndCityId(schoolName,cityID);
+		}
+    	else{
+    		return null;
+    	}
+    }
 }

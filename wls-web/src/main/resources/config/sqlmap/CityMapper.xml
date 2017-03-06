@@ -29,10 +29,41 @@
         FROM `shool_info` WHERE `sh_id` = #{schoolID}
     </select>
     
+    <select id="findSchoolByName" parameterType="map" resultType="School_infoEntity">
+        SELECT *
+        FROM `shool_info` WHERE `sh_shool` like "%"#{schoolName}"%"
+    </select>
+    
      <select id="findCityList" parameterType="map" resultType="City_infoEntity">
         SELECT *
         FROM `city_info` 
     </select>
     
+      <select id="findProvinceByName" parameterType="map" resultType="Province_infoEntity">
+        SELECT *
+        FROM `province_info` WHERE `pr_province` like "%"#{provinceName}"%"
+    </select>
+
+    <select id="findCityByNameAndProvinceId" parameterType="map" resultType="com.wls.manage.entity.City_infoEntity">
+        SELECT *
+        FROM `city_info` 
+        <where> 
+		 <if test="provinceID != -1">
+			     ci_province=#{provinceID}
+		 </if>
+		  AND `ci_city` like "%"#{cityName}"%"
+		 </where>
+    </select>
+    
+     <select id="findSchoolByNameAndCityId" parameterType="map" resultType="School_infoEntity">
+        SELECT *
+        FROM `shool_info` 
+        <where> 
+		 <if test="cityID != -1">
+			     sh_city=#{cityID}
+		 </if>
+		  AND `sh_shool` like "%"#{schoolName}"%"
+		 </where>
+    </select>
 
 </mapper>

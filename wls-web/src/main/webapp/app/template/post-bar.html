@@ -27,7 +27,7 @@
        <div class="content-search margin-bottom-20"> 
         <div class="row"> 
          <div class="col-md-10 padding-top-10"> 
-            <select id=""  class="searchSelect"
+            <!-- <select id=""  class="searchSelect"
                ng-model="provinceid" ng-disabled="editable"
                                      ng-change="provinceSelected(provinceid)"
                                      ng-options="x.pr_id as x.pr_province for x in provinces">
@@ -35,11 +35,18 @@
               <select id="" class="searchSelect" ng-model="cityid"
                                     ng-disabled="editable" ng-change="citySelected(cityid)"
                                     ng-options="x.ci_id as x.ci_city for x in citys"></select>
-          <!-- <input type="text" id="cityChoice" class="form-control" placeholder="请选择地区"/> -->
+          <input type="text" id="cityChoice" class="form-control" placeholder="请选择地区"/>
            <select id="" class="searchSelect" ng-model="schoolid"
                                     ng-disabled="editable"
                                     ng-change="schoolSelected(schoolid)"
-                                    ng-options="x.sh_id as x.sh_shool for x in schools"> </select>
+                                    ng-options="x.sh_id as x.sh_shool for x in schools"> </select> -->
+                                    
+           <input class="searchSelect" id="inputPostProvince" ng-change="searchProvince(provincename)" ng-model = "provincename" placeholder="请输入省份" style="width:150px;height:35px !important"></input>                                  
+           <input class="searchSelect" id="inputPostCity" ng-change="searchCity(cityname)" ng-model = "cityname" placeholder="请输入城市" style="width:150px;height:35px !important"></input>
+           <input class="searchSelect" id="inputPostSchool" ng-change="searchSchool(schoolname)" ng-model = "schoolname" placeholder="请输入学校" style="width:150px;height:35px !important"></input>
+            <ul class="list-group" id="PostProvinceUl" style="display:none"><a class="list-group-item" ng-click="chooseProvince(province)" ng-repeat="province in totalProvinces"> {{province.pr_province}}</a></ul> 
+            <ul class="list-group" id="PostCityUl" style="display:none"><a class="list-group-item" ng-click="chooseCity(city)" ng-repeat="city in totalCitys"> {{city.ci_city}}</a></ul>                        
+           <ul class="list-group" id="PostSchoolUl" style="display:none"><a class="list-group-item" ng-click="chooseSchool(school)" ng-repeat="school in totalSchools"> {{school.sh_shool}}</a></ul>
           </div> 
            <!--<div class="col-md-3"> 
            <div class="input-group"> 

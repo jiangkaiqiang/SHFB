@@ -2,10 +2,8 @@
  <link rel="stylesheet" type="text/css" href="../../assets/css/bootstrap-fileinput.css" /> 
  <script src="../../assets/js/bootstrap.min.js" type="text/javascript"></script> 
  <script src="../../assets/js/bootstrap-fileinput.js" type="text/javascript"></script> 
-<link rel="stylesheet" type="text/css" href="../../ueditor/third-party/video-js/video-js.css">  
-<script type="text/javascript" charset="utf-8" src="../../ueditor/third-party/video-js/video.js"></script>
-<script src="http://api.html5media.info/1.1.8/html5media.min.js"></script>
-<<style>h4{color:#0066ff;}</style>
+<!-- <script src="http://api.html5media.info/1.1.8/html5media.min.js"></script> -->
+<style>h4{color:#0066ff;}</style>
 <body class="menu-always-on-top"> 
   <div class="weilanshu" id="base_content_container"> 
    <div class="main"> 
@@ -31,12 +29,12 @@
 	             <img src="{{pubfile}}"/> 
        		 </div>
         </div>
-        <div style="margin: 15px 0;">
+       <!--  <div style="margin: 15px 0;">
 	        <h4 ng-if="publish.pubVideo!=null&&publish.pubVideo!=undefined&&publish.pubVideo!=''" class="well well-sm">作品视频</h4>
 	        <div ng-if="publish.pubVideo!=null&&publish.pubVideo!=undefined&&publish.pubVideo!=''" ng-repeat="video in publish.pubVideo">
 	                <video width="320" height="240" autoplay="autoplay" controls="controls" src="{{video}}" loop="-1"></video>
 	        </div>
-        </div>
+        </div> -->
         <div style="margin: 15px 0;">
 	        <h4 ng-if="publish.appendixDtos!=null&&publish.appendixDtos!=undefined&&publish.appendixDtos!=''" class="well well-sm">附件下载</h4>
 	        <div ng-if="publish.appendixDtos!=null&&publish.appendixDtos!=undefined&&publish.appendixDtos!=''" ng-repeat="appendix in publish.appendixDtos">

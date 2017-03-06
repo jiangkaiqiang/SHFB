@@ -3,14 +3,36 @@ wlsWeb.controller('post-message',function($http, $location,$rootScope, Upload,$s
 		alert("请先登录");
 		window.location.href="#/login";
 	}
-	// 获取学校列表
+/*	// 获取学校列表
     $http.get('/i/city/findSchoolList').success(function (data) {
     	$scope.schools = data;
         var sh = {"sh_id":-1,"sh_shool":"全部学校"};
     	 $scope.schools.push(sh);
-    	$scope.schools = sortJson($scope.schools,"sh_id");
+    	 $scope.schools = sortJson($scope.schools,"sh_id");
     	 $scope.schoolid = -1;
-    });
+    });*/
+    
+    $scope.searchSchool = function(schoolname){
+    	if(schoolname==''){
+    		$("#schoolUl").css("display","none");
+    	}
+    	else{
+    		 $http.get('/i/city/findSchoolByName', {
+    	            params: {
+    	                "schoolName": schoolname
+    	            }
+    	        }).success(function (data) {
+     	    	$scope.totalSchools = data;
+     	    	$("#schoolUl").css("display","");
+     	    });
+    	}
+    };
+    $scope.chooseSchool = function(school){
+    	$scope.schoolname = school.sh_shool;
+    	$("#schoolUl").css("display","none");
+    	$scope.schoolid = school.sh_id;
+    };
+    
     function sortJson(json,key){ 
         for (var i = 0; i < json.length; i++) {
             for (var j = 0; j < json.length-1; j++) {

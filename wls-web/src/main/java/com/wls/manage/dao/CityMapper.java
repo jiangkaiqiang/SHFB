@@ -26,4 +26,12 @@ public interface CityMapper {
 	Province_infoEntity findProvinceById(@Param("provinceID") int provinceID);
 
 	School_infoEntity findSchoolById(@Param("schoolID") int schoolID);
+
+	List<School_infoEntity>  findSchoolByName(@Param("schoolName") String schoolName);
+
+	List<Province_infoEntity> findProvinceByName(@Param("provinceName") String provinceName);
+
+	List<City_infoEntity> findCityByNameAndProvinceId(@Param("cityName") String cityName, @Param("provinceID") Integer provinceID);
+
+	List<School_infoEntity> findSchoolByNameAndCityId(@Param("schoolName") String schoolName, @Param("cityID")Integer cityID);
 }

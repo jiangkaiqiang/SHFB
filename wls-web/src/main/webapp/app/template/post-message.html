@@ -253,11 +253,13 @@
                   <input type="radio" name="optionsRadios1" id="optionsRadios2" value="校园频道" > 校园频道
               </label>
               <div class="col-md-2 no-padding"  id="select_school" style="display:none"> 
-            <select id="" class="selectpicker form-control" data-live-search="true" style="height:35px !important"
+              <input class="form-control" id="inputSchool" ng-change="searchSchool(schoolname)" ng-model = "schoolname" placeholder="请输入学校" style="height:35px !important"></input>
+              <ul class="list-group" id="schoolUl" style="display:none"><a class="list-group-item" ng-click="chooseSchool(school)" ng-repeat="school in totalSchools"> {{school.sh_shool}}</a></ul>
+           <!--  <select id="" class="selectpicker form-control" data-live-search="true" style="height:35px !important"
                                    ng-model="schoolid"
                                     ng-disabled="editable"
                                     ng-change="schoolSelected(schoolid)"
-                                    ng-options="x.sh_id as x.sh_shool for x in schools"> </select>
+                                    ng-options="x.sh_id as x.sh_shool for x in schools"> </select> -->
           </div>
          </div> 
         </div> 
