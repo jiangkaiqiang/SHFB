@@ -215,20 +215,20 @@
 	   <div class="row">
         <div class="portlet-body form">
         <div class="col-md-12 form-group">  
-         <label class="col-md-1 control-label no-padding" style="font-size:16px">作品标题：</label> 
+         <label class="col-md-1 control-label no-padding" style="font-size:16px">发布标题：</label> 
          <div class="col-md-4"> 
           <input type="text" class="form-control" ng-model="title" placeholder="输入作品标题" /> 
          </div> 
         </div> 
          <div class="col-md-12 form-group">  
-         <label class="col-md-1 control-label no-padding" style="font-size:16px">作品内容：</label> 
+         <label class="col-md-1 control-label no-padding" style="font-size:16px">发布内容：</label> 
          <div class="col-md-4"> 
          <textarea ng-model="content" class="form-control ng-pristine ng-untouched ng-valid" rows="4"
          placeholder="输入作品内容......"></textarea>
          </div> 
         </div> 
          <div class="col-md-12 form-group">  
-         <label class="col-md-1 control-label no-padding" style="font-size:16px">作品图片：</label> 
+         <label class="col-md-1 control-label no-padding" style="font-size:16px">发布图片：</label> 
          <div class="col-md-4"> 
 		 <a href="javascript:;" class="picfile">选择图片<input type="file" id="picfiles" ngf-select="addPicFiles()" ng-model="picfiles"  ngf-multiple="true" name="picfiles" ></a>
 		 <output id="pic_list" class="pic_list"><span ng-repeat="file in totalPicFiles"><img class="thumb" ngf-src="file" title="{{file.name}}"><i ng-click="dropPicFile(file)">×</i></span></output>
@@ -236,7 +236,7 @@
         </div>
 
         <div class="col-md-12 form-group">  
-         <label class="col-md-1 control-label no-padding" style="font-size:16px">作品附件：</label> 
+         <label class="col-md-1 control-label no-padding" style="font-size:16px">发布附件：</label> 
          <div class="col-md-4"> 
           <a href="javascript:;" class="appendix">选择附件<input type="file" id="appendixs" ngf-select="addAppendixs()" ng-model="appendixs"  ngf-multiple="true" name="appendixs" ></a>
 		 <output id="appendix_list" class="appendix_list"><span ng-repeat="file in totalAppendixs"><span class="thumb">{{file.name}}</span><i ng-click="dropAppendixFile(file)">×</i><br></span></output>
@@ -264,7 +264,7 @@
          </div> 
         </div> 
         <div class="col-md-12 form-group"> 
-         <label class="col-md-1 control-label no-padding" style="font-size:16px">作品分类：</label> 
+         <label class="col-md-1 control-label no-padding" style="font-size:16px">发布分类：</label> 
          <div class="mt-radio-inline col-md-9">
               <label class="mt-radio margin-bottom-10 col-md-2 no-padding">
                   <input type="radio" name="optionsRadios3" id="optionsRadios3" value="1"  checked> 创意作品

@@ -199,7 +199,7 @@ public class MessageController extends BaseController {
 			resumeVisMapper.insertResumeVis(resumeVisEntity);
 			new CometUtil().pushTo(messageEntity);
 		}
-		messageDao.deleteMessage(messageID);
+		/*messageDao.deleteMessage(messageID);*/
 		return ResponseData.newSuccess("回复成功");
 	}
 	

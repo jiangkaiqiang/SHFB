@@ -78,9 +78,9 @@
            <input class="searchSelect" id="inputGeekProvince" ng-change="searchProvince(provincename)" ng-model = "provincename" placeholder="请输入省份" style="width:150px;height:35px !important"></input>                                  
            <input class="searchSelect" id="inputGeekCity" ng-change="searchCity(cityname)" ng-model = "cityname" placeholder="请输入城市" style="width:150px;height:35px !important"></input>
            <input class="searchSelect" id="inputGeekSchool" ng-change="searchSchool(schoolname)" ng-model = "schoolname" placeholder="请输入学校" style="width:150px;height:35px !important"></input>
-            <ul class="list-group" id="geekProvinceUl" style="display:none"><a class="list-group-item" ng-click="chooseProvince(province)" ng-repeat="province in totalProvinces"> {{province.pr_province}}</a></ul> 
-            <ul class="list-group" id="geekCityUl" style="display:none"><a class="list-group-item" ng-click="chooseCity(city)" ng-repeat="city in totalCitys"> {{city.ci_city}}</a></ul>                        
-           <ul class="list-group" id="geekSchoolUl" style="display:none"><a class="list-group-item" ng-click="chooseSchool(school)" ng-repeat="school in totalSchools"> {{school.sh_shool}}</a></ul>
+            <ul class="list-group" id="geekProvinceUl" style="width:150px;display:none"><a class="list-group-item" ng-click="chooseProvince(province)" ng-repeat="province in totalProvinces"> {{province.pr_province}}</a></ul> 
+            <ul class="list-group" id="geekCityUl" style="display:none;width:305px;padding-left:155px"><a class="list-group-item" ng-click="chooseCity(city)" ng-repeat="city in totalCitys"> {{city.ci_city}}</a></ul>                        
+           <ul class="list-group" id="geekSchoolUl" style="display:none;width:460px;padding-left:310px"><a class="list-group-item" ng-click="chooseSchool(school)" ng-repeat="school in totalSchools"> {{school.sh_shool}}</a></ul>
           </div> 
           
           <div class="col-md-4 padding-top-10"> 

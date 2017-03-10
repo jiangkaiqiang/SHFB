@@ -2409,15 +2409,17 @@ table .product-quantity .input-group {
   height:162px;
 }
 .business-card-line img{
-  padding: 40px 0px;
-  max-width:120px;
+  padding: 0px 0px;
+  width: 120px;
   margin:auto;
   position:absolute;
   z-index:99;
+  height: 160px;
 }
 .business-card-img img{
-  padding: 40px 0px;
-  max-width:140px;
+  padding: 0px 0px;
+  width: 120px;
+  height: 120px;
   margin:auto;
   position:absolute;
   z-index:99;

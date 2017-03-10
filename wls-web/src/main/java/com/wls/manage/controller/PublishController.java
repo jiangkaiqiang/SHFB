@@ -82,19 +82,16 @@ public class PublishController extends BaseController {
 			publishDto.setPubcategory(publishEntity.getPubcategory());
 			switch (publishDto.getPubcategory()) {
 			case 1:
-				publishDto.setPubcategoryname("科技类");
+				publishDto.setPubcategoryname("创意作品");
 				break;
 			case 2:
-				publishDto.setPubcategoryname("互联网类");
+				publishDto.setPubcategoryname("知识分享");
 				break;
 			case 3:
-				publishDto.setPubcategoryname("校园类");
+				publishDto.setPubcategoryname("问答互助");
 				break;
 			case 4:
-				publishDto.setPubcategoryname("财经类");
-				break;
-			case 5:
-				publishDto.setPubcategoryname("创业类");
+				publishDto.setPubcategoryname("校园招聘");
 				break;
 			default:
 				break;
@@ -240,19 +237,16 @@ public class PublishController extends BaseController {
 			publishDto.setPubcategory(publishEntity.getPubcategory());
 			switch (publishDto.getPubcategory()) {
 			case 1:
-				publishDto.setPubcategoryname("科技类");
+				publishDto.setPubcategoryname("创意作品");
 				break;
 			case 2:
-				publishDto.setPubcategoryname("互联网类");
+				publishDto.setPubcategoryname("知识分享");
 				break;
 			case 3:
-				publishDto.setPubcategoryname("校园类");
+				publishDto.setPubcategoryname("问答互助");
 				break;
 			case 4:
-				publishDto.setPubcategoryname("财经类");
-				break;
-			case 5:
-				publishDto.setPubcategoryname("创业类");
+				publishDto.setPubcategoryname("校园招聘");
 				break;
 			default:
 				break;
@@ -491,6 +485,9 @@ public class PublishController extends BaseController {
 			@RequestParam(required = false) MultipartFile videoFile0,
 			@RequestParam(required = false) MultipartFile videoFile1
 			){
+		if(schoolid==null){
+			schoolid = -1;
+		}
 		MultipartFile[] picFiles = {picFile5, picFile4, picFile3, picFile2, picFile1,picFile0};
 		MultipartFile[] appendixs = {appendix2, appendix1, appendix0};
 		MultipartFile[] videoFiles = {videoFile0, videoFile1};

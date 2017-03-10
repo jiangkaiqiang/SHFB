@@ -53,6 +53,13 @@ wlsWeb.controller('my-space-company',function($http, $location,$rootScope, $scop
 			   window.location.reload();
 		   });
 	  };
+	  
+    function delcfm() {
+	        if (!confirm("确认要删除？")) {
+	            return false;
+	        }
+	        return true;
+	}
 	$scope.saveInfo = function() {
 		if($scope.user.sex=="男"){
 			$scope.sex = 0;
@@ -144,7 +151,7 @@ wlsWeb.controller('my-space-company',function($http, $location,$rootScope, $scop
 	    			messageSenderID : $scope.user.id
 	    		}
 	    	}).success(function(data) {
-	    		alert("回复成功");
+	    		$("#quick_reply_alter_com").modal("show");
 	    		$scope.findMessageByReceiverId();
 		   });
 	   };

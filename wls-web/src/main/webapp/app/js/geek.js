@@ -148,6 +148,34 @@ wlsWeb.controller('geek',function($http, $location,$rootScope, $scope,$state, $s
         return json;
     };*/
     
+	$('#inputGeekProvince').click(function(){
+		$http.get('/i/city/findProvinceList').success(function (data) {
+			$scope.totalProvinces = data;
+ 	    	$("#geekProvinceUl").css("display","");
+	    });
+	});
+	
+	$('#inputGeekCity').click(function(){
+		$http.get('/i/city/findCitysByProvinceId', {
+            params: {
+                "provinceID": $scope.provinceid
+            }
+        }).success(function (data) {
+        	$scope.totalCitys = data;
+ 	    	$("#geekCityUl").css("display","");
+        });
+	});
+	
+	$('#inputGeekSchool').click(function(){
+		$http.get('/i/city/findSchoolsByCityId', {
+            params: {
+                "cityID": $scope.cityid
+            }
+        }).success(function (data) {
+        	$scope.totalSchools = data;
+ 	    	$("#geekSchoolUl").css("display","");
+        });
+	});
 	
 	$scope.searchProvince = function(provincename){
     	if(provincename==''){
@@ -170,6 +198,14 @@ wlsWeb.controller('geek',function($http, $location,$rootScope, $scope,$state, $s
     	$scope.provincename = province.pr_province;
     	$("#geekProvinceUl").css("display","none");
     	$scope.provinceid = province.pr_id;
+    	$http.get('/i/city/findCitysByProvinceId', {
+            params: {
+                "provinceID": $scope.provinceid
+            }
+        }).success(function (data) {
+        	$scope.totalCitys = data;
+ 	    	$("#geekCityUl").css("display","");
+        });
     	$scope.getUsers();
     };
     
@@ -199,6 +235,14 @@ wlsWeb.controller('geek',function($http, $location,$rootScope, $scope,$state, $s
     	$scope.cityname = city.ci_city;
     	$("#geekCityUl").css("display","none");
     	$scope.cityid = city.ci_id;
+    	$http.get('/i/city/findSchoolsByCityId', {
+            params: {
+                "cityID": $scope.cityid
+            }
+        }).success(function (data) {
+        	$scope.totalSchools = data;
+ 	    	$("#geekSchoolUl").css("display","");
+        });
     	$scope.getUsers();
     };
     

@@ -150,7 +150,34 @@ wlsWeb.controller('post-bar',function($http, $state,$rootScope, $stateParams,$lo
         };
         return json;
     };*/
-    
+	$('#inputPostProvince').click(function(){
+		$http.get('/i/city/findProvinceList').success(function (data) {
+			$scope.totalProvinces = data;
+ 	    	$("#PostProvinceUl").css("display","");
+	    });
+	});
+	
+	$('#inputPostCity').click(function(){
+		$http.get('/i/city/findCitysByProvinceId', {
+            params: {
+                "provinceID": $scope.provinceid
+            }
+        }).success(function (data) {
+        	$scope.totalCitys = data;
+ 	    	$("#PostCityUl").css("display","");
+        });
+	});
+	
+	$('#inputPostSchool').click(function(){
+		$http.get('/i/city/findSchoolsByCityId', {
+            params: {
+                "cityID": $scope.cityid
+            }
+        }).success(function (data) {
+        	$scope.totalSchools = data;
+ 	    	$("#PostSchoolUl").css("display","");
+        });
+	});
 	$scope.searchProvince = function(provincename){
     	if(provincename==''){
     		$("#PostProvinceUl").css("display","none");
@@ -172,6 +199,14 @@ wlsWeb.controller('post-bar',function($http, $state,$rootScope, $stateParams,$lo
     	$scope.provincename = province.pr_province;
     	$("#PostProvinceUl").css("display","none");
     	$scope.provinceid = province.pr_id;
+    	$http.get('/i/city/findCitysByProvinceId', {
+            params: {
+                "provinceID": $scope.provinceid
+            }
+        }).success(function (data) {
+        	$scope.totalCitys = data;
+ 	    	$("#PostCityUl").css("display","");
+        });
     	$scope.getPublishs();
     };
     
@@ -198,6 +233,14 @@ wlsWeb.controller('post-bar',function($http, $state,$rootScope, $stateParams,$lo
     	$scope.cityname = city.ci_city;
     	$("#PostCityUl").css("display","none");
     	$scope.cityid = city.ci_id;
+    	$http.get('/i/city/findSchoolsByCityId', {
+            params: {
+                "cityID": $scope.cityid
+            }
+        }).success(function (data) {
+        	$scope.totalSchools = data;
+ 	    	$("#PostSchoolUl").css("display","");
+        });
     	$scope.getPublishs();
     };
     

@@ -172,7 +172,7 @@
              <div class="item" ng-repeat="message in messages"> 
               <div class="item-head"> 
                <div class="item-details"> 
-                <img class="item-pic" src="{{message.senderavatar}}" /> 
+                <img style="width: 35px;height: 35px;border-radius: 150px !important;" src="{{message.senderavatar}}" /> 
                 <a ng-click="goUserSpace(message.senderid)" class="item-name primary-link">{{message.sendername}}</a> 
                 <span class="item-label">{{message.informtime}}</span> 
                </div> 
@@ -271,5 +271,26 @@
    </div> 
    <!-- /.modal --> 
    <!--attention_me--> 
+    <!-- /.modal --> 
+   <!--quick_reply_alter--> 
+   <div class="modal fade" id="quick_reply_alter_com" tabindex="-1" role="basic" aria-hidden="true"> 
+    <div class="modal-dialog"> 
+     <div class="modal-content"> 
+      <div class="modal-header"> 
+       <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button> 
+       <h4 class="modal-title">回复成功</h4> 
+      </div> 
+      <div class="modal-body"> 
+       <i class="fa fa-check-circle-o" style="color:green; font-size:20px;padding:5px;"></i>回复成功！ 
+      </div> 
+      <div class="modal-footer"> 
+       <button type="button" class="btn default" data-dismiss="modal">关闭</button> 
+      </div> 
+     </div> 
+     <!-- /.modal-content --> 
+    </div> 
+    <!-- /.modal-dialog --> 
+   </div>
+  <!-- /.modal -->  
   <!-- Global js END -->  
  </body>

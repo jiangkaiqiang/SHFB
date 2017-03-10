@@ -188,9 +188,9 @@
                  </div> 
                 </div> 
               <div class="blog-item-body-info col-md-12 col-sm-12 col-xs-12 "> 
-                  <p style="display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 3;
+             <!--      <p style="display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 3;
                 overflow: hidden;">{{publish.content}}
-             </p> 
+             </p>  -->
              <div class="no-padding" style="display: inline-block;" ng-if="publish.pubCovers!=null&&publish.pubCovers!=undefined&&publish.pubCovers!=''" ng-repeat="pubcover in publish.pubCovers">
                  <img src="{{pubcover}}"/> 
              </div>
@@ -832,7 +832,7 @@
              <div class="item" ng-repeat="message in messages"> 
               <div class="item-head"> 
                <div class="item-details"> 
-                <img class="item-pic" src="{{message.senderavatar}}" /> 
+                <img style="width: 35px;height: 35px;border-radius: 150px !important;" src="{{message.senderavatar}}" /> 
                 <a ng-click="goUserSpace(message.senderid)" class="item-name primary-link">{{message.sendername}}</a> 
                 <span class="item-label">{{message.informtime}}</span> 
                </div> 
