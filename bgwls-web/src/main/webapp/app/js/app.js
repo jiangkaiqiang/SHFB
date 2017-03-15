@@ -62,10 +62,10 @@ coldWeb.config(function ($stateProvider, $urlRouterProvider) {
         url: '/goods-list/{key}',
         controller: 'goods-list',
         templateUrl: 'app/template/goods-list.html'
-    }).state('coldStoragelist', {
-        url: '/storageManage',
-        controller: 'storageManage',
-        templateUrl: 'app/template/storageManage.html'
+    }).state('publishManage', {
+        url: '/publishManage',
+        controller: 'publishManage',
+        templateUrl: 'app/template/publishManage.html'
     }).state('commentManage', {
         url: '/commentManage',
         controller: 'commentManage',

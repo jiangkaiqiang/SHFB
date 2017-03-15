@@ -1,4 +1,4 @@
-coldWeb.controller('infoManage', function($rootScope, $scope, $state, $cookies,
+coldWeb.controller('publishManage', function($rootScope, $scope, $state, $cookies,
 		$http, $location, Upload) {
 	$scope.maxSize = 10;
 	// 总条目数(默认每页十条)
@@ -6,12 +6,12 @@ coldWeb.controller('infoManage', function($rootScope, $scope, $state, $cookies,
 	// 当前页
 	$scope.bigCurrentPage = 1;
 	$scope.optAudit = 100;
-	$scope.AllInformation = [];
+	$scope.AllPublish = [];
 	// 获取资讯列表
-	$scope.getAllInformation = function() {
+	$scope.getAllPublish = function() {
 		$http({
 			method : 'POST',
-			url : window.localStorage.weburl+'/i/information/findAllInformation',
+			url : window.localStorage.weburl+'/i/publish/findPublishList',
 			params : {
 				pageNum : $scope.bigCurrentPage,
 				pageSize : $scope.maxSize,
@@ -20,29 +20,29 @@ coldWeb.controller('infoManage', function($rootScope, $scope, $state, $cookies,
 			}
 		}).success(function(data) {
 			$scope.bigTotalItems = data.total;
-			$scope.AllInformation = data.list;
+			$scope.AllPublish = data.list;
 		});
 	};
 
-	$scope.getAllInformation();
+	$scope.getAllPublish();
 
 	$scope.pageChanged = function() {
-		$scope.getAllInformation();
+		$scope.getAllPublish();
 	};
 
 	$scope.goSearch = function() {
-		$scope.getAllInformation();
+		$scope.getAllPublish();
 	};
 	
 	
-	$scope.goDetail = function(inforID) {
-		  $http.get(window.localStorage.weburl+'/i/information/findInformationByID', {
+	$scope.goDetail = function(publishID) {
+		  $http.get(window.localStorage.weburl+'/i/publish/findPublishByID', {
 					params : {
-						"inforID" : inforID
+						"publishID" : publishID
 					}
 				}).success(function(data) {
-					$scope.informationDetail = data;
-					document.getElementById("content").innerHTML=$scope.informationDetail.content;
+					$scope.publish = data;
+					document.getElementById("pubContent").innerHTML=$scope.publish.content;
 				});
 		};
 
@@ -53,18 +53,18 @@ coldWeb.controller('infoManage', function($rootScope, $scope, $state, $cookies,
 		return true;
 	}
 
-	 $scope.goDeleteInfo = function (infoID) {
+	 $scope.goDeletePub = function (infoID) {
 	    	if(delcfm()){
-	    	$http.get(window.localStorage.weburl+'/i/information/deleteInfo', {
+	    	$http.get(window.localStorage.weburl+'/i/publish/deletePublishForBg', {
 	            params: {
-	                "inforID": infoID
+	                "publishID": infoID
 	            }
 	        }).success(function (data) {
 	        });
 	    	$state.reload();
 	    	}
 	    };
-	    $scope.deleteInfos = function(){
+	    $scope.deletePubs = function(){
 	    	if(delcfm()){
 	    	var infoIDs = [];
 	    	for(i in $scope.selected){
@@ -73,9 +73,9 @@ coldWeb.controller('infoManage', function($rootScope, $scope, $state, $cookies,
 	    	if(infoIDs.length >0 ){
 	    		$http({
 	    			method:'POST',
-	    			url:window.localStorage.weburl+'/i/information/deleteByInfoIDs',
+	    			url:window.localStorage.weburl+'/i/publish/deleteByPublishIDs',
 	    			params:{
-	    				'inforIDs': infoIDs
+	    				'publishIDs': infoIDs
 	    			}
 	    		}).success(function (data) {
 	            });
@@ -99,13 +99,13 @@ coldWeb.controller('infoManage', function($rootScope, $scope, $state, $cookies,
 	    	return list.indexOf(info) > -1;
 	    };
 	    $scope.isChecked = function() {
-	        return $scope.selected.length === $scope.AllInformation.length;
+	        return $scope.selected.length === $scope.AllPublish.length;
 	    };
 	    $scope.toggleAll = function() {
-	        if ($scope.selected.length === $scope.AllInformation.length) {
+	        if ($scope.selected.length === $scope.AllPublish.length) {
 	        	$scope.selected = [];
 	        } else if ($scope.selected.length === 0 || $scope.selected.length > 0) {
-	        	$scope.selected = $scope.AllInformation.slice(0);
+	        	$scope.selected = $scope.AllPublish.slice(0);
 	        }
 	    };
 });

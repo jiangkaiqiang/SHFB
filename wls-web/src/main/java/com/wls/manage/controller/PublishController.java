@@ -23,6 +23,7 @@ import com.wls.manage.dao.PublishMapper;
 import com.wls.manage.dao.ResponseMapper;
 import com.wls.manage.dao.UserMapper;
 import com.wls.manage.dto.AppendixDto;
+import com.wls.manage.dto.BaseDto;
 import com.wls.manage.dto.CommentDto;
 import com.wls.manage.dto.PublishDto;
 import com.wls.manage.dto.ResponseDto;
@@ -217,7 +218,7 @@ public class PublishController extends BaseController {
 			List<PraiseEntity> praiseEntities = praiseMapper.findPraisesByPublishId(publishEntity.getId().intValue());
 			publishDto.setPraisenum(praiseEntities.size());
 			for (PraiseEntity praiseEntity : praiseEntities) {
-				if (praiseEntity.getPraiserid().intValue()==userID.intValue()) {
+				if (praiseEntity!=null&&praiseEntity.getPraiserid()!=null&&userID!=null&&praiseEntity.getPraiserid().intValue()==userID.intValue()) {
 					publishDto.setPraiseflag(1);
 					break;
 				}
@@ -428,7 +429,26 @@ public class PublishController extends BaseController {
 		 publishMapper.deletePublish(publishID);
 		 return getPublishDtos(publishMapper.findPublishByUserId(userID));
 	}
-	
+	/**
+	 * 删除发布后台
+	 * @param msgID
+	 * @return
+	 */
+	@RequestMapping(value = "/deletePublishForBg")
+	@ResponseBody
+	public Object deletePublishForBg(Integer publishID) {
+		 publishMapper.deletePublish(publishID);
+		 return new BaseDto(0);
+		}
+		
+     @RequestMapping(value = "/deleteByPublishIDs")
+		@ResponseBody
+		public Object deleteByPublishIDs(Integer[] publishIDs) {
+			for(Integer publishID:publishIDs){
+				 publishMapper.deletePublish(publishID);
+			}
+			return new BaseDto(0);
+		}
 	/**
 	 * 点赞发布
 	 * @param publishID
