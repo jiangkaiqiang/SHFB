@@ -1,18 +1,19 @@
 coldWeb.controller('home', function ($rootScope, $scope, $state, $cookies, $http, $location) {
 	$scope.load = function(){
-		 $.ajax({type: "GET",cache: false,dataType: 'json',url: '/i/admin/findAdmin'}).success(function(data){
-			   $rootScope.admin = data.entity;
+		 /*$.ajax({type: "GET",cache: false,dataType: 'json',url: 'http://localhost:8989/i/admin/findAdmin'}).success(function(data){
+			   $rootScope.admin = data.entity;*/
+		admin = window.localStorage.lkuser;
 				if($rootScope.admin == null || $rootScope.admin.id == 0){
 					url = "http://" + $location.host() + ":" + $location.port() + "/login.html";
 					window.location.href = url;
 				}
-		   });
+		 /*  });*/
 	};
 	$scope.load();
 	// 显示最大页数
-    $scope.maxSize = 12;
+    $scope.maxSize = 10;
     // 总条目数(默认每页十条)
-    $scope.bigTotalItems = 12;
+    $scope.bigTotalItems = 10;
     // 当前页
     $scope.bigCurrentPage = 1;
 	$scope.Allusers = [];
@@ -23,7 +24,7 @@ coldWeb.controller('home', function ($rootScope, $scope, $state, $cookies, $http
     $scope.getUsers = function() {
 		$http({
 			method : 'POST',
-			url : '/i/user/findUserList',
+			url : window.localStorage.weburl+'/i/user/findUserListForBg',
 			params : {
 				pageNum : $scope.bigCurrentPage,
 				pageSize : $scope.maxSize,
@@ -58,7 +59,7 @@ coldWeb.controller('home', function ($rootScope, $scope, $state, $cookies, $http
 	
     $scope.goDeleteUser = function (userID) {
     	if(delcfm()){
-    	$http.get('/i/user/deleteUser', {
+    	$http.get(window.localStorage.weburl+'/i/user/deleteUser', {
             params: {
                 "userID": userID
             }
@@ -75,8 +76,8 @@ coldWeb.controller('home', function ($rootScope, $scope, $state, $cookies, $http
     	}
     	if(userIDs.length >0 ){
     		$http({
-    			method:'DELETE',
-    			url:'/i/user/deleteByUserIDs',
+    			method:'POST',
+    			url:window.localStorage.weburl+'/i/user/deleteByUserIDs',
     			params:{
     				'userIDs': userIDs
     			}
@@ -122,7 +123,7 @@ coldWeb.controller('home', function ($rootScope, $scope, $state, $cookies, $http
     	return userIDs;
     }
     
-    $scope.getAudit = function(i){
+    /*$scope.getAudit = function(i){
     	if(i==0)
     		return '待审核';
     	else if(i>0){
@@ -130,14 +131,14 @@ coldWeb.controller('home', function ($rootScope, $scope, $state, $cookies, $http
     	}else{
     		return '未通过';
     	}
-    }
+    }*/
     
-    $scope.changeAudit = function(user){
+    /*$scope.changeAudit = function(user){
     	var r=confirm("通过审核？");
     	user.audit = r?1:-1;
     	$http({
     		'method':'POST',	
-    		'url':'/i/user/changeAudit',
+    		'url':window.localStorage.weburl+'/i/user/changeAudit',
     		'params':{
     			'userID':user.id,
     			'audit':user.audit
@@ -151,14 +152,14 @@ coldWeb.controller('home', function ($rootScope, $scope, $state, $cookies, $http
     	if(userIDs.length >0 ){
     		$http({
     			method:'POST',
-    			url:'/i/user/changeAudits',
+    			url:window.localStorage.weburl+'/i/user/changeAudits',
     			params:{
     				'userIDs': userIDs,
     				'audit':audit
     			}
     		});
     	}
-    }
+    }*/
     
     
     function checkInput(){
@@ -168,6 +169,9 @@ coldWeb.controller('home', function ($rootScope, $scope, $state, $cookies, $http
             flag = false;
         }
         if ($scope.password == undefined || $scope.password == '') {
+            flag = false;
+        }
+        if ($scope.telephone == undefined || $scope.telephone == '') {
             flag = false;
         }
         return flag;
@@ -180,12 +184,13 @@ coldWeb.controller('home', function ($rootScope, $scope, $state, $cookies, $http
           if($scope.password==$scope.password1){
             $http({
             	method : 'GET', 
-    			url:'/i/user/addUser',
+    			url:window.localStorage.weburl+'/i/user/addUser',
     			params:{
     				'username': encodeURI($scope.username,"UTF-8"),
     				'password': $scope.password,
     				'email' : $scope.email,
-    				'telephone' : $scope.telephone
+    				'telephone' : $scope.telephone,
+    				'suproleid' : $scope.suproleid
     			}
     		}).then(function (resp) {
                 alert("添加成功");
@@ -201,7 +206,7 @@ coldWeb.controller('home', function ($rootScope, $scope, $state, $cookies, $http
         	  alert("两次密码不一致!");
            }
           } else {
-            alert("请填写用户名或密码!");
+            alert("请填写用户名或密码，手机号!");
         }
     }
 });

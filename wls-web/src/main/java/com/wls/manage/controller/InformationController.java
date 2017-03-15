@@ -11,6 +11,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -407,5 +408,22 @@ public class InformationController extends BaseController {
 		insertInformationByType(newInfomationDtos,"3");
 		return ResponseData.newSuccess("添加成功");
 	}
+	/**
+	 * 后端管理系统================================================================
+	 */
+	@RequestMapping(value = "/deleteInfo", method = RequestMethod.GET)
+	@ResponseBody
+	public Object deleteInfo(int inforID) {
+		 informationDao.deleteInformation(inforID);
+		 return new BaseDto(0);
+	}
 	
+	@RequestMapping(value = "/deleteByInfoIDs")
+	@ResponseBody
+	public Object deleteByInfoIDs(Integer[] inforIDs) {
+		for(Integer inforID:inforIDs){
+			informationDao.deleteInformation(inforID);
+		}
+		return new BaseDto(0);
+	}
 }

@@ -4,14 +4,14 @@
 				<button type="button" class="btn btn-default pull-left" id="plusCold" data-toggle="modal" data-target="#addUser">
 					<span class="glyphicon glyphicon-plus"></span>添加用户
 				</button>
-		<div class="btn-group pull-left" id="status">
+		<!-- <div class="btn-group pull-left" id="status">
 			<select ng-model="optAudit" ng-change="auditChanged(optAudit)">
 				<option value="8">所有</option>
 				<option value="0">待审核</option>
 				<option value="1">已审核</option>
 				<option value="-1">未通过</option>
 			</select>
-		</div>
+		</div> -->
 		<div id="search">								
 					<input type="text" ng-model="keyword" placeholder="请输入关键词" id="myText" />
 					<div id="searchImg" ng-click="goSearch()">
@@ -36,7 +36,8 @@
 				         <th>邮箱</th>
 				         <th>手机号</th>
 				         <th>添加时间</th>
-				         <th>状态</th>
+				         <th>角色</th>
+				        <!--  <th>状态</th> -->
 				         <th>操作</th>
 				      </tr>
 				   </thead>
@@ -50,11 +51,13 @@
 				         <td>{{user.username}}</td>
 				         <td>{{user.email}}</td>
 				         <td>{{user.telephone}}</td>
-				         <td>{{user.addTime}}</td>
-				         <td ng-bind="getAudit(user.audit)"></td>
+				         <td>{{user.registertime}}</td>
+				          <td ng-if="user.suproleid==1">学生</td>
+				           <td ng-if="user.suproleid==2">其他</td>
+				         <!-- <td ng-bind="getAudit(user.audit)"></td> -->
 				         <td>
 				         	<button class="delete" ng-click="goDeleteUser(user.id)"></button>
-				            <button class="btn btn-primary btn-sm" ng-click="changeAudit(user)">审核</button>
+				            <!-- <button class="btn btn-primary btn-sm" ng-click="changeAudit(user)">审核</button> -->
 				         </td>
 				      </tr>
 				   </tbody>
@@ -71,7 +74,7 @@
 			<!-- 表格操作区域结束 -->
 			<div class="three">
 				<div class="btn-group" role="group">
-				    <button type="button" class="btn btn-default" ng-click="changeAudits()">审核</button>
+				   <!--  <button type="button" class="btn btn-default" ng-click="changeAudits()">审核</button> -->
 				   <button type="button" class="btn btn-default" ng-click="deleteUsers()">删除</button>
 				</div>
 			</div>
@@ -129,6 +132,15 @@
 					            placeholder="请输入手机号">
 					      </div>
 					   </div>
+					    <div class="form-group">
+					    <label for="phoneNum" class="col-sm-2 control-label">角色</label>
+					    <div class="col-sm-10">
+					      <select ng-model="suproleid" style="width:120px;height:30px">
+				          <option value="1">学生</option>
+				          <option value="2">其他</option>
+			         </select>
+			         </div>
+			          </div>
 	            	</form>
 	         </div>
 	         <div class="modal-footer">

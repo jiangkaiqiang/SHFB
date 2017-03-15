@@ -124,5 +124,19 @@
 		SELECT u.* FROM user u 
 	    WHERE u.id = #{id}
 	</select>
-
+    <select id="findAllUserForBg" parameterType="int" resultType="UserEntity">
+         SELECT * FROM `user`
+		 <where> 
+			<if test="audit != null">
+			    audit=#{audit}
+			</if>
+		    <if test="keyword != null">
+		        AND username like "%"#{keyword}"%"
+		    </if>
+		 </where>
+         order by `registertime` desc
+    </select>
+    <select id="deleteUser" parameterType="map">
+	    DELETE FROM user WHERE `id` = #{id}
+	</select>
 </mapper>

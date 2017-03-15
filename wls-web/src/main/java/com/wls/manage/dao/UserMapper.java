@@ -26,4 +26,8 @@ public interface UserMapper {
 			,@Param("userid")Integer userid);
 	
 	public int existenceUserName(@Param("username")String username);
+    
+	void deleteUser(@Param("id") int id);
+	
+	Page<UserEntity> findAllUserForBg(@Param("audit")Integer audit, @Param("keyword")String keyword);
 }

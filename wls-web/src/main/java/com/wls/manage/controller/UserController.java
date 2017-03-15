@@ -30,6 +30,8 @@ import com.wls.manage.dao.ResumeVisMapper;
 import com.wls.manage.dao.RoleMapper;
 import com.wls.manage.dao.SkillMapper;
 import com.wls.manage.dao.UserMapper;
+import com.wls.manage.dto.BaseDto;
+import com.wls.manage.dto.ResultDto;
 import com.wls.manage.dto.UploadFileEntity;
 import com.wls.manage.dto.UserDto;
 import com.wls.manage.entity.CookieEntity;
@@ -820,5 +822,57 @@ public class UserController extends BaseController {
 		String password = EncodeUtil.encodeByMD5(changepwd);
 		userDao.updateUserPwd(password, telephone);
 	    return ResponseData.newSuccess("密码修改成功");
+	}
+	
+	
+ /*
+  * 后端代码开始================================================================================
+  */
+	@RequestMapping(value = "/findUserListForBg", method = RequestMethod.POST)
+	@ResponseBody
+	public Object findUserListForBg(@RequestParam(value="pageNum",required=false) Integer pageNum,
+			@RequestParam(value="pageSize") Integer pageSize, 
+			@RequestParam(value="audit", required=false) Integer audit,
+			@RequestParam(value="keyword", required=false) String keyword) throws UnsupportedEncodingException {
+		if( !(audit == -1 || audit == 1 || audit == 0) ){
+			audit = null;
+		}
+		pageNum = pageNum == null? 1:pageNum;
+		pageSize = pageSize==null? 12:pageSize;
+		PageHelper.startPage(pageNum, pageSize);
+		if(keyword.equals("undefined"))
+			keyword = null;
+		else{
+		keyword = URLDecoder.decode(keyword, "UTF-8");
+		}
+		return new PageInfo<UserEntity>(userDao.findAllUserForBg(audit,keyword));
+		
+	}
+	
+	@RequestMapping(value = "/deleteUser", method = RequestMethod.GET)
+	@ResponseBody
+	public Object deleteUser(int userID) {
+		 userDao.deleteUser(userID);
+		 return new BaseDto(0);
+	}
+	
+	@RequestMapping(value = "/deleteByUserIDs")
+	@ResponseBody
+	public Object deleteByUserIDs(Integer[] userIDs) {
+		for(Integer userID:userIDs){
+			userDao.deleteUser(userID);
+		}
+		return new BaseDto(0);
+	}
+	@RequestMapping(value = "/addUser", method = RequestMethod.GET)
+	@ResponseBody
+	public Object addUser(UserEntity user) throws UnsupportedEncodingException {
+		if (user.getUsername() == null || user.getPassword() == null||user.getTelephone()==null) {
+			return new ResultDto(-1, "用户名和密码,手机号不能为空");
+		}
+		user.setUsername(URLDecoder.decode(user.getUsername(), "UTF-8"));
+		user.setPassword(EncodeUtil.encodeByMD5(user.getPassword()));
+		userDao.insertUser(user);
+		return new BaseDto(0);
 	}
 }

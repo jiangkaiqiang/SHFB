@@ -1,247 +1,38 @@
 var coldWeb = angular.module('ColdWeb', ['ui.bootstrap', 'ui.router', 'ui.checkbox',
     'ngCookies', 'xeditable', 'isteven-multi-select', 'angucomplete', 'angular-table','ngFileUpload','remoteValidation']);
-coldWeb.constant('coldWebUrl', 'http://www.smartcold.org.cn/i/');
-// coldWeb.constant('coldWebUrl', 'http://localhost:8081/i/');
+var weburl = "http://localhost:8989";
 angular.element(document).ready(function ($ngCookies, $http, $rootScope) {
 	angular.bootstrap(document, ['ColdWeb']);
 });
-coldWeb.run(function (editableOptions, naviService,adminService, $location) {
+coldWeb.run(function (editableOptions, adminService, $location,$http) {
+	$http.defaults.withCredentials = true;
     editableOptions.theme = 'bs3'; // bootstrap3 theme. Can be also 'bs2', 'default'
-    naviService.setNAVI();
-    $.ajax({type: "GET",cache: false,dataType: 'json',url: '/i/admin/findAdmin'}).success(function(data){
-      	admin = data.entity;
-      	if(admin == null || admin.id == 0){
-  			url = "http://" + $location.host() + ":" + $location.port() + "/login.html";
+    /*$.ajax({type: "GET",cache: false,dataType: 'json',url: weburl+'/i/admin/findAdmin'}).success(function(data){
+      	admin = data.entity;*/
+        window.localStorage.weburl = "http://localhost:8989";
+        admin = window.localStorage.lkuser;
+      	if(admin == null || admin==''||admin==undefined){
+  			url = "login.html";
   			window.location.href = url;
   		}
   		adminService.setAdmin(admin);
-      });
+      /*});*/
 });
 
-coldWeb.config(function ($httpProvider) {
-	//$httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
-    $httpProvider.interceptors.push(function ($q, $injector) {
-        return {
-            'response': function (response) {
-                return response;
-            },
-            'responseError': function (rejection) {
-                var modal = $injector.get('$Modal');
-                modal.open({
-                    animation: true,
-                    templateUrl: 'app/template/error.html',
-                    controller: 'error',
-                    backdrop: true,
-                    resolve: {
-                        rejection: function () {
-                            return rejection;
-                        }
-                    }
-                });
-
-                return $q.reject(rejection);
-            }
-        };
-    });
-});
 
 coldWeb.factory('adminService',['$rootScope','$http', function($rootScope,$http){
 	return {
 		setAdmin: function(admin){
 	    	$rootScope.admin = admin;
 	    	$rootScope.logout = function () {
-	        	$http.get('/i/admin/logout').success(function(data){
-	        		$rootScope.admin = null;
+		        	$http.get(window.localStorage.weburl+'/i/admin/logout').success(function(data){
+		            window.localStorage.lkuser ='';
 	            });
 	        	window.location.reload();
 	        };
-	        $rootScope.gotoSmartCold = function(){
-	        	cookies = document.cookie.split(";")
-	        	url = "http://www.smartcold.net";
-	        	angular.forEach(cookies,function(item){
-	        		item = item.trim();
-	        		if(item.startsWith("token=")){	        			
-	        			url = url + "/#/" + item;
-	        		}
-	        	})
-	        	window.open(url);
-	        }
 	    },
-	}
-}])
-
-coldWeb.factory('naviService', ['$rootScope', '$state', function ($rootScope, $state) {
-    return {
-        setNAVI: function () {
-            $rootScope.toColdStorageList = function () {
-                $state.go('coldStoragelist', {});
-            };
-            $rootScope.toColdStorageComment = function (storageId) {
-                $state.go('coldStorageComment', {'storageId': storageId});
-            };
-        },
-    };
+	};
 }]);
-
-coldWeb.filter('objectCount', function () {
-    return function (input) {
-        var size = 0, key;
-        for (key in input) {
-            if (input.hasOwnProperty(key)) size++;
-        }
-        return size;
-    }
-});
-
-coldWeb.filter('toArray', function () {
-    'use strict';
-
-    return function (obj) {
-        if (!(obj instanceof Object)) {
-            return obj;
-        }
-
-        return Object.keys(obj).filter(function (key) {
-            if (key.charAt(0) !== "$") {
-                return key;
-            }
-        }).map(function (key) {
-            if (!(obj[key] instanceof Object)) {
-                obj[key] = {value: obj[key]};
-            }
-
-            return Object.defineProperty(obj[key], '$key', {__proto__: null, value: key});
-        });
-    };
-});
-
-
-coldWeb.directive('toggleClass', function() {
-	    return {
-	        restrict: 'A',
-	        link: function(scope, element, attrs) {
-	            element.bind('click', function() {
-	                if(element.attr("class") == "empty") {
-	                    element.removeClass("empty");
-	                    element.addClass(attrs.toggleClass);
-	                    window.location.href=attrs.url;
-	                } else {
-	                    element.removeClass("highlight");
-	                    element.addClass("empty");
-	                }
-	            });
-	        }
-	    };
-	});
-
-coldWeb.directive('snippet', function () {
-    return {
-        restrict: 'E',
-        template: '<pre><div class="hidden code" ng-transclude></div><code></code></pre>',
-        replace: true,
-        transclude: true,
-        link: function (scope, elm, attrs) {
-            scope.$watch(function () {
-                return elm.find('.code').text();
-            }, function (newValue, oldValue) {
-                if (newValue != oldValue) {
-                    elm.find('code').html(hljs.highlightAuto(newValue).value);
-                }
-            });
-        }
-    };
-});
-
-
-coldWeb.directive('star', function () {
-  return {
-    template: '<ul class="rating" ng-mouseleave="leave(order)">' +
-        '<li ng-repeat="star in stars" ng-class="star" ng-click="click(order,$index + 1)" ng-mouseover="over(order,$index + 1)">' +
-        '\u2605' +
-        '</li>' +
-        '</ul>{{overVal?overVal:ratingVal}} 分',
-    scope: {
-      ratingValue: '=',
-      max: '=',
-      order: '=',
-      readonly: '@',
-      onClick: '='
-    },
-    controller: function($scope){
-      $scope.ratingValue = $scope.ratingValue || 0;
-      $scope.max = $scope.max || 5;
-	  $scope.ratingVal = 0;
-	  $scope.overVal = null;
-	  $scope.stars = [];
-	  for(var i=0; i< $scope.max;i++){
-		  $scope.stars.push({
-              filled: i < $scope.ratingVal
-            });
-	  }
-	  var updateStars = function (val) {
-          for (var i = 0; i < $scope.max; i++) {
-            $scope.stars[i].filled = i < val;
-          }
-        };
-      $scope.click = function(i,val){
-        $scope.ratingVal = val;
-    	updateStars(val);
-        $scope.onClick(i,val);
-      };
-      $scope.over = function(i,val){
-    	$scope.overVal = val;
-    	updateStars(val);
-      };
-      $scope.leave = function(i){
-    	  $scope.overVal = null;
-    	updateStars($scope.ratingVal);
-      }
-      updateStars(0);
-    },
-    link: function (scope, elem, attrs) {
-      elem.css("text-align", "center");
- 
-    }
-  };
-});
-
-coldWeb.directive('activeLink', ['$location', '$filter', function (location, filter) {
-    return {
-        restrict: 'A',
-        link: function (scope, element, attrs, controller) {
-            var clazz = attrs.activeLink;
-            var path = element.children().attr('href') + "";
-            path = filter('limitTo')(path, path.length - 1, 1);
-            scope.location = location;
-            scope.$watch('location.path()', function (newPath) {
-                if (newPath.indexOf(path) > -1) {
-                    element.addClass(clazz);
-                } else {
-                    element.removeClass(clazz);
-                }
-            });
-        }
-    };
-}]);
-
-coldWeb.filter('sizeformat', function () {
-    return function (size) {
-        if (size / (1024 * 1024 * 1024) > 1)
-            return (size / (1024 * 1024 * 1024)).toFixed(2) + 'G';
-        else if (size / (1024 * 1024) > 1)
-            return (size / (1024 * 1024)).toFixed(2) + 'M';
-        else if (size / 1024 > 1)
-            return (size / 1024).toFixed(2) + 'K';
-        else
-            return size + 'B'
-    }
-});
-
-coldWeb.filter('objectLength',function(){
-    return function(obj,len){
-        return Object.keys(obj).length + (len?len:0);
-    }
-});
 
 
 coldWeb.config(function ($stateProvider, $urlRouterProvider) {
@@ -250,7 +41,7 @@ coldWeb.config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider.state('login', {
         url: '/login',
         controller: 'login',
-        templateUrl: 'app/template/login.html?4'
+        templateUrl: 'login.html'
     }).state('home', {
         url: '/home',
         controller: 'home',
