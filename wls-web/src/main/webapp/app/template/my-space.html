@@ -261,7 +261,8 @@
                  </div> 
                  <div class="resume-basic-info col-md-12"> 
                  <div class="col-md-1"> 
-                        {{user.sex}}
+                  <div ng-if="userDetail.sex==0">男</div>
+                  <div ng-if="userDetail.sex==1">女</div>    
                   </div> 
                   <div class="col-md-2"> 
                   <i class="fa fa-user"></i>

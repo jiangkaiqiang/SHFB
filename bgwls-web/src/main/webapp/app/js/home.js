@@ -177,7 +177,56 @@ coldWeb.controller('home', function ($rootScope, $scope, $state, $cookies, $http
         return flag;
     }
 
-    
+    $scope.goDetail = function(userID) {
+    	$http.get(window.localStorage.weburl+'/i/user/findUserByID', {
+            params: {
+                "spaceUserID": userID
+            }
+        }).success(function(data){
+		    if(data!=null&&data.id!=undefined){
+				 $scope.userDetail = data;
+		    }
+	     });
+    	 $http.get(window.localStorage.weburl+'/i/user/findEducateByUserID', {
+	            params: {
+	                "userID": userID
+	            }
+	        }).success(function (data) { 
+	        	if(data.success){
+	        		$scope.educates = data.data;
+	        	}
+	     });
+		 $http.get(window.localStorage.weburl+'/i/user/findSkillByUserID', {
+	            params: {
+	                "userID": userID
+	            }
+	        }).success(function (data) { 
+	        	if(data.success){
+	        		$scope.skills = data.data;
+	        	}
+	        	else{
+	        		$scope.skills = undefined;
+	        	}
+	     });
+		 $http.get(window.localStorage.weburl+'/i/user/findHonorByUserID', {
+	            params: {
+	                "userID": userID
+	            }
+	        }).success(function (data) { 
+	        	if(data.success){
+	        		$scope.honors = data.data;
+	        	}
+	     });
+		 $http.get(window.localStorage.weburl+'/i/user/findJobByUserID', {
+	            params: {
+	                "userID": userID
+	            }
+	        }).success(function (data) { 
+	        	if(data.success){
+	        		$scope.jobs = data.data;
+	        	}
+	     });
+		};
     
     $scope.submit = function(){
         if (checkInput()){

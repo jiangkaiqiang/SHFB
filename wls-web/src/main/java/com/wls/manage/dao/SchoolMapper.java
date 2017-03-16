@@ -1,6 +1,8 @@
 package com.wls.manage.dao;
 
+import com.github.pagehelper.Page;
 import com.wls.manage.entity.School_infoEntity;
+import com.wls.manage.entity.UserEntity;
 
 import org.apache.ibatis.annotations.Param;
 
@@ -20,4 +22,9 @@ public interface SchoolMapper {
     
     List<School_infoEntity> findSchoolList();
 
+	Page<School_infoEntity> findAllSchoolForBg(@Param("keyword")String keyword);
+	
+	void deleteSchool(@Param("id") int id);
+	
+	void insertSchool(School_infoEntity school_infoEntity);
 }

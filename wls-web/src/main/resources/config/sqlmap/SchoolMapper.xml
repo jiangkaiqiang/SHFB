@@ -19,4 +19,27 @@
         SELECT *
         FROM `shool_info` 
     </select>
+     <select id="findAllSchoolForBg" parameterType="int" resultType="School_infoEntity">
+         SELECT * FROM `shool_info`
+		 <where> 
+		    <if test="keyword != null">
+		       sh_shool like "%"#{keyword}"%"
+		    </if>
+		 </where>
+    </select>
+    <select id="deleteSchool" parameterType="map">
+	    DELETE FROM shool_info WHERE `sh_id` = #{id}
+	</select>
+	
+	<insert id="insertSchool" parameterType="School_infoEntity">
+        INSERT INTO `shool_info`(
+		`sh_shool`,
+		`sh_city`
+		)
+		VALUE 
+		(
+		#{sh_shool},
+		#{sh_city}
+		)
+    </insert>
 </mapper>
