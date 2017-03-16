@@ -1,6 +1,5 @@
 var coldWeb = angular.module('ColdWeb', ['ui.bootstrap', 'ui.router', 'ui.checkbox',
     'ngCookies', 'xeditable', 'isteven-multi-select', 'angucomplete', 'angular-table','ngFileUpload','remoteValidation']);
-var weburl = "http://localhost:8989";
 angular.element(document).ready(function ($ngCookies, $http, $rootScope) {
 	angular.bootstrap(document, ['ColdWeb']);
 });
@@ -9,7 +8,7 @@ coldWeb.run(function (editableOptions, adminService, $location,$http) {
     editableOptions.theme = 'bs3'; // bootstrap3 theme. Can be also 'bs2', 'default'
     /*$.ajax({type: "GET",cache: false,dataType: 'json',url: weburl+'/i/admin/findAdmin'}).success(function(data){
       	admin = data.entity;*/
-        window.localStorage.weburl = "http://localhost:8989";
+        window.localStorage.weburl = "http://www.weilanshu.com";
         admin = window.localStorage.lkuser;
       	if(admin == null || admin==''||admin==undefined){
   			url = "login.html";
@@ -25,10 +24,8 @@ coldWeb.factory('adminService',['$rootScope','$http', function($rootScope,$http)
 		setAdmin: function(admin){
 	    	$rootScope.admin = admin;
 	    	$rootScope.logout = function () {
-		        	$http.get(window.localStorage.weburl+'/i/admin/logout').success(function(data){
 		            window.localStorage.lkuser ='';
-	            });
-	        	window.location.reload();
+	        	    window.location.reload();
 	        };
 	    },
 	};

@@ -4,7 +4,7 @@ $(document).ready(function(){
 				  window.location.href = "http://"+ window.location.host + "/#/home";
 				}
 			});*/
-	window.localStorage.weburl = "http://localhost:8989";
+	window.localStorage.weburl = "http://www.weilanshu.com";
 		});
 		
 		function showErrorInfo(msg){
