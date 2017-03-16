@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.github.pagehelper.Page;
 import com.wls.manage.entity.ResponseEntity;
 /**
  * 回复mapper
@@ -20,5 +21,5 @@ public interface ResponseMapper {
 	List<ResponseEntity> findresponsesByResponseId(@Param("responseID") int responseID);
 	
 	int deleteByID(int ID);
-    
+	Page<ResponseEntity> findAllResponse(@Param("keyword")String keyword);
 }

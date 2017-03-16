@@ -1,4 +1,4 @@
-coldWeb.controller('commentManage', function($rootScope, $scope, $state, $cookies,
+coldWeb.controller('responseManage', function($rootScope, $scope, $state, $cookies,
 		$http, $location, Upload) {
 	$scope.maxSize = 10;
 	// 总条目数(默认每页十条)
@@ -6,12 +6,12 @@ coldWeb.controller('commentManage', function($rootScope, $scope, $state, $cookie
 	// 当前页
 	$scope.bigCurrentPage = 1;
 	$scope.optAudit = 100;
-	$scope.AllComment = [];
+	$scope.AllResponse = [];
 	// 获取资讯列表
-	$scope.getAllComment = function() {
+	$scope.getAllResponse = function() {
 		$http({
 			method : 'POST',
-			url : window.localStorage.weburl+'/i/comment/findCommentList',
+			url : window.localStorage.weburl+'/i/response/findResponseList',
 			params : {
 				pageNum : $scope.bigCurrentPage,
 				pageSize : $scope.maxSize,
@@ -19,18 +19,18 @@ coldWeb.controller('commentManage', function($rootScope, $scope, $state, $cookie
 			}
 		}).success(function(data) {
 			$scope.bigTotalItems = data.total;
-			$scope.AllComment = data.list;
+			$scope.AllResponse = data.list;
 		});
 	};
 
-	$scope.getAllComment();
+	$scope.getAllResponse();
 
 	$scope.pageChanged = function() {
-		$scope.getAllComment();
+		$scope.getAllResponse();
 	};
 
 	$scope.goSearch = function() {
-		$scope.getAllComment();
+		$scope.getAllResponse();
 	};
 	
 
@@ -41,18 +41,18 @@ coldWeb.controller('commentManage', function($rootScope, $scope, $state, $cookie
 		return true;
 	}
 
-	 $scope.goDeleteCom = function (infoID) {
+	 $scope.goDeleteRes = function (infoID) {
 	    	if(delcfm()){
-	    	$http.get(window.localStorage.weburl+'/i/comment/deleteComment', {
+	    	$http.get(window.localStorage.weburl+'/i/response/deleteResponse', {
 	            params: {
-	                "commentID": infoID
+	                "responseID": infoID
 	            }
 	        }).success(function (data) {
 	        });
 	    	$state.reload();
 	    	}
 	    };
-	    $scope.deleteComs = function(){
+	    $scope.deleteRess = function(){
 	    	if(delcfm()){
 	    	var infoIDs = [];
 	    	for(i in $scope.selected){
@@ -61,9 +61,9 @@ coldWeb.controller('commentManage', function($rootScope, $scope, $state, $cookie
 	    	if(infoIDs.length >0 ){
 	    		$http({
 	    			method:'POST',
-	    			url:window.localStorage.weburl+'/i/comment/deleteByCommentIDs',
+	    			url:window.localStorage.weburl+'/i/response/deleteByResponseIDs',
 	    			params:{
-	    				'commentIDs': infoIDs
+	    				'responseIDs': infoIDs
 	    			}
 	    		}).success(function (data) {
 	            });
@@ -87,13 +87,13 @@ coldWeb.controller('commentManage', function($rootScope, $scope, $state, $cookie
 	    	return list.indexOf(info) > -1;
 	    };
 	    $scope.isChecked = function() {
-	        return $scope.selected.length === $scope.AllComment.length;
+	        return $scope.selected.length === $scope.AllResponse.length;
 	    };
 	    $scope.toggleAll = function() {
-	        if ($scope.selected.length === $scope.AllComment.length) {
+	        if ($scope.selected.length === $scope.AllResponse.length) {
 	        	$scope.selected = [];
 	        } else if ($scope.selected.length === 0 || $scope.selected.length > 0) {
-	        	$scope.selected = $scope.AllComment.slice(0);
+	        	$scope.selected = $scope.AllResponse.slice(0);
 	        }
 	    };
 });

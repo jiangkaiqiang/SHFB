@@ -44,5 +44,13 @@
 		#{responseID} 
 		order by `responsetime` desc
 	</select>
-
+    <select id="findAllResponse" parameterType="int" resultType="ResponseEntity">
+         SELECT * FROM `response`
+		 <where> 
+		    <if test="keyword != null">
+		        AND content like "%"#{keyword}"%"
+		    </if>
+		 </where>
+         order by `responsetime` desc
+    </select>
 </mapper>

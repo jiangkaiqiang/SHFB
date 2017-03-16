@@ -2,7 +2,9 @@ package com.wls.manage.dao;
 
 import java.util.List;
 
+import com.github.pagehelper.Page;
 import com.wls.manage.entity.CommentEntity;
+
 import org.apache.ibatis.annotations.Param;
 /**
  * 评论mapper
@@ -20,5 +22,5 @@ public interface CommentMapper {
 			@Param("flag") int flag);
 	
 	int deleteByCommentID(int commentID);
-    
+	Page<CommentEntity> findAllComment(@Param("keyword")String keyword);
 }

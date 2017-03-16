@@ -1,6 +1,8 @@
 package com.wls.manage.controller;
 
+import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
+import java.net.URLDecoder;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,7 +11,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.wls.manage.dao.ResponseMapper;
+import com.wls.manage.dto.BaseDto;
 import com.wls.manage.entity.ResponseEntity;
 import com.wls.manage.util.ResponseData;
 
@@ -31,4 +36,35 @@ public class ResponseController {
     	responseMapper.insertResponse(responseEntity);
     	return ResponseData.newSuccess("回复成功");
     }
+    @RequestMapping(value = "/findResponseList", method = RequestMethod.POST)
+   	@ResponseBody
+   	public Object findResponseList(@RequestParam(value="pageNum",required=false) Integer pageNum,
+   			@RequestParam(value="pageSize") Integer pageSize, 
+   			@RequestParam(value="keyword", required=false) String keyword) throws UnsupportedEncodingException {
+   		pageNum = pageNum == null? 1:pageNum;
+   		pageSize = pageSize==null? 12:pageSize;
+   		PageHelper.startPage(pageNum, pageSize);
+   		if(keyword.equals("undefined"))
+   			keyword = null;
+   		else{
+   		keyword = URLDecoder.decode(keyword, "UTF-8");
+   		}
+   		return new PageInfo<ResponseEntity>(responseMapper.findAllResponse(keyword));
+   		
+   	}
+       @RequestMapping(value = "/deleteResponse", method = RequestMethod.GET)
+   	@ResponseBody
+   	public Object deleteResponse(int responseID) {
+   		 responseMapper.deleteByID(responseID);
+   		 return new BaseDto(0);
+   	}
+   	
+   	@RequestMapping(value = "/deleteByResponseIDs")
+   	@ResponseBody
+   	public Object deleteByResponseIDs(Integer[] responseIDs) {
+   		for(Integer responseID:responseIDs){
+   			responseMapper.deleteByID(responseID);
+   		}
+   		return new BaseDto(0);
+   	}
 }

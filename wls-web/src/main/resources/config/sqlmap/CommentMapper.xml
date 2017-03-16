@@ -45,5 +45,13 @@
 		#{flag}
 		order by `commenttime` desc
 	</select>
-
+   <select id="findAllComment" parameterType="int" resultType="CommentEntity">
+         SELECT * FROM `comment`
+		 <where> 
+		    <if test="keyword != null">
+		        AND content like "%"#{keyword}"%"
+		    </if>
+		 </where>
+         order by `commenttime` desc
+    </select>
 </mapper>

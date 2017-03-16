@@ -118,10 +118,10 @@ coldWeb.config(function ($stateProvider, $urlRouterProvider) {
         url: '/coldStorageAuthAudit/:rdcId',
         controller: 'coldStorageAuthAudit',
         templateUrl: 'app/template/coldStorageAuth.html'
-    }).state('companylist', {
-        url: '/companylist',
-        controller: 'companylist',
-        templateUrl: 'app/template/companyManage.html'
+    }).state('responseManage', {
+        url: '/responseManage',
+        controller: 'responseManage',
+        templateUrl: 'app/template/responseManage.html'
     }).state('storageRelate', {
         url: '/storageRelate/:companyId',
         controller: 'storageRelate',
