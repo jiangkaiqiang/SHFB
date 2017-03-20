@@ -30,6 +30,18 @@ wlsWeb.controller('my-space-company',function($http, $location,$rootScope, $scop
 			        	$scope.followers = data;
 			        	$scope.followerNum = $scope.followers.length;
 			     });
+					
+					 $scope.publishNum = 0;
+					 $http.get('/i/publish/findPublishByUserId', {
+				            params: {
+				                "userID": $scope.user.id
+				            }
+				        }).success(function (data) { 
+				        	if(data!=null){
+				        	$scope.publishs = data;
+				        	$scope.publishNum = $scope.publishs.length;
+				        	}
+				     });
 				 }
 				else{
 					alert("请先登录");
@@ -173,7 +185,24 @@ wlsWeb.controller('my-space-company',function($http, $location,$rootScope, $scop
 				 }
    	 });
 		};
-	    
+		
+		 $scope.deletePublish  = function(publishID) {
+			   if(delcfm()){
+		    	$http.get( "/i/publish/deletePublish",{
+		    		params : {
+		    			publishID : publishID,
+		    			userID : $scope.user.id
+		    			}
+		    	}).success(function(data) {
+		    		//alert("删除成功");
+		    		$scope.publishs = data;
+		        	$scope.publishNum = $scope.publishs.length;
+			   });
+			   }
+		   };
+		   $scope.goBlogInfo = function(publishID) {
+		      	 $state.go('blog-info', {"publishID": publishID});
+		   	};
 		 $scope.responseMessage = function(messageID){
 	            $("#reply_area-"+messageID).css("display","");
 	    };

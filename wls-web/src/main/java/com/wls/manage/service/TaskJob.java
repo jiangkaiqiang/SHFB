@@ -41,11 +41,11 @@ public class TaskJob {
         HttpService httpService = new HttpServiceImpl();
         httpService.sendGet(url+"/i/information/addInformationWithLY",20000);
     } 
-    @Scheduled(cron = "0 51 4 * * ?")  
+   /* @Scheduled(cron = "0 51 4 * * ?")  
     public void job8() {  
         HttpService httpService = new HttpServiceImpl();
         httpService.sendGet(url+"/i/information/addInformationWithBJ",20000);
-    } 
+    } */
     /*
     @Scheduled(cron = "0 48 23 * * ?")  
     public void job7() {  

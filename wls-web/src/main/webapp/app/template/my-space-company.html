@@ -40,6 +40,7 @@
       <div class="product-page-content margin-bottom-20"> 
        <ul id="myTab" class="nav nav-tabs"> 
         <li class="active"><a href="#tab-1" data-toggle="tab" id="btn1">基本资料</a></li> 
+        <li><a href="#tab-4" data-toggle="tab" id="btn4">招聘信息</a></li> 
         <li><a href="#tab-2" data-toggle="tab" id="btn2">关注</a></li> 
         <li><a href="#tab-3" data-toggle="tab" id="btn3">消息
         <span class="badge badge-danger">{{messageNum}} </span></a></li> 
@@ -113,6 +114,66 @@
           </div> 
          </div> 
         </div> 
+        
+         <div class="tab-pane fade row" id="tab-4"> 
+         <!-- BEGIN article --> 
+         <div class="portlet light"> 
+          <div class="portlet-title"> 
+           <div class="caption caption-md"> 
+            <i class="icon-bar-chart theme-font hide"></i> 
+            <span class="caption-subject font-blue-madison bold uppercase">已发布作品</span> 
+            <span class="caption-helper">{{publishNum}}个</span> 
+           </div> 
+          </div> 
+          <div class="portlet-body"> 
+           <!-- BEGIN PRODUCT LIST --> 
+            <div class="row blogs-list margin-bottom-20" ng-repeat="publish in publishs"> 
+            <div class="col-md-9 margin-bottom-20"> 
+             <div class="blog-item col-md-12 col-sm-12 col-xs-12"> 
+              <div class="col-md-12 col-sm-12 col-xs-12 no-padding"> 
+               <a href="" ><img class="blog-item-img" src="{{publish.publisheravatar}}" /></a> 
+               <div class="blog-item-body col-md-10 margin-bottom-10 "> 
+                <div class="blog-item-body-title"> 
+                 <div class="col-md-12 col-sm-12 col-xs-12 "> 
+                  <a class="blog-item-name" ng-click="goBlogInfo(publish.id)">{{publish.title}}</a> 
+                  <span class="blog-item-time"><i class="fa fa-clock-o"></i> {{publish.pubtime}} ###来自{{publish.publishername}}</span> 
+                 </div> 
+                </div> 
+              <div class="blog-item-body-info col-md-12 col-sm-12 col-xs-12 "> 
+             <!--      <p style="display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 3;
+                overflow: hidden;">{{publish.content}}
+             </p>  -->
+             <div class="no-padding" style="display: inline-block;" ng-if="publish.pubCovers!=null&&publish.pubCovers!=undefined&&publish.pubCovers!=''" ng-repeat="pubcover in publish.pubCovers">
+                 <img src="{{pubcover}}"/> 
+             </div>
+                </div> 
+                </div> 
+               </div> 
+              <div class="col-md-12 col-sm-12 col-xs-12  blog-item-action"> 
+               <div class="col-md-4 col-sm-4 col-xs-4 "> 
+                 <span><a ng-click="goBlogInfo(publish.id)"><i class="fa fa-comments"></i> 评论{{publish.commentnum}}</a></span>
+               </div> 
+               <div class="col-md-4 col-sm-4 col-xs-4 line"> 
+                 <span><a style="color:#64AED9"><i style="color:#64AED9" class="fa fa-thumbs-up"></i> 已赞{{publish.praisenum}}</a></span>
+               </div> 
+               <div class="col-md-4 col-sm-4 col-xs-4"> 
+                <span ng-click="deletePublish(publish.id)"><a>删除</a></span> 
+                <!-- <ul class="dropdown-menu" role="menu"> 
+                 <li> <a href="javascript:;"> <i class="fa fa-wechat"></i> 微信 </a> </li> 
+                 <li> <a href="javascript:;"> <i class="fa fa-weibo"></i> 新浪微博</a> </li> 
+                 <li> <a href="javascript:;"> <i class="fa fa-qq"></i> QQ</a> </li> 
+                 <li> <a href="javascript:;"> <i class="fa fa-star"></i> QQ空间 </a> </li> 
+                </ul>  -->
+               </div> 
+              </div> 
+             </div> 
+            </div> 
+           </div> 
+           <!-- END PRODUCT LIST --> 
+          </div> 
+         </div> 
+        </div> 
+        
         <div class="tab-pane fade row" id="tab-2"> 
          <!-- BEGIN ATTENTION --> 
            <div class="portlet light"> 
@@ -172,7 +233,7 @@
              <div class="item" ng-repeat="message in messages"> 
               <div class="item-head"> 
                <div class="item-details"> 
-                <img style="width: 35px;height: 35px;border-radius: 150px !important;" src="{{message.senderavatar}}" /> 
+                 <a ng-click="goUserSpace(message.senderid)"><img style="width: 35px;height: 35px;border-radius: 150px !important;" src="{{message.senderavatar}}" /> </a>
                 <a ng-click="goUserSpace(message.senderid)" class="item-name primary-link">{{message.sendername}}</a> 
                 <span class="item-label">{{message.informtime}}</span> 
                </div> 

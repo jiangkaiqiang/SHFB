@@ -34,6 +34,17 @@ wlsWeb.controller('my-space-company-ask',function($http, $location, $scope,$stat
 					else{
 						$scope.level = 1;
 					}
+					 $scope.publishNum = 0;
+					 $http.get('/i/publish/findPublishByUserId', {
+				            params: {
+				                "userID": $scope.user.id
+				            }
+				        }).success(function (data) { 
+				        	if(data!=null){
+				        	$scope.publishs = data;
+				        	$scope.publishNum = $scope.publishs.length;
+				        	}
+				     });
 					$http.get('/i/user/findFollowerByUserId', {
 			            params: {
 			                "userID": $scope.user.id
@@ -123,5 +134,7 @@ wlsWeb.controller('my-space-company-ask',function($http, $location, $scope,$stat
 	        	}
 	     });
 		};
-	    
+		 $scope.goBlogInfo = function(publishID) {
+	      	 $state.go('blog-info', {"publishID": publishID});
+	   	};  
 });

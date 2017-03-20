@@ -38,11 +38,20 @@
             <if test="title != null" >
                 title = #{title},
             </if>
-            <if test="describe != null" >
-                describe = #{describe},
-            </if>
             <if test="pubcategory != null" >
                 pubcategory = #{pubcategory},
+            </if>
+             <if test="pubcover != null" >
+                pubcover = #{pubcover},
+            </if>
+            <if test="schoolid != null" >
+                schoolid = #{schoolid},
+            </if>
+            <if test="appendixs != null" >
+                appendixs = #{appendixs},
+            </if>
+            <if test="pubvideo != null" >
+                pubvideo = #{pubvideo},
             </if>
             <if test="content != null" >
                 content = #{content},

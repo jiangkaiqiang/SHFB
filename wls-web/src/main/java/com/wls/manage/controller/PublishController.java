@@ -490,6 +490,7 @@ public class PublishController extends BaseController {
 	public Object addPublish(@RequestParam(required = false) String title,//标题
 			@RequestParam(required = false) String describe,
 			@RequestParam(required = false) Integer pubcategory,
+			@RequestParam(required = false) Integer publishid,
 			@RequestParam(required = false) Integer publisher,
 			@RequestParam(required = false) Integer schoolid,
 			@RequestParam(required = false) String content, 
@@ -555,13 +556,26 @@ public class PublishController extends BaseController {
 			ftpService.uploadFile(uploadFileEntity);
 			appendixString = appendixString +file.getOriginalFilename()+"<"+FtpService.READ_URL+"data/"+dir + "/" + fileName+">";
 		}
-		publishEntity.setPubcover(picFile);
-		publishEntity.setAppendixs(appendixString);
-		publishEntity.setPubvideo(videoFile);
+		if (!picFile.equals("")) {
+			publishEntity.setPubcover(picFile);	
+		}
+		if (!appendixString.equals("")) {
+			publishEntity.setAppendixs(appendixString);	
+		}
+		if (!videoFile.equals("")) {
+			publishEntity.setPubvideo(videoFile);
+		}
+	
 		/*if (publishCovers!=null&&!publishCovers.isEmpty()) {
 			publishEntity.setPubcover(publishCovers.get(0));
 		}*/
-		publishMapper.insertPublish(publishEntity);
+		if (publishid==null) {
+			publishMapper.insertPublish(publishEntity);
+		}
+		else {
+			publishEntity.setId(BigInteger.valueOf(publishid));
+			publishMapper.updatePublish(publishEntity);
+		}
 		return ResponseData.newSuccess();
 	}
 	
