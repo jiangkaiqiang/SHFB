@@ -203,6 +203,182 @@ wlsWeb.controller('my-space-company',function($http, $location,$rootScope, $scop
 		   $scope.goBlogInfo = function(publishID) {
 		      	 $state.go('blog-info', {"publishID": publishID});
 		   	};
+		   	
+			$scope.schoolid = -1;
+			$('body')
+			 .on('click', '#optionsRadios1', function(e) {
+				    $scope.schoolid = -1;
+			        $("#select_school").css("display","none");
+			    });
+			 $('body')
+			    .on('click', '#optionsRadios2', function(e) {
+			        $("#select_school").css("display","");
+			    });
+			 
+		  	$scope.updatePublish  = function(publishID) {
+		   		$("#tab_4list").css("display","none");
+		   		$("#tab-4update").css("display","");
+		   	    $http.get('/i/publish/findPublishByID', {
+	                params: {
+	                    "publishID": publishID
+	                }
+	            }).success(function(data,status,config,headers){
+	                $scope.publish = data;
+	                /*$scope.totalPicFiles = $scope.publish.picFiles;
+	                $scope.totalAppendixs = $scope.publish.appendixDtos;
+	                $scope.totalVideoFiles = $scope.publish.pubVideo;*/
+	                $scope.title = $scope.publish.title;
+	                $scope.schoolid = $scope.publish.schoolid;
+	                $scope.content = $scope.publish.content;
+	                if($scope.schoolid!=-1&&$scope.schoolid!=null&&$scope.schoolid!=undefined){
+	                	 $("input[name='optionsRadios1']").eq(1).attr("checked","checked");
+	                	 $("#select_school").css("display","");
+	                	 $http.get('/i/city/findSchoolById', {
+	         	            params: {
+	         	                "schoolID": $scope.schoolid
+	         	            }
+	         	        }).success(function(data){
+	         				 $scope.defaultschool = data;
+	         				$scope.schoolname=$scope.defaultschool.sh_shool; 
+	            	    });
+	                }
+	                else{
+	                	 $("input[name='optionsRadios1']").eq(0).attr("checked","checked");
+	                }
+	                $("input[name='optionsRadios3']").eq($scope.publish.pubcategory-1).attr("checked","checked");
+	                document.getElementById("contentdetail").innerHTML=$scope.publish.content;
+	             });
+		    };
+		    
+		    $scope.searchSchool = function(schoolname){
+		    	if(schoolname==''){
+		    		$("#schoolUl").css("display","none");
+		    	}
+		    	else{
+		    		 $http.get('/i/city/findSchoolByName', {
+		    	            params: {
+		    	                "schoolName": schoolname
+		    	            }
+		    	        }).success(function (data) {
+		     	    	$scope.totalSchools = data;
+		     	    	$("#schoolUl").css("display","");
+		     	    });
+		    	}
+		    };
+		    $scope.chooseSchool = function(school){
+		    	$scope.schoolname = school.sh_shool;
+		    	$("#schoolUl").css("display","none");
+		    	$scope.schoolid = school.sh_id;
+		    };
+		    
+		   
+		    
+		    $scope.addPicFiles = function () {
+		    	if($scope.totalPicFiles==undefined){
+		    		$scope.totalPicFiles = [];
+		    	}
+				if($scope.picfiles.length==0){return;};
+				var allfiles = $scope.totalPicFiles.concat($scope.picfiles);
+				if(allfiles.length>6){alert("最多选择6张！");return;}
+		        $scope.totalPicFiles=allfiles; 
+		    };
+		    $scope.dropPicFile = function(picFile){
+		        angular.forEach($scope.totalPicFiles,function(item, key){
+		            if(item == picFile){
+		                $scope.totalPicFiles.splice(key,1); return false;
+		            }
+		        });
+		    };
+		    $scope.addAppendixs = function () {
+		    	if($scope.totalAppendixs==undefined){
+		    	 $scope.totalAppendixs = [];
+		    	}
+				if($scope.appendixs.length==0){return;};
+				var allfiles = $scope.totalAppendixs.concat($scope.appendixs);
+				if(allfiles.length>3){alert("最多选择3个！");return;}
+		        $scope.totalAppendixs=allfiles; 
+		    };
+		    $scope.dropAppendixFile = function(file){
+		        angular.forEach($scope.totalAppendixs,function(item, key){
+		            if(item == file){
+		                $scope.totalAppendixs.splice(key,1); return false;
+		            }
+		        });
+		    };
+		    
+		    $scope.addVideoFiles = function () {
+		    	if($scope.totalVideoFiles==undefined){
+		    	$scope.totalVideoFiles = [];
+		    	}
+				if($scope.videofiles.length==0){return;};
+				var allfiles = $scope.totalVideoFiles.concat($scope.videofiles);
+				if(allfiles.length>2){alert("最多选择2个！");return;}
+		        $scope.totalVideoFiles=allfiles; 
+		    };
+		    $scope.dropVideoFile = function(file){
+		        angular.forEach($scope.totalVideoFiles,function(item, key){
+		            if(item == file){
+		                $scope.totalVideoFiles.splice(key,1); return false;
+		            }
+		        });
+		    };
+		    
+		    function checkInput() {
+				var flag = true;
+				// 检查必须填写项
+				if ($scope.title == undefined || $scope.title == '') {
+					flag = false;
+				}
+				if ($scope.content == undefined || $scope.content == '') {
+					flag = false;
+				}
+				return flag;
+			}
+		    
+		    $scope.confirmUpdatePub  = function() {
+		    	if (checkInput()) {
+					   data = {
+							    'title' : $scope.title,
+				            	'describe' : $scope.describe,
+								'pubcategory' : $('input[name="optionsRadios3"]:checked').val(),
+								//'publisher' : $rootScope.user.id,
+								'publisher' : $rootScope.user.id,
+								'content' : $scope.content,
+								'schoolid' : $scope.schoolid,
+								'publishid' : $scope.publish.id
+				            };
+					        if($scope.totalPicFiles!=undefined)
+				            for(var i = 0; i < $scope.totalPicFiles.length; i++){
+				                data["picFile" + i] = $scope.totalPicFiles[i];
+				            }
+					        if($scope.totalAppendixs!=undefined)
+				            for(var i = 0; i < $scope.totalAppendixs.length; i++){
+				                data["appendix" + i] = $scope.totalAppendixs[i];
+				            }
+					        if($scope.totalVideoFiles!=undefined)
+				            for(var i = 0; i < $scope.totalVideoFiles.length; i++){
+				                data["videoFile" + i] = $scope.totalVideoFiles[i];
+				            }
+				       Upload.upload({
+				                url: '/i/publish/addPublish',
+				                headers :{ 'Content-Transfer-Encoding': 'utf-8' },
+				                data: data
+				            }).success(function (data) {
+			            if(data.success){
+			            	alert("修改成功");
+			            	$state.reload();
+			            }
+			        });
+				} else {
+					alert("标题和内容不允许为空!");
+				}
+		    };
+		    
+		    $scope.cancelUpdate  = function() {
+		    	$("#tab-4update").css("display","none");
+		   		$("#tab_4list").css("display","");
+		    };
+		   	
 		 $scope.responseMessage = function(messageID){
 	            $("#reply_area-"+messageID).css("display","");
 	    };

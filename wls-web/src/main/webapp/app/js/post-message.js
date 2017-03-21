@@ -11,7 +11,16 @@ wlsWeb.controller('post-message',function($http, $location,$rootScope, Upload,$s
     	 $scope.schools = sortJson($scope.schools,"sh_id");
     	 $scope.schoolid = -1;
     });*/
-    
+	$scope.schoolid = -1;
+	$('body')
+	 .on('click', '#optionsRadios1', function(e) {
+		    $scope.schoolid = -1;
+	        $("#select_school").css("display","none");
+	    });
+	 $('body')
+	    .on('click', '#optionsRadios2', function(e) {
+	        $("#select_school").css("display","");
+	    });
     $scope.searchSchool = function(schoolname){
     	if(schoolname==''){
     		$("#schoolUl").css("display","none");

@@ -14,7 +14,196 @@
     jQuery(document).ready(function() {   
     CommonObj.init();  
     });
-  </script>    
+  </script>  
+  
+   <style>
+  .note-insert button{
+    border:solid 1px #FF5400; 
+    color:#FF5400}
+  .note-insert .btn-default > i{
+    color:#FF5400 !important 
+   }
+  .note-image-dialog h5{    
+    font-size: 14px;
+    line-height: 1.2;
+    font-weight: 400;
+    margin-bottom: 10px;
+  }
+   #picfiles, #appendixs,#videofiles {
+	width: 100%;
+	height: 100%;
+	position:absolute;
+	top:0;
+	left:0;
+	border: medium none;
+	opacity:0;
+   }
+   /*  #appendixs {
+	width: 85px;
+	height: 122px;
+	border: medium none;
+	margin-top: -60px;
+	margin-left :20px;
+   }
+    #videofiles {
+	width: 85px;
+	height: 122px;
+	border: medium none;
+	margin-top: -60px;
+	margin-left :20px;
+   } */
+  .picfile {
+	position: relative;
+	display: inline-block;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	overflow: hidden;
+	line-height: 29px;
+	width: 85px;
+	height: 29px;
+	text-indent: 2em;
+	font-size: 9pt;
+	background: url(../../assets/img/image-upload.png) no-repeat center
+}	
+.videofile {
+	position: relative;
+	display: inline-block;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	overflow: hidden;
+	line-height: 29px;
+	width: 85px;
+	height: 29px;
+	text-indent: 2em;
+	font-size: 9pt;
+	background: url(../../assets/img/image-upload.png) no-repeat center
+}	
+.appendix {
+	position: relative;
+	display: inline-block;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	overflow: hidden;
+	line-height: 29px;
+	width: 85px;
+	height: 29px;
+	text-indent: 2em;
+	font-size: 9pt;
+	background: url(../../assets/img/image-upload.png) no-repeat center
+}
+.pic_list {
+	width: 1000px;
+	overflow: hidden;
+}
+.pic_list .thumb{
+	height: 100px;
+    width: auto;
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+.pic_list span img {
+	height: 100px;
+	width: auto;
+	margin-left: 10px;
+	margin-bottom: 10px;
+}
+.pic_list span i {
+	position: absolute;
+	cursor: pointer;
+	color: #fff;
+	border-radius: 3px;
+	background: rgba(0, 0, 0, .5);
+	margin-left: -21px;
+	width: 18px;
+	height: 18px;
+	text-align: center;
+	opacity: .6;
+	line-height: 13px;
+	font: normal normal normal 18px/1 FontAwesome
+}
+.pic_list span:hover i{
+	color:red;
+	opacity:1;
+}	
+
+
+
+
+.appendix_list {
+	width: 1000px;
+	overflow: hidden;
+}
+.appendix_list .thumb{
+	height: 100px;
+    width: auto;
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+.appendix_list span span {
+	height: 30px;
+	width: auto;
+	margin-left: 10px;
+	margin-bottom: 10px;
+}
+.appendix_list span i {
+	position: absolute;
+	cursor: pointer;
+	color: #fff;
+	border-radius: 3px;
+	background: rgba(0, 0, 0, .5);
+	margin-left: -21px;
+	width: 18px;
+	height: 18px;
+	text-align: center;
+	opacity: .6;
+	line-height: 13px;
+	font: normal normal normal 18px/1 FontAwesome
+}
+.appendix_list span:hover i{
+	color:red;
+	opacity:1;
+}	
+
+
+
+
+
+.video_list {
+	width: 1000px;
+	overflow: hidden;
+}
+.video_list .thumb{
+	height: 100px;
+    width: auto;
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+.video_list span span {
+	height: 30px;
+	width: auto;
+	margin-left: 10px;
+	margin-bottom: 10px;
+}
+.video_list span i {
+	position: absolute;
+	cursor: pointer;
+	color: #fff;
+	border-radius: 3px;
+	background: rgba(0, 0, 0, .5);
+	margin-left: -21px;
+	width: 18px;
+	height: 18px;
+	text-align: center;
+	opacity: .6;
+	line-height: 13px;
+	font: normal normal normal 18px/1 FontAwesome
+}
+.video_list span:hover i{
+	color:red;
+	opacity:1;
+}	
+  </style> 
+    
  </head> 
  <!--DOC: menu-always-on-top class to the body element to set menu on top --> 
  <body class="menu-always-on-top" > 
@@ -117,7 +306,7 @@
         
          <div class="tab-pane fade row" id="tab-4"> 
          <!-- BEGIN article --> 
-         <div class="portlet light"> 
+         <div id="tab_4list" class="portlet light"> 
           <div class="portlet-title"> 
            <div class="caption caption-md"> 
             <i class="icon-bar-chart theme-font hide"></i> 
@@ -150,20 +339,17 @@
                 </div> 
                </div> 
               <div class="col-md-12 col-sm-12 col-xs-12  blog-item-action"> 
-               <div class="col-md-4 col-sm-4 col-xs-4 "> 
+                 <div class="col-md-3 col-sm-3 col-xs-3 "> 
                  <span><a ng-click="goBlogInfo(publish.id)"><i class="fa fa-comments"></i> 评论{{publish.commentnum}}</a></span>
                </div> 
-               <div class="col-md-4 col-sm-4 col-xs-4 line"> 
+               <div class="col-md-3 col-sm-3 col-xs-3 line"> 
                  <span><a style="color:#64AED9"><i style="color:#64AED9" class="fa fa-thumbs-up"></i> 已赞{{publish.praisenum}}</a></span>
                </div> 
-               <div class="col-md-4 col-sm-4 col-xs-4"> 
+               <div class="col-md-3 col-sm-3 col-xs-3  line"> 
                 <span ng-click="deletePublish(publish.id)"><a>删除</a></span> 
-                <!-- <ul class="dropdown-menu" role="menu"> 
-                 <li> <a href="javascript:;"> <i class="fa fa-wechat"></i> 微信 </a> </li> 
-                 <li> <a href="javascript:;"> <i class="fa fa-weibo"></i> 新浪微博</a> </li> 
-                 <li> <a href="javascript:;"> <i class="fa fa-qq"></i> QQ</a> </li> 
-                 <li> <a href="javascript:;"> <i class="fa fa-star"></i> QQ空间 </a> </li> 
-                </ul>  -->
+               </div> 
+               <div class="col-md-3 col-sm-3 col-xs-3"> 
+                <span ng-click="updatePublish(publish.id)"><a>编辑</a></span> 
                </div> 
               </div> 
              </div> 
@@ -172,6 +358,95 @@
            <!-- END PRODUCT LIST --> 
           </div> 
          </div> 
+         
+          <div id="tab-4update" style="display:none"  class="portlet light">
+  <div class="post-message-block content" style="padding-top:20px" id="base_content_container"> 
+   <div class="container"> 
+    <h1>编辑<b> 发布</b></h1> 
+    <div class="row padding-top-30"> 
+     <div class="col-md-12">
+      <div class="portlet light padding-top-60">
+	   <div class="row">
+        <div class="portlet-body form">
+        <div class="col-md-12 form-group">  
+         <label class="col-md-1 control-label no-padding" style="font-size:16px">发布标题：</label> 
+         <div class="col-md-4"> 
+          <input type="text" class="form-control" ng-model="title" placeholder="输入作品标题" /> 
+         </div> 
+        </div> 
+         <div class="col-md-12 form-group">  
+         <label class="col-md-1 control-label no-padding" style="font-size:16px">发布内容：</label> 
+         <div class="col-md-4"> 
+         <textarea ng-model="content" id ="contentdetail" class="form-control ng-pristine ng-untouched ng-valid" rows="4"
+         placeholder="输入作品内容......"></textarea>
+         </div> 
+        </div> 
+         <div class="col-md-12 form-group">  
+         <label class="col-md-1 control-label no-padding" style="font-size:16px">发布图片：</label> 
+         <div class="col-md-4"> 
+		 <a href="javascript:;" class="picfile">选择图片<input type="file" id="picfiles" ngf-select="addPicFiles()" ng-model="picfiles"  ngf-multiple="true" name="picfiles" ></a>
+		 <output id="pic_list" class="pic_list"><span ng-repeat="file in totalPicFiles"><img class="thumb" ngf-src="file" title="{{file.name}}"><i ng-click="dropPicFile(file)">×</i></span></output>
+         </div> 
+        </div>
+
+        <div class="col-md-12 form-group">  
+         <label class="col-md-1 control-label no-padding" style="font-size:16px">发布附件：</label> 
+         <div class="col-md-4"> 
+          <a href="javascript:;" class="appendix">选择附件<input type="file" id="appendixs" ngf-select="addAppendixs()" ng-model="appendixs"  ngf-multiple="true" name="appendixs" ></a>
+		 <output id="appendix_list" class="appendix_list"><span ng-repeat="file in totalAppendixs"><span class="thumb">{{file.name}}</span><i ng-click="dropAppendixFile(file)">×</i><br></span></output>
+         </div> 
+        </div>
+         
+        <div class="col-md-12 form-group"> 
+         <label class="col-md-1 control-label no-padding" style="font-size:16px">发布范围：</label> 
+          <div class="mt-radio-inline col-md-9">
+              <label class="mt-radio margin-bottom-10 col-md-2 no-padding">
+                  <input type="radio" name="optionsRadios1" id="optionsRadios1" value="全部" checked> 全部
+              </label>
+              <label class="mt-radio margin-bottom-10 col-md-2 no-padding">
+                  <input type="radio" name="optionsRadios1" id="optionsRadios2" value="校园频道" > 校园频道
+              </label>
+              <div class="col-md-2 no-padding"  id="select_school" style="display:none"> 
+              <input class="form-control" id="inputSchool" ng-change="searchSchool(schoolname)" ng-model = "schoolname" placeholder="请输入学校" style="height:35px !important"></input>
+              <ul class="list-group" id="schoolUl" style="display:none"><a class="list-group-item" ng-click="chooseSchool(school)" ng-repeat="school in totalSchools"> {{school.sh_shool}}</a></ul>
+          </div>
+         </div> 
+        </div> 
+        <div class="col-md-12 form-group"> 
+         <label class="col-md-1 control-label no-padding" style="font-size:16px">发布分类：</label> 
+         <div class="mt-radio-inline col-md-9">
+              <label class="mt-radio margin-bottom-10 col-md-2 no-padding">
+                  <input type="radio" name="optionsRadios3" id="optionsRadios3" value="1" > 创意作品
+              </label>
+             <label class="mt-radio margin-bottom-10 col-md-2 no-padding">
+                  <input type="radio" name="optionsRadios3" id="optionsRadios4" value="2" > 知识分享
+              </label>
+             <label class="mt-radio margin-bottom-10 col-md-2 no-padding">
+                  <input type="radio" name="optionsRadios3" id="optionsRadios5" value="3" > 问答互助
+              </label>
+              <label class="mt-radio margin-bottom-10 col-md-2 no-padding">
+                  <input type="radio" name="optionsRadios3" id="optionsRadios6" value="4"> 校园招聘
+              </label>
+          </div>
+		</div> 
+       </div> 	
+       
+       <!-- <div class="col-md-12 margin-bottom-20">
+       <script id="container" name="content" type="text/plain">
+      </script>
+       </div> -->
+      <div class="content-center">
+      <a class="btn blue" ng-click="confirmUpdatePub()">更新</a> 
+      <a class="btn grey" ng-click="cancelUpdate()">取消</a>
+     </div>  
+	 </div>
+    </div> 
+     </div> 
+  </div> 
+  </div>
+  </div>
+         </div>
+         
         </div> 
         
         <div class="tab-pane fade row" id="tab-2"> 

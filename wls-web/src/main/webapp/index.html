@@ -147,7 +147,7 @@
           <div class="pull-right copyright">
             <a href="javascript:void(0);">声明</a>
             <span>|</span>
-            <a href="javascript:void(0);">关于我们</a>
+            <a data-toggle="modal" href="#aboutusModal">关于我们</a>
             <span>|</span>
             <a href="javascript:void(0);">联系我们</a>
           </div>
@@ -156,6 +156,24 @@
       </div>
     </div>
   </div>
+  
+  <!-- 模态框（Modal） --> 
+				<div class="modal fade" id="aboutusModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"> 
+				    <div class="modal-dialog" style="width:600px;"> 
+				        <div class="modal-content"> 
+				            <div class="modal-header"> 
+				                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button> 
+				                <h4 class="modal-title" id="myModalLabel">关于我们</h4> 
+				            </div> 
+				            <div style="text-align:center;"  id="aboutfig" class="modal-body">
+				            <img style="width:500px" src="../../assets/img/aboutus.jpg" alt="">
+				            </div> 
+				            <div class="modal-footer"> 
+				                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+				            </div> 
+				        </div><!-- /.modal-content --> 
+				    </div><!-- /.modal --> 
+				</div>  
   <!-- END FOOTER -->
  <!--[if lt IE 9]>
 <script src="../../assets/global/plugins/respond.min.js"></script>

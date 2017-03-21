@@ -571,7 +571,16 @@ wlsWeb.controller('my-space',function($http, $location,$rootScope, $scope,$state
 									      	 $state.go('blog-info', {"publishID": publishID});
 									   	};
 									   	
-									 
+									   	$scope.schoolid = -1;
+										$('body')
+										 .on('click', '#optionsRadios1', function(e) {
+											    $scope.schoolid = -1;
+										        $("#select_school").css("display","none");
+										    });
+										 $('body')
+										    .on('click', '#optionsRadios2', function(e) {
+										        $("#select_school").css("display","");
+										    });
 									   	$scope.updatePublish  = function(publishID) {
 									   		$("#tab_2list").css("display","none");
 									   		$("#tab-2update").css("display","");
@@ -587,6 +596,22 @@ wlsWeb.controller('my-space',function($http, $location,$rootScope, $scope,$state
 								                $scope.title = $scope.publish.title;
 								                $scope.schoolid = $scope.publish.schoolid;
 								                $scope.content = $scope.publish.content;
+								                if($scope.schoolid!=-1&&$scope.schoolid!=null&&$scope.schoolid!=undefined){
+								                	 $("input[name='optionsRadios1']").eq(1).attr("checked","checked");
+								                	 $("#select_school").css("display","");
+								                	 $http.get('/i/city/findSchoolById', {
+								         	            params: {
+								         	                "schoolID": $scope.schoolid
+								         	            }
+								         	        }).success(function(data){
+								         				 $scope.defaultschool = data;
+								         				$scope.schoolname=$scope.defaultschool.sh_shool; 
+								            	    });
+								                }
+								                else{
+								                	 $("input[name='optionsRadios1']").eq(0).attr("checked","checked");
+								                }
+								                $("input[name='optionsRadios3']").eq($scope.publish.pubcategory-1).attr("checked","checked");
 								                document.getElementById("contentdetail").innerHTML=$scope.publish.content;
 								             });
 									    };
