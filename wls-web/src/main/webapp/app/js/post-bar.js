@@ -16,7 +16,7 @@ wlsWeb.controller('post-bar',function($http, $state,$rootScope, $stateParams,$lo
 	                      {id:"1",name:"创意作品"},
 	                      {id:"2",name:"知识分享"},
 	                      {id:"3",name:"问答互助"},
-	                      {id:"4",name:"校园招聘"}
+	                      {id:"4",name:"随拍随记"}
 	];
     $scope.goPostMessage = function() {
     	if($rootScope.user!=null&&$rootScope.user.id!=undefined){
@@ -322,6 +322,7 @@ wlsWeb.controller('post-bar',function($http, $state,$rootScope, $stateParams,$lo
 	 });
 	};
     $scope.goBlogInfo = function(publishID) {
-      	 $state.go('blog-info', {"publishID": publishID});
+    	 var url = $state.href('blog-info', {"publishID": publishID});
+    	 window.open(url);
    	};
 });

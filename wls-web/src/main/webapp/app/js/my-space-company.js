@@ -45,7 +45,7 @@ wlsWeb.controller('my-space-company',function($http, $location,$rootScope, $scop
 				 }
 				else{
 					alert("请先登录");
-					window.location.href="#/login";
+					window.location.href = "#/login";
 				}
     	 });
 	   };

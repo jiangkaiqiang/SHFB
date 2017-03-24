@@ -39,7 +39,7 @@
       <div class="product-page-content margin-bottom-20"> 
        <ul id="myTab" class="nav nav-tabs"> 
         <li class="active"><a href="#tab-1" data-toggle="tab" id="btn1">基本资料</a></li> 
-        <li><a href="#tab-2" data-toggle="tab" id="btn2">作品</a></li> 
+        <li><a href="#tab-2" data-toggle="tab" id="btn2">动态/作品</a></li> 
         <li><a href="#tab-3" data-toggle="tab" id="btn3">简历</a></li> 
         <li><a href="#tab-4" data-toggle="tab" id="btn4">关注</a></li>
        </ul> 
@@ -115,9 +115,9 @@
                  </div> 
                 </div> 
                 <div class="blog-item-body-info col-md-12"> 
-                  <p style="display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 3;
+                <!--   <p style="display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 3;
                 overflow: hidden;">{{publish.content}}
-             </p> 
+             </p>  -->
              <div style="display: inline-block;" ng-if="publish.pubCovers!=null&&publish.pubCovers!=undefined&&publish.pubCovers!=''" ng-repeat="pubcover in publish.pubCovers">
                  <img src="{{pubcover}}"/> 
              </div>
@@ -178,7 +178,7 @@
                   </div> 
                   <div class="col-md-8 resume-img"> 
                    <img src="../../assets/img/personal-resume.png" class="pull-right" height="100px" /> 
-                   <a href="http://www.weilanshu.com/#/my-space-ask/{{user.id}}" class="resume-basic-info pull-right">个人空间：http://www.weilanshu.com/#/my-space-ask/{{user.id}}</a> 
+                   <a target="_blank" href="http://www.weilanshu.com/#/my-space-ask/{{user.id}}" class="resume-basic-info pull-right">个人空间：http://www.weilanshu.com/i{{user.id}}</a> 
                   </div> 
                  </div> 
                  <div class="resume-basic-info col-md-12"> 

@@ -92,7 +92,7 @@ public class PublishController extends BaseController {
 				publishDto.setPubcategoryname("问答互助");
 				break;
 			case 4:
-				publishDto.setPubcategoryname("校园招聘");
+				publishDto.setPubcategoryname("随拍随记");
 				break;
 			default:
 				break;
@@ -247,7 +247,7 @@ public class PublishController extends BaseController {
 				publishDto.setPubcategoryname("问答互助");
 				break;
 			case 4:
-				publishDto.setPubcategoryname("校园招聘");
+				publishDto.setPubcategoryname("随拍随记");
 				break;
 			default:
 				break;

@@ -2538,3 +2538,26 @@ table .product-quantity .input-group {
   height:35px; 
   width:150px;
 }
+.searchSelect{
+	width:150px;
+}
+    #geekProvinceUl , #PostProvinceUl{
+      width:150px;
+	}
+	 #geekProvinceUl a,#PostProvinceUl a{
+      width:150px;
+	}
+	#geekCityUl , #PostCityUl{
+	  width:150px;
+	  padding-left:155px;
+	}
+	#geekCityUl a, #PostCityUl a{
+	  width:150px;
+	}
+	#geekSchoolUl,#PostSchoolUl {
+	  width:150px;
+	  padding-left:310px;
+	}
+	#geekSchoolUl a, #PostSchoolUl a{
+	  width:150px;
+	}

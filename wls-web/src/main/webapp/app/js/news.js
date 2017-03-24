@@ -85,6 +85,7 @@ wlsWeb.controller('news',function($http, $location, $state,$scope,$interval) {
     };
     
     $scope.goNewsInfo = function(newID) {
-   	 $state.go('news-info', {"newID": newID});
+   	 var url = $state.href('news-info', {"newID": newID});
+	 window.open(url);
 	};
 });

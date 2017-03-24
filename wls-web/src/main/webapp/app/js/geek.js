@@ -273,7 +273,8 @@ wlsWeb.controller('geek',function($http, $location,$rootScope, $scope,$state, $s
 	    };
 	    
     $scope.goUserSpace = function(userID) {
-    	 $state.go('my-space-ask', {"spaceID": userID});
+    	 var url = $state.href('my-space-ask', {"spaceID": userID});
+    	 window.open(url);
 	};
     
 	$scope.pageChanged = function() {

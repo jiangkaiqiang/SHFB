@@ -283,8 +283,28 @@
 	}
 	
 	.searchSelect{
-	width:133px;
+	width:130px;
 }
+#geekProvinceUl, #PostProvinceUl{
+      width:130px;
+	}
+	 #geekProvinceUl a, #PostProvinceUl a{
+      width:130px;
+	}
+	#geekCityUl, #PostCityUl{
+	  width:130px;
+	  padding-left:135px;
+	}
+	#geekCityUl a, #PostCityUl a{
+	  width:130px;
+	}
+	#geekSchoolUl, #PostSchoolUl{
+	  width:130px;
+	  padding-left:270px;
+	}
+	#geekSchoolUl a, #PostSchoolUl a{
+	  width:130px;
+	}
 
 }
 /*<=767*/
@@ -393,6 +413,26 @@
 	.searchSelect{
 	width:125px;
 } 
+    #geekProvinceUl , #PostProvinceUl{
+      width:125px;
+	}
+	 #geekProvinceUl a,#PostProvinceUl a{
+      width:125px;
+	}
+	#geekCityUl , #PostCityUl{
+	  width:125px;
+	  padding-left:130px;
+	}
+	#geekCityUl a, #PostCityUl a{
+	  width:125px;
+	}
+	#geekSchoolUl,#PostSchoolUl {
+	  width:125px;
+	  padding-left:260px;
+	}
+	#geekSchoolUl a, #PostSchoolUl a{
+	  width:125px;
+	}
 
 }
 /*<=400*/
@@ -427,8 +467,29 @@
     margin:0px 0px 5px 95px;
 }
 .searchSelect{
-	width:112px;
-}
+	width:106px;
+} 
+    #geekProvinceUl , #PostProvinceUl{
+      width:106px;
+	}
+	 #geekProvinceUl a,#PostProvinceUl a{
+      width:106px;
+	}
+	#geekCityUl , #PostCityUl{
+	  width:106px;
+	  padding-left:111px;
+	}
+	#geekCityUl a, #PostCityUl a{
+	  width:106px;
+	}
+	#geekSchoolUl,#PostSchoolUl {
+	  width:106px;
+	  padding-left:222px;
+	}
+	#geekSchoolUl a, #PostSchoolUl a{
+	  width:106px;
+	}
+   
 .resume-basic-info{
 		font-size:14px;
 	}
@@ -449,8 +510,28 @@
 	  right: 0;
 	}
 	.searchSelect{
-	width:93px;
-}
+	  width:93px;
+} 
+    #geekProvinceUl , #PostProvinceUl{
+      width:93px;
+	}
+	 #geekProvinceUl a,#PostProvinceUl a{
+      width:93px;
+	}
+	#geekCityUl , #PostCityUl{
+	  width:93px;
+	  padding-left:98px;
+	}
+	#geekCityUl a, #PostCityUl a{
+	  width:93px;
+	}
+	#geekSchoolUl,#PostSchoolUl {
+	  width:93px;
+	  padding-left:196px;
+	}
+	#geekSchoolUl a, #PostSchoolUl a{
+	  width:93px;
+	}
 .resume-basic-info{
 		font-size:12px;
 	}

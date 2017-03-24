@@ -47,19 +47,19 @@ wlsWeb.factory('userService',['$rootScope','$http', function($rootScope,$http){
 	        	window.location.href="";
 	        };
 	        $rootScope.goNews = function() {
-	        	window.location.href="#/news";
+	        	window.location.href ="#/news";
 	        };
 	        $rootScope.goGeek = function() {
-	        	window.location.href="#/geek";
+	        	window.location.href = "#/geek";
 	        };
 	        $rootScope.goPostbar = function() {
-	        	window.location.href="#/post-bar";
+	        	window.location.href = "#/post-bar";
 	        };
 	        $rootScope.goLogin = function() {
-	        	window.location.href="#/login";
+	        	window.location.href = "#/login";
 	        };
 	        $rootScope.goRegister = function() {
-	        	window.location.href="#/register";
+	        	window.location.href = "#/register";
 	        };
 	    },
 	};
