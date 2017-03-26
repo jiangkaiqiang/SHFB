@@ -1,5 +1,67 @@
 <link href="../../assets/css/timeline-old.css" rel="stylesheet">
 <style>
+
+/*企业名片*/
+.business-card{
+  padding:15px 0;
+  border-width: 1px 1px 3px;
+    border-color: #e3e4e5;
+    border-style: solid;
+}
+.business-card-line{
+  border-right: solid 1px #ECEBEB;
+  height:162px;
+}
+.business-card-line img{
+  padding: 0px 0px;
+  width: 120px;
+  margin:auto;
+  position:absolute;
+  z-index:99;
+  height: 160px;
+}
+.business-card-img img{
+  padding: 0px 0px;
+  width: 120px;
+  height: 120px;
+  margin:auto;
+  position:absolute;
+  z-index:99;
+  opacity:0.2;filter(alpha=20);
+  
+}
+.business-card-img .layer{
+    position:absolute;
+    padding: 50px;
+    color:#999;
+    z-index:100;
+    border:1px solid #e3e4e5;
+    }
+  
+.business-card-body{
+  padding:0px 30px 15px 30px;
+}
+.business-card-body h2{
+  font-weight:600;
+}
+.business-card-body h2 span{
+  font-size:14px;
+  font-weight:600;
+}
+.business-card-body h4{
+  padding-top:20px;
+  font-size:16px;
+  font-weight:600;
+}
+.business-card-body span i{
+  font-size:16px;
+  font-weight:600;
+}
+.business-card-body p{
+  font-size:12px;
+  padding:0px !important;
+  margin:0px !important;
+}
    /*简历*/
 .resume-header-line{
   height:55px;
@@ -118,7 +180,7 @@
 				         <th style="width:50px">地址</th>
 				         <th style="width:100px">添加时间</th>
 				         <th style="width:50px">角色</th>
-				         <th style="width:70px">查看简历</th>
+				         <th style="width:70px">查看详情</th>
 				        <!--  <th>状态</th> -->
 				         <th>操作</th>
 				      </tr>
@@ -247,10 +309,10 @@
 				        <div class="modal-content"> 
 				            <div class="modal-header"> 
 				                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button> 
-				                <h4 class="modal-title" id="myModalLabel">{{userDetail.username}}的个人简历</h4> 
+				                <h4 class="modal-title" id="myModalLabel">{{userDetail.username}}的个人详情</h4> 
 				            </div> 
 				            <div id="content" class="modal-body">
-				            <div id="resume" style="padding-top:55px; background:#ebedec;"> 
+				            <div id="resume" ng-if="userDetail.suproleid==1" style="padding-top:55px; background:#ebedec;"> 
             <div class="portlet light" style="background:#ebedec !important;"> 
              <div class="portlet-body"> 
               <div class="row"> 
@@ -433,6 +495,43 @@
              </div> 
             </div> 
            </div> 
+           
+           
+            <div id="card" ng-if="userDetail.suproleid==2" style="padding-top:55px; background:#ebedec;"> 
+           <div class="portlet-body"> 
+           <div class="row"> 
+            <div class="col-md-5"> 
+             <div class="business-card col-md-12 col-sm-12 col-xs-12" id="card_body"> 
+              <div class="business-card-line col-md-4 col-sm-4 col-xs-4"> 
+               <a data-toggle="modal" id="btn_edit_img_com" ng-if="userDetail.photo==null||userDetail.photo==undefined"  >
+                <img src="../../assets/img/logo/logo.png" /> 
+                 </a> 
+               <a  ng-if="userDetail.photo!=null&&userDetail.photo!=undefined"  >
+                <img src="{{userDetail.photo}}" /> </a> 
+              </div> 
+              <div class="business-card-body col-md-8 col-sm-8 col-xs-8"> 
+               <h2>
+               <span ng-if="userDetail.nickname!=undefined">{{userDetail.nickname}}</span>
+               <span ng-if="userDetail.nickname==undefined">姓名</span>
+               <span ng-if="userDetail.position!=undefined">{{userDetail.position}}</span> 
+               <span ng-if="userDetail.position==undefined">职位</span> 
+               </h2> 
+               <span ng-if="userDetail.telephone!=undefined"><i class="fa  fa-mobile-phone"></i> {{userDetail.telephone}}</span> 
+               <span ng-if="userDetail.telephone==undefined"><i class="fa  fa-mobile-phone"></i> 编辑手机号</span> 
+               <h4 ng-if="userDetail.company!=undefined">{{userDetail.company}}</h4> 
+               <h4 ng-if="userDetail.company==undefined">公司</h4> 
+               <p><b>地址:</b>{{userDetail.address}}</p> 
+               <p><b>电话:</b>{{userDetail.phone}}</p> 
+               <p><b>邮箱:</b>{{userDetail.email}}</p> 
+              </div> 
+             </div> 
+            </div> 
+           </div> 
+          </div> 
+            </div>
+            
+            
+           
 				            </div> 
 				            <div class="modal-footer"> 
 				                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
