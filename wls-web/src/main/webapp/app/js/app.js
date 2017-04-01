@@ -117,6 +117,10 @@ wlsWeb.config(function ($stateProvider, $urlRouterProvider) {
         url: '/my-space-ask/:spaceID',
         controller: 'my-space-ask',
         templateUrl: 'app/template/my-space-ask.html'
+    }).state('aboutus', {
+        url: '/aboutus',
+        controller: 'aboutus',
+        templateUrl: '../../aboutus.html'
     }).state('my-space-company-ask', {
         url: '/my-space-company-ask/:spaceID',
         controller: 'my-space-company-ask',
