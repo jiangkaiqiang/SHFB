@@ -46,7 +46,7 @@
 	
 	<select id="findMessageByReceiverID" parameterType="map" resultType="MessageEntity">
 		SELECT * FROM `message`
-		WHERE `receiverid` = #{receiverID} order by `informtime` desc 
+		WHERE `receiverid` = #{receiverID} or `senderid` = #{receiverID} order by `informtime` desc 
 	</select>
 	
 	<select id="findMessageByCategory" parameterType="map" resultType="MessageEntity">

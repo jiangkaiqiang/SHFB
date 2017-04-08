@@ -298,7 +298,7 @@ var _hmt = _hmt || [];
                <p><b>姓名:</b><input type="text" class="form-control" placeholder="姓名" ng-model="user.nickname" /></p>
                <p><b>性别:</b><select id="editsexselect" class="form-control" ng-model="user.sex" ><option>男</option><option>女</option></select></p>
                <p><b>职位:</b><input type="text" class="form-control" placeholder="职位" ng-model="user.position"  /></p>   
-               <p><b>手机:</b><input type="text" class="form-control" placeholder="手机" ng-model="user.telephone"  /></p> 
+               <p><b>手机:</b><input type="text" class="form-control" disabled="true"　readOnly="true" placeholder="手机" ng-model="user.telephone"  /></p> 
                <p><b>公司名称:</b><input type="text" class="form-control" placeholder="公司名称" ng-model="user.company"  /></p> 
                <p><b>地址:</b> <input type="text" class="form-control" placeholder="地址" ng-model="user.address"  /></p> 
                <p><b>电话:</b> <input type="text" class="form-control" placeholder="电话" ng-model="user.phone" /></p> 
@@ -514,9 +514,9 @@ var _hmt = _hmt || [];
            <div style="height: 300px; overflow-y:scroll"> 
             <div class="general-item-list col-md-12"> 
              <div class="item" ng-repeat="message in messages"> 
-              <div class="item-head"> 
+              <div class="item-head" ng-if="message.senderid!=user.id"> 
                <div class="item-details"> 
-                 <a ng-click="goUserSpace(message.senderid)"><img style="width: 35px;height: 35px;border-radius: 150px !important;" src="{{message.senderavatar}}" /> </a>
+                <a ng-click="goUserSpace(message.senderid)"><img style="width: 35px;height: 35px;border-radius: 150px !important;" src="{{message.senderavatar}}" /> </a>
                 <a ng-click="goUserSpace(message.senderid)" class="item-name primary-link">{{message.sendername}}</a> 
                 <span class="item-label">{{message.informtime}}</span> 
                </div> 
@@ -527,7 +527,22 @@ var _hmt = _hmt || [];
               <a class="btn" ng-click="deleteMessage(message.id)">删除</a>
                </span> 
               </div> 
-              <div class="item-body">
+              
+               <div class="item-head" style="padding-left:100px" ng-if="message.senderid==user.id"> 
+               <div class="item-details"> 
+                <a ng-click="goUserSpace(message.senderid)"><img style="width: 35px;height: 35px;border-radius: 150px !important;" src="{{message.senderavatar}}" /> </a>
+                <a ng-click="goUserSpace(message.senderid)" class="item-name primary-link">{{message.sendername}}</a> 
+                <span class="item-label">{{message.informtime}}</span> 
+               </div> 
+               <span class="item-status">
+              <!--  <span class="badge badge-empty badge-success"></span> 已读  -->
+              <a class="btn" ng-if="message.msgcategory=='2'" ng-click="messageResponse(message.id,message.senderid,message.msgcategory)">同意</a>
+              <a class="btn" ng-if="message.msgcategory=='1'" id="quick_reply" ng-click="responseMessage(message.id)">回复</a>
+              <a class="btn" ng-click="deleteMessage(message.id)">删除</a>
+               </span> 
+              </div> 
+              
+              <div class="item-body"  ng-if="message.senderid!=user.id">
                        {{message.content}}
                 <div class="col-md-12 form-group input-group padding-top-10" id="reply_area-{{message.id}}" style="display:none"> 
                  <input type="text" ng-model="resopnseMsg" class="form-control"> 
@@ -535,6 +550,16 @@ var _hmt = _hmt || [];
                  <button class="btn btn-primary" type="button" ng-click="messageResponse(message.id,message.senderid,message.msgcategory,resopnseMsg)" id="quick_reply_btn">回复</button> </span> 
                 </div>
               </div> 
+              
+              <div class="item-body" style="padding-left:110px" ng-if="message.senderid==user.id">
+                       {{message.content}}
+                <div class="col-md-12 form-group input-group padding-top-10" id="reply_area-{{message.id}}" style="display:none"> 
+                 <input type="text" ng-model="resopnseMsg" class="form-control"> 
+                 <span class="input-group-btn"> 
+                 <button class="btn btn-primary" type="button" ng-click="messageResponse(message.id,message.senderid,message.msgcategory,resopnseMsg)" id="quick_reply_btn">回复</button> </span> 
+                </div>
+              </div> 
+              
              </div> 
             </div> 
            </div> 
