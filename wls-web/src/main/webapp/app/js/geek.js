@@ -17,7 +17,7 @@ wlsWeb.controller('geek',function($http, $location,$rootScope, $scope,$state, $s
 	                      {id:"2",name:"程序猿"},
 	                      {id:"3",name:"学霸"},
 	                      {id:"4",name:"墨客"},
-	                      {id:"5",name:"极客"},
+	                      {id:"5",name:"创客"},
 	                      {id:"6",name:"技术控"}
 	];
 	 // 获取当前geek的列表
