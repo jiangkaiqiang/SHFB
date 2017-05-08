@@ -47,6 +47,7 @@ var _hmt = _hmt || [];
         <div class="content-search margin-bottom-20"> 
          <div class="row"> 
            <div class="col-md-8 padding-top-10"> 
+          在这里可以找到中国每一所高校的人才，便于企业定向招聘: <br>
       <!--   <select id="" class="selectpicker bla bla bli" data-live-search="true">  
         <option selected>全部</option>  
         <option>上海</option>  
@@ -86,6 +87,7 @@ var _hmt = _hmt || [];
                                     ng-disabled="editable"
                                     ng-change="schoolSelected(schoolid)"
                                     ng-options="x.sh_id as x.sh_shool for x in schools"> </select> -->
+         
            <input class="searchSelect" id="inputGeekProvince" ng-change="searchProvince(provincename)" ng-model = "provincename" placeholder="请输入省份" style="height:35px !important"></input>                                  
            <input class="searchSelect" id="inputGeekCity" ng-change="searchCity(cityname)" ng-model = "cityname" placeholder="请输入城市" style="height:35px !important"></input>
            <input class="searchSelect" id="inputGeekSchool" ng-change="searchSchool(schoolname)" ng-model = "schoolname" placeholder="请输入学校" style="height:35px !important"></input>
@@ -96,7 +98,7 @@ var _hmt = _hmt || [];
           </div> 
           
           <div class="col-md-4 padding-top-10"> 
-           <div class="input-group"> 
+           <div class="input-group" style="padding-top:20px"> 
             <input type="text" placeholder="输入关键词" ng-model="keyword" class="form-control" /> 
             <span class="input-group-btn"> <button class="btn btn-primary" ng-click="goSearch()" type="submit">搜索</button> </span> 
            </div> 
