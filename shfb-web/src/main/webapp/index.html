@@ -1,387 +1,215 @@
-<!DOCTYPE html>
-<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
-<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
-<!--[if !IE]><!-->
-<html lang="en">
-<!--<![endif]-->
-<!-- Head BEGIN -->
-<head>
-  
-  <title>蔚蓝树</title>
-  <Meta http-equiv="Content-Type" content="text/html; charset=utf-8" > 
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<!doctype html>
+<html>
+   <head>
+        <title>链库后台管理系统</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <link rel="shortcut icon" href="assets/img/favicon.ico" />
+        <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+        <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+        <link rel="stylesheet" href="assets/css/bootstrap-datetimepicker.min.css">
+        <link rel="stylesheet" type="text/css" href="assets/css/index.css">
+        <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css" />
+        <link rel="stylesheet" type="text/css" href="bower_components/angular-multi-select-master/isteven-multi-select.css" />
+		<script type="text/javascript" src="assets/js/jquery-1.12.0.min.js"></script>
+		<script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="assets/js/smartpaginator.js"></script>
+    </head>
+    <body>
+    	<!-- head部分结构开始 -->
+			<div class="head">
+				<div class="logoArea pull-left" onclick="location.href='index.html'">
+					<h1 class="logo  pull-left"></h1>
+					<h3 class="manage  pull-left">链库后台管理系统</h3>
+					<!-- <div class="home  pull-left">
+						<span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+					</div> -->
+				</div>
+				<div class="userArea pull-right">
+					<div class="admin  pull-left h4">
+						<span class="hi"><font style="size:14px">您好，</font></span> 
+						<span class="user" ng-model="admin"><font style="size:14px">{{admin.adminname}}</font></span>
+					</div>
+					<!-- <div class="smartColdManage  pull-left h4">链库后台管理</div> -->
+					<div class="back  pull-left">
+						<span class="glyphicon glyphicon-log-out" title="退出登录" aria-hidden="true" ng-click="logout()"></span>
+					</div>
+				</div>
+			</div>
+    	<!-- head部分结构结束 -->
+		
+		<!-- 主体区域结构开始 -->
+    		<div class="content clearfix">
+    			<!-- 侧栏区域结构开始 -->
+    				<div class="sidebar pull-left" >
+    					<div class="functionColumn">
+    						<span class="glyphicon glyphicon-th-large"></span>
+    						<span>功能栏目</span>
+    					</div>
+    					<ul class="list" ng-controller="index">
+    					
+    						<li ng-click="goMenu('usermanage','#/home')" id ="usermanage">
+    							<span class="glyphicon glyphicon-user"></span>
+    							<a>用户管理</a>
+    							<span class="glyphicon glyphicon-chevron-right pull-right"></span>
+    							<ul class="liSon">
+    								<li>children</li>
+    								<li>children</li>
+    								<li>children</li>
+    							</ul>
+    						</li>
+    					
+    						<li  ng-click="goMenu('usermanage','#/adminlist')" ng-if="admin.role==1" >
+    							<span class="glyphicon glyphicon-user"></span>
+    							<a>管理员管理</a>
+    							<span class="glyphicon glyphicon-chevron-right pull-right"></span>
+    							<ul class="liSon">
+    								<li>children</li>
+    								<li>children</li>
+    								<li>children</li>
+    							</ul>
+    						</li>
+							<li ng-click="goMenu('usermanage','#/companylist')">
+								<span class="glyphicon glyphicon-home"></span>
+								<a>集团管理</a>
+								<span class="glyphicon glyphicon-chevron-right pull-right"></span>
+								<ul class="liSon">
+									<li>children</li>
+									<li>children</li>
+									<li>children</li>
+								</ul>
+							</li>
+    						<li ng-click="goMenu('usermanage','#/storageManage')">
+    							<span class="glyphicon glyphicon-cog"></span>
+    							<a>冷库管理</a>
+    							<span class="glyphicon glyphicon-chevron-right pull-right"></span>
+    							<ul class="liSon">
+    								<li>children</li>
+    								<li>children</li>
+    								<li>children</li>
+    							</ul>
+    						</li>
+    						<li ng-click="goMenu('usermanage','#/storageConfig')">
+    							<span class="glyphicon glyphicon-th-list"></span>
+    							<a>冷库配置信息</a>
+    							<span class="glyphicon glyphicon-chevron-right pull-right"></span>
+    							<ul class="liSon">
+    								<li>children</li>
+    								<li>children</li>
+    								<li>children</li>
+    							</ul>
+    						</li>
+    						<li ng-click="goMenu('usermanage','#/spiderConfig')">
+    							<span class="glyphicon glyphicon-th"></span>
+    							<a>冷库360配置</a>
+    							<span class="glyphicon glyphicon-chevron-right pull-right"></span>
+    							<ul class="liSon">
+    								<li>children</li>
+    								<li>children</li>
+    								<li>children</li>
+    							</ul>
+    						</li>
+    						<li ng-click="goMenu('usermanage','#/monthlyReportList')">
+    							<span class="glyphicon glyphicon-th"></span>
+    							<a>冷库报表管理</a>
+    							<span class="glyphicon glyphicon-chevron-right pull-right"></span>
+    						</li>
+    						<li ng-click="goMenu('usermanage','#/deviceConfig')">
+    							<span class="glyphicon glyphicon-th"></span>
+    							<a>Device配置</a>
+    							<span class="glyphicon glyphicon-chevron-right pull-right"></span>
+                            </li>
+    						<li ng-click="goMenu('usermanage','#/commentManage')">
+    							<span class="glyphicon glyphicon-pencil"></span>
+    							<a>评价管理</a>
+    							<span class="glyphicon glyphicon-chevron-right pull-right"></span>
+    							<ul class="liSon">
+    								<li>children</li>
+    								<li>children</li>
+    								<li>children</li>
+    							</ul>
+    						</li>
+    						<li ng-click="goMenu('usermanage','#/infoManage')">
+    							<span class="glyphicon glyphicon-calendar"></span>
+    							<a>资讯管理</a>
+    							<span class="glyphicon glyphicon-chevron-right pull-right"></span>
+    							<ul class="liSon">
+    								<li>children</li>
+    								<li>children</li>
+    								<li>children</li>
+    							</ul>
+    						</li>
+    						<li ng-click="goMenu('usermanage','#/operationLog')">
+    							<span class="glyphicon glyphicon-calendar"></span>
+    							<a>操作日志</a>
+    							<span class="glyphicon glyphicon-chevron-right pull-right"></span>
+    							<ul class="liSon">
+    								<li>children</li>
+    								<li>children</li>
+    								<li>children</li>
+    							</ul>
+    						</li>
+    					</ul>
+    				</div>
+				<!-- 侧栏区域结构结束-->
 
-  <meta content="从校园到职场的桥梁" name="description">
-  <meta content="校园、招聘、职场、BOSS、学生" name="keywords">
-  <meta content="chenrong" name="author">
-
-  <meta property="og:site_name" content="-CUSTOMER VALUE-">
-  <meta property="og:title" content="-CUSTOMER VALUE-">
-  <meta property="og:description" content="-CUSTOMER VALUE-">
-  <meta property="og:type" content="website">
-  <meta property="og:image" content="-CUSTOMER VALUE-">
-  <meta property="og:url" content="-CUSTOMER VALUE-">
-
-  <link rel="shortcut icon" href="assets/img/favicon.ico">
-
-  <!-- Global styles BEGIN -->
-  <link href="assets/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/css/font-awesome.min.css" rel="stylesheet">
-  <!-- Global styles END -->
-
-  <!-- Theme styles BEGIN -->
-  <link href="assets/css/components.css" rel="stylesheet">
-  <link href="assets/css/style.css" rel="stylesheet">
-  <link href="assets/css/style-responsive.css" rel="stylesheet">
-  <!-- Theme styles END -->
-  <link href="assets/css/plugins.css" rel="stylesheet">
-  <!--Begin login-->
-  <link href="assets/css/login-soft.css" rel="stylesheet" type="text/css">
-<!--   <link href="assets/css/components-rounded.css" id="style_components" rel="stylesheet" type="text/css"> -->
-<!--    <link rel="stylesheet" type="text/css" href="bower_components/angular-multi-select-master/isteven-multi-select.css" /> -->
-  <!-- End login -->
-  <style>
-  .msgPush{
-	position:fixed;
-	z-index:199999;
-	top:76px;
-	right:60px;
-	background: #43BBEA;
-	box-shadow:0 2px 5px #333;
-	width:280px;
-	height:50px;
-	padding:10px 18px;
-	/* border:1px solid #eee; */
-	border-top:0;
-	display: none; 
-}
-.topTrl{
-	position:absolute;
-	top:-40px;
-	right:75px;
-	border-bottom:20px solid #43BBEA;
-	border-top:20px solid transparent;
-	border-right:20px solid transparent;
-	border-left:20px solid transparent;
-}
-.pushClose{
-	position:absolute;
-	top:0;
-	right:0;
-	width:20px;
-	height:20px;
-	text-align:center;
-	line-height:20px;
-	font-size:20px;
-	color:#333;
-	cursor: pointer;	
-}
-.pushClose:hover{
-	color:red;
-}
-.pushContent{
-	color:#fff;
-	line-height: 1.75;
-}
-  </style>
-  
-  <script>
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?f3c4a089acab1654d89e00bac21834af";
-  var s = document.getElementsByTagName("script")[0]; 
-  s.parentNode.insertBefore(hm, s);
-})();
-</script>
-  
-  
-</head>
-<!--DOC: menu-always-on-top class to the body element to set menu on top -->
-<body class="menu-always-on-top">
-  <!-- Header BEGIN -->
-  <div class="header header-mobi-ext">
-    <div class="container">
-      <div class="row">
-        <!-- Logo BEGIN -->
-        <div class="col-md-2 col-sm-2">
-          <a class="scroll site-logo" href="#/home"><img src="assets/img/logo/logo.png" alt="蔚蓝树"></a>
-        </div>
-        <!-- Logo END -->
-        <a href="javascript:void(0);" class="mobi-toggler"><i class="fa fa-bars"></i></a>
-        <!-- Navigation BEGIN -->
-        <div class="col-md-10 pull-right">
-          <ul class="header-navigation" id="menu">
-            <li id="bar_home" ng-click="goHome()" ><a>首页</a></li>
-            <li id="bar_news" ng-click="goNews()"><a>蔚蓝头条</a></li>
-            <li id="bar_geek" ng-click="goGeek()"><a>校园人才</a></li>
-            <li id="bar_post-bar" ng-click="goPostbar()"><a>文创空间</a></li>
-            <li id="bar-power"><a>在线直聘</a></li>
-            <li id="bar_my-space" ng-click="goSpace()" ><a ng-if="user == null || user == undefined || user == '' ||user.id == undefined">我的</a>
-            <a ng-if="user != null && user.id != 0 && user.id != undefined
-            && user != ''"><img style="width: 35px;height: 35px;border-radius: 150px !important;" src="{{user.avatar}}" /></a></li>
-           <!--  <li id="bar_my-space"><a href="#/my-space"><span ng-show="user != null && user.id != 0 && user.suproleid==1&& user.id != undefined
-            && user != ''" >我的</span></a></li>
-            <li id="bar_my-space-company"><a href="#/my-space-company"><span ng-show="user != null && user.id != 0 && user.suproleid==2&& user.id != undefined
-            && user != ''" >我的</span></a></li> -->
-            <li id="bar_login"><div ng-if="user == null || user == undefined || user == '' ||user.id == undefined"><a ng-click="goRegister()" style="display: inline; font-size:15px;">注册</a> 
-             |  <a ng-click="goLogin()" style="display: inline; font-size:15px;"><span>登录</span></a></div></li>
-            <li ng-click="logout()"><div ng-if="user != null && user.id != 0 && user.id != undefined
-            && user != ''"><a style="display: inline; font-size:15px;">注销</a> </div></li>
-          </ul>
-        </div> 
-        <!-- Navigation END -->
-      </div>
-    </div>
-  </div>
-  <div id="msgPush" class="msgPush">
-		<span class="topTrl"></span>
-		<span class="pushClose" onclick="pushClose()">×</span>
-		<div class="pushContent">
-			<p>您收到了一条新消息,请及时查看！</p>
-		</div>
-	</div>
-  <!-- Header END -->
-  <!-- <iframe src="home.html" name="main" width="100%"  height="1000px" style="border:0px solid;"></iframe> -->
-<!--   <div  ui-view style="overflow: hidden"></div> -->
-  <div  ui-view></div>
-  <!-- BEGIN FOOTER -->
-  <div class="footer">
-    <div class="container">
-      <div class="row">
-        <!-- BEGIN COPYRIGHT -->
-        <div class="col-md-6 col-sm-6">
-          <div class="pull-left copyright">2016 © 蔚蓝树. ALL Rights Reserved.</div>
-        </div>
-        <!-- END COPYRIGHT -->
-        <!-- BEGIN SOCIAL ICONS -->
-        <div class="col-md-6 col-sm-6">
-          <div class="pull-right copyright">
-            <a href="javascript:void(0);">声明</a>
-            <span>|</span>
-<!--             <a data-toggle="modal" href="#aboutusModal">关于我们</a> -->
-                 <a href="#/aboutus">关于我们</a>
-            <span>|</span>
-            <a href="#/contactus">联系我们</a>
-          </div>
-        </div>
-        <!-- END SOCIAL ICONS -->
-      </div>
-    </div>
-  </div>
-  
-  <!-- 模态框（Modal） --> 
-				<div class="modal fade" id="aboutusModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"> 
-				    <div class="modal-dialog" style="width:600px;"> 
-				        <div class="modal-content"> 
-				            <div class="modal-header"> 
-				                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button> 
-				                <h4 class="modal-title" id="myModalLabel">关于我们</h4> 
-				            </div> 
-				            <div style="text-align:center;"  id="aboutfig" class="modal-body">
-				            <img style="width:500px" src="../../assets/img/aboutus.jpg" alt="">
-				            </div> 
-				            <div class="modal-footer"> 
-				                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-				            </div> 
-				        </div><!-- /.modal-content --> 
-				    </div><!-- /.modal --> 
-				</div>  
-  <!-- END FOOTER -->
- <!--[if lt IE 9]>
-<script src="../../assets/global/plugins/respond.min.js"></script>
-<script src="../../assets/global/plugins/excanvas.min.js"></script> 
-<![endif]-->
-  <!-- Load JavaScripts at the bottom, because it will reduce page load time -->
-  <!-- Core plugins BEGIN (For ALL pages) -->
-   <script src="assets/js/common.js" type="text/javascript"></script>
-<script src="assets/js/jquery.min.js" type="text/javascript"></script>  
-  <script src="assets/js/jquery-migrate.min.js" type="text/javascript"></script>
-  <script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
-  <!-- Core plugins END (For ALL pages) -->
-  <!-- Core plugins BEGIN (required only for current page) -->
-  <script src="assets/js/jquery.nav.js"></script>
-  <script src="assets/js/layout.js" type="text/javascript"></script>
-  <!-- Core plugins END (required only for current page) -->
-  <!-- Global js BEGIN -->
-   <!-- <script src="assets/js/metronic.js" type="text/javascript"></script> 
-  <script src="../../assets/js/demo.js" type="text/javascript"></script> 
-  -->
-  <!-- Core plugins END (required only for current page) -->
-  <!--Begin Login-->
-  <!-- <script src="assets/js/jquery.validate.min.js" type="text/javascript"></script> -->
- <!--  <script src="assets/js/login-soft.js" type="text/javascript"></script> -->
- 
-  <!--END Login-->
-  <!-- begin register -->
-  <!--<script type="text/javascript" src="assets/js/additional-methods.min.js"></script>-->
-  <script type="text/javascript" src="assets/js/jquery.bootstrap.wizard.min.js"></script>
-  <!--<script type="text/javascript" src="assets/js/select2.min.js"></script>-->
-<!--   <script src="../../assets/js/smartpaginator.js"></script> -->
-  <!-- <script src="assets/js/form-wizard.js"></script> -->
-<!-- end register -->
-  <script language="javascript">
-$(function (){
-	var url,s;
-	url=window.location.href;
-   
-
-		var t = url.indexOf('news');
-		if(t>=0){
-	       s=1;
-		}
-		else{
-		    var t = url.indexOf('geek');
-            if(t>=0){
-	           s=2;
-			}
-			else{
-				var t = url.indexOf('post-bar');
-			    if(t>=0){
-			      s=3;
-				}
-			    else{
-			      var t = url.indexOf('');
-                       if(t>=0){
-	                      s=0;
-	                       }
-	                    else
-	                        s=4;
-			     }		
-	             
-		}
-		}
-
-	$("ul#menu li").each(function(index, element){
-		//alert($(this).find("a").text());
-		var currentNav = $(this).children("a:eq(0)").text();
-		//console.log(currentNav + " == " + s);
-		if(currentNav == "首页" && s==0){
-			$(this).addClass("current");
-		}
-		if(currentNav == "资讯" && s==1){
-			//alert(123);
-			$(this).addClass("current");
-		}
-		if(currentNav == "创客" && s==2){
-			$(this).addClass("current");
-		}
-		if(currentNav == "树屋" && s==3){
-			 $(this).addClass("current");
-		}
-		if(currentNav == "我的" && s==4){
-			 $(this).addClass("current");
-		}
-		else{
-			//$(this).removeClass("current");
-		}
-			
-	})
-})
-  </script>
- <script language="javascript">
-$(function (){
-    $('body')
-    .on('click', '#bar_home', function(e) {
-        $("#bar_home").addClass("current");
-		$("#bar_news").removeClass("current");
-		$("#bar_geek").removeClass("current");
-		$("#bar_post-bar").removeClass("current");
-		$("#bar_my-space").removeClass("current");
-		$("#bar_my-space-company").removeClass("current");
-    })
-	.on('click', '#bar_news', function(e) {
-	    $("#bar_home").removeClass("current");
-        $("#bar_news").addClass("current");
-		$("#bar_geek").removeClass("current");
-		$("#bar_post-bar").removeClass("current");
-		$("#bar_my-space").removeClass("current");
-		$("#bar_my-space-company").removeClass("current");
-    })
-	.on('click', '#bar_geek', function(e) {
-	    $("#bar_home").removeClass("current");
-        $("#bar_news").removeClass("current");
-		$("#bar_geek").addClass("current");
-		$("#bar_post-bar").removeClass("current");
-		$("#bar_my-space").removeClass("current");
-		$("#bar_my-space-company").removeClass("current");
-    })
-	.on('click', '#bar_post-bar', function(e) {
-	    $("#bar_home").removeClass("current");
-        $("#bar_news").removeClass("current");
-		$("#bar_geek").removeClass("current");
-		$("#bar_post-bar").addClass("current");
-		$("#bar_my-space").removeClass("current");
-		$("#bar_my-space-company").removeClass("current");
-    })
-	.on('click', '#bar_my-space', function(e) {
-	    $("#bar_home").removeClass("current");
-        $("#bar_news").removeClass("current");
-		$("#bar_geek").removeClass("current");
-		$("#bar_post-bar").removeClass("current");
-		$("#bar_my-space").addClass("current");
-		$("#bar_my-space-company").removeClass("current");
-    })
-	.on('click', '#bar_my-space-company', function(e) {
-	    $("#bar_home").removeClass("current");
-        $("#bar_news").removeClass("current");
-		$("#bar_geek").removeClass("current");
-		$("#bar_post-bar").removeClass("current");
-		$("#bar_my-space").removeClass("current");
-		$("#bar_my-space-company").addClass("current");
-    })
-	.on('click', '#bar_login', function(e) {
-	    $("#bar_home").removeClass("current");
-        $("#bar_news").removeClass("current");
-		$("#bar_geek").removeClass("current");
-		$("#bar_post-bar").removeClass("current");
-		$("#bar_my-space").removeClass("current");
-		$("#bar_my-space-company").removeClass("current");
-    });
-	});
-function pushClose(){
-			$(".msgPush").hide();
-		}
-  </script>
-  <script>
-    $(document).ready(function() {
-      Layout.init();
-      /*Metronic.init();
-      Demo.init(); */
-	  CommonObj.init();
-    });
-  </script>
-<!-- END JAVASCRIPTS -->
- <script type="text/javascript" src="../../assets/js/jquery-3.1.0.min.js"></script> 
+				<!-- 内容区域结构开始-->
+    			<div  ui-view style="overflow: hidden">
+	                 </div>
+    			<!-- 内容区域结构结束-->
+    		</div>
+    	<!-- 主体区域结构结束-->
+    	<footer>
+    		<p class="copyRight"> &copy;2016&nbsp;Smartcold&nbsp;&nbsp;&nbsp;&nbsp;沪ICP备　16004753</p>
+    	</footer>
+    </body>
 <script src="bower_components/angular/angular.min.js"></script>
 <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
-<!-- <script src="bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
-<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js?"></script> -->
+<script src="bower_components/angular-cookies/angular-cookies.min.js"></script>
+<script src="bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
+<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js?"></script>
 <script src="bower_components/angular/ng-file-upload.min.js"></script>
 <script src="bower_components/angular/ng-file-upload-shim.min.js"></script>
+<script src="bower_components/highlightjs/highlight.pack.js"></script>
+<script src="bower_components/angular-bootstrap-checkbox/angular-bootstrap-checkbox.js"></script>
 <script src="bower_components/angular-xeditable/dist/js/xeditable.js"></script>
-<!-- <script type="text/javascript" src="assets/js/smartpaginator.js"></script> -->
-<!-- <script src="bower_components/angucomplete/angucomplete.js"></script> -->
+<script src="bower_components/angular-multi-select-master/isteven-multi-select.js"></script>
+<script src="bower_components/angucomplete/angucomplete.js"></script>
+<script src="bower_components/at-table/dist/angular-table.min.js"></script>
 <script src="bower_components/jquery/dist/jquery.js"></script>
-<script src="app/js/comet4j.js" type="text/javascript"></script>
-<!-- <script src="bower_components/angular-multi-select-master/isteven-multi-select.js"></script>  -->
-<!-- <script src="bower_components/angular/ngRemoteValidate.0.6.1.min.js"></script> -->
-<script src="app/js/app.js" type="text/javascript"></script>
-<script src="app/js/home.js" type="text/javascript"></script>
-<script src="app/js/geek.js" type="text/javascript"></script>
-<script src="app/js/login.js" type="text/javascript"></script>
-<script src="app/js/my-space.js" type="text/javascript"></script>
-<script src="app/js/my-space-company.js" type="text/javascript"></script>
-<script src="app/js/my-space-company-ask.js" type="text/javascript"></script>
-<script src="app/js/register.js" type="text/javascript"></script>
-<script src="app/js/post-bar.js" type="text/javascript"></script>
-<script src="app/js/news.js" type="text/javascript"></script>
-<script src="app/js/news-info.js" type="text/javascript"></script>
-<script src="app/js/blog-info.js" type="text/javascript"></script>
-<script src="app/js/post-message.js" type="text/javascript"></script>
-<script src="app/js/my-space-ask.js" type="text/javascript"></script>
-<script src="app/js/aboutus.js" type="text/javascript"></script>
-<script src="app/js/contactus.js" type="text/javascript"></script>
-</body>
+<script src="bower_components/bootstrap/js/carousel.js"></script>
+<script src="bower_components/bootstrap/js/bootstrap-datetimepicker.min.js"></script>
+<script src="bower_components/angular/ngRemoteValidate.0.6.1.min.js"></script>
+<!-- app js -->
+
+<script src="app/js/app.js"></script>
+<script type="text/javascript" src="app/js/index.js"></script>
+<script src="app/js/controller-base.js"></script>
+<script src="app/js/controller-search.js"></script>
+<script src="app/js/controller-review.js"></script>
+<script src="app/js/storageManage.js"></script>
+<script src="app/js/commentManage.js"></script>
+<script src="app/js/home.js"></script>
+<script src="app/js/coldStorageAdd.js"></script>
+<script src="app/js/coldStorageEdit.js"></script>
+<script src="app/js/coldStorageMap.js"></script>
+<script src="app/js/adminList.js"></script>
+<script src="app/js/home.js"></script>
+<script src="app/js/infoManage.js"></script>
+<script src="app/js/storageConfig.js"></script> 
+<script src="app/js/spiderConfig.js"></script> 
+<script src="app/js/operationLog.js"></script> 
+<script src="app/js/coldStorageAudit.js"></script>
+<script src="app/js/coldStorageHonorAudit.js"></script>
+<script src="app/js/coldStorageAuthAudit.js"></script>
+<script src="app/js/companyList.js"></script>
+<script src="app/js/storageRelate.js"></script>
+<script src="app/js/userRelate.js"></script>
+
+<script src="app/js/deviceConfig.js"></script>
+<script src="app/js/monthReport.js"></script>
+<script src="app/js/monthlyReportList.js"></script>
+
+
+
 </html>

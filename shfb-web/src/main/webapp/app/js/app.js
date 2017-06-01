@@ -1,133 +1,146 @@
-/*JS.Engine.start('conn');
-JS.Engine.on(
-        { 
-           msgData : function(msgData){
-        	   $("#msgPush").show();
-        	   setTimeout(function(){$("#msgPush").hide();}, 3000);
-           },
-       }
-   );*/
-var wlsWeb = angular.module('WlsWeb', ['ui.router',
-     'xeditable',  'ngFileUpload']);
-angular.element(document).ready(function ( $http, $rootScope) {
-	angular.bootstrap(document, ['WlsWeb']);
+var coldWeb = angular.module('ColdWeb', ['ui.bootstrap', 'ui.router', 'ui.checkbox',
+    'ngCookies', 'xeditable', 'isteven-multi-select', 'angucomplete', 'angular-table','ngFileUpload','remoteValidation']);
+//coldWeb.constant('coldWebUrl', 'http://www.smartcold.org.cn/i/');
+angular.element(document).ready(function ($ngCookies, $http, $rootScope) {
+	angular.bootstrap(document, ['ColdWeb']);
 });
-wlsWeb.run(function (editableOptions, userService, $location) {
+coldWeb.run(function (editableOptions, adminService, $location) {
     editableOptions.theme = 'bs3'; // bootstrap3 theme. Can be also 'bs2', 'default'
     $.ajax({type: "GET",cache: false,dataType: 'json',url: '/i/user/findUser'}).success(function(data){
-      	user = data;
-  		userService.setUser(user);
+      	admin = data;
+      	if(admin == null || admin.id == 0){
+  			url = "http://" + $location.host() + ":" + $location.port() + "/login.html";
+  			window.location.href = url;
+  		}
+  		adminService.setAdmin(admin);
       });
 });
 
-wlsWeb.factory('userService',['$rootScope','$http', function($rootScope,$http){
+coldWeb.factory('adminService',['$rootScope','$http', function($rootScope,$http){
 	return {
-		setUser: function(user){
-	    	$rootScope.user = user;
+		setAdmin: function(admin){
+	    	$rootScope.admin = admin;
 	    	$rootScope.logout = function () {
 	        	$http.get('/i/user/logout').success(function(data){
-	        		$rootScope.user = null;
+	        		$rootScope.admin = null;
 	            });
-	        	window.location.href="";
-	        };
-	        $rootScope.goSpace = function() {
-	        	if($rootScope.user.id==undefined){
-	        		alert("请先登录");
-	        	}
-	        	else{
-	        		if($rootScope.user.suproleid==1){
-	        			window.location.href="#/my-space";
-	        		}
-	        		else{
-	        			window.location.href="#/my-space-company";
-	        		}
-	        	}
-	        };
-	        $rootScope.goHome = function() {
-	        	window.location.href="";
-	        };
-	        $rootScope.goNews = function() {
-	        	window.location.href ="#/news";
-	        };
-	        $rootScope.goGeek = function() {
-	        	window.location.href = "#/geek";
-	        };
-	        $rootScope.goPostbar = function() {
-	        	window.location.href = "#/post-bar";
-	        };
-	        $rootScope.goLogin = function() {
-	        	window.location.href = "#/login";
-	        };
-	        $rootScope.goRegister = function() {
-	        	window.location.href = "#/register";
+	        	window.location.reload();
 	        };
 	    },
-	};
-}]);
+	}
+}])
 
-wlsWeb.config(function ($stateProvider, $urlRouterProvider) {
-    $urlRouterProvider.otherwise("");
-    
+coldWeb.config(function ($stateProvider, $urlRouterProvider) {
+    $urlRouterProvider.otherwise("/home");
     //index
-    $stateProvider.state('home', {
-        url: '',
-        controller: 'home',
-        templateUrl: '../../home.html'
-    }).state('geek', {
-        url: '/geek',
-        controller: 'geek',
-        templateUrl: 'app/template/geek.html'
-    }).state('my-space', {
-        url: '/my-space',
-        controller: 'my-space',
-        templateUrl: 'app/template/my-space.html'
-    }).state('my-space-company', {
-        url: '/my-space-company',
-        controller: 'my-space-company',
-        templateUrl: 'app/template/my-space-company.html'
-    }).state('register', {
-        url: '/register',
-        controller: 'register',
-        templateUrl: '../../register.html'
-    }).state('login', {
+    $stateProvider.state('login', {
         url: '/login',
         controller: 'login',
-        templateUrl: '../../login.html'
-    }).state('post-bar', {
-        url: '/post-bar',
-        controller: 'post-bar',
-        templateUrl: 'app/template/post-bar.html'
-    }).state('news', {
-        url: '/news',
-        controller: 'news',
-        templateUrl: 'app/template/news.html'
-    }).state('post-message', {
-        url: '/post-message',
-        controller: 'post-message',
-        templateUrl: 'app/template/post-message.html'
-    }).state('news-info', {
-        url: '/news-info/:newID',
-        controller: 'news-info',
-        templateUrl: 'app/template/news-info.html'
-    }).state('blog-info', {
-        url: '/blog-info/:publishID',
-        controller: 'blog-info',
-        templateUrl: 'app/template/blog-info.html'
-    }).state('my-space-ask', {
-        url: '/my-space-ask/:spaceID',
-        controller: 'my-space-ask',
-        templateUrl: 'app/template/my-space-ask.html'
-    }).state('aboutus', {
-        url: '/aboutus',
-        controller: 'aboutus',
-        templateUrl: '../../aboutus.html'
-    }).state('contactus', {
-        url: '/contactus',
-        controller: 'contactus',
-        templateUrl: '../../contactus.html'
-    }).state('my-space-company-ask', {
-        url: '/my-space-company-ask/:spaceID',
-        controller: 'my-space-company-ask',
-        templateUrl: 'app/template/my-space-company-ask.html'
+        templateUrl: 'app/template/login.html?4'
+    }).state('home', {
+        url: '/home',
+        controller: 'home',
+        templateUrl: 'app/template/home.html'
+    }).state('search', {
+        url: '/search',
+        controller: 'search',
+        templateUrl: 'app/template/search.html'
+    }).state('info', {
+        url: '/info/{id}',
+        controller: 'info',
+        templateUrl: 'app/template/info.html'
+    }).state('multi-query', {
+        url: '/multi-query/{key}',
+        controller: 'multi-query',
+        templateUrl: 'app/template/multi-query.html'
+    }).state('goods-list', {
+        url: '/goods-list/{key}',
+        controller: 'goods-list',
+        templateUrl: 'app/template/goods-list.html'
+    }).state('coldStoragelist', {
+        url: '/storageManage',
+        controller: 'storageManage',
+        templateUrl: 'app/template/storageManage.html'
+    }).state('commentManage', {
+        url: '/commentManage',
+        controller: 'commentManage',
+        templateUrl: 'app/template/commentManage.html'
+    }).state('review', {
+        url: '/coldStorage/{rdcID}/review',
+        controller: 'review',
+        templateUrl: 'app/template/review.html'
+    }).state('coldStorageAdd', {
+        url: '/coldStorageAdd',
+        controller: 'coldStorageAdd',
+        templateUrl: 'app/template/coldStorageInfo.html'
+    }).state('coldStorageEdit', {
+        url: '/coldStorageEdit/:rdcID',
+        controller: 'coldStorageEdit',
+        templateUrl: 'app/template/editStorage.html'
+    }).state('coldStorageMap', {
+        url: '/coldStorageMap',
+        controller: 'coldStorageMap',
+        templateUrl: 'app/template/coldStorageMap.html'
+    }).state('adminlist', {
+        url: '/adminlist',
+        controller: 'adminlist',
+        templateUrl: 'app/template/adminManage.html'
+    }).state('infoManage', {
+        url: '/infoManage',
+        controller: 'infoManage',
+        templateUrl: 'app/template/infoManage.html'
+    }).state('spiderConfig', {
+        url: '/spiderConfig',
+        controller: 'spiderConfig',
+        templateUrl: 'app/template/spiderConfig.html'
+    }).state('storageConfig', {
+        url: '/storageConfig',
+        controller: 'storageConfig',
+        templateUrl: 'app/template/storageConfig.html'
+    }).state('operatinLog',{
+    	url: '/operationLog',
+    	controller: 'operationLog',
+    	templateUrl: 'app/template/operationLog.html'
+    }).state('coldStorageAudit', {
+        url: '/coldStorageAudit/:rdcID',
+        controller: 'coldStorageAudit',
+        templateUrl: 'app/template/editStorage.html'
+    }).state('coldStorageHonorAudit', {
+        url: '/coldStorageHonorAudit/:rdcId',
+        controller: 'coldStorageHonorAudit',
+        templateUrl: 'app/template/coldStorageHonor.html'
+    }).state('coldStorageAuthAudit', {
+        url: '/coldStorageAuthAudit/:rdcId',
+        controller: 'coldStorageAuthAudit',
+        templateUrl: 'app/template/coldStorageAuth.html'
+    }).state('companylist', {
+        url: '/companylist',
+        controller: 'companylist',
+        templateUrl: 'app/template/companyManage.html'
+    }).state('storageRelate', {
+        url: '/storageRelate/:companyId',
+        controller: 'storageRelate',
+        templateUrl: 'app/template/storageRelate.html'
+    }).state('userRelate', {
+        url: '/userRelate/:companyId',
+        controller: 'userRelate',
+        templateUrl: 'app/template/userRelate.html'
+    }).state('deviceConfig', {
+        url: '/deviceConfig',
+        controller: 'deviceConfig',
+        templateUrl: 'app/template/deviceConfig.html'
+    }).state('monthlyReportList', {
+        url: '/monthlyReportList',
+        controller: 'monthlyReportList',
+        templateUrl: 'app/template/monthlyReportList.html'
+    }).state('rdcReportList', {
+        url: '/rdcReportList/{rdcId}',
+        controller: 'rdcReportList',
+        templateUrl: 'app/template/rdcReportList.html'
+    }).state('monthReport',{//冷库月分析报告
+    	url: '/monthReport/{rdcId}',
+    	controller: 'monthReport',
+    	params:{id:null,name:null},
+        templateUrl: 'app/template/monthReport.html'
     });
 });

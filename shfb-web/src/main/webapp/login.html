@@ -1,146 +1,150 @@
-<!-- BEGIN HEAD -->
-<head>
-<link href="assets/css/login-soft.css" rel="stylesheet" type="text/css">
-<script src="assets/js/jquery.validate.min.js" type="text/javascript"></script>
-<script src="assets/js/login-soft.js" type="text/javascript"></script>
-<script src="assets/js/common.js" type="text/javascript"></script>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+        <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="assets/css/index.css">
+		<script type="text/javascript" src="assets/js/jquery-1.12.0.min.js"></script>
+		<script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="assets/js/smartpaginator.js"></script>
+    </head>
+    <body>
+    	<!-- head部分结构开始 -->
+			<div class="head">
+				<div class="logoArea pull-left" onclick="">
+					<h1 class="logo  pull-left"></h1>
+					<h3 class="manage  pull-left">链库后台管理系统</h3>
+					<!-- <div class="home  pull-left">
+						<span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+					</div> -->
+				</div>
+			</div>
+    	<!-- head部分结构结束 -->
+		
+		<!-- 主体区域结构开始 -->
+    		<div class="content">            
+                <div class="panel panel-success">
+                   <div class="panel-heading">
+                      <h3 class="panel-title">管理员登陆</h3>
+                   </div>
+                   <div class="panel-body">
+                      <div class="main-form-container">
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="adminname" id="adminname" placeholder='用户名' >
+                            <!-- 错误信息 popover -->
+                            <div class="err-popover-out">
+                                <div class="err-popover">
+                                    <div class="tri-right"></div>
+                                    <div class="tri-right-in"></div>
+                                    <div class="err-popover-content"></div>
+                                </div>
+                            </div>
+                            <!-- 错误信息 popover end -->
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control" id="adminpwd" name="adminpwd" placeholder='密码' >
+                            <!-- 错误信息 popover -->
+                            <div class="err-popover-out">
+                                <div class="err-popover">
+                                    <div class="tri-right"></div>
+                                    <div class="tri-right-in"></div>
+                                    <div class="err-popover-content"></div>
+                                </div>
+                            </div>
+                            <!-- 错误信息 popover end -->
+                        </div>
+                        <div class="form-group">
+                            <label class="checkbox-inline">
+                                <input type="radio" name="adminrole" id="adminrole" value="0"    > 管理员
+                            </label>
+                            <label class="checkbox-inline">
+                                <input type="radio" name="adminrole" id="adminrole" value="1"  checked> 超级管理员
+                            </label>                                   
+                        </div>
+                        <button type="button" id="submit" class="btn btn-form-common form-control" onclick="login();"><span>登录</span></button>
+                        <div class="row">
+                          <div class="col-xs-8">
+                            <a style="color:red" hidden=true id="mention">用户名或密码错误</a>
+                          </div>
+                        </div>
+                   </div>
+                </div>
+    			<!-- 内容区域结构结束-->
+    		</div>
 <script>
-jQuery(document).ready(function() {     
- CommonObj.init();
- Login.init();
-});
- var realityHeight = parseInt($("#base_content_container2").outerHeight()); // 内容高度
-    var bodyHeight = Math.max( window.innerHeight, document.body.clientHeight );
-    if((bodyHeight - 80) > realityHeight){
-    $("#base_content_container2").css("height",(bodyHeight - 140));
-    }
+	$(document).ready(function(){
+		$.ajax({url: "/i/user/findUser",async:false, cache: false}).success(function(data){
+				if(data.success&&data.entity.id != 0){
+				  window.location.href = "http://"+ window.location.host + "/#/home";
+				}
+			});
+		});
+		
+		function showErrorInfo(msg){
+			var msgEl = $("#mention");
+			if(msg == null || msg == ''){
+                msgEl.hide();
+                msgEl.html('');
+			}else{
+				msgEl.show();
+    			msgEl.html(msg);
+			}
+		}
+		function login() {
+		          var me = "#submit";
+			        if($(me).data('isLoading') === true)return;
+					showErrorInfo("");
+					if ($("#adminname").val() == '') {
+						showErrorInfo("用户名不能为空！");
+						return;
+					} else if ($("#adminpwd").val() == '') {
+						showErrorInfo("密码不能为空！");
+						return;
+					} 
+					
+					$(me).text("登录中...");
+					$(me).data('isLoading',true);
+					 var rds = document.getElementsByName("adminrole");
+					var adminRole="";
+					for ( var i = 0; i < rds.length; i++) {
+						if (rds.item(i).checked) {
+							adminRole = rds.item(i).getAttribute("value");
+							break;
+						} else {
+							continue;
+						}
+					 }
+					   $.ajax({
+								type : 'POST',
+								dataType : "json",
+								url : "/i/user/login",
+								data : {userName : $("#adminname").val(),password : $("#adminpwd").val()},
+								complete : function(e){
+                                    $(me).text("登录");
+                                    $(me).delay(500).data('isLoading',false);
+								},
+								success : function(data) {
+									if (data.success) {
+	                                    document.cookie = data.message;
+										if (window.location.hash != "") {
+											backUrl = window.location.hash;
+										} else {
+											backUrl = "#/home";
+										}
+										window.location.href = "http://"+ window.location.host + "/"+ backUrl;
+										window.Event.returnValue = false;
+									} else {
+									    $("#mention")[0].hidden = false;
+										showErrorInfo(data.message);
+									}
+								}
+							});
+				};
+			$(document).on({keyup : function(e) {if (e.keyCode == '13'){login();}}});
+		
 </script>
-<!-- END JAVASCRIPTS -->
-<script>
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?f3c4a089acab1654d89e00bac21834af";
-  var s = document.getElementsByTagName("script")[0]; 
-  s.parentNode.insertBefore(hm, s);
-})();
-</script>
-
-</head>
-<!-- END HEAD -->
-<!-- BEGIN BODY -->
-<body class="menu-always-on-top">
-<!-- BEGIN LOGO -->
-<div class="login" id="base_content_container2">
-<div class="logo">
-    <a href="">
-  <!--  <img src="assets/img/logo/logo-white.png" alt="" width="150px"/>-->
-    </a>
-</div>
-<!-- END LOGO -->
-<!-- BEGIN SIDEBAR TOGGLER BUTTON -->
-<div class="menu-toggler sidebar-toggler">
-</div>
-<!-- END SIDEBAR TOGGLER BUTTON -->
-<!-- BEGIN LOGIN -->
-<div class="content">
-    <!-- BEGIN LOGIN FORM -->
-    <div class="login-form">
-        <h3 class="form-title">登录</h3>
-        <div class="alert alert-danger display-hide">
-            <button class="close" data-close="alert"></button>
-            <span>
-            输入用户名和密码. </span>
-        </div>
-        <div class="form-group">
-            <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
-            <label class="control-label visible-ie8 visible-ie9">用户名/手机号</label>
-            <div class="input-icon">
-                <i class="fa fa-user"></i>
-                <input class="form-control placeholder-no-fix" type="text" autocomplete="off" ng-model="username" placeholder="用户名/手机号" name="username"/>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label visible-ie8 visible-ie9">密码</label>
-            <div class="input-icon">
-                <i class="fa fa-lock"></i>
-                <input class="form-control placeholder-no-fix" type="password" autocomplete="off" ng-model="password" placeholder="密码" name="password"/>
-            </div>
-        </div>
-        <div class="form-actions">
-            <label class="checkbox"><a href="javascript:;" id="forget-password" style="color:#fff; text-decoration:none">忘记密码？ </a></label>
-            <button ng-click="login()"  class="btn blue pull-right">
-            登录 <i class="m-icon-swapright m-icon-white"></i>
-            </button>
-        </div>
-        <div class="create-account">
-            <p>
-                 没有账户 ?&nbsp; <a href="#/register" style="color:#fff">
-                注册新用户 </a>
-            </p>
-        </div>
-    </div>
-    <!-- END LOGIN FORM -->
-    <!-- BEGIN FORGOT PASSWORD FORM -->
-    <div class="forget-form">
-        <h3>忘记密码 ?</h3>
-        <p>
-             输入手机号码找回密码.
-        </p>
-        <div class="form-group">
-            <div class="input-icon input-group"> 
-            <i class="fa fa-phone"></i>
-            <input type="text" placeholder="手机号" ng-model="telephonenum" class="form-control placeholder-no-fix" name="phone"/> 
-            <span class="input-group-btn"> 
-            <button class="btn blue" type="button" id="J_getCode" ng-click="sendPwdVerifyCode()">发送验证码</button>
-            <button class="btn blue" type="button" id="J_resetCode" style="display:none"><span id="J_second">60</span>秒后重发</button>
-            </span> 
-           </div> 
-        </div>
-        <div class="form-group">
-            <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
-            <label class="control-label visible-ie8 visible-ie9">验证码</label>
-            <div class="input-icon">
-                <i class="fa fa-info"></i>
-                <input class="form-control placeholder-no-fix" type="text" ng-model="pwdverifycode" autocomplete="off" placeholder="验证码" name="validate_code"/>
-            </div>
-        </div>
-        <div class="form-actions">
-            <button type="button" id="back-btn" class="btn">
-            <i class="m-icon-swapleft"></i> 返回 </button>
-            <button ng-click="pwdCodeVerify()" type="button" class="btn blue pull-right" id="reset-password">
-            提交 <i class="m-icon-swapright m-icon-white"></i>
-            </button>
-        </div>
-    </div>
-    <!-- END FORGOT PASSWORD FORM -->
-    <!-- BEGIN Reset FORM -->
-      <div class="reset-form">
-          <h3 class="form-title">重置密码</h3>
-          <div class="form-group">
-              <label class="control-label visible-ie8 visible-ie9">密码</label>
-              <div class="input-icon">
-                  <i class="fa fa-lock"></i>
-                  <input class="form-control placeholder-no-fix" ng-model="changepwd1" type="password" autocomplete="off" placeholder="密码" name="password" id="password1"/>
-                  <span id="password-error" class="help-block" style="display:none">密码出错！</span>
-              </div>
-          </div>
-          <div class="form-group">
-              <label class="control-label visible-ie8 visible-ie9">确认密码</label>
-              <div class="input-icon">
-                  <i class="fa fa-lock"></i>
-                  <input class="form-control placeholder-no-fix" ng-model="changepwd2" type="password" autocomplete="off" placeholder="确认密码" name="rpassword" id="password2"/>
-                  <span id="rpassword-error" class="help-block" style="display:none">确认密码出错！</span>
-              </div>
-          </div>
-          <div class="form-actions">
-              <button  ng-click="changePwd()" class="btn blue col-md-12" id="reset_password">
-              重置
-              </button>
-          </div>
-      </div>
-      <!-- END Reset FORM -->
-</div>
-<!-- END LOGIN -->
-</div>
-</body>
+    	<!-- 主体区域结构结束-->
+    </body>
+</html>
