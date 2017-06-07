@@ -4,7 +4,7 @@
 
 <mapper namespace="com.shfb.rfid.manage.dao.CookieMapper">
 
-	<insert id="insertCookie" parameterType="CookieEntity">
+	<insert id="insertCookie" parameterType="Cookies">
 		INSERT INTO `cookies`
 		(
 		`cookie`,
@@ -21,7 +21,7 @@
 		)
 	</insert>
 	
-	<select id="findEffectiveCookie" parameterType="map" resultType="CookieEntity">
+	<select id="findEffectiveCookie" parameterType="map" resultType="Cookies">
 	    SELECT * FROM `cookies`
 	    WHERE cookie = #{cookie} 
 	    AND addTime + INTERVAL expireTime MINUTE >= now()

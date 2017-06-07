@@ -1,6 +1,6 @@
 package com.shfb.rfid.manage.service;
 
-import com.shfb.rfid.manage.entity.CookieEntity;
+import com.shfb.rfid.manage.entity.Cookies;
 
 public interface CookieService {
 
@@ -8,7 +8,7 @@ public interface CookieService {
 
 	public String insertCookie(String username);
 
-	public CookieEntity findEffectiveCookie(String cookie);
+	public Cookies findEffectiveCookie(String cookie);
 
 	public void deleteCookie(String cookie);
 }

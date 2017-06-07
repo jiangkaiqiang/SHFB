@@ -2,7 +2,7 @@ coldWeb.controller('home', function ($rootScope, $scope, $state, $cookies, $http
 	$scope.load = function(){
 		 $.ajax({type: "GET",cache: false,dataType: 'json',url: '/i/user/findUser'}).success(function(data){
 			   $rootScope.admin = data;
-				if($rootScope.admin == null || $rootScope.admin.id == 0){
+				if($rootScope.admin == null || $rootScope.admin.id == 0 || admin.id==undefined){
 					url = "http://" + $location.host() + ":" + $location.port() + "/login.html";
 					window.location.href = url;
 				}

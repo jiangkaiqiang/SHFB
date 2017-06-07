@@ -8,7 +8,7 @@ coldWeb.run(function (editableOptions, adminService, $location) {
     editableOptions.theme = 'bs3'; // bootstrap3 theme. Can be also 'bs2', 'default'
     $.ajax({type: "GET",cache: false,dataType: 'json',url: '/i/user/findUser'}).success(function(data){
       	admin = data;
-      	if(admin == null || admin.id == 0){
+      	if(admin == null || admin.id == 0 || admin.id==undefined){
   			url = "http://" + $location.host() + ":" + $location.port() + "/login.html";
   			window.location.href = url;
   		}

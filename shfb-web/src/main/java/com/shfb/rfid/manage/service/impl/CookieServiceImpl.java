@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.shfb.rfid.manage.dao.CookieMapper;
-import com.shfb.rfid.manage.entity.CookieEntity;
+import com.shfb.rfid.manage.entity.Cookies;
 import com.shfb.rfid.manage.service.CookieService;
 import com.shfb.rfid.manage.util.EncodeUtil;
 
@@ -19,7 +19,7 @@ public class CookieServiceImpl implements CookieService {
 	@Override
 	public String insertCookie(String username) {
 		Date date = new Date();
-		CookieEntity cookieEntity = new CookieEntity();
+		Cookies cookieEntity = new Cookies();
 
 		String encode = EncodeUtil.encode("sha1", String.format("%s%s", username, date.getTime()));
 		cookieEntity.setUsername(username);
@@ -31,7 +31,7 @@ public class CookieServiceImpl implements CookieService {
 	}
 
 	@Override
-	public CookieEntity findEffectiveCookie(String cookie) {
+	public Cookies findEffectiveCookie(String cookie) {
 		return cookieDao.findEffectiveCookie(cookie);
 	}
 

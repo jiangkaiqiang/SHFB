@@ -13,22 +13,21 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import com.shfb.rfid.manage.dao.UserMapper;
+import com.shfb.rfid.manage.dao.SysUserMapper;
 import com.shfb.rfid.manage.dto.UploadFileEntity;
-import com.shfb.rfid.manage.entity.CookieEntity;
-import com.shfb.rfid.manage.entity.UserEntity;
+import com.shfb.rfid.manage.entity.Cookies;
+import com.shfb.rfid.manage.entity.SysUser;
 import com.shfb.rfid.manage.service.CookieService;
 import com.shfb.rfid.manage.service.FtpService;
 import com.shfb.rfid.manage.util.EncodeUtil;
 import com.shfb.rfid.manage.util.ResponseData;
 import com.shfb.rfid.manage.util.StringUtil;
-import com.taobao.api.ApiException;
 @Controller
 @RequestMapping(value = "/user")
 public class UserController extends BaseController {
 	private static String baseDir = "picture";
 	@Autowired
-	private UserMapper userDao;
+	private SysUserMapper userDao;
 	@Autowired
 	private CookieService cookieService;
 	@Autowired
@@ -38,7 +37,7 @@ public class UserController extends BaseController {
 	@ResponseBody
 	public Object login(HttpServletRequest request, String userName, String password) {
 		if(StringUtil.isnotNull(userName)&&StringUtil.isnotNull(password)){
-			UserEntity user = userDao.findUser(userName, EncodeUtil.encodeByMD5(password));
+			SysUser user = userDao.findUser(userName, password);
 			if (user != null) {
 				String cookie = cookieService.insertCookie(userName);
 				user.setPassword("********");
@@ -57,7 +56,7 @@ public class UserController extends BaseController {
 	public Object findUserByID(
 			@RequestParam(value="spaceUserID", required=false) Integer spaceUserID
 			) throws UnsupportedEncodingException {
-	     UserEntity userEntity = userDao.findUserById(spaceUserID);
+	     SysUser userEntity = userDao.findUserById(spaceUserID);
 	     return userEntity;
 	}
 	
@@ -79,7 +78,7 @@ public class UserController extends BaseController {
 	@RequestMapping(value = "/findUser")
 	@ResponseBody
 	public Object findUser(HttpServletRequest request,String token) {
-		UserEntity user = (UserEntity)request.getSession().getAttribute("user");
+		SysUser user = (SysUser)request.getSession().getAttribute("user");
 		if(user!=null){return user;}
 		if(StringUtil.isNull(token)){
 			Cookie[] cookies = request.getCookies();
@@ -90,7 +89,7 @@ public class UserController extends BaseController {
 			}
 		}
 		if(StringUtil.isnotNull(token)){
-			CookieEntity effectiveCookie = cookieService.findEffectiveCookie(token);
+			Cookies effectiveCookie = cookieService.findEffectiveCookie(token);
 			if (effectiveCookie != null) {
 				user = userDao.findUserByName(effectiveCookie.getUsername());
 				if(user!=null){
@@ -100,28 +99,28 @@ public class UserController extends BaseController {
 				}
 			}
 		}
-		user = new UserEntity();
+		user = new SysUser();
 		return user;
 	}
 		
-	@RequestMapping(value = "/updatePhoto")
+	/*@RequestMapping(value = "/updatePhoto")
 	@ResponseBody
-	public Object updatePhoto(HttpServletRequest request, @RequestParam(required = false) MultipartFile userphoto) throws ApiException {
-		UserEntity user = new UserEntity();
-		UserEntity old_user = (UserEntity)request.getSession().getAttribute("user");
-		user.setId(old_user.getId());
+	public Object updatePhoto(HttpServletRequest request, @RequestParam(required = false) MultipartFile userphoto) {
+		SysUserEntity user = new SysUserEntity();
+		SysUserEntity old_user = (SysUserEntity)request.getSession().getAttribute("user");
+		user.setUser_id(old_user.getUser_id());
 		if(userphoto!=null){
-			String dir = String.format("%s/user/photo/%s", baseDir, user.getId());
-			String fileName = String.format("user%s_%s.%s", user.getId(), new Date().getTime(), "jpg");
+			String dir = String.format("%s/user/photo/%s", baseDir, user.getUser_id());
+			String fileName = String.format("user%s_%s.%s", user.getUser_id(), new Date().getTime(), "jpg");
 			UploadFileEntity uploadFileEntity = new UploadFileEntity(fileName, userphoto, dir);
 			ftpService.uploadFile(uploadFileEntity);
 			user.setPhoto(FtpService.READ_URL+"data/"+dir + "/" + fileName);//http://42.121.130.177:8089/picture/user/1124/3456789.png
 			this.userDao.updateUser(user);
-			UserEntity	ol_user = this.userDao.findUserById(user.getId().intValue());
+			SysUserEntity ol_user = this.userDao.findUserById(user.getUser_id());
 			ol_user.setPassword("********");
 			request.getSession().setAttribute("user",ol_user);
 			return ResponseData.newSuccess(ol_user);
 		}
 		return ResponseData.newFailure();
-	}
+	}*/
 }
