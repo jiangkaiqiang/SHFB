@@ -17,5 +17,5 @@ public interface SysUserMapper {
 	
 	void updateUser(SysUser userEntity);
 		
-	Page<SysUser> findAllUser(@Param("audit")Integer audit, @Param("keyword")String keyword);
+	Page<SysUser> findAllUser(@Param("status")Integer status, @Param("keyword")String keyword);
 }

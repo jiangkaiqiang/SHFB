@@ -139,4 +139,16 @@
       details = #{details,jdbcType=VARCHAR}
     where pro_id = #{pro_id,jdbcType=INTEGER}
   </update>
+  <select id="findAllProject" parameterType="int" resultType="com.shfb.rfid.manage.entity.Project">
+		SELECT * FROM `project`
+		<where>
+			<if test="pr_id != null">
+				pr_id=#{pr_id}
+			</if>
+			<if test="keyword != null">
+				AND pro_name like "%"#{keyword}"%"
+			</if>
+		</where>
+		order by `pro_id` desc
+	</select>
 </mapper>

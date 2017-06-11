@@ -1,5 +1,8 @@
 package com.shfb.rfid.manage.dao;
 
+import org.apache.ibatis.annotations.Param;
+
+import com.github.pagehelper.Page;
 import com.shfb.rfid.manage.entity.Project;
 
 public interface ProjectMapper {
@@ -14,4 +17,6 @@ public interface ProjectMapper {
     int updateByPrimaryKeySelective(Project record);
 
     int updateByPrimaryKey(Project record);
+    
+    Page<Project> findAllProject(@Param("pr_id")Integer pr_id, @Param("keyword")String keyword);
 }

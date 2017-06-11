@@ -46,11 +46,11 @@
 						 <input type="checkbox" ng-checked="exists(user, selected)"
                     				ng-click="toggle(user, selected)"/>
 				         </td>
-				         <td>{{user.id}}</td>
-				         <td>{{user.username}}</td>
-				         <td>{{user.email}}</td>
-				         <td>{{user.telephone}}</td>
-				         <td>{{user.addTime}}</td>
+				         <td>{{user.user_id}}</td>
+				         <td>{{user.user_name}}</td>
+				         <td>{{user.user_role_id}}</td>
+				         <td>{{user.user_tel}}</td>
+				         <td>{{user.createTime}}</td>
 				         <td ng-bind="getAudit(user.audit)"></td>
 				         <td>
 				         	<button class="delete" ng-click="goDeleteUser(user.id)"></button>

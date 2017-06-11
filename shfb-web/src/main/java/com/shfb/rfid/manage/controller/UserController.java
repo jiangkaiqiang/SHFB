@@ -1,6 +1,7 @@
 package com.shfb.rfid.manage.controller;
 
 import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.Date;
 
 import javax.servlet.http.Cookie;
@@ -13,6 +14,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.shfb.rfid.manage.dao.SysUserMapper;
 import com.shfb.rfid.manage.dto.UploadFileEntity;
 import com.shfb.rfid.manage.entity.Cookies;
@@ -103,6 +107,27 @@ public class UserController extends BaseController {
 		return user;
 	}
 		
+	@RequestMapping(value = "/findUserList", method = RequestMethod.POST)
+	@ResponseBody
+	public Object findUserList(@RequestParam(value="pageNum",required=false) Integer pageNum,
+			@RequestParam(value="pageSize") Integer pageSize, 
+			@RequestParam(value="audit", required=false) Integer audit,
+			@RequestParam(value="keyword", required=false) String keyword) throws UnsupportedEncodingException {
+		if( !(audit == -1 || audit == 1 || audit == 0) ){
+			audit = null;
+		}
+		pageNum = pageNum == null? 1:pageNum;
+		pageSize = pageSize==null? 12:pageSize;
+		PageHelper.startPage(pageNum, pageSize);
+		if(keyword.equals("undefined"))
+			keyword = null;
+		else{
+		keyword = URLDecoder.decode(keyword, "UTF-8");
+		}
+		return new PageInfo<SysUser>(userDao.findAllUser(audit,keyword));
+		
+	}
+	
 	/*@RequestMapping(value = "/updatePhoto")
 	@ResponseBody
 	public Object updatePhoto(HttpServletRequest request, @RequestParam(required = false) MultipartFile userphoto) {

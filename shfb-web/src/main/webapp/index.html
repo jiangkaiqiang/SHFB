@@ -28,7 +28,7 @@
 				<div class="userArea pull-right">
 					<div class="admin  pull-left h4">
 						<span class="hi"><font style="size:14px">您好，</font></span> 
-						<span class="user" ng-model="admin"><font style="size:14px">{{admin.adminname}}</font></span>
+						<span class="user" ng-model="admin"><font style="size:14px">{{admin.user_name}}</font></span>
 					</div>
 					<!-- <div class="smartColdManage  pull-left h4">链库后台管理</div> -->
 					<div class="back  pull-left">
@@ -48,7 +48,7 @@
     					</div>
     					<ul class="list" ng-controller="index">
     					
-    						<li ng-click="goMenu('usermanage','#/home')" id ="usermanage">
+    						<li ng-click="goMenu('home','#/home')" id ="home">
     							<span class="glyphicon glyphicon-user"></span>
     							<a>用户管理</a>
     							<span class="glyphicon glyphicon-chevron-right pull-right"></span>
@@ -89,9 +89,9 @@
     								<li>children</li>
     							</ul>
     						</li>
-    						<li ng-click="goMenu('usermanage','#/storageConfig')">
+    						<li ng-click="goMenu('projectManage','#/projectManage')" id="projectManage">
     							<span class="glyphicon glyphicon-th-list"></span>
-    							<a>冷库配置信息</a>
+    							<a>项目管理</a>
     							<span class="glyphicon glyphicon-chevron-right pull-right"></span>
     							<ul class="liSon">
     								<li>children</li>
@@ -109,29 +109,9 @@
     								<li>children</li>
     							</ul>
     						</li>
-    						<li ng-click="goMenu('usermanage','#/monthlyReportList')">
-    							<span class="glyphicon glyphicon-th"></span>
-    							<a>冷库报表管理</a>
-    							<span class="glyphicon glyphicon-chevron-right pull-right"></span>
-    						</li>
-    						<li ng-click="goMenu('usermanage','#/deviceConfig')">
-    							<span class="glyphicon glyphicon-th"></span>
-    							<a>Device配置</a>
-    							<span class="glyphicon glyphicon-chevron-right pull-right"></span>
-                            </li>
     						<li ng-click="goMenu('usermanage','#/commentManage')">
     							<span class="glyphicon glyphicon-pencil"></span>
     							<a>评价管理</a>
-    							<span class="glyphicon glyphicon-chevron-right pull-right"></span>
-    							<ul class="liSon">
-    								<li>children</li>
-    								<li>children</li>
-    								<li>children</li>
-    							</ul>
-    						</li>
-    						<li ng-click="goMenu('usermanage','#/infoManage')">
-    							<span class="glyphicon glyphicon-calendar"></span>
-    							<a>资讯管理</a>
     							<span class="glyphicon glyphicon-chevron-right pull-right"></span>
     							<ul class="liSon">
     								<li>children</li>
@@ -184,32 +164,6 @@
 
 <script src="app/js/app.js"></script>
 <script type="text/javascript" src="app/js/index.js"></script>
-<script src="app/js/controller-base.js"></script>
-<script src="app/js/controller-search.js"></script>
-<script src="app/js/controller-review.js"></script>
-<script src="app/js/storageManage.js"></script>
-<script src="app/js/commentManage.js"></script>
 <script src="app/js/home.js"></script>
-<script src="app/js/coldStorageAdd.js"></script>
-<script src="app/js/coldStorageEdit.js"></script>
-<script src="app/js/coldStorageMap.js"></script>
-<script src="app/js/adminList.js"></script>
-<script src="app/js/home.js"></script>
-<script src="app/js/infoManage.js"></script>
-<script src="app/js/storageConfig.js"></script> 
-<script src="app/js/spiderConfig.js"></script> 
-<script src="app/js/operationLog.js"></script> 
-<script src="app/js/coldStorageAudit.js"></script>
-<script src="app/js/coldStorageHonorAudit.js"></script>
-<script src="app/js/coldStorageAuthAudit.js"></script>
-<script src="app/js/companyList.js"></script>
-<script src="app/js/storageRelate.js"></script>
-<script src="app/js/userRelate.js"></script>
-
-<script src="app/js/deviceConfig.js"></script>
-<script src="app/js/monthReport.js"></script>
-<script src="app/js/monthlyReportList.js"></script>
-
-
-
+<script src="app/js/projectManage.js"></script>
 </html>
