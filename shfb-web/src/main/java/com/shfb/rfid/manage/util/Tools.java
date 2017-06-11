@@ -209,11 +209,11 @@ public class Tools {
 	 * @param paraname  传入参数
 	 * @param FKEY		接收的 KEY
 	 * @return 为空则返回true，不否则返回false
-	 */
+	 *//*
 	public static boolean checkKey(String paraname, String FKEY){
 		paraname = (null == paraname)? "":paraname;
 		return MD5.md5(paraname+DateUtil.getDays()+",fh,").equals(FKEY);
-	}
+	}*/
 	 
 	/**
 	 * 读取txt里的单行内容
