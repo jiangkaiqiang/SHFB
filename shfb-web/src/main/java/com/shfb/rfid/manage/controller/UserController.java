@@ -18,6 +18,8 @@ import org.springframework.web.multipart.MultipartFile;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.shfb.rfid.manage.dao.SysUserMapper;
+import com.shfb.rfid.manage.dto.BaseDto;
+import com.shfb.rfid.manage.dto.ResultDto;
 import com.shfb.rfid.manage.dto.UploadFileEntity;
 import com.shfb.rfid.manage.entity.Cookies;
 import com.shfb.rfid.manage.entity.SysUser;
@@ -126,6 +128,18 @@ public class UserController extends BaseController {
 		}
 		return new PageInfo<SysUser>(userDao.findAllUser(audit,keyword));
 		
+	}
+	
+	@RequestMapping(value = "/addUser", method = RequestMethod.GET)
+	@ResponseBody
+	public Object addUser(SysUser user) throws UnsupportedEncodingException {
+		if (user.getUser_name() == null || user.getPassword() == null||user.getUser_tel()==null) {
+			return new ResultDto(-1, "用户名和密码,手机号不能为空");
+		}
+		user.setUser_name(URLDecoder.decode(user.getUser_name(), "UTF-8"));
+		user.setPassword(EncodeUtil.encodeByMD5(user.getPassword()));
+		userDao.insert(user);
+		return new BaseDto(0);
 	}
 	
 	/*@RequestMapping(value = "/updatePhoto")

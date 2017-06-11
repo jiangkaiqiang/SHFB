@@ -27,11 +27,11 @@
     where pro_id = #{pro_id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.shfb.rfid.manage.entity.Project" >
-    insert into project (pro_id, pro_name, contacts_name, 
+    insert into project (pro_name, contacts_name, 
       contacts_tel, contacts_phone, pr_id, 
       ci_id, address, details
       )
-    values (#{pro_id,jdbcType=INTEGER}, #{pro_name,jdbcType=VARCHAR}, #{contacts_name,jdbcType=VARCHAR}, 
+    values (#{pro_name,jdbcType=VARCHAR}, #{contacts_name,jdbcType=VARCHAR}, 
       #{contacts_tel,jdbcType=VARCHAR}, #{contacts_phone,jdbcType=VARCHAR}, #{pr_id,jdbcType=INTEGER}, 
       #{ci_id,jdbcType=INTEGER}, #{address,jdbcType=VARCHAR}, #{details,jdbcType=VARCHAR}
       )
@@ -149,6 +149,6 @@
 				AND pro_name like "%"#{keyword}"%"
 			</if>
 		</where>
-		order by `pro_id` desc
+		order by `pro_id` asc
 	</select>
 </mapper>
