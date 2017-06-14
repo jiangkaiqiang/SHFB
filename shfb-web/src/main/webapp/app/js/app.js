@@ -41,5 +41,9 @@ coldWeb.config(function ($stateProvider, $urlRouterProvider) {
         url: '/projectManage',
         controller: 'projectManage',
         templateUrl: 'app/template/projectManage.html'
+    }).state('compFactoryManage', {
+        url: '/compFactoryManage',
+        controller: 'compFactoryManage',
+        templateUrl: 'app/template/compFactoryManage.html'
     });
 });

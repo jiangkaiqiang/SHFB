@@ -109,7 +109,7 @@ public class ProjectController extends BaseController {
 	
 	@RequestMapping(value = "/deleteProjectByIDs")
 	@ResponseBody
-	public Object deleteByProjectIDs(Integer[] projectIDs) {
+	public Object deleteProjectByIDs(Integer[] projectIDs) {
 		for(Integer projectID:projectIDs){
 			projectDao.deleteByPrimaryKey(projectID);
 		}

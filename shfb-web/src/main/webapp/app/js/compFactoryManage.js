@@ -1,4 +1,4 @@
-coldWeb.controller('projectManage', function ($rootScope, $scope, $state, $cookies, $http, $location) {
+coldWeb.controller('compFactoryManage', function ($rootScope, $scope, $state, $cookies, $http, $location) {
 	$scope.load = function(){
 		 $.ajax({type: "GET",cache: false,dataType: 'json',url: '/i/user/findUser'}).success(function(data){
 			   $rootScope.admin = data;
@@ -15,13 +15,14 @@ coldWeb.controller('projectManage', function ($rootScope, $scope, $state, $cooki
     $scope.bigTotalItems = 10;
     // 当前页
     $scope.bigCurrentPage = 1;
-	$scope.Allprojects = [];
+	$scope.Allcompfactorys = [];
 	 // 获取当前冷库的列表
+
 	  
-    $scope.getProjects = function() {
+    $scope.getCompFactorys = function() {
 		$http({
 			method : 'POST',
-			url : '/i/project/findProjectList',
+			url : '/i/compfactory/findCompFactoryList',
 			params : {
 				pageNum : $scope.bigCurrentPage,
 				pageSize : $scope.maxSize,
@@ -30,27 +31,26 @@ coldWeb.controller('projectManage', function ($rootScope, $scope, $state, $cooki
 			}
 		}).success(function(data) {
 			$scope.bigTotalItems = data.total;
-			$scope.Allprojects = data.list;
+			$scope.Allcompfactorys = data.list;
 		});
 	}
 
 	$scope.pageChanged = function() {
-		$scope.getProjects();
+		$scope.getCompFactorys();
 	}
-	$scope.getProjects();
+	$scope.getCompFactorys();
 	// 获取当前冷库的列表
 	$scope.provinceChanged = function(provinceid) {
-		$scope.getProjects();
+		$scope.getCompFactorys();
 	}
     
 	$scope.goSearch = function () {
-		$scope.getProjects();
+		$scope.getCompFactorys();
     }
 	
 	$scope.searchProvinceSelected = function () {
-		$scope.getProjects();
+		$scope.getCompFactorys();
     }
-	
 	
 	$scope.showAll = function () {
 		$state.reload();
@@ -82,11 +82,11 @@ coldWeb.controller('projectManage', function ($rootScope, $scope, $state, $cooki
     $scope.provinceSelectedForUpdate = function () {
         $http.get('/i/city/findCitysByProvinceId', {
             params: {
-                "provinceID": $scope.projectUpdate.pr_id
+                "provinceID": $scope.compfactoryUpdate.pr_id
             }
         }).success(function (data) {
             $scope.citysForUpdate = data;
-            $scope.projectUpdate.ci_id = data[0].ci_id;
+            $scope.compfactoryUpdate.ci_id = data[0].ci_id;
         });
     };
     
@@ -100,33 +100,33 @@ coldWeb.controller('projectManage', function ($rootScope, $scope, $state, $cooki
 	        return true;
 	}
 	
-    $scope.goDeleteProject = function (projectID) {
+    $scope.goDeleteCompFactory = function (compfactoryID) {
     	if(delcfm()){
-    	$http.get('/i/project/deleteProjectByID', {
+    	$http.get('/i/compfactory/deleteCompFactoryByID', {
             params: {
-                "projectID": projectID
+                "compFactoryID": compfactoryID
             }
         }).success(function (data) {
-        	$scope.getProjects();
+        	$scope.getCompFactorys();
         	alert("删除成功");
         });
     	}
     }
-    $scope.deleteProjects = function(){
+    $scope.deleteCompFactorys = function(){
     	if(delcfm()){
-    	var projectIDs = [];
+    	var compfactoryIDs = [];
     	for(i in $scope.selected){
-    		projectIDs.push($scope.selected[i].pro_id);
+    		compfactoryIDs.push($scope.selected[i].comp_factory_id);
     	}
-    	if(projectIDs.length >0 ){
+    	if(compfactoryIDs.length >0 ){
     		$http({
     			method:'DELETE',
-    			url:'/i/project/deleteProjectByIDs',
+    			url:'/i/compfactory/deleteCompFactoryByIDs',
     			params:{
-    				'projectIDs': projectIDs
+    				'compFactoryIDs': compfactoryIDs
     			}
     		}).success(function (data) {
-    			$scope.getProjects();
+    			$scope.getCompFactorys();
             	alert("删除成功");
             });
     	}
@@ -135,33 +135,33 @@ coldWeb.controller('projectManage', function ($rootScope, $scope, $state, $cooki
    
     
     $scope.selected = [];
-    $scope.toggle = function (project, list) {
-		  var idx = list.indexOf(project);
+    $scope.toggle = function (compfactory, list) {
+		  var idx = list.indexOf(compfactory);
 		  if (idx > -1) {
 		    list.splice(idx, 1);
 		  }
 		  else {
-		    list.push(project);
+		    list.push(compfactory);
 		  }
     };
-    $scope.exists = function (project, list) {
-    	return list.indexOf(project) > -1;
+    $scope.exists = function (compfactory, list) {
+    	return list.indexOf(compfactory) > -1;
     };
     $scope.isChecked = function() {
-        return $scope.selected.length === $scope.Allprojects.length;
+        return $scope.selected.length === $scope.Allcompfactorys.length;
     };
     $scope.toggleAll = function() {
-        if ($scope.selected.length === $scope.Allprojects.length) {
+        if ($scope.selected.length === $scope.Allcompfactorys.length) {
         	$scope.selected = [];
         } else if ($scope.selected.length === 0 || $scope.selected.length > 0) {
-        	$scope.selected = $scope.Allprojects.slice(0);
+        	$scope.selected = $scope.Allcompfactorys.slice(0);
         }
     };
     
     function checkInput(){
         var flag = true;
         // 检查必须填写项
-        if ($scope.proname == undefined || $scope.proname == '') {
+        if ($scope.compfactoryname == undefined || $scope.compfactoryname == '') {
             flag = false;
         }
         if ($scope.contactName == undefined || $scope.contactName == '') {
@@ -173,21 +173,20 @@ coldWeb.controller('projectManage', function ($rootScope, $scope, $state, $cooki
         if (checkInput()){
             $http({
             	method : 'GET',
-            	url:'/i/project/addProject',
+            	url:'/i/compfactory/addCompFactory',
     			params:{
-    				'pro_name': $scope.proname,
+    				'comp_factory_name': $scope.compfactoryname,
     				'contacts_name': $scope.contactName,
     				'contacts_tel' : $scope.contactTel,
     				'contacts_phone' : $scope.contactPhone,
     				'pr_id': $scope.addProvinceid,
     				'ci_id': $scope.addCityid,
-    				'address' : $scope.address,
-    				'details' : $scope.detail
-    			}
+    				'address' : $scope.address
+    				}
     		}).then(function (resp) {
     			 alert("添加成功");
-                 $scope.getProjects();
-                 $("#addProject").modal("hide"); 
+                 $scope.getCompFactorys();
+                 $("#addCompFactory").modal("hide"); 
             }, function (resp) {
                 console.log('Error status: ' + resp.status);
             }, function (evt) {
@@ -195,44 +194,44 @@ coldWeb.controller('projectManage', function ($rootScope, $scope, $state, $cooki
                 console.log('progress: ' + progressPercentage + '% ' + evt.name);
             });
           } else {
-            alert("请填写项目名称和联系人!");
+            alert("请填写构件厂名称和联系人!");
         }
     }
-    $scope.goDetail = function(projectID) {
-    	$http.get('/i/project/findProjectByID', {
+    $scope.goDetail = function(compfactoryID) {
+    	$http.get('/i/compfactory/findCompFactoryByID', {
             params: {
-                "projectID": projectID
+                "compFactoryID": compfactoryID
             }
         }).success(function(data){
-		    if(data!=null&&data.project.pro_id!=undefined){
-				 $scope.projectDetail = data;
+		    if(data!=null&&data.compfactory.comp_factory_id!=undefined){
+				 $scope.compfactoryDetail = data;
 		    }
 	     });
 	};
 	
-	 $scope.goUpdate = function(projectID) {
-	    	$http.get('/i/project/findProjectByID', {
+	 $scope.goUpdate = function(compfactoryID) {
+	    	$http.get('/i/compfactory/findCompFactoryByID', {
 	            params: {
-	                "projectID": projectID
+	                "compFactoryID": compfactoryID
 	            }
 	        }).success(function(data){
-			    if(data!=null&&data.project.pro_id!=undefined){
-					 $scope.projectUpdate = data.project;
+			    if(data!=null&&data.compfactory.comp_factory_id!=undefined){
+					 $scope.compfactoryUpdate = data.compfactory;
 					 // 获取省列表
 					 
 					    $http.get('/i/city/findProvinceList').success(function (data) {
 					        $scope.provincesForUpdate = data;
-					        if($scope.projectUpdate.pr_id!=null&&$scope.projectUpdate.pr_id!=undefined){
+					        if($scope.compfactoryUpdate.pr_id!=null&&$scope.compfactoryUpdate.pr_id!=undefined){
 					        	 $http.get('/i/city/findCitysByProvinceId', {
 					                 params: {
-					                     "provinceID": $scope.projectUpdate.pr_id
+					                     "provinceID": $scope.compfactoryUpdate.pr_id
 					                 }
 					             }).success(function (data) {
 					                 $scope.citysForUpdate = data;
 					             });
 					   	    }
 					        else{
-					        	$scope.projectUpdate.pr_id = data[0].pr_id;
+					        	$scope.compfactoryUpdate.pr_id = data[0].pr_id;
 					        }
 					    });
 			    }
@@ -241,10 +240,10 @@ coldWeb.controller('projectManage', function ($rootScope, $scope, $state, $cooki
 		function checkInputForUpdate(){
 	        var flag = true;
 	        // 检查必须填写项
-	        if ($scope.projectUpdate.pro_name == undefined || $scope.projectUpdate.pro_name == '') {
+	        if ($scope.compfactoryUpdate.comp_factory_name == undefined || $scope.compfactoryUpdate.comp_factory_name == '') {
 	            flag = false;
 	        }
-	        if ($scope.projectUpdate.contacts_name == undefined || $scope.projectUpdate.contacts_name == '') {
+	        if ($scope.compfactoryUpdate.contacts_name == undefined || $scope.compfactoryUpdate.contacts_name == '') {
 	            flag = false;
 	        }
 	        return flag;
@@ -253,22 +252,21 @@ coldWeb.controller('projectManage', function ($rootScope, $scope, $state, $cooki
 		        if (checkInputForUpdate()){
 		            $http({
 		            	method : 'GET',
-		            	url:'/i/project/updateProject',
+		            	url:'/i/compfactory/updateCompFactory',
 		    			params:{
-		    				'pro_id': $scope.projectUpdate.pro_id,
-		    				'pro_name': $scope.projectUpdate.pro_name,
-		    				'contacts_name': $scope.projectUpdate.contacts_name,
-		    				'contacts_tel' : $scope.projectUpdate.contacts_tel,
-		    				'contacts_phone' : $scope.projectUpdate.contacts_phone,
-		    				'pr_id': $scope.projectUpdate.pr_id,
-		    				'ci_id': $scope.projectUpdate.ci_id,
-		    				'address' : $scope.projectUpdate.address,
-		    				'details' : $scope.projectUpdate.details
+		    				'comp_factory_id': $scope.compfactoryUpdate.comp_factory_id,
+		    				'comp_factory_name': $scope.compfactoryUpdate.comp_factory_name,
+		    				'contacts_name': $scope.compfactoryUpdate.contacts_name,
+		    				'contacts_tel' : $scope.compfactoryUpdate.contacts_tel,
+		    				'contacts_phone' : $scope.compfactoryUpdate.contacts_phone,
+		    				'pr_id': $scope.compfactoryUpdate.pr_id,
+		    				'ci_id': $scope.compfactoryUpdate.ci_id,
+		    				'address' : $scope.compfactoryUpdate.address
 		    			}
 		    		}).then(function (resp) {
 		    			 alert("更新成功");
-		                 $scope.getProjects();
-		                 $("#updateProject").modal("hide"); 
+		                 $scope.getCompFactorys();
+		                 $("#updateCompfactory").modal("hide"); 
 		            }, function (resp) {
 		                console.log('Error status: ' + resp.status);
 		            }, function (evt) {
@@ -276,7 +274,7 @@ coldWeb.controller('projectManage', function ($rootScope, $scope, $state, $cooki
 		                console.log('progress: ' + progressPercentage + '% ' + evt.name);
 		            });
 		          } else {
-		            alert("请填写项目名称和联系人!");
+		            alert("请填写构件厂名称和联系人!");
 		        }
 		    }
 });
