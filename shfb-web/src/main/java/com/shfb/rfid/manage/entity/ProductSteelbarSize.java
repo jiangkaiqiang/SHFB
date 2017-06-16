@@ -9,15 +9,15 @@ public class ProductSteelbarSize {
 
     private Integer mesh_size_pass;
 
-    private Double mesh_size_mark;
+    private String mesh_size_mark;
 
     private Integer skeleton_length_pass;
 
-    private Double skeleton_length_mark;
+    private String skeleton_length_mark;
 
     private Integer skeleton_width_high_pass;
 
-    private Double skeleton_width_high_mark;
+    private String skeleton_width_high_mark;
 
     private Integer force_bet_spacing_pass;
 
@@ -79,11 +79,11 @@ public class ProductSteelbarSize {
         this.mesh_size_pass = mesh_size_pass;
     }
 
-    public Double getMesh_size_mark() {
+    public String getMesh_size_mark() {
         return mesh_size_mark;
     }
 
-    public void setMesh_size_mark(Double mesh_size_mark) {
+    public void setMesh_size_mark(String mesh_size_mark) {
         this.mesh_size_mark = mesh_size_mark;
     }
 
@@ -95,11 +95,11 @@ public class ProductSteelbarSize {
         this.skeleton_length_pass = skeleton_length_pass;
     }
 
-    public Double getSkeleton_length_mark() {
+    public String getSkeleton_length_mark() {
         return skeleton_length_mark;
     }
 
-    public void setSkeleton_length_mark(Double skeleton_length_mark) {
+    public void setSkeleton_length_mark(String skeleton_length_mark) {
         this.skeleton_length_mark = skeleton_length_mark;
     }
 
@@ -111,11 +111,11 @@ public class ProductSteelbarSize {
         this.skeleton_width_high_pass = skeleton_width_high_pass;
     }
 
-    public Double getSkeleton_width_high_mark() {
+    public String getSkeleton_width_high_mark() {
         return skeleton_width_high_mark;
     }
 
-    public void setSkeleton_width_high_mark(Double skeleton_width_high_mark) {
+    public void setSkeleton_width_high_mark(String skeleton_width_high_mark) {
         this.skeleton_width_high_mark = skeleton_width_high_mark;
     }
 

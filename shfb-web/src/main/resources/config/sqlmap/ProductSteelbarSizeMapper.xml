@@ -6,11 +6,11 @@
     <result column="mesh_length_width_pass" property="mesh_length_width_pass" jdbcType="INTEGER" />
     <result column="mesh_length_width_mark" property="mesh_length_width_mark" jdbcType="VARCHAR" />
     <result column="mesh_size_pass" property="mesh_size_pass" jdbcType="INTEGER" />
-    <result column="mesh_size_mark" property="mesh_size_mark" jdbcType="DOUBLE" />
+    <result column="mesh_size_mark" property="mesh_size_mark" jdbcType="VARCHAR" />
     <result column="skeleton_length_pass" property="skeleton_length_pass" jdbcType="INTEGER" />
-    <result column="skeleton_length_mark" property="skeleton_length_mark" jdbcType="DOUBLE" />
+    <result column="skeleton_length_mark" property="skeleton_length_mark" jdbcType="VARCHAR" />
     <result column="skeleton_width_high_pass" property="skeleton_width_high_pass" jdbcType="INTEGER" />
-    <result column="skeleton_width_high_mark" property="skeleton_width_high_mark" jdbcType="DOUBLE" />
+    <result column="skeleton_width_high_mark" property="skeleton_width_high_mark" jdbcType="VARCHAR" />
     <result column="force_bet_spacing_pass" property="force_bet_spacing_pass" jdbcType="INTEGER" />
     <result column="force_bet_spacing_mark" property="force_bet_spacing_mark" jdbcType="VARCHAR" />
     <result column="force_row_spacing_pass" property="force_row_spacing_pass" jdbcType="INTEGER" />
@@ -58,8 +58,8 @@
       component_id, picture)
     values (#{product_steelbar_size_id,jdbcType=INTEGER}, #{mesh_length_width_pass,jdbcType=INTEGER}, 
       #{mesh_length_width_mark,jdbcType=VARCHAR}, #{mesh_size_pass,jdbcType=INTEGER}, 
-      #{mesh_size_mark,jdbcType=DOUBLE}, #{skeleton_length_pass,jdbcType=INTEGER}, #{skeleton_length_mark,jdbcType=DOUBLE}, 
-      #{skeleton_width_high_pass,jdbcType=INTEGER}, #{skeleton_width_high_mark,jdbcType=DOUBLE}, 
+      #{mesh_size_mark,jdbcType=VARCHAR}, #{skeleton_length_pass,jdbcType=INTEGER}, #{skeleton_length_mark,jdbcType=VARCHAR}, 
+      #{skeleton_width_high_pass,jdbcType=INTEGER}, #{skeleton_width_high_mark,jdbcType=VARCHAR}, 
       #{force_bet_spacing_pass,jdbcType=INTEGER}, #{force_bet_spacing_mark,jdbcType=VARCHAR}, 
       #{force_row_spacing_pass,jdbcType=INTEGER}, #{force_row_spacing_mark,jdbcType=VARCHAR}, 
       #{force_column_beam_pass,jdbcType=INTEGER}, #{force_column_beam_mark,jdbcType=VARCHAR}, 
@@ -155,19 +155,19 @@
         #{mesh_size_pass,jdbcType=INTEGER},
       </if>
       <if test="mesh_size_mark != null" >
-        #{mesh_size_mark,jdbcType=DOUBLE},
+        #{mesh_size_mark,jdbcType=VARCHAR},
       </if>
       <if test="skeleton_length_pass != null" >
         #{skeleton_length_pass,jdbcType=INTEGER},
       </if>
       <if test="skeleton_length_mark != null" >
-        #{skeleton_length_mark,jdbcType=DOUBLE},
+        #{skeleton_length_mark,jdbcType=VARCHAR},
       </if>
       <if test="skeleton_width_high_pass != null" >
         #{skeleton_width_high_pass,jdbcType=INTEGER},
       </if>
       <if test="skeleton_width_high_mark != null" >
-        #{skeleton_width_high_mark,jdbcType=DOUBLE},
+        #{skeleton_width_high_mark,jdbcType=VARCHAR},
       </if>
       <if test="force_bet_spacing_pass != null" >
         #{force_bet_spacing_pass,jdbcType=INTEGER},
@@ -226,19 +226,19 @@
         mesh_size_pass = #{mesh_size_pass,jdbcType=INTEGER},
       </if>
       <if test="mesh_size_mark != null" >
-        mesh_size_mark = #{mesh_size_mark,jdbcType=DOUBLE},
+        mesh_size_mark = #{mesh_size_mark,jdbcType=VARCHAR},
       </if>
       <if test="skeleton_length_pass != null" >
         skeleton_length_pass = #{skeleton_length_pass,jdbcType=INTEGER},
       </if>
       <if test="skeleton_length_mark != null" >
-        skeleton_length_mark = #{skeleton_length_mark,jdbcType=DOUBLE},
+        skeleton_length_mark = #{skeleton_length_mark,jdbcType=VARCHAR},
       </if>
       <if test="skeleton_width_high_pass != null" >
         skeleton_width_high_pass = #{skeleton_width_high_pass,jdbcType=INTEGER},
       </if>
       <if test="skeleton_width_high_mark != null" >
-        skeleton_width_high_mark = #{skeleton_width_high_mark,jdbcType=DOUBLE},
+        skeleton_width_high_mark = #{skeleton_width_high_mark,jdbcType=VARCHAR},
       </if>
       <if test="force_bet_spacing_pass != null" >
         force_bet_spacing_pass = #{force_bet_spacing_pass,jdbcType=INTEGER},
@@ -290,11 +290,11 @@
     set mesh_length_width_pass = #{mesh_length_width_pass,jdbcType=INTEGER},
       mesh_length_width_mark = #{mesh_length_width_mark,jdbcType=VARCHAR},
       mesh_size_pass = #{mesh_size_pass,jdbcType=INTEGER},
-      mesh_size_mark = #{mesh_size_mark,jdbcType=DOUBLE},
+      mesh_size_mark = #{mesh_size_mark,jdbcType=VARCHAR},
       skeleton_length_pass = #{skeleton_length_pass,jdbcType=INTEGER},
-      skeleton_length_mark = #{skeleton_length_mark,jdbcType=DOUBLE},
+      skeleton_length_mark = #{skeleton_length_mark,jdbcType=VARCHAR},
       skeleton_width_high_pass = #{skeleton_width_high_pass,jdbcType=INTEGER},
-      skeleton_width_high_mark = #{skeleton_width_high_mark,jdbcType=DOUBLE},
+      skeleton_width_high_mark = #{skeleton_width_high_mark,jdbcType=VARCHAR},
       force_bet_spacing_pass = #{force_bet_spacing_pass,jdbcType=INTEGER},
       force_bet_spacing_mark = #{force_bet_spacing_mark,jdbcType=VARCHAR},
       force_row_spacing_pass = #{force_row_spacing_pass,jdbcType=INTEGER},
@@ -311,4 +311,12 @@
       picture = #{picture,jdbcType=VARCHAR}
     where product_steelbar_size_id = #{product_steelbar_size_id,jdbcType=INTEGER}
   </update>
+  
+  <select id="findByComponentId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from product_steelbar_size
+    where component_id = #{component_id,jdbcType=INTEGER}
+  </select>
+  
 </mapper>

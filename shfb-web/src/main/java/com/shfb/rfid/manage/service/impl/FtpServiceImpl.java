@@ -1,6 +1,9 @@
 package com.shfb.rfid.manage.service.impl;
 
 import java.io.IOException;
+import java.net.URI;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.util.List;
 
 import org.apache.commons.net.ftp.FTPClient;
@@ -47,7 +50,7 @@ public class FtpServiceImpl implements FtpService {
 			}
 		}
 		
-		result = ftp.storeFile(uploadFileEntity.getName(), uploadFileEntity.getMultipartFile().getInputStream());
+		result = ftp.storeFile(new String(uploadFileEntity.getName().getBytes("GBK"), "iso-8859-1"), uploadFileEntity.getMultipartFile().getInputStream());
 		if (!result) {
 			log.error("File upload failed, upload dir:"+uploadFileEntity.getRemoteNewDir()+
 					", file name:"+uploadFileEntity.getName()+
@@ -81,7 +84,7 @@ public class FtpServiceImpl implements FtpService {
 		try {
 			connectFtp();
 			for (UploadFileEntity uploadFile : uploadFileList) {
-				upload(uploadFile);
+				result = upload(uploadFile);
 			}
 			closeFtp();
 		} catch (IOException e) {

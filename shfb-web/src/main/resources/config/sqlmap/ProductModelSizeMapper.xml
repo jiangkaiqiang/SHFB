@@ -330,4 +330,11 @@
       picture = #{picture,jdbcType=VARCHAR}
     where product_model_size_id = #{product_model_size_id,jdbcType=INTEGER}
   </update>
+  
+   <select id="findByComponentId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from product_model_size
+    where component_id = #{component_id,jdbcType=INTEGER}
+  </select>
 </mapper>

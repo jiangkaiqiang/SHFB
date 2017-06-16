@@ -17,7 +17,7 @@ public class ProductEmbeddedParts {
 
     private Integer embedded_tube_size_pass;
 
-    private Double embedded_tube_size_mark;
+    private String embedded_tube_size_mark;
 
     private Integer door_centerline_pass;
 
@@ -25,7 +25,7 @@ public class ProductEmbeddedParts {
 
     private Integer door_width_high_pass;
 
-    private Double door_width_high_mark;
+    private String door_width_high_mark;
 
     private Integer insert_steel_centerline_pass;
 
@@ -33,7 +33,7 @@ public class ProductEmbeddedParts {
 
     private Integer insert_steel_length_pass;
 
-    private Double insert_steel_length_mark;
+    private String insert_steel_length_mark;
 
     private Integer crane_ring_centerline_pass;
 
@@ -41,7 +41,7 @@ public class ProductEmbeddedParts {
 
     private Integer crane_ring_length_pass;
 
-    private Double crane_ring_length_mark;
+    private String crane_ring_length_mark;
 
     private Integer reserved_hole_centerline_pass;
 
@@ -49,7 +49,7 @@ public class ProductEmbeddedParts {
 
     private Integer reserved_hole_size_pass;
 
-    private Double reserved_hole_size_mark;
+    private String reserved_hole_size_mark;
 
     private Integer bolt_centerline_pass;
 
@@ -135,11 +135,11 @@ public class ProductEmbeddedParts {
         this.embedded_tube_size_pass = embedded_tube_size_pass;
     }
 
-    public Double getEmbedded_tube_size_mark() {
+    public String getEmbedded_tube_size_mark() {
         return embedded_tube_size_mark;
     }
 
-    public void setEmbedded_tube_size_mark(Double embedded_tube_size_mark) {
+    public void setEmbedded_tube_size_mark(String embedded_tube_size_mark) {
         this.embedded_tube_size_mark = embedded_tube_size_mark;
     }
 
@@ -167,11 +167,11 @@ public class ProductEmbeddedParts {
         this.door_width_high_pass = door_width_high_pass;
     }
 
-    public Double getDoor_width_high_mark() {
+    public String getDoor_width_high_mark() {
         return door_width_high_mark;
     }
 
-    public void setDoor_width_high_mark(Double door_width_high_mark) {
+    public void setDoor_width_high_mark(String door_width_high_mark) {
         this.door_width_high_mark = door_width_high_mark;
     }
 
@@ -199,11 +199,11 @@ public class ProductEmbeddedParts {
         this.insert_steel_length_pass = insert_steel_length_pass;
     }
 
-    public Double getInsert_steel_length_mark() {
+    public String getInsert_steel_length_mark() {
         return insert_steel_length_mark;
     }
 
-    public void setInsert_steel_length_mark(Double insert_steel_length_mark) {
+    public void setInsert_steel_length_mark(String insert_steel_length_mark) {
         this.insert_steel_length_mark = insert_steel_length_mark;
     }
 
@@ -231,11 +231,11 @@ public class ProductEmbeddedParts {
         this.crane_ring_length_pass = crane_ring_length_pass;
     }
 
-    public Double getCrane_ring_length_mark() {
+    public String getCrane_ring_length_mark() {
         return crane_ring_length_mark;
     }
 
-    public void setCrane_ring_length_mark(Double crane_ring_length_mark) {
+    public void setCrane_ring_length_mark(String crane_ring_length_mark) {
         this.crane_ring_length_mark = crane_ring_length_mark;
     }
 
@@ -263,11 +263,11 @@ public class ProductEmbeddedParts {
         this.reserved_hole_size_pass = reserved_hole_size_pass;
     }
 
-    public Double getReserved_hole_size_mark() {
+    public String getReserved_hole_size_mark() {
         return reserved_hole_size_mark;
     }
 
-    public void setReserved_hole_size_mark(Double reserved_hole_size_mark) {
+    public void setReserved_hole_size_mark(String reserved_hole_size_mark) {
         this.reserved_hole_size_mark = reserved_hole_size_mark;
     }
 

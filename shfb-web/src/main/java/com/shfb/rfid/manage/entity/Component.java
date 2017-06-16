@@ -1,7 +1,5 @@
 package com.shfb.rfid.manage.entity;
 
-import java.util.Date;
-
 public class Component {
 	private Integer component_id;
 
@@ -17,7 +15,7 @@ public class Component {
 
 	private Integer expedit_status;
 
-	private Date expedit_date;
+	private String expedit_date;
 
 	private Integer component_status_id;
 
@@ -29,13 +27,13 @@ public class Component {
 
 	private String floor;
 
-	private Date plan_begin_date;
+	private String plan_begin_date;
 
-	private Date plan_end_date;
+	private String plan_end_date;
 
-	private Date real_begin_date;
+	private String real_begin_date;
 
-	private Date real_end_date;
+	private String real_end_date;
 
 	private String order_num;
 
@@ -43,14 +41,22 @@ public class Component {
 
 	private Integer order_user_id;
 
-	private Date order_time;
+	private String order_time;
 
-	private Date product_plan_begin_date;
+	private String product_plan_begin_date;
 
-	private Date product_plan_end_date;
+	private String product_plan_end_date;
 
 	private String drawing;
+	
+	private String picture_comp_make;
 
+	private String picture_product_accept;
+	
+	private String picture_receipt;
+	
+	private String picture_install;
+	
 	public Integer getComponent_id() {
 		return component_id;
 	}
@@ -111,11 +117,11 @@ public class Component {
 		this.expedit_status = expedit_status;
 	}
 
-	public Date getExpedit_date() {
+	public String getExpedit_date() {
 		return expedit_date;
 	}
 
-	public void setExpedit_date(Date expedit_date) {
+	public void setExpedit_date(String expedit_date) {
 		this.expedit_date = expedit_date;
 	}
 
@@ -159,35 +165,35 @@ public class Component {
 		this.floor = floor == null ? null : floor.trim();
 	}
 
-	public Date getPlan_begin_date() {
+	public String getPlan_begin_date() {
 		return plan_begin_date;
 	}
 
-	public void setPlan_begin_date(Date plan_begin_date) {
+	public void setPlan_begin_date(String plan_begin_date) {
 		this.plan_begin_date = plan_begin_date;
 	}
 
-	public Date getPlan_end_date() {
+	public String getPlan_end_date() {
 		return plan_end_date;
 	}
 
-	public void setPlan_end_date(Date plan_end_date) {
+	public void setPlan_end_date(String plan_end_date) {
 		this.plan_end_date = plan_end_date;
 	}
 
-	public Date getReal_begin_date() {
+	public String getReal_begin_date() {
 		return real_begin_date;
 	}
 
-	public void setReal_begin_date(Date real_begin_date) {
+	public void setReal_begin_date(String real_begin_date) {
 		this.real_begin_date = real_begin_date;
 	}
 
-	public Date getReal_end_date() {
+	public String getReal_end_date() {
 		return real_end_date;
 	}
 
-	public void setReal_end_date(Date real_end_date) {
+	public void setReal_end_date(String real_end_date) {
 		this.real_end_date = real_end_date;
 	}
 
@@ -215,35 +221,69 @@ public class Component {
 		this.order_user_id = order_user_id;
 	}
 
-	public Date getOrder_time() {
+	public String getOrder_time() {
 		return order_time;
 	}
 
-	public void setOrder_time(Date order_time) {
+	public void setOrder_time(String order_time) {
 		this.order_time = order_time;
 	}
 
-	public Date getProduct_plan_begin_date() {
+	public String getProduct_plan_begin_date() {
 		return product_plan_begin_date;
 	}
 
-	public void setProduct_plan_begin_date(Date product_plan_begin_date) {
+	public void setProduct_plan_begin_date(String product_plan_begin_date) {
 		this.product_plan_begin_date = product_plan_begin_date;
 	}
 
-	public Date getProduct_plan_end_date() {
+	public String getProduct_plan_end_date() {
 		return product_plan_end_date;
 	}
 
-	public void setProduct_plan_end_date(Date product_plan_end_date) {
+	public void setProduct_plan_end_date(String product_plan_end_date) {
 		this.product_plan_end_date = product_plan_end_date;
 	}
 
-	public String getdrawing() {
+	public String getDrawing() {
 		return drawing;
 	}
 
-	public void setdrawing(String drawing) {
-		this.drawing = drawing == null ? null : drawing.trim();
+	public void setDrawing(String drawing) {
+		this.drawing = drawing;
 	}
+
+	public String getPicture_comp_make() {
+		return picture_comp_make;
+	}
+
+	public void setPicture_comp_make(String picture_comp_make) {
+		this.picture_comp_make = picture_comp_make;
+	}
+
+	public String getPicture_product_accept() {
+		return picture_product_accept;
+	}
+
+	public void setPicture_product_accept(String picture_product_accept) {
+		this.picture_product_accept = picture_product_accept;
+	}
+
+	public String getPicture_receipt() {
+		return picture_receipt;
+	}
+
+	public void setPicture_receipt(String picture_receipt) {
+		this.picture_receipt = picture_receipt;
+	}
+
+	public String getPicture_install() {
+		return picture_install;
+	}
+
+	public void setPicture_install(String picture_install) {
+		this.picture_install = picture_install;
+	}
+	
+	
 }

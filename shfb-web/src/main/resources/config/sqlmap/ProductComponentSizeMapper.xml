@@ -878,4 +878,12 @@
       picture = #{picture,jdbcType=VARCHAR}
     where product_component_size_id = #{product_component_size_id,jdbcType=INTEGER}
   </update>
+  
+  <select id="findByComponentId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from product_component_size
+    where component_id = #{component_id,jdbcType=INTEGER}
+  </select>
+  
 </mapper>

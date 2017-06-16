@@ -45,7 +45,7 @@ public class ProductCuring {
 
     private String picture;
 
-    private Integer componentid;
+    private Integer component_id;
 
     public Integer getProduct_curing_id() {
         return product_curing_id;
@@ -223,11 +223,11 @@ public class ProductCuring {
         this.picture = picture == null ? null : picture.trim();
     }
 
-    public Integer getComponentid() {
-        return componentid;
+    public Integer getComponent_id() {
+        return component_id;
     }
 
-    public void setComponentid(Integer componentid) {
-        this.componentid = componentid;
+    public void setComponent_id(Integer component_id) {
+        this.component_id = component_id;
     }
 }

@@ -151,4 +151,7 @@
 		</where>
 		order by `pro_id` asc
 	</select>
+	<select id="findProjectNames"  resultType="map">
+		SELECT pro_id, pro_name FROM project
+	</select>
 </mapper>

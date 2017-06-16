@@ -6,27 +6,27 @@
     <result column="embedded_steelbar_centerline_pass" property="embedded_steelbar_centerline_pass" jdbcType="INTEGER" />
     <result column="embedded_steelbar_centerline_mark" property="embedded_steelbar_centerline_mark" jdbcType="VARCHAR" />
     <result column="embedded_steelbar_smooth_pass" property="embedded_steelbar_smooth_pass" jdbcType="INTEGER" />
-    <result column="embedded_steelbar_smooth_mark" property="embedded_steelbar_smooth_mark" jdbcType="VARCHAR" />
+    <result column="embedded_steelbar_smooth_mark" property="embedded_steelbar_smooth_mark" jdbcType="VARCHAR" />
     <result column="embedded_tube_centerline_pass" property="embedded_tube_centerline_pass" jdbcType="INTEGER" />
     <result column="embedded_tube_centerline_mark" property="embedded_tube_centerline_mark" jdbcType="VARCHAR" />
     <result column="embedded_tube_size_pass" property="embedded_tube_size_pass" jdbcType="INTEGER" />
-    <result column="embedded_tube_size_mark" property="embedded_tube_size_mark" jdbcType="DOUBLE" />
+    <result column="embedded_tube_size_mark" property="embedded_tube_size_mark" jdbcType="VARCHAR" />
     <result column="door_centerline_pass" property="door_centerline_pass" jdbcType="INTEGER" />
     <result column="door_centerline_mark" property="door_centerline_mark" jdbcType="VARCHAR" />
     <result column="door_width_high_pass" property="door_width_high_pass" jdbcType="INTEGER" />
-    <result column="door_width_high_mark" property="door_width_high_mark" jdbcType="DOUBLE" />
+    <result column="door_width_high_mark" property="door_width_high_mark" jdbcType="VARCHAR" />
     <result column="insert_steel_centerline_pass" property="insert_steel_centerline_pass" jdbcType="INTEGER" />
     <result column="insert_steel_ceterline_mark" property="insert_steel_ceterline_mark" jdbcType="VARCHAR" />
     <result column="insert_steel_length_pass" property="insert_steel_length_pass" jdbcType="INTEGER" />
-    <result column="insert_steel_length_mark" property="insert_steel_length_mark" jdbcType="DOUBLE" />
+    <result column="insert_steel_length_mark" property="insert_steel_length_mark" jdbcType="VARCHAR" />
     <result column="crane_ring_centerline_pass" property="crane_ring_centerline_pass" jdbcType="INTEGER" />
     <result column="crane_ring_centerline_mark" property="crane_ring_centerline_mark" jdbcType="VARCHAR" />
     <result column="crane_ring_length_pass" property="crane_ring_length_pass" jdbcType="INTEGER" />
-    <result column="crane_ring_length_mark" property="crane_ring_length_mark" jdbcType="DOUBLE" />
+    <result column="crane_ring_length_mark" property="crane_ring_length_mark" jdbcType="VARCHAR" />
     <result column="reserved_hole_centerline_pass" property="reserved_hole_centerline_pass" jdbcType="INTEGER" />
     <result column="reserved_hole_centerline_mark" property="reserved_hole_centerline_mark" jdbcType="VARCHAR" />
     <result column="reserved_hole_size_pass" property="reserved_hole_size_pass" jdbcType="INTEGER" />
-    <result column="reserved_hole_size_mark" property="reserved_hole_size_mark" jdbcType="DOUBLE" />
+    <result column="reserved_hole_size_mark" property="reserved_hole_size_mark" jdbcType="VARCHAR" />
     <result column="bolt_centerline_pass" property="bolt_centerline_pass" jdbcType="INTEGER" />
     <result column="bolt_centerline_mark" property="bolt_centerline_mark" jdbcType="VARCHAR" />
     <result column="bolt_length_pass" property="bolt_length_pass" jdbcType="INTEGER" />
@@ -83,15 +83,15 @@
       #{embedded_steelbar_centerline_mark,jdbcType=VARCHAR}, #{embedded_steelbar_smooth_pass,jdbcType=INTEGER}, 
       #{embedded_steelbar_smooth_mark,jdbcType=VARCHAR}, #{embedded_tube_centerline_pass,jdbcType=INTEGER}, 
       #{embedded_tube_centerline_mark,jdbcType=VARCHAR}, #{embedded_tube_size_pass,jdbcType=INTEGER}, 
-      #{embedded_tube_size_mark,jdbcType=DOUBLE}, #{door_centerline_pass,jdbcType=INTEGER}, 
+      #{embedded_tube_size_mark,jdbcType=VARCHAR}, #{door_centerline_pass,jdbcType=INTEGER}, 
       #{door_centerline_mark,jdbcType=VARCHAR}, #{door_width_high_pass,jdbcType=INTEGER}, 
-      #{door_width_high_mark,jdbcType=DOUBLE}, #{insert_steel_centerline_pass,jdbcType=INTEGER}, 
+      #{door_width_high_mark,jdbcType=VARCHAR}, #{insert_steel_centerline_pass,jdbcType=INTEGER}, 
       #{insert_steel_ceterline_mark,jdbcType=VARCHAR}, #{insert_steel_length_pass,jdbcType=INTEGER}, 
-      #{insert_steel_length_mark,jdbcType=DOUBLE}, #{crane_ring_centerline_pass,jdbcType=INTEGER}, 
+      #{insert_steel_length_mark,jdbcType=VARCHAR}, #{crane_ring_centerline_pass,jdbcType=INTEGER}, 
       #{crane_ring_centerline_mark,jdbcType=VARCHAR}, #{crane_ring_length_pass,jdbcType=INTEGER}, 
-      #{crane_ring_length_mark,jdbcType=DOUBLE}, #{reserved_hole_centerline_pass,jdbcType=INTEGER}, 
+      #{crane_ring_length_mark,jdbcType=VARCHAR}, #{reserved_hole_centerline_pass,jdbcType=INTEGER}, 
       #{reserved_hole_centerline_mark,jdbcType=VARCHAR}, #{reserved_hole_size_pass,jdbcType=INTEGER}, 
-      #{reserved_hole_size_mark,jdbcType=DOUBLE}, #{bolt_centerline_pass,jdbcType=INTEGER}, 
+      #{reserved_hole_size_mark,jdbcType=VARCHAR}, #{bolt_centerline_pass,jdbcType=INTEGER}, 
       #{bolt_centerline_mark,jdbcType=VARCHAR}, #{bolt_length_pass,jdbcType=INTEGER}, 
       #{bolt_length_mark,jdbcType=VARCHAR}, #{sleeve_centerline_pass,jdbcType=INTEGER}, 
       #{sleeve_centerline_mark,jdbcType=VARCHAR}, #{sleeve_smooth_pass,jdbcType=INTEGER}, 
@@ -233,7 +233,7 @@
         #{embedded_tube_size_pass,jdbcType=INTEGER},
       </if>
       <if test="embedded_tube_size_mark != null" >
-        #{embedded_tube_size_mark,jdbcType=DOUBLE},
+        #{embedded_tube_size_mark,jdbcType=VARCHAR},
       </if>
       <if test="door_centerline_pass != null" >
         #{door_centerline_pass,jdbcType=INTEGER},
@@ -245,7 +245,7 @@
         #{door_width_high_pass,jdbcType=INTEGER},
       </if>
       <if test="door_width_high_mark != null" >
-        #{door_width_high_mark,jdbcType=DOUBLE},
+        #{door_width_high_mark,jdbcType=VARCHAR},
       </if>
       <if test="insert_steel_centerline_pass != null" >
         #{insert_steel_centerline_pass,jdbcType=INTEGER},
@@ -257,7 +257,7 @@
         #{insert_steel_length_pass,jdbcType=INTEGER},
       </if>
       <if test="insert_steel_length_mark != null" >
-        #{insert_steel_length_mark,jdbcType=DOUBLE},
+        #{insert_steel_length_mark,jdbcType=VARCHAR},
       </if>
       <if test="crane_ring_centerline_pass != null" >
         #{crane_ring_centerline_pass,jdbcType=INTEGER},
@@ -269,7 +269,7 @@
         #{crane_ring_length_pass,jdbcType=INTEGER},
       </if>
       <if test="crane_ring_length_mark != null" >
-        #{crane_ring_length_mark,jdbcType=DOUBLE},
+        #{crane_ring_length_mark,jdbcType=VARCHAR},
       </if>
       <if test="reserved_hole_centerline_pass != null" >
         #{reserved_hole_centerline_pass,jdbcType=INTEGER},
@@ -281,7 +281,7 @@
         #{reserved_hole_size_pass,jdbcType=INTEGER},
       </if>
       <if test="reserved_hole_size_mark != null" >
-        #{reserved_hole_size_mark,jdbcType=DOUBLE},
+        #{reserved_hole_size_mark,jdbcType=VARCHAR},
       </if>
       <if test="bolt_centerline_pass != null" >
         #{bolt_centerline_pass,jdbcType=INTEGER},
@@ -340,7 +340,7 @@
         embedded_tube_size_pass = #{embedded_tube_size_pass,jdbcType=INTEGER},
       </if>
       <if test="embedded_tube_size_mark != null" >
-        embedded_tube_size_mark = #{embedded_tube_size_mark,jdbcType=DOUBLE},
+        embedded_tube_size_mark = #{embedded_tube_size_mark,jdbcType=VARCHAR},
       </if>
       <if test="door_centerline_pass != null" >
         door_centerline_pass = #{door_centerline_pass,jdbcType=INTEGER},
@@ -352,7 +352,7 @@
         door_width_high_pass = #{door_width_high_pass,jdbcType=INTEGER},
       </if>
       <if test="door_width_high_mark != null" >
-        door_width_high_mark = #{door_width_high_mark,jdbcType=DOUBLE},
+        door_width_high_mark = #{door_width_high_mark,jdbcType=VARCHAR},
       </if>
       <if test="insert_steel_centerline_pass != null" >
         insert_steel_centerline_pass = #{insert_steel_centerline_pass,jdbcType=INTEGER},
@@ -364,7 +364,7 @@
         insert_steel_length_pass = #{insert_steel_length_pass,jdbcType=INTEGER},
       </if>
       <if test="insert_steel_length_mark != null" >
-        insert_steel_length_mark = #{insert_steel_length_mark,jdbcType=DOUBLE},
+        insert_steel_length_mark = #{insert_steel_length_mark,jdbcType=VARCHAR},
       </if>
       <if test="crane_ring_centerline_pass != null" >
         crane_ring_centerline_pass = #{crane_ring_centerline_pass,jdbcType=INTEGER},
@@ -376,7 +376,7 @@
         crane_ring_length_pass = #{crane_ring_length_pass,jdbcType=INTEGER},
       </if>
       <if test="crane_ring_length_mark != null" >
-        crane_ring_length_mark = #{crane_ring_length_mark,jdbcType=DOUBLE},
+        crane_ring_length_mark = #{crane_ring_length_mark,jdbcType=VARCHAR},
       </if>
       <if test="reserved_hole_centerline_pass != null" >
         reserved_hole_centerline_pass = #{reserved_hole_centerline_pass,jdbcType=INTEGER},
@@ -388,7 +388,7 @@
         reserved_hole_size_pass = #{reserved_hole_size_pass,jdbcType=INTEGER},
       </if>
       <if test="reserved_hole_size_mark != null" >
-        reserved_hole_size_mark = #{reserved_hole_size_mark,jdbcType=DOUBLE},
+        reserved_hole_size_mark = #{reserved_hole_size_mark,jdbcType=VARCHAR},
       </if>
       <if test="bolt_centerline_pass != null" >
         bolt_centerline_pass = #{bolt_centerline_pass,jdbcType=INTEGER},
@@ -432,23 +432,23 @@
       embedded_tube_centerline_pass = #{embedded_tube_centerline_pass,jdbcType=INTEGER},
       embedded_tube_centerline_mark = #{embedded_tube_centerline_mark,jdbcType=VARCHAR},
       embedded_tube_size_pass = #{embedded_tube_size_pass,jdbcType=INTEGER},
-      embedded_tube_size_mark = #{embedded_tube_size_mark,jdbcType=DOUBLE},
+      embedded_tube_size_mark = #{embedded_tube_size_mark,jdbcType=VARCHAR},
       door_centerline_pass = #{door_centerline_pass,jdbcType=INTEGER},
       door_centerline_mark = #{door_centerline_mark,jdbcType=VARCHAR},
       door_width_high_pass = #{door_width_high_pass,jdbcType=INTEGER},
-      door_width_high_mark = #{door_width_high_mark,jdbcType=DOUBLE},
+      door_width_high_mark = #{door_width_high_mark,jdbcType=VARCHAR},
       insert_steel_centerline_pass = #{insert_steel_centerline_pass,jdbcType=INTEGER},
       insert_steel_ceterline_mark = #{insert_steel_ceterline_mark,jdbcType=VARCHAR},
       insert_steel_length_pass = #{insert_steel_length_pass,jdbcType=INTEGER},
-      insert_steel_length_mark = #{insert_steel_length_mark,jdbcType=DOUBLE},
+      insert_steel_length_mark = #{insert_steel_length_mark,jdbcType=VARCHAR},
       crane_ring_centerline_pass = #{crane_ring_centerline_pass,jdbcType=INTEGER},
       crane_ring_centerline_mark = #{crane_ring_centerline_mark,jdbcType=VARCHAR},
       crane_ring_length_pass = #{crane_ring_length_pass,jdbcType=INTEGER},
-      crane_ring_length_mark = #{crane_ring_length_mark,jdbcType=DOUBLE},
+      crane_ring_length_mark = #{crane_ring_length_mark,jdbcType=VARCHAR},
       reserved_hole_centerline_pass = #{reserved_hole_centerline_pass,jdbcType=INTEGER},
       reserved_hole_centerline_mark = #{reserved_hole_centerline_mark,jdbcType=VARCHAR},
       reserved_hole_size_pass = #{reserved_hole_size_pass,jdbcType=INTEGER},
-      reserved_hole_size_mark = #{reserved_hole_size_mark,jdbcType=DOUBLE},
+      reserved_hole_size_mark = #{reserved_hole_size_mark,jdbcType=VARCHAR},
       bolt_centerline_pass = #{bolt_centerline_pass,jdbcType=INTEGER},
       bolt_centerline_mark = #{bolt_centerline_mark,jdbcType=VARCHAR},
       bolt_length_pass = #{bolt_length_pass,jdbcType=INTEGER},
@@ -461,4 +461,12 @@
       picture = #{picture,jdbcType=VARCHAR}
     where product_embedded_parts_id = #{product_embedded_parts_id,jdbcType=INTEGER}
   </update>
+  
+  <select id="findByComponentId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from product_embedded_parts
+    where component_id = #{component_id,jdbcType=INTEGER}
+  </select>
+  
 </mapper>

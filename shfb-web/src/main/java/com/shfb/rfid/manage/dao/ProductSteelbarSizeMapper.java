@@ -14,4 +14,6 @@ public interface ProductSteelbarSizeMapper {
     int updateByPrimaryKeySelective(ProductSteelbarSize record);
 
     int updateByPrimaryKey(ProductSteelbarSize record);
+    
+    ProductSteelbarSize findByComponentId(Integer component_id);
 }

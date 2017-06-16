@@ -14,4 +14,6 @@ public interface ProductComponentSizeMapper {
     int updateByPrimaryKeySelective(ProductComponentSize record);
 
     int updateByPrimaryKey(ProductComponentSize record);
+    
+    ProductComponentSize findByComponentId(Integer component_id);
 }

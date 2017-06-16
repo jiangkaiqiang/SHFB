@@ -9,23 +9,27 @@
     <result column="component_size" property="component_size" jdbcType="VARCHAR" />
     <result column="bind_status" property="bind_status" jdbcType="INTEGER" />
     <result column="expedit_status" property="expedit_status" jdbcType="INTEGER" />
-    <result column="expedit_date" property="expedit_date" jdbcType="DATE" />
+    <result column="expedit_date" property="expedit_date" jdbcType="VARCHAR" />
     <result column="component_status_id" property="component_status_id" jdbcType="INTEGER" />
     <result column="check_res" property="check_res" jdbcType="INTEGER" />
     <result column="single_name" property="single_name" jdbcType="VARCHAR" />
     <result column="pro_id" property="pro_id" jdbcType="INTEGER" />
     <result column="floor" property="floor" jdbcType="VARCHAR" />
-    <result column="plan_begin_date" property="plan_begin_date" jdbcType="DATE" />
-    <result column="plan_end_date" property="plan_end_date" jdbcType="DATE" />
-    <result column="real_begin_date" property="real_begin_date" jdbcType="DATE" />
-    <result column="real_end_date" property="real_end_date" jdbcType="DATE" />
+    <result column="plan_begin_date" property="plan_begin_date" jdbcType="VARCHAR" />
+    <result column="plan_end_date" property="plan_end_date" jdbcType="VARCHAR" />
+    <result column="real_begin_date" property="real_begin_date" jdbcType="VARCHAR" />
+    <result column="real_end_date" property="real_end_date" jdbcType="VARCHAR" />
     <result column="order_num" property="order_num" jdbcType="VARCHAR" />
     <result column="comp_factory_id" property="comp_factory_id" jdbcType="INTEGER" />
     <result column="order_user_id" property="order_user_id" jdbcType="INTEGER" />
     <result column="order_time" property="order_time" jdbcType="TIMESTAMP" />
-    <result column="product_plan_begin_date" property="product_plan_begin_date" jdbcType="DATE" />
-    <result column="product_plan_end_date" property="product_plan_end_date" jdbcType="DATE" />
+    <result column="product_plan_begin_date" property="product_plan_begin_date" jdbcType="VARCHAR" />
+    <result column="product_plan_end_date" property="product_plan_end_date" jdbcType="VARCHAR" />
     <result column="drawing" property="drawing" jdbcType="VARCHAR" />
+    <result column="picture_comp_make" property="picture_comp_make" jdbcType="VARCHAR" />
+    <result column="picture_product_accept" property="picture_product_accept" jdbcType="VARCHAR" />
+    <result column="picture_receipt" property="picture_receipt" jdbcType="VARCHAR" />
+    <result column="picture_install" property="picture_install" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
     component_id, component_name, component_num, component_type, component_size, bind_status, 
@@ -286,6 +290,18 @@
       <if test="drawing != null" >
         drawing = #{drawing,jdbcType=VARCHAR},
       </if>
+      <if test="picture_comp_make != null" >
+        picture_comp_make = #{picture_comp_make,jdbcType=VARCHAR},
+      </if>
+      <if test="picture_product_accept != null" >
+        picture_product_accept = #{picture_product_accept,jdbcType=VARCHAR},
+      </if>
+      <if test="picture_receipt != null" >
+        picture_receipt = #{picture_receipt,jdbcType=VARCHAR},
+      </if>
+      <if test="picture_install != null" >
+        picture_install = #{picture_install,jdbcType=VARCHAR},
+      </if>
     </set>
     where component_id = #{component_id,jdbcType=INTEGER}
   </update>
@@ -316,4 +332,62 @@
       drawing = #{drawing,jdbcType=VARCHAR}
     where component_id = #{component_id,jdbcType=INTEGER}
   </update>
+  
+  <select id="findAllComponent" parameterType="com.shfb.rfid.manage.entity.Component" resultType="com.shfb.rfid.manage.dto.ComponentDto">
+  	select 
+  	c.component_id, c.component_name, c.component_num, c.component_type, c.component_size,
+    c.expedit_status, c.expedit_date, s.component_status_name,
+    c.plan_end_date,c.product_plan_begin_date, c.product_plan_end_date,
+    s.component_status_name
+    from component AS c
+    LEFT JOIN component_status AS s on c.component_status_id=s.component_status_id 
+    WHERE 1=1
+    <if test="component_status_id != null">
+    AND c.component_status_id=#{component_status_id}
+    </if>
+     <if test="pro_id != null">
+    AND c.pro_id=#{pro_id}
+    </if>
+    <if test="single_name != null">
+    AND c.single_name=#{single_name}
+    </if>
+    <if test="floor != null">
+    AND c.floor=#{floor}
+    </if>
+    <if test="component_type != component_type">
+    AND c.component_type=#{component_type}
+    </if>
+    order by component_id desc		
+  </select>
+  
+  <select id="findSingle" parameterType="java.lang.Integer" resultType="map">
+  	SELECT DISTINCT(single_name) FROM component 
+  	<if test="pro_id != null">
+  	WHERE pro_id=#{pro_id}
+  	</if>
+  </select>
+  
+  <select id="findFloor" parameterType="java.lang.Integer" resultType="map">
+  	SELECT DISTINCT(floor) FROM component WHERE 1=1
+  	<if test="pro_id != null">
+  	and pro_id=#{pro_id}
+  	</if>
+  	<if test="single_name != null">
+  	and single_name=#{single_name}
+  	</if>
+  </select>
+  
+  <select id="findComponentBysel" parameterType="java.lang.Integer"  resultType="com.shfb.rfid.manage.entity.Component">
+  	SELECT component_id, component_name,component_num,component_type FROM component WHERE 1=1
+  	<if test="pro_id != null">
+  	 AND pro_id=#{pro_id}
+  	</if>
+  	<if test="single_name != null">
+  	AND single_name=#{single_name}
+  	</if>
+  	<if test="floor != null">
+  	AND floor=#{floor}
+  	</if>
+  </select>
+  
 </mapper>
