@@ -17,7 +17,7 @@ coldWeb.controller('home', function ($rootScope, $scope, $state, $cookies, $http
     $scope.bigCurrentPage = 1;
 	$scope.Allusers = [];
 	$scope.optAudit = '8';
-	 // 获取当前冷库的列表
+	 // 获取当前用户的列表
 
 	  
     $scope.getUsers = function() {
@@ -55,6 +55,13 @@ coldWeb.controller('home', function ($rootScope, $scope, $state, $cookies, $http
 	        }
 	        return true;
 	}
+	
+	
+	 // 获取项目
+    $http.get('/i/project/findAllProject').success(function (data) {
+        $scope.projects = data;
+        $scope.addProjectid = data[0].pro_id;
+    });
 	
     $scope.goDeleteUser = function (userID) {
     	if(delcfm()){
@@ -124,11 +131,9 @@ coldWeb.controller('home', function ($rootScope, $scope, $state, $cookies, $http
     
     $scope.getAudit = function(i){
     	if(i==0)
-    		return '待审核';
-    	else if(i>0){
-    		return '通过';
-    	}else{
-    		return '未通过';
+    		return '无效';
+        else{
+    		return '有效';
     	}
     }
     

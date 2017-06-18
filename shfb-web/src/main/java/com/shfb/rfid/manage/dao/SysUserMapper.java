@@ -9,7 +9,7 @@ public interface SysUserMapper {
 
 	SysUser findUser(@Param("user_name") String username, @Param("password") String password);
 
-	SysUser findUserByName(@Param("username") String username);
+	SysUser findUserByName(@Param("user_name") String user_name);
 	
 	SysUser findUserById(@Param("id") int id);
 	

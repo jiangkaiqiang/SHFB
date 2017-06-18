@@ -22,5 +22,8 @@ public interface ProjectMapper {
     int updateByPrimaryKey(Project record);
     
     Page<Project> findAllProject(@Param("pr_id")Integer pr_id, @Param("keyword")String keyword);
+    
+    List<Project> findAllProjectList();
+    
     List<Map<String, Object>> findProjectNames();
 }

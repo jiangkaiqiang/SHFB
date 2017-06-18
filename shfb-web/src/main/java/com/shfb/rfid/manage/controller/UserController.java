@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,6 +29,7 @@ import com.shfb.rfid.manage.service.FtpService;
 import com.shfb.rfid.manage.util.EncodeUtil;
 import com.shfb.rfid.manage.util.ResponseData;
 import com.shfb.rfid.manage.util.StringUtil;
+import com.shfb.rfid.manage.dto.NgRemoteValidateDTO;
 @Controller
 @RequestMapping(value = "/user")
 public class UserController extends BaseController {
@@ -142,6 +144,14 @@ public class UserController extends BaseController {
 		return new BaseDto(0);
 	}
 	
+	@ResponseBody
+	@RequestMapping(value = "/checkUserName", method = RequestMethod.GET)
+	public Object checkUserName(@RequestParam("value") String username) {
+		username = StringUtils.trimAllWhitespace(username);
+		NgRemoteValidateDTO ngRemoteValidateDTO = new NgRemoteValidateDTO();
+		ngRemoteValidateDTO.setValid(userDao.findUserByName(username)==null? true:false);
+		return ngRemoteValidateDTO;
+	}
 	/*@RequestMapping(value = "/updatePhoto")
 	@ResponseBody
 	public Object updatePhoto(HttpServletRequest request, @RequestParam(required = false) MultipartFile userphoto) {

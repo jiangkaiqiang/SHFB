@@ -19,5 +19,14 @@
 	<context:annotation-config />
 	<!-- 默认的注解映射的支持 -->  
 	<mvc:annotation-driven />
-	
+	<mvc:interceptors>
+		 <mvc:interceptor>
+			<mvc:mapping path="/project/*"/>
+			<bean class="com.shfb.rfid.manage.intercepter.ProjectLogInterceptor"/>
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/compfactory/*"/>
+			<bean class="com.shfb.rfid.manage.intercepter.CompFactoryLogInterceptor"/>
+		</mvc:interceptor>
+	</mvc:interceptors>
 </beans>
