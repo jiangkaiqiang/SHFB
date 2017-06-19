@@ -79,6 +79,20 @@ public class ResponseData<T> {
 
 		return rd;
 	}
+	/**
+	 * 获取当前可用的ResponseData对象(SUCCESS)
+	 * @param message
+	 * @return
+	 */
+	public static <T> ResponseData<T> newSuccess(String message,String token,String role) {
+		ResponseData<T> rd = getInstance();
+		rd.setToken(token);
+		rd.setSuccess(true);
+		rd.setMessage(message);
+		rd.setExp(null);
+		rd.setExtra(role);
+		return rd;
+	}
 
 	/**
 	 * 获取当前可用的ResponseData对象(SUCCESS)
@@ -191,6 +205,7 @@ public class ResponseData<T> {
 	//请求信息
 	private boolean success=true;
 	private String message;
+	private String token;
 	private Exception exp;
 	//数据对象
 	private T entity;
@@ -314,4 +329,15 @@ public class ResponseData<T> {
 	public void setExtra(Object extra) {
 		this.extra = extra;
 	}
+
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
+	}
+
+
+	
 }

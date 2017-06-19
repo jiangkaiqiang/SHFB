@@ -360,6 +360,19 @@
     order by component_id desc		
   </select>
   
+    <select id="findComponentPage"  resultType="com.shfb.rfid.manage.dto.ComponentDto">
+  	select 
+  	c.component_id, c.component_name, c.component_num, c.component_type, c.component_size,
+    c.expedit_status, c.expedit_date, s.component_status_name,c.bind_status,c.check_res,
+    c.plan_end_date,c.product_plan_begin_date, c.product_plan_end_date,
+    s.component_status_name
+    from component AS c
+    LEFT JOIN component_status AS s on c.component_status_id=s.component_status_id 
+    WHERE 1=1
+ 
+    order by component_id desc		
+  </select>
+  
   <select id="findSingle" parameterType="java.lang.Integer" resultType="map">
   	SELECT DISTINCT(single_name) FROM component 
   	<if test="pro_id != null">

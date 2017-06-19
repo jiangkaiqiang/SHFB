@@ -72,7 +72,13 @@ public class ComponentMakeController extends BaseController{
 		if(StringUtil.isnotNull(userName)&&StringUtil.isnotNull(password)){
 			SysUser user = userDao.findUser(userName, password);
 			if (user != null) {
-	            return  ResponseData.newSuccess(String.format("token=%s", user.getUser_id()+""));
+				//以下返回信息为暂时，1代表业主总包 2代表构建厂
+				if(user.getUser_role_id() == 2) {
+					return  ResponseData.newSuccess("登录成功",user.getUser_id()+"","2");
+				} else {
+					return  ResponseData.newSuccess("登录成功",user.getUser_id()+"","1");
+				}
+	            
 			}
 			return ResponseData.newFailure("用户名或者密码不正确~");
 		}else{

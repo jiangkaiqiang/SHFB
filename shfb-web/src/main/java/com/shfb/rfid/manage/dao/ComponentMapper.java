@@ -29,4 +29,7 @@ public interface ComponentMapper {
     List<Map<String, Object>> findFloor(@Param("pro_id")Integer pro_id, @Param("single_name")String single_name);
     
     List<Component> findComponentBysel(@Param("pro_id")Integer pro_id, @Param("single_name")String single_name, @Param("floor")String floor);
+    
+    Page<ComponentDto> findComponentPage(); 
+    
 }
