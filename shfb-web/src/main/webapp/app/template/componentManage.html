@@ -104,7 +104,7 @@
 				         <td ng-if="component.check_res=='2'">验收通过</td>
 				         <td ng-if="component.check_res=='3'">验收不通过</td>
 				         <td>
-  				            <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#showProject" ng-click="goDetail(project.project.pro_id)">查看</button>
+  				            <button class="btn btn-primary btn-sm"  ng-click="">查看</button>
   				            <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#updateProject" ng-click="goUpdate(project.project.pro_id)">更新</button>
 				         	<button class="delete" ng-click="goDeleteProject(project.project.pro_id)"></button>
 				         </td>
@@ -126,86 +126,10 @@
 				    <button type="button" class="btn btn-default" ng-click="printReport()">导出构件</button>
 				   <button type="button" class="btn btn-default" ng-click="deleteProjects()">批量删除</button>
 				</div>
-			</div>
-    </div>  
-   	<!--  添加project模态框 -->
-   	<div class="modal fade" id="addProject" role="dialog"  aria-labelledby="myModalLabel" aria-hidden="true">
-	   <div class="modal-dialog">
-	      <div class="modal-content">
-	         <div class="modal-header">
-	            <button type="button" class="close" 
-	               data-dismiss="modal" aria-hidden="true">
-	                  &times;
-	            </button>
-	            <h4 class="modal-title" id="myModalLabel">
-	               添加构件
-	            </h4>
-	         </div>
-	         <div class="modal-body">
-	            	
-	         </div>
-	         <div class="modal-footer">
-	            <button type="button" class="btn btn-default" 
-	               data-dismiss="modal">取消
-	            </button>
-	            <button type="button" ng-click="submit()" class="btn btn-primary" data-dismiss="modal">
-	                                                       提交
-	            </button>
-	         </div>
-	      </div><!-- /.modal-content -->
-	</div><!-- /.modal -->
-	</div>
-	<!--  添加project模态框 end -->
-   	<!--  查看project模态框 -->
-   	<div class="modal fade" id="showProject" role="dialog"  aria-labelledby="myModalLabel" aria-hidden="true">
-	   <div class="modal-dialog">
-	      <div class="modal-content">
-	         <div class="modal-header">
-	            <button type="button" class="close" 
-	               data-dismiss="modal" aria-hidden="true">
-	                  &times;
-	            </button>
-	            <h4 class="modal-title" id="myModalLabel">
-	               查看构件
-	            </h4>
-	         </div>
-	         <div class="modal-body">
-
-	         </div>
-	         <div class="modal-footer">
-	            <button type="button" class="btn btn-default" 
-	               data-dismiss="modal">关闭
-	            </button>
-	         </div>
-	      </div><!-- /.modal-content -->
-	</div><!-- /.modal -->
-	</div>
-	<!--  查看project模态框 end -->
-	<!--  更新project模态框 -->
-   	<div class="modal fade" id="updateProject" role="dialog"  aria-labelledby="myModalLabel" aria-hidden="true">
-	   <div class="modal-dialog">
-	      <div class="modal-content">
-	         <div class="modal-header">
-	            <button type="button" class="close" 
-	               data-dismiss="modal" aria-hidden="true">
-	                  &times;
-	            </button>
-	            <h4 class="modal-title" id="myModalLabel">
-	              
-	            </h4>
-	         </div>
-	         <div class="modal-body">
-
-	         </div>
-	         <div class="modal-footer">
-	            <button type="button" class="btn btn-default" 
-	               data-dismiss="modal">取消
-	            </button>
-	            <button type="button" ng-click="update()" class="btn btn-primary" data-dismiss="modal">
-	                                                       更新
-	            </button>
-	         </div>
-	      </div><!-- /.modal-content -->
-	</div><!-- /.modal -->
-	</div>
-	<!--  更新project模态框 end -->
+			</div>						
+    </div>
+    
+    	<!-- 构件查看 -->
+    	<div class="col-sm-12" style="height:34px" ng-switch on="current">
+			进度	
+		</div> 

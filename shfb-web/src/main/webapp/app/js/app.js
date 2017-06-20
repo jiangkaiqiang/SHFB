@@ -57,5 +57,9 @@ coldWeb.config(function ($stateProvider, $urlRouterProvider) {
         url: '/personalSpace',
         controller: 'personalSpace',
         templateUrl: 'app/template/personalSpace.html'
+    }).state('componentInfo', {
+        url: '/componentInfo',
+        controller: 'componentInfo',
+        templateUrl: 'app/template/componentInfo.html'
     });
 });
