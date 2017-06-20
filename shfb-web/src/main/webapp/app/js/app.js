@@ -45,6 +45,10 @@ coldWeb.config(function ($stateProvider, $urlRouterProvider) {
         url: '/compFactoryManage',
         controller: 'compFactoryManage',
         templateUrl: 'app/template/compFactoryManage.html'
+    }).state('componentManage', {
+        url: '/componentManage',
+        controller: 'componentManage',
+        templateUrl: 'app/template/componentManage.html'
     }).state('operationLog', {
         url: '/operationLog',
         controller: 'operationLog',
@@ -53,5 +57,13 @@ coldWeb.config(function ($stateProvider, $urlRouterProvider) {
         url: '/personalSpace',
         controller: 'personalSpace',
         templateUrl: 'app/template/personalSpace.html'
+    }).state('componentInfo', {
+        url: '/componentInfo',
+        controller: 'componentInfo',
+        templateUrl: 'app/template/componentInfo.html'
+    }).state('componentOrder', {
+        url: '/componentOrder',
+        controller: 'componentOrder',
+        templateUrl: 'app/template/componentOrder.html'
     });
 });

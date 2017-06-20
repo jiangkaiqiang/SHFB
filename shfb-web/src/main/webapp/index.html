@@ -58,13 +58,54 @@
     								<li>children</li>
     							</ul>
     						</li>
-    						 
+    						<li ng-click="goMenu('componentManage','#/componentManage')" id ="componentManage">
+    							<span class="glyphicon glyphicon-road"></span>
+    							<a>构件列表</a>
+    							<span class="glyphicon glyphicon-chevron-right pull-right"></span>
+    							<ul class="liSon">
+    								<li>children</li>
+    								<li>children</li>
+    								<li>children</li>
+    							</ul>
+    						</li>
+    						<li ng-click="goMenu('componentOrder','#/componentOrder')" id ="componentOrder">
+    							<span class="glyphicon glyphicon-road"></span>
+    							<a>进度计划</a>
+    							<span class="glyphicon glyphicon-chevron-right pull-right"></span>
+    							<ul class="liSon">
+    								<li>children</li>
+    								<li>children</li>
+    								<li>children</li>
+    							</ul>
+    						</li>
+    					
+    						<!-- <li  ng-click="goMenu('usermanage','#/adminlist')" ng-if="admin.role==1" >
+    							<span class="glyphicon glyphicon-user"></span>
+    							<a>管理员管理</a>
+    							<span class="glyphicon glyphicon-chevron-right pull-right"></span>
+    							<ul class="liSon">
+    								<li>children</li>
+    								<li>children</li>
+    								<li>children</li>
+    							</ul>
+    						</li>
+    						<li ng-click="goMenu('usermanage','#/storageManage')">
+    							<span class="glyphicon glyphicon-cog"></span>
+    							<a>冷库管理</a>
+    							<span class="glyphicon glyphicon-chevron-right pull-right"></span>
+    							<ul class="liSon">
+    								<li>children</li>
+    								<li>children</li>
+    								<li>children</li>
+    							</ul>
+    						</li> -->
     						<li ng-click="goMenu('projectManage','#/projectManage')" id="projectManage">
     							<span class="glyphicon glyphicon-th-list"></span>
     							<a>项目管理</a>
     							<span class="glyphicon glyphicon-chevron-right pull-right"></span>
     							<ul class="liSon">
-    								<li>children</li>
+    								<li>
+    								</li>
     								<li>children</li>
     								<li>children</li>
     							</ul>
@@ -157,6 +198,7 @@
 <script src="app/js/home.js"></script>
 <script src="app/js/projectManage.js"></script>
 <script src="app/js/compFactoryManage.js"></script>
+<script src="app/js/componentManage.js"></script>
 <script src="app/js/operationLog.js"></script>
 <script src="app/js/personalSpace.js"></script>
 </html>
