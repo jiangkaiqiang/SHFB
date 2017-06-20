@@ -116,5 +116,10 @@ public class ProjectController extends BaseController {
 		return new BaseDto(0);
 	}
 
-	
+	 @RequestMapping(value = "/findAllProject")
+	    @ResponseBody
+	    public Object findAllProject() {
+	        return projectDao.findAllProjectList();
+	    }
+	    	
 }
