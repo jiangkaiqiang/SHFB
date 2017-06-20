@@ -1,5 +1,7 @@
 package com.shfb.rfid.manage.dao;
 
+import java.util.List;
+
 import com.github.pagehelper.Page;
 import com.shfb.rfid.manage.entity.SysUser;
 
@@ -18,4 +20,6 @@ public interface SysUserMapper {
 	void updateUser(SysUser userEntity);
 		
 	Page<SysUser> findAllUser(@Param("status")Integer status, @Param("keyword")String keyword);
+	
+	List<SysUser> findUsersByRoleID(@Param("userRoleID")Integer userRoleID);
 }

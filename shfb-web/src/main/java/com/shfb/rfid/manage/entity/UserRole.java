@@ -6,6 +6,10 @@ public class UserRole {
     private String user_role_name;
 
     private String menu_ids;
+    
+    private String creater;
+    
+    private String createTime;
 
     public Integer getUser_role_id() {
         return user_role_id;
@@ -30,4 +34,21 @@ public class UserRole {
     public void setMenu_ids(String menu_ids) {
         this.menu_ids = menu_ids == null ? null : menu_ids.trim();
     }
+
+	public String getCreater() {
+		return creater;
+	}
+
+	public void setCreater(String creater) {
+		this.creater = creater;
+	}
+
+	public String getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(String createTime) {
+		this.createTime = createTime;
+	}
+    
 }

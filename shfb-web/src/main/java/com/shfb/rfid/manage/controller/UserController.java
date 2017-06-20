@@ -47,6 +47,8 @@ public class UserController extends BaseController {
 		if(StringUtil.isnotNull(userName)&&StringUtil.isnotNull(password)){
 			SysUser user = userDao.findUser(userName, password);
 			if (user != null) {
+				user.setLogin_time(new Date());
+				userDao.updateUser(user);
 				String cookie = cookieService.insertCookie(userName);
 				user.setPassword("********");
 				request.getSession().setAttribute("user", user);
@@ -141,6 +143,18 @@ public class UserController extends BaseController {
 		user.setUser_name(URLDecoder.decode(user.getUser_name(), "UTF-8"));
 		user.setPassword(EncodeUtil.encodeByMD5(user.getPassword()));
 		userDao.insert(user);
+		return new BaseDto(0);
+	}
+	
+	@RequestMapping(value = "/changePwd")
+	@ResponseBody
+	public Object changePwd(HttpServletRequest request,@RequestParam(value="password") String password,
+			@RequestParam(value="userID", required=false) Integer userID) {
+		SysUser sysUser = new SysUser();
+		sysUser.setUser_id(userID);
+		sysUser.setPassword(password);
+		userDao.updateUser(sysUser);
+		logout(request);
 		return new BaseDto(0);
 	}
 	
