@@ -68,4 +68,10 @@
       component_status_order = #{component_status_order,jdbcType=INTEGER}
     where component_status_id = #{component_status_id,jdbcType=INTEGER}
   </update>
+  
+  <select id="findStatus" resultMap="BaseResultMap">
+  	select 
+    <include refid="Base_Column_List" />
+    from component_status 
+  </select>
 </mapper>

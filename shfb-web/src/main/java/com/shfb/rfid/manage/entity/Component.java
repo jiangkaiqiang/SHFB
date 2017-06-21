@@ -57,6 +57,8 @@ public class Component {
 	
 	private String picture_install;
 	
+	private String order_date;
+	
 	public Integer getComponent_id() {
 		return component_id;
 	}
@@ -284,6 +286,15 @@ public class Component {
 	public void setPicture_install(String picture_install) {
 		this.picture_install = picture_install;
 	}
+
+	public String getOrder_date() {
+		return order_date;
+	}
+
+	public void setOrder_date(String order_date) {
+		this.order_date = order_date;
+	}
+	
 	
 	
 }

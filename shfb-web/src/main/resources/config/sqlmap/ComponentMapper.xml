@@ -30,6 +30,7 @@
     <result column="picture_product_accept" property="picture_product_accept" jdbcType="VARCHAR" />
     <result column="picture_receipt" property="picture_receipt" jdbcType="VARCHAR" />
     <result column="picture_install" property="picture_install" jdbcType="VARCHAR" />
+    <result column="order_date" property="order_date" jdbcType="VARCHAR" />   
   </resultMap>
   <sql id="Base_Column_List" >
     component_id, component_name, component_num, component_type, component_size, bind_status, 
@@ -354,7 +355,7 @@
     <if test="floor != null">
     AND c.floor=#{floor}
     </if>
-    <if test="component_type != component_type">
+    <if test="component_type != null">
     AND c.component_type=#{component_type}
     </if>
     order by component_id desc		
@@ -369,7 +370,21 @@
     from component AS c
     LEFT JOIN component_status AS s on c.component_status_id=s.component_status_id 
     WHERE 1=1
- 
+    <if test="pro_id != null">
+    AND c.pro_id=#{pro_id}
+    </if> 
+    <if test="single_name != null">
+    AND c.single_name=#{single_name}
+    </if> 
+    <if test="floor != null">
+    AND c.floor=#{floor}
+    </if> 
+    <if test="component_type != null">
+    AND c.component_type=#{component_type}
+    </if> 
+    <if test="component_status_id != null">
+    AND c.component_status_id=#{component_status_id}
+    </if> 
     order by component_id desc		
   </select>
   
@@ -401,6 +416,31 @@
   	<if test="floor != null">
   	AND floor=#{floor}
   	</if>
+  </select>
+  
+  <select id="findComponentInfoById" parameterType="java.lang.Integer" resultType="com.shfb.rfid.manage.dto.ComponentDto">
+  		SELECT p.pro_name, c.single_name, c.floor, c.plan_begin_date, c.plan_end_date,
+	c.real_begin_date, c.real_end_date, c.component_num, c.component_name, c.component_size,
+	s.component_status_name,c.bind_status, c.expedit_status, c.expedit_date, c.order_num, c.component_id,
+	f.comp_factory_name,u.user_name, c.order_date, c.product_plan_begin_date, c.product_plan_end_date,
+	c.picture_comp_make, c.picture_product_accept, c.picture_receipt, c.picture_install,c.component_status_id
+ 	FROM component AS c 
+	LEFT JOIN project AS p ON c.pro_id=p.pro_id 
+	LEFT JOIN component_status AS s ON c.component_status_id=s.component_status_id
+	LEFT JOIN comp_factory AS f ON c.comp_factory_id=f.comp_factory_id
+	LEFT JOIN sys_user AS u ON c.order_user_id=u.user_id
+	WHERE component_id=#{component_id}
+  </select>
+  
+  <select id="findSingleBysel" parameterType="java.lang.Integer" resultType="map">
+  	SELECT DISTINCT(single_name), pro_id FROM component 
+  	<if test="pro_id != null">
+  	WHERE pro_id=#{pro_id}
+  	</if>
+  </select>
+  
+  <select id="findComponentTypes" resultMap="BaseResultMap">
+  	SELECT DISTINCT(component_type) from component
   </select>
   
 </mapper>
