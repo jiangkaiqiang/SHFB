@@ -74,4 +74,9 @@
 		</where>
 		order by `create_time` desc
 	</select>
+		<select id="findUsersByRoleID" parameterType="map" resultType="SysUser">
+		SELECT
+		u.* FROM sys_user u
+		WHERE u.user_role_id = #{userRoleID}
+	</select>
 </mapper>

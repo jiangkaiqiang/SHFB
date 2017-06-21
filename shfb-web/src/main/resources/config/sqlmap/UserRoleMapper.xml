@@ -5,13 +5,13 @@
     <id column="user_role_id" property="user_role_id" jdbcType="INTEGER" />
     <result column="user_role_name" property="user_role_name" jdbcType="VARCHAR" />
     <result column="menu_ids" property="menu_ids" jdbcType="VARCHAR" />
+    <result column="user_role_note" property="user_role_note" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    user_role_id, user_role_name, menu_ids
+    user_role_id, user_role_name, menu_ids, user_role_note, creater, createTime
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
+    select *
     from user_role
     where user_role_id = #{user_role_id,jdbcType=INTEGER}
   </select>
@@ -20,9 +20,9 @@
     where user_role_id = #{user_role_id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.shfb.rfid.manage.entity.UserRole" >
-    insert into user_role (user_role_id, user_role_name, menu_ids
+    insert into user_role (user_role_name, menu_ids,creater,createTime,user_role_note
       )
-    values (#{user_role_id,jdbcType=INTEGER}, #{user_role_name,jdbcType=VARCHAR}, #{menu_ids,jdbcType=VARCHAR}
+    values (#{user_role_name,jdbcType=VARCHAR}, #{menu_ids,jdbcType=VARCHAR},#{creater,jdbcType=VARCHAR}, now(),#{user_role_note,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.shfb.rfid.manage.entity.UserRole" >
@@ -59,6 +59,12 @@
       <if test="menu_ids != null" >
         menu_ids = #{menu_ids,jdbcType=VARCHAR},
       </if>
+      <if test="creater != null" >
+        creater = #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="user_role_note != null" >
+        user_role_note = #{user_role_note,jdbcType=VARCHAR},
+      </if>
     </set>
     where user_role_id = #{user_role_id,jdbcType=INTEGER}
   </update>
@@ -68,4 +74,19 @@
       menu_ids = #{menu_ids,jdbcType=VARCHAR}
     where user_role_id = #{user_role_id,jdbcType=INTEGER}
   </update>
+  <select id="findAllUserRole" parameterType="int" resultType="com.shfb.rfid.manage.entity.UserRole">
+		SELECT * FROM `user_role`
+		<where>
+			<if test="startTime!=null and startTime!=''">
+                AND createTime &gt;= #{startTime}
+            </if>
+            <if test="endTime!=null and endTime!=''">
+                AND createTime &lt;= #{endTime}
+            </if>
+			<if test="keyword != null">
+				AND user_role_name like "%"#{keyword}"%"
+			</if>
+		</where>
+		order by `createTime` desc
+	</select>
 </mapper>

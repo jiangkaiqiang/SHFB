@@ -49,8 +49,8 @@
 				   <tbody>
 				      <tr ng-repeat="project in Allprojects">
 				         <td>
-						 <input type="checkbox" ng-checked="exists(project.project, selected)"
-                    				ng-click="toggle(project.project, selected)"/>
+						 <input type="checkbox" ng-checked="exists(project, selected)"
+                    				ng-click="toggle(project, selected)"/>
 				         </td>
 				         <td>{{project.project.pro_id}}</td>
 				         <td>{{project.project.pro_name}}</td>
