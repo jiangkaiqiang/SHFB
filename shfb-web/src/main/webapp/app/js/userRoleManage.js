@@ -15,83 +15,38 @@ coldWeb.controller('userRoleManage', function ($rootScope, $scope, $state, $cook
     $scope.bigTotalItems = 10;
     // 当前页
     $scope.bigCurrentPage = 1;
-	$scope.Allprojects = [];
+	$scope.AlluserRoles = [];
 	 // 获取当前冷库的列表
-	  
-    $scope.getProjects = function() {
+    $scope.getUserRoles = function() {
 		$http({
 			method : 'POST',
-			url : '/i/project/findProjectList',
+			url : '/i/userrole/findUserRoleList',
 			params : {
 				pageNum : $scope.bigCurrentPage,
 				pageSize : $scope.maxSize,
-				provinceid : $scope.searchprovinceid,
+				startTime : $scope.startTime,
+				endTime : $scope.endTime,
 				keyword : encodeURI($scope.keyword,"UTF-8"),
 			}
 		}).success(function(data) {
 			$scope.bigTotalItems = data.total;
-			$scope.Allprojects = data.list;
+			$scope.AlluserRoles = data.list;
 		});
 	}
 
 	$scope.pageChanged = function() {
-		$scope.getProjects();
+		$scope.getUserRoles();
 	}
-	$scope.getProjects();
-	// 获取当前冷库的列表
-	$scope.provinceChanged = function(provinceid) {
-		$scope.getProjects();
-	}
+	$scope.getUserRoles();
     
 	$scope.goSearch = function () {
-		$scope.getProjects();
+		$scope.getUserRoles();
     }
-	
-	$scope.searchProvinceSelected = function () {
-		$scope.getProjects();
-    }
-	
 	
 	$scope.showAll = function () {
 		$state.reload();
     }
 	
-	 // 获取省列表
-    $http.get('/i/city/findProvinceList').success(function (data) {
-        $scope.provinces = data;
-        $scope.addProvinceid = data[0].pr_id;
-    });
-    // 根据省ID查询城市列表
-    $scope.provinceSelected = function () {
-        $http.get('/i/city/findCitysByProvinceId', {
-            params: {
-                "provinceID": $scope.addProvinceid
-            }
-        }).success(function (data) {
-            $scope.citys = data;
-            $scope.addCityid = data[0].ci_id;
-        });
-    };
-    
-    $scope.citySelected = function () {
-    };
-    
-    
-    
-    // 根据省ID查询城市列表
-    $scope.provinceSelectedForUpdate = function () {
-        $http.get('/i/city/findCitysByProvinceId', {
-            params: {
-                "provinceID": $scope.projectUpdate.pr_id
-            }
-        }).success(function (data) {
-            $scope.citysForUpdate = data;
-            $scope.projectUpdate.ci_id = data[0].ci_id;
-        });
-    };
-    
-    $scope.citySelectedForUpdate = function () {
-    };
 	
 	function delcfm() {
 	        if (!confirm("确认要删除？")) {
@@ -100,94 +55,53 @@ coldWeb.controller('userRoleManage', function ($rootScope, $scope, $state, $cook
 	        return true;
 	}
 	
-    $scope.goDeleteProject = function (projectID) {
+    $scope.goDeleteUserRole = function (userRoleID) {
     	if(delcfm()){
-    	$http.get('/i/project/deleteProjectByID', {
+    	$http.get('/i/userrole/deleteUserRoleByID', {
             params: {
-                "projectID": projectID
+                "userRoleID": userRoleID
             }
         }).success(function (data) {
-        	$scope.getProjects();
+        	$scope.getUserRoles();
         	alert("删除成功");
         });
     	}
     }
-    $scope.deleteProjects = function(){
-    	if(delcfm()){
-    	var projectIDs = [];
-    	for(i in $scope.selected){
-    		projectIDs.push($scope.selected[i].pro_id);
-    	}
-    	if(projectIDs.length >0 ){
-    		$http({
-    			method:'DELETE',
-    			url:'/i/project/deleteProjectByIDs',
-    			params:{
-    				'projectIDs': projectIDs
-    			}
-    		}).success(function (data) {
-    			$scope.getProjects();
-            	alert("删除成功");
-            });
-    	}
-    	}
-    }
-   
-    
-    $scope.selected = [];
-    $scope.toggle = function (project, list) {
-		  var idx = list.indexOf(project);
-		  if (idx > -1) {
-		    list.splice(idx, 1);
-		  }
-		  else {
-		    list.push(project);
-		  }
-    };
-    $scope.exists = function (project, list) {
-    	return list.indexOf(project) > -1;
-    };
-    $scope.isChecked = function() {
-        return $scope.selected.length === $scope.Allprojects.length;
-    };
-    $scope.toggleAll = function() {
-        if ($scope.selected.length === $scope.Allprojects.length) {
-        	$scope.selected = [];
-        } else if ($scope.selected.length === 0 || $scope.selected.length > 0) {
-        	$scope.selected = $scope.Allprojects.slice(0);
-        }
-    };
-    
+  
     function checkInput(){
         var flag = true;
         // 检查必须填写项
-        if ($scope.proname == undefined || $scope.proname == '') {
-            flag = false;
-        }
-        if ($scope.contactName == undefined || $scope.contactName == '') {
+        if ($scope.userRoleName == undefined || $scope.userRoleName == '') {
             flag = false;
         }
         return flag;
     }
     $scope.submit = function(){
         if (checkInput()){
+        	var menus="";
+        	if($scope.overView) menus += "1;";
+        	if($scope.compManage) menus += "2;";
+        	if($scope.processManage) menus += "3;";
+        	if($scope.projectManage) menus += "4;";
+        	if($scope.compFactoryManage) menus += "5;";
+        	if($scope.userManage) menus += "6;";
+        	if($scope.roleManage) menus += "7;";
+        	if($scope.logManage) menus += "8;";
+        	if($scope.productManage) menus += "9;";
+        	if($scope.personalManage) menus += "10;";
             $http({
             	method : 'GET',
-            	url:'/i/project/addProject',
+            	url:'/i/userrole/addUserRole',
     			params:{
-    				'pro_name': $scope.proname,
-    				'contacts_name': $scope.contactName,
-    				'contacts_tel' : $scope.contactTel,
-    				'contacts_phone' : $scope.contactPhone,
-    				'pr_id': $scope.addProvinceid,
-    				'ci_id': $scope.addCityid,
-    				'address' : $scope.address,
-    				'details' : $scope.detail
+    				'user_role_name': $scope.userRoleName,
+    				'menu_ids': menus,
+    				'creater' :  $rootScope.admin.user_name,
+    				'user_role_note' : $scope.note
     			}
     		}).then(function (resp) {
     			 alert("添加成功");
-                 $scope.getProjects();
-                 $("#addProject").modal("hide"); 
+                 $scope.getUserRoles();
+                 $("#addUserRole").modal("hide"); 
             }, function (resp) {
                 console.log('Error status: ' + resp.status);
             }, function (evt) {
@@ -195,10 +109,10 @@ coldWeb.controller('userRoleManage', function ($rootScope, $scope, $state, $cook
                 console.log('progress: ' + progressPercentage + '% ' + evt.name);
             });
           } else {
-            alert("请填写项目名称和联系人!");
+            alert("请填写用户角色名称!");
         }
     }
-    $scope.goDetail = function(projectID) {
+   /* $scope.goDetail = function(projectID) {
     	$http.get('/i/project/findProjectByID', {
             params: {
                 "projectID": projectID
@@ -208,67 +122,55 @@ coldWeb.controller('userRoleManage', function ($rootScope, $scope, $state, $cook
 				 $scope.projectDetail = data;
 		    }
 	     });
-	};
+	};*/
 	
-	 $scope.goUpdate = function(projectID) {
-	    	$http.get('/i/project/findProjectByID', {
+	 $scope.goUpdate = function(userRoleID) {
+	    	$http.get('/i/userrole/findUserRoleByID', {
 	            params: {
-	                "projectID": projectID
+	                "userRoleID": userRoleID
 	            }
 	        }).success(function(data){
-			    if(data!=null&&data.project.pro_id!=undefined){
-					 $scope.projectUpdate = data.project;
-					 // 获取省列表
-					 
-					    $http.get('/i/city/findProvinceList').success(function (data) {
-					        $scope.provincesForUpdate = data;
-					        if($scope.projectUpdate.pr_id!=null&&$scope.projectUpdate.pr_id!=undefined){
-					        	 $http.get('/i/city/findCitysByProvinceId', {
-					                 params: {
-					                     "provinceID": $scope.projectUpdate.pr_id
-					                 }
-					             }).success(function (data) {
-					                 $scope.citysForUpdate = data;
-					             });
-					   	    }
-					        else{
-					        	$scope.projectUpdate.pr_id = data[0].pr_id;
-					        }
-					    });
+			    if(data!=null&&data.userRole.user_role_id!=undefined){
+					 $scope.userRoleDtoForUpdate = data;
 			    }
 		     });
 		};
+		
 		function checkInputForUpdate(){
 	        var flag = true;
 	        // 检查必须填写项
-	        if ($scope.projectUpdate.pro_name == undefined || $scope.projectUpdate.pro_name == '') {
-	            flag = false;
-	        }
-	        if ($scope.projectUpdate.contacts_name == undefined || $scope.projectUpdate.contacts_name == '') {
+	        if ($scope.userRoleDtoForUpdate.userRole.user_role_name == undefined || $scope.userRoleDtoForUpdate.userRole.user_role_name == '') {
 	            flag = false;
 	        }
 	        return flag;
 	    }
 		 $scope.update = function(){
-		        if (checkInputForUpdate()){
+			 if (checkInputForUpdate()){
+		        	var menus="";
+		        	if($scope.userRoleDtoForUpdate.overView) menus += "1;";
+		        	if($scope.userRoleDtoForUpdate.compManage) menus += "2;";
+		        	if($scope.userRoleDtoForUpdate.processManage) menus += "3;";
+		        	if($scope.userRoleDtoForUpdate.projectManage) menus += "4;";
+		        	if($scope.userRoleDtoForUpdate.compFactoryManage) menus += "5;";
+		        	if($scope.userRoleDtoForUpdate.userManage) menus += "6;";
+		        	if($scope.userRoleDtoForUpdate.roleManage) menus += "7;";
+		        	if($scope.userRoleDtoForUpdate.logManage) menus += "8;";
+		        	if($scope.userRoleDtoForUpdate.productManage) menus += "9;";
+		        	if($scope.userRoleDtoForUpdate.personalManage) menus += "10;";
 		            $http({
 		            	method : 'GET',
-		            	url:'/i/project/updateProject',
+		            	url:'/i/userrole/updateUserRole',
 		    			params:{
-		    				'pro_id': $scope.projectUpdate.pro_id,
-		    				'pro_name': $scope.projectUpdate.pro_name,
-		    				'contacts_name': $scope.projectUpdate.contacts_name,
-		    				'contacts_tel' : $scope.projectUpdate.contacts_tel,
-		    				'contacts_phone' : $scope.projectUpdate.contacts_phone,
-		    				'pr_id': $scope.projectUpdate.pr_id,
-		    				'ci_id': $scope.projectUpdate.ci_id,
-		    				'address' : $scope.projectUpdate.address,
-		    				'details' : $scope.projectUpdate.details
+		    				'user_role_id':  $scope.userRoleDtoForUpdate.userRole.user_role_id,
+		    				'user_role_name':  $scope.userRoleDtoForUpdate.userRole.user_role_name,
+		    				'menu_ids': menus,
+		    				'creater' :  $rootScope.admin.user_name,
+		    				'user_role_note' :  $scope.userRoleDtoForUpdate.userRole.user_role_note
 		    			}
 		    		}).then(function (resp) {
 		    			 alert("更新成功");
-		                 $scope.getProjects();
-		                 $("#updateProject").modal("hide"); 
+		                 $scope.getUserRoles();
+		                 $("#updateUserRole").modal("hide"); 
 		            }, function (resp) {
 		                console.log('Error status: ' + resp.status);
 		            }, function (evt) {
@@ -276,7 +178,7 @@ coldWeb.controller('userRoleManage', function ($rootScope, $scope, $state, $cook
 		                console.log('progress: ' + progressPercentage + '% ' + evt.name);
 		            });
 		          } else {
-		            alert("请填写项目名称和联系人!");
+		            alert("请填写用户角色名称!");
 		        }
-		    }
+		 }
 });

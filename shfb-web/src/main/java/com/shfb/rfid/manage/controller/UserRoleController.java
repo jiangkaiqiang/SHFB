@@ -2,6 +2,7 @@ package com.shfb.rfid.manage.controller;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -85,9 +86,25 @@ public class UserRoleController extends BaseController {
 	public Object findUserRoleByID(Integer userRoleID) {
 		UserRole userRole = userRoleDao.selectByPrimaryKey(userRoleID);
 		UserRoleDto userRoleDto = new UserRoleDto();
+		String menuids = userRole.getMenu_ids();
+		String[] menus = menuids.split(";");
+		List<Integer> menuList = new ArrayList<Integer>();
+		for (int i = 0; i < menus.length; i++) {
+			menuList.add(Integer.parseInt(menus[i]));
+		}
+		if (menuList.contains(1)) userRoleDto.setOverView(true);
+		if (menuList.contains(2)) userRoleDto.setCompManage(true);
+		if (menuList.contains(3)) userRoleDto.setProcessManage(true);
+		if (menuList.contains(4)) userRoleDto.setProjectManage(true);
+		if (menuList.contains(5)) userRoleDto.setCompFactoryManage(true);
+		if (menuList.contains(6)) userRoleDto.setUserManage(true);
+		if (menuList.contains(7)) userRoleDto.setRoleManage(true);
+		if (menuList.contains(8)) userRoleDto.setLogManage(true);
+		if (menuList.contains(9)) userRoleDto.setProductManage(true);
+		if (menuList.contains(10)) userRoleDto.setPersonalManage(true);
 		userRoleDto.setUserRole(userRole);
-		List<SysUser> sysUsers = userDao.findUsersByRoleID(userRole.getUser_role_id());
-	    userRoleDto.setUserNum(sysUsers.size());
+		/*List<SysUser> sysUsers = userDao.findUsersByRoleID(userRole.getUser_role_id());
+	    userRoleDto.setUserNum(sysUsers.size());*/
 		return userRoleDto;
 	}
 	

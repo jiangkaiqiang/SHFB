@@ -10,6 +10,8 @@ public class UserRole {
     private String creater;
     
     private String createTime;
+    
+    private String user_role_note;
 
     public Integer getUser_role_id() {
         return user_role_id;
@@ -49,6 +51,14 @@ public class UserRole {
 
 	public void setCreateTime(String createTime) {
 		this.createTime = createTime;
+	}
+
+	public String getUser_role_note() {
+		return user_role_note;
+	}
+
+	public void setUser_role_note(String user_role_note) {
+		this.user_role_note = user_role_note;
 	}
     
 }

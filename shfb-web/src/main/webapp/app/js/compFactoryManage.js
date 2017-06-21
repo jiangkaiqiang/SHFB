@@ -116,7 +116,7 @@ coldWeb.controller('compFactoryManage', function ($rootScope, $scope, $state, $c
     	if(delcfm()){
     	var compfactoryIDs = [];
     	for(i in $scope.selected){
-    		compfactoryIDs.push($scope.selected[i].comp_factory_id);
+    		compfactoryIDs.push($scope.selected[i].compfactory.comp_factory_id);
     	}
     	if(compfactoryIDs.length >0 ){
     		$http({

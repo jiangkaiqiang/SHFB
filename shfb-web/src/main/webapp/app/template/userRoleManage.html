@@ -2,7 +2,7 @@
     	<!-- 按钮操作区域开始 -->
 			<div class="col-sm-12" style="height:34px">
 			<div class="col-sm-3">
-				<button type="button" class="btn btn-default pull-left" id="plusCold" data-toggle="modal" data-target="#addProject">
+				<button type="button" class="btn btn-default pull-left" id="plusCold" data-toggle="modal" data-target="#addUserRole">
 					<span class="glyphicon glyphicon-plus"></span>添加角色
 				</button>
 				</div>
@@ -11,12 +11,6 @@
 					<div id="searchImg" ng-click="goSearch()">
 						<span class="glyphicon glyphicon-search"></span>
 					</div>
-				</div>
-				<div  class="col-sm-5">								
-					根据地区查询：<select id=""  class="form-control" style="height:35px;width:100px !important"
-                                     ng-model="searchprovinceid" ng-disabled="editable"
-                                     ng-change="searchProvinceSelected(searchprovinceid)"
-                                     ng-options="x.pr_id as x.pr_province for x in provinces"></select>
 				</div>
 			</div>
 			<div class="col-sm-12" style="height:34px">
@@ -30,39 +24,26 @@
 				<table class="table table-striped table-bordered" id="tableArea" ng-model="Allprojects">
 				   <thead>
 				      <tr>
-				         <th>
-				         	<div>
-				         		<input type="checkbox" ng-checked="isChecked()" ng-click="toggleAll()" class="checkBox" >
-				         		<label for="allSecSon" >全选</label>
-				         	</div>
-				         </th>
 				         <th>序号</th>
-				         <th>项目名称</th>
-				         <th>联系人</th>
-				         <th>手机号码</th>
-				         <th>电话</th>
-				         <th>地区</th>
-				         <th>地址</th>
+				         <th>角色名称</th>
+				         <th>备注</th>
+				         <th>创建人</th>
+				         <th>创建时间</th>
+				         <th>用户数</th>
 				         <th>操作</th>
 				      </tr>
 				   </thead>
 				   <tbody>
-				      <tr ng-repeat="project in Allprojects">
+				      <tr ng-repeat="userRoleDto in AlluserRoles">
+				         <td>{{userRoleDto.userRole.user_role_id}}</td>
+				         <td>{{userRoleDto.userRole.user_role_name}}</td>
+				         <td>{{userRoleDto.userRole.user_role_note}}</td>
+				         <td>{{userRoleDto.userRole.creater}}</td>
+				         <td>{{userRoleDto.userRole.createTime}}</td>
+				         <td>{{userRoleDto.userNum}}</td>
 				         <td>
-						 <input type="checkbox" ng-checked="exists(project.project, selected)"
-                    				ng-click="toggle(project.project, selected)"/>
-				         </td>
-				         <td>{{project.project.pro_id}}</td>
-				         <td>{{project.project.pro_name}}</td>
-				         <td>{{project.project.contacts_name}}</td>
-				         <td>{{project.project.contacts_tel}}</td>
-				         <td>{{project.project.contacts_phone}}</td>
-				         <td>{{project.provinceName}}-{{project.cityName}}</td>
-				         <td>{{project.project.address}}</td>
-				         <td>
-  				            <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#showProject" ng-click="goDetail(project.project.pro_id)">查看</button>
-  				            <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#updateProject" ng-click="goUpdate(project.project.pro_id)">更新</button>
-				         	<button class="delete" ng-click="goDeleteProject(project.project.pro_id)"></button>
+  				            <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#updateUserRole" ng-click="goUpdate(userRoleDto.userRole.user_role_id)">编辑</button>
+				         	<button class="delete" ng-click="goDeleteUserRole(userRoleDto.userRole.user_role_id)"></button>
 				         </td>
 				      </tr>
 				   </tbody>
@@ -77,15 +58,15 @@
 	</div>
 			</div>
 			<!-- 表格操作区域结束 -->
-			<div class="three">
+			<!-- <div class="three">
 				<div class="btn-group" role="group">
 				    <button type="button" class="btn btn-default" ng-click="printReport()">打印报表</button>
 				   <button type="button" class="btn btn-default" ng-click="deleteProjects()">批量删除</button>
 				</div>
-			</div>
+			</div> -->
     </div>  
-   	<!--  添加project模态框 -->
-   	<div class="modal fade" id="addProject" role="dialog"  aria-labelledby="myModalLabel" aria-hidden="true">
+   	<!--  添加用户角色模态框 -->
+   	<div class="modal fade" id="addUserRole" role="dialog"  aria-labelledby="myModalLabel" aria-hidden="true">
 	   <div class="modal-dialog">
 	      <div class="modal-content">
 	         <div class="modal-header">
@@ -94,69 +75,122 @@
 	                  &times;
 	            </button>
 	            <h4 class="modal-title" id="myModalLabel">
-	               添加项目
+	               添加用户角色
 	            </h4>
 	         </div>
 	         <div class="modal-body">
 	            	<form class="form-horizontal" name="projectForm">
-					   <div class="form-group">
-					      <label for="projectname" class="col-sm-2 control-label">名称</label>
-					      <div class="col-sm-10">
-					         <input type="text" class="form-control" ng-model="proname" name="proname" placeholder="请输入项目名称">
+	            	<div class="tabbable" id="tabs-615459">
+				<ul class="nav nav-tabs">
+					<li class="active">
+						<a href="#panel-182509" data-toggle="tab">角色信息</a>
+					</li>
+					<li>
+						<a href="#panel-162989" data-toggle="tab">角色权限</a>
+					</li>
+				</ul>
+				<div class="tab-content">
+					<div class="tab-pane active" id="panel-182509" style="padding:50px 50px 50px 50px">
+						<div class="form-group">
+					      <label for="projectname" class="col-sm-3 control-label">角色名称</label>
+					      <div class="col-sm-8">
+					         <input type="text" class="form-control" ng-model="userRoleName" name="userRoleName" placeholder="请输入角色名称">
 					      </div>
 					   </div>
 					   <div class="form-group">
-					      <label for="province" class="col-sm-2 control-label">省市</label>
-					      <div class="col-sm-10">
-					      <div class="col-sm-3">
-					        <select id=""  class="form-control" style="height:35px;width:100px !important"
-                                     ng-model="addProvinceid" ng-disabled="editable"
-                                     ng-change="provinceSelected(addProvinceid)"
-                                     ng-options="x.pr_id as x.pr_province for x in provinces"></select>
-                                     </div>
-                                     <div class="col-sm-3">
-                           <select id=""  class="form-control" style="height:35px;width:100px !important" ng-model="addCityid"
-                                    ng-disabled="editable" ng-change="citySelected(addCityid)"
-                                    ng-options="x.ci_id as x.ci_city for x in citys"></select>
-                                    </div>
-					      </div>
-					   </div>
-					   <div class="form-group">
-					      <label for="address" class="col-sm-2 control-label">详细地址</label>
-					      <div class="col-sm-10">
-					         <input type="text" class="form-control" id="address" ng-model="address"
-					            placeholder="请输入详细地址">
-					      </div>
-					   </div>
-					   <div class="form-group">
-					      <label for="contactName" class="col-sm-2 control-label">联系人</label>
-					      <div class="col-sm-10">
-					         <input type="text" class="form-control" id="contactName" name="contactName" ng-model="contactName"
-					            placeholder="请输入联系人姓名">
-					      </div>
-					   </div>
-					   <div class="form-group">
-					      <label for="contactTel" class="col-sm-2 control-label">手机号码</label>
-					      <div class="col-sm-10">
-					         <input type="number" class="form-control" id="contactTel" name="contactTel" ng-model="contactTel"
-					            placeholder="请输入联系人手机号">
-					      </div>
-					   </div>
-					    <div class="form-group">
-					      <label for="contactPhone" class="col-sm-2 control-label">电话</label>
-					      <div class="col-sm-10">
-					         <input type="text" class="form-control" id="contactPhone" name="contactPhone" ng-model="contactPhone"
-					            placeholder="请输入联系人电话（座机）">
-					      </div>
-					   </div>
-					   <div class="form-group">
-					      <label for="detail" class="col-sm-2 control-label">概况</label>
-					      <div class="col-sm-10">
-					         <textarea type="text" rows="4" class="form-control" id="detail" name="detail" ng-model="detail"
-					            placeholder="请输入项目概况">
+					      <label for="projectname" class="col-sm-3 control-label">备注</label>
+					      <div class="col-sm-8">
+					         <textarea type="text" rows="4" class="form-control" id="note" name="note" ng-model="note"
+					            placeholder="请输入角色备注">
 					            </textarea>
 					      </div>
 					   </div>
+					</div>
+					<div class="tab-pane" id="panel-162989" style="padding:30px 50px 50px 200px">
+						<div class="accordion" id="accordion-7827">
+				<div class="accordion-group">
+					<div class="accordion-heading">
+						<span class="glyphicon glyphicon-folder-open"></span> <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-7827" href="#accordion-element-451062">概览</a>
+					</div>
+					<div id="accordion-element-451062" class="accordion-body in collapse">
+						<div class="accordion-inner">
+						<input type="checkbox" ng-model="overView"> <span class="glyphicon glyphicon-tags"></span>  综合概览 
+						</div>
+					</div>
+				</div>
+				<div class="accordion-group">
+					<div class="accordion-heading">
+						<span class="glyphicon glyphicon-folder-open"></span> <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-7827" href="#accordion-element-451063">构件管理</a>
+					</div>
+					<div id="accordion-element-451063" class="accordion-body in collapse">
+						<div class="accordion-inner">
+						<input type="checkbox" ng-model="compManage"> <span class="glyphicon glyphicon-tags"></span>  构件管理
+						</div>
+						<div class="accordion-inner">
+						<input type="checkbox" ng-model="processManage"> <span class="glyphicon glyphicon-tags"></span>  进度管理
+						</div>
+					</div>
+				</div>
+				<div class="accordion-group">
+					<div class="accordion-heading">
+						<span class="glyphicon glyphicon-folder-open"></span> <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-7827" href="#accordion-element-451064">项目管理</a>
+					</div>
+					<div id="accordion-element-451064" class="accordion-body in collapse">
+						<div class="accordion-inner">
+						<input type="checkbox" ng-model="projectManage"> <span class="glyphicon glyphicon-tags"></span>  项目管理
+						</div>
+					</div>
+				</div>
+				<div class="accordion-group">
+					<div class="accordion-heading">
+						<span class="glyphicon glyphicon-folder-open"></span> <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-7827" href="#accordion-element-451065">构件厂管理</a>
+					</div>
+					<div id="accordion-element-451065" class="accordion-body in collapse">
+						<div class="accordion-inner">
+						<input type="checkbox" ng-model="compFactoryManage"> <span class="glyphicon glyphicon-tags"></span>  构件厂管理
+						</div>
+					</div>
+				</div>
+				<div class="accordion-group">
+					<div class="accordion-heading">
+						<span class="glyphicon glyphicon-folder-open"></span> <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-7827" href="#accordion-element-451066">系统管理</a>
+					</div>
+					<div id="accordion-element-451066" class="accordion-body in collapse">
+						<div class="accordion-inner">
+						<input type="checkbox" ng-model="userManage"> <span class="glyphicon glyphicon-tags"></span>  用户管理
+						</div>
+						<div class="accordion-inner">
+						<input type="checkbox" ng-model="roleManage"> <span class="glyphicon glyphicon-tags"></span>  角色管理
+						</div>
+						<div class="accordion-inner">
+						<input type="checkbox" ng-model="logManage"> <span class="glyphicon glyphicon-tags"></span> 操作日志
+						</div>
+					</div>
+				</div>
+				<div class="accordion-group">
+					<div class="accordion-heading">
+						<span class="glyphicon glyphicon-folder-open"></span> <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-7827" href="#accordion-element-451067">生产管理</a>
+					</div>
+					<div id="accordion-element-451067" class="accordion-body in collapse">
+						<div class="accordion-inner">
+						<input type="checkbox" ng-model="productManage"> <span class="glyphicon glyphicon-tags"></span>  生产管理
+						</div>
+					</div>
+				</div>
+				<div class="accordion-group">
+					<div class="accordion-heading">
+						<span class="glyphicon glyphicon-folder-open"></span> <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-7827" href="#accordion-element-451068">个人中心</a>
+					</div>
+					<div id="accordion-element-451068" class="accordion-body in collapse">
+						<div class="accordion-inner">
+						<input type="checkbox" ng-model="personalManage"> <span class="glyphicon glyphicon-tags"></span>  个人中心
+						</div>
+					</div>
+				</div>
+			</div>
+					</div>
+				</div>
+			</div>
 	            	</form>
 	         </div>
 	         <div class="modal-footer">
@@ -170,9 +204,9 @@
 	      </div><!-- /.modal-content -->
 	</div><!-- /.modal -->
 	</div>
-	<!--  添加project模态框 end -->
-   	<!--  查看project模态框 -->
-   	<div class="modal fade" id="showProject" role="dialog"  aria-labelledby="myModalLabel" aria-hidden="true">
+	<!--  添加用户角色模态框 end -->
+	  	<!--  修改用户角色模态框 -->
+   	<div class="modal fade" id="updateUserRole" role="dialog"  aria-labelledby="myModalLabel" aria-hidden="true">
 	   <div class="modal-dialog">
 	      <div class="modal-content">
 	         <div class="modal-header">
@@ -181,137 +215,122 @@
 	                  &times;
 	            </button>
 	            <h4 class="modal-title" id="myModalLabel">
-	               查看项目
+	               修改用户角色
 	            </h4>
 	         </div>
 	         <div class="modal-body">
 	            	<form class="form-horizontal" name="projectForm">
-					   <div class="form-group">
-					      <label for="projectname" class="col-sm-2 control-label">名称</label>
-					      <div class="col-sm-10">
-					         {{projectDetail.project.pro_name}}
+	            	<div class="tabbable" id="utabs-615459">
+				<ul class="nav nav-tabs">
+					<li class="active">
+						<a href="#upanel-182509" data-toggle="tab">角色信息</a>
+					</li>
+					<li>
+						<a href="#upanel-162989" data-toggle="tab">角色权限</a>
+					</li>
+				</ul>
+				<div class="tab-content">
+					<div class="tab-pane active" id="upanel-182509" style="padding:50px 50px 50px 50px">
+						<div class="form-group">
+					      <label for="projectname" class="col-sm-3 control-label">角色名称</label>
+					      <div class="col-sm-8">
+					         <input type="text" class="form-control" ng-model="userRoleDtoForUpdate.userRole.user_role_name" name="userRoleName" placeholder="请输入角色名称">
 					      </div>
 					   </div>
 					   <div class="form-group">
-					      <label for="province" class="col-sm-2 control-label">省市</label>
-					      <div class="col-sm-10">
-					        {{projectDetail.provinceName}}-{{projectDetail.cityName}}
-					      </div>
-					   </div>
-					   <div class="form-group">
-					      <label for="address" class="col-sm-2 control-label">详细地址</label>
-					      <div class="col-sm-10">
-					      {{projectDetail.project.address}}
-					      </div>
-					   </div>
-					   <div class="form-group">
-					      <label for="contactName" class="col-sm-2 control-label">联系人</label>
-					      <div class="col-sm-10">
-					      {{projectDetail.project.contacts_name}}
-					      </div>
-					   </div>
-					   <div class="form-group">
-					      <label for="contactTel" class="col-sm-2 control-label">手机号码</label>
-					      <div class="col-sm-10">
-					      {{projectDetail.project.contacts_tel}}
-					      </div>
-					   </div>
-					    <div class="form-group">
-					      <label for="contactPhone" class="col-sm-2 control-label">电话</label>
-					      <div class="col-sm-10">
-					      {{projectDetail.project.contacts_phone}}
-					      </div>
-					   </div>
-					   <div class="form-group">
-					      <label for="detail" class="col-sm-2 control-label">概况</label>
-					      <div class="col-sm-10">
-					      {{projectDetail.project.details}}
-					      </div>
-					   </div>
-	            	</form>
-	         </div>
-	         <div class="modal-footer">
-	            <button type="button" class="btn btn-default" 
-	               data-dismiss="modal">关闭
-	            </button>
-	         </div>
-	      </div><!-- /.modal-content -->
-	</div><!-- /.modal -->
-	</div>
-	<!--  查看project模态框 end -->
-	<!--  更新project模态框 -->
-   	<div class="modal fade" id="updateProject" role="dialog"  aria-labelledby="myModalLabel" aria-hidden="true">
-	   <div class="modal-dialog">
-	      <div class="modal-content">
-	         <div class="modal-header">
-	            <button type="button" class="close" 
-	               data-dismiss="modal" aria-hidden="true">
-	                  &times;
-	            </button>
-	            <h4 class="modal-title" id="myModalLabel">
-	               更新项目
-	            </h4>
-	         </div>
-	         <div class="modal-body">
-	            	<form class="form-horizontal" name="projectForm">
-					   <div class="form-group">
-					      <label for="projectname" class="col-sm-2 control-label">名称</label>
-					      <div class="col-sm-10">
-					         <input type="text" class="form-control" ng-model="projectUpdate.pro_name" name="proname" placeholder="请输入项目名称">
-					      </div>
-					   </div>
-					   <div class="form-group">
-					      <label for="province" class="col-sm-2 control-label">省市</label>
-					      <div class="col-sm-10">
-					       <div class="col-sm-3">
-					        <select id="" class="form-control"  style="height:35px;width:100px !important"
-                                     ng-model="projectUpdate.pr_id" ng-disabled="editable"
-                                     ng-change="provinceSelectedForUpdate(projectUpdate.pr_id)"
-                                     ng-options="x.pr_id as x.pr_province for x in provincesForUpdate"></select>
-                                     </div>
-                             <div class="col-sm-3">
-                           <select id="" class="form-control"  style="height:35px;width:100px !important" ng-model="projectUpdate.ci_id"
-                                    ng-disabled="editable" ng-change="citySelectedForUpdate(projectUpdate.ci_id)"
-                                    ng-options="x.ci_id as x.ci_city for x in citysForUpdate"></select>
-                                    </div>
-					      </div>
-					   </div>
-					   <div class="form-group">
-					      <label for="address" class="col-sm-2 control-label">详细地址</label>
-					      <div class="col-sm-10">
-					         <input type="text" class="form-control" id="address" ng-model="projectUpdate.address"
-					            placeholder="请输入详细地址">
-					      </div>
-					   </div>
-					   <div class="form-group">
-					      <label for="contactName" class="col-sm-2 control-label">联系人</label>
-					      <div class="col-sm-10">
-					         <input type="text" class="form-control" id="contactName" name="contactName" ng-model="projectUpdate.contacts_name"
-					            placeholder="请输入联系人姓名">
-					      </div>
-					   </div>
-					   <div class="form-group">
-					      <label for="contactTel" class="col-sm-2 control-label">电话</label>
-					      <div class="col-sm-10">
-					         <input type="number" class="form-control" id="contactTel" name="contactTel" ng-model="projectUpdate.contacts_tel"
-					            placeholder="请输入联系人手机号">
-					      </div>
-					   </div>
-					    <div class="form-group">
-					      <label for="contactPhone" class="col-sm-2 control-label">手机号码</label>
-					      <div class="col-sm-10">
-					         <input type="text" class="form-control" id="contactPhone" name="contactPhone" ng-model="projectUpdate.contacts_phone"
-					            placeholder="请输入联系人电话（座机）">
-					      </div>
-					   </div>
-					   <div class="form-group">
-					      <label for="detail" class="col-sm-2 control-label">概况</label>
-					      <div class="col-sm-10">
-					         <textarea type="text" rows="4" class="form-control" id="detail" name="detail" ng-model="projectUpdate.details"
-					            placeholder="请输入项目概况">
+					      <label for="projectname" class="col-sm-3 control-label">备注</label>
+					      <div class="col-sm-8">
+					         <textarea type="text" rows="4" class="form-control" id="note" name="note" ng-model="userRoleDtoForUpdate.userRole.user_role_note"
+					            placeholder="请输入角色备注">
 					            </textarea>
 					      </div>
 					   </div>
+					</div>
+					<div class="tab-pane" id="upanel-162989" style="padding:30px 50px 50px 200px">
+						<div class="accordion" id="uaccordion-7827">
+				<div class="accordion-group">
+					<div class="accordion-heading">
+						<span class="glyphicon glyphicon-folder-open"></span> <a class="accordion-toggle" data-toggle="collapse" data-parent="#uaccordion-7827" href="#uaccordion-element-451062">概览</a>
+					</div>
+					<div id="uaccordion-element-451062" class="accordion-body in collapse">
+						<div class="accordion-inner">
+						<input type="checkbox" ng-model="userRoleDtoForUpdate.overView"> <span class="glyphicon glyphicon-tags"></span>  综合概览 
+						</div>
+					</div>
+				</div>
+				<div class="accordion-group">
+					<div class="accordion-heading">
+						<span class="glyphicon glyphicon-folder-open"></span> <a class="accordion-toggle" data-toggle="collapse" data-parent="#uaccordion-7827" href="#uaccordion-element-451063">构件管理</a>
+					</div>
+					<div id="uaccordion-element-451063" class="accordion-body in collapse">
+						<div class="accordion-inner">
+						<input type="checkbox" ng-model="userRoleDtoForUpdate.compManage"> <span class="glyphicon glyphicon-tags"></span>  构件管理
+						</div>
+						<div class="accordion-inner">
+						<input type="checkbox" ng-model="userRoleDtoForUpdate.processManage"> <span class="glyphicon glyphicon-tags"></span>  进度管理
+						</div>
+					</div>
+				</div>
+				<div class="accordion-group">
+					<div class="accordion-heading">
+						<span class="glyphicon glyphicon-folder-open"></span> <a class="accordion-toggle" data-toggle="collapse" data-parent="#uaccordion-7827" href="#uaccordion-element-451064">项目管理</a>
+					</div>
+					<div id="uaccordion-element-451064" class="accordion-body in collapse">
+						<div class="accordion-inner">
+						<input type="checkbox" ng-model="userRoleDtoForUpdate.projectManage"> <span class="glyphicon glyphicon-tags"></span>  项目管理
+						</div>
+					</div>
+				</div>
+				<div class="accordion-group">
+					<div class="accordion-heading">
+						<span class="glyphicon glyphicon-folder-open"></span> <a class="accordion-toggle" data-toggle="collapse" data-parent="#uaccordion-7827" href="#uaccordion-element-451065">构件厂管理</a>
+					</div>
+					<div id="uaccordion-element-451065" class="accordion-body in collapse">
+						<div class="accordion-inner">
+						<input type="checkbox" ng-model="userRoleDtoForUpdate.compFactoryManage"> <span class="glyphicon glyphicon-tags"></span>  构件厂管理
+						</div>
+					</div>
+				</div>
+				<div class="accordion-group">
+					<div class="accordion-heading">
+						<span class="glyphicon glyphicon-folder-open"></span> <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-7827" href="#uaccordion-element-451066">系统管理</a>
+					</div>
+					<div id="uaccordion-element-451066" class="accordion-body in collapse">
+						<div class="accordion-inner">
+						<input type="checkbox" ng-model="userRoleDtoForUpdate.userManage"> <span class="glyphicon glyphicon-tags"></span>  用户管理
+						</div>
+						<div class="accordion-inner">
+						<input type="checkbox" ng-model="userRoleDtoForUpdate.roleManage"> <span class="glyphicon glyphicon-tags"></span>  角色管理
+						</div>
+						<div class="accordion-inner">
+						<input type="checkbox" ng-model="userRoleDtoForUpdate.logManage"> <span class="glyphicon glyphicon-tags"></span> 操作日志
+						</div>
+					</div>
+				</div>
+				<div class="accordion-group">
+					<div class="accordion-heading">
+						<span class="glyphicon glyphicon-folder-open"></span> <a class="accordion-toggle" data-toggle="collapse" data-parent="#uaccordion-7827" href="#uaccordion-element-451067">生产管理</a>
+					</div>
+					<div id="uaccordion-element-451067" class="accordion-body in collapse">
+						<div class="accordion-inner">
+						<input type="checkbox" ng-model="userRoleDtoForUpdate.productManage"> <span class="glyphicon glyphicon-tags"></span>  生产管理
+						</div>
+					</div>
+				</div>
+				<div class="accordion-group">
+					<div class="accordion-heading">
+						<span class="glyphicon glyphicon-folder-open"></span> <a class="accordion-toggle" data-toggle="collapse" data-parent="#uaccordion-7827" href="#uaccordion-element-451068">个人中心</a>
+					</div>
+					<div id="uaccordion-element-451068" class="accordion-body in collapse">
+						<div class="accordion-inner">
+						<input type="checkbox" ng-model="userRoleDtoForUpdate.personalManage"> <span class="glyphicon glyphicon-tags"></span>  个人中心
+						</div>
+					</div>
+				</div>
+			</div>
+					</div>
+				</div>
+			</div>
 	            	</form>
 	         </div>
 	         <div class="modal-footer">
@@ -319,10 +338,11 @@
 	               data-dismiss="modal">取消
 	            </button>
 	            <button type="button" ng-click="update()" class="btn btn-primary" data-dismiss="modal">
-	                                                       更新
+	                                                       提交
 	            </button>
 	         </div>
 	      </div><!-- /.modal-content -->
 	</div><!-- /.modal -->
 	</div>
-	<!--  更新project模态框 end -->
+	<!--  添加修改角色模态框 end -->
+	

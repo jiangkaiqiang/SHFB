@@ -1,25 +1,34 @@
     <div style="padding: 28px 30px 0 30px;background-color: #F1F1F1;">
-    	<!-- 按钮操作区域开始 -->
-			<div class="operation">
+    
+    <!-- 按钮操作区域开始 -->
+			<div class="col-sm-12" style="height:34px">
+			<div class="col-sm-3">
 				<button type="button" class="btn btn-default pull-left" id="plusCold" data-toggle="modal" data-target="#addUser">
 					<span class="glyphicon glyphicon-plus"></span>添加用户
 				</button>
-		<div class="btn-group pull-left" id="status">
-			<select ng-model="optAudit" ng-change="auditChanged(optAudit)">
-				<option value="8">所有</option>
-				<option value="0">无效</option>
-				<option value="1">有效</option>
-			</select>
-		</div>
-		<div id="search">
-		            关键字查询：								
+				</div>
+		        <div  class="col-sm-4">								
+					  关键字查询：								
 					<input type="text" ng-model="keyword" placeholder="请输入关键词" id="myText" />
 					<div id="searchImg" ng-click="goSearch()">
 						<span class="glyphicon glyphicon-search"></span>
 					</div>
-				</div>							
+				</div>
+				<div  class="col-sm-5">								
+					是否有效：<select  class="form-control" style="height:35px;width:100px !important" ng-model="optAudit" ng-change="auditChanged(optAudit)">
+				<option value="8">所有</option>
+				<option value="0">无效</option>
+				<option value="1">有效</option>
+			         </select>
+				</div>
+			</div>
+			<div class="col-sm-12" style="height:34px">
+			<button type="button" class="btn btn-default pull-right" ng-click="showAll()">
+					显示全部
+				</button>	
 			</div>
 			<!-- 按钮操作区域结束 -->
+    
 			<!-- 表格操作区域开始 -->
 			<div class="tableArea">
 				<table class="table table-striped table-bordered" id="tableArea" ng-model="Allusers">

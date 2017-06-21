@@ -50,8 +50,8 @@
 				   <tbody>
 				      <tr ng-repeat="compfactory in Allcompfactorys">
 				         <td>
-						 <input type="checkbox" ng-checked="exists(compfactory.compfactory, selected)"
-                    				ng-click="toggle(compfactory.compfactory, selected)"/>
+						 <input type="checkbox" ng-checked="exists(compfactory, selected)"
+                    				ng-click="toggle(compfactory, selected)"/>
 				         </td>
 				         <td>{{compfactory.compfactory.comp_factory_id}}</td>
 				         <td>{{compfactory.compfactory.comp_factory_name}}</td>

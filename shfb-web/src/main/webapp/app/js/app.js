@@ -65,5 +65,9 @@ coldWeb.config(function ($stateProvider, $urlRouterProvider) {
         url: '/componentOrder',
         controller: 'componentOrder',
         templateUrl: 'app/template/componentOrder.html'
+    }).state('userRoleManage', {
+        url: '/userRoleManage',
+        controller: 'userRoleManage',
+        templateUrl: 'app/template/userRoleManage.html'
     });
 });

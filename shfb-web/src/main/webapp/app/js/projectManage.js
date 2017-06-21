@@ -116,7 +116,7 @@ coldWeb.controller('projectManage', function ($rootScope, $scope, $state, $cooki
     	if(delcfm()){
     	var projectIDs = [];
     	for(i in $scope.selected){
-    		projectIDs.push($scope.selected[i].pro_id);
+    		projectIDs.push($scope.selected[i].project.pro_id);
     	}
     	if(projectIDs.length >0 ){
     		$http({
