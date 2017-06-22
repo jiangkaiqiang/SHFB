@@ -46,9 +46,9 @@ public class ComponentController extends BaseController {
 		pageNum = pageNum == null? 1:pageNum;
 		pageSize = pageSize==null? 10:pageSize;
 		PageHelper.startPage(pageNum, pageSize);
-		single_name = single_name.equals("")? null:single_name;
-		floor = floor.equals("")? null:floor;
-		component_type = component_type.equals("")? null:component_type;
+		single_name = "".equals(single_name)? null:single_name;
+		floor = "".equals(floor)? null:floor;
+		component_type = "".equals(component_type)? null:component_type;
 		Page<ComponentDto> components = componentDao.findComponentPage(pro_id, single_name, floor, component_type, component_status_id);
 
 		return new PageInfo<ComponentDto>(components);
