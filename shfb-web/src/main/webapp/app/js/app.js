@@ -20,6 +20,15 @@ coldWeb.factory('adminService',['$rootScope','$http', function($rootScope,$http)
 	return {
 		setAdmin: function(admin){
 	    	$rootScope.admin = admin;
+	    	$http.get('/i/userrole/findUserRoleByUserID', {
+	            params: {
+	                "userID": $rootScope.admin.user_id
+	            }
+	        }).success(function(data){
+			    if(data!=null&&data.userRole.user_role_id!=undefined){
+			    	$rootScope.adminRoleDto = data;
+			    }
+		     });
 	    	$rootScope.logout = function () {
 	        	$http.get('/i/user/logout').success(function(data){
 	        		$rootScope.admin = null;
@@ -37,6 +46,10 @@ coldWeb.config(function ($stateProvider, $urlRouterProvider) {
         url: '/home',
         controller: 'home',
         templateUrl: 'app/template/home.html'
+    }).state('userManage', {
+        url: '/userManage',
+        controller: 'userManage',
+        templateUrl: 'app/template/userManage.html'
     }).state('projectManage', {
         url: '/projectManage',
         controller: 'projectManage',
