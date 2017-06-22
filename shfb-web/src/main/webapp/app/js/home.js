@@ -49,6 +49,10 @@ coldWeb.controller('home', function ($rootScope, $scope, $state, $cookies, $http
 		$scope.getUsers();
     }
 	
+	$scope.showAll = function () {
+		$state.reload();
+    }
+	
 	function delcfm() {
 	        if (!confirm("确认要删除？")) {
 	            return false;
@@ -62,35 +66,43 @@ coldWeb.controller('home', function ($rootScope, $scope, $state, $cookies, $http
         $scope.projects = data;
         $scope.addProjectid = data[0].pro_id;
     });
+    
+    // 获取角色
+    $http.get('/i/userrole/findAllUserRole').success(function (data) {
+        $scope.userRoles = data;
+        $scope.addUserRoleid = data[0].user_role_id;
+    });
 	
     $scope.goDeleteUser = function (userID) {
     	if(delcfm()){
-    	$http.get('/i/user/deleteUser', {
+    	$http.get('/i/user/deleteUserByID', {
             params: {
                 "userID": userID
             }
         }).success(function (data) {
+        	$scope.getUsers();
+        	alert("删除成功");
         });
-    	$state.reload();
     	}
     }
     $scope.deleteUsers = function(){
     	if(delcfm()){
     	var userIDs = [];
     	for(i in $scope.selected){
-    		userIDs.push($scope.selected[i].id);
+    		userIDs.push($scope.selected[i].sysUser.user_id);
     	}
     	if(userIDs.length >0 ){
     		$http({
     			method:'DELETE',
-    			url:'/i/user/deleteByUserIDs',
+    			url:'/i/user/deleteUserByIDs',
     			params:{
     				'userIDs': userIDs
     			}
     		}).success(function (data) {
+    			$scope.getUsers();
+            	alert("删除成功");
             });
     	}
-    	window.location.reload(); 
     	}
     }
    
@@ -130,38 +142,10 @@ coldWeb.controller('home', function ($rootScope, $scope, $state, $cookies, $http
     }
     
     $scope.getAudit = function(i){
-    	if(i==0)
-    		return '无效';
-        else{
+    	if(i==1)
     		return '有效';
-    	}
-    }
-    
-    $scope.changeAudit = function(user){
-    	var r=confirm("通过审核？");
-    	user.audit = r?1:-1;
-    	$http({
-    		'method':'POST',	
-    		'url':'/i/user/changeAudit',
-    		'params':{
-    			'userID':user.id,
-    			'audit':user.audit
-    		}
-    	})
-    }
-    $scope.changeAudits = function(){
-    	var r=confirm("通过审核？");
-    	var audit = r?1:-1
-    	var userIDs = $scope.getUserIDsFromSelected(audit);
-    	if(userIDs.length >0 ){
-    		$http({
-    			method:'POST',
-    			url:'/i/user/changeAudits',
-    			params:{
-    				'userIDs': userIDs,
-    				'audit':audit
-    			}
-    		});
+        else{
+    		return '无效';
     	}
     }
     
@@ -183,23 +167,25 @@ coldWeb.controller('home', function ($rootScope, $scope, $state, $cookies, $http
     $scope.submit = function(){
         if (checkInput()){
           if($scope.password==$scope.password1){
+        	var valid;
+        	if($scope.validforadd)  valid = 1;
+        	else  valid = 2;
             $http({
             	method : 'GET', 
     			url:'/i/user/addUser',
     			params:{
-    				'username': encodeURI($scope.username,"UTF-8"),
+    				'user_name': $scope.username,
     				'password': $scope.password,
-    				'email' : $scope.email,
-    				'telephone' : $scope.telephone
+    				'user_role_id' : $scope.addUserRoleid,
+    				'company': $scope.company,
+    				'pro_id' : $scope.addProjectid,
+    				'valid_status' : valid,
+    				'user_tel' : $scope.telephone
     			}
     		}).then(function (resp) {
-                alert("添加成功");
-                window.location.reload(); 
-            }, function (resp) {
-                console.log('Error status: ' + resp.status);
-            }, function (evt) {
-                var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-                console.log('progress: ' + progressPercentage + '% ' + evt.name);
+    			 alert(resp.data.message);
+                 $scope.getUsers();
+                 $("#addUser").modal("hide"); 
             });
            }
           else{
@@ -209,4 +195,63 @@ coldWeb.controller('home', function ($rootScope, $scope, $state, $cookies, $http
             alert("请填写用户名或密码!");
         }
     }
+    
+	 $scope.goUpdateUser = function(userID) {
+		    $scope.validforupdate  = false;
+	    	$http.get('/i/user/findUserByID', {
+	            params: {
+	                "spaceUserID": userID
+	            }
+	        }).success(function(data){
+			    if(data!=null&&data.user_id!=undefined){
+					 $scope.userForUpdate = data;
+					 if($scope.userForUpdate.valid_status==1)
+						 $scope.validforupdate = true;
+			    }
+		     });
+		};
+		function checkInputForUpdate(){
+	        var flag = true;
+	        // 检查必须填写项
+	        if ($scope.userForUpdate.user_name == undefined || $scope.userForUpdate.user_name == '') {
+	            flag = false;
+	        }
+	        if ($scope.userForUpdate.password == undefined ||  $scope.userForUpdate.password == '') {
+	            flag = false;
+	        }
+	        return flag;
+	    }
+		 $scope.update = function(){
+			 if (checkInputForUpdate()){
+		          if($scope.passwordForUpdate==$scope.passwordForUpdate1){
+		        	var valid;
+		        	if($scope.validforupdate)  valid = 1;
+		        	else  valid = 2;
+		            $http({
+		            	method : 'GET', 
+		    			url:'/i/user/updateUser',
+		    			params:{
+		    				'user_id': $scope.userForUpdate.user_id,
+		    				'user_name': $scope.userForUpdate.user_name,
+		    				'password': $scope.userForUpdate.password,
+		    				'user_role_id' : $scope.userForUpdate.user_role_id,
+		    				'company':  $scope.userForUpdate.company,
+		    				'pro_id' : $scope.userForUpdate.pro_id,
+		    				'valid_status' : valid,
+		    				'user_tel' : $scope.userForUpdate.user_tel
+		    			}
+		    		}).then(function (resp) {
+		    			 alert(resp.data.message);
+		                 $scope.getUsers();
+		                 $("#updateUser").modal("hide"); 
+		            });
+		           }
+		          else{
+		        	  alert("两次密码不一致!");
+		           }
+		          } else {
+		            alert("请填写用户名或密码!");
+		        }
+		    }
+    
 });

@@ -114,5 +114,9 @@ public class UserRoleController extends BaseController {
 		 userRoleDao.deleteByPrimaryKey(userRoleID);
 		 return new BaseDto(0);
 	}
-	
+	 @RequestMapping(value = "/findAllUserRole")
+	    @ResponseBody
+	    public Object findAllUserRole() {
+	        return userRoleDao.findAllUserRoleList();
+	    }
 }
