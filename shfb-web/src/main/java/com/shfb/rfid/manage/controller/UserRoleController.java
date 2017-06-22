@@ -80,6 +80,13 @@ public class UserRoleController extends BaseController {
 		return new BaseDto(0);
 	}
 	
+	@RequestMapping(value = "/findUserRoleByUserID")
+	@ResponseBody
+	public Object findUserRoleByUserID(Integer userID){
+		SysUser sysUser  = userDao.findUserById(userID);
+		return findUserRoleByID(sysUser.getUser_role_id());
+	}
+	
 	
 	@RequestMapping(value = "/findUserRoleByID")
 	@ResponseBody
@@ -114,5 +121,9 @@ public class UserRoleController extends BaseController {
 		 userRoleDao.deleteByPrimaryKey(userRoleID);
 		 return new BaseDto(0);
 	}
-	
+	 @RequestMapping(value = "/findAllUserRole")
+	    @ResponseBody
+	    public Object findAllUserRole() {
+	        return userRoleDao.findAllUserRoleList();
+	    }
 }

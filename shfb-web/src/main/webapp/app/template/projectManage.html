@@ -81,6 +81,8 @@
 				<div class="btn-group" role="group">
 				    <button type="button" class="btn btn-default" ng-click="printReport()">打印报表</button>
 				   <button type="button" class="btn btn-default" ng-click="deleteProjects()">批量删除</button>
+				      <button type="button" class="btn btn-default" data-toggle="modal" data-target="#importComp">导入构件</button>
+				    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#importPic">导入图纸</button>
 				</div>
 			</div>
     </div>  
@@ -326,3 +328,80 @@
 	</div><!-- /.modal -->
 	</div>
 	<!--  更新project模态框 end -->
+	<!--  导入构件模态框 -->
+   	<div class="modal fade" id="importComp" role="dialog"  aria-labelledby="myModalLabel" aria-hidden="true">
+	   <div class="modal-dialog">
+	      <div class="modal-content">
+	         <div class="modal-header">
+	            <button type="button" class="close" 
+	               data-dismiss="modal" aria-hidden="true">
+	                  &times;
+	            </button>
+	            <h4 class="modal-title" id="myModalLabel">
+	               导入构件
+	            </h4>
+	         </div>
+	         <div class="modal-body">
+	            	<form class="form-horizontal" name="compfactoryForm">
+					   <div class="form-group">
+					      <label  class="col-sm-4 control-label"><a>下载模板(.xls)</a></label>
+					      <div class="col-sm-4">
+					                      <input type="file" id="importComp">
+					      </div>
+					      <div class="col-sm-4">
+					      <button type="button" class="btn btn-default" >删除文件</button>
+					      </div>
+					   </div>
+	            	</form>
+	         </div>
+	         <div class="modal-footer">
+	          <button type="button" ng-click="importComp()" class="btn btn-primary" data-dismiss="modal">
+	                           导入
+	            </button>
+	            <button type="button" class="btn btn-default" 
+	               data-dismiss="modal">关闭
+	            </button>
+	         </div>
+	      </div><!-- /.modal-content -->
+	</div><!-- /.modal -->
+	</div>
+	<!-- 导入构件模态框end -->
+	
+	<!--  导入图纸模态框 -->
+   	<div class="modal fade" id="importPic" role="dialog"  aria-labelledby="myModalLabel" aria-hidden="true">
+	   <div class="modal-dialog">
+	      <div class="modal-content">
+	         <div class="modal-header">
+	            <button type="button" class="close" 
+	               data-dismiss="modal" aria-hidden="true">
+	                  &times;
+	            </button>
+	            <h4 class="modal-title" id="myModalLabel">
+	               导入图纸
+	            </h4>
+	         </div>
+	         <div class="modal-body">
+	            	<form class="form-horizontal" name="compfactoryForm">
+					   <div class="form-group">
+					      <div class="col-sm-4">
+					                      <input type="file" id="importPic">
+					      </div>
+					      <div class="col-sm-4">
+					      <button type="button" class="btn btn-default" >删除文件</button>
+					      </div>
+					   </div>
+	            	</form>
+	         </div>
+	         <div class="modal-footer">
+	          <button type="button" ng-click="importPic()" class="btn btn-primary" data-dismiss="modal">
+	                           导入
+	            </button>
+	            <button type="button" class="btn btn-default" 
+	               data-dismiss="modal">关闭
+	            </button>
+	         </div>
+	      </div><!-- /.modal-content -->
+	</div><!-- /.modal -->
+	</div>
+	<!-- 导入构件模态框end -->
+	

@@ -13,8 +13,12 @@
 		#{login_time,jdbcType=TIMESTAMP}, #{password,jdbcType=VARCHAR}, #{user_tel,jdbcType=VARCHAR},
 		#{company,jdbcType=VARCHAR}, #{pro_id,jdbcType=INTEGER},
 		#{valid_status,jdbcType=INTEGER},
-		#{create_time,jdbcType=TIMESTAMP})
+		now())
 	</insert>
+	 <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sys_user
+    where user_id = #{user_id,jdbcType=INTEGER}
+  </delete>
 	<update id="updateUser" parameterType="SysUser">
 		update sys_user
 		<set >
@@ -66,7 +70,7 @@
 		SELECT * FROM `sys_user`
 		<where>
 			<if test="status != null">
-				status=#{status}
+				valid_status=#{status}
 			</if>
 			<if test="keyword != null">
 				AND user_name like "%"#{keyword}"%"

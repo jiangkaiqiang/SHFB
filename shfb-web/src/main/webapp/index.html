@@ -50,117 +50,69 @@
     						<span>功能栏目</span>
     					</div>
     					<ul class="list" ng-controller="index">
-    					
-    						<li ng-click="goMenu('home','#/home')" id ="home">
-    							<span class="glyphicon glyphicon-user"></span>
-    							<a>用户管理</a>
+    					  <li ng-click="goMenu('home','#/home')" id ="home" ng-show="adminRoleDto.overView">
+    							<span class="glyphicon glyphicon-eye-open"></span>
+    							<a>概览</a>
     							<span class="glyphicon glyphicon-chevron-right pull-right"></span>
     							<ul class="liSon">
-    								<li>children</li>
-    								<li>children</li>
-    								<li>children</li>
+    								<li ng-click="goMenu('home','#/home')">综合概览</li>
     							</ul>
     						</li>
-    						<li ng-click="goMenu('componentManage','#/componentManage')" id ="componentManage">
+    						
+    						<li ng-click="goMenu('componentManage','#/componentManage')" id ="componentManage" ng-show="adminRoleDto.compManage || adminRoleDto.processManage">
     							<span class="glyphicon glyphicon-road"></span>
-    							<a>构件列表</a>
+    							<a>构件管理</a>
     							<span class="glyphicon glyphicon-chevron-right pull-right"></span>
     							<ul class="liSon">
-    								<li>children</li>
-    								<li>children</li>
-    								<li>children</li>
-    							</ul>
-    						</li>
-    						<li ng-click="goMenu('componentOrder','#/componentOrder')" id ="componentOrder">
-    							<span class="glyphicon glyphicon-sort-by-attributes"></span>
-    							<a>进度计划</a>
-    							<span class="glyphicon glyphicon-chevron-right pull-right"></span>
-    							<ul class="liSon">
-    								<li>children</li>
-    								<li>children</li>
-    								<li>children</li>
+    								<li ng-click="goMenu('componentManage','#/componentManage')" ng-show="adminRoleDto.compManage">构件列表</li>
+    								<li ng-click="goMenu('componentOrder','#/componentOrder')" ng-show="adminRoleDto.processManage">进度计划</li>
     							</ul>
     						</li>
     					
-    						<!-- <li  ng-click="goMenu('usermanage','#/adminlist')" ng-if="admin.role==1" >
-    							<span class="glyphicon glyphicon-user"></span>
-    							<a>管理员管理</a>
-    							<span class="glyphicon glyphicon-chevron-right pull-right"></span>
-    							<ul class="liSon">
-    								<li>children</li>
-    								<li>children</li>
-    								<li>children</li>
-    							</ul>
-    						</li>
-    						<li ng-click="goMenu('usermanage','#/storageManage')">
-    							<span class="glyphicon glyphicon-cog"></span>
-    							<a>冷库管理</a>
-    							<span class="glyphicon glyphicon-chevron-right pull-right"></span>
-    							<ul class="liSon">
-    								<li>children</li>
-    								<li>children</li>
-    								<li>children</li>
-    							</ul>
-    						</li> -->
-    						<li ng-click="goMenu('projectManage','#/projectManage')" id="projectManage">
+    					<li ng-click="goMenu('projectManage','#/projectManage')" id="projectManage" ng-show="adminRoleDto.projectManage">
     							<span class="glyphicon glyphicon-th-list"></span>
     							<a>项目管理</a>
     							<span class="glyphicon glyphicon-chevron-right pull-right"></span>
     							<ul class="liSon">
-    								<li>
-    								</li>
-    								<li>children</li>
-    								<li>children</li>
+    								<li ng-click="goMenu('projectManage','#/projectManage')" ng-show="adminRoleDto.projectManage">项目管理</li>
     							</ul>
     						</li>
-    						<li ng-click="goMenu('compFactoryManage','#/compFactoryManage')">
+    						<li ng-click="goMenu('compFactoryManage','#/compFactoryManage')" ng-show="adminRoleDto.compFactoryManage" id="compFactoryManage">
 								<span class="glyphicon glyphicon-home"></span>
 								<a>构件厂管理</a>
 								<span class="glyphicon glyphicon-chevron-right pull-right"></span>
 								<ul class="liSon">
-									<li>children</li>
-									<li>children</li>
-									<li>children</li>
+									<li ng-click="goMenu('compFactoryManage','#/compFactoryManage')" ng-show="adminRoleDto.compFactoryManage">构件厂管理</li>
 								</ul>
 							</li>
-							<li ng-click="goMenu('operationLog','#/operationLog')">
-    							<span class="glyphicon glyphicon-calendar"></span>
-    							<a>操作日志</a>
-    							<span class="glyphicon glyphicon-chevron-right pull-right"></span>
-    							<ul class="liSon">
-    								<li>children</li>
-    								<li>children</li>
-    								<li>children</li>
-    							</ul>
-    						</li> 
-    					 <li ng-click="goMenu('userRoleManage','#/userRoleManage')">
-    							<span class="glyphicon glyphicon-th"></span>
-    							<a>角色管理</a>
-    							<span class="glyphicon glyphicon-chevron-right pull-right"></span>
-    							<ul class="liSon">
-    								<li>children</li>
-    								<li>children</li>
-    								<li>children</li>
-    							</ul>
-    						</li> 
-    						<!-- <li ng-click="goMenu('usermanage','#/storageManage')">
+    					
+    					<li ng-click="goMenu('userManage','#/userManage')" id ="userManage" ng-show="adminRoleDto.userManage || 
+    					adminRoleDto.roleManage ||adminRoleDto.logManage">
     							<span class="glyphicon glyphicon-cog"></span>
     							<a>系统管理</a>
     							<span class="glyphicon glyphicon-chevron-right pull-right"></span>
     							<ul class="liSon">
-    								<li>children</li>
-    								<li>children</li>
-    								<li>children</li>
+    								<li ng-click="goMenu('userManage','#/userManage')" ng-show="adminRoleDto.userManage">用户管理</li>
+    								<li ng-click="goMenu('userRoleManage','#/userRoleManage')" ng-show="adminRoleDto.roleManage">角色管理</li>
+    								<li ng-click="goMenu('operationLog','#/operationLog')" ng-show="adminRoleDto.logManage">操作日志</li>
     							</ul>
-    						</li> -->
-    						<li ng-click="goMenu('personalSpace','#/personalSpace')">
+    						</li>
+    					
+    					<li ng-click="goMenu('productManage','#/productManage')" id="productManage" ng-show="adminRoleDto.productManage">
+    							<span class="glyphicon glyphicon-th-list"></span>
+    							<a>生产管理</a>
+    							<span class="glyphicon glyphicon-chevron-right pull-right"></span>
+    							<ul class="liSon">
+    								<li ng-click="goMenu('productManage','#/productManage')" ng-show="adminRoleDto.productManage">生产管理</li>
+    							</ul>
+    						</li>
+    					
+    					<li ng-click="goMenu('personalSpace','#/personalSpace')" id ="personalSpace" ng-show="adminRoleDto.personalManage">
     							<span class="glyphicon glyphicon-pencil"></span>
     							<a>个人中心</a>
     							<span class="glyphicon glyphicon-chevron-right pull-right"></span>
     							<ul class="liSon">
-    								<li>children</li>
-    								<li>children</li>
-    								<li>children</li>
+    								<li ng-click="goMenu('personalSpace','#/personalSpace')" ng-show="adminRoleDto.personalManage">个人中心</li>
     							</ul>
     						</li>
     					</ul>
@@ -204,8 +156,12 @@
 <script src="app/js/componentManage.js"></script>
 <script src="app/js/operationLog.js"></script>
 <script src="app/js/personalSpace.js"></script>
+<<<<<<< HEAD
 <script src="app/js/componentOrder.js"></script>
 
+=======
+<script src="app/js/userManage.js"></script>
+>>>>>>> branch 'master' of https://github.com/jiangkaiqiang/SHFB.git
 <!-- viewer -->
 <script src="assets/js/viewer.min.js"></script>
 

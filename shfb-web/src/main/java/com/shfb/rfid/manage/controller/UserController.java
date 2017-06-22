@@ -16,14 +16,23 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.shfb.rfid.manage.dao.ProjectMapper;
 import com.shfb.rfid.manage.dao.SysUserMapper;
+import com.shfb.rfid.manage.dao.UserRoleMapper;
 import com.shfb.rfid.manage.dto.BaseDto;
+import com.shfb.rfid.manage.dto.ProjectDto;
 import com.shfb.rfid.manage.dto.ResultDto;
+import com.shfb.rfid.manage.dto.SysUserDto;
 import com.shfb.rfid.manage.dto.UploadFileEntity;
+import com.shfb.rfid.manage.entity.CityInfo;
 import com.shfb.rfid.manage.entity.Cookies;
+import com.shfb.rfid.manage.entity.Project;
+import com.shfb.rfid.manage.entity.ProvinceInfo;
 import com.shfb.rfid.manage.entity.SysUser;
+import com.shfb.rfid.manage.entity.UserRole;
 import com.shfb.rfid.manage.service.CookieService;
 import com.shfb.rfid.manage.service.FtpService;
 import com.shfb.rfid.manage.util.EncodeUtil;
@@ -36,6 +45,10 @@ public class UserController extends BaseController {
 	private static String baseDir = "picture";
 	@Autowired
 	private SysUserMapper userDao;
+	@Autowired
+	private ProjectMapper projectDao;
+	@Autowired
+	private UserRoleMapper userRoleDao;
 	@Autowired
 	private CookieService cookieService;
 	@Autowired
@@ -119,7 +132,7 @@ public class UserController extends BaseController {
 			@RequestParam(value="pageSize") Integer pageSize, 
 			@RequestParam(value="audit", required=false) Integer audit,
 			@RequestParam(value="keyword", required=false) String keyword) throws UnsupportedEncodingException {
-		if( !(audit == -1 || audit == 1 || audit == 0) ){
+		if( !(audit == 2 || audit == 1) ){
 			audit = null;
 		}
 		pageNum = pageNum == null? 1:pageNum;
@@ -130,20 +143,53 @@ public class UserController extends BaseController {
 		else{
 		keyword = URLDecoder.decode(keyword, "UTF-8");
 		}
-		return new PageInfo<SysUser>(userDao.findAllUser(audit,keyword));
+		Page<SysUser> sysUsers = userDao.findAllUser(audit,keyword);
+		Page<SysUserDto> sysUserDtos = new Page<SysUserDto>();
+		for (SysUser sysUser : sysUsers) {
+			SysUserDto sysUserDto = new SysUserDto();
+			sysUserDto.setSysUser(sysUser);
+			if (sysUser.getPro_id()!=null) {
+				Project project = projectDao.selectByPrimaryKey(sysUser.getPro_id());
+				if (project!=null) {
+					sysUserDto.setProjectName(project.getPro_name());					
+				}
+			}
+			if (sysUser.getUser_role_id()!=null) {
+				UserRole userRole = userRoleDao.selectByPrimaryKey(sysUser.getUser_role_id());
+				if (userRole!=null) {
+					sysUserDto.setUserRoleName(userRole.getUser_role_name());	
+				}
+			}
+			sysUserDtos.add(sysUserDto);
+		}
+		sysUserDtos.setPageSize(sysUsers.getPageSize());
+		sysUserDtos.setPages(sysUsers.getPages());
+		sysUserDtos.setTotal(sysUsers.getTotal());
+		return new PageInfo<SysUserDto>(sysUserDtos);
 		
 	}
 	
 	@RequestMapping(value = "/addUser", method = RequestMethod.GET)
 	@ResponseBody
 	public Object addUser(SysUser user) throws UnsupportedEncodingException {
-		if (user.getUser_name() == null || user.getPassword() == null||user.getUser_tel()==null) {
-			return new ResultDto(-1, "用户名和密码,手机号不能为空");
+		if (user.getUser_name() == null || user.getPassword() == null) {
+			return new ResultDto(-1, "用户名和密码不能为空");
 		}
-		user.setUser_name(URLDecoder.decode(user.getUser_name(), "UTF-8"));
-		user.setPassword(EncodeUtil.encodeByMD5(user.getPassword()));
+		if (userDao.findUserByName(user.getUser_name())!=null) {
+			return new ResultDto(-1, "用户名已存在");
+		}
 		userDao.insert(user);
-		return new BaseDto(0);
+		return new ResultDto(0,"添加成功");
+	}
+	
+	@RequestMapping(value = "/updateUser", method = RequestMethod.GET)
+	@ResponseBody
+	public Object updateUser(SysUser user) throws UnsupportedEncodingException {
+		if (user.getUser_name() == null || user.getPassword() == null) {
+			return new ResultDto(-1, "用户名和密码不能为空");
+		}
+		userDao.updateUser(user);
+		return new ResultDto(0,"更新成功");
 	}
 	
 	@RequestMapping(value = "/changePwd")
@@ -165,6 +211,23 @@ public class UserController extends BaseController {
 		NgRemoteValidateDTO ngRemoteValidateDTO = new NgRemoteValidateDTO();
 		ngRemoteValidateDTO.setValid(userDao.findUserByName(username)==null? true:false);
 		return ngRemoteValidateDTO;
+	}
+	
+	
+	@RequestMapping(value = "/deleteUserByID")
+	@ResponseBody
+	public Object deleteUserByID(Integer userID) {
+		 userDao.deleteByPrimaryKey(userID);
+		 return new BaseDto(0);
+	}
+	
+	@RequestMapping(value = "/deleteUserByIDs")
+	@ResponseBody
+	public Object deleteUserByIDs(Integer[] userIDs) {
+		for(Integer userID:userIDs){
+			userDao.deleteByPrimaryKey(userID);
+		}
+		return new BaseDto(0);
 	}
 	/*@RequestMapping(value = "/updatePhoto")
 	@ResponseBody

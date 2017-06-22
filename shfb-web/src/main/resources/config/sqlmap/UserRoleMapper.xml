@@ -89,4 +89,7 @@
 		</where>
 		order by `createTime` desc
 	</select>
+	<select id="findAllUserRoleList" parameterType="int" resultType="com.shfb.rfid.manage.entity.UserRole">
+		SELECT * FROM `user_role` order by `createTime` asc
+	</select>
 </mapper>
