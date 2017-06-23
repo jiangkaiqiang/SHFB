@@ -38,6 +38,8 @@ public interface ComponentMapper {
     
     List<Component> findComponentTypes();
     
+    List<ComponentDto> exportComponents(String[] componentIds);
+    
    
     
 }

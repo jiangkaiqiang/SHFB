@@ -3,6 +3,7 @@ package com.shfb.rfid.manage.controller;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
@@ -25,6 +27,8 @@ import com.shfb.rfid.manage.dto.ResultDto;
 import com.shfb.rfid.manage.entity.Component;
 import com.shfb.rfid.manage.entity.ComponentOrder;
 import com.shfb.rfid.manage.entity.ComponentStatus;
+import com.shfb.rfid.manage.util.ExcelImportUtil;
+
 @Controller
 @RequestMapping(value = "/component")
 public class ComponentController extends BaseController {
@@ -126,5 +130,32 @@ public class ComponentController extends BaseController {
 		}
 		
 	}
+	
+	@RequestMapping(value = "/exportComp", method = RequestMethod.GET)
+	@ResponseBody
+	public ModelAndView exportComp(String componentIdStrs)  {
+		String[] componentIds = componentIdStrs.split(",");
+		List<ComponentDto> components = componentDao.exportComponents(componentIds);	
+		
+		Map<String, Object> dataExel = new HashMap<String, Object>();
+		List<String> titles = new ArrayList<String>();
+		titles.add("构件名称");
+		titles.add("构件编号");
+		titles.add("构件类型");
+		titles.add("构件规格");
+		List<Map<String, Object>> varList = new ArrayList<Map<String,Object>>();
+		for (ComponentDto component : components) {
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("var1", component.getComponent_name());
+			map.put("var2", component.getComponent_num());
+			map.put("var3", component.getComponent_type());
+			map.put("var4", component.getComponent_size());
+			varList.add(map);
+		}
+		dataExel.put("titles", titles);
+		dataExel.put("varList", varList);
+		return ExcelImportUtil.exportExcel(dataExel);
+	}
+	
 	
 }

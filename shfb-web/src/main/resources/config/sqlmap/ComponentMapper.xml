@@ -443,4 +443,13 @@
   	SELECT DISTINCT(component_type) from component
   </select>
   
+  <select id="exportComponents" parameterType="String" resultType="com.shfb.rfid.manage.dto.ComponentDto">
+  	SELECT 
+  		component_id,component_name,component_num,component_type,component_size
+  	FROM component WHERE component_id in 
+  	<foreach collection="array" index="index" item="item" open="(" separator="," close=")">
+		 	#{item}
+	</foreach>
+  </select>
+  
 </mapper>

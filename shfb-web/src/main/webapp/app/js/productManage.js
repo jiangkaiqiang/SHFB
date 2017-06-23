@@ -1,4 +1,4 @@
-coldWeb.controller('componentManage', function ($rootScope, $scope, $state, $cookies, $http, $location) {
+coldWeb.controller('productManage', function ($rootScope, $scope, $state, $cookies, $http, $location) {
 	
 	 $scope.isinfoShow = false;  
 	 $scope.ismanageShow = true;

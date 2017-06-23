@@ -1,11 +1,12 @@
 coldWeb.controller('index', function ($scope, $state, $cookies, $http, $location) {
 	   $scope.goMenu = function (name,url) {
-		    angular.element(name).addClass('highlight');
+		   /* angular.element(name).addClass('highlight');*/
 	   		window.location.href=url;
 	   	};
 	$(function() {
-	//  侧栏下拉菜单暂时隐藏	
-	$(".list li").eq(0).addClass('highlight').siblings().removeClass('highlight');
+	//  侧栏下拉菜单暂时隐藏
+	var liID = window.location.hash.substring(2, window.location.hash.length);
+	$("#"+liID).addClass('highlight').siblings().removeClass('highlight');
 	$(".list li").click(function(event){
 		/*$(".list li").attr('value','');
 		var i = $(this).index();

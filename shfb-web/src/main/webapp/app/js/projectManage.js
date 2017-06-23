@@ -294,69 +294,25 @@ coldWeb.controller('projectManage', function ($rootScope, $scope, $state, $cooki
 		 }
 		 
 		 $scope.loadTem=function(){
-			 window.location.href="../../assets/file/componentTemplate.xlsx";
+			 window.location.href="../../assets/file/componentTemplate.xls";
 		 }
 		 
 		 $scope.importPic=function(){
-//			 $http({
-//				 method:'POST',
-//				 url: '/i/project/fileUpload',
-//				 headers: {
-//
-//				    'Content-Type': undefined
-//
-//				  },
-//				  data: {
-//
-//				    filename:document.getElementsByClassName('input-file')[0].files[0],
-//				    problemType: '3'
-//
-//				  },
-//				  transformRequest: function(data, headersGetter) {
-//
-//				    let formData = new FormData();
-//				    angular.forEach(data, function (value, key) {
-//				    formData.append(key, value);
-//
-//				    }
-//
-//				    return formData;
-//
-//				   }
-//
-//				})
-//				.success(function()  {
-//
-//				  alert('Upload Successfully');
-//
-//				})
-//				.error(function()  {
-//
-//				  alert('Fail to upload, please upload again');
-//
-//				});
 			 $http({
-			        method: 'POST',
-			        url: '/i/project/fileUpload',
-			        headers: {
-			        	'Content-Type': undefined
-			        	},
-			        data: {
-			        		 	filename:document.getElementsByClassName('input-file')[0].files[0],
-			        		 	problemType: '3'
-			        		 	},
-			       transformRequest:function(){
-			    	   var formData = new FormData();
-			    	   angular.forEach(data,function(value, key){
-			    		   formData.append(key, value);
-			    	   });
-			    	   
-			       }
-			    }).then(function successCallback(response) {
-			            $scope.names = response.data.sites;
-			        }, function errorCallback(response) {
-			            // 请求失败执行代码
-			    });
+					url: '/i/project/fileUpload',
+					method: 'POST',
+					headers: {
+						'Content-Type': undefined
+					},
+					transformRequest: function() {
+						var formData = new FormData();
+						formData.append('file', $('#upfile')[0].files[0]);
+						formData.append('pro_id',1);
+						return formData;
+					}
+				}).success(function (data) {
+					alert(data.message);   //返回上传后所在的路径
+				});
 		 }
 		 
 });

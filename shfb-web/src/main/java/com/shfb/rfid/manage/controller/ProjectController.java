@@ -1,7 +1,11 @@
 package com.shfb.rfid.manage.controller;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,13 +19,18 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.shfb.rfid.manage.dao.CityMapper;
+import com.shfb.rfid.manage.dao.ComponentMapper;
 import com.shfb.rfid.manage.dao.ProjectMapper;
 import com.shfb.rfid.manage.dto.BaseDto;
 import com.shfb.rfid.manage.dto.ProjectDto;
 import com.shfb.rfid.manage.dto.ResultDto;
+import com.shfb.rfid.manage.dto.UploadFileEntity;
 import com.shfb.rfid.manage.entity.CityInfo;
+import com.shfb.rfid.manage.entity.Component;
 import com.shfb.rfid.manage.entity.Project;
 import com.shfb.rfid.manage.entity.ProvinceInfo;
+import com.shfb.rfid.manage.service.FtpService;
+import com.shfb.rfid.manage.util.ExcelImportUtil;
 @Controller
 @RequestMapping(value = "/project")
 public class ProjectController extends BaseController {
@@ -29,7 +38,10 @@ public class ProjectController extends BaseController {
 	private ProjectMapper projectDao;
 	@Autowired
 	private CityMapper cityDao;
-	
+	@Autowired
+	private FtpService ftpservice;
+	@Autowired
+	private ComponentMapper componentDao;
 	
 	
 	@RequestMapping(value = "/findProjectList", method = RequestMethod.POST)
@@ -125,15 +137,53 @@ public class ProjectController extends BaseController {
 	  
 	 /**
 		 *app上传文件()
+	 * @throws IOException 
 		 */
 		@RequestMapping(value="/fileUpload")
 		@ResponseBody
-		public ResultDto fileUpload(@RequestParam(value = "file", required = false) MultipartFile[] files){
+		public ResultDto fileUpload(@RequestParam(value = "file", required = false) MultipartFile[] files,
+				Integer pro_id) throws IOException{
+			/**
+			 * 保存上传的excel
+			 */
+			boolean res=false;
+			if (null != files && files.length>0) {		
+				List<UploadFileEntity> fileEntities = new ArrayList<UploadFileEntity>();				
+				for (int i = 0; i < files.length; i++) {
+					//获取文件的原始名字
+					String fileName = files[i].getOriginalFilename();
+					//文件保存的名字
+					String saveName = System.currentTimeMillis() + fileName.substring(fileName.lastIndexOf("."));
+					fileEntities.add(new UploadFileEntity(saveName, files[i], "uploadComp"));					
+				}
+				//保存文件
+				res = ftpservice.uploadFileList(fileEntities);			
+				}
+			/**
+			 * 保存成功后解析excel，并将数据存到数据库
+			 */
+				if( res == true ) {
+					List<Map<String, String>> result = ExcelImportUtil.readExcel(files[0].getInputStream(), 1, 0, 0);
+					for (Map<String, String> map : result) {
+						Component component = new Component();
+						component.setComponent_name(map.get("var0"));
+						if(map.get("var1") == null){
+							continue;
+						}
+						component.setComponent_num(map.get("var1"));
+						component.setSingle_name(map.get("var2"));
+						component.setFloor(map.get("var3"));
+						component.setComponent_type(map.get("var4"));
+						component.setComponent_size(map.get("var5"));
+						component.setPro_id(pro_id);
+						componentDao.insertSelective(component);
+					}
+					return new ResultDto(2,"sucess");
+				} else {
+					return new ResultDto(2,"server err");
+				}
 			
-			for (MultipartFile myfile : files) {
-				System.out.println(myfile.getOriginalFilename());
-			}
-			
-			return new ResultDto(-1, "项目名和联系人不能为空");
 		}
+			
+		
 }
