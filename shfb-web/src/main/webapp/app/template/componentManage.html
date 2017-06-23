@@ -114,8 +114,7 @@
 				         <td ng-if="component.check_res=='3'">验收不通过</td>
 				         <td>
   				            <button class="btn btn-primary btn-sm"  ng-click="showInfo(component.component_id)">查看</button>
-  				            <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#updateProject" ng-click="goUpdate(project.project.pro_id)">更新</button>
-				         	<button class="delete" ng-click="goDeleteProject(project.project.pro_id)"></button>
+				         	<button class="delete" ng-click="deleteComp(component.component_id)"></button>
 				         </td>
 				      </tr>
 				   </tbody>

@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.shfb.rfid.manage.dao.CityMapper;
@@ -19,8 +22,6 @@ import com.shfb.rfid.manage.dto.ResultDto;
 import com.shfb.rfid.manage.entity.CityInfo;
 import com.shfb.rfid.manage.entity.Project;
 import com.shfb.rfid.manage.entity.ProvinceInfo;
-import com.shfb.rfid.manage.util.EncodeUtil;
-import com.github.pagehelper.Page;
 @Controller
 @RequestMapping(value = "/project")
 public class ProjectController extends BaseController {
@@ -117,9 +118,22 @@ public class ProjectController extends BaseController {
 	}
 
 	 @RequestMapping(value = "/findAllProject")
-	    @ResponseBody
+	 @ResponseBody
 	    public Object findAllProject() {
 	        return projectDao.findAllProjectList();
 	    }
-	    	
+	  
+	 /**
+		 *app上传文件()
+		 */
+		@RequestMapping(value="/fileUpload")
+		@ResponseBody
+		public ResultDto fileUpload(@RequestParam(value = "file", required = false) MultipartFile[] files){
+			
+			for (MultipartFile myfile : files) {
+				System.out.println(myfile.getOriginalFilename());
+			}
+			
+			return new ResultDto(-1, "项目名和联系人不能为空");
+		}
 }

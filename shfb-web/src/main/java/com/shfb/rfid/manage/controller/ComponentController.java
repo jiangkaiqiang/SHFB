@@ -23,6 +23,7 @@ import com.shfb.rfid.manage.dao.ComponentStatusMapper;
 import com.shfb.rfid.manage.dto.ComponentDto;
 import com.shfb.rfid.manage.dto.ResultDto;
 import com.shfb.rfid.manage.entity.Component;
+import com.shfb.rfid.manage.entity.ComponentOrder;
 import com.shfb.rfid.manage.entity.ComponentStatus;
 @Controller
 @RequestMapping(value = "/component")
@@ -110,6 +111,20 @@ public class ComponentController extends BaseController {
 				res.add(type);
 		}
 		return res;
+	}
+	
+	
+	@RequestMapping(value = "/deleteComp", method = RequestMethod.GET)
+	@ResponseBody
+	public ResultDto deleteComp(Integer component_id)  {
+		int res = componentDao.deleteByPrimaryKey(component_id);
+
+		if( res==1 ) {
+			return new ResultDto(1, "删除成功");
+		} else {
+			return new ResultDto(2, "删除失败");
+		}
+		
 	}
 	
 }

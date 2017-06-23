@@ -279,4 +279,84 @@ coldWeb.controller('projectManage', function ($rootScope, $scope, $state, $cooki
 		            alert("请填写项目名称和联系人!");
 		        }
 		    }
+		 
+		 $scope.importComponent=function(){
+			 var projectIDs = [];
+		    	for(i in $scope.selected){
+		    		projectIDs.push($scope.selected[i].pro_id);
+		    	}
+		    	if(projectIDs.length == 0 ){
+		    		alert("请选择项目");		    		
+		    	}else{
+		    		$('#importPic').modal('show')
+		    		
+		    	}
+		 }
+		 
+		 $scope.loadTem=function(){
+			 window.location.href="../../assets/file/componentTemplate.xlsx";
+		 }
+		 
+		 $scope.importPic=function(){
+//			 $http({
+//				 method:'POST',
+//				 url: '/i/project/fileUpload',
+//				 headers: {
+//
+//				    'Content-Type': undefined
+//
+//				  },
+//				  data: {
+//
+//				    filename:document.getElementsByClassName('input-file')[0].files[0],
+//				    problemType: '3'
+//
+//				  },
+//				  transformRequest: function(data, headersGetter) {
+//
+//				    let formData = new FormData();
+//				    angular.forEach(data, function (value, key) {
+//				    formData.append(key, value);
+//
+//				    }
+//
+//				    return formData;
+//
+//				   }
+//
+//				})
+//				.success(function()  {
+//
+//				  alert('Upload Successfully');
+//
+//				})
+//				.error(function()  {
+//
+//				  alert('Fail to upload, please upload again');
+//
+//				});
+			 $http({
+			        method: 'POST',
+			        url: '/i/project/fileUpload',
+			        headers: {
+			        	'Content-Type': undefined
+			        	},
+			        data: {
+			        		 	filename:document.getElementsByClassName('input-file')[0].files[0],
+			        		 	problemType: '3'
+			        		 	},
+			       transformRequest:function(){
+			    	   var formData = new FormData();
+			    	   angular.forEach(data,function(value, key){
+			    		   formData.append(key, value);
+			    	   });
+			    	   
+			       }
+			    }).then(function successCallback(response) {
+			            $scope.names = response.data.sites;
+			        }, function errorCallback(response) {
+			            // 请求失败执行代码
+			    });
+		 }
+		 
 });

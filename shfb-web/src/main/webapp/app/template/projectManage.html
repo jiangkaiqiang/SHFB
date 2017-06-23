@@ -81,7 +81,7 @@
 				<div class="btn-group" role="group">
 				    <button type="button" class="btn btn-default" ng-click="printReport()">打印报表</button>
 				   <button type="button" class="btn btn-default" ng-click="deleteProjects()">批量删除</button>
-				      <button type="button" class="btn btn-default" data-toggle="modal" data-target="#importComp">导入构件</button>
+				      <button type="button" class="btn btn-default"  ng-click="importComponent()">导入构件</button>
 				    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#importPic">导入图纸</button>
 				</div>
 			</div>
@@ -384,10 +384,10 @@
 	            	<form class="form-horizontal" name="compfactoryForm">
 					   <div class="form-group">
 					      <div class="col-sm-4">
-					                      <input type="file" id="importPic">
+					                      <input type="file" id="file" class="input-file">
 					      </div>
 					      <div class="col-sm-4">
-					      <button type="button" class="btn btn-default" >删除文件</button>
+					      <button type="button" class="btn btn-default" ng-click="loadTem()">下载模板</button>
 					      </div>
 					   </div>
 	            	</form>

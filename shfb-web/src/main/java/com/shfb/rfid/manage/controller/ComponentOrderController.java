@@ -53,7 +53,6 @@ public class ComponentOrderController extends BaseController {
 		
 	}
 	
-	//int updateByPrimaryKeySelective(ComponentOrder componentOrder);
 	@RequestMapping(value = "/updateByPrimaryKeySelective", method = RequestMethod.GET)
 	@ResponseBody
 	public ResultDto updateByPrimaryKeySelective(ComponentOrder componentOrder)  {

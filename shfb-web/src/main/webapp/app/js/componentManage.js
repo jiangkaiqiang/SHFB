@@ -241,5 +241,25 @@ coldWeb.controller('componentManage', function ($rootScope, $scope, $state, $coo
 				$scope.isedit=false;
 			});
 	   }  
+	   
+	   $scope.deleteComp = function (component_id) {
+	    	if(delcfm()){
+	    	$http.get('/i/component/deleteComp', {
+	            params: {
+	                "component_id": component_id
+	            }
+	        }).success(function (data) {
+	        	$scope.getComponents();
+	        	alert(data.message);
+	        });
+	    	}
+	    }
+	   
+		function delcfm() {
+	        if (!confirm("确认要删除？")) {
+	            return false;
+	        }
+	        return true;
+	}
 	      
 });
