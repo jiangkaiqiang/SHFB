@@ -5,6 +5,17 @@ coldWeb.controller('personalSpace', function ($rootScope, $scope, $state, $cooki
 				url = "http://" + $location.host() + ":" + $location.port() + "/login.html";
 				window.location.href = url;
 			}
+			else{
+				$http.get('/i/userrole/findUserRoleByUserID', {
+		            params: {
+		                "userID": $rootScope.admin.user_id
+		            }
+		        }).success(function(data){
+				    if(data!=null&&data.userRole.user_role_id!=undefined){
+				    	$scope.adminRole = data.userRole;
+				    }
+			     });
+			}
 	   });
 	  function checkInput(){
 	        var flag = true;

@@ -64,8 +64,8 @@
     							<a>构件管理</a>
     							<span class="glyphicon glyphicon-chevron-right pull-right"></span>
     							<ul class="liSon">
-    								<li ng-click="goMenu('componentManage','#/componentManage')" ng-show="adminRoleDto.compManage">构件列表</li>
-    								<li ng-click="goMenu('componentOrder','#/componentOrder')" ng-show="adminRoleDto.processManage">进度计划</li>
+    								<li  ng-show="adminRoleDto.compManage"><a style="text-decoration:none" href="#/componentManage"><font color="black">构件列表</font></a></li>
+    								<li  ng-show="adminRoleDto.processManage"><a style="text-decoration:none" href="#/componentOrder"><font color="black">进度计划</font></a></li>
     							</ul>
     						</li>
     					
@@ -92,9 +92,9 @@
     							<a>系统管理</a>
     							<span class="glyphicon glyphicon-chevron-right pull-right"></span>
     							<ul class="liSon">
-    								<li ng-click="goMenu('userManage','#/userManage')" ng-show="adminRoleDto.userManage">用户管理</li>
-    								<li ng-click="goMenu('userRoleManage','#/userRoleManage')" ng-show="adminRoleDto.roleManage">角色管理</li>
-    								<li ng-click="goMenu('operationLog','#/operationLog')" ng-show="adminRoleDto.logManage">操作日志</li>
+    								<li  ng-show="adminRoleDto.userManage"><a style="text-decoration:none" href="#/userManage"><font color="black">用户管理</font></a></li>
+    								<li  ng-show="adminRoleDto.roleManage"><a  style="text-decoration:none"  href="#/userRoleManage"><font color="black">角色管理</font></a></li>
+    								<li  ng-show="adminRoleDto.logManage"><a style="text-decoration:none"  href="#/operationLog"><font color="black">操作日志</font></a></li>
     							</ul>
     						</li>
     					
@@ -156,12 +156,8 @@
 <script src="app/js/componentManage.js"></script>
 <script src="app/js/operationLog.js"></script>
 <script src="app/js/personalSpace.js"></script>
-<<<<<<< HEAD
 <script src="app/js/componentOrder.js"></script>
-
-=======
 <script src="app/js/userManage.js"></script>
->>>>>>> branch 'master' of https://github.com/jiangkaiqiang/SHFB.git
 <!-- viewer -->
 <script src="assets/js/viewer.min.js"></script>
 
