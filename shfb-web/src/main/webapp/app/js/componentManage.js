@@ -18,7 +18,7 @@ coldWeb.controller('componentManage', function ($rootScope, $scope, $state, $coo
     $scope.bigTotalItems = 10;
     // 当前页
     $scope.bigCurrentPage = 1;
-	$scope.Allprojects = [];
+	$scope.components = [];
 	 // 获取当前冷库的列表
 	  
     $scope.getComponents = function() {
@@ -289,13 +289,13 @@ coldWeb.controller('componentManage', function ($rootScope, $scope, $state, $coo
 	    	return list.indexOf(project) > -1;
 	    };
 	    $scope.isChecked = function() {
-	        return $scope.selected.length === $scope.Allprojects.length;
+	        return $scope.selected.length === $scope.components.length;
 	    };
 	    $scope.toggleAll = function() {
-	        if ($scope.selected.length === $scope.Allprojects.length) {
+	        if ($scope.selected.length === $scope.components.length) {
 	        	$scope.selected = [];
 	        } else if ($scope.selected.length === 0 || $scope.selected.length > 0) {
-	        	$scope.selected = $scope.Allprojects.slice(0);
+	        	$scope.selected = $scope.components.slice(0);
 	        }
 	    };
 	    
