@@ -135,6 +135,36 @@ public class ProjectController extends BaseController {
 	        return projectDao.findAllProjectList();
 	    }
 	  
+	 
+	 /**
+		 *app上传文件()
+	 * @throws IOException 
+		 */
+		@RequestMapping(value="/importPic")
+		@ResponseBody
+		public ResultDto importPic(@RequestParam(value = "files", required = false) MultipartFile[] files) throws IOException{
+			/**
+			 * 保存上传的图片
+			 */
+			boolean res=false;
+			if (null != files && files.length>0) {		
+				List<UploadFileEntity> fileEntities = new ArrayList<UploadFileEntity>();				
+				for (int i = 0; i < files.length; i++) {
+					//获取文件的原始名字
+					String fileName = files[i].getOriginalFilename();
+					fileEntities.add(new UploadFileEntity(fileName, files[i], "uploadPic"));					
+				}
+				//保存文件
+				res = ftpservice.uploadFileList(fileEntities);			
+				}
+				if( res == true ) 
+					return new ResultDto(2,"sucess");
+				else {
+					return new ResultDto(2,"server err");
+				}
+			
+		}
+	 
 	 /**
 		 *app上传文件()
 	 * @throws IOException 

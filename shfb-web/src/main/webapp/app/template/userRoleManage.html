@@ -1,6 +1,6 @@
     <div style="padding: 28px 30px 0 30px;background-color: #F1F1F1;">
     	<!-- 按钮操作区域开始 -->
-			<div class="col-sm-12" style="height:34px">
+			<div class="col-sm-12" style="height:70px">
 			<div class="col-sm-3">
 				<button type="button" class="btn btn-default pull-left" id="plusCold" data-toggle="modal" data-target="#addUserRole">
 					<span class="glyphicon glyphicon-plus"></span>添加角色
@@ -13,10 +13,36 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-sm-12" style="height:34px">
+			
+			<div class="col-sm-12" style="height:50px">
+			 <div  class="col-sm-4">	
+                <!--指定 date标记-->  
+                <div class='input-group date' id='datetimepicker1'>  
+                    <input type='text' class="form-control" placeholder="开始时间" ng-model="startTime" />  
+                    <span class="input-group-addon">  
+                        <span class="glyphicon glyphicon-calendar"></span>  
+                    </span>  
+                </div>  
+                </div>
+                <div  class="col-sm-4">	
+                <!--指定 date标记-->  
+                <div class='input-group date' id='datetimepicker2'>  
+                    <input type='text' class="form-control" placeholder="结束时间" ng-model="endTime" />  
+                    <span class="input-group-addon">  
+                        <span class="glyphicon glyphicon-calendar"></span>  
+                    </span>  
+                </div> 
+                </div>
+                <div  class="col-sm-2">	
+			<button type="button" class="btn btn-default pull-right" ng-click="goSearch()">
+					日期查询
+				</button>	
+				</div>
+               <div  class="col-sm-2">	
 			<button type="button" class="btn btn-default pull-right" ng-click="showAll()">
 					显示全部
 				</button>	
+				</div>
 			</div>
 			<!-- 按钮操作区域结束 -->
 			<!-- 表格操作区域开始 -->
@@ -187,6 +213,19 @@
 						</div>
 					</div>
 				</div>
+				<div class="accordion-group">
+					<div class="accordion-heading">
+						<span class="glyphicon glyphicon-folder-open"></span> <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-7827" href="#accordion-element-451069">用户设备选择</a>
+					</div>
+					<div id="accordion-element-451069" class="accordion-body in collapse">
+						<div class="accordion-inner">
+						<input type="checkbox" ng-model="pcManage"> <span class="glyphicon glyphicon-tags"></span>  电脑端
+						</div>
+						<div class="accordion-inner">
+						<input type="checkbox" ng-model="appManage"> <span class="glyphicon glyphicon-tags"></span>  平板端
+						</div>
+					</div>
+				</div>
 			</div>
 					</div>
 				</div>
@@ -327,6 +366,19 @@
 						</div>
 					</div>
 				</div>
+				<div class="accordion-group">
+					<div class="accordion-heading">
+						<span class="glyphicon glyphicon-folder-open"></span> <a class="accordion-toggle" data-toggle="collapse" data-parent="#uaccordion-7827" href="#uaccordion-element-451069">用户设备选择</a>
+					</div>
+					<div id="uaccordion-element-451069" class="accordion-body in collapse">
+						<div class="accordion-inner">
+						<input type="checkbox" ng-model="userRoleDtoForUpdate.pcManage"> <span class="glyphicon glyphicon-tags"></span>  电脑端
+						</div>
+						<div class="accordion-inner">
+						<input type="checkbox" ng-model="userRoleDtoForUpdate.appManage"> <span class="glyphicon glyphicon-tags"></span>  平板端
+						</div>
+					</div>
+				</div>
 			</div>
 					</div>
 				</div>
@@ -345,4 +397,3 @@
 	</div><!-- /.modal -->
 	</div>
 	<!--  添加修改角色模态框 end -->
-	

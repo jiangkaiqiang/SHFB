@@ -89,6 +89,8 @@ coldWeb.controller('userRoleManage', function ($rootScope, $scope, $state, $cook
         	if($scope.logManage) menus += "8;";
         	if($scope.productManage) menus += "9;";
         	if($scope.personalManage) menus += "10;";
+        	if($scope.pcManage) menus += "11;";
+        	if($scope.appManage) menus += "12;";
             $http({
             	method : 'GET',
             	url:'/i/userrole/addUserRole',
@@ -157,6 +159,8 @@ coldWeb.controller('userRoleManage', function ($rootScope, $scope, $state, $cook
 		        	if($scope.userRoleDtoForUpdate.logManage) menus += "8;";
 		        	if($scope.userRoleDtoForUpdate.productManage) menus += "9;";
 		        	if($scope.userRoleDtoForUpdate.personalManage) menus += "10;";
+		        	if($scope.userRoleDtoForUpdate.pcManage) menus += "11;";
+		        	if($scope.userRoleDtoForUpdate.appManage) menus += "12;";
 		            $http({
 		            	method : 'GET',
 		            	url:'/i/userrole/updateUserRole',
@@ -181,4 +185,14 @@ coldWeb.controller('userRoleManage', function ($rootScope, $scope, $state, $cook
 		            alert("请填写用户角色名称!");
 		        }
 		 }
+		 $('#datetimepicker1').datetimepicker({  
+		        //format: 'YYYY-MM-DD hh:mm',  
+		        //locale: moment.locale('zh-cn')  
+		    }).on('dp.change', function (e) {  
+		    });  
+		 $('#datetimepicker2').datetimepicker({  
+		        //format: 'YYYY-MM-DD hh:mm',  
+		        //locale: moment.locale('zh-cn')  
+		    }).on('dp.change', function (e) {  
+		    });  
 });
