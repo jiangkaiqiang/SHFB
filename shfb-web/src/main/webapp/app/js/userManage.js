@@ -28,6 +28,9 @@ coldWeb.controller('userManage', function ($rootScope, $scope, $state, $cookies,
 				pageNum : $scope.bigCurrentPage,
 				pageSize : $scope.maxSize,
 				audit : $scope.optAudit,
+				startTime : $scope.startTime,
+				endTime : $scope.endTime,
+				userProjectID : $rootScope.admin.pro_id,
 				keyword : encodeURI($scope.keyword,"UTF-8"),
 			}
 		}).success(function(data) {
@@ -253,5 +256,10 @@ coldWeb.controller('userManage', function ($rootScope, $scope, $state, $cookies,
 		            alert("请填写用户名或密码!");
 		        }
 		    }
-    
+		 $('#datetimepicker1').datetimepicker({  
+		    }).on('dp.change', function (e) {  
+		    });  
+		 $('#datetimepicker2').datetimepicker({  
+		    }).on('dp.change', function (e) {  
+		    });  
 });

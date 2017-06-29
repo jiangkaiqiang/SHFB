@@ -131,6 +131,9 @@ public class UserController extends BaseController {
 	public Object findUserList(@RequestParam(value="pageNum",required=false) Integer pageNum,
 			@RequestParam(value="pageSize") Integer pageSize, 
 			@RequestParam(value="audit", required=false) Integer audit,
+			@RequestParam(value="startTime", required=false) String startTime,
+			@RequestParam(value="endTime", required=false) String endTime,
+			@RequestParam(value="userProjectID", required=false) Integer userProjectID,
 			@RequestParam(value="keyword", required=false) String keyword) throws UnsupportedEncodingException {
 		if( !(audit == 2 || audit == 1) ){
 			audit = null;
@@ -143,7 +146,10 @@ public class UserController extends BaseController {
 		else{
 		keyword = URLDecoder.decode(keyword, "UTF-8");
 		}
-		Page<SysUser> sysUsers = userDao.findAllUser(audit,keyword);
+		if (userProjectID==0) {
+			userProjectID = null;
+		}
+		Page<SysUser> sysUsers = userDao.findAllUser(audit,keyword,startTime, endTime,userProjectID);
 		Page<SysUserDto> sysUserDtos = new Page<SysUserDto>();
 		for (SysUser sysUser : sysUsers) {
 			SysUserDto sysUserDto = new SysUserDto();

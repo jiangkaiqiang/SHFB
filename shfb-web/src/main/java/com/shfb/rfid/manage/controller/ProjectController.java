@@ -49,6 +49,7 @@ public class ProjectController extends BaseController {
 	public Object findProjectList(@RequestParam(value="pageNum",required=false) Integer pageNum,
 			@RequestParam(value="pageSize") Integer pageSize, 
 			@RequestParam(value="provinceid", required=false) Integer provinceid,
+			@RequestParam(value="userProjectID", required=false) Integer userProjectID,
 			@RequestParam(value="keyword", required=false) String keyword) throws UnsupportedEncodingException {
 		pageNum = pageNum == null? 1:pageNum;
 		pageSize = pageSize==null? 12:pageSize;
@@ -58,7 +59,10 @@ public class ProjectController extends BaseController {
 		else{
 		keyword = URLDecoder.decode(keyword, "UTF-8");
 		}
-		Page<Project> projects = projectDao.findAllProject(provinceid,keyword);
+		if (userProjectID==0) {
+			userProjectID = null;
+		}
+		Page<Project> projects = projectDao.findAllProject(provinceid,keyword,userProjectID);
 		Page<ProjectDto> projectDtos = new Page<ProjectDto>();
 		for (Project project : projects) {
 			ProjectDto projectDto = new ProjectDto();

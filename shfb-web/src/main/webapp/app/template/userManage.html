@@ -1,7 +1,7 @@
     <div style="padding: 28px 30px 0 30px;background-color: #F1F1F1;">
     
     <!-- 按钮操作区域开始 -->
-			<div class="col-sm-12" style="height:34px">
+			<div class="col-sm-12" style="height:70px">
 			<div class="col-sm-3">
 				<button type="button" class="btn btn-default pull-left" id="plusCold" data-toggle="modal" data-target="#addUser">
 					<span class="glyphicon glyphicon-plus"></span>添加用户
@@ -22,10 +22,35 @@
 			         </select>
 				</div>
 			</div>
-			<div class="col-sm-12" style="height:34px">
+			<div class="col-sm-12" style="height:50px">
+			 <div  class="col-sm-4">	
+                <!--指定 date标记-->  
+                <div class='input-group date' id='datetimepicker1'>  
+                    <input type='text' class="form-control" placeholder="开始时间" ng-model="startTime" />  
+                    <span class="input-group-addon">  
+                        <span class="glyphicon glyphicon-calendar"></span>  
+                    </span>  
+                </div>  
+                </div>
+                <div  class="col-sm-4">	
+                <!--指定 date标记-->  
+                <div class='input-group date' id='datetimepicker2'>  
+                    <input type='text' class="form-control" placeholder="结束时间" ng-model="endTime" />  
+                    <span class="input-group-addon">  
+                        <span class="glyphicon glyphicon-calendar"></span>  
+                    </span>  
+                </div> 
+                </div>
+                <div  class="col-sm-2">	
+			<button type="button" class="btn btn-default pull-right" ng-click="goSearch()">
+					日期查询
+				</button>	
+				</div>
+               <div  class="col-sm-2">	
 			<button type="button" class="btn btn-default pull-right" ng-click="showAll()">
 					显示全部
 				</button>	
+				</div>
 			</div>
 			<!-- 按钮操作区域结束 -->
     

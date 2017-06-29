@@ -20,7 +20,7 @@ public interface SysUserMapper {
 	
 	void updateUser(SysUser userEntity);
 		
-	Page<SysUser> findAllUser(@Param("status")Integer status, @Param("keyword")String keyword);
+	Page<SysUser> findAllUser(@Param("status")Integer status, @Param("keyword")String keyword,@Param("startTime")String startTime, @Param("endTime")String endTime,@Param("userProjectID")Integer userProjectID);
 	
 	List<SysUser> findUsersByRoleID(@Param("userRoleID")Integer userRoleID);
 }

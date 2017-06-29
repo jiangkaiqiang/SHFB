@@ -26,6 +26,7 @@ coldWeb.controller('projectManage', function ($rootScope, $scope, $state, $cooki
 				pageNum : $scope.bigCurrentPage,
 				pageSize : $scope.maxSize,
 				provinceid : $scope.searchprovinceid,
+				userProjectID : $rootScope.admin.pro_id,
 				keyword : encodeURI($scope.keyword,"UTF-8"),
 			}
 		}).success(function(data) {
@@ -116,7 +117,7 @@ coldWeb.controller('projectManage', function ($rootScope, $scope, $state, $cooki
     	if(delcfm()){
     	var projectIDs = [];
     	for(i in $scope.selected){
-    		projectIDs.push($scope.selected[i].pro_id);
+    		projectIDs.push($scope.selected[i].project.pro_id);
     	}
     	if(projectIDs.length >0 ){
     		$http({

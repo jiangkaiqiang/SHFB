@@ -55,7 +55,7 @@
 	<select id="findUser" parameterType="map" resultType="SysUser">
 		SELECT u.*
 		FROM sys_user u
-		WHERE u.user_name = #{user_name} AND u.password = #{password}
+		WHERE u.user_name = #{user_name} AND u.password = #{password} AND u.valid_status = 1
 	</select>
 	<select id="findUserByName" parameterType="map" resultType="SysUser">
 		SELECT u.* FROM sys_user u
@@ -72,9 +72,18 @@
 			<if test="status != null">
 				valid_status=#{status}
 			</if>
+			<if test="userProjectID != null">
+				AND pro_id=#{userProjectID}
+			</if>
 			<if test="keyword != null">
 				AND user_name like "%"#{keyword}"%"
 			</if>
+			<if test="startTime!=null and startTime!=''">
+                AND create_time &gt;= #{startTime}
+            </if>
+            <if test="endTime!=null and endTime!=''">
+                AND create_time &lt;= #{endTime}
+            </if>
 		</where>
 		order by `create_time` desc
 	</select>
