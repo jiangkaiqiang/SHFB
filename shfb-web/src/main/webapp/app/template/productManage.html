@@ -243,17 +243,29 @@
 				</div>
 				<div class="col-md-3">
 						  <span style="float:left">生产计划开始日期：</span>
-					      <span ng-if="isedit">
+					      <!-- <span ng-if="isedit">
 					         <input id="product_plan_begin_date" type="text" style="width:150px" class="form-control" ng-model="componentInfo.product_plan_begin_date" placeholder="生产计划开始时间">
-					      </span>
+					      </span> -->
 					      <span ng-if="!isedit">{{componentInfo.product_plan_begin_date}}</span>			
+							<div class='input-group date datetimepickerDisplay' style="display:none;">  
+                    		<input id="product_plan_begin_date" style="width:40%;position: relative" type='text' class="form-control" placeholder="生成计划开始时间" ng-model="componentInfo.product_plan_begin_date" />  
+                    			<span class="input-group-addon" style="width:14px">  
+                        		<span class="glyphicon glyphicon-calendar"></span>  
+                    			</span>  
+                			</div>
 				</div>
 				<div class="col-md-3">
 						  <span style="float:left">生产计划完成日期：</span>
-					      <span ng-if="isedit">
+					      <!-- <span ng-if="isedit">
 					         <input id="product_plan_end_date" type="text" style="width:150px" class="form-control" ng-model="componentInfo.product_plan_end_date" placeholder="生产计划完成日期">
-					      </span>
+					      </span> -->
 					       <span ng-if="!isedit">{{componentInfo.product_plan_end_date}}</span>
+					       <div class='input-group date datetimepickerDisplay' style="display:none;">  
+                    		<input id="product_plan_end_date" style="width:40%;position: relative" type='text' class="form-control" placeholder="生成计划完成日期" ng-model="componentInfo.product_plan_end_date" />  
+                    			<span class="input-group-addon" style="width:14px">  
+                        		<span class="glyphicon glyphicon-calendar"></span>  
+                    			</span>  
+                			</div>
 				</div>
 			</div> 
 			
@@ -334,15 +346,27 @@
 					   <div class="form-group">
 					      <label for="projectname" class="col-sm-4 control-label">生产计划开始日期：</label>
 					      <div class="col-sm-8">
-					         <input type="text" class="form-control" ng-model="product_plan_begin_date" name="proname" placeholder="请输入生产计划开始日期">
+<!-- 					         <input type="text" class="form-control" ng-model="product_plan_begin_date" name="proname" placeholder="请输入生产计划开始日期">
+ -->					      	 <div class='input-group date datetimepickerDisplay'>  
+                    		<input style="position: relative" type='text' class="form-control" placeholder="生产计划开始日期" ng-model="product_plan_begin_date" />  
+                    			<span class="input-group-addon" style="width:14px">  
+                        		<span class="glyphicon glyphicon-calendar"></span>  
+                    			</span>  
+                			</div>
 					      </div>
 					   </div>
 			
 					   <div class="form-group">
 					      <label for="address" class="col-sm-4 control-label">生产计划结束日期：</label>
 					      <div class="col-sm-8">
-					         <input type="text" class="form-control" id="address" ng-model="product_plan_end_date"
-					            placeholder="请输入生产计划结束日期">
+					         <!-- <input type="text" class="form-control" id="address" ng-model="product_plan_end_date"
+					            placeholder="请输入生产计划结束日期"> -->
+					            <div class='input-group date datetimepickerDisplay'>  
+                    		<input  style="position: relative" type='text' class="form-control" placeholder="生产计划结束日期" ng-model="product_plan_end_date" />  
+                    			<span class="input-group-addon" style="width:14px">  
+                        		<span class="glyphicon glyphicon-calendar"></span>  
+                    			</span>  
+                			</div>
 					      </div>
 					   </div>
 					   <div class="form-group">

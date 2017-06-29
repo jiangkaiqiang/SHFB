@@ -41,6 +41,7 @@ coldWeb.controller('componentOrder', function ($rootScope, $scope, $state, $cook
 				pageSize : $scope.maxSize,
 				pro_id : $scope.pro_idf,
 				single_name : $scope.single_namef,
+				userProjectID : $rootScope.admin.pro_id,
 				floor:$scope.floorf
 			}
 		}).success(function(data) {
@@ -58,7 +59,10 @@ coldWeb.controller('componentOrder', function ($rootScope, $scope, $state, $cook
 	$scope.findProjects = function(){
 		$http({
 			method : 'GET',
-			url : '/i/project/findAllProject',
+			url : '/i/project/findAllProjectByUserID',
+			params : {
+				userProjectID : $rootScope.admin.pro_id
+			}
 		}).success(function(data) {
 			$scope.projects = data;
 		});
@@ -153,5 +157,12 @@ coldWeb.controller('componentOrder', function ($rootScope, $scope, $state, $cook
 	    	window.location.href="/i/componentOrder/exportCompOrder?order_idStrs="+parmStr;
 		    	
 		}
+		
+		 $('.datetimepickerDisplay').datetimepicker({  
+		    	format: 'yyyy-mm-dd',
+		    	autoclose:true,
+		    	minView:'month'
+		    }).on('dp.change', function (e) {  
+		    });
 	
 });

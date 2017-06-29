@@ -52,8 +52,8 @@ coldWeb.controller('componentManage', function ($rootScope, $scope, $state, $coo
 				single_name : $scope.single_namef,
 				floor:$scope.floorf,
 				component_type:$scope.component_typef,
-				component_status_id:$scope.component_status_idf
-				
+				component_status_id:$scope.component_status_idf,
+				userProjectID : $rootScope.admin.pro_id
 			}
 		}).success(function(data) {
 			$scope.bigTotalItems = data.total;
@@ -95,7 +95,10 @@ coldWeb.controller('componentManage', function ($rootScope, $scope, $state, $coo
 	$scope.findProjects = function(){
 		$http({
 			method : 'GET',
-			url : '/i/project/findAllProject',
+			url : '/i/project/findAllProjectByUserID',
+			params : {
+				userProjectID : $rootScope.admin.pro_id
+			}
 		}).success(function(data) {
 			$scope.projects = data;
 		});
@@ -209,6 +212,13 @@ coldWeb.controller('componentManage', function ($rootScope, $scope, $state, $coo
 	   //编辑
 	   $scope.editComp=function(){
 		   $scope.isedit=true;
+		   $(".datetimepickerDisplay").css("display","block");
+		   $('.datetimepickerDisplay').datetimepicker({  
+		    	format: 'yyyy-mm-dd',
+		    	autoclose:true,
+		    	minView:'month'
+		    }).on('dp.change', function (e) {  
+		    });
 	   }
 	   
 	   //保存编辑
@@ -239,6 +249,7 @@ coldWeb.controller('componentManage', function ($rootScope, $scope, $state, $coo
 				$scope.componentInfo.product_plan_end_date=$("#product_plan_end_date").val();
 				
 				$scope.isedit=false;
+				$(".datetimepickerDisplay").css("display","none");
 			});
 	   }  
 	   
@@ -440,5 +451,13 @@ coldWeb.controller('componentManage', function ($rootScope, $scope, $state, $coo
 			    height: 100
 			});
 	    }
+	    $('#datetimepicker1').datetimepicker({  
+	    	format: 'yyyy-mm-dd',
+	    	autoclose:true,
+	    	minView:'month'
+	    }).on('dp.change', function (e) {  
+	    });
+	    
+	    
 	     
 });

@@ -98,7 +98,8 @@ public class ComponentController extends BaseController {
 	@RequestMapping(value = "/findSingleByProject", method = RequestMethod.GET)
 	@ResponseBody
 	public List<Map<String, Object>> findSingleByProject(Integer pro_id)  {
-	 	return componentDao.findSingleBysel(pro_id);
+		List<Map<String, Object>> res = componentDao.findSingleBysel(pro_id);
+	 	return res;
 	}
 	
 	@RequestMapping(value = "/findFloorBySel", method = RequestMethod.GET)

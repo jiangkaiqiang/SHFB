@@ -40,6 +40,9 @@ public class ComponentOrderController extends BaseController {
 			) throws UnsupportedEncodingException {
 		pageNum = pageNum == null? 1:pageNum;
 		pageSize = pageSize==null? 10:pageSize;
+		if (userProjectID==0) {
+			userProjectID = null;
+		}
 		PageHelper.startPage(pageNum, pageSize);
 		single_name = "".equals(single_name)? null:single_name;
 		floor = "".equals(floor)? null:floor;

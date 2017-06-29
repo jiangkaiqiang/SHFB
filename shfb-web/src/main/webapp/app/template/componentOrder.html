@@ -137,31 +137,55 @@
 					   <div class="form-group">
 					      <label for="contactTel" class="col-sm-2 control-label">计划开始日期</label>
 					      <div class="col-sm-10">
-					         <input type="text" class="form-control" id="contactTel" name="contactTel" ng-model="order.plan_begin_date"
-					            placeholder="请输入计划开始时间">
+					         <!-- <input type="text" class="form-control" id="contactTel" name="contactTel" ng-model="order.plan_begin_date"
+					            placeholder="请输入计划开始时间"> -->
+					          <div class='input-group date datetimepickerDisplay'>  
+                    		<input id="expedit_date" style="position: relative" type='text' class="form-control" placeholder="计划开始日期" ng-model="order.plan_begin_date" />  
+                    			<span class="input-group-addon" style="width:14px">  
+                        		<span class="glyphicon glyphicon-calendar"></span>  
+                    			</span>  
+                			</div>
 					      </div>
 					   </div>
 					    <div class="form-group">
 					      <label for="contactPhone" class="col-sm-2 control-label">计划完成日期</label>
 					      <div class="col-sm-10">
-					         <input type="text" class="form-control" id="contactPhone" name="contactPhone" ng-model="order.plan_end_date"
-					            placeholder="请输入计划结束时间">
+					         <!-- <input type="text" class="form-control" id="contactPhone" name="contactPhone" ng-model="order.plan_end_date"
+					            placeholder="请输入计划结束时间"> -->
+					            <div class='input-group date datetimepickerDisplay'>  
+                    		<input id="expedit_date" style="position: relative" type='text' class="form-control" placeholder="计划完成日期" ng-model="order.plan_end_date" />  
+                    			<span class="input-group-addon" style="width:14px">  
+                        		<span class="glyphicon glyphicon-calendar"></span>  
+                    			</span>  
+                			</div>
 					      </div>
 					   </div>
 					   <div class="form-group">
 					      <label for="detail" class="col-sm-2 control-label">实际开始日期</label>
 					      <div class="col-sm-10">
-					         <textarea type="text" rows="4" class="form-control" id="detail" name="detail" ng-model="order.real_begin_date"
+					         <!-- <textarea type="text" rows="4" class="form-control" id="detail" name="detail" ng-model="order.real_begin_date"
 					            placeholder="请输入实际开始日期">
-					            </textarea>
+					            </textarea> -->
+					           <div class='input-group date datetimepickerDisplay'>  
+                    		<input id="expedit_date" style="position: relative" type='text' class="form-control" placeholder="实际开始日期" ng-model="order.real_begin_date" />  
+                    			<span class="input-group-addon" style="width:14px">  
+                        		<span class="glyphicon glyphicon-calendar"></span>  
+                    			</span>  
+                			</div>
 					      </div>
 					   </div>
 					   <div class="form-group">
 					      <label for="detail" class="col-sm-2 control-label">实际完成日期</label>
 					      <div class="col-sm-10">
-					         <textarea type="text" rows="4" class="form-control" id="detail" name="detail" ng-model="order.real_end_date"
+					         <!-- <textarea type="text" rows="4" class="form-control" id="detail" name="detail" ng-model="order.real_end_date"
 					            placeholder="请输入实际完成日期">
-					            </textarea>
+					            </textarea> -->
+					             <div class='input-group date datetimepickerDisplay' >  
+                    		<input id="expedit_date" style="position: relative" type='text' class="form-control" placeholder="实际完成日期" ng-model="order.real_end_date" />  
+                    			<span class="input-group-addon" style="width:14px">  
+                        		<span class="glyphicon glyphicon-calendar"></span>  
+                    			</span>  
+                			</div>
 					      </div>
 					   </div>
 	            	</form>

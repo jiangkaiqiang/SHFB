@@ -152,7 +152,7 @@
 					</button>------>	
 					</div>
 					<div class="row">
-						计划开始时间：
+						计划开始时间：{{componentInfo.plan_begin_date}}
 					</div>
 					<div class="row">
 						计划完成时间：{{componentInfo.plan_end_date}}
@@ -191,42 +191,72 @@
 				</div>
 				<div class="col-md-3">
 						<span style="float:left">催货交期：</span>
-					      <span ng-if="isedit">
+					      <!-- <span ng-if="isedit">
 					         <input id="expedit_date" type="text" style="width:150px" class="form-control" ng-model="componentInfo.expedit_date" placeholder="催货交期">
-					      </span>
+					      </span> -->
 					      <span ng-if="!isedit">
 					      		{{componentInfo.expedit_date}}
 					      </span>
+					      <div class='input-group date datetimepickerDisplay' style="display:none;">  
+                    		<input id="expedit_date" style="width:40%;position: relative" type='text' class="form-control" placeholder="催货交期" ng-model="componentInfo.expedit_date" />  
+                    			<span class="input-group-addon" style="width:14px">  
+                        		<span class="glyphicon glyphicon-calendar"></span>  
+                    			</span>  
+                			</div>
 				</div>
 			</div> 
 			<div class="row" style="margin-top:10px;padding-left:30px;padding-bottom:15px">
 				<div class="col-md-3">
 					      <span style="float:left">计划开始时间：</span>
-					      <span ng-if="isedit">
+					      <!-- <span ng-if="isedit">
 					         <input id="plan_begin_date" type="text" style="width:150px" class="form-control" ng-model="componentInfo.plan_begin_date" placeholder="计划开始时间">
-					      </span>
+					      </span> -->
 					       <span ng-if="!isedit">{{componentInfo.plan_begin_date}}</span>
+							<div class='input-group date datetimepickerDisplay' style="display:none;">  
+                    		<input id="plan_begin_date" style="width:40%;position: relative" type='text' class="form-control" placeholder="计划开始时间" ng-model="componentInfo.plan_begin_date" />  
+                    			<span class="input-group-addon" style="width:14px">  
+                        		<span class="glyphicon glyphicon-calendar"></span>  
+                    			</span>  
+                			</div>
 				</div>
 				<div class="col-md-3">
 					 	  <span style="float:left">计划完成时间：</span>
-					      <span ng-if="isedit">
+					      <!-- <span ng-if="isedit">
 					         <input id="plan_end_date" type="text" style="width:150px" class="form-control" ng-model="componentInfo.plan_end_date" placeholder="计划完成时间">
-					      </span>
+					      </span> -->
 					      <span ng-if="!isedit">{{componentInfo.plan_end_date}}</span>
+						  <div class='input-group date datetimepickerDisplay' style="display:none;">  
+                    		<input id="plan_end_date" style="width:40%;position: relative" type='text' class="form-control" placeholder="计划完成时间" ng-model="componentInfo.plan_end_date" />  
+                    			<span class="input-group-addon" style="width:14px">  
+                        		<span class="glyphicon glyphicon-calendar"></span>  
+                    			</span>  
+                			</div>
 				</div>
 				<div class="col-md-3">
 						  <span style="float:left">实际开始时间：</span>
-					      <span ng-if="isedit">
+					      <!-- <span ng-if="isedit">
 					         <input id="real_begin_date" type="text" style="width:150px" class="form-control" ng-model="componentInfo.real_begin_date" placeholder="实际开始时间">
-					      </span>
+					      </span> -->
 					       <span ng-if="!isedit">{{componentInfo.real_begin_date}}</span>
+					       <div class='input-group date datetimepickerDisplay' style="display:none;">  
+                    		<input id="real_begin_date" style="width:40%;position: relative" type='text' class="form-control" placeholder="实际开始时间" ng-model="componentInfo.real_begin_date" />  
+                    			<span class="input-group-addon" style="width:14px">  
+                        		<span class="glyphicon glyphicon-calendar"></span>  
+                    			</span>  
+                			</div>
 				</div>
 				<div class="col-md-3">
 					 	  <span style="float:left">实际完成时间：</span>
-					      <span ng-if="isedit">
+					      <!-- <span ng-if="isedit">
 					         <input id="real_end_date" type="text" style="width:150px" class="form-control" ng-model="componentInfo.real_end_date" placeholder="实际完成时间">
-					      </span>
+					      </span> -->
 					      <span ng-if="!isedit">{{componentInfo.real_end_date}}</span>
+					      <div class='input-group date datetimepickerDisplay' style="display:none;">  
+                    		<input id="real_end_date" style="width:40%;position: relative" type='text' class="form-control" placeholder="实际完成时间" ng-model="componentInfo.real_end_date" />  
+                    			<span class="input-group-addon" style="width:14px">  
+                        		<span class="glyphicon glyphicon-calendar"></span>  
+                    			</span>  
+                			</div>
 				</div>
 			</div> 
 			<div class="row" style="margin-top:10px;padding-left:30px;padding-bottom:15px">
@@ -274,17 +304,32 @@
 				</div>
 				<div class="col-md-3">
 						  <span style="float:left">生产计划开始日期：</span>
-					      <span ng-if="isedit">
+					      <!-- <span ng-if="isedit">
 					         <input id="product_plan_begin_date" type="text" style="width:150px" class="form-control" ng-model="componentInfo.product_plan_begin_date" placeholder="生产计划开始时间">
+					      </span> -->
+					      <span ng-if="!isedit">
+					      {{componentInfo.product_plan_begin_date}}
+					      
 					      </span>
-					      <span ng-if="!isedit">{{componentInfo.product_plan_begin_date}}</span>			
+					      <div class='input-group date datetimepickerDisplay' style="display:none;">  
+                    		<input id="product_plan_begin_date" style="width:40%;position: relative" type='text' class="form-control" placeholder="生产计划开始时间" ng-model="componentInfo.product_plan_begin_date" />  
+                    			<span class="input-group-addon" style="width:14px">  
+                        		<span class="glyphicon glyphicon-calendar"></span>  
+                    			</span>  
+                			</div>			
 				</div>
 				<div class="col-md-3">
 						  <span style="float:left">生产计划完成日期：</span>
-					      <span ng-if="isedit">
+					      <!-- <span ng-if="isedit">
 					         <input id="product_plan_end_date" type="text" style="width:150px" class="form-control" ng-model="componentInfo.product_plan_end_date" placeholder="生产计划完成日期">
-					      </span>
+					      </span> -->
 					       <span ng-if="!isedit">{{componentInfo.product_plan_end_date}}</span>
+						  <div class='input-group date datetimepickerDisplay' style="display:none;">  
+                    		<input id="product_plan_end_date" style="width:40%;position: relative" type='text' class="form-control" placeholder="生产计划完成时间" ng-model="componentInfo.product_plan_end_date" />  
+                    			<span class="input-group-addon" style="width:14px">  
+                        		<span class="glyphicon glyphicon-calendar"></span>  
+                    			</span>  
+                			</div>
 				</div>
 			</div> 
 			
@@ -395,11 +440,9 @@
 					    <div class="form-group">
 					      <label for="contactPhone" class="col-sm-2 control-label">催货交期</label>
 					      <div class="col-sm-10">
-					         <input type="text" class="form-control" id="contactPhone" name="contactPhone" ng-model="expedit_date"
-					            placeholder="请输入催货交期">
 					          <!--指定 date标记-->  
                 <div class='input-group date' id='datetimepicker1'>  
-                    <input type='text' class="form-control" placeholder="开始时间" ng-model="startTime" />  
+                    <input type='text' class="form-control" placeholder="开始时间" ng-model="expedit_date" />  
                     <span class="input-group-addon">  
                         <span class="glyphicon glyphicon-calendar"></span>  
                     </span>  
