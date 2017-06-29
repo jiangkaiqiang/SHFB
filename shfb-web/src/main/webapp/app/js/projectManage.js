@@ -1,4 +1,4 @@
-coldWeb.controller('projectManage', function ($rootScope, $scope, $state, $cookies, $http, $location) {
+coldWeb.controller('projectManage', function ($rootScope, $scope, $state, $cookies, $http, $location, Upload) {
 	$scope.load = function(){
 		 $.ajax({type: "GET",cache: false,dataType: 'json',url: '/i/user/findUser'}).success(function(data){
 			   $rootScope.admin = data;
@@ -26,6 +26,7 @@ coldWeb.controller('projectManage', function ($rootScope, $scope, $state, $cooki
 				pageNum : $scope.bigCurrentPage,
 				pageSize : $scope.maxSize,
 				provinceid : $scope.searchprovinceid,
+				userProjectID : $rootScope.admin.pro_id,
 				keyword : encodeURI($scope.keyword,"UTF-8"),
 			}
 		}).success(function(data) {
@@ -116,7 +117,7 @@ coldWeb.controller('projectManage', function ($rootScope, $scope, $state, $cooki
     	if(delcfm()){
     	var projectIDs = [];
     	for(i in $scope.selected){
-    		projectIDs.push($scope.selected[i].pro_id);
+    		projectIDs.push($scope.selected[i].project.pro_id);
     	}
     	if(projectIDs.length >0 ){
     		$http({
@@ -288,7 +289,7 @@ coldWeb.controller('projectManage', function ($rootScope, $scope, $state, $cooki
 		    	if(projectIDs.length == 0 ){
 		    		alert("请选择项目");		    		
 		    	}else{
-		    		$('#importPic').modal('show')
+		    		$('#importComp').modal('show')
 		    		
 		    	}
 		 }
@@ -297,7 +298,7 @@ coldWeb.controller('projectManage', function ($rootScope, $scope, $state, $cooki
 			 window.location.href="../../assets/file/componentTemplate.xls";
 		 }
 		 
-		 $scope.importPic=function(){
+		 $scope.importComp=function(){
 			 $http({
 					url: '/i/project/fileUpload',
 					method: 'POST',
@@ -315,4 +316,50 @@ coldWeb.controller('projectManage', function ($rootScope, $scope, $state, $cooki
 				});
 		 }
 		 
+		 $scope.totalPicFiles = [];
+		 $scope.addPicFiles = function () {
+				if($scope.picfiles.length==0){return;};
+				for(var i = 0; i < $scope.picfiles.length; i++){
+					var fileName = $scope.picfiles[i].name;
+					var fileType = (fileName.substring(fileName.lastIndexOf(".")+1,fileName.length)).toLowerCase();
+				    var suppotFile = new Array();
+				    suppotFile[0] = "png";
+				    for(var i =0;i<suppotFile.length;i++){
+				      if(suppotFile[i]!=fileType){
+				    	alert("请上传png格式图片");
+				    	return;
+				      };
+	              }
+				}
+				var allfiles = $scope.totalPicFiles.concat($scope.picfiles);
+		        $scope.totalPicFiles=allfiles; 
+		    };
+		    $scope.importPic = function() {
+				       /*Upload.upload({
+				                url: '/i/project/importPic',
+				                headers :{ 'Content-Transfer-Encoding': 'utf-8' },
+				                data: { files:  $scope.totalPicFiles}
+				            }).success(function (data) {
+			            if(data.success){
+			            	alert("上传成功");
+			            	window.location.href="#/post-bar";
+			            }
+			        });*/
+		    	$http({
+					url: '/i/project/importPic',
+					method: 'POST',
+					headers: {
+						'Content-Type': undefined
+					},
+					transformRequest: function() {
+						var formData = new FormData();
+						for(var i = 0; i < $scope.totalPicFiles.length; i++){
+							formData.append('files',$scope.totalPicFiles[i]);
+			            }
+						return formData;
+					}
+				}).success(function (data) {
+					alert(data.message);   //返回上传后所在的路径
+				});
+			};
 });

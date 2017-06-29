@@ -26,7 +26,12 @@ public class UserRoleDto {
     private boolean productManage;
 	
 	private boolean personalManage; 
+	
+    private boolean pcManage;//11
+	
+	private boolean appManage; //12
 
+	
 	public UserRole getUserRole() {
 		return userRole;
 	}
@@ -121,6 +126,22 @@ public class UserRoleDto {
 
 	public void setPersonalManage(boolean personalManage) {
 		this.personalManage = personalManage;
+	}
+
+	public boolean isPcManage() {
+		return pcManage;
+	}
+
+	public void setPcManage(boolean pcManage) {
+		this.pcManage = pcManage;
+	}
+
+	public boolean isAppManage() {
+		return appManage;
+	}
+
+	public void setAppManage(boolean appManage) {
+		this.appManage = appManage;
 	}
 	
 	

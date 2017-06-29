@@ -145,6 +145,9 @@
 			<if test="pr_id != null">
 				pr_id=#{pr_id}
 			</if>
+			<if test="userProjectID != null">
+				AND pro_id=#{userProjectID}
+			</if>
 			<if test="keyword != null">
 				AND pro_name like "%"#{keyword}"%"
 			</if>
