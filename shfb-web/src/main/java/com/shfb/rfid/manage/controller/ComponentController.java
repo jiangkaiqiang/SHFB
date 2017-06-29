@@ -41,6 +41,7 @@ public class ComponentController extends BaseController {
 	@ResponseBody
 	public Object findComponentPage(@RequestParam(value="pageNum",required=false) Integer pageNum,
 			@RequestParam(value="pageSize") Integer pageSize, 
+			@RequestParam(value="userProjectID", required=false) Integer userProjectID,
 			@RequestParam(value="pro_id", required=false) Integer pro_id,
 			@RequestParam(value="single_name", required=false) String single_name,
 			@RequestParam(value="floor", required=false) String floor,
@@ -50,10 +51,13 @@ public class ComponentController extends BaseController {
 		pageNum = pageNum == null? 1:pageNum;
 		pageSize = pageSize==null? 10:pageSize;
 		PageHelper.startPage(pageNum, pageSize);
+		if (userProjectID==0) {
+			userProjectID = null;
+		}
 		single_name = "".equals(single_name)? null:single_name;
 		floor = "".equals(floor)? null:floor;
 		component_type = "".equals(component_type)? null:component_type;
-		Page<ComponentDto> components = componentDao.findComponentPage(pro_id, single_name, floor, component_type, component_status_id);
+		Page<ComponentDto> components = componentDao.findComponentPage(pro_id, single_name, floor, component_type, component_status_id,userProjectID);
 
 		return new PageInfo<ComponentDto>(components);
 		

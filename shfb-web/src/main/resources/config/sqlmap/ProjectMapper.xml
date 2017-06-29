@@ -155,6 +155,16 @@
 		order by `pro_id` asc
 	</select>
 	
+	<select id="findProjectsByUserID" parameterType="int" resultType="com.shfb.rfid.manage.entity.Project">
+		SELECT * FROM `project`
+		<where>
+			<if test="userProjectID != null">
+				 pro_id=#{userProjectID}
+			</if>
+		</where>
+		order by `pro_id` asc
+	</select>
+	
 	 <select id="findAllProjectList" parameterType="int" resultType="com.shfb.rfid.manage.entity.Project">
 		SELECT * FROM `project` order by `pro_id` asc
 	</select>

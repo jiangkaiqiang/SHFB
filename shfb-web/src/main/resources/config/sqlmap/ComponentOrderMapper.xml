@@ -49,6 +49,9 @@
   	<if test="floor != null">
   	and o.floor=#{floor}
   	</if>
+  	 <if test="userProjectID != null">
+	AND o.pro_id=#{userProjectID}
+    </if> 
   </select>
   <update id="updateByPrimaryKeySelective" parameterType="com.shfb.rfid.manage.entity.ComponentOrder" >
     update component_order
