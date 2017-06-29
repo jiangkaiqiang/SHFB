@@ -140,5 +140,18 @@ coldWeb.controller('componentOrder', function ($rootScope, $scope, $state, $cook
 	        	$scope.selected = $scope.componentOrders.slice(0);
 	        }
 	    };
+	    
+
+		//进度计划导出
+		$scope.exportCompOrder = function(){
+			
+			var parmStr="";
+	    	for(i in $scope.selected){
+	    		parmStr += $scope.selected[i].order_id +","
+	    	}
+	    	if(parmStr=="") {alert("请选择计划"); return;}
+	    	window.location.href="/i/componentOrder/exportCompOrder?order_idStrs="+parmStr;
+		    	
+		}
 	
 });

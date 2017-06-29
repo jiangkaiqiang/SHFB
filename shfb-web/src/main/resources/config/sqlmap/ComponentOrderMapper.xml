@@ -94,4 +94,15 @@
       )
   </insert>
   
+  <select id="exportComponentOrders" parameterType="String" resultType="com.shfb.rfid.manage.dto.ComponentOrderDto">
+  	select
+  	o.order_id, o.order_num, o.pro_id, o.single_name, o.floor, o.plan_begin_date,o.plan_end_date, 
+    o.real_begin_date, o.real_end_date, o.order_time, o.order_username, p.pro_name from component_order AS o
+	LEFT JOIN project AS p ON o.pro_id=p.pro_id
+	 WHERE order_id in 
+  	<foreach collection="array" index="index" item="item" open="(" separator="," close=")">
+		 	#{item}
+	</foreach>
+  </select>
+  
 </mapper>

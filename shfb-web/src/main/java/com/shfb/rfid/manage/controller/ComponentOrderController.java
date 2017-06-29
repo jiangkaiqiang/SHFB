@@ -1,32 +1,27 @@
 package com.shfb.rfid.manage.controller;
 
 import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.shfb.rfid.manage.dao.CityMapper;
-import com.shfb.rfid.manage.dao.ComponentMapper;
 import com.shfb.rfid.manage.dao.ComponentOrderMapper;
-import com.shfb.rfid.manage.dao.ComponentStatusMapper;
-import com.shfb.rfid.manage.dto.ComponentDto;
 import com.shfb.rfid.manage.dto.ComponentOrderDto;
 import com.shfb.rfid.manage.dto.ResultDto;
-import com.shfb.rfid.manage.entity.Component;
 import com.shfb.rfid.manage.entity.ComponentOrder;
-import com.shfb.rfid.manage.entity.ComponentStatus;
+import com.shfb.rfid.manage.util.ExcelImportUtil;
 @Controller
 @RequestMapping(value = "/componentOrder")
 public class ComponentOrderController extends BaseController {
@@ -72,5 +67,41 @@ public class ComponentOrderController extends BaseController {
 	 	return componentOrderDao.selectByPrimaryKey(order_id);
 	}
 	
+	/**
+	 * 导出构件
+	 * @param componentIdStrs
+	 * @return
+	 */
+	@RequestMapping(value = "/exportCompOrder", method = RequestMethod.GET)
+	@ResponseBody
+	public ModelAndView exportCompOrder(String order_idStrs)  {
+		String[] order_ids = order_idStrs.split(",");
+		List<ComponentOrderDto> componentOrders = componentOrderDao.exportComponentOrders(order_ids);	
+		
+		Map<String, Object> dataExel = new HashMap<String, Object>();
+		List<String> titles = new ArrayList<String>();
+		titles.add("项目名称");
+		titles.add("单体");
+		titles.add("楼层");
+		titles.add("计划开始时间");
+		titles.add("计划完成时间");
+		titles.add("实际开始时间");
+		titles.add("实际完成时间");
+		List<Map<String, Object>> varList = new ArrayList<Map<String,Object>>();
+		for (ComponentOrderDto componentOrder : componentOrders) {
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("var1", componentOrder.getPro_name());
+			map.put("var2", componentOrder.getSingle_name());
+			map.put("var3", componentOrder.getFloor());
+			map.put("var4", componentOrder.getPlan_begin_date());
+			map.put("var5", componentOrder.getPlan_end_date());
+			map.put("var6", componentOrder.getReal_begin_date());
+			map.put("var7", componentOrder.getReal_end_date());
+			varList.add(map);
+		}
+		dataExel.put("titles", titles);
+		dataExel.put("varList", varList);
+		return ExcelImportUtil.exportExcel(dataExel);
+	}
 	
 }
