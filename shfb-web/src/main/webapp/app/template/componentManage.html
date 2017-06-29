@@ -9,7 +9,7 @@
 			<div class="row" style="height:34px">
 				<div class="col-sm-2">
 					<div class="btn-group pull-left" id="status">
-					项目：<select 
+					项目：<select ng-init="selectedProject = projects[0]"
 					ng-model="selectedProject" ng-options="x.pro_name for x in projects"
 					ng-change="projectChange(selectedProject.pro_id)"
 					>			
@@ -18,7 +18,8 @@
 				</div>
 		        <div  class="col-sm-2">								
 					<div class="btn-group pull-left" id="status">
-					单体：<select ng-model="selectSingle" ng-options="x.single_name for x in singles"
+					单体：<select ng-init="selectSingle = singles[0]"
+					ng-model="selectSingle" ng-options="x.single_name for x in singles"
 					ng-change="singleChange(selectSingle.pro_id, selectSingle.single_name)"
 					>
 					</select>
@@ -26,7 +27,8 @@
 				</div>
 				<div  class="col-sm-2">								
 					<div class="btn-group pull-left" id="status">
-					楼层：<select ng-model="selectFloor" ng-options="x.floor for x in floors">
+					楼层：<select ng-init="selectFloor = floors[0]"
+					 ng-model="selectFloor" ng-options="x.floor for x in floors">
 					</select>
 					</div>
 				</div>
@@ -53,21 +55,17 @@
 				</div>				
 			</div>
 			<br>
-			<br>
-			<div class="row" style="height:8px">
-				<button type="button" class="btn btn-default pull-right" >
-					下单
-				</button>
-				<button type="button" class="btn btn-default pull-right">
-					绑定
-				</button>
-				<button type="button" class="btn btn-default pull-right">
-					催货
-				</button>	
-			</div>
+				<div class="three" style="text-align:right">
+				<div class="btn-group" role="group">
+				<button type="button" class="btn btn-default pull-right" ng-click="bind()">绑定</button>
+				<button type="button" class="btn btn-default pull-right" ng-click="expeditGood()">催货</button>
+				<button type="button" class="btn btn-default pull-right" ng-click="placeOrder()">下单</button>
+				</div>
+				</div>	
+			
 			<!-- 按钮操作区域结束 -->
 			<!-- 表格操作区域开始 -->
-			<div class="tableArea">
+			<div class="tableArea" style="margin-top:2px">
 				<table class="table table-striped table-bordered" id="tableArea" ng-model="components">
 				   <thead>
 				      <tr>
@@ -114,6 +112,7 @@
 				         <td ng-if="component.check_res=='3'">验收不通过</td>
 				         <td>
   				            <button class="btn btn-primary btn-sm"  ng-click="showInfo(component.component_id)">查看</button>
+				         	<button class="btn btn-primary btn-sm"  ng-click="QRcodeShow(component.component_num)">二维码</button>
 				         	<button class="delete" ng-click="deleteComp(component.component_id)"></button>
 				         </td>
 				      </tr>
@@ -132,7 +131,7 @@
 			<div class="three">
 				<div class="btn-group" role="group">
 				    <button type="button" class="btn btn-default" ng-click="exportComp()">导出构件</button>
-				   <button type="button" class="btn btn-default" ng-click="deleteProjects()">批量删除</button>
+				   <button type="button" class="btn btn-default" ng-click="deleteComps()">批量删除</button>
 				</div>
 			</div>						
     </div>
@@ -348,3 +347,95 @@
 				</div>
 			</div>
     	</div>
+    	<!-- 构件查看结束 -->
+    	
+    	<!--  下单模态框 -->
+   	<div class="modal fade" id="placeOrder" role="dialog"  aria-labelledby="myModalLabel" aria-hidden="true">
+	   <div class="modal-dialog">
+	      <div class="modal-content">
+	         <div class="modal-header">
+	            <button type="button" class="close" 
+	               data-dismiss="modal" aria-hidden="true">
+	                  &times;
+	            </button>
+	            <h4 class="modal-title" id="myModalLabel">
+	               	构件下单
+	            </h4>
+	         </div>
+	         <div class="modal-body">
+	            	<form class="form-horizontal" name="projectForm">
+					   <div class="form-group">
+					      <label for="projectname" class="col-sm-2 control-label">项目名称</label>
+					      <div class="col-sm-10">
+					         {{selectedProject.pro_name}}
+					      </div>
+					   </div>
+					   
+					   <div class="form-group">
+					      <label for="address" class="col-sm-2 control-label">单体名称</label>
+					      <div class="col-sm-10">
+					         {{selectSingle.single_name}}
+					      </div>
+					   </div>
+					   <div class="form-group">
+					      <label for="contactName" class="col-sm-2 control-label">楼层名称</label>
+					      <div class="col-sm-10">
+					        {{selectFloor.floor}}
+					      </div>
+					   </div>
+					   <div class="form-group">
+					   <label for="contactName" class="col-sm-2 control-label">构件厂</label>      
+					      <div class="col-sm-10">
+								<select class="form-control"
+									ng-model="selectedFactory" ng-options="x.comp_factory_name for x in factorys"
+								>			
+								</select>					
+							</div>      
+					   </div>
+					    <div class="form-group">
+					      <label for="contactPhone" class="col-sm-2 control-label">催货交期</label>
+					      <div class="col-sm-10">
+					         <input type="text" class="form-control" id="contactPhone" name="contactPhone" ng-model="expedit_date"
+					            placeholder="请输入催货交期">
+					      </div>
+					   </div>
+					   
+	            	</form>
+	         </div>
+	         <div class="modal-footer">
+	            <button type="button" class="btn btn-default" 
+	               data-dismiss="modal">取消
+	            </button>
+	            <button type="button" ng-click="addPlaceOrder()" class="btn btn-primary" data-dismiss="modal">
+	                                                      下单
+	            </button>
+	         </div>
+	      </div><!-- /.modal-content -->
+	</div><!-- /.modal -->
+	</div>
+	<!--  下单模态框 end -->
+	<!--  查看二维码模态框 -->
+   	<div class="modal fade" id="QRcode" role="dialog"  aria-labelledby="myModalLabel" aria-hidden="true">
+	   <div class="modal-dialog">
+	      <div class="modal-content">
+	         <div class="modal-header">
+	            <button type="button" class="close" 
+	               data-dismiss="modal" aria-hidden="true">
+	                  &times;
+	            </button>
+	            <h4 class="modal-title" id="myModalLabel">
+	               二维码
+	            </h4>
+	         </div>
+	         <div class="modal-body" style="text-align:center">
+	            	<div id="qrcode"></div>
+	         </div>
+	         <div class="modal-footer">
+	            <button type="button" class="btn btn-default" 
+	               data-dismiss="modal">关闭
+	            </button>
+	         </div>
+	      </div><!-- /.modal-content -->
+	</div><!-- /.modal -->
+	</div>
+	<!-- 查看二维码模态框end -->

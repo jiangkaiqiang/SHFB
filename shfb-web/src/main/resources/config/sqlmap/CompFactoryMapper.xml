@@ -140,4 +140,10 @@
 		</where>
 		order by `comp_factory_id` asc
 	</select>
+	
+	<select id="findCompFactorys" resultType="com.shfb.rfid.manage.entity.CompFactory">
+		select
+		<include refid="Base_Column_List" />
+    	from comp_factory 
+	</select>
 </mapper>

@@ -59,6 +59,8 @@ public class Component {
 	
 	private String order_date;
 	
+	private String product_explain;
+	
 	public Integer getComponent_id() {
 		return component_id;
 	}
@@ -293,6 +295,14 @@ public class Component {
 
 	public void setOrder_date(String order_date) {
 		this.order_date = order_date;
+	}
+
+	public String getProduct_explain() {
+		return product_explain;
+	}
+
+	public void setProduct_explain(String product_explain) {
+		this.product_explain = product_explain;
 	}
 	
 	

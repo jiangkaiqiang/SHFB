@@ -1,5 +1,7 @@
 package com.shfb.rfid.manage.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 import com.github.pagehelper.Page;
@@ -19,4 +21,7 @@ public interface CompFactoryMapper {
     int updateByPrimaryKey(CompFactory record);
     
     Page<CompFactory> findAllCompFactory(@Param("pr_id")Integer pr_id, @Param("keyword")String keyword);
+    
+    List<CompFactory> findCompFactorys();
+    
 }

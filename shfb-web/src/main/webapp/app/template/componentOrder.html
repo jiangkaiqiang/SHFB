@@ -66,8 +66,8 @@
 				   <tbody>
 				      <tr ng-repeat="componentOrder in componentOrders">
 				         <td>
-						 <input type="checkbox" ng-checked="exists(project, selected)"
-                    				ng-click="toggle(project, selected)"/>
+						 <input type="checkbox" ng-checked="exists(componentOrder, selected)"
+                    				ng-click="toggle(componentOrder, selected)"/>
 				         </td>
 				         <td>{{$index+1}}</td>
 				         <td>{{componentOrder.pro_name}}</td>

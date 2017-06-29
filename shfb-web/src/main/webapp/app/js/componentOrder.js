@@ -117,4 +117,28 @@ coldWeb.controller('componentOrder', function ($rootScope, $scope, $state, $cook
 	     });
 	}
 	
+	 $scope.selected = [];
+	    $scope.toggle = function (project, list) {
+			  var idx = list.indexOf(project);
+			  if (idx > -1) {
+			    list.splice(idx, 1);
+			  }
+			  else {
+			    list.push(project);
+			  }
+	    };
+	    $scope.exists = function (project, list) {
+	    	return list.indexOf(project) > -1;
+	    };
+	    $scope.isChecked = function() {
+	        return $scope.selected.length === $scope.componentOrders.length;
+	    };
+	    $scope.toggleAll = function() {
+	        if ($scope.selected.length === $scope.componentOrders.length) {
+	        	$scope.selected = [];
+	        } else if ($scope.selected.length === 0 || $scope.selected.length > 0) {
+	        	$scope.selected = $scope.componentOrders.slice(0);
+	        }
+	    };
+	
 });

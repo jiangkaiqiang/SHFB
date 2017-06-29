@@ -260,7 +260,14 @@ coldWeb.controller('componentManage', function ($rootScope, $scope, $state, $coo
 	            return false;
 	        }
 	        return true;
-	}
+		}
+		
+		function isConfirm(info) {
+	        if (!confirm(info)) {
+	            return false;
+	        }
+	        return true;
+		}
 		
 		
 		//构件导出
@@ -310,5 +317,128 @@ coldWeb.controller('componentManage', function ($rootScope, $scope, $state, $coo
 	        }
 	        return flag;
 	    }
-	      
+	     
+	    //点击下单
+	    $scope.placeOrder = function(){
+	    	   if($scope.selectedProject!=undefined && $scope.selectedProject.pro_id!=undefined) {
+			   }else{
+				   alert("请选择项目");
+				   return;
+			   }
+			   if($scope.selectSingle!=undefined&&$scope.selectSingle.single_name!=undefined) {
+			   }else{
+				   alert("请选择单体");
+				   return;
+			   }			   
+			   
+			   //查询构件厂
+			   $scope.findCompFactorys = function(){
+					$http({
+						method : 'GET',
+						url : '/i/compfactory/findCompFactorys',
+					}).success(function(data) {
+						$scope.factorys = data;
+					});
+				}
+				$scope.findCompFactorys();
+			   
+			   
+			   $('#placeOrder').modal('show');			 
+	    }
+	    
+	    //确认下单
+	    $scope.addPlaceOrder=function(){
+	
+	    	   var pro_ida ="";
+	    	   if($scope.selectedProject!=undefined && $scope.selectedProject.pro_id!=undefined) {
+	    		   pro_ida=$scope.selectedProject.pro_id;
+			   }
+	    	   var single_namea="";
+			   if($scope.selectSingle!=undefined&&$scope.selectSingle.single_name!=undefined) {
+				   single_namea=$scope.selectSingle.single_name;
+			   }
+			   
+			   var floora="";
+			   if($scope.selectFloor!=undefined&&$scope.selectFloor.floor!=undefined) {
+				   floora=$scope.selectFloor.floor;
+			   }
+
+			   var comp_factory_id="";
+			   if($scope.selectedFactory!=undefined&&$scope.selectedFactory.comp_factory_id!=undefined) {
+				   comp_factory_id=$scope.selectedFactory.comp_factory_id;
+			   }
+			   
+	      $http({
+			method : 'POST',
+			url : '/i/component/placeOrder',
+			params : {
+				pro_id : pro_ida,
+				single_name : single_namea,
+				floor : floora,
+				comp_factory_id:comp_factory_id,
+				expedit_date:$scope.expedit_date,
+				order_user_id:$rootScope.admin.user_id,
+				order_username:$rootScope.admin.user_name
+			}
+		}).success(function(data) {
+			alert(data.message);
+		});
+	    }
+	    
+	    //批量删除
+	    $scope.deleteComps = function () {
+	    	//判断有无选择
+	    	var parmStr = "";
+	    	for(i in $scope.selected){
+	    		parmStr += $scope.selected[i].component_id +","
+	    	}
+	    	if(parmStr=="") {alert("请选择构件"); return;}
+	    	
+	    	if(delcfm()){
+	    	$http.get('/i/component/deleteComps', {
+	            params: {
+	                "component_ids": parmStr
+	            }
+	        }).success(function (data) {
+	        	//刷新数据
+	        	$scope.getComponents();
+	        	//清空选择的值
+	        	$scope.selected = [];
+	        	alert(data.message);
+	        });
+	    	}
+	    }
+	     //催货
+	     $scope.expeditGood = function () {
+	    	//判断有无选择
+	    	var parmStr = "";
+	    	for(i in $scope.selected){
+	    		parmStr += $scope.selected[i].component_id +","
+	    	}
+	    	if(parmStr=="") {alert("请选择构件"); return;}
+	    	
+	    	if(isConfirm("确认催货")){
+	    	$http.get('/i/component/expeditGood', {
+	            params: {
+	                "component_ids": parmStr
+	            }
+	        }).success(function (data) {
+	        	$scope.getComponents();
+	        	$scope.selected = [];
+	        	alert(data.message);
+	        });
+	    	}
+	    }
+	    
+	    $scope.QRcodeShow = function(component_num){
+	    	$("#qrcode").empty();
+	    	$('#QRcode').modal('show');
+	    	$("#qrcode").qrcode({
+			    render: "canvas",//二维码生成方式 table/canvas
+			    text: component_num, //二维码的内容
+			    width: 100,//默认生成的二维码大小是 256×256
+			    height: 100
+			});
+	    }
+	     
 });

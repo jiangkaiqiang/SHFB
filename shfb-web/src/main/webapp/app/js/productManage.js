@@ -217,24 +217,11 @@ coldWeb.controller('productManage', function ($rootScope, $scope, $state, $cooki
 				method : 'GET',
 				url : '/i/component/updateByPrimaryKeySelective',
 				params : {
-						component_id : $("#component_id").html(),
-						expedit_date : $("#expedit_date").val(),
-						plan_begin_date : $("#plan_begin_date").val(),
-						plan_end_date : $("#plan_end_date").val(),
-						real_begin_date : $("#real_begin_date").val(),
-						real_end_date : $("#real_end_date").val(),
-						component_status_id : $("#statusSel").val(),
 						product_plan_begin_date : $("#product_plan_begin_date").val(),
 						product_plan_end_date : $("#product_plan_end_date").val()
 					}
 			}).success(function(data) {
 				alert(data.message);
-				$scope.componentInfo.component_status_name=$("#statusSel").find("option:selected").text();
-				$scope.componentInfo.expedit_date=$("#expedit_date").val();
-				$scope.componentInfo.plan_begin_date=$("#plan_begin_date").val();
-				$scope.componentInfo.plan_end_date=$("#plan_end_date").val();
-				$scope.componentInfo.real_begin_date=$("#real_begin_date").val();
-				$scope.componentInfo.real_end_date=$("#real_end_date").val();
 				$scope.componentInfo.product_plan_begin_date=$("#product_plan_begin_date").val();
 				$scope.componentInfo.product_plan_end_date=$("#product_plan_end_date").val();
 				
@@ -289,13 +276,13 @@ coldWeb.controller('productManage', function ($rootScope, $scope, $state, $cooki
 	    	return list.indexOf(project) > -1;
 	    };
 	    $scope.isChecked = function() {
-	        return $scope.selected.length === $scope.Allprojects.length;
+	        return $scope.selected.length === $scope.components.length;
 	    };
 	    $scope.toggleAll = function() {
-	        if ($scope.selected.length === $scope.Allprojects.length) {
+	        if ($scope.selected.length === $scope.components.length) {
 	        	$scope.selected = [];
 	        } else if ($scope.selected.length === 0 || $scope.selected.length > 0) {
-	        	$scope.selected = $scope.Allprojects.slice(0);
+	        	$scope.selected = $scope.components.slice(0);
 	        }
 	    };
 	    
@@ -309,6 +296,35 @@ coldWeb.controller('productManage', function ($rootScope, $scope, $state, $cooki
 	            flag = false;
 	        }
 	        return flag;
+	    }
+	    
+	    $scope.modalShow=function(eleId){
+	    	if($scope.selected.length==0) {alert("请选择构件"); return;}
+	    	$(eleId).modal('show');
+	    	
+	    }
+	    
+	    
+	    $scope.submitProductPlan=function(){
+	    	//判断有无选择
+	    	var parmStr = "";
+	    	for(i in $scope.selected){
+	    		parmStr += $scope.selected[i].component_id +","
+	    	}
+	    	
+	    	$http.get('/i/component/addProductPlan', {
+	            params: {
+	                component_ids: parmStr,
+	                product_plan_begin_date:$scope.product_plan_begin_date,
+	                product_plan_end_date:$scope.product_plan_end_date,
+	                product_explain:$scope.product_explain
+	            }
+	        }).success(function (data) {
+	        	$scope.getComponents();
+	        	$scope.selected = [];
+	        	alert(data.message);
+	        });
+	    	
 	    }
 	      
 });

@@ -1,13 +1,11 @@
 package com.shfb.rfid.manage.controller;
 
 import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,13 +17,12 @@ import org.springframework.web.servlet.ModelAndView;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.shfb.rfid.manage.dao.CityMapper;
 import com.shfb.rfid.manage.dao.ComponentMapper;
+import com.shfb.rfid.manage.dao.ComponentOrderMapper;
 import com.shfb.rfid.manage.dao.ComponentStatusMapper;
 import com.shfb.rfid.manage.dto.ComponentDto;
 import com.shfb.rfid.manage.dto.ResultDto;
 import com.shfb.rfid.manage.entity.Component;
-import com.shfb.rfid.manage.entity.ComponentOrder;
 import com.shfb.rfid.manage.entity.ComponentStatus;
 import com.shfb.rfid.manage.util.ExcelImportUtil;
 
@@ -37,6 +34,8 @@ public class ComponentController extends BaseController {
 	
 	@Autowired
 	private ComponentStatusMapper componentStatusDao;
+	@Autowired
+	private ComponentOrderMapper componentOrderDao;
 	
 	@RequestMapping(value = "/findComponentPage", method = RequestMethod.POST)
 	@ResponseBody
@@ -130,7 +129,56 @@ public class ComponentController extends BaseController {
 		}
 		
 	}
+	/**
+	 * 批量删除
+	 * @param component_id
+	 * @return
+	 */
+	@RequestMapping(value = "/deleteComps", method = RequestMethod.GET)
+	@ResponseBody
+	public ResultDto deleteComps(String component_ids)  {
+		String[] component_idArray = component_ids.split(",");
+		int reses = 0;
+		for (String comId : component_idArray) {
+			int res = componentDao.deleteByPrimaryKey(Integer.valueOf(comId));
+			reses += res;
+		}
+		
+		if( reses == component_idArray.length ) {
+			return new ResultDto(1, "删除成功");
+		} else {
+			return new ResultDto(2, "删除失败");
+		}
+		
+	}
 	
+	/**
+	 * 催货
+	 * @param component_id
+	 * @return
+	 */
+	@RequestMapping(value = "/expeditGood", method = RequestMethod.GET)
+	@ResponseBody
+	public ResultDto expeditGood(String component_ids)  {
+		String[] component_idArray = component_ids.split(",");
+		int reses = 0;
+		for (String comId : component_idArray) {
+			int res = componentDao.expeditGood(Integer.valueOf(comId));
+			reses += res;
+		}
+		
+		if( reses == component_idArray.length ) {
+			return new ResultDto(1, "催货成功");
+		} else {
+			return new ResultDto(2, "催货失败");
+		}
+		
+	}
+	/**
+	 * 导出构件
+	 * @param componentIdStrs
+	 * @return
+	 */
 	@RequestMapping(value = "/exportComp", method = RequestMethod.GET)
 	@ResponseBody
 	public ModelAndView exportComp(String componentIdStrs)  {
@@ -157,5 +205,70 @@ public class ComponentController extends BaseController {
 		return ExcelImportUtil.exportExcel(dataExel);
 	}
 	
+	/**
+	 * 下单
+	 * @param pageNum
+	 * @param pageSize
+	 * @param pro_id
+	 * @param single_name
+	 * @param floor
+	 * @param component_type
+	 * @param component_status_id
+	 * @return
+	 * @throws UnsupportedEncodingException
+	 */
+	@RequestMapping(value = "/placeOrder", method = RequestMethod.POST)
+	@ResponseBody
+	public ResultDto placeOrder( 
+			@RequestParam(value="pro_id", required=true) Integer pro_id,
+			@RequestParam(value="single_name", required=true) String single_name,
+			@RequestParam(value="floor", required=false) String floor,
+			@RequestParam(value="expedit_date", required=true) String expedit_date,
+			@RequestParam(value="comp_factory_id", required=true) Integer comp_factory_id,
+			@RequestParam(value="order_user_id", required=true) String order_user_id,
+			@RequestParam(value="order_username",required=true) String order_username
+			) throws UnsupportedEncodingException {
+			String order_num=Long.valueOf(System.currentTimeMillis()).toString(); 
+			//更新构件
+			int resUpdate = componentDao.placeOrder(pro_id, single_name, floor, expedit_date, comp_factory_id, order_user_id,order_num);		
+			//新加订单
+			int resInsert = componentOrderDao.insertSelective(pro_id, single_name, floor, comp_factory_id, order_username, order_num);
+			if((resUpdate + resInsert) > 0) 
+				return  new ResultDto(1, "下单成功");
+			else
+				return  new ResultDto(2, "下单失败");
+		
+	}
+	
+	/**
+	 * 添加生产计划
+	 * @param component_ids
+	 * @param product_plan_begin_date
+	 * @param product_plan_end_date
+	 * @param explain
+	 * @return
+	 * @throws UnsupportedEncodingException
+	 */
+	@RequestMapping(value = "/addProductPlan", method = RequestMethod.GET)
+	@ResponseBody
+	public ResultDto addProductPlan( 
+			@RequestParam(value="component_ids", required=true) String component_ids,
+			@RequestParam(value="product_plan_begin_date", required=true) String product_plan_begin_date,
+			@RequestParam(value="product_plan_end_date", required=false) String product_plan_end_date,
+			@RequestParam(value="product_explain", required=true) String product_explain
+			) throws UnsupportedEncodingException {
+				
+				String[] component_idArray = component_ids.split(",");
+				int reses = 0;
+				for (String comId : component_idArray) {
+					int res = componentDao.addProductPlan(Integer.valueOf(comId), product_plan_begin_date, product_plan_end_date, product_explain);
+					reses += res;
+				}
+			if(reses > 0) 
+				return  new ResultDto(1, "提交计划成功");
+			else
+				return  new ResultDto(2, "提交计划失败");
+		
+	}
 	
 }

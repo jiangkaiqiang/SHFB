@@ -12,6 +12,13 @@ public class ComponentOrder {
 	private String real_end_date;
 	private String order_time;
 	private String order_username;
+	private String comp_factory_id;
+	public String getComp_factory_id() {
+		return comp_factory_id;
+	}
+	public void setComp_factory_id(String comp_factory_id) {
+		this.comp_factory_id = comp_factory_id;
+	}
 	public Integer getOrder_id() {
 		return order_id;
 	}

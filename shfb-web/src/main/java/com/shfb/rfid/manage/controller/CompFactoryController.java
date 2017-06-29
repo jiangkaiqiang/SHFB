@@ -2,6 +2,7 @@ package com.shfb.rfid.manage.controller;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -115,6 +116,17 @@ public class CompFactoryController extends BaseController {
 		}
 		return new BaseDto(0);
 	}
-
+	
+	/**
+	 * 查询所有构件厂（为构件厂下拉框提供服务）
+	 * @param compFactoryID
+	 * @return
+	 */
+	@RequestMapping(value = "/findCompFactorys")
+	@ResponseBody
+	public List<CompFactory> findCompFactorys() {
+		List<CompFactory> compFactorys = compfactoryDao.findCompFactorys();
+		return compFactorys;
+	}
 	
 }

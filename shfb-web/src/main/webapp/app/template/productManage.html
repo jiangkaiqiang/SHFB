@@ -57,8 +57,8 @@
 			<div class="row" style="height:8px">
 				<div class="three">
 				<div class="btn-group pull-right" role="group" style="margin-right:10px">
-				    <button type="button" class="btn btn-default" ng-click="">提交生成计划</button>
-				   <button type="button" class="btn btn-default" ng-click="">修改成产计划</button>
+				    <button type="button" class="btn btn-default" ng-click="modalShow('#productPlan')">提交生成计划</button>
+				  
 				</div>
 			</div>	
 			</div>
@@ -78,13 +78,12 @@
 				         <th>序号</th>
 				         <th>构件编号</th>
 				         <th>构件名称</th>
-				         <th>构件类型</th>
-				         <th>构件规格</th>
+				         <th>生产计划开始</th>
+				         <th>生产计划结束</th>
 				         <th>已绑定</th>
 				         <th>已催货</th>
 				         <th>催货交期</th>
 				         <th>状态</th>
-				         <th>附件</th>
 				         <th>验收结果</th>
 				         <th>操作</th>
 				      </tr>
@@ -98,15 +97,14 @@
 				         <td>{{$index+1}}</td>
 				         <td>{{component.component_num}}</td>
 				         <td>{{component.component_name}}</td>
-				         <td>{{component.component_type}}</td>
-				         <td>{{component.component_size}}</td>
+				         <td>{{component.product_plan_begin_date}}</td>
+				         <td>{{component.product_plan_end_date}}</td>
 				         <td ng-if="component.bind_status=='1'">未绑定</td>
 				         <td ng-if="component.bind_status=='2'">已绑定</td>
 				         <td ng-if="component.expedit_status=='1'">未催货</td>
 				         <td ng-if="component.expedit_status=='2'">已催货</td>
 				         <td>{{component.expedit_date}}</td>
 				         <td>{{component.component_status_name}}</td>
-				         <td></td>
 				         <td ng-if="component.check_res=='1'">未验收</td>
 				         <td ng-if="component.check_res=='2'">验收通过</td>
 				         <td ng-if="component.check_res=='3'">验收不通过</td>
@@ -184,43 +182,25 @@
 					楼层：{{componentInfo.floor}}
 				</div>
 				<div class="col-md-3">
-						<span style="float:left">催货交期：</span>
-					      <span ng-if="isedit">
-					         <input id="expedit_date" type="text" style="width:150px" class="form-control" ng-model="componentInfo.expedit_date" placeholder="催货交期">
-					      </span>
-					      <span ng-if="!isedit">
-					      		{{componentInfo.expedit_date}}
-					      </span>
+						<span style="float:left">催货交期：{{componentInfo.expedit_date}}</span>	     
 				</div>
 			</div> 
 			<div class="row" style="margin-top:10px;padding-left:30px;padding-bottom:15px">
 				<div class="col-md-3">
-					      <span style="float:left">计划开始时间：</span>
-					      <span ng-if="isedit">
-					         <input id="plan_begin_date" type="text" style="width:150px" class="form-control" ng-model="componentInfo.plan_begin_date" placeholder="计划开始时间">
-					      </span>
-					       <span ng-if="!isedit">{{componentInfo.plan_begin_date}}</span>
+					      <span style="float:left">计划开始时间：</span>			    
+					       <span>{{componentInfo.plan_begin_date}}</span>
 				</div>
 				<div class="col-md-3">
-					 	  <span style="float:left">计划完成时间：</span>
-					      <span ng-if="isedit">
-					         <input id="plan_end_date" type="text" style="width:150px" class="form-control" ng-model="componentInfo.plan_end_date" placeholder="计划完成时间">
-					      </span>
-					      <span ng-if="!isedit">{{componentInfo.plan_end_date}}</span>
+					 	  <span style="float:left">计划完成时间：</span>				
+					      <span>{{componentInfo.plan_end_date}}</span>
 				</div>
 				<div class="col-md-3">
-						  <span style="float:left">实际开始时间：</span>
-					      <span ng-if="isedit">
-					         <input id="real_begin_date" type="text" style="width:150px" class="form-control" ng-model="componentInfo.real_begin_date" placeholder="实际开始时间">
-					      </span>
-					       <span ng-if="!isedit">{{componentInfo.real_begin_date}}</span>
+						  <span style="float:left">实际开始时间：</span>					  
+					      <span>{{componentInfo.real_begin_date}}</span>
 				</div>
 				<div class="col-md-3">
-					 	  <span style="float:left">实际完成时间：</span>
-					      <span ng-if="isedit">
-					         <input id="real_end_date" type="text" style="width:150px" class="form-control" ng-model="componentInfo.real_end_date" placeholder="实际完成时间">
-					      </span>
-					      <span ng-if="!isedit">{{componentInfo.real_end_date}}</span>
+					 	  <span style="float:left">实际完成时间：</span>				    
+					      <span>{{componentInfo.real_end_date}}</span>
 				</div>
 			</div> 
 			<div class="row" style="margin-top:10px;padding-left:30px;padding-bottom:15px">
@@ -234,13 +214,8 @@
 					构件规格：{{componentInfo.component_size}}
 				</div>
 				<div class="col-md-3">
-					<span style="float:left">状态：</span>
-					<span ng-if="isedit">
-						<select id="statusSel"  class="form-control" style="height:35px;width:100px !important">						
-                    	<option ng-repeat="status in statuslist" value="{{status.component_status_id}}">{{status.component_status_name}}</option>
-                    	</select>
-					</span>	
-					<span ng-if="!isedit">{{componentInfo.component_status_name}}</span>				
+					<span style="float:left">状态：</span>					
+					<span>{{componentInfo.component_status_name}}</span>				
 				</div>
 			</div> 
 			<div class="row" style="margin-top:10px;padding-left:30px;padding-bottom:15px">
@@ -341,3 +316,54 @@
 				</div>
 			</div>
     	</div>
+    	<!--  添加生产计划模态框 -->
+   	<div class="modal fade" id="productPlan" role="dialog"  aria-labelledby="myModalLabel" aria-hidden="true">
+	   <div class="modal-dialog">
+	      <div class="modal-content">
+	         <div class="modal-header">
+	            <button type="button" class="close" 
+	               data-dismiss="modal" aria-hidden="true">
+	                  &times;
+	            </button>
+	            <h4 class="modal-title" id="myModalLabel">
+	               添加生产计划
+	            </h4>
+	         </div>
+	         <div class="modal-body">
+	            	<form class="form-horizontal" name="projectForm">
+					   <div class="form-group">
+					      <label for="projectname" class="col-sm-4 control-label">生产计划开始日期：</label>
+					      <div class="col-sm-8">
+					         <input type="text" class="form-control" ng-model="product_plan_begin_date" name="proname" placeholder="请输入生产计划开始日期">
+					      </div>
+					   </div>
+			
+					   <div class="form-group">
+					      <label for="address" class="col-sm-4 control-label">生产计划结束日期：</label>
+					      <div class="col-sm-8">
+					         <input type="text" class="form-control" id="address" ng-model="product_plan_end_date"
+					            placeholder="请输入生产计划结束日期">
+					      </div>
+					   </div>
+					   <div class="form-group">
+					      <label for="contactName" class="col-sm-4 control-label">说明：</label>
+					      <div class="col-sm-8">
+					         <textarea type="text" rows="4" class="form-control" id="contactName" name="contactName" ng-model="product_explain"
+					            placeholder="请输入说明">
+					            </textarea>
+					      </div>
+					   </div>				   
+	            	</form>
+	         </div>
+	         <div class="modal-footer">
+	            <button type="button" class="btn btn-default" 
+	               data-dismiss="modal">取消
+	            </button>
+	            <button type="button" ng-click="submitProductPlan()" class="btn btn-primary" data-dismiss="modal">
+	                                                       提交
+	            </button>
+	         </div>
+	      </div><!-- /.modal-content -->
+	</div><!-- /.modal -->
+	</div>
+	<!--  添加生产计划模态框 end -->

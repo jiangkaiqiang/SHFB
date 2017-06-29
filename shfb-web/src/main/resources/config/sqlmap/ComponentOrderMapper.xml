@@ -12,7 +12,8 @@
     <result column="real_begin_date" property="real_begin_date" jdbcType="VARCHAR" />
     <result column="real_end_date" property="real_end_date" jdbcType="VARCHAR" />
     <result column="order_time" property="order_time" jdbcType="VARCHAR" />
-    <result column="order_username" property="order_username" jdbcType="VARCHAR" />    
+    <result column="order_username" property="order_username" jdbcType="VARCHAR" />  
+    <result column="comp_factory_id" property="comp_factory_id" jdbcType="INTEGER" />  
   </resultMap>
   <resultMap id="componentOrderDto" type="com.shfb.rfid.manage.dto.ComponentOrderDto" >
     <id column="order_id" property="order_id" jdbcType="INTEGER" />
@@ -26,11 +27,12 @@
     <result column="real_end_date" property="real_end_date" jdbcType="VARCHAR" />
     <result column="order_time" property="order_time" jdbcType="VARCHAR" />
     <result column="order_username" property="order_username" jdbcType="VARCHAR" />
-     <result column="pro_name" property="pro_name" jdbcType="VARCHAR" />   
+    <result column="pro_name" property="pro_name" jdbcType="VARCHAR" /> 
+    <result column="comp_factory_id" property="comp_factory_id" jdbcType="INTEGER" />  
   </resultMap>
   <sql id="Base_Column_List" >
     order_id, order_num, pro_id, single_name, floor, plan_begin_date,plan_end_date, 
-    real_begin_date, real_end_date, order_time, order_username
+    real_begin_date, real_end_date, order_time, order_username, comp_factory_id
   </sql>
   <select id="findComponentOrderPage"  resultMap="componentOrderDto" >
   		select
@@ -75,4 +77,21 @@
 	where 1=1 and
 	order_id = #{order_id,jdbcType=INTEGER}
   </select>
+  
+   <insert id="insertSelective" parameterType="String" >
+    insert into component_order (order_num, pro_id, single_name,
+    	floor,plan_begin_date,real_begin_date,order_time,order_username,comp_factory_id
+      )
+    values (#{order_num,jdbcType=VARCHAR}, 
+    		#{pro_id,jdbcType=INTEGER}, 
+      		#{single_name,jdbcType=VARCHAR}, 
+      		#{floor,jdbcType=VARCHAR}, 
+      		CURDATE(), 
+     		CURDATE(),
+     		NOW(),
+      		#{order_username,jdbcType=VARCHAR},
+      		#{comp_factory_id}
+      )
+  </insert>
+  
 </mapper>

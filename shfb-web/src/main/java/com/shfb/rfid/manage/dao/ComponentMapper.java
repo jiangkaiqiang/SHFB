@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.github.pagehelper.Page;
 import com.shfb.rfid.manage.dto.ComponentDto;
@@ -40,6 +41,18 @@ public interface ComponentMapper {
     
     List<ComponentDto> exportComponents(String[] componentIds);
     
-   
+    int placeOrder(@Param("pro_id") Integer pro_id,
+			@Param("single_name") String single_name,
+			@Param("floor") String floor,
+			@Param("expedit_date") String expedit_date,
+			@Param("comp_factory_id") Integer comp_factory_id,
+			@Param("order_user_id") String order_user_id,
+			@Param("order_num") String order_num
+    		);  
+    int expeditGood(Integer component_id);
     
+    int addProductPlan(@Param("component_id") Integer component_id,
+			@Param("product_plan_begin_date") String product_plan_begin_date,
+			@Param("product_plan_end_date") String product_plan_end_date,
+			@Param("product_explain") String product_explain);
 }

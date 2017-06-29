@@ -15,4 +15,11 @@ public interface ComponentOrderMapper {
     
     ComponentOrderDto selectByPrimaryKey(Integer order_id);
     
+    int insertSelective(@Param("pro_id") Integer pro_id,
+			@Param("single_name") String single_name,
+			@Param("floor") String floor,
+			@Param("comp_factory_id") Integer comp_factory_id,
+			@Param("order_username") String order_username,
+			@Param("order_num") String order_num);
+    
 }

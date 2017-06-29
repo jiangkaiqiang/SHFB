@@ -30,7 +30,8 @@
     <result column="picture_product_accept" property="picture_product_accept" jdbcType="VARCHAR" />
     <result column="picture_receipt" property="picture_receipt" jdbcType="VARCHAR" />
     <result column="picture_install" property="picture_install" jdbcType="VARCHAR" />
-    <result column="order_date" property="order_date" jdbcType="VARCHAR" />   
+    <result column="order_date" property="order_date" jdbcType="VARCHAR" />  
+    <result column="product_explain" property="product_explain" jdbcType="VARCHAR" /> 
   </resultMap>
   <sql id="Base_Column_List" >
     component_id, component_name, component_num, component_type, component_size, bind_status, 
@@ -451,5 +452,35 @@
 		 	#{item}
 	</foreach>
   </select>
+  
+  <update id="placeOrder" parameterType="String">
+  	 update component SET
+        		plan_begin_date = CURDATE(),
+				real_begin_date = CURDATE(),
+				order_time = NOW(),
+				expedit_date = #{expedit_date},
+				component_status_id = 2,
+				comp_factory_id=#{comp_factory_id},
+				order_user_id=#{order_user_id},
+				order_num=#{order_num}
+    where pro_id=#{pro_id} AND single_name=#{single_name} 
+    <if test="pro_id != null">
+    and floor=#{floor}
+    </if>
+  </update>
+  
+  <update id="expeditGood" parameterType="Integer">
+  	update component SET
+  		expedit_status = 2
+  	where component_id = #{component_id}
+  </update>
+  
+  <update id="addProductPlan" parameterType="Integer">
+  	update component SET
+  		product_plan_begin_date = #{product_plan_begin_date},
+  		product_plan_end_date = #{product_plan_end_date},
+  		product_explain = #{product_explain}
+  	where component_id = #{component_id}
+  </update>
   
 </mapper>
