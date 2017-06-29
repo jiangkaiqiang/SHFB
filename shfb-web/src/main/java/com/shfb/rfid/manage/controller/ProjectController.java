@@ -139,6 +139,14 @@ public class ProjectController extends BaseController {
 	        return projectDao.findAllProjectList();
 	    }
 	  
+	 @RequestMapping(value = "/findAllProjectByUserID")
+		@ResponseBody
+		public Object findAllProjectByUserID(Integer userProjectID) {
+		 if (userProjectID==0) {
+			userProjectID = null;
+		 }
+		 return projectDao.findProjectsByUserID(userProjectID);
+		}
 	 
 	 /**
 		 *app上传文件()

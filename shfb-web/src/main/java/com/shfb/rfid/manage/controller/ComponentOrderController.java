@@ -33,6 +33,7 @@ public class ComponentOrderController extends BaseController {
 	@ResponseBody
 	public Object findComponentOrderPage(@RequestParam(value="pageNum",required=false) Integer pageNum,
 			@RequestParam(value="pageSize") Integer pageSize, 
+			@RequestParam(value="userProjectID", required=false) Integer userProjectID,
 			@RequestParam(value="pro_id", required=false) Integer pro_id,
 			@RequestParam(value="single_name", required=false) String single_name,
 			@RequestParam(value="floor", required=false) String floor
@@ -42,7 +43,7 @@ public class ComponentOrderController extends BaseController {
 		PageHelper.startPage(pageNum, pageSize);
 		single_name = "".equals(single_name)? null:single_name;
 		floor = "".equals(floor)? null:floor;
-		Page<ComponentOrderDto> componentOrders = componentOrderDao.findComponentOrderPage(pro_id, single_name, floor);
+		Page<ComponentOrderDto> componentOrders = componentOrderDao.findComponentOrderPage(pro_id, single_name, floor,userProjectID);
 
 		return new PageInfo<ComponentOrderDto>(componentOrders);
 		

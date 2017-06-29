@@ -385,6 +385,9 @@
     </if> 
     <if test="component_status_id != null">
     AND c.component_status_id=#{component_status_id}
+    </if>
+    <if test="userProjectID != null">
+	AND c.pro_id=#{userProjectID}
     </if> 
     order by component_id desc		
   </select>

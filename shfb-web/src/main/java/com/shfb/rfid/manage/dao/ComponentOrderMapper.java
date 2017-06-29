@@ -10,7 +10,8 @@ import com.shfb.rfid.manage.entity.ComponentOrder;
 
 public interface ComponentOrderMapper {
     
-    Page<ComponentOrderDto> findComponentOrderPage(@Param("pro_id")Integer pro_id, @Param("single_name")String single_name, @Param("floor")String floor);
+    Page<ComponentOrderDto> findComponentOrderPage(@Param("pro_id")Integer pro_id, @Param("single_name")String single_name
+    		, @Param("floor")String floor,@Param("userProjectID")Integer userProjectID);
     
     int updateByPrimaryKeySelective(ComponentOrder componentOrder);
     
