@@ -74,6 +74,21 @@ public class UserController extends BaseController {
 		
 	}
 	
+	@RequestMapping(value = "/loginForClient")
+	@ResponseBody
+	public Object loginForClient(HttpServletRequest request, String userName, String password) {
+		if(StringUtil.isnotNull(userName)&&StringUtil.isnotNull(password)){
+			SysUser user = userDao.findUser(userName, password);
+			if (user != null) {
+	            return  ResponseData.newSuccess(user.getPro_id()+"");
+			}
+			return ResponseData.newFailure("用户名或者密码不正确~");
+		}else{
+			return ResponseData.newFailure("用户名和密码不能为空~");
+		}
+		
+	}
+	
 	@RequestMapping(value = "/findUserByID")
 	@ResponseBody
 	public Object findUserByID(
