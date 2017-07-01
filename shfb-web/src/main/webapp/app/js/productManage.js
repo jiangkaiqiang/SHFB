@@ -101,6 +101,9 @@ coldWeb.controller('productManage', function ($rootScope, $scope, $state, $cooki
 			}
 		}).success(function(data) {
 			$scope.projects = data;
+			
+			$scope.selectedProject=data[0];
+			$scope.projectChange($scope.selectedProject.pro_id);
 		});
 	}
 	$scope.findProjects();
@@ -125,6 +128,16 @@ coldWeb.controller('productManage', function ($rootScope, $scope, $state, $cooki
 			}
 		}).success(function(data) {
 			$scope.singles = data;
+			$scope.selectSingle = $scope.singles[0];
+			try
+			{
+				$scope.singleChange($scope.selectedProject.pro_id, $scope.selectSingle.single_name);
+			}
+			catch(err)
+			{
+				$scope.floors = [];
+				
+			}
 		});
 	}
 	
@@ -138,6 +151,7 @@ coldWeb.controller('productManage', function ($rootScope, $scope, $state, $cooki
 			}
 		}).success(function(data) {
 			$scope.floors = data;
+			$scope.selectFloor = $scope.floors[0];
 		});
 	}
 	

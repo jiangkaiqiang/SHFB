@@ -40,11 +40,11 @@ public class InstallAcceptanceController {
 	 */
 	@RequestMapping(value = "/findInstallComponentSizeByKey", method = RequestMethod.GET)
 	@ResponseBody
-	public InstallComponentSize findInstallComponentSizeByKey(
+	public ResultDto findInstallComponentSizeByKey(
 			@RequestParam(value="component_id", required=true) Integer component_id) {
 		InstallComponentSize installComponentSize = installComponentSizeDao.findByComponentId(component_id);
-		return installComponentSize;
-		
+		//return installComponentSize;
+		return new ResultDto(installComponentSize);
 	}
 	/**
 	 * 上传安装验收时的预制构件尺寸允许偏差及检查方法

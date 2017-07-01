@@ -40,11 +40,11 @@ public class ProductionAcceptanceController {
 	 */
 	@RequestMapping(value = "/findProductComponentSizeByKey", method = RequestMethod.GET)
 	@ResponseBody
-	public ProductComponentSize findProductComponentSizeByKey(
+	public ResultDto findProductComponentSizeByKey(
 			@RequestParam(value="component_id", required=true) Integer component_id) {
 		ProductComponentSize productComponentSize = productComponentSizeDao.findByComponentId(component_id);
-		return productComponentSize;
-		
+		//return productComponentSize;
+		return new ResultDto(productComponentSize);
 	}
 	/**
 	 * 上传生产验收时的预制构件尺寸允许偏差及检查方法
