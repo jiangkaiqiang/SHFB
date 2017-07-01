@@ -9,8 +9,8 @@
 			<div class="row" style="height:34px">
 				<div class="col-sm-2">
 					<div class="btn-group pull-left" id="status">
-					项目：<select ng-init="selectedProject = projects[0]"
-					ng-model="selectedProject" ng-options="x.pro_name for x in projects"
+					项目：<select 
+					ng-model="selectedProject" ng-options="x as x.pro_name for x in projects"
 					ng-change="projectChange(selectedProject.pro_id)"
 					>			
 					</select>
@@ -19,8 +19,8 @@
 		        <div  class="col-sm-2">								
 					<div class="btn-group pull-left" id="status">
 					单体：<select ng-init="selectSingle = singles[0]"
-					ng-model="selectSingle" ng-options="x.single_name for x in singles"
-					ng-change="singleChange(selectSingle.pro_id, selectSingle.single_name)"
+					ng-model="selectSingle" ng-options="x as x.single_name for x in singles"
+					ng-change="singleChange(selectedProject.pro_id, selectSingle.single_name)"
 					>
 					</select>
 					</div>
@@ -28,7 +28,7 @@
 				<div  class="col-sm-2">								
 					<div class="btn-group pull-left" id="status">
 					楼层：<select ng-init="selectFloor = floors[0]"
-					 ng-model="selectFloor" ng-options="x.floor for x in floors">
+					 ng-model="selectFloor" ng-options="x as x.floor for x in floors">
 					</select>
 					</div>
 				</div>

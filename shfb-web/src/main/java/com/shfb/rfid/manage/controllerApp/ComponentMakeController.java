@@ -92,7 +92,7 @@ public class ComponentMakeController extends BaseController{
 	 */
 	@RequestMapping(value = "/getSelectContent", method = RequestMethod.GET)
 	@ResponseBody
-	public List<Map<String, Object>> getSelectContent() {
+	public Object getSelectContent() {
 		List<Map<String, Object>> projects = projectDao.findProjectNames();
 		for (Map<String, Object> project : projects) {
 			Integer pro_id = Integer.valueOf(project.get("pro_id").toString());
@@ -108,7 +108,8 @@ public class ComponentMakeController extends BaseController{
 			}
 			project.put("singles", singles);
 		}
-		return projects;
+		return  ResponseData.newSuccess(projects, "查询成功");
+		//return projects;
 	}
 	
 	/**
@@ -118,9 +119,10 @@ public class ComponentMakeController extends BaseController{
 	 */
 	@RequestMapping(value = "/findComponentList", method = RequestMethod.GET)
 	@ResponseBody	
-	public Page<ComponentDto> findComponentList(Component parm) {
+	public Object findComponentList(Component parm) {
 		Page<ComponentDto> components = componentDao.findAllComponent(parm);
-		return components;		
+		return  ResponseData.newSuccess(components, "查询成功");
+		//return components;		
 	}
 	
 	/**
@@ -130,10 +132,12 @@ public class ComponentMakeController extends BaseController{
 	 */
 	@RequestMapping(value = "/findComponentByKey", method = RequestMethod.GET)
 	@ResponseBody
-	public Component findComponentByKey(
+	public ResultDto findComponentByKey(
 			@RequestParam(value="component_id", required=true) Integer component_id) {
 		Component component = componentDao.selectByPrimaryKey(component_id);
-		return component;
+		
+		return new ResultDto(component);
+		//return component;
 		
 	}
 	
@@ -158,10 +162,11 @@ public class ComponentMakeController extends BaseController{
 	 */
 	@RequestMapping(value = "/findProductModelSizeByKey", method = RequestMethod.GET)
 	@ResponseBody
-	public ProductModelSize findProductModelSizeByKey(
+	public ResultDto findProductModelSizeByKey(
 			@RequestParam(value="component_id", required=true) Integer component_id) {
 		ProductModelSize productComponentSize = productModelSizeDao.findByComponentId(component_id);
-		return productComponentSize;
+		return new ResultDto(productComponentSize);
+		//return productComponentSize;
 		
 	}
 	
@@ -188,10 +193,11 @@ public class ComponentMakeController extends BaseController{
 	 */
 	@RequestMapping(value = "/findProductSteelbarSizeByKey", method = RequestMethod.GET)
 	@ResponseBody
-	public ProductSteelbarSize findProductSteelbarSizeByKey(
+	public ResultDto findProductSteelbarSizeByKey(
 			@RequestParam(value="component_id", required=true) Integer component_id) {
 		ProductSteelbarSize productSteelbarSize = productSteelbarSizeDao.findByComponentId(component_id);
-		return productSteelbarSize;
+		return new ResultDto(productSteelbarSize);
+		//return productSteelbarSize;
 		
 	}
 	/**
@@ -216,11 +222,11 @@ public class ComponentMakeController extends BaseController{
 	 */
 	@RequestMapping(value = "/findProductEmbeddedPartsByKey", method = RequestMethod.GET)
 	@ResponseBody
-	public ProductEmbeddedParts findProductEmbeddedPartsByKey(
+	public ResultDto findProductEmbeddedPartsByKey(
 			@RequestParam(value="component_id", required=true) Integer component_id) {
 		ProductEmbeddedParts productEmbeddedParts = productEmbeddedPartsDao.findByComponentId(component_id);
-		return productEmbeddedParts;
-		
+		//return productEmbeddedParts;
+		return new ResultDto(productEmbeddedParts);
 	}
 	/**
 	 * 获取预埋件设置数据(上传预埋件和预留孔洞的允许偏差和检验方法)
@@ -243,11 +249,11 @@ public class ComponentMakeController extends BaseController{
 	 */
 	@RequestMapping(value = "/findProductCuringByKey", method = RequestMethod.GET)
 	@ResponseBody
-	public ProductCuring findProductCuringByKey(
+	public ResultDto findProductCuringByKey(
 			@RequestParam(value="component_id", required=true) Integer component_id) {
 		ProductCuring productCuring = productCuringDao.findByComponentId(component_id);
-		return productCuring;
-		
+		//return productCuring;
+		return new ResultDto(productCuring);
 	}	
 	/**
 	 * 上传混凝土浇筑及养护数据(预制构件养护质量)

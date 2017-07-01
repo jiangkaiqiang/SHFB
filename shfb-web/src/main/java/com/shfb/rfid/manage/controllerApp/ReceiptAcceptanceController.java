@@ -40,11 +40,11 @@ public class ReceiptAcceptanceController {
 	 */
 	@RequestMapping(value = "/findReceiptComponentSizeByKey", method = RequestMethod.GET)
 	@ResponseBody
-	public ReceiptComponentSize findReceiptComponentSizeByKey(
+	public ResultDto findReceiptComponentSizeByKey(
 			@RequestParam(value="component_id", required=true) Integer component_id) {
 		ReceiptComponentSize receiptComponentSize = receiptComponentSizeDao.findByComponentId(component_id);
-		return receiptComponentSize;
-		
+		//return receiptComponentSize;
+		return new ResultDto(receiptComponentSize);
 	}
 	/**
 	 * 上传收货验收时的预制构件尺寸允许偏差及检查方法
