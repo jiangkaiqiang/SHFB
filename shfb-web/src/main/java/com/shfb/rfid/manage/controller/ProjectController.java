@@ -164,13 +164,17 @@ public class ProjectController extends BaseController {
 				for (int i = 0; i < files.length; i++) {
 					//获取文件的原始名字
 					String fileName = files[i].getOriginalFilename();
-					fileEntities.add(new UploadFileEntity(fileName, files[i], "uploadPic"));					
+					fileEntities.add(new UploadFileEntity(fileName.replaceAll("#", "$"), files[i], "uploadPic"));					
+					Component component = new Component();
+					component.setComponent_num(fileName.substring(0,fileName.lastIndexOf(".")));
+					component.setDrawing(FtpService.FILE_Url+"uploadPic/"+fileName.replaceAll("#", "$"));
+					componentDao.updateByComponentNum(component);
 				}
 				//保存文件
 				res = ftpservice.uploadFileList(fileEntities);			
 				}
 				if( res == true ) 
-					return new ResultDto(2,"sucess");
+					return new ResultDto(1,"sucess");
 				else {
 					return new ResultDto(2,"server err");
 				}
@@ -220,7 +224,7 @@ public class ProjectController extends BaseController {
 						component.setPro_id(pro_id);
 						componentDao.insertSelective(component);
 					}
-					return new ResultDto(2,"sucess");
+					return new ResultDto(1,"sucess");
 				} else {
 					return new ResultDto(2,"server err");
 				}
