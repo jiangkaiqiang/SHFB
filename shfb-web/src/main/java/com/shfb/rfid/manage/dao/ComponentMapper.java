@@ -20,6 +20,8 @@ public interface ComponentMapper {
     Component selectByPrimaryKey(Integer component_id);
 
     int updateByPrimaryKeySelective(Component record);
+    
+    int updateByComponentNum(Component record);
 
     int updateByPrimaryKey(Component record);
     
@@ -30,6 +32,8 @@ public interface ComponentMapper {
     List<Map<String, Object>> findSingleBysel(@Param("pro_id")Integer pro_id);
         
     List<Map<String, Object>> findFloor(@Param("pro_id")Integer pro_id, @Param("single_name")String single_name);
+    
+    List<Component> findComponentByProID(@Param("pro_id")Integer pro_id);
     
     List<Component> findComponentBysel(@Param("pro_id")Integer pro_id, @Param("single_name")String single_name, @Param("floor")String floor);
     
