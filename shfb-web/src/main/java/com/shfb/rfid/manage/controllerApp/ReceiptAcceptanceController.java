@@ -51,12 +51,17 @@ public class ReceiptAcceptanceController {
 	 */
 	@RequestMapping(value = "/insertReceiptComponentSize", method = RequestMethod.POST)
 	@ResponseBody
-	public Map insertReceiptComponentSize(ReceiptComponentSize receiptComponentSize) {
-		Map map = new HashMap();
-		if(receiptComponentSize.getComponent_id() == null) return map;
+	public ResultDto insertReceiptComponentSize(ReceiptComponentSize receiptComponentSize) {
+		
+		if(receiptComponentSize.getComponent_id() == null) return new ResultDto(2, "无法找到构件id", false);
 		int res = receiptComponentSizeDao.insertSelective(receiptComponentSize);		
-		map.put("res", res);
-		return map;		
+
+		if(res == 1) {
+			return new ResultDto(1, "上传成功");
+		} else {
+			return new ResultDto(2, "上传失败", false);
+		}
+			
 	}
 	
 	/**

@@ -51,13 +51,37 @@ public class ProductionAcceptanceController {
 	 */
 	@RequestMapping(value = "/insertProductComponentSize", method = RequestMethod.POST)
 	@ResponseBody
-	public Map insertProductComponentSize(ProductComponentSize productComponentSize) {
-		Map map = new HashMap();
-		if(productComponentSize.getComponent_id() == null) return map;
+	public ResultDto insertProductComponentSize(ProductComponentSize productComponentSize) {
+		
+		if(productComponentSize.getComponent_id() == null) return new ResultDto(2, "无法找到构件id", false);
 		int res = productComponentSizeDao.insertSelective(productComponentSize);		
-		map.put("res", res);
-		return map;		
+
+		if(res == 1) {
+			return new ResultDto(1, "上传成功");
+		} else {
+			return new ResultDto(2, "上传失败", false);
+		}
+			
 	}
+	
+	
+	/**
+	 * 发货
+	 */
+	@RequestMapping(value = "/deliverGoods", method = RequestMethod.GET)
+	@ResponseBody
+	public ResultDto deliverGoods(Component component) {
+		component.setComponent_status_id(6);
+		int res = componentDao.updateComStatus(component);
+		
+		if(res == 1) {
+			
+			return new ResultDto(1, "已发货");
+		} else {
+			return new ResultDto(2, "发货失败", false);
+		}
+	}
+	
 	
 	/**
 	 * 生产验收-上传构件实物图
@@ -74,6 +98,9 @@ public class ProductionAcceptanceController {
 		return appUploadFile(files, component_id, 0);
 		
 	}
+	
+	
+	
 	
 	/**
 	 * app上传构件实物图

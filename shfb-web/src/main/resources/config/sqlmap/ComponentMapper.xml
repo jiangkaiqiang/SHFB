@@ -466,8 +466,11 @@
 				comp_factory_id=#{comp_factory_id},
 				order_user_id=#{order_user_id},
 				order_num=#{order_num}
-    where pro_id=#{pro_id} AND single_name=#{single_name} 
-    <if test="pro_id != null">
+    where pro_id=#{pro_id} 
+     <if test="single_name != null and single_name != ''">
+    AND single_name=#{single_name} 
+    </if>
+    <if test="floor != null and floor != ''">
     and floor=#{floor}
     </if>
   </update>
@@ -483,6 +486,12 @@
   		product_plan_begin_date = #{product_plan_begin_date},
   		product_plan_end_date = #{product_plan_end_date},
   		product_explain = #{product_explain}
+  	where component_id = #{component_id}
+  </update>
+  
+  <update id="updateComStatus" parameterType="com.shfb.rfid.manage.entity.Component">
+  	update component SET
+  		component_status_id = #{component_status_id}
   	where component_id = #{component_id}
   </update>
   

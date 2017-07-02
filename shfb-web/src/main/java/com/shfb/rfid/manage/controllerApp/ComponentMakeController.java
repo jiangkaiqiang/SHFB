@@ -98,9 +98,15 @@ public class ComponentMakeController extends BaseController{
 			Integer pro_id = Integer.valueOf(project.get("pro_id").toString());
 			List<Map<String, Object>> singles = componentDao.findSingle(pro_id);
 			for (Map<String, Object> single : singles) {
+				if(single == null) {
+					continue;
+				}
 				String single_name = single.get("single_name").toString();
 				List<Map<String, Object>> floors = componentDao.findFloor(pro_id, single_name);
 				for (Map<String, Object> floor : floors) {
+					if(floor == null ) {
+						continue;
+					}
 					List<Component> components = componentDao.findComponentBysel(pro_id, single_name, floor.get("floor").toString());
 					floor.put("components", components);
 				}

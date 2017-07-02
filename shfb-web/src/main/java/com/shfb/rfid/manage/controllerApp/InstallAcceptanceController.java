@@ -51,12 +51,17 @@ public class InstallAcceptanceController {
 	 */
 	@RequestMapping(value = "/insertInstallComponentSize", method = RequestMethod.POST)
 	@ResponseBody
-	public Map insertInstallComponentSize(InstallComponentSize installComponentSize) {
-		Map map = new HashMap();
-		if(installComponentSize.getComponent_id() == null) return map;
+	public ResultDto insertInstallComponentSize(InstallComponentSize installComponentSize) {
+		
+		if(installComponentSize.getComponent_id() == null) return new ResultDto(2, "无法找到构件id", false);
 		int res = installComponentSizeDao.insertSelective(installComponentSize);		
-		map.put("res", res);
-		return map;		
+	
+		if(res == 1) {
+			return new ResultDto(1, "上传成功");
+		} else {
+			return new ResultDto(2, "上传失败", false);
+		}
+				
 	}
 	
 	/**

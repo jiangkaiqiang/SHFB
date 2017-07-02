@@ -23,6 +23,8 @@ public interface ComponentMapper {
 
     int updateByPrimaryKey(Component record);
     
+    int updateComStatus(Component record);
+    
     Page<ComponentDto> findAllComponent(Component record);
     
     List<Map<String, Object>> findSingle(@Param("pro_id")Integer pro_id);
