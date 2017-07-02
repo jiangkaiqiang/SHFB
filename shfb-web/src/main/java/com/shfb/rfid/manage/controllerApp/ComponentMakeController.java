@@ -332,4 +332,23 @@ public class ComponentMakeController extends BaseController{
 		
 	}
 	
+	
+	/**
+	 * 改变构件状态
+	 * @param component_status_id 构件状态
+	 * @param component_id 构件id
+	 */
+	@RequestMapping(value = "/updateComStatus", method = RequestMethod.POST)
+	@ResponseBody
+	public ResultDto updateComStatus(Component component) {
+		if(component.getComponent_id() == null) new ResultDto(2,"param err");
+		int res = componentDao.updateComStatus(component);		
+		if(res != 0) {
+			return new ResultDto(0,"success");
+		} else {
+			return new ResultDto(1,"server err");
+		}
+		
+	}
+	
 }

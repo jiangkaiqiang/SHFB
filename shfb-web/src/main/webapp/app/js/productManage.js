@@ -351,5 +351,11 @@ coldWeb.controller('productManage', function ($rootScope, $scope, $state, $cooki
 	        });
 	    	
 	    }
-	      
+	     
+	    $('.datetimepickerDisplay').datetimepicker({  
+	    	format: 'yyyy-mm-dd',
+	    	autoclose:true,
+	    	minView:'month'
+	    }).on('dp.change', function (e) {  
+	    });
 });

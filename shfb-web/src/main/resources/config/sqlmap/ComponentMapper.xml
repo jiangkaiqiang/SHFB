@@ -485,7 +485,8 @@
   	update component SET
   		product_plan_begin_date = #{product_plan_begin_date},
   		product_plan_end_date = #{product_plan_end_date},
-  		product_explain = #{product_explain}
+  		product_explain = #{product_explain},
+  		component_status_id = 3
   	where component_id = #{component_id}
   </update>
   
