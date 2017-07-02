@@ -66,8 +66,8 @@ coldWeb.controller('componentOrder', function ($rootScope, $scope, $state, $cook
 		}).success(function(data) {
 			$scope.projects = data;
 			
-			$scope.selectedProject=data[0];
-			$scope.projectChange($scope.selectedProject.pro_id);
+//			$scope.selectedProject=data[0];
+//			$scope.projectChange($scope.selectedProject.pro_id);
 		});
 	}
 	$scope.findProjects();
@@ -81,16 +81,16 @@ coldWeb.controller('componentOrder', function ($rootScope, $scope, $state, $cook
 			}
 		}).success(function(data) {
 			$scope.singles = data;
-			$scope.selectSingle = $scope.singles[0];
-			try
-			{
-				$scope.singleChange($scope.selectedProject.pro_id, $scope.selectSingle.single_name);
-			}
-			catch(err)
-			{
-				$scope.floors = [];
-				
-			}
+//			$scope.selectSingle = $scope.singles[0];
+//			try
+//			{
+//				$scope.singleChange($scope.selectedProject.pro_id, $scope.selectSingle.single_name);
+//			}
+//			catch(err)
+//			{
+//				$scope.floors = [];
+//				
+//			}
 		});
 	}
 	
@@ -104,7 +104,7 @@ coldWeb.controller('componentOrder', function ($rootScope, $scope, $state, $cook
 			}
 		}).success(function(data) {
 			$scope.floors = data;
-			$scope.selectFloor = $scope.floors[0];
+			//$scope.selectFloor = $scope.floors[0];
 		});
 	}
 	

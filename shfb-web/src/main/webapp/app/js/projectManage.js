@@ -284,10 +284,10 @@ coldWeb.controller('projectManage', function ($rootScope, $scope, $state, $cooki
 		 $scope.importComponent=function(){
 			 var projectIDs = [];
 		    	for(i in $scope.selected){
-		    		projectIDs.push($scope.selected[i].pro_id);
+		    		projectIDs.push($scope.selected[i].project.pro_id);
 		    	}
-		    	if(projectIDs.length == 0 ){
-		    		alert("请选择项目");		    		
+		    	if(projectIDs.length != 1 ){
+		    		alert("请选择一个项目");		    		
 		    	}else{
 		    		$('#importComp').modal('show')
 		    		
@@ -307,8 +307,12 @@ coldWeb.controller('projectManage', function ($rootScope, $scope, $state, $cooki
 					},
 					transformRequest: function() {
 						var formData = new FormData();
+						var projectIDs = [];
+				    	for(i in $scope.selected){
+				    		projectIDs.push($scope.selected[i].project.pro_id);
+				    	}
 						formData.append('file', $('#upfile')[0].files[0]);
-						formData.append('pro_id',1);
+						formData.append('pro_id',projectIDs[0]);
 						return formData;
 					}
 				}).success(function (data) {
