@@ -131,6 +131,24 @@ public class ComponentMakeController extends BaseController{
 		//return components;		
 	}
 	
+	
+	/**
+	 * 获取构件列表
+	 * @param component_status_id
+	 * @return
+	 */
+	@RequestMapping(value = "/findComponentListForClient")
+	@ResponseBody	
+	public Object findComponentListForClient(Component parm) {
+		Integer pro_id = parm.getPro_id();
+		if (parm.getPro_id()==0) {
+			pro_id = null;
+		}
+		List<Component> components = componentDao.findComponentByProID(pro_id);
+		return  ResponseData.newSuccess(components, "查询成功");
+		//return components;		
+	}
+	
 	/**
 	 * 获取构件的详细信息
 	 * @param component_id

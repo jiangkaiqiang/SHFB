@@ -45,13 +45,14 @@
     from component
     where component_id = #{component_id,jdbcType=INTEGER}
   </select>
-  <select id="findComponentByProID" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="findComponentByProID" resultType="com.shfb.rfid.manage.entity.Component" parameterType="java.lang.Integer" >
     select *
     from component
      WHERE 1=1
     <if test="pro_id != null">
     AND pro_id=#{pro_id}
     </if>
+    AND card_num IS NULL
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from component
