@@ -25,6 +25,7 @@ import com.shfb.rfid.manage.dto.ResultDto;
 import com.shfb.rfid.manage.entity.Component;
 import com.shfb.rfid.manage.entity.ComponentStatus;
 import com.shfb.rfid.manage.util.ExcelImportUtil;
+import com.shfb.rfid.manage.util.ResponseData;
 
 @Controller
 @RequestMapping(value = "/component")
@@ -120,7 +121,7 @@ public class ComponentController extends BaseController {
 		}
 		return res;
 	}
-	
+		
 	
 	@RequestMapping(value = "/deleteComp", method = RequestMethod.GET)
 	@ResponseBody

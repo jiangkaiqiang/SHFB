@@ -45,6 +45,15 @@
     from component
     where component_id = #{component_id,jdbcType=INTEGER}
   </select>
+  <select id="findComponentByProID" resultType="com.shfb.rfid.manage.entity.Component" parameterType="java.lang.Integer" >
+    select *
+    from component
+     WHERE 1=1
+    <if test="pro_id != null">
+    AND pro_id=#{pro_id}
+    </if>
+    AND card_num IS NULL
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from component
     where component_id = #{component_id,jdbcType=INTEGER}
@@ -292,6 +301,9 @@
       <if test="drawing != null" >
         drawing = #{drawing,jdbcType=VARCHAR},
       </if>
+      <if test="card_num != null" >
+        card_num = #{card_num,jdbcType=VARCHAR},
+      </if>
       <if test="picture_comp_make != null" >
         picture_comp_make = #{picture_comp_make,jdbcType=VARCHAR},
       </if>
@@ -307,6 +319,102 @@
     </set>
     where component_id = #{component_id,jdbcType=INTEGER}
   </update>
+  
+  
+  <update id="updateByComponentNum" parameterType="com.shfb.rfid.manage.entity.Component" >
+    update component
+    <set >
+      <if test="component_name != null" >
+        component_name = #{component_name,jdbcType=VARCHAR},
+      </if>
+      <if test="component_num != null" >
+        component_num = #{component_num,jdbcType=VARCHAR},
+      </if>
+      <if test="component_type != null" >
+        component_type = #{component_type,jdbcType=VARCHAR},
+      </if>
+      <if test="component_size != null" >
+        component_size = #{component_size,jdbcType=VARCHAR},
+      </if>
+      <if test="bind_status != null" >
+        bind_status = #{bind_status,jdbcType=INTEGER},
+      </if>
+      <if test="expedit_status != null" >
+        expedit_status = #{expedit_status,jdbcType=INTEGER},
+      </if>
+      <if test="expedit_date != null" >
+        expedit_date = #{expedit_date,jdbcType=DATE},
+      </if>
+      <if test="component_status_id != null" >
+        component_status_id = #{component_status_id,jdbcType=INTEGER},
+      </if>
+      <if test="check_res != null" >
+        check_res = #{check_res,jdbcType=INTEGER},
+      </if>
+      <if test="single_name != null" >
+        single_name = #{single_name,jdbcType=VARCHAR},
+      </if>
+      <if test="pro_id != null" >
+        pro_id = #{pro_id,jdbcType=INTEGER},
+      </if>
+      <if test="floor != null" >
+        floor = #{floor,jdbcType=VARCHAR},
+      </if>
+      <if test="plan_begin_date != null" >
+        plan_begin_date = #{plan_begin_date,jdbcType=DATE},
+      </if>
+      <if test="plan_end_date != null" >
+        plan_end_date = #{plan_end_date,jdbcType=DATE},
+      </if>
+      <if test="real_begin_date != null" >
+        real_begin_date = #{real_begin_date,jdbcType=DATE},
+      </if>
+      <if test="real_end_date != null" >
+        real_end_date = #{real_end_date,jdbcType=DATE},
+      </if>
+      <if test="order_num != null" >
+        order_num = #{order_num,jdbcType=VARCHAR},
+      </if>
+      <if test="comp_factory_id != null" >
+        comp_factory_id = #{comp_factory_id,jdbcType=INTEGER},
+      </if>
+      <if test="order_user_id != null" >
+        order_user_id = #{order_user_id,jdbcType=INTEGER},
+      </if>
+      <if test="order_time != null" >
+        order_time = #{order_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="product_plan_begin_date != null" >
+        product_plan_begin_date = #{product_plan_begin_date,jdbcType=DATE},
+      </if>
+      <if test="product_plan_end_date != null" >
+        product_plan_end_date = #{product_plan_end_date,jdbcType=DATE},
+      </if>
+      <if test="drawing != null" >
+        drawing = #{drawing,jdbcType=VARCHAR},
+      </if>
+      <if test="card_num != null" >
+        card_num = #{card_num,jdbcType=VARCHAR},
+      </if>
+      <if test="picture_comp_make != null" >
+        picture_comp_make = #{picture_comp_make,jdbcType=VARCHAR},
+      </if>
+      <if test="picture_product_accept != null" >
+        picture_product_accept = #{picture_product_accept,jdbcType=VARCHAR},
+      </if>
+      <if test="picture_receipt != null" >
+        picture_receipt = #{picture_receipt,jdbcType=VARCHAR},
+      </if>
+      <if test="picture_install != null" >
+        picture_install = #{picture_install,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where component_num = #{component_num,jdbcType=INTEGER}
+  </update>
+  
+  
+  
+  
   <update id="updateByPrimaryKey" parameterType="com.shfb.rfid.manage.entity.Component" >
     update component
     set component_name = #{component_name,jdbcType=VARCHAR},

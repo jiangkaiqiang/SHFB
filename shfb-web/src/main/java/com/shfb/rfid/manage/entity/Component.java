@@ -61,6 +61,7 @@ public class Component {
 	
 	private String product_explain;
 	
+	private String card_num;
 	public Integer getComponent_id() {
 		return component_id;
 	}
@@ -304,7 +305,12 @@ public class Component {
 	public void setProduct_explain(String product_explain) {
 		this.product_explain = product_explain;
 	}
-	
-	
-	
+
+	public String getCard_num() {
+		return card_num;
+	}
+
+	public void setCard_num(String card_num) {
+		this.card_num = card_num;
+	}
 }

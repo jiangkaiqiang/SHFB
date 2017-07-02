@@ -123,10 +123,28 @@ public class ComponentMakeController extends BaseController{
 	 * @param component_status_id
 	 * @return
 	 */
-	@RequestMapping(value = "/findComponentList", method = RequestMethod.GET)
+	@RequestMapping(value = "/findComponentList")
 	@ResponseBody	
 	public Object findComponentList(Component parm) {
 		Page<ComponentDto> components = componentDao.findAllComponent(parm);
+		return  ResponseData.newSuccess(components, "查询成功");
+		//return components;		
+	}
+	
+	
+	/**
+	 * 获取构件列表
+	 * @param component_status_id
+	 * @return
+	 */
+	@RequestMapping(value = "/findComponentListForClient")
+	@ResponseBody	
+	public Object findComponentListForClient(Component parm) {
+		Integer pro_id = parm.getPro_id();
+		if (parm.getPro_id()==0) {
+			pro_id = null;
+		}
+		List<Component> components = componentDao.findComponentByProID(pro_id);
 		return  ResponseData.newSuccess(components, "查询成功");
 		//return components;		
 	}
@@ -146,6 +164,21 @@ public class ComponentMakeController extends BaseController{
 		//return component;
 		
 	}
+	
+	/**
+	 * 获取构件列表
+	 * @param component_status_id
+	 * @return
+	 */
+	/*@RequestMapping(value = "/findComponentListForClient")
+	@ResponseBody	
+	public Object findComponentListForClient(Integer pro_id) {
+		if (pro_id==0) {
+			pro_id=null;
+		}
+		List<Component> components = componentDao.findComponentByProID(pro_id);
+		return  components;
+	}*/
 	
 	/**
 	 * 构件制作-上传构件实物图
@@ -219,6 +252,19 @@ public class ComponentMakeController extends BaseController{
 			return new ResultDto(0,"success");
 		} else {
 			return new ResultDto(1,"server err");
+		}
+		
+	}
+	
+	@RequestMapping(value = "/updateByComponentNum")
+	@ResponseBody
+	public ResultDto updateByComponentNum(Component component)  {
+		int res = componentDao.updateByComponentNum(component);
+
+		if( res==1 ) {
+			return new ResultDto(1, "保存成功");
+		} else {
+			return new ResultDto(2, "保存失败");
 		}
 		
 	}
