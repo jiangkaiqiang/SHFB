@@ -473,7 +473,13 @@ coldWeb.controller('componentManage', function ($rootScope, $scope, $state, $coo
 	    	minView:'month'
 	    }).on('dp.change', function (e) {  
 	    });
-	    
+	  
+	    $scope.loadExe=function(){
+	    	 if(isConfirm("是否下载读卡程序")) {
+	    		 window.location.href="../../assets/file/cardRead.zip";
+	    	 }
+			 
+		 }
 	    
 	     
 });

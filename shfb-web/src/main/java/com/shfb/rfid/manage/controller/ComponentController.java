@@ -2,6 +2,7 @@ package com.shfb.rfid.manage.controller;
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,15 +18,18 @@ import org.springframework.web.servlet.ModelAndView;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.shfb.rfid.manage.dao.CompProgressMapper;
 import com.shfb.rfid.manage.dao.ComponentMapper;
 import com.shfb.rfid.manage.dao.ComponentOrderMapper;
 import com.shfb.rfid.manage.dao.ComponentStatusMapper;
 import com.shfb.rfid.manage.dto.ComponentDto;
 import com.shfb.rfid.manage.dto.ResultDto;
+import com.shfb.rfid.manage.entity.CompProgress;
 import com.shfb.rfid.manage.entity.Component;
 import com.shfb.rfid.manage.entity.ComponentStatus;
 import com.shfb.rfid.manage.util.ExcelImportUtil;
 import com.shfb.rfid.manage.util.ResponseData;
+import com.shfb.rfid.manage.util.TimeUtil;
 
 @Controller
 @RequestMapping(value = "/component")
@@ -37,6 +41,8 @@ public class ComponentController extends BaseController {
 	private ComponentStatusMapper componentStatusDao;
 	@Autowired
 	private ComponentOrderMapper componentOrderDao;
+	@Autowired
+	private CompProgressMapper comProgressDao;
 	
 	@RequestMapping(value = "/findComponentPage", method = RequestMethod.POST)
 	@ResponseBody
@@ -234,11 +240,25 @@ public class ComponentController extends BaseController {
 			@RequestParam(value="order_user_id", required=true) String order_user_id,
 			@RequestParam(value="order_username",required=true) String order_username
 			) throws UnsupportedEncodingException {
-			String order_num=Long.valueOf(System.currentTimeMillis()).toString(); 
-			//更新构件
+			Date dateNow = new Date();
+			String order_num=TimeUtil.dateToString(dateNow, "yyyyMMddHHmmss"); 
+			//更新构件表
 			int resUpdate = componentDao.placeOrder(pro_id, single_name, floor, expedit_date, comp_factory_id, order_user_id,order_num);		
-			//新加订单
+			//新加订单表
 			int resInsert = componentOrderDao.insertSelective(pro_id, single_name, floor, comp_factory_id, order_username, order_num);
+			
+			List<Integer> componentIds = componentDao.findComponentByOrderNum(order_num);
+			
+			
+			for (Integer componentId : componentIds) {				
+				//更新构件状态进度表				
+				int resProgress = updateComProgress(componentId, order_username, "已下单");
+				
+				if(resProgress !=1 ) {
+					return  new ResultDto(2, "更新构件进度失败");
+				}
+			}
+					
 			if((resUpdate + resInsert) > 0) 
 				return  new ResultDto(1, "下单成功");
 			else
@@ -261,20 +281,43 @@ public class ComponentController extends BaseController {
 			@RequestParam(value="component_ids", required=true) String component_ids,
 			@RequestParam(value="product_plan_begin_date", required=true) String product_plan_begin_date,
 			@RequestParam(value="product_plan_end_date", required=false) String product_plan_end_date,
-			@RequestParam(value="product_explain", required=true) String product_explain
+			@RequestParam(value="product_explain", required=true) String product_explain,
+			@RequestParam(value="order_username",required=true) String order_username
 			) throws UnsupportedEncodingException {
 				
 				String[] component_idArray = component_ids.split(",");
 				int reses = 0;
+				
 				for (String comId : component_idArray) {
 					int res = componentDao.addProductPlan(Integer.valueOf(comId), product_plan_begin_date, product_plan_end_date, product_explain);
-					reses += res;
+					
+					if(res!=0) {
+						//更新构件状态成功
+						reses += res;
+						//更新构件状态进度
+						updateComProgress(Integer.valueOf(comId), order_username, "已接单");
+					} else {
+						System.err.println("更新构件状态失败"+comId);
+					}
+					
 				}
-			if(reses > 0) 
+			if(reses == component_idArray.length) 
 				return  new ResultDto(1, "提交计划成功");
 			else
-				return  new ResultDto(2, "提交计划失败");
+				return  new ResultDto(2, (component_idArray.length-reses)+"个构件提交计划失败");
 		
+	}
+	
+	
+	public int updateComProgress(Integer componentId, String order_username, String component_status_name) {
+		CompProgress compProgress = new CompProgress();
+		compProgress.setComponent_id(componentId);
+		compProgress.setOperation_date(TimeUtil.dateToString(new Date(), ""));
+		compProgress.setOperation_user(order_username);
+		compProgress.setComponent_status_name("已下单");
+		//更新构件状态进度表
+		int resProgress = comProgressDao.insertSelective(compProgress);
+		return resProgress;
 	}
 	
 }

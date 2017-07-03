@@ -8,4 +8,5 @@ public interface CompProgressMapper {
   
 	List<CompProgress> selectByPrimaryKey(Integer component_id);
 
+	int insertSelective(CompProgress compProgress);
 }

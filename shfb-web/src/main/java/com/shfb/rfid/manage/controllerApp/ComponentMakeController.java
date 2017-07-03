@@ -1,6 +1,7 @@
 package com.shfb.rfid.manage.controllerApp;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -16,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.github.pagehelper.Page;
 import com.shfb.rfid.manage.controller.BaseController;
+import com.shfb.rfid.manage.dao.CompProgressMapper;
 import com.shfb.rfid.manage.dao.ComponentMapper;
 import com.shfb.rfid.manage.dao.ProductCuringMapper;
 import com.shfb.rfid.manage.dao.ProductEmbeddedPartsMapper;
@@ -26,6 +28,7 @@ import com.shfb.rfid.manage.dao.SysUserMapper;
 import com.shfb.rfid.manage.dto.ComponentDto;
 import com.shfb.rfid.manage.dto.ResultDto;
 import com.shfb.rfid.manage.dto.UploadFileEntity;
+import com.shfb.rfid.manage.entity.CompProgress;
 import com.shfb.rfid.manage.entity.Component;
 import com.shfb.rfid.manage.entity.ProductCuring;
 import com.shfb.rfid.manage.entity.ProductEmbeddedParts;
@@ -35,6 +38,7 @@ import com.shfb.rfid.manage.entity.SysUser;
 import com.shfb.rfid.manage.service.FtpService;
 import com.shfb.rfid.manage.util.ResponseData;
 import com.shfb.rfid.manage.util.StringUtil;
+import com.shfb.rfid.manage.util.TimeUtil;
 
 import net.sf.jsqlparser.schema.Server;
 
@@ -64,6 +68,8 @@ public class ComponentMakeController extends BaseController{
 	private SysUserMapper userDao;
 	@Autowired
 	private ProjectMapper projectDao;
+	@Autowired
+	private CompProgressMapper comProgressDao;
 	
 	/**
 	 * app登录
@@ -169,7 +175,7 @@ public class ComponentMakeController extends BaseController{
 	 * @param card_num rfid卡号
 	 * @return
 	 */
-	@RequestMapping(value = "/findComponentByKey", method = RequestMethod.POST)
+	@RequestMapping(value = "/findComponentByKey")
 	@ResponseBody
 	public ResultDto findComponentByKey(Component record) {
 		try {
@@ -179,26 +185,8 @@ public class ComponentMakeController extends BaseController{
 			return new ResultDto(2, "param err", false);
 		}
 		
-		
-		
-		//return component;
-		
 	}
 	
-	/**
-	 * 获取构件列表
-	 * @param component_status_id
-	 * @return
-	 */
-	/*@RequestMapping(value = "/findComponentListForClient")
-	@ResponseBody	
-	public Object findComponentListForClient(Integer pro_id) {
-		if (pro_id==0) {
-			pro_id=null;
-		}
-		List<Component> components = componentDao.findComponentByProID(pro_id);
-		return  components;
-	}*/
 	
 	/**
 	 * 查询构件类型(为构建类型下拉框服务)
@@ -426,6 +414,23 @@ public class ComponentMakeController extends BaseController{
 			return new ResultDto(1,"server err");
 		}
 		
+	}
+	/**
+	 * 改变构件进度状态
+	 * @param componentId
+	 * @param order_username
+	 * @param component_status_name
+	 * @return
+	 */
+	public int updateComProgress(Integer componentId, String order_username, String component_status_name) {
+		CompProgress compProgress = new CompProgress();
+		compProgress.setComponent_id(componentId);
+		compProgress.setOperation_date(TimeUtil.dateToString(new Date(), ""));
+		compProgress.setOperation_user(order_username);
+		compProgress.setComponent_status_name("已下单");
+		//更新构件状态进度表
+		int resProgress = comProgressDao.insertSelective(compProgress);
+		return resProgress;
 	}
 	
 }
