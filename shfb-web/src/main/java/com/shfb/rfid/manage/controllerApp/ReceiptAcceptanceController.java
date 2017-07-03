@@ -1,6 +1,7 @@
 package com.shfb.rfid.manage.controllerApp;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,13 +14,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.shfb.rfid.manage.dao.CompProgressMapper;
 import com.shfb.rfid.manage.dao.ComponentMapper;
 import com.shfb.rfid.manage.dao.ReceiptComponentSizeMapper;
+import com.shfb.rfid.manage.dao.SysUserMapper;
 import com.shfb.rfid.manage.dto.ResultDto;
 import com.shfb.rfid.manage.dto.UploadFileEntity;
+import com.shfb.rfid.manage.entity.CompProgress;
 import com.shfb.rfid.manage.entity.Component;
 import com.shfb.rfid.manage.entity.ReceiptComponentSize;
+import com.shfb.rfid.manage.entity.SysUser;
 import com.shfb.rfid.manage.service.FtpService;
+import com.shfb.rfid.manage.util.TimeUtil;
 
 /**
  * 收货验收模块-app接口
@@ -35,6 +41,10 @@ public class ReceiptAcceptanceController {
 	private FtpService ftpservice;
 	@Autowired
 	private ComponentMapper componentDao;
+	@Autowired
+	private CompProgressMapper comProgressDao;
+	@Autowired
+	private SysUserMapper userDao;
 	/**
 	 * 获取收货验收时的预制构件尺寸允许偏差及检查方法-如果没有数据表示第一次上传
 	 */
@@ -51,9 +61,16 @@ public class ReceiptAcceptanceController {
 	 */
 	@RequestMapping(value = "/insertReceiptComponentSize", method = RequestMethod.POST)
 	@ResponseBody
-	public ResultDto insertReceiptComponentSize(ReceiptComponentSize receiptComponentSize) {
+	public ResultDto insertReceiptComponentSize(ReceiptComponentSize receiptComponentSize, Integer token) {
 		
 		if(receiptComponentSize.getComponent_id() == null) return new ResultDto(2, "无法找到构件id", false);
+		
+		SysUser sysUser = userDao.findUserById(token);
+		int resUpdate = updateComStatus(receiptComponentSize.getComponent_id(), 7, 6);
+		if(resUpdate == 1) {
+			updateComProgress(receiptComponentSize.getComponent_id(), sysUser.getUser_name(), "进场");
+		}
+		
 		int res = receiptComponentSizeDao.insertSelective(receiptComponentSize);		
 
 		if(res == 1) {
@@ -134,5 +151,34 @@ public class ReceiptAcceptanceController {
 				}
 		
 	}
+	
+	/**
+	 * 改变构件状态
+	 */
+	public int updateComStatus(Integer componentId, Integer component_status_id,Integer oldcomponent_status_id) {
+		int res = componentDao.updateComStatus(componentId, component_status_id, oldcomponent_status_id);
+		return res;
+	}
+	
+	
+	/**
+	 * 改变构件进度状态
+	 * @param componentId
+	 * @param order_username
+	 * @param component_status_name
+	 * @return
+	 */
+	public int updateComProgress(Integer componentId, String order_username, String component_status_name) {
+		CompProgress compProgress = new CompProgress();
+		compProgress.setComponent_id(componentId);
+		compProgress.setOperation_date(TimeUtil.dateToString(new Date(), ""));
+		compProgress.setOperation_user(order_username);
+		compProgress.setComponent_status_name("已下单");
+		//更新构件状态进度表
+		int resProgress = comProgressDao.insertSelective(compProgress);
+		return resProgress;
+	}
+	
+	
 	
 }

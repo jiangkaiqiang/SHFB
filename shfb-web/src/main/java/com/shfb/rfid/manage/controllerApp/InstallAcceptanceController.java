@@ -1,6 +1,7 @@
 package com.shfb.rfid.manage.controllerApp;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,13 +14,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.shfb.rfid.manage.dao.CompProgressMapper;
 import com.shfb.rfid.manage.dao.ComponentMapper;
 import com.shfb.rfid.manage.dao.InstallComponentSizeMapper;
+import com.shfb.rfid.manage.dao.SysUserMapper;
 import com.shfb.rfid.manage.dto.ResultDto;
 import com.shfb.rfid.manage.dto.UploadFileEntity;
+import com.shfb.rfid.manage.entity.CompProgress;
 import com.shfb.rfid.manage.entity.Component;
 import com.shfb.rfid.manage.entity.InstallComponentSize;
+import com.shfb.rfid.manage.entity.SysUser;
 import com.shfb.rfid.manage.service.FtpService;
+import com.shfb.rfid.manage.util.TimeUtil;
 
 /**
  * 安装验收模块-app接口
@@ -35,6 +41,10 @@ public class InstallAcceptanceController {
 	private FtpService ftpservice;
 	@Autowired
 	private ComponentMapper componentDao;
+	@Autowired
+	private CompProgressMapper comProgressDao;
+	@Autowired
+	private SysUserMapper userDao;
 	/**
 	 * 获取安装验收时的预制构件尺寸允许偏差及检查方法-如果没有数据表示第一次上传
 	 */
@@ -51,9 +61,17 @@ public class InstallAcceptanceController {
 	 */
 	@RequestMapping(value = "/insertInstallComponentSize", method = RequestMethod.POST)
 	@ResponseBody
-	public ResultDto insertInstallComponentSize(InstallComponentSize installComponentSize) {
+	public ResultDto insertInstallComponentSize(InstallComponentSize installComponentSize, Integer token) {
 		
 		if(installComponentSize.getComponent_id() == null) return new ResultDto(2, "无法找到构件id", false);
+		
+		SysUser sysUser = userDao.findUserById(token);
+		int resUpdate = updateComStatus(installComponentSize.getComponent_id(), 8, 7);
+		if(resUpdate == 1) {
+			updateComProgress(installComponentSize.getComponent_id(), sysUser.getUser_name(), "验收完成");
+		}
+		
+		
 		int res = installComponentSizeDao.insertSelective(installComponentSize);		
 	
 		if(res == 1) {
@@ -134,4 +152,33 @@ public class InstallAcceptanceController {
 				}
 		
 	}
+	
+	
+	/**
+	 * 改变构件状态
+	 */
+	public int updateComStatus(Integer componentId, Integer component_status_id,Integer oldcomponent_status_id) {
+		int res = componentDao.updateComStatus(componentId, component_status_id, oldcomponent_status_id);
+		return res;
+	}
+	
+	
+	/**
+	 * 改变构件进度状态
+	 * @param componentId
+	 * @param order_username
+	 * @param component_status_name
+	 * @return
+	 */
+	public int updateComProgress(Integer componentId, String order_username, String component_status_name) {
+		CompProgress compProgress = new CompProgress();
+		compProgress.setComponent_id(componentId);
+		compProgress.setOperation_date(TimeUtil.dateToString(new Date(), ""));
+		compProgress.setOperation_user(order_username);
+		compProgress.setComponent_status_name("已下单");
+		//更新构件状态进度表
+		int resProgress = comProgressDao.insertSelective(compProgress);
+		return resProgress;
+	}
+	
 }
