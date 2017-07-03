@@ -94,8 +94,13 @@ public class ComponentMakeController extends BaseController{
 	 */
 	@RequestMapping(value = "/getSelectContent", method = RequestMethod.GET)
 	@ResponseBody
-	public Object getSelectContent() {
-		List<Map<String, Object>> projects = projectDao.findProjectNames();
+	public Object getSelectContent(Integer token) {
+		SysUser sysUser = userDao.findUserById(token);
+		Integer userProjectID = sysUser.getPro_id();
+		if (userProjectID==0) {
+			userProjectID = null;
+		}
+		List<Map<String, Object>> projects = projectDao.findProjectNames(userProjectID);
 		for (Map<String, Object> project : projects) {
 			Integer pro_id = Integer.valueOf(project.get("pro_id").toString());
 			List<Map<String, Object>> singles = componentDao.findSingle(pro_id);
@@ -127,7 +132,13 @@ public class ComponentMakeController extends BaseController{
 	 */
 	@RequestMapping(value = "/findComponentList")
 	@ResponseBody	
-	public Object findComponentList(Component parm) {
+	public Object findComponentList(Component parm, Integer token) {
+		SysUser sysUser = userDao.findUserById(token);
+		Integer userProjectID = sysUser.getPro_id();
+		if (userProjectID==0) {
+			userProjectID = null;
+		}
+		parm.setPro_id(userProjectID);
 		Page<ComponentDto> components = componentDao.findAllComponent(parm);
 		return  ResponseData.newSuccess(components, "查询成功");
 		//return components;		
