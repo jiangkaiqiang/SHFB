@@ -70,6 +70,14 @@
     </if>
     AND card_num IS NULL
   </select>
+  
+  <select id="findComponentByOrderNum" resultType="java.lang.Integer" parameterType="String" >
+    select component_id
+    from component
+    where order_num=#{order_num}
+  </select>
+  
+  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from component
     where component_id = #{component_id,jdbcType=INTEGER}
@@ -593,7 +601,7 @@
 				comp_factory_id=#{comp_factory_id},
 				order_user_id=#{order_user_id},
 				order_num=#{order_num}
-    where pro_id=#{pro_id} 
+    where component_status_id=1 and pro_id=#{pro_id} 
      <if test="single_name != null and single_name != ''">
     AND single_name=#{single_name} 
     </if>
@@ -614,7 +622,7 @@
   		product_plan_end_date = #{product_plan_end_date},
   		product_explain = #{product_explain},
   		component_status_id = 3
-  	where component_id = #{component_id}
+  	where component_status_id=2 and  component_id = #{component_id}
   </update>
   
   <update id="updateComStatus" parameterType="com.shfb.rfid.manage.entity.Component">

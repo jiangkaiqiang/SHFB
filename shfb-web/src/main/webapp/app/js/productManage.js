@@ -18,9 +18,8 @@ coldWeb.controller('productManage', function ($rootScope, $scope, $state, $cooki
     $scope.bigTotalItems = 10;
     // 当前页
     $scope.bigCurrentPage = 1;
-	$scope.Allprojects = [];
 	 // 获取当前冷库的列表
-	  
+	$scope.components = [];  
     $scope.getComponents = function() {
     	   $scope.pro_idf ="";
     	   if($scope.selectedProject!=undefined && $scope.selectedProject.pro_id!=undefined) {
@@ -300,6 +299,7 @@ coldWeb.controller('productManage', function ($rootScope, $scope, $state, $cooki
 	    $scope.exists = function (project, list) {
 	    	return list.indexOf(project) > -1;
 	    };
+	    
 	    $scope.isChecked = function() {
 	        return $scope.selected.length === $scope.components.length;
 	    };
@@ -329,7 +329,9 @@ coldWeb.controller('productManage', function ($rootScope, $scope, $state, $cooki
 	    	
 	    }
 	    
-	    
+	    /**
+	     * 提交生产计划
+	     */
 	    $scope.submitProductPlan=function(){
 	    	//判断有无选择
 	    	var parmStr = "";
@@ -342,7 +344,8 @@ coldWeb.controller('productManage', function ($rootScope, $scope, $state, $cooki
 	                component_ids: parmStr,
 	                product_plan_begin_date:$scope.product_plan_begin_date,
 	                product_plan_end_date:$scope.product_plan_end_date,
-	                product_explain:$scope.product_explain
+	                product_explain:$scope.product_explain,
+	                order_username:$rootScope.admin.user_name
 	            }
 	        }).success(function (data) {
 	        	$scope.getComponents();

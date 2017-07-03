@@ -66,4 +66,6 @@ public interface ComponentMapper {
 			@Param("product_plan_end_date") String product_plan_end_date,
 			@Param("product_explain") String product_explain);
     
+    List<Integer> findComponentByOrderNum(@Param("order_num") String order_num);
+    
 }

@@ -9,7 +9,7 @@ public interface FtpService {
 	//public final static String HOST = "10.25.192.102";
 
 	//public final static String PUB_HOST = "42.121.130.177";
-	public final static String PUB_HOST = "172.19.213.43";
+	public final static String PUB_HOST = "139.196.139.164";
 
 	//public final static String USER_NAME = "pwftp";
 	public final static String USER_NAME = "ftpuser";

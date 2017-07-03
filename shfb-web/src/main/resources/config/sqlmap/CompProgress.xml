@@ -19,4 +19,35 @@
     from comp_progress
     where component_id = #{component_id,jdbcType=INTEGER}
   </select>
+  <insert id="insertSelective" parameterType="com.shfb.rfid.manage.entity.CompProgress" >
+    insert into comp_progress
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="operation_date != null" >
+        operation_date,
+      </if>
+      <if test="operation_user != null" >
+        operation_user,
+      </if>
+      <if test="component_status_name != null" >
+        component_status_name,
+      </if>
+      <if test="component_id != null" >
+        component_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="operation_date != null" >
+        #{operation_date,jdbcType=INTEGER},
+      </if>
+      <if test="operation_user != null" >
+        #{operation_user,jdbcType=VARCHAR},
+      </if>
+      <if test="component_status_name != null" >
+        #{component_status_name,jdbcType=VARCHAR},
+      </if>
+      <if test="component_id != null" >
+        #{component_id,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
 </mapper>
