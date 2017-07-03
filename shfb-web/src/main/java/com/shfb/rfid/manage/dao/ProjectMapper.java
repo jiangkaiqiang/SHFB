@@ -27,5 +27,5 @@ public interface ProjectMapper {
     
     List<Project> findAllProjectList();
     
-    List<Map<String, Object>> findProjectNames();
+    List<Map<String, Object>> findProjectNames(@Param("userProjectID")Integer userProjectID);
 }
