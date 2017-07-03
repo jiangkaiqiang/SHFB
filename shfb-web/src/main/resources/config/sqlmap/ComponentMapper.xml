@@ -499,7 +499,7 @@
   	c.component_id, c.component_name, c.component_num, c.component_type, c.component_size,
     c.expedit_status, c.expedit_date, s.component_status_name,c.bind_status,c.check_res,
     c.plan_end_date,c.product_plan_begin_date, c.product_plan_end_date,
-    s.component_status_name, p.pro_name, c.single_name, c.floor
+    s.component_status_name, p.pro_name, c.single_name, c.floor, c.card_num
     from component AS c
     LEFT JOIN component_status AS s on c.component_status_id=s.component_status_id 
     LEFT JOIN project AS p ON c.pro_id=p.pro_id
