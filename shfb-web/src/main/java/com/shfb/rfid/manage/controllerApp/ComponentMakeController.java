@@ -201,6 +201,17 @@ public class ComponentMakeController extends BaseController{
 	}*/
 	
 	/**
+	 * 查询构件类型(为构建类型下拉框服务)
+	 */	
+	@RequestMapping(value = "/findComonentType")
+	@ResponseBody	
+	public Object findComonentType() {
+		List<Component> components = componentDao.findComponentTypes();
+		return  ResponseData.newSuccess(components, "查询成功");
+		//return components;		
+	}
+	
+	/**
 	 * 构件制作-上传构件实物图
 	 * @param files
 	 * @return

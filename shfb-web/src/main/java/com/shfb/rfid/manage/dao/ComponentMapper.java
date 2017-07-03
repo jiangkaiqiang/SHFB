@@ -65,4 +65,5 @@ public interface ComponentMapper {
 			@Param("product_plan_begin_date") String product_plan_begin_date,
 			@Param("product_plan_end_date") String product_plan_end_date,
 			@Param("product_explain") String product_explain);
+    
 }
