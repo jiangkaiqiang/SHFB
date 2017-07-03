@@ -45,12 +45,14 @@
 					</div>
 				</div>
 				<div  class="col-sm-2">	
-					<div class="btn-group pull-left" id="status">
-					&nbsp;
+					<br>
+					
+					<button type="button" class="btn btn-default pull-right" ng-click="showAll()">
+							查询全部
+					</button>
 					<button type="button" class="btn btn-default pull-right" ng-click="getComponents()">
 							搜索
-					</button>
-					</div>							
+					</button>							
 					
 				</div>				
 			</div>
@@ -77,14 +79,14 @@
 				         </th>
 				         <th>序号</th>
 				         <th>构件编号</th>
-				         <th>构件名称</th>
 				         <th>构件类型</th>
-				         <th>构件规格</th>
+				         <th>项目</th>
+				         <th>单体</th>
+				         <th>楼层</th>
 				         <th>已绑定</th>
 				         <th>已催货</th>
 				         <th>催货交期</th>
-				         <th>状态</th>
-				         
+				         <th>状态</th>				         
 				         <th>验收结果</th>
 				         <th>操作</th>
 				      </tr>
@@ -97,9 +99,10 @@
 				         </td>
 				         <td>{{$index+1}}</td>
 				         <td>{{component.component_num}}</td>
-				         <td>{{component.component_name}}</td>
 				         <td>{{component.component_type}}</td>
-				         <td>{{component.component_size}}</td>
+				         <td>{{component.pro_name}}</td>
+				         <td>{{component.single_name}}</td>
+				         <td>{{component.floor}}</td>
 				         <td ng-if="component.bind_status=='1'">未绑定</td>
 				         <td ng-if="component.bind_status=='2'">已绑定</td>
 				         <td ng-if="component.expedit_status=='1'">未催货</td>

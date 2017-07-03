@@ -491,9 +491,10 @@
   	c.component_id, c.component_name, c.component_num, c.component_type, c.component_size,
     c.expedit_status, c.expedit_date, s.component_status_name,c.bind_status,c.check_res,
     c.plan_end_date,c.product_plan_begin_date, c.product_plan_end_date,
-    s.component_status_name
+    s.component_status_name, p.pro_name, c.single_name, c.floor
     from component AS c
     LEFT JOIN component_status AS s on c.component_status_id=s.component_status_id 
+    LEFT JOIN project AS p ON c.pro_id=p.pro_id
     WHERE 1=1
     <if test="pro_id != null">
     AND c.pro_id=#{pro_id}
@@ -517,14 +518,16 @@
   </select>
   
   <select id="findSingle" parameterType="java.lang.Integer" resultType="map">
-  	SELECT DISTINCT(single_name) FROM component 
+  	SELECT DISTINCT(single_name) FROM component where 1=1
+  	and single_name is not null AND single_name !=''
   	<if test="pro_id != null">
-  	WHERE pro_id=#{pro_id}
+  	and pro_id=#{pro_id}
   	</if>
   </select>
   
   <select id="findFloor" parameterType="java.lang.Integer" resultType="map">
   	SELECT DISTINCT(floor) FROM component WHERE 1=1
+  	and floor is not null AND floor !=''
   	<if test="pro_id != null">
   	and pro_id=#{pro_id}
   	</if>
@@ -568,7 +571,7 @@
   </select>
   
   <select id="findComponentTypes" resultMap="BaseResultMap">
-  	SELECT DISTINCT(component_type) from component
+  	SELECT DISTINCT(component_type) from component WHERE component_type  is not null AND component_type !=''
   </select>
   
   <select id="exportComponents" parameterType="String" resultType="com.shfb.rfid.manage.dto.ComponentDto">
