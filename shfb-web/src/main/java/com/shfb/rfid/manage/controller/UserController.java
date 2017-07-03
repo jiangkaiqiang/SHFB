@@ -76,9 +76,9 @@ public class UserController extends BaseController {
 	
 	@RequestMapping(value = "/loginForClient")
 	@ResponseBody
-	public Object loginForClient(HttpServletRequest request, String userName, String password) {
+	public Object loginForClient(HttpServletRequest request, String userName, String password) throws UnsupportedEncodingException {
 		if(StringUtil.isnotNull(userName)&&StringUtil.isnotNull(password)){
-			SysUser user = userDao.findUser(userName, password);
+			SysUser user = userDao.findUser(URLDecoder.decode(userName, "UTF-8"), password);
 			if (user != null) {
 	            return  ResponseData.newSuccess(user.getPro_id()+"");
 			}
