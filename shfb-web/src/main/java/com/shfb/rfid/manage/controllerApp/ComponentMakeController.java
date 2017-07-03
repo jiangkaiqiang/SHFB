@@ -25,6 +25,7 @@ import com.shfb.rfid.manage.dao.ProductModelSizeMapper;
 import com.shfb.rfid.manage.dao.ProductSteelbarSizeMapper;
 import com.shfb.rfid.manage.dao.ProjectMapper;
 import com.shfb.rfid.manage.dao.SysUserMapper;
+import com.shfb.rfid.manage.dao.UserRoleMapper;
 import com.shfb.rfid.manage.dto.ComponentDto;
 import com.shfb.rfid.manage.dto.ResultDto;
 import com.shfb.rfid.manage.dto.UploadFileEntity;
@@ -35,6 +36,7 @@ import com.shfb.rfid.manage.entity.ProductEmbeddedParts;
 import com.shfb.rfid.manage.entity.ProductModelSize;
 import com.shfb.rfid.manage.entity.ProductSteelbarSize;
 import com.shfb.rfid.manage.entity.SysUser;
+import com.shfb.rfid.manage.entity.UserRole;
 import com.shfb.rfid.manage.service.FtpService;
 import com.shfb.rfid.manage.util.ResponseData;
 import com.shfb.rfid.manage.util.StringUtil;
@@ -70,6 +72,8 @@ public class ComponentMakeController extends BaseController{
 	private ProjectMapper projectDao;
 	@Autowired
 	private CompProgressMapper comProgressDao;
+	@Autowired
+	private UserRoleMapper userRoleDao;
 	
 	/**
 	 * app登录
@@ -80,8 +84,9 @@ public class ComponentMakeController extends BaseController{
 		if(StringUtil.isnotNull(userName)&&StringUtil.isnotNull(password)){
 			SysUser user = userDao.findUser(userName, password);
 			if (user != null) {
+				UserRole role = userRoleDao.selectByPrimaryKey(user.getUser_role_id());
 				//以下返回信息为暂时，1代表业主总包 2代表构建厂
-				if(user.getUser_role_id() == 2) {
+				if(role.getMenu_ids().contains("11")) {
 					return  ResponseData.newSuccess("登录成功",user.getUser_id()+"","2");
 				} else {
 					return  ResponseData.newSuccess("登录成功",user.getUser_id()+"","1");
@@ -233,9 +238,15 @@ public class ComponentMakeController extends BaseController{
 	 */
 	@RequestMapping(value = "/insertProductModelSize", method = RequestMethod.POST)
 	@ResponseBody
-	public ResultDto insertProductModelSize(ProductModelSize productModelSize) {
+	public ResultDto insertProductModelSize(ProductModelSize productModelSize,Integer token) {
 
 		if(productModelSize.getComponent_id() == null) new ResultDto(2,"param err");
+		
+		SysUser sysUser = userDao.findUserById(token);
+		int resUpdate = updateComStatus(productModelSize.getComponent_id(), 4, 3);
+		if(resUpdate == 1) {
+			updateComProgress(productModelSize.getComponent_id(), sysUser.getUser_name(), "生产中");
+		}
 		
 		int res = productModelSizeDao.insertSelective(productModelSize);		
 		if(res != 0) {
@@ -400,21 +411,13 @@ public class ComponentMakeController extends BaseController{
 	
 	/**
 	 * 改变构件状态
-	 * @param component_status_id 构件状态
-	 * @param component_id 构件id
 	 */
-	@RequestMapping(value = "/updateComStatus", method = RequestMethod.POST)
-	@ResponseBody
-	public ResultDto updateComStatus(Component component) {
-		if(component.getComponent_id() == null) new ResultDto(2,"param err");
-		int res = componentDao.updateComStatus(component);		
-		if(res != 0) {
-			return new ResultDto(0,"success");
-		} else {
-			return new ResultDto(1,"server err");
-		}
-		
+	public int updateComStatus(Integer componentId, Integer component_status_id,Integer oldcomponent_status_id) {
+		int res = componentDao.updateComStatus(componentId, component_status_id, oldcomponent_status_id);
+		return res;
 	}
+	
+	
 	/**
 	 * 改变构件进度状态
 	 * @param componentId

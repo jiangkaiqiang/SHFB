@@ -628,7 +628,7 @@
   <update id="updateComStatus" parameterType="com.shfb.rfid.manage.entity.Component">
   	update component SET
   		component_status_id = #{component_status_id}
-  	where component_id = #{component_id}
+  	where component_id = #{component_id} and component_status_id = #{oldcomponent_status_id}
   </update>
   
 </mapper>

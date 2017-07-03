@@ -27,7 +27,9 @@ public interface ComponentMapper {
 
     int updateByPrimaryKey(Component record);
     
-    int updateComStatus(Component record);
+    int updateComStatus(@Param("component_id") Integer component_id, 
+    		@Param("component_status_id")Integer component_status_id, 
+    		@Param("oldcomponent_status_id")Integer oldcomponent_status_id);
     
     Page<ComponentDto> findAllComponent(Component record);
     
