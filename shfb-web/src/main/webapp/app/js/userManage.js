@@ -257,9 +257,11 @@ coldWeb.controller('userManage', function ($rootScope, $scope, $state, $cookies,
 		        }
 		    }
 		 $('#datetimepicker1').datetimepicker({  
+		    	autoclose:true
 		    }).on('dp.change', function (e) {  
 		    });  
 		 $('#datetimepicker2').datetimepicker({  
+		    	autoclose:true
 		    }).on('dp.change', function (e) {  
 		    });  
 });
