@@ -18,6 +18,8 @@ public interface ComponentMapper {
     int insertSelective(Component record);
 
     Component selectByPrimaryKey(Integer component_id);
+    
+    Component selectByCom(Component record);
 
     int updateByPrimaryKeySelective(Component record);
     

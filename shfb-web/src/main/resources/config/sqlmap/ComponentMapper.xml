@@ -45,6 +45,22 @@
     from component
     where component_id = #{component_id,jdbcType=INTEGER}
   </select>
+  <select id="selectByCom" resultMap="BaseResultMap" parameterType="com.shfb.rfid.manage.entity.Component" >
+    select 
+    <include refid="Base_Column_List" />
+    from component
+    where 1=1 
+    <if test="component_id != null">
+    	and component_id = #{component_id,jdbcType=INTEGER}
+    </if>
+     <if test="component_num != null">
+    	and component_num = #{component_num,jdbcType=INTEGER}
+    </if>
+     <if test="card_num != null">
+    	and card_num = #{card_num,jdbcType=INTEGER}
+    </if>
+    
+  </select>
   <select id="findComponentByProID" resultType="com.shfb.rfid.manage.entity.Component" parameterType="java.lang.Integer" >
     select *
     from component
@@ -593,7 +609,8 @@
   	update component SET
   		product_plan_begin_date = #{product_plan_begin_date},
   		product_plan_end_date = #{product_plan_end_date},
-  		product_explain = #{product_explain}
+  		product_explain = #{product_explain},
+  		component_status_id = 3
   	where component_id = #{component_id}
   </update>
   

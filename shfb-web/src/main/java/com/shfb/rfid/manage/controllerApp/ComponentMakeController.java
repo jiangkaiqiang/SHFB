@@ -36,6 +36,8 @@ import com.shfb.rfid.manage.service.FtpService;
 import com.shfb.rfid.manage.util.ResponseData;
 import com.shfb.rfid.manage.util.StringUtil;
 
+import net.sf.jsqlparser.schema.Server;
+
 
 /**
  * 构件制作模块-app接口
@@ -151,16 +153,23 @@ public class ComponentMakeController extends BaseController{
 	
 	/**
 	 * 获取构件的详细信息
-	 * @param component_id
+	 * @param component_id 构件id
+	 * @param component_num 构件编号
+	 * @param card_num rfid卡号
 	 * @return
 	 */
-	@RequestMapping(value = "/findComponentByKey", method = RequestMethod.GET)
+	@RequestMapping(value = "/findComponentByKey", method = RequestMethod.POST)
 	@ResponseBody
-	public ResultDto findComponentByKey(
-			@RequestParam(value="component_id", required=true) Integer component_id) {
-		Component component = componentDao.selectByPrimaryKey(component_id);
+	public ResultDto findComponentByKey(Component record) {
+		try {
+			Component component = componentDao.selectByCom(record);
+			return new ResultDto(component);
+		} catch (Exception e) {
+			return new ResultDto(2, "param err", false);
+		}
 		
-		return new ResultDto(component);
+		
+		
 		//return component;
 		
 	}
@@ -375,6 +384,25 @@ public class ComponentMakeController extends BaseController{
 				} else {
 					return new ResultDto(2,"server err");
 				}
+		
+	}
+	
+	
+	/**
+	 * 改变构件状态
+	 * @param component_status_id 构件状态
+	 * @param component_id 构件id
+	 */
+	@RequestMapping(value = "/updateComStatus", method = RequestMethod.POST)
+	@ResponseBody
+	public ResultDto updateComStatus(Component component) {
+		if(component.getComponent_id() == null) new ResultDto(2,"param err");
+		int res = componentDao.updateComStatus(component);		
+		if(res != 0) {
+			return new ResultDto(0,"success");
+		} else {
+			return new ResultDto(1,"server err");
+		}
 		
 	}
 	
