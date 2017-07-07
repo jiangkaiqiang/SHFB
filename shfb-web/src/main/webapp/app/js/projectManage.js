@@ -159,19 +159,16 @@ coldWeb.controller('projectManage', function ($rootScope, $scope, $state, $cooki
         }
     };
     
-    function checkInput(){
-        var flag = true;
-        // 检查必须填写项
-        if ($scope.proname == undefined || $scope.proname == '') {
-            flag = false;
-        }
-        if ($scope.contactName == undefined || $scope.contactName == '') {
-            flag = false;
-        }
-        return flag;
-    }
+
     $scope.submit = function(){
-        if (checkInput()){
+    	 if ($scope.proname == undefined || $scope.proname == '') {
+             alert("请添加项目名称！");
+             return; 
+          }
+          if ($scope.contactName == undefined || $scope.contactName == '') {
+          	alert("请添加联系人！");
+              return; 
+          }
             $http({
             	method : 'GET',
             	url:'/i/project/addProject',
@@ -195,9 +192,6 @@ coldWeb.controller('projectManage', function ($rootScope, $scope, $state, $cooki
                 var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
                 console.log('progress: ' + progressPercentage + '% ' + evt.name);
             });
-          } else {
-            alert("请填写项目名称和联系人!");
-        }
     }
     $scope.goDetail = function(projectID) {
     	$http.get('/i/project/findProjectByID', {
@@ -239,19 +233,16 @@ coldWeb.controller('projectManage', function ($rootScope, $scope, $state, $cooki
 			    }
 		     });
 		};
-		function checkInputForUpdate(){
-	        var flag = true;
-	        // 检查必须填写项
-	        if ($scope.projectUpdate.pro_name == undefined || $scope.projectUpdate.pro_name == '') {
-	            flag = false;
+		
+		 $scope.update = function(){
+			 if ($scope.projectUpdate.pro_name == undefined || $scope.projectUpdate.pro_name == '') {
+	        	 alert("请添加项目名称！");
+	             return; 
 	        }
 	        if ($scope.projectUpdate.contacts_name == undefined || $scope.projectUpdate.contacts_name == '') {
-	            flag = false;
+	        	alert("请添加联系人！");
+	              return; 
 	        }
-	        return flag;
-	    }
-		 $scope.update = function(){
-		        if (checkInputForUpdate()){
 		            $http({
 		            	method : 'GET',
 		            	url:'/i/project/updateProject',
@@ -276,9 +267,6 @@ coldWeb.controller('projectManage', function ($rootScope, $scope, $state, $cooki
 		                var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
 		                console.log('progress: ' + progressPercentage + '% ' + evt.name);
 		            });
-		          } else {
-		            alert("请填写项目名称和联系人!");
-		        }
 		    }
 		 
 		 $scope.importComponent=function(){

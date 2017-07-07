@@ -161,7 +161,7 @@ public class UserController extends BaseController {
 		else{
 		keyword = URLDecoder.decode(keyword, "UTF-8");
 		}
-		if (userProjectID==0) {
+		if (userProjectID==null || userProjectID==0) {
 			userProjectID = null;
 		}
 		Page<SysUser> sysUsers = userDao.findAllUser(audit,keyword,startTime, endTime,userProjectID);
