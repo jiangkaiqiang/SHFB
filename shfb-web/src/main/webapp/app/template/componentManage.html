@@ -83,7 +83,7 @@
 				         <th>项目</th>
 				         <th>单体</th>
 				         <th>楼层</th>
-				         <th>已绑定</th>
+						 <th>卡号</th>
 				         <th>已催货</th>
 				         <th>催货交期</th>
 				         <th>状态</th>				         
@@ -103,8 +103,7 @@
 				         <td>{{component.pro_name}}</td>
 				         <td>{{component.single_name}}</td>
 				         <td>{{component.floor}}</td>
-				         <td ng-if="component.bind_status=='1'">未绑定</td>
-				         <td ng-if="component.bind_status=='2'">已绑定</td>
+				         <td>{{component.card_num}}</td>
 				         <td ng-if="component.expedit_status=='1'">未催货</td>
 				         <td ng-if="component.expedit_status=='2'">已催货</td>
 				         <td>{{component.expedit_date}}</td>
