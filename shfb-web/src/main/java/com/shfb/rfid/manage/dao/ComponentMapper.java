@@ -45,7 +45,8 @@ public interface ComponentMapper {
     
     Page<ComponentDto> findComponentPage(@Param("pro_id")Integer pro_id, @Param("single_name")String single_name, 
     		@Param("floor")String floor, @Param("component_type")String component_type, 
-    		@Param("component_status_id")Integer component_status_id,@Param("userProjectID")Integer userProjectID);
+    		@Param("component_status_id")Integer component_status_id,
+    		@Param("userProjectID")Integer userProjectID,@Param("userCompFactoryID")Integer userCompFactoryID);
     
     ComponentDto findComponentInfoById(Integer component_id);
     

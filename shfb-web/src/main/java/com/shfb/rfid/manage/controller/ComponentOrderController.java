@@ -35,18 +35,22 @@ public class ComponentOrderController extends BaseController {
 			@RequestParam(value="pageSize") Integer pageSize, 
 			@RequestParam(value="userProjectID", required=false) Integer userProjectID,
 			@RequestParam(value="pro_id", required=false) Integer pro_id,
+			@RequestParam(value="userCompFactoryID", required=false) Integer userCompFactoryID,
 			@RequestParam(value="single_name", required=false) String single_name,
 			@RequestParam(value="floor", required=false) String floor
 			) throws UnsupportedEncodingException {
 		pageNum = pageNum == null? 1:pageNum;
 		pageSize = pageSize==null? 10:pageSize;
-		if (userProjectID==0) {
+		if (null==userProjectID||userProjectID==0) {
 			userProjectID = null;
+		}
+		if (null==userCompFactoryID||userCompFactoryID==0) {
+			userCompFactoryID = null;
 		}
 		PageHelper.startPage(pageNum, pageSize);
 		single_name = "".equals(single_name)? null:single_name;
 		floor = "".equals(floor)? null:floor;
-		Page<ComponentOrderDto> componentOrders = componentOrderDao.findComponentOrderPage(pro_id, single_name, floor,userProjectID);
+		Page<ComponentOrderDto> componentOrders = componentOrderDao.findComponentOrderPage(pro_id, single_name, floor,userProjectID,userCompFactoryID);
 
 		return new PageInfo<ComponentOrderDto>(componentOrders);
 		

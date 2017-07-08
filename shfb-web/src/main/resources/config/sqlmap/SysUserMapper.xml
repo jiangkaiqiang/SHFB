@@ -6,12 +6,12 @@
 	<insert id="insert" parameterType="SysUser">
 		insert into sys_user (user_name, user_role_id,
 		login_time, password, user_tel,
-		company, pro_id, valid_status,
+		company, pro_id, comp_factory_id, valid_status,
 		create_time)
 		values (#{user_name,jdbcType=VARCHAR},
 		#{user_role_id,jdbcType=INTEGER},
 		#{login_time,jdbcType=TIMESTAMP}, #{password,jdbcType=VARCHAR}, #{user_tel,jdbcType=VARCHAR},
-		#{company,jdbcType=VARCHAR}, #{pro_id,jdbcType=INTEGER},
+		#{company,jdbcType=VARCHAR}, #{pro_id,jdbcType=INTEGER}, #{comp_factory_id,jdbcType=INTEGER},
 		#{valid_status,jdbcType=INTEGER},
 		now())
 	</insert>
@@ -42,6 +42,9 @@
       </if>
       <if test="pro_id != null" >
         pro_id = #{pro_id,jdbcType=INTEGER},
+      </if>
+       <if test="comp_factory_id != null" >
+        comp_factory_id = #{comp_factory_id,jdbcType=INTEGER},
       </if>
       <if test="valid_status != null" >
         valid_status = #{valid_status,jdbcType=INTEGER},

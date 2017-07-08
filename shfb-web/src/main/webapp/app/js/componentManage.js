@@ -53,7 +53,8 @@ coldWeb.controller('componentManage', function ($rootScope, $scope, $state, $coo
 				floor:$scope.floorf,
 				component_type:$scope.component_typef,
 				component_status_id:$scope.component_status_idf,
-				userProjectID : $rootScope.admin.pro_id
+				userProjectID : $rootScope.admin.pro_id,
+				userCompFactoryID : $rootScope.admin.comp_factory_id
 			}
 		}).success(function(data) {
 			$scope.bigTotalItems = data.total;

@@ -64,7 +64,13 @@ coldWeb.controller('userManage', function ($rootScope, $scope, $state, $cookies,
 	}
 	
 	
-	 // 获取项目
+	 // 获取构件厂
+    $http.get('/i/compfactory/findCompFactorys').success(function (data) {
+        $scope.compfactorys = data;
+        $scope.addcompfactoryid = data[0].comp_factory_id;
+    });
+    
+    // 获取项目
     $http.get('/i/project/findAllProject').success(function (data) {
         $scope.projects = data;
         $scope.addProjectid = data[0].pro_id;
@@ -182,6 +188,7 @@ coldWeb.controller('userManage', function ($rootScope, $scope, $state, $cookies,
     				'user_role_id' : $scope.addUserRoleid,
     				'company': $scope.company,
     				'pro_id' : $scope.addProjectid,
+    				'comp_factory_id' : $scope.addcompfactoryid,
     				'valid_status' : valid,
     				'user_tel' : $scope.telephone
     			}
@@ -240,6 +247,7 @@ coldWeb.controller('userManage', function ($rootScope, $scope, $state, $cookies,
 		    				'user_role_id' : $scope.userForUpdate.user_role_id,
 		    				'company':  $scope.userForUpdate.company,
 		    				'pro_id' : $scope.userForUpdate.pro_id,
+		    				'comp_factory_id' : $scope.userForUpdate.comp_factory_id,
 		    				'valid_status' : valid,
 		    				'user_tel' : $scope.userForUpdate.user_tel
 		    			}

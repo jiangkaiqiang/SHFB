@@ -126,6 +126,10 @@ public class CompFactoryController extends BaseController {
 	@ResponseBody
 	public List<CompFactory> findCompFactorys() {
 		List<CompFactory> compFactorys = compfactoryDao.findCompFactorys();
+		CompFactory compFactory = new CompFactory();
+		compFactory.setComp_factory_id(0);
+		compFactory.setComp_factory_name("全部");
+		compFactorys.add(0,compFactory);
 		return compFactorys;
 	}
 	

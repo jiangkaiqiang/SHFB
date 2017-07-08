@@ -522,6 +522,9 @@
     <if test="userProjectID != null">
 	AND c.pro_id=#{userProjectID}
     </if> 
+     <if test="userCompFactoryID != null">
+	AND c.comp_factory_id=#{userCompFactoryID}
+    </if> 
     order by component_id desc		
   </select>
   

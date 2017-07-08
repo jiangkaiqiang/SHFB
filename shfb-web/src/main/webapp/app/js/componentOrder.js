@@ -42,6 +42,7 @@ coldWeb.controller('componentOrder', function ($rootScope, $scope, $state, $cook
 				pro_id : $scope.pro_idf,
 				single_name : $scope.single_namef,
 				userProjectID : $rootScope.admin.pro_id,
+				userCompFactoryID : $rootScope.admin.comp_factory_id,
 				floor:$scope.floorf
 			}
 		}).success(function(data) {

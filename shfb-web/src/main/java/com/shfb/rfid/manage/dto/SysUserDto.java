@@ -9,6 +9,8 @@ public class SysUserDto {
 	private String projectName;
 	
 	private String userRoleName;
+	
+	private String compFactoryName;
 
 	public SysUser getSysUser() {
 		return sysUser;
@@ -32,6 +34,14 @@ public class SysUserDto {
 
 	public void setUserRoleName(String userRoleName) {
 		this.userRoleName = userRoleName;
+	}
+
+	public String getCompFactoryName() {
+		return compFactoryName;
+	}
+
+	public void setCompFactoryName(String compFactoryName) {
+		this.compFactoryName = compFactoryName;
 	}
 	
 	

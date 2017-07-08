@@ -27,6 +27,8 @@ public class SysUser {
 	private Integer valid_status; //是否有效，1有效，2无效
 	
 	private Date create_time; //创建时间
+	
+	private Integer comp_factory_id;
 
 	public Integer getUser_id() {
 		return user_id;
@@ -107,6 +109,13 @@ public class SysUser {
 	public void setCreate_time(Date create_time) {
 		this.create_time = create_time;
 	}
-	
+
+	public Integer getComp_factory_id() {
+		return comp_factory_id;
+	}
+
+	public void setComp_factory_id(Integer comp_factory_id) {
+		this.comp_factory_id = comp_factory_id;
+	}
 	
 }

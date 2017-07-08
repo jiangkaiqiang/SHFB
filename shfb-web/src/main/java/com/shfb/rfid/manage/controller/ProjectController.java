@@ -174,9 +174,9 @@ public class ProjectController extends BaseController {
 				res = ftpservice.uploadFileList(fileEntities);			
 				}
 				if( res == true ) 
-					return new ResultDto(1,"sucess");
+					return new ResultDto(1,"上传成功");
 				else {
-					return new ResultDto(2,"server err");
+					return new ResultDto(2,"上传失败");
 				}
 			
 		}
@@ -224,9 +224,9 @@ public class ProjectController extends BaseController {
 						component.setPro_id(pro_id);
 						componentDao.insertSelective(component);
 					}
-					return new ResultDto(1,"sucess");
+					return new ResultDto(1,"上传成功");
 				} else {
-					return new ResultDto(2,"server err");
+					return new ResultDto(2,"上传失败");
 				}
 			
 		}

@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.shfb.rfid.manage.dao.CompFactoryMapper;
 import com.shfb.rfid.manage.dao.ProjectMapper;
 import com.shfb.rfid.manage.dao.SysUserMapper;
 import com.shfb.rfid.manage.dao.UserRoleMapper;
@@ -28,6 +29,7 @@ import com.shfb.rfid.manage.dto.ResultDto;
 import com.shfb.rfid.manage.dto.SysUserDto;
 import com.shfb.rfid.manage.dto.UploadFileEntity;
 import com.shfb.rfid.manage.entity.CityInfo;
+import com.shfb.rfid.manage.entity.CompFactory;
 import com.shfb.rfid.manage.entity.Cookies;
 import com.shfb.rfid.manage.entity.Project;
 import com.shfb.rfid.manage.entity.ProvinceInfo;
@@ -49,6 +51,8 @@ public class UserController extends BaseController {
 	private ProjectMapper projectDao;
 	@Autowired
 	private UserRoleMapper userRoleDao;
+	@Autowired
+	private CompFactoryMapper compFactoryDao;
 	@Autowired
 	private CookieService cookieService;
 	@Autowired
@@ -179,6 +183,15 @@ public class UserController extends BaseController {
 				UserRole userRole = userRoleDao.selectByPrimaryKey(sysUser.getUser_role_id());
 				if (userRole!=null) {
 					sysUserDto.setUserRoleName(userRole.getUser_role_name());	
+				}
+			}
+			if (sysUser.getComp_factory_id()!=null) {
+				CompFactory compFactory = compFactoryDao.selectByPrimaryKey(sysUser.getComp_factory_id());
+				if (compFactory==null) {
+						sysUserDto.setCompFactoryName("全部");
+				}
+				else {
+					sysUserDto.setCompFactoryName(compFactory.getComp_factory_name());
 				}
 			}
 			sysUserDtos.add(sysUserDto);
