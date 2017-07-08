@@ -173,7 +173,7 @@ public class ReceiptAcceptanceController {
 		compProgress.setComponent_id(componentId);
 		compProgress.setOperation_date(TimeUtil.dateToString(new Date(), ""));
 		compProgress.setOperation_user(order_username);
-		compProgress.setComponent_status_name("已下单");
+		compProgress.setComponent_status_name(component_status_name);
 		//更新构件状态进度表
 		int resProgress = comProgressDao.insertSelective(compProgress);
 		return resProgress;

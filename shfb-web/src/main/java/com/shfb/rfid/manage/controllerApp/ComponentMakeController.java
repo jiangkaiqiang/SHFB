@@ -435,14 +435,14 @@ public class ComponentMakeController extends BaseController{
 		compProgress.setComponent_id(componentId);
 		compProgress.setOperation_date(TimeUtil.dateToString(new Date(), ""));
 		compProgress.setOperation_user(order_username);
-		compProgress.setComponent_status_name("已下单");
+		compProgress.setComponent_status_name(component_status_name);
 		//更新构件状态进度表
 		int resProgress = comProgressDao.insertSelective(compProgress);
 		return resProgress;
 	}
 	
 	/**
-	 * 获取构件基本信息
+	 * 获取构件基本信息（）
 	 */
 	@RequestMapping(value = "/getComInfo", method = RequestMethod.POST)
 	@ResponseBody
@@ -450,5 +450,23 @@ public class ComponentMakeController extends BaseController{
 		ComponentDto component = componentDao.getComponentInfo(comonentNum);	
 		return component;
 	}
+	
+	/**
+	 * 获取所有图纸
+	 */
+	@RequestMapping(value = "/getDrawings", method = RequestMethod.GET)
+	@ResponseBody
+	public Object getDrawings(Integer token) {
+		SysUser sysUser = userDao.findUserById(token);
+		Integer userProjectID = sysUser.getPro_id();
+		if (userProjectID==0) {
+			userProjectID = null;
+		}
+		List<Component> drawings = componentDao.getDrawings(userProjectID);
+		
+		return drawings;
+		
+	}
+	
 	
 }

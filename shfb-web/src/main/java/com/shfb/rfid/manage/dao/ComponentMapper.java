@@ -73,4 +73,6 @@ public interface ComponentMapper {
     
     ComponentDto getComponentInfo(String component_num);
     
+    List<Component> getDrawings(@Param("pro_id")Integer pro_id);
+    
 }

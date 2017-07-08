@@ -640,4 +640,11 @@
   	where component_id = #{component_id} and component_status_id = #{oldcomponent_status_id}
   </update>
   
+  <select id="getDrawings" parameterType="Integer" resultType="com.shfb.rfid.manage.entity.Component">
+  	SELECT drawing FROM component WHERE drawing is not null AND drawing!='' 
+  		<if test="pro_id != null and pro_id != ''">
+    		and pro_id=#{pro_id}
+    	</if>
+  </select>
+  
 </mapper>
