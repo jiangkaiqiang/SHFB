@@ -22,6 +22,12 @@
     from project
     where pro_id = #{pro_id,jdbcType=INTEGER}
   </select>
+  <select id="findProjectByName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from project
+    where pro_name = #{pro_name,jdbcType=VARCHAR}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from project
     where pro_id = #{pro_id,jdbcType=INTEGER}

@@ -43,6 +43,8 @@ public interface ComponentMapper {
     
     List<Component> findComponentBysel(@Param("pro_id")Integer pro_id, @Param("single_name")String single_name, @Param("floor")String floor);
     
+    List<Component>  findComponentByselForClient(@Param("pro_id")Integer pro_id, @Param("single_name")String single_name, @Param("floor")String floor);
+   
     Page<ComponentDto> findComponentPage(@Param("pro_id")Integer pro_id, @Param("single_name")String single_name, 
     		@Param("floor")String floor, @Param("component_type")String component_type, 
     		@Param("component_status_id")Integer component_status_id,
@@ -80,6 +82,8 @@ public interface ComponentMapper {
     
     ComponentDto getComponentInfo(String component_num);
     
+    List<Component> findComponentByCardNum(@Param("cardNum")Integer cardNum);
+
     List<Component> getDrawings(@Param("pro_id")Integer pro_id);
     
 }

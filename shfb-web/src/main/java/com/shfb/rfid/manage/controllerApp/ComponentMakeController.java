@@ -37,6 +37,7 @@ import com.shfb.rfid.manage.entity.ProductCuring;
 import com.shfb.rfid.manage.entity.ProductEmbeddedParts;
 import com.shfb.rfid.manage.entity.ProductModelSize;
 import com.shfb.rfid.manage.entity.ProductSteelbarSize;
+import com.shfb.rfid.manage.entity.Project;
 import com.shfb.rfid.manage.entity.SysUser;
 import com.shfb.rfid.manage.entity.UserRole;
 import com.shfb.rfid.manage.service.FtpService;
@@ -137,6 +138,62 @@ public class ComponentMakeController extends BaseController{
 		return  ResponseData.newSuccess(projects, "查询成功");
 		//return projects;
 	}
+	
+	
+	/**
+	 * 客户端下拉框接口(项目)
+	 */
+	@RequestMapping(value = "/getSelectProjectForClient")
+	@ResponseBody
+	public Object getSelectProjectForClient(Integer projectID) {
+		Integer userProjectID = projectID;
+		if (userProjectID==0) {
+			userProjectID = null;
+		}
+		List<Map<String, Object>> projects = projectDao.findProjectNames(userProjectID);
+		return  ResponseData.newSuccess(projects, "查询成功");
+	}
+	
+	/**
+	 * 客户端下拉框接口(单体)
+	 */
+	@RequestMapping(value = "/getSelectSingleForClient")
+	@ResponseBody
+	public Object getSelectSingleForClient(String projectName) {
+		Project project = projectDao.findProjectByName(projectName);
+		List<Map<String, Object>> singles = componentDao.findSingle(project.getPro_id());
+		return  ResponseData.newSuccess(singles, "查询成功");
+	}
+	/**
+	 * 客户端下拉框接口(楼层)
+	 */
+	@RequestMapping(value = "/getSelectFloorForClient")
+	@ResponseBody
+	public Object getSelectFloorForClient(String projectName, String singleName) {
+		Project project = projectDao.findProjectByName(projectName);
+		List<Map<String, Object>> floors = componentDao.findFloor(project.getPro_id(), singleName);
+		return  ResponseData.newSuccess(floors, "查询成功");
+	}
+	/**
+	 * 客户端下拉框接口(构件)
+	 */
+	@RequestMapping(value = "/getSelectCompForClient")
+	@ResponseBody
+	public Object getSelectCompForClient(String projectName, String singleName,String floorName) {
+		if (projectName.equals("null")) {
+			projectName = null;
+		}
+		if (singleName.equals("null")) {
+			singleName = null;
+		}
+		if (floorName.equals("null")) {
+			floorName = null;
+		}
+		Project project = projectDao.findProjectByName(projectName);
+		List<Component> components = componentDao.findComponentByselForClient(project.getPro_id(), singleName, floorName);
+		return  ResponseData.newSuccess(components, "查询成功");
+	}
+	
 	
 	/**
 	 * 获取构件列表
@@ -452,6 +509,21 @@ public class ComponentMakeController extends BaseController{
 	}
 	
 	/**
+	 * 获取卡号是否已经绑定
+	 */
+	@RequestMapping(value = "/getCardBindInfo", method = RequestMethod.POST)
+	@ResponseBody
+	public boolean getCardBindInfo(Integer cardNum) {
+		List<Component> components = componentDao.findComponentByCardNum(cardNum);
+		if (components==null||components.size()==0) {
+			return false;
+		}
+		else {
+			return true;
+		}
+	}
+	
+     /**
 	 * 获取所有图纸
 	 */
 	@RequestMapping(value = "/getDrawings", method = RequestMethod.GET)
@@ -467,6 +539,4 @@ public class ComponentMakeController extends BaseController{
 		return new ResultDto(drawings);
 		
 	}
-	
-	
 }
