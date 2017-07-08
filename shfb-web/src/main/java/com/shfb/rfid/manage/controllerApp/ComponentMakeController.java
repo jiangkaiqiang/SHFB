@@ -37,6 +37,7 @@ import com.shfb.rfid.manage.entity.ProductCuring;
 import com.shfb.rfid.manage.entity.ProductEmbeddedParts;
 import com.shfb.rfid.manage.entity.ProductModelSize;
 import com.shfb.rfid.manage.entity.ProductSteelbarSize;
+import com.shfb.rfid.manage.entity.Project;
 import com.shfb.rfid.manage.entity.SysUser;
 import com.shfb.rfid.manage.entity.UserRole;
 import com.shfb.rfid.manage.service.FtpService;
@@ -159,7 +160,8 @@ public class ComponentMakeController extends BaseController{
 	@RequestMapping(value = "/getSelectSingleForClient")
 	@ResponseBody
 	public Object getSelectSingleForClient(String projectName) {
-		List<Map<String, Object>> singles = componentDao.findSingleByProjectName(projectName);
+		Project project = projectDao.findProjectByName(projectName);
+		List<Map<String, Object>> singles = componentDao.findSingle(project.getPro_id());
 		return  ResponseData.newSuccess(singles, "查询成功");
 	}
 	/**
@@ -168,8 +170,28 @@ public class ComponentMakeController extends BaseController{
 	@RequestMapping(value = "/getSelectFloorForClient")
 	@ResponseBody
 	public Object getSelectFloorForClient(String projectName, String singleName) {
-		List<Map<String, Object>> floors = componentDao.findFloorBySingleName(projectName,singleName);
+		Project project = projectDao.findProjectByName(projectName);
+		List<Map<String, Object>> floors = componentDao.findFloor(project.getPro_id(), singleName);
 		return  ResponseData.newSuccess(floors, "查询成功");
+	}
+	/**
+	 * 客户端下拉框接口(构件)
+	 */
+	@RequestMapping(value = "/getSelectCompForClient")
+	@ResponseBody
+	public Object getSelectCompForClient(String projectName, String singleName,String floorName) {
+		if (projectName.equals("null")) {
+			projectName = null;
+		}
+		if (singleName.equals("null")) {
+			singleName = null;
+		}
+		if (floorName.equals("null")) {
+			floorName = null;
+		}
+		Project project = projectDao.findProjectByName(projectName);
+		List<Component> components = componentDao.findComponentByselForClient(project.getPro_id(), singleName, floorName);
+		return  ResponseData.newSuccess(components, "查询成功");
 	}
 	
 	
@@ -470,14 +492,14 @@ public class ComponentMakeController extends BaseController{
 		compProgress.setComponent_id(componentId);
 		compProgress.setOperation_date(TimeUtil.dateToString(new Date(), ""));
 		compProgress.setOperation_user(order_username);
-		compProgress.setComponent_status_name("已下单");
+		compProgress.setComponent_status_name(component_status_name);
 		//更新构件状态进度表
 		int resProgress = comProgressDao.insertSelective(compProgress);
 		return resProgress;
 	}
 	
 	/**
-	 * 获取构件基本信息
+	 * 获取构件基本信息（）
 	 */
 	@RequestMapping(value = "/getComInfo", method = RequestMethod.POST)
 	@ResponseBody
@@ -501,4 +523,20 @@ public class ComponentMakeController extends BaseController{
 		}
 	}
 	
+     /**
+	 * 获取所有图纸
+	 */
+	@RequestMapping(value = "/getDrawings", method = RequestMethod.GET)
+	@ResponseBody
+	public Object getDrawings(Integer token) {
+		SysUser sysUser = userDao.findUserById(token);
+		Integer userProjectID = sysUser.getPro_id();
+		if (userProjectID==0) {
+			userProjectID = null;
+		}
+		List<Component> drawings = componentDao.getDrawings(userProjectID);
+		
+		return drawings;
+		
+	}
 }

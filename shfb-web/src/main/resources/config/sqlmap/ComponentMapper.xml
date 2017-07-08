@@ -566,6 +566,20 @@
   	</if>
   </select>
   
+   <select id="findComponentByselForClient" parameterType="java.lang.Integer"  resultType="com.shfb.rfid.manage.entity.Component">
+  	SELECT component_id, component_name,component_num,component_type FROM component WHERE 1=1
+  	<if test="pro_id != null">
+  	 AND pro_id=#{pro_id}
+  	</if>
+  	<if test="single_name != null">
+  	AND single_name=#{single_name}
+  	</if>
+  	<if test="floor != null">
+  	AND floor=#{floor}
+  	</if>
+  	AND (card_num IS NULL or card_num =  '')
+  </select>
+  
   <select id="findComponentInfoById" parameterType="java.lang.Integer" resultType="com.shfb.rfid.manage.dto.ComponentDto">
   		SELECT p.pro_name, c.single_name, c.floor, c.plan_begin_date, c.plan_end_date,
 	c.real_begin_date, c.real_end_date, c.component_num, c.component_name, c.component_size,
@@ -647,7 +661,13 @@
     <if test="cardNum != null">
     AND card_num=#{cardNum}
     </if>
+    </select>
     
+  <select id="getDrawings" parameterType="Integer" resultType="com.shfb.rfid.manage.entity.Component">
+  	SELECT drawing FROM component WHERE drawing is not null AND drawing!='' 
+  		<if test="pro_id != null and pro_id != ''">
+    		and pro_id=#{pro_id}
+    	</if>
   </select>
   
 </mapper>
