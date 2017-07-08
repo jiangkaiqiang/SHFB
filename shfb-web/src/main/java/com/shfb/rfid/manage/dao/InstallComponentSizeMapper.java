@@ -1,7 +1,11 @@
 package com.shfb.rfid.manage.dao;
 
+import java.util.List;
+import java.util.Map;
+
+import org.omg.CORBA.Object;
+
 import com.shfb.rfid.manage.entity.InstallComponentSize;
-import com.shfb.rfid.manage.entity.ProductComponentSize;
 
 public interface InstallComponentSizeMapper {
     int deleteByPrimaryKey(Integer install_component_size_id);
@@ -17,4 +21,7 @@ public interface InstallComponentSizeMapper {
     int updateByPrimaryKey(InstallComponentSize record);
     
     InstallComponentSize findByComponentId(Integer component_id);
+    
+    Map<String,Object> getAppVersion();
+    
 }

@@ -44,6 +44,20 @@ public class ComponentController extends BaseController {
 	@Autowired
 	private CompProgressMapper comProgressDao;
 	
+	/**
+	 * 构件管理
+	 * @param pageNum
+	 * @param pageSize
+	 * @param userProjectID
+	 * @param userCompFactoryID
+	 * @param pro_id
+	 * @param single_name
+	 * @param floor
+	 * @param component_type
+	 * @param component_status_id
+	 * @return
+	 * @throws UnsupportedEncodingException
+	 */
 	@RequestMapping(value = "/findComponentPage", method = RequestMethod.POST)
 	@ResponseBody
 	public Object findComponentPage(@RequestParam(value="pageNum",required=false) Integer pageNum,
@@ -70,6 +84,53 @@ public class ComponentController extends BaseController {
 		component_type = "".equals(component_type)? null:component_type;
 		Page<ComponentDto> components = componentDao.findComponentPage(pro_id, single_name, floor, 
 				component_type, component_status_id,userProjectID,userCompFactoryID);
+
+		return new PageInfo<ComponentDto>(components);
+		
+	}
+	
+	/**
+	 * 生产管理
+	 * @param pageNum
+	 * @param pageSize
+	 * @param userProjectID
+	 * @param userCompFactoryID
+	 * @param pro_id
+	 * @param single_name
+	 * @param floor
+	 * @param component_type
+	 * @param component_status_id
+	 * @return
+	 * @throws UnsupportedEncodingException
+	 */
+	@RequestMapping(value = "/findComponentProductPage", method = RequestMethod.POST)
+	@ResponseBody
+	public Object findComponentProductPage(@RequestParam(value="pageNum",required=false) Integer pageNum,
+			@RequestParam(value="pageSize") Integer pageSize, 
+			@RequestParam(value="userProjectID", required=false) Integer userProjectID,
+			@RequestParam(value="userCompFactoryID", required=false) Integer userCompFactoryID,
+			@RequestParam(value="pro_id", required=false) Integer pro_id,
+			@RequestParam(value="single_name", required=false) String single_name,
+			@RequestParam(value="floor", required=false) String floor,
+			@RequestParam(value="component_type", required=false) String component_type,
+			@RequestParam(value="component_status_id", required=false) Integer component_status_id,
+			@RequestParam(value="order_num", required=false) String order_num
+			) throws UnsupportedEncodingException {
+		pageNum = pageNum == null? 1:pageNum;
+		pageSize = pageSize==null? 10:pageSize;
+		PageHelper.startPage(pageNum, pageSize);
+		if (null==userProjectID||userProjectID==0) {
+			userProjectID = null;
+		}
+		if (null==userCompFactoryID||userCompFactoryID==0) {
+			userCompFactoryID = null;
+		}
+		single_name = "".equals(single_name)? null:single_name;
+		floor = "".equals(floor)? null:floor;
+		component_type = "".equals(component_type)? null:component_type;
+		order_num = "".equals(order_num)? null:order_num;
+		Page<ComponentDto> components = componentDao.findComponentProductPage(pro_id, single_name, floor, 
+				component_type, component_status_id,userProjectID,userCompFactoryID,order_num);
 
 		return new PageInfo<ComponentDto>(components);
 		
@@ -176,11 +237,11 @@ public class ComponentController extends BaseController {
 	 */
 	@RequestMapping(value = "/expeditGood", method = RequestMethod.GET)
 	@ResponseBody
-	public ResultDto expeditGood(String component_ids)  {
+	public ResultDto expeditGood(String component_ids,String expedit_date)  {
 		String[] component_idArray = component_ids.split(",");
 		int reses = 0;
 		for (String comId : component_idArray) {
-			int res = componentDao.expeditGood(Integer.valueOf(comId));
+			int res = componentDao.expeditGood(Integer.valueOf(comId),expedit_date);
 			reses += res;
 		}
 		
@@ -221,6 +282,38 @@ public class ComponentController extends BaseController {
 		dataExel.put("varList", varList);
 		return ExcelImportUtil.exportExcel(dataExel);
 	}
+	/**
+	 * 导出生产管理的构件
+	 */	
+	@RequestMapping(value = "/exportCompProduct", method = RequestMethod.GET)
+	@ResponseBody
+	public ModelAndView exportCompProduct(String order_num)  {
+		
+		List<ComponentDto> components = componentDao.exportComponentProduct(order_num);	
+		
+		Map<String, Object> dataExel = new HashMap<String, Object>();
+		List<String> titles = new ArrayList<String>();
+		titles.add("构件编号");
+		titles.add("订单号");
+		titles.add("生产计划开始时间");
+		titles.add("生产计划结束时间");
+		titles.add("计划供应时间");
+		titles.add("催货时间");
+		List<Map<String, Object>> varList = new ArrayList<Map<String,Object>>();
+		for (ComponentDto component : components) {
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("var1", component.getComponent_num());
+			map.put("var2", component.getOrder_num());
+			map.put("var3", component.getProduct_plan_begin_date());
+			map.put("var4", component.getProduct_plan_end_date());
+			map.put("var5", component.getPlan_end_date());
+			map.put("var6", component.getExpedit_date());
+			varList.add(map);
+		}
+		dataExel.put("titles", titles);
+		dataExel.put("varList", varList);
+		return ExcelImportUtil.exportExcel(dataExel);
+	}
 	
 	/**
 	 * 下单
@@ -240,7 +333,7 @@ public class ComponentController extends BaseController {
 			@RequestParam(value="pro_id", required=true) Integer pro_id,
 			@RequestParam(value="single_name", required=true) String single_name,
 			@RequestParam(value="floor", required=false) String floor,
-			@RequestParam(value="expedit_date", required=true) String expedit_date,
+			@RequestParam(value="plan_end_date", required=true) String plan_end_date,
 			@RequestParam(value="comp_factory_id", required=true) Integer comp_factory_id,
 			@RequestParam(value="order_user_id", required=true) String order_user_id,
 			@RequestParam(value="order_username",required=true) String order_username
@@ -248,7 +341,7 @@ public class ComponentController extends BaseController {
 			Date dateNow = new Date();
 			String order_num=TimeUtil.dateToString(dateNow, "yyyyMMddHHmmss"); 
 			//更新构件表
-			int resUpdate = componentDao.placeOrder(pro_id, single_name, floor, expedit_date, comp_factory_id, order_user_id,order_num);		
+			int resUpdate = componentDao.placeOrder(pro_id, single_name, floor, plan_end_date, comp_factory_id, order_user_id,order_num);		
 			//新加订单表
 			int resInsert = componentOrderDao.insertSelective(pro_id, single_name, floor, comp_factory_id, order_username, order_num);
 			

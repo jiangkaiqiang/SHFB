@@ -373,6 +373,20 @@ coldWeb.controller('componentManage', function ($rootScope, $scope, $state, $coo
 			   $('#placeOrder').modal('show');			 
 	    }
 	    
+	    //点击催货
+	    $scope.good_expe = function(){
+	    	//判断有无选择
+	    	var parmStr = "";
+	    	for(i in $scope.selected){
+	    		parmStr += $scope.selected[i].component_id +","
+	    	}
+	    if(parmStr=="") {alert("请选择构件"); return;}		   			   
+			   
+	    $('#good_expedit').modal('show');			 
+	    
+	    }
+	    
+	    
 	    //确认下单
 	    $scope.addPlaceOrder=function(){
 	
@@ -403,7 +417,7 @@ coldWeb.controller('componentManage', function ($rootScope, $scope, $state, $coo
 				single_name : single_namea,
 				floor : floora,
 				comp_factory_id:comp_factory_id,
-				expedit_date:$scope.expedit_date,
+				plan_end_date:$scope.plan_end_date,
 				order_user_id:$rootScope.admin.user_id,
 				order_username:$rootScope.admin.user_name
 			}
@@ -438,17 +452,17 @@ coldWeb.controller('componentManage', function ($rootScope, $scope, $state, $coo
 	    }
 	     //催货
 	     $scope.expeditGood = function () {
-	    	//判断有无选择
-	    	var parmStr = "";
-	    	for(i in $scope.selected){
-	    		parmStr += $scope.selected[i].component_id +","
-	    	}
-	    	if(parmStr=="") {alert("请选择构件"); return;}
 	    	
+		    	var parmStr = "";
+		    	for(i in $scope.selected){
+		    		parmStr += $scope.selected[i].component_id +","
+		    	}
+	    	 
 	    	if(isConfirm("确认催货")){
 	    	$http.get('/i/component/expeditGood', {
 	            params: {
-	                "component_ids": parmStr
+	                "component_ids": parmStr,
+	                "expedit_date":$scope.good_expedit_date
 	            }
 	        }).success(function (data) {
 	        	$scope.getComponents();
@@ -469,6 +483,14 @@ coldWeb.controller('componentManage', function ($rootScope, $scope, $state, $coo
 			});
 	    }
 	    $('#datetimepicker1').datetimepicker({  
+	    	format: 'yyyy-mm-dd',
+	    	autoclose:true,
+	    	minView:'month'
+	    }).on('dp.change', function (e) {  
+	    });
+	    
+	    
+	    $('#expedit_datetime').datetimepicker({  
 	    	format: 'yyyy-mm-dd',
 	    	autoclose:true,
 	    	minView:'month'

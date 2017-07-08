@@ -42,6 +42,12 @@
 					</select>
 					</div>
 				</div>
+				<div  class="col-sm-2">								
+					<div class="btn-group pull-left" id="status">
+					订单编号：<select ng-model="selectcomponent_order" ng-options="x.order_num for x in component_orders">
+					</select>
+					</div>
+				</div>
 				<div  class="col-sm-2">	
 					<div class="btn-group pull-left" id="status">
 					&nbsp;
@@ -57,8 +63,8 @@
 			<div class="row" style="height:8px">
 				<div class="three">
 				<div class="btn-group pull-right" role="group" style="margin-right:10px">
-				    <button type="button" class="btn btn-default" ng-click="modalShow('#productPlan')">提交生成计划</button>
-				  
+				    <button type="button" class="btn btn-default" ng-click="modalShow('#productPlan')">提交生产计划</button>
+				  	<button type="button" class="btn btn-default" ng-click="exportProduct()">导出生产计划</button>
 				</div>
 			</div>	
 			</div>
@@ -77,11 +83,12 @@
 				         </th>
 				         <th>序号</th>
 				         <th>构件编号</th>
-				
+						 <th>订单编号</th>
 				         <th>生产计划开始</th>
 				         <th>生产计划结束</th>
 		
 				         <th>已催货</th>
+				         <th>计划供应时间</th>
 				         <th>催货交期</th>
 				         <th>状态</th>
 				         <th>验收结果</th>
@@ -96,12 +103,13 @@
 				         </td>
 				         <td>{{$index+1}}</td>
 				         <td>{{component.component_num}}</td>
-				         <!-- <td>{{component.component_name}}</td> -->
+				          <td>{{component.order_num}}</td> 
 				         <td>{{component.product_plan_begin_date}}</td>
 				         <td>{{component.product_plan_end_date}}</td>
 				        
 				         <td ng-if="component.expedit_status=='1'">未催货</td>
 				         <td ng-if="component.expedit_status=='2'">已催货</td>
+				         <td>{{component.plan_end_date}}</td>
 				         <td>{{component.expedit_date}}</td>
 				         <td>{{component.component_status_name}}</td>
 				         <td ng-if="component.check_res=='1'">未验收</td>
@@ -245,7 +253,7 @@
 					      </span> -->
 					      <span ng-if="!isedit">{{componentInfo.product_plan_begin_date}}</span>			
 							<div class='input-group date datetimepickerDisplay' style="display:none;">  
-                    		<input id="product_plan_begin_date" style="width:40%;position: relative" type='text' class="form-control" placeholder="生成计划开始时间" ng-model="componentInfo.product_plan_begin_date" />  
+                    		<input id="product_plan_begin_date" style="width:40%;position: relative" type='text' class="form-control" placeholder="生产计划开始时间" ng-model="componentInfo.product_plan_begin_date" />  
                     			<span class="input-group-addon" style="width:14px">  
                         		<span class="glyphicon glyphicon-calendar"></span>  
                     			</span>  
@@ -258,7 +266,7 @@
 					      </span> -->
 					       <span ng-if="!isedit">{{componentInfo.product_plan_end_date}}</span>
 					       <div class='input-group date datetimepickerDisplay' style="display:none;">  
-                    		<input id="product_plan_end_date" style="width:40%;position: relative" type='text' class="form-control" placeholder="生成计划完成日期" ng-model="componentInfo.product_plan_end_date" />  
+                    		<input id="product_plan_end_date" style="width:40%;position: relative" type='text' class="form-control" placeholder="生产计划完成日期" ng-model="componentInfo.product_plan_end_date" />  
                     			<span class="input-group-addon" style="width:14px">  
                         		<span class="glyphicon glyphicon-calendar"></span>  
                     			</span>  

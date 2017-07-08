@@ -442,7 +442,7 @@ public class ComponentMakeController extends BaseController{
 	}
 	
 	/**
-	 * 获取构件基本信息（）
+	 * 获取构件基本信息
 	 */
 	@RequestMapping(value = "/getComInfo", method = RequestMethod.POST)
 	@ResponseBody
@@ -464,7 +464,7 @@ public class ComponentMakeController extends BaseController{
 		}
 		List<Component> drawings = componentDao.getDrawings(userProjectID);
 		
-		return drawings;
+		return new ResultDto(drawings);
 		
 	}
 	

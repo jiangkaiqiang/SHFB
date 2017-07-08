@@ -212,15 +212,15 @@ public class ProjectController extends BaseController {
 					List<Map<String, String>> result = ExcelImportUtil.readExcel(files[0].getInputStream(), 1, 0, 0);
 					for (Map<String, String> map : result) {
 						Component component = new Component();
-						component.setComponent_name(map.get("var0"));
-						if(map.get("var1") == null){
+						//component.setComponent_name(map.get("var0"));
+						if(map.get("var0") == null){
 							continue;
 						}
-						component.setComponent_num(map.get("var1"));
-						component.setSingle_name(map.get("var2"));
-						component.setFloor(map.get("var3"));
-						component.setComponent_type(map.get("var4"));
-						component.setComponent_size(map.get("var5"));
+						component.setComponent_num(map.get("var0"));
+						component.setSingle_name(map.get("var1"));
+						component.setFloor(map.get("var2"));
+						component.setComponent_type(map.get("var3"));
+						component.setComponent_size(map.get("var4"));
 						component.setPro_id(pro_id);
 						componentDao.insertSelective(component);
 					}

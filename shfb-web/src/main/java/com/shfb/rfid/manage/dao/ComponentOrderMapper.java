@@ -26,4 +26,6 @@ public interface ComponentOrderMapper {
     
     List<ComponentOrderDto> exportComponentOrders(String[] order_ids);
     
+    List<ComponentOrder> findComponentOrders();
+    
 }

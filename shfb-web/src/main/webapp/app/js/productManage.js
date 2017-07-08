@@ -41,9 +41,13 @@ coldWeb.controller('productManage', function ($rootScope, $scope, $state, $cooki
 		   if($scope.selectStatus!=undefined&&$scope.selectStatus.component_status_id!=undefined) {
 			   $scope.component_status_idf=$scope.selectStatus.component_status_id;
 		   }
+		   $scope.order_numf="";
+		   if($scope.selectcomponent_order!=undefined&&$scope.selectcomponent_order.order_num!=undefined) {
+			   $scope.order_numf=$scope.selectcomponent_order.order_num;
+		   }
 		$http({
 			method : 'POST',
-			url : '/i/component/findComponentPage',
+			url : '/i/component/findComponentProductPage',
 			params : {
 				pageNum : $scope.bigCurrentPage,
 				pageSize : $scope.maxSize,
@@ -52,7 +56,8 @@ coldWeb.controller('productManage', function ($rootScope, $scope, $state, $cooki
 				floor:$scope.floorf,
 				component_type:$scope.component_typef,
 				component_status_id:$scope.component_status_idf,
-				userProjectID : $rootScope.admin.pro_id
+				userProjectID : $rootScope.admin.pro_id,
+				order_num : $scope.order_numf
 			}
 		}).success(function(data) {
 			$scope.bigTotalItems = data.total;
@@ -90,6 +95,17 @@ coldWeb.controller('productManage', function ($rootScope, $scope, $state, $cooki
 		 
     }
 	
+	//导出生产计划
+	$scope.exportProduct = function(){
+		if($scope.selectcomponent_order!=undefined&&$scope.selectcomponent_order.order_num!=undefined) {
+		   }else{
+			   alert("请选择订单");
+			   return;
+		   }
+		
+    	window.location.href="/i/component/exportCompProduct?order_num="+$scope.selectcomponent_order.order_num;
+	}
+	
 	//查询所有项目
 	$scope.findProjects = function(){
 		$http({
@@ -117,6 +133,20 @@ coldWeb.controller('productManage', function ($rootScope, $scope, $state, $cooki
 		});
 	}
 	$scope.findComponentTypes();
+	
+	//查询所有订单编号
+	$scope.findComponentOrders = function(){
+		$http({
+			method : 'GET',
+			url : '/i/componentOrder/findComponentOrders',
+		}).success(function(data) {
+			console.log(data);
+			$scope.component_orders = data;
+		});
+	}
+	$scope.findComponentOrders();
+	
+	
 	
 	$scope.projectChange=function(pro_id){
 		$http({
