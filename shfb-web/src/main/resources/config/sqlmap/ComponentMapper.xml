@@ -71,6 +71,12 @@
     AND card_num IS NULL
   </select>
   
+  <select id="getComponentInfo" resultType="com.shfb.rfid.manage.dto.ComponentDto" parameterType="String" >
+    SELECT component_num,component_type,component_size,single_name,floor, pro_name from component AS c 
+		LEFT JOIN project AS p ON c.pro_id = p.pro_id WHERE component_num=#{component_num}
+  </select>
+  
+  
   <select id="findComponentByOrderNum" resultType="java.lang.Integer" parameterType="String" >
     select component_id
     from component

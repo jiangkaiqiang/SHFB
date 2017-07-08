@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.http.protocol.ResponseDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,6 +27,7 @@ import com.shfb.rfid.manage.dao.ProductSteelbarSizeMapper;
 import com.shfb.rfid.manage.dao.ProjectMapper;
 import com.shfb.rfid.manage.dao.SysUserMapper;
 import com.shfb.rfid.manage.dao.UserRoleMapper;
+import com.shfb.rfid.manage.dto.AppResultDto;
 import com.shfb.rfid.manage.dto.ComponentDto;
 import com.shfb.rfid.manage.dto.ResultDto;
 import com.shfb.rfid.manage.dto.UploadFileEntity;
@@ -87,15 +89,15 @@ public class ComponentMakeController extends BaseController{
 				UserRole role = userRoleDao.selectByPrimaryKey(user.getUser_role_id());
 				//以下返回信息为暂时，1代表业主总包 2代表构建厂
 				if(role.getMenu_ids().contains("11")) {
-					return  ResponseData.newSuccess("登录成功",user.getUser_id()+"","2");
+					return new AppResultDto(true, "登录成功", user.getUser_id()+"", "2");
 				} else {
-					return  ResponseData.newSuccess("登录成功",user.getUser_id()+"","1");
+					return new AppResultDto(true, "登录成功", user.getUser_id()+"", "1");
 				}
 	            
 			}
-			return ResponseData.newFailure("用户名或者密码不正确~");
+			return new AppResultDto(false, "用户名或密码错误", "", "1");
 		}else{
-			return ResponseData.newFailure("用户名和密码不能为空~");
+			return new AppResultDto(false, "用户名或密码为空", "", "1");
 		}
 		
 	}
@@ -157,7 +159,7 @@ public class ComponentMakeController extends BaseController{
 	
 	
 	/**
-	 * 获取构件列表
+	 * 
 	 * @param component_status_id
 	 * @return
 	 */
@@ -185,6 +187,9 @@ public class ComponentMakeController extends BaseController{
 	public ResultDto findComponentByKey(Component record) {
 		try {
 			Component component = componentDao.selectByCom(record);
+			if(component == null) {
+				component = new Component();
+			}
 			return new ResultDto(component);
 		} catch (Exception e) {
 			return new ResultDto(2, "param err", false);
@@ -434,6 +439,16 @@ public class ComponentMakeController extends BaseController{
 		//更新构件状态进度表
 		int resProgress = comProgressDao.insertSelective(compProgress);
 		return resProgress;
+	}
+	
+	/**
+	 * 获取构件基本信息
+	 */
+	@RequestMapping(value = "/getComInfo", method = RequestMethod.POST)
+	@ResponseBody
+	public ComponentDto insertProductCuring(String comonentNum) {
+		ComponentDto component = componentDao.getComponentInfo(comonentNum);	
+		return component;
 	}
 	
 }

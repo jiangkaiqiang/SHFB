@@ -77,10 +77,10 @@
 				         </th>
 				         <th>序号</th>
 				         <th>构件编号</th>
-				         <th>构件名称</th>
+				
 				         <th>生产计划开始</th>
 				         <th>生产计划结束</th>
-				         <th>已绑定</th>
+		
 				         <th>已催货</th>
 				         <th>催货交期</th>
 				         <th>状态</th>
@@ -99,8 +99,7 @@
 				         <td>{{component.component_name}}</td>
 				         <td>{{component.product_plan_begin_date}}</td>
 				         <td>{{component.product_plan_end_date}}</td>
-				         <td ng-if="component.bind_status=='1'">未绑定</td>
-				         <td ng-if="component.bind_status=='2'">已绑定</td>
+				        
 				         <td ng-if="component.expedit_status=='1'">未催货</td>
 				         <td ng-if="component.expedit_status=='2'">已催货</td>
 				         <td>{{component.expedit_date}}</td>
@@ -172,9 +171,7 @@
 			</div>
 			
 			<div class="row" style="padding-left:30px;padding-bottom:15px">
-				<div class="col-md-3">
-					项目名称：{{componentInfo.pro_name}}
-				</div>
+				
 				<div class="col-md-3">
 					单体名称：{{componentInfo.single_name}}
 				</div>

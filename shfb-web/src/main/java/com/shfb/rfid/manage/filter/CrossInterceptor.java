@@ -23,6 +23,11 @@ public class CrossInterceptor extends OncePerRequestFilter {
             response.setHeader("Access-Control-Allow-Credentials","true"); //是否支持cookie跨域
             response.setHeader("Access-Control-Allow-Methods", "POST, GET,PUT, OPTIONS, DELETE");
             response.setHeader("Access-Control-Allow-Headers", "x-requested-with,Content-Transfer-Encoding");//,Content-Type,Content-Transfer-Encoding
+            if (request.getServletPath().contains("/n/")) {
+            	System.out.println(request.getServletPath());
+            	request.getRequestDispatcher("/componentMobile.html").forward(request,response);
+            	return;
+            }
             filterChain.doFilter(request, response);
 	    }
 }
