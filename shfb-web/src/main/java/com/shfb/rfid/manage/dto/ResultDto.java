@@ -32,9 +32,7 @@ public class ResultDto {
 
 	public ResultDto(Object data) {
 		super();
-		if(data == null) {
-			data = "null";
-		}
+		
 		this.status = 1;
 		this.message = "查询成功";
 		this.success = true;

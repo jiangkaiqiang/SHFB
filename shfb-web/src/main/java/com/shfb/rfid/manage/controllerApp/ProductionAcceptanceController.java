@@ -84,7 +84,7 @@ public class ProductionAcceptanceController {
 	/**
 	 * 发货
 	 */
-	@RequestMapping(value = "/deliverGoods", method = RequestMethod.GET)
+	@RequestMapping(value = "/deliverGoods")
 	@ResponseBody
 	public ResultDto deliverGoods(Integer token, Integer component_id) {
 		if(component_id == null) return new ResultDto(2, "无法找到构件id", false);

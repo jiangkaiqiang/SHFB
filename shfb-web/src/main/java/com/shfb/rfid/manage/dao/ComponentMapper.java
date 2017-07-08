@@ -71,4 +71,6 @@ public interface ComponentMapper {
     
     List<Integer> findComponentByOrderNum(@Param("order_num") String order_num);
     
+    ComponentDto getComponentInfo(String component_num);
+    
 }
