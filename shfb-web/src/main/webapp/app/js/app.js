@@ -42,7 +42,52 @@ coldWeb.factory('adminService',['$rootScope','$http', function($rootScope,$http)
 }])
 
 coldWeb.config(function ($stateProvider, $urlRouterProvider) {
-    $urlRouterProvider.otherwise("/home");
+	/* $.ajax({type: "GET",cache: false,dataType: 'json',url: '/i/user/findUser'}).success(function(data){
+	      	var user = data;
+	      	if(user != null && user.user_id != 0 && user.user_id!=undefined){
+	        $.get("/i/userrole/findUserRoleByUserID", {userID: user.user_id},function(data){
+	        	if(data!=null&&data.userRole.user_role_id!=undefined){
+      				var adminRoleDto = data;
+			    	if(adminRoleDto.overView){
+			 		   $urlRouterProvider.otherwise("/home");
+			 	}
+			 	else{
+			 		if(adminRoleDto.compManage || adminRoleDto.processManage){
+			 			$urlRouterProvider.otherwise("/componentManage");
+			 		}
+			 		else{
+			 			if(adminRoleDto.projectManage){
+			 				$urlRouterProvider.otherwise("/projectManage");
+			 			}
+			 			else{
+			 				if(adminRoleDto.compFactoryManage){
+			 				   $urlRouterProvider.otherwise("/compFactoryManage");
+			 				}
+			 				else{
+			 					 if(adminRoleDto.userManage || adminRoleDto.roleManage || adminRoleDto.logManage){
+			 						   $urlRouterProvider.otherwise("/userManage");
+			 					 }
+			 					 else{
+			 						 if(adminRoleDto.productManage){
+			 							 $urlRouterProvider.otherwise("/productManage");
+			 						 }
+			 						 else{
+			 							 $urlRouterProvider.otherwise("/personalSpace");
+			 						 }
+			 					 }
+			 				}
+			 			}
+			 		}
+			 	}
+			    }
+	      	 });
+	      	}
+	      	else{*/
+	      		 $urlRouterProvider.otherwise("/home");
+	      /*	}
+	      });
+*/
+ 
     //index
     $stateProvider.state('home', {
         url: '/home',
