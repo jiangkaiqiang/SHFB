@@ -68,7 +68,7 @@
     <if test="pro_id != null">
     AND pro_id=#{pro_id}
     </if>
-    AND card_num IS NULL
+    AND (card_num IS NULL or card_num =  '')
   </select>
   
   <select id="getComponentInfo" resultType="com.shfb.rfid.manage.dto.ComponentDto" parameterType="String" >
@@ -639,5 +639,15 @@
   		component_status_id = #{component_status_id}
   	where component_id = #{component_id} and component_status_id = #{oldcomponent_status_id}
   </update>
+  
+  <select id="findComponentByCardNum" resultType="com.shfb.rfid.manage.entity.Component" parameterType="java.lang.Integer" >
+    select *
+    from component
+     WHERE 1=1
+    <if test="cardNum != null">
+    AND card_num=#{cardNum}
+    </if>
+    
+  </select>
   
 </mapper>

@@ -138,6 +138,41 @@ public class ComponentMakeController extends BaseController{
 		//return projects;
 	}
 	
+	
+	/**
+	 * 客户端下拉框接口(项目)
+	 */
+	@RequestMapping(value = "/getSelectProjectForClient")
+	@ResponseBody
+	public Object getSelectProjectForClient(Integer projectID) {
+		Integer userProjectID = projectID;
+		if (userProjectID==0) {
+			userProjectID = null;
+		}
+		List<Map<String, Object>> projects = projectDao.findProjectNames(userProjectID);
+		return  ResponseData.newSuccess(projects, "查询成功");
+	}
+	
+	/**
+	 * 客户端下拉框接口(单体)
+	 */
+	@RequestMapping(value = "/getSelectSingleForClient")
+	@ResponseBody
+	public Object getSelectSingleForClient(String projectName) {
+		List<Map<String, Object>> singles = componentDao.findSingleByProjectName(projectName);
+		return  ResponseData.newSuccess(singles, "查询成功");
+	}
+	/**
+	 * 客户端下拉框接口(楼层)
+	 */
+	@RequestMapping(value = "/getSelectFloorForClient")
+	@ResponseBody
+	public Object getSelectFloorForClient(String projectName, String singleName) {
+		List<Map<String, Object>> floors = componentDao.findFloorBySingleName(projectName,singleName);
+		return  ResponseData.newSuccess(floors, "查询成功");
+	}
+	
+	
 	/**
 	 * 获取构件列表
 	 * @param component_status_id
@@ -449,6 +484,21 @@ public class ComponentMakeController extends BaseController{
 	public ComponentDto insertProductCuring(String comonentNum) {
 		ComponentDto component = componentDao.getComponentInfo(comonentNum);	
 		return component;
+	}
+	
+	/**
+	 * 获取卡号是否已经绑定
+	 */
+	@RequestMapping(value = "/getCardBindInfo", method = RequestMethod.POST)
+	@ResponseBody
+	public boolean getCardBindInfo(Integer cardNum) {
+		List<Component> components = componentDao.findComponentByCardNum(cardNum);
+		if (components==null||components.size()==0) {
+			return false;
+		}
+		else {
+			return true;
+		}
 	}
 	
 }

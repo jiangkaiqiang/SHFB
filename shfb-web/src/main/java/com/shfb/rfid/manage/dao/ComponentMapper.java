@@ -73,4 +73,11 @@ public interface ComponentMapper {
     
     ComponentDto getComponentInfo(String component_num);
     
+    List<Component> findComponentByCardNum(@Param("cardNum")Integer cardNum);
+
+	List<Map<String, Object>> findSingleByProjectName(String projectName);
+
+	List<Map<String, Object>> findFloorBySingleName(String projectName,
+			String singleName);
+    
 }
