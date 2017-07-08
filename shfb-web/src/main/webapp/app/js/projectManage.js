@@ -316,12 +316,11 @@ coldWeb.controller('projectManage', function ($rootScope, $scope, $state, $cooki
 					var fileType = (fileName.substring(fileName.lastIndexOf(".")+1,fileName.length)).toLowerCase();
 				    var suppotFile = new Array();
 				    suppotFile[0] = "png";
-				    for(var i =0;i<suppotFile.length;i++){
-				      if(suppotFile[i]!=fileType){
-				    	alert("请上传png格式图片");
+				    suppotFile[1] = "jpg";
+				    if(suppotFile[0]!=fileType&&suppotFile[1]!=fileType){
+				    	alert("请上传png或jpg格式的图片！");
 				    	return;
-				      };
-	              }
+				     };
 				}
 				var allfiles = $scope.totalPicFiles.concat($scope.picfiles);
 		        $scope.totalPicFiles=allfiles; 
