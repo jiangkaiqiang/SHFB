@@ -57,6 +57,7 @@ coldWeb.controller('productManage', function ($rootScope, $scope, $state, $cooki
 				component_type:$scope.component_typef,
 				component_status_id:$scope.component_status_idf,
 				userProjectID : $rootScope.admin.pro_id,
+				userCompFactoryID : $rootScope.admin.comp_factory_id,
 				order_num : $scope.order_numf
 			}
 		}).success(function(data) {
@@ -139,6 +140,9 @@ coldWeb.controller('productManage', function ($rootScope, $scope, $state, $cooki
 		$http({
 			method : 'GET',
 			url : '/i/componentOrder/findComponentOrders',
+			params : {
+				userCompFactoryID : $rootScope.admin.comp_factory_id
+			}
 		}).success(function(data) {
 			console.log(data);
 			$scope.component_orders = data;

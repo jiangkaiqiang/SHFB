@@ -369,7 +369,7 @@ coldWeb.controller('componentManage', function ($rootScope, $scope, $state, $coo
 			   $scope.findCompFactorys = function(){
 					$http({
 						method : 'GET',
-						url : '/i/compfactory/findCompFactorys',
+						url : '/i/compfactory/findCompFactorysForOrder',
 					}).success(function(data) {
 						$scope.factorys = data;
 					});

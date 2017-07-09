@@ -113,6 +113,7 @@
   
   <select id="findComponentOrders" resultType="com.shfb.rfid.manage.entity.ComponentOrder" >
   	select order_num from component_order
+  	 where comp_factory_id = #{userCompFactoryID,jdbcType=INTEGER}
   </select>
   
   
