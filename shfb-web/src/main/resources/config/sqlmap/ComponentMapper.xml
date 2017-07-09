@@ -534,6 +534,43 @@
     order by component_id desc		
   </select>
   
+   <select id="findComponentProductPage"  resultType="com.shfb.rfid.manage.dto.ComponentDto">
+  	select 
+  	c.component_id, c.component_name, c.component_num, c.component_type, c.component_size,
+    c.expedit_status, c.expedit_date, s.component_status_name,c.bind_status,c.check_res,
+    c.plan_end_date,c.product_plan_begin_date, c.product_plan_end_date, c.order_num,
+    s.component_status_name, p.pro_name, c.single_name, c.floor, c.card_num
+    from component AS c
+    LEFT JOIN component_status AS s on c.component_status_id=s.component_status_id 
+    LEFT JOIN project AS p ON c.pro_id=p.pro_id
+    WHERE 1=1
+    <if test="pro_id != null">
+    AND c.pro_id=#{pro_id}
+    </if> 
+    <if test="single_name != null">
+    AND c.single_name=#{single_name}
+    </if> 
+    <if test="floor != null">
+    AND c.floor=#{floor}
+    </if> 
+    <if test="component_type != null">
+    AND c.component_type=#{component_type}
+    </if> 
+    <if test="component_status_id != null">
+    AND c.component_status_id=#{component_status_id}
+    </if>
+    <if test="userProjectID != null">
+	AND c.pro_id=#{userProjectID}
+    </if> 
+     <if test="userCompFactoryID != null">
+	AND c.comp_factory_id=#{userCompFactoryID}
+    </if> 
+    <if test="order_num != null">
+    AND c.order_num=#{order_num}
+    </if>
+    order by component_id desc		
+  </select>
+  
   <select id="findSingle" parameterType="java.lang.Integer" resultType="map">
   	SELECT DISTINCT(single_name) FROM component where 1=1
   	and single_name is not null AND single_name !=''
@@ -614,12 +651,22 @@
 	</foreach>
   </select>
   
+  <select id="exportComponentProduct" parameterType="String" resultType="com.shfb.rfid.manage.dto.ComponentDto">
+  	SELECT 
+  		c.component_num,c.order_num, c.product_plan_begin_date, c.product_plan_end_date,c.plan_end_date,c.expedit_date 
+  	FROM component AS c  WHERE 1=1
+	<if test="order_num != null">
+	and	c.order_num=#{order_num}
+	</if>  	
+  </select>
+  
+  
   <update id="placeOrder" parameterType="String">
   	 update component SET
         		plan_begin_date = CURDATE(),
 				real_begin_date = CURDATE(),
 				order_time = NOW(),
-				expedit_date = #{expedit_date},
+				expedit_date = #{plan_end_date},
 				component_status_id = 2,
 				comp_factory_id=#{comp_factory_id},
 				order_user_id=#{order_user_id},
@@ -635,7 +682,7 @@
   
   <update id="expeditGood" parameterType="Integer">
   	update component SET
-  		expedit_status = 2
+  		expedit_status = 2, expedit_date=#{expedit_date}
   	where component_id = #{component_id}
   </update>
   

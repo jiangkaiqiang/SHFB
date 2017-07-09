@@ -8,7 +8,7 @@ public class ResultDto {
 	
 	private boolean success;
 	
-	private Object data;
+	private Object data = "";
 
 	public ResultDto() {
 
@@ -32,7 +32,9 @@ public class ResultDto {
 
 	public ResultDto(Object data) {
 		super();
-		
+		if( data == null ) {
+			data="";
+		}
 		this.status = 1;
 		this.message = "查询成功";
 		this.success = true;

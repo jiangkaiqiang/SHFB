@@ -295,4 +295,12 @@
     from install_component_size
     where component_id = #{component_id,jdbcType=INTEGER}
   </select>
+  
+  <resultMap id="appResult"   type="HashMap">  
+    <result column="app_version" property="app_version"/>  
+    <result column="app_url" property="app_url" />
+  </resultMap>
+  <select id="getAppVersion" resultMap="appResult">
+  	select app_version, app_url from app_update
+  </select>
 </mapper>

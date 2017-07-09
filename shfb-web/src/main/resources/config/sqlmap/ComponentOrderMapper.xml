@@ -111,4 +111,9 @@
 	</foreach>
   </select>
   
+  <select id="findComponentOrders" resultType="com.shfb.rfid.manage.entity.ComponentOrder" >
+  	select order_num from component_order
+  </select>
+  
+  
 </mapper>

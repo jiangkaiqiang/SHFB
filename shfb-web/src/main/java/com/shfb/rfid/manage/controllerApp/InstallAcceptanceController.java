@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.omg.CORBA.Object;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -95,6 +96,18 @@ public class InstallAcceptanceController {
 			@RequestParam(value="component_id", required=true) Integer component_id
 			) throws Exception{
 		return appUploadFile(files, component_id, 0);
+		
+	}
+	
+	/**
+	 * 获取app信息
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value="/getAppVersion")
+	@ResponseBody
+	public Map<String,Object> getAppVersion() throws Exception{
+		return installComponentSizeDao.getAppVersion();
 		
 	}
 	

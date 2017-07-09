@@ -76,6 +76,17 @@ public class ComponentOrderController extends BaseController {
 	}
 	
 	/**
+	 * 查询所有订单编号
+	 * @return
+	 */
+	@RequestMapping(value = "/findComponentOrders", method = RequestMethod.GET)
+	@ResponseBody
+	public List<ComponentOrder> findComponentOrders() {
+		return componentOrderDao.findComponentOrders();
+	}
+	
+	
+	/**
 	 * 导出构件
 	 * @param componentIdStrs
 	 * @return

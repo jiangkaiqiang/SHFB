@@ -60,7 +60,7 @@
 				<div class="three" style="text-align:right">
 				<div class="btn-group" role="group">
 				<button type="button" class="btn btn-default pull-right" ng-click="loadExe()">读卡下载</button>
-				<button type="button" class="btn btn-default pull-right" ng-click="expeditGood()">催货</button>
+				<button type="button" class="btn btn-default pull-right" ng-click="good_expe()">催货</button>
 				<button type="button" class="btn btn-default pull-right" ng-click="placeOrder()">下单</button>
 				</div>
 				</div>	
@@ -177,7 +177,7 @@
 			
 			<div class="row" style="padding-left:30px;" ng-init="isedit=false">
 				<h4 class="modal-title">
-	               	构件详情<span id="component_id">{{componentInfo.component_id}}</span><br>
+	               	构件详情<span id="component_id" style="visibility:hidden">{{componentInfo.component_id}}</span><br>
 	    		</h4><hr>
 			</div>
 			
@@ -440,11 +440,11 @@
 							</div>      
 					   </div>
 					    <div class="form-group">
-					      <label for="contactPhone" class="col-sm-2 control-label">催货交期</label>
+					      <label for="contactPhone" class="col-sm-2 control-label">计划完成时间</label>
 					      <div class="col-sm-10">
 					          <!--指定 date标记-->  
                 <div class='input-group date' id='datetimepicker1'>  
-                    <input type='text' class="form-control" placeholder="开始时间" ng-model="expedit_date" />  
+                    <input type='text' class="form-control" placeholder="完成时间" ng-model="plan_end_date" />  
                     <span class="input-group-addon">  
                         <span class="glyphicon glyphicon-calendar"></span>  
                     </span>  
@@ -466,6 +466,51 @@
 	</div><!-- /.modal -->
 	</div>
 	<!--  下单模态框 end -->
+	
+	<!--  催货模态框 -->
+   	<div class="modal fade" id="good_expedit" role="dialog"  aria-labelledby="myModalLabel" aria-hidden="true">
+	   <div class="modal-dialog">
+	      <div class="modal-content">
+	         <div class="modal-header">
+	            <button type="button" class="close" 
+	               data-dismiss="modal" aria-hidden="true">
+	                  &times;
+	            </button>
+	            <h4 class="modal-title" id="myModalLabel">
+	               	构件催货
+	            </h4>
+	         </div>
+	         <div class="modal-body">
+	            	<form class="form-horizontal" name="projectForm">
+					    <div class="form-group">
+					      <label for="contactPhone" class="col-sm-2 control-label">催货时间</label>
+					      <div class="col-sm-10">
+					          <!--指定 date标记-->  
+                <div class='input-group date' id='expedit_datetime'>  
+                    <input type='text' class="form-control" placeholder="催货时间" ng-model="good_expedit_date" />  
+                    <span class="input-group-addon">  
+                        <span class="glyphicon glyphicon-calendar"></span>  
+                    </span>  
+                </div>
+					      </div>
+					   </div>
+					   
+	            	</form>
+	         </div>
+	         <div class="modal-footer">
+	            <button type="button" class="btn btn-default" 
+	               data-dismiss="modal">取消
+	            </button>
+	            <button type="button" ng-click="expeditGood()" class="btn btn-primary" data-dismiss="modal">
+	                                                      催货
+	            </button>
+	         </div>
+	      </div><!-- /.modal-content -->
+	</div><!-- /.modal -->
+	</div>
+	<!--  催货模态框 end -->
+	
+	
 	<!--  查看二维码模态框 -->
    	<div class="modal fade" id="QRcode" role="dialog"  aria-labelledby="myModalLabel" aria-hidden="true">
 	   <div class="modal-dialog">

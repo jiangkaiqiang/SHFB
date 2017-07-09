@@ -50,21 +50,28 @@ public interface ComponentMapper {
     		@Param("component_status_id")Integer component_status_id,
     		@Param("userProjectID")Integer userProjectID,@Param("userCompFactoryID")Integer userCompFactoryID);
     
+    Page<ComponentDto> findComponentProductPage(@Param("pro_id")Integer pro_id, @Param("single_name")String single_name, 
+    		@Param("floor")String floor, @Param("component_type")String component_type, 
+    		@Param("component_status_id")Integer component_status_id,
+    		@Param("userProjectID")Integer userProjectID,@Param("userCompFactoryID")Integer userCompFactoryID,@Param("order_num")String order_num);
+    
     ComponentDto findComponentInfoById(Integer component_id);
     
     List<Component> findComponentTypes();
     
     List<ComponentDto> exportComponents(String[] componentIds);
     
+    List<ComponentDto> exportComponentProduct(@Param("order_num")String order_num);
+    
     int placeOrder(@Param("pro_id") Integer pro_id,
 			@Param("single_name") String single_name,
 			@Param("floor") String floor,
-			@Param("expedit_date") String expedit_date,
+			@Param("plan_end_date") String plan_end_date,
 			@Param("comp_factory_id") Integer comp_factory_id,
 			@Param("order_user_id") String order_user_id,
 			@Param("order_num") String order_num
     		);  
-    int expeditGood(Integer component_id);
+    int expeditGood(@Param("component_id") Integer component_id, @Param("expedit_date") String expedit_date);
     
     int addProductPlan(@Param("component_id") Integer component_id,
 			@Param("product_plan_begin_date") String product_plan_begin_date,
