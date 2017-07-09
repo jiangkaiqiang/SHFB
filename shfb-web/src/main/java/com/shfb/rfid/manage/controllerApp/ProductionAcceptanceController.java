@@ -46,18 +46,20 @@ public class ProductionAcceptanceController {
 	/**
 	 * 获取生产验收时的预制构件尺寸允许偏差及检查方法-如果没有数据表示第一次上传
 	 */
-	@RequestMapping(value = "/findProductComponentSizeByKey", method = RequestMethod.GET)
+	@RequestMapping(value = "/findProductComponentSizeByKey")
 	@ResponseBody
 	public ResultDto findProductComponentSizeByKey(
 			@RequestParam(value="component_id", required=true) Integer component_id) {
 		ProductComponentSize productComponentSize = productComponentSizeDao.findByComponentId(component_id);
-		//return productComponentSize;
+		if(productComponentSize == null ){
+			productComponentSize=new ProductComponentSize();
+		}
 		return new ResultDto(productComponentSize);
 	}
 	/**
 	 * 上传生产验收时的预制构件尺寸允许偏差及检查方法
 	 */
-	@RequestMapping(value = "/insertProductComponentSize", method = RequestMethod.POST)
+	@RequestMapping(value = "/insertProductComponentSize")
 	@ResponseBody
 	public ResultDto insertProductComponentSize(ProductComponentSize productComponentSize,Integer token) {
 		

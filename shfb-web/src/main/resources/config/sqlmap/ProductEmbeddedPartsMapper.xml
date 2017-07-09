@@ -6,7 +6,7 @@
     <result column="embedded_steelbar_centerline_pass" property="embedded_steelbar_centerline_pass" jdbcType="INTEGER" />
     <result column="embedded_steelbar_centerline_mark" property="embedded_steelbar_centerline_mark" jdbcType="VARCHAR" />
     <result column="embedded_steelbar_smooth_pass" property="embedded_steelbar_smooth_pass" jdbcType="INTEGER" />
-    <result column="embedded_steelbar_smooth_mark" property="embedded_steelbar_smooth_mark" jdbcType="VARCHAR" />
+    <result column="embedded_steelbar_smooth_mark" property="embedded_steelbar_smooth_mark" jdbcType="VARCHAR" />
     <result column="embedded_tube_centerline_pass" property="embedded_tube_centerline_pass" jdbcType="INTEGER" />
     <result column="embedded_tube_centerline_mark" property="embedded_tube_centerline_mark" jdbcType="VARCHAR" />
     <result column="embedded_tube_size_pass" property="embedded_tube_size_pass" jdbcType="INTEGER" />
@@ -40,7 +40,7 @@
   </resultMap>
   <sql id="Base_Column_List" >
     product_embedded_parts_id, embedded_steelbar_centerline_pass, embedded_steelbar_centerline_mark, 
-    embedded_steelbar_smooth_pass, embedded_steelbar_smooth_mark, embedded_tube_centerline_pass, 
+    embedded_steelbar_smooth_pass, embedded_steelbar_smooth_mark, embedded_tube_centerline_pass, 
     embedded_tube_centerline_mark, embedded_tube_size_pass, embedded_tube_size_mark, 
     door_centerline_pass, door_centerline_mark, door_width_high_pass, door_width_high_mark, 
     insert_steel_centerline_pass, insert_steel_ceterline_mark, insert_steel_length_pass, 
@@ -63,7 +63,7 @@
   <insert id="insert" parameterType="com.shfb.rfid.manage.entity.ProductEmbeddedParts" >
     insert into product_embedded_parts (product_embedded_parts_id, embedded_steelbar_centerline_pass, 
       embedded_steelbar_centerline_mark, embedded_steelbar_smooth_pass, 
-      embedded_steelbar_smooth_mark, embedded_tube_centerline_pass, 
+      embedded_steelbar_smooth_mark, embedded_tube_centerline_pass, 
       embedded_tube_centerline_mark, embedded_tube_size_pass, 
       embedded_tube_size_mark, door_centerline_pass, 
       door_centerline_mark, door_width_high_pass, 
@@ -81,7 +81,7 @@
       )
     values (#{product_embedded_parts_id,jdbcType=INTEGER}, #{embedded_steelbar_centerline_pass,jdbcType=INTEGER}, 
       #{embedded_steelbar_centerline_mark,jdbcType=VARCHAR}, #{embedded_steelbar_smooth_pass,jdbcType=INTEGER}, 
-      #{embedded_steelbar_smooth_mark,jdbcType=VARCHAR}, #{embedded_tube_centerline_pass,jdbcType=INTEGER}, 
+      #{embedded_steelbar_smooth_mark,jdbcType=VARCHAR}, #{embedded_tube_centerline_pass,jdbcType=INTEGER}, 
       #{embedded_tube_centerline_mark,jdbcType=VARCHAR}, #{embedded_tube_size_pass,jdbcType=INTEGER}, 
       #{embedded_tube_size_mark,jdbcType=VARCHAR}, #{door_centerline_pass,jdbcType=INTEGER}, 
       #{door_centerline_mark,jdbcType=VARCHAR}, #{door_width_high_pass,jdbcType=INTEGER}, 
@@ -113,8 +113,8 @@
       <if test="embedded_steelbar_smooth_pass != null" >
         embedded_steelbar_smooth_pass,
       </if>
-      <if test="embedded_steelbar_smooth_mark != null" >
-        embedded_steelbar_smooth_mark,
+      <if test="embedded_steelbar_smooth_mark != null" >
+        embedded_steelbar_smooth_mark,
       </if>
       <if test="embedded_tube_centerline_pass != null" >
         embedded_tube_centerline_pass,
@@ -220,8 +220,8 @@
       <if test="embedded_steelbar_smooth_pass != null" >
         #{embedded_steelbar_smooth_pass,jdbcType=INTEGER},
       </if>
-      <if test="embedded_steelbar_smooth_mark != null" >
-        #{embedded_steelbar_smooth_mark,jdbcType=VARCHAR},
+      <if test="embedded_steelbar_smooth_mark != null" >
+        #{embedded_steelbar_smooth_mark,jdbcType=VARCHAR},
       </if>
       <if test="embedded_tube_centerline_pass != null" >
         #{embedded_tube_centerline_pass,jdbcType=INTEGER},
@@ -327,8 +327,8 @@
       <if test="embedded_steelbar_smooth_pass != null" >
         embedded_steelbar_smooth_pass = #{embedded_steelbar_smooth_pass,jdbcType=INTEGER},
       </if>
-      <if test="embedded_steelbar_smooth_mark != null" >
-        embedded_steelbar_smooth_mark = #{embedded_steelbar_smooth_mark,jdbcType=VARCHAR},
+      <if test="embedded_steelbar_smooth_mark != null" >
+        embedded_steelbar_smooth_mark = #{embedded_steelbar_smooth_mark,jdbcType=VARCHAR},
       </if>
       <if test="embedded_tube_centerline_pass != null" >
         embedded_tube_centerline_pass = #{embedded_tube_centerline_pass,jdbcType=INTEGER},
@@ -428,7 +428,7 @@
     set embedded_steelbar_centerline_pass = #{embedded_steelbar_centerline_pass,jdbcType=INTEGER},
       embedded_steelbar_centerline_mark = #{embedded_steelbar_centerline_mark,jdbcType=VARCHAR},
       embedded_steelbar_smooth_pass = #{embedded_steelbar_smooth_pass,jdbcType=INTEGER},
-      embedded_steelbar_smooth_mark = #{embedded_steelbar_smooth_mark,jdbcType=VARCHAR},
+      embedded_steelbar_smooth_mark = #{embedded_steelbar_smooth_mark,jdbcType=VARCHAR},
       embedded_tube_centerline_pass = #{embedded_tube_centerline_pass,jdbcType=INTEGER},
       embedded_tube_centerline_mark = #{embedded_tube_centerline_mark,jdbcType=VARCHAR},
       embedded_tube_size_pass = #{embedded_tube_size_pass,jdbcType=INTEGER},

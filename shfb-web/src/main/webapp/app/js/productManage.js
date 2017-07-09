@@ -235,6 +235,7 @@ coldWeb.controller('productManage', function ($rootScope, $scope, $state, $cooki
 		  $("#viewer2").viewer();
 		  $("#viewer3").viewer();
 		  $("#viewer4").viewer();
+		  $("#viewer5").viewer();
 	   }
 	   //返回按钮
 	   $scope.goback=function(){

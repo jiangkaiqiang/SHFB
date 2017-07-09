@@ -19,6 +19,10 @@ coldWeb.controller('componentManage', function ($rootScope, $scope, $state, $coo
     // 当前页
     $scope.bigCurrentPage = 1;
 	$scope.components = [];
+	$scope.picture_comp_makes = [];
+	$scope.picture_product_accepts = [];
+	$scope.picture_receipts = [];
+	$scope.picture_installs = [];
 	 // 获取当前冷库的列表
 	  
     $scope.getComponents = function() {
@@ -199,6 +203,8 @@ coldWeb.controller('componentManage', function ($rootScope, $scope, $state, $coo
 				if($scope.componentInfo.picture_install != undefined) {
 					$scope.picture_installs=$scope.componentInfo.picture_install.split(";")
 				}
+				
+				$scope.viewerShow();
 			});
 		}
 	   
@@ -208,6 +214,7 @@ coldWeb.controller('componentManage', function ($rootScope, $scope, $state, $coo
 		  $("#viewer2").viewer();
 		  $("#viewer3").viewer();
 		  $("#viewer4").viewer();
+		  $("#viewer5").viewer();
 	   }
 	   //返回按钮
 	   $scope.goback=function(){
