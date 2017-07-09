@@ -49,18 +49,20 @@ public class InstallAcceptanceController {
 	/**
 	 * 获取安装验收时的预制构件尺寸允许偏差及检查方法-如果没有数据表示第一次上传
 	 */
-	@RequestMapping(value = "/findInstallComponentSizeByKey", method = RequestMethod.GET)
+	@RequestMapping(value = "/findInstallComponentSizeByKey")
 	@ResponseBody
 	public ResultDto findInstallComponentSizeByKey(
 			@RequestParam(value="component_id", required=true) Integer component_id) {
 		InstallComponentSize installComponentSize = installComponentSizeDao.findByComponentId(component_id);
-		//return installComponentSize;
+		if(installComponentSize == null ) {
+			installComponentSize = new InstallComponentSize();
+		}
 		return new ResultDto(installComponentSize);
 	}
 	/**
 	 * 上传安装验收时的预制构件尺寸允许偏差及检查方法
 	 */
-	@RequestMapping(value = "/insertInstallComponentSize", method = RequestMethod.POST)
+	@RequestMapping(value = "/insertInstallComponentSize")
 	@ResponseBody
 	public ResultDto insertInstallComponentSize(InstallComponentSize installComponentSize, Integer token) {
 		
@@ -106,8 +108,15 @@ public class InstallAcceptanceController {
 	 */
 	@RequestMapping(value="/getAppVersion")
 	@ResponseBody
-	public Map<String,Object> getAppVersion() throws Exception{
-		return installComponentSizeDao.getAppVersion();
+	public ResultDto getAppVersion(){
+		try {
+			return new ResultDto(installComponentSizeDao.getAppVersion());
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResultDto(2, "server err", false);
+		}
+		
+		
 		
 	}
 	

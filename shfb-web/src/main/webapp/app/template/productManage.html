@@ -273,7 +273,21 @@
                 			</div>
 				</div>
 			</div> 
-			
+			<div class="row">
+				<div class="col-sm-24 col-md-12">
+					<h4 class="page-header" style="background:#F1F1F1;">
+	               		构件图纸<br>
+	    			</h4>
+	    			<div class="docs-galley">
+          				<ul class="docs-pictures clearfix" id="viewer5">
+            				 <li class="picture">
+            					<img src="{{componentInfo.drawing}}" style="width:100px;height:100px" ng-click="viewerShow()">
+            				</li> 
+            				
+          				</ul>
+       		 		</div>
+				</div>
+			</div>
 			<div class="row">
 				<div class="col-sm-6 col-md-3">
 					<h4 class="page-header" style="background:#F1F1F1;">
@@ -295,7 +309,7 @@
 	    			<div class="docs-galley">
           				<ul class="docs-pictures clearfix" id="viewer2">
           					<li ng-repeat="picture_product_accept in picture_product_accepts" ng-if="picture_product_accept!=''" class="picture">
-            					<img src="{{picture_product_accept}}" style="width:100px;height:100px">
+            					<img src="{{picture_product_accept}}" style="width:100px;height:100px" ng-click="viewerShow()">
             				</li>
           				</ul>
        		 		</div>
@@ -307,7 +321,7 @@
 	    			<div class="docs-galley">
           				<ul class="docs-pictures clearfix" id="viewer3">
             				<li ng-repeat="picture_receipt in picture_receipts" ng-if="picture_receipt!=''" class="picture">
-            					<img src="{{picture_receipt}}" style="width:100px;height:100px">
+            					<img src="{{picture_receipt}}" style="width:100px;height:100px" ng-click="viewerShow()">
             				</li>
           				</ul>
        		 		</div>
@@ -319,7 +333,7 @@
 	    			<div class="docs-galley">
           				<ul class="docs-pictures clearfix" id="viewer4">
             				<li ng-repeat="picture_install in picture_installs" ng-if="picture_install!=''" class="picture">
-            					<img src="{{picture_install}}" style="width:100px;height:100px">
+            					<img src="{{picture_install}}" style="width:100px;height:100px" ng-click="viewerShow()">
             				</li>
           				</ul>
        		 		</div>

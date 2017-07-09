@@ -9,7 +9,7 @@ public class ProductEmbeddedParts {
 
     private Integer embedded_steelbar_smooth_pass;
 
-    private String embedded_steelbar_smooth_mark;
+    private String embedded_steelbar_smooth_mark;
 
     private Integer embedded_tube_centerline_pass;
 

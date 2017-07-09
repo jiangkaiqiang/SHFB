@@ -33,6 +33,7 @@ import com.shfb.rfid.manage.dto.ResultDto;
 import com.shfb.rfid.manage.dto.UploadFileEntity;
 import com.shfb.rfid.manage.entity.CompProgress;
 import com.shfb.rfid.manage.entity.Component;
+import com.shfb.rfid.manage.entity.ProductComponentSize;
 import com.shfb.rfid.manage.entity.ProductCuring;
 import com.shfb.rfid.manage.entity.ProductEmbeddedParts;
 import com.shfb.rfid.manage.entity.ProductModelSize;
@@ -106,7 +107,7 @@ public class ComponentMakeController extends BaseController{
 	/**
 	 * 平板端下拉框接口(项目-单体-楼层-构件)
 	 */
-	@RequestMapping(value = "/getSelectContent", method = RequestMethod.GET)
+	@RequestMapping(value = "/getSelectContent")
 	@ResponseBody
 	public Object getSelectContent(Integer token) {
 		SysUser sysUser = userDao.findUserById(token);
@@ -288,12 +289,15 @@ public class ComponentMakeController extends BaseController{
 	/**
 	 * 获取钢模制作验收数据(模具尺寸的允许偏差和检验方法)
 	 */
-	@RequestMapping(value = "/findProductModelSizeByKey", method = RequestMethod.GET)
+	@RequestMapping(value = "/findProductModelSizeByKey")
 	@ResponseBody
 	public ResultDto findProductModelSizeByKey(
 			@RequestParam(value="component_id", required=true) Integer component_id) {
-		ProductModelSize productComponentSize = productModelSizeDao.findByComponentId(component_id);
-		return new ResultDto(productComponentSize);
+		ProductModelSize productModelSize = productModelSizeDao.findByComponentId(component_id);
+		if(productModelSize == null) {
+			productModelSize = new ProductModelSize();
+		}
+		return new ResultDto(productModelSize);
 		//return productComponentSize;
 		
 	}
@@ -301,7 +305,7 @@ public class ComponentMakeController extends BaseController{
 	/**
 	 * 上传钢模制作验收数据(模具尺寸的允许偏差和检验方法)
 	 */
-	@RequestMapping(value = "/insertProductModelSize", method = RequestMethod.POST)
+	@RequestMapping(value = "/insertProductModelSize")
 	@ResponseBody
 	public ResultDto insertProductModelSize(ProductModelSize productModelSize,Integer token) {
 
@@ -325,11 +329,15 @@ public class ComponentMakeController extends BaseController{
 	/**
 	 * 获取钢筋困扎数据(钢筋制品尺寸允许偏差和检验方法)
 	 */
-	@RequestMapping(value = "/findProductSteelbarSizeByKey", method = RequestMethod.GET)
+	@RequestMapping(value = "/findProductSteelbarSizeByKey")
 	@ResponseBody
 	public ResultDto findProductSteelbarSizeByKey(
 			@RequestParam(value="component_id", required=true) Integer component_id) {
 		ProductSteelbarSize productSteelbarSize = productSteelbarSizeDao.findByComponentId(component_id);
+		if(productSteelbarSize == null ) {
+			productSteelbarSize = new ProductSteelbarSize();
+		}
+		
 		return new ResultDto(productSteelbarSize);
 		//return productSteelbarSize;
 		
@@ -337,7 +345,7 @@ public class ComponentMakeController extends BaseController{
 	/**
 	 * 上传钢筋困扎数据(钢筋制品尺寸允许偏差和检验方法)
 	 */
-	@RequestMapping(value = "/insertProductSteelbarSize", method = RequestMethod.POST)
+	@RequestMapping(value = "/insertProductSteelbarSize")
 	@ResponseBody
 	public ResultDto insertProductSteelbarSize(ProductSteelbarSize productSteelbarSize) {
 		
@@ -367,18 +375,20 @@ public class ComponentMakeController extends BaseController{
 	/**
 	 * 获取预埋件设置数据( 预埋件和预留孔洞的允许偏差和检验方法)
 	 */
-	@RequestMapping(value = "/findProductEmbeddedPartsByKey", method = RequestMethod.GET)
+	@RequestMapping(value = "/findProductEmbeddedPartsByKey")
 	@ResponseBody
 	public ResultDto findProductEmbeddedPartsByKey(
 			@RequestParam(value="component_id", required=true) Integer component_id) {
 		ProductEmbeddedParts productEmbeddedParts = productEmbeddedPartsDao.findByComponentId(component_id);
-		//return productEmbeddedParts;
+		if(productEmbeddedParts == null ){
+			productEmbeddedParts = new ProductEmbeddedParts();
+		}
 		return new ResultDto(productEmbeddedParts);
 	}
 	/**
 	 * 获取预埋件设置数据(上传预埋件和预留孔洞的允许偏差和检验方法)
 	 */
-	@RequestMapping(value = "/insertProductEmbeddedParts", method = RequestMethod.POST)
+	@RequestMapping(value = "/insertProductEmbeddedParts")
 	@ResponseBody
 	public ResultDto insertProductEmbeddedParts(ProductEmbeddedParts productEmbeddedParts) {
 		if(productEmbeddedParts.getComponent_id() == null) new ResultDto(2,"param err");
@@ -394,18 +404,20 @@ public class ComponentMakeController extends BaseController{
 	/**
 	 * 获取混凝土浇筑及养护数据(预制构件养护质量)  
 	 */
-	@RequestMapping(value = "/findProductCuringByKey", method = RequestMethod.GET)
+	@RequestMapping(value = "/findProductCuringByKey")
 	@ResponseBody
 	public ResultDto findProductCuringByKey(
 			@RequestParam(value="component_id", required=true) Integer component_id) {
 		ProductCuring productCuring = productCuringDao.findByComponentId(component_id);
-		//return productCuring;
+		if(productCuring == null ) {
+			productCuring = new ProductCuring();
+		}
 		return new ResultDto(productCuring);
 	}	
 	/**
 	 * 上传混凝土浇筑及养护数据(预制构件养护质量)
 	 */
-	@RequestMapping(value = "/insertProductCuring", method = RequestMethod.POST)
+	@RequestMapping(value = "/insertProductCuring")
 	@ResponseBody
 	public ResultDto insertProductCuring(ProductCuring productCuring) {
 		if(productCuring.getComponent_id() == null) new ResultDto(2,"param err");
@@ -504,7 +516,7 @@ public class ComponentMakeController extends BaseController{
 	/**
 	 * 获取构件基本信息
 	 */
-	@RequestMapping(value = "/getComInfo", method = RequestMethod.POST)
+	@RequestMapping(value = "/getComInfo")
 	@ResponseBody
 	public ComponentDto insertProductCuring(String comonentNum) {
 		ComponentDto component = componentDao.getComponentInfo(comonentNum);	
@@ -529,7 +541,7 @@ public class ComponentMakeController extends BaseController{
      /**
 	 * 获取所有图纸
 	 */
-	@RequestMapping(value = "/getDrawings", method = RequestMethod.GET)
+	@RequestMapping(value = "/getDrawings")
 	@ResponseBody
 	public Object getDrawings(Integer token) {
 		SysUser sysUser = userDao.findUserById(token);

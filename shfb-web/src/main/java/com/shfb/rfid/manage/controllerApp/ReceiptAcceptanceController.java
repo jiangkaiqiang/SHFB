@@ -48,18 +48,21 @@ public class ReceiptAcceptanceController {
 	/**
 	 * 获取收货验收时的预制构件尺寸允许偏差及检查方法-如果没有数据表示第一次上传
 	 */
-	@RequestMapping(value = "/findReceiptComponentSizeByKey", method = RequestMethod.GET)
+	@RequestMapping(value = "/findReceiptComponentSizeByKey")
 	@ResponseBody
 	public ResultDto findReceiptComponentSizeByKey(
 			@RequestParam(value="component_id", required=true) Integer component_id) {
 		ReceiptComponentSize receiptComponentSize = receiptComponentSizeDao.findByComponentId(component_id);
-		//return receiptComponentSize;
+		
+		if(receiptComponentSize == null ) {
+			receiptComponentSize = new ReceiptComponentSize();
+		}
 		return new ResultDto(receiptComponentSize);
 	}
 	/**
 	 * 上传收货验收时的预制构件尺寸允许偏差及检查方法
 	 */
-	@RequestMapping(value = "/insertReceiptComponentSize", method = RequestMethod.POST)
+	@RequestMapping(value = "/insertReceiptComponentSize")
 	@ResponseBody
 	public ResultDto insertReceiptComponentSize(ReceiptComponentSize receiptComponentSize, Integer token) {
 		

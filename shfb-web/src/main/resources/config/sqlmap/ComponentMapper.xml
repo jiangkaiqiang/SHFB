@@ -621,7 +621,7 @@
   		SELECT p.pro_name, c.single_name, c.floor, c.plan_begin_date, c.plan_end_date,
 	c.real_begin_date, c.real_end_date, c.component_num, c.component_name, c.component_size,
 	s.component_status_name,c.bind_status, c.expedit_status, c.expedit_date, c.order_num, c.component_id,
-	f.comp_factory_name,u.user_name, c.order_date, c.product_plan_begin_date, c.product_plan_end_date,
+	f.comp_factory_name,u.user_name, c.order_date, c.product_plan_begin_date, c.product_plan_end_date, c.drawing,
 	c.picture_comp_make, c.picture_product_accept, c.picture_receipt, c.picture_install,c.component_status_id
  	FROM component AS c 
 	LEFT JOIN project AS p ON c.pro_id=p.pro_id 
