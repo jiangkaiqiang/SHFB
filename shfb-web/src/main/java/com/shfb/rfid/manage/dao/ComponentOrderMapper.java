@@ -26,6 +26,6 @@ public interface ComponentOrderMapper {
     
     List<ComponentOrderDto> exportComponentOrders(String[] order_ids);
     
-    List<ComponentOrder> findComponentOrders();
+    List<ComponentOrder> findComponentOrders(@Param("userCompFactoryID")Integer userCompFactoryID);
     
 }

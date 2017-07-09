@@ -133,4 +133,16 @@ public class CompFactoryController extends BaseController {
 		return compFactorys;
 	}
 	
+	/**
+	 * 查询所有构件厂（为构件下单下拉框提供服务，不需要添加全部）
+	 * @param compFactoryID
+	 * @return
+	 */
+	@RequestMapping(value = "/findCompFactorysForOrder")
+	@ResponseBody
+	public List<CompFactory> findCompFactorysForOrder() {
+		List<CompFactory> compFactorys = compfactoryDao.findCompFactorys();
+		return compFactorys;
+	}
+	
 }

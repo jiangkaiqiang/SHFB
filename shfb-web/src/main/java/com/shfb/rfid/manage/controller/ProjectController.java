@@ -164,10 +164,11 @@ public class ProjectController extends BaseController {
 				for (int i = 0; i < files.length; i++) {
 					//获取文件的原始名字
 					String fileName = files[i].getOriginalFilename();
-					fileEntities.add(new UploadFileEntity(fileName.replaceAll("#", "$"), files[i], "uploadPic"));					
+					String rFileName = fileName.replaceAll("#", "");
+					fileEntities.add(new UploadFileEntity(rFileName, files[i], "uploadPic"));					
 					Component component = new Component();
 					component.setComponent_num(fileName.substring(0,fileName.lastIndexOf(".")));
-					component.setDrawing(FtpService.FILE_Url+"uploadPic/"+fileName.replaceAll("#", "$"));
+					component.setDrawing(FtpService.FILE_Url+"uploadPic/"+rFileName);
 					componentDao.updateByComponentNum(component);
 				}
 				//保存文件
