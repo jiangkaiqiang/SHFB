@@ -82,7 +82,7 @@ public interface ComponentMapper {
     
     ComponentDto getComponentInfo(String component_num);
     
-    List<Component> findComponentByCardNum(@Param("cardNum")Integer cardNum);
+    List<Component> findComponentByCardNum(@Param("cardNum")String cardNum);
 
     List<Component> getDrawings(@Param("pro_id")Integer pro_id);
     

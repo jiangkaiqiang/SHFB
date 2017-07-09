@@ -191,6 +191,9 @@ public class ComponentMakeController extends BaseController{
 			floorName = null;
 		}
 		Project project = projectDao.findProjectByName(projectName);
+		if (project==null) {
+			project = new Project();
+		}
 		List<Component> components = componentDao.findComponentByselForClient(project.getPro_id(), singleName, floorName);
 		return  ResponseData.newSuccess(components, "查询成功");
 	}
@@ -525,7 +528,7 @@ public class ComponentMakeController extends BaseController{
 	 */
 	@RequestMapping(value = "/getCardBindInfo")
 	@ResponseBody
-	public boolean getCardBindInfo(Integer cardNum) {
+	public boolean getCardBindInfo(String cardNum) {
 		List<Component> components = componentDao.findComponentByCardNum(cardNum);
 		if (components==null||components.size()==0) {
 			return false;
