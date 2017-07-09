@@ -107,8 +107,8 @@ public class ProductEmbeddedParts {
         return embedded_steelbar_smooth_mark;
     }
 
-    public void setEmbedded_steelbar_smooth_mark(String embedded_steelbar_smooth_mark) {
-        this.embedded_steelbar_smooth_mark = embedded_steelbar_smooth_mark == null ? null : embedded_steelbar_smooth_mark.trim();
+    public void setEmbedded_steelbar_smooth_mark(String embedded_steelbar_smooth_mark) {
+        this.embedded_steelbar_smooth_mark = embedded_steelbar_smooth_mark == null ? null : embedded_steelbar_smooth_mark.trim();
     }
 
     public Integer getEmbedded_tube_centerline_pass() {
