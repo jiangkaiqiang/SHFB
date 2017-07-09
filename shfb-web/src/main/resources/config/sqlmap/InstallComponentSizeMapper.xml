@@ -263,7 +263,7 @@
         picture = #{picture,jdbcType=VARCHAR},
       </if>
     </set>
-    where install_component_size_id = #{install_component_size_id,jdbcType=INTEGER}
+    where component_id = #{component_id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.shfb.rfid.manage.entity.InstallComponentSize" >
     update install_component_size

@@ -497,6 +497,9 @@
     <if test="component_type != null">
     AND c.component_type=#{component_type}
     </if>
+    <if test="expedit_status != null">
+    AND expedit_status=#{expedit_status}
+    </if>
     order by component_id desc		
   </select>
   

@@ -70,12 +70,19 @@ public class InstallAcceptanceController {
 		
 		SysUser sysUser = userDao.findUserById(token);
 		int resUpdate = updateComStatus(installComponentSize.getComponent_id(), 8, 7);
+		
 		if(resUpdate == 1) {
 			updateComProgress(installComponentSize.getComponent_id(), sysUser.getUser_name(), "验收完成");
 		}
 		
 		
-		int res = installComponentSizeDao.insertSelective(installComponentSize);		
+		//int res = installComponentSizeDao.insertSelective(installComponentSize);
+		int res;
+		 if(null == installComponentSizeDao.findByComponentId(installComponentSize.getComponent_id())) {
+			 res = installComponentSizeDao.insertSelective(installComponentSize);
+		 } else {
+			 res = installComponentSizeDao.updateByPrimaryKeySelective(installComponentSize);
+		 }
 	
 		if(res == 1) {
 			return new ResultDto(1, "上传成功");
@@ -97,7 +104,7 @@ public class InstallAcceptanceController {
 			@RequestParam(value = "file", required = true) MultipartFile[] files, 
 			@RequestParam(value="component_id", required=true) Integer component_id
 			) throws Exception{
-		return appUploadFile(files, component_id, 0);
+		return appUploadFile(files, component_id, 3);
 		
 	}
 	

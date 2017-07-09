@@ -3,69 +3,69 @@ package com.shfb.rfid.manage.entity;
 public class ProductEmbeddedParts {
     private Integer product_embedded_parts_id;
 
-    private Integer embedded_steelbar_centerline_pass;
+    private Integer embedded_steelbar_centerline_pass=2;
 
-    private String embedded_steelbar_centerline_mark;
+    private String embedded_steelbar_centerline_mark="";
 
-    private Integer embedded_steelbar_smooth_pass;
+    private Integer embedded_steelbar_smooth_pass=2;
 
-    private String embedded_steelbar_smooth_mark;
+    private String embedded_steelbar_smooth_mark="";
 
-    private Integer embedded_tube_centerline_pass;
+    private Integer embedded_tube_centerline_pass=2;
 
-    private String embedded_tube_centerline_mark;
+    private String embedded_tube_centerline_mark="";
 
-    private Integer embedded_tube_size_pass;
+    private Integer embedded_tube_size_pass=2;
 
-    private String embedded_tube_size_mark;
+    private String embedded_tube_size_mark="";
 
-    private Integer door_centerline_pass;
+    private Integer door_centerline_pass=2;
 
-    private String door_centerline_mark;
+    private String door_centerline_mark="";
 
-    private Integer door_width_high_pass;
+    private Integer door_width_high_pass=2;
 
-    private String door_width_high_mark;
+    private String door_width_high_mark="";
 
-    private Integer insert_steel_centerline_pass;
+    private Integer insert_steel_centerline_pass=2;
 
-    private String insert_steel_ceterline_mark;
+    private String insert_steel_ceterline_mark="";
 
-    private Integer insert_steel_length_pass;
+    private Integer insert_steel_length_pass=2;
 
-    private String insert_steel_length_mark;
+    private String insert_steel_length_mark="";
 
-    private Integer crane_ring_centerline_pass;
+    private Integer crane_ring_centerline_pass=2;
 
-    private String crane_ring_centerline_mark;
+    private String crane_ring_centerline_mark="";
 
-    private Integer crane_ring_length_pass;
+    private Integer crane_ring_length_pass=2;
 
-    private String crane_ring_length_mark;
+    private String crane_ring_length_mark="";
 
-    private Integer reserved_hole_centerline_pass;
+    private Integer reserved_hole_centerline_pass=2;
 
-    private String reserved_hole_centerline_mark;
+    private String reserved_hole_centerline_mark="";
 
-    private Integer reserved_hole_size_pass;
+    private Integer reserved_hole_size_pass=2;
 
-    private String reserved_hole_size_mark;
+    private String reserved_hole_size_mark="";
 
-    private Integer bolt_centerline_pass;
+    private Integer bolt_centerline_pass=2;
 
-    private String bolt_centerline_mark;
+    private String bolt_centerline_mark="";
 
-    private Integer bolt_length_pass;
+    private Integer bolt_length_pass=2;
 
-    private String bolt_length_mark;
+    private String bolt_length_mark="";
 
-    private Integer sleeve_centerline_pass;
+    private Integer sleeve_centerline_pass=2;
 
-    private String sleeve_centerline_mark;
+    private String sleeve_centerline_mark="";
 
-    private Integer sleeve_smooth_pass;
+    private Integer sleeve_smooth_pass=2;
 
-    private String sleeve_smooth_mark;
+    private String sleeve_smooth_mark="";
 
     private Integer component_id;
 

@@ -3,45 +3,45 @@ package com.shfb.rfid.manage.entity;
 public class ProductSteelbarSize {
     private Integer product_steelbar_size_id;
 
-    private Integer mesh_length_width_pass;
+    private Integer mesh_length_width_pass=2;
 
-    private String mesh_length_width_mark;
+    private String mesh_length_width_mark="";
 
-    private Integer mesh_size_pass;
+    private Integer mesh_size_pass=2;
 
-    private String mesh_size_mark;
+    private String mesh_size_mark="";
 
-    private Integer skeleton_length_pass;
+    private Integer skeleton_length_pass=2;
 
-    private String skeleton_length_mark;
+    private String skeleton_length_mark="";
 
-    private Integer skeleton_width_high_pass;
+    private Integer skeleton_width_high_pass=2;
 
-    private String skeleton_width_high_mark;
+    private String skeleton_width_high_mark="";
 
-    private Integer force_bet_spacing_pass;
+    private Integer force_bet_spacing_pass=2;
 
-    private String force_bet_spacing_mark;
+    private String force_bet_spacing_mark="";
 
-    private Integer force_row_spacing_pass;
+    private Integer force_row_spacing_pass=2;
 
-    private String force_row_spacing_mark;
+    private String force_row_spacing_mark="";
 
-    private Integer force_column_beam_pass;
+    private Integer force_column_beam_pass=2;
 
-    private String force_column_beam_mark;
+    private String force_column_beam_mark="";
 
-    private Integer force_plate_wall_pass;
+    private Integer force_plate_wall_pass=2;
 
-    private String force_plate_wall_mark;
+    private String force_plate_wall_mark="";
 
-    private Integer steelbar_spacing_pass;
+    private Integer steelbar_spacing_pass=2;
 
-    private String steelbar_spacing_mark;
+    private String steelbar_spacing_mark="";
 
-    private Integer steelbar_start_point_pass;
+    private Integer steelbar_start_point_pass=2;
 
-    private String steelbar_start_point_mark;
+    private String steelbar_start_point_mark="";
 
     private Integer component_id;
 

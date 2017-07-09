@@ -278,7 +278,7 @@
         component_id = #{component_id,jdbcType=INTEGER},
       </if>
     </set>
-    where product_curing_id = #{product_curing_id,jdbcType=INTEGER}
+    where component_id = #{component_id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.shfb.rfid.manage.entity.ProductCuring" >
     update product_curing

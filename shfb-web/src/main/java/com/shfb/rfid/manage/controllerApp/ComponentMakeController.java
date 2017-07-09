@@ -317,7 +317,15 @@ public class ComponentMakeController extends BaseController{
 			updateComProgress(productModelSize.getComponent_id(), sysUser.getUser_name(), "生产中");
 		}
 		
-		int res = productModelSizeDao.insertSelective(productModelSize);		
+		 int res;
+		 if(null == productModelSizeDao.findByComponentId(productModelSize.getComponent_id())) {
+			 res = productModelSizeDao.insertSelective(productModelSize);
+		 } else {
+			 res = productModelSizeDao.updateByPrimaryKeySelective(productModelSize);
+		 }
+		
+				
+		
 		if(res != 0) {
 			return new ResultDto(1,"success");
 		} else {
@@ -350,7 +358,15 @@ public class ComponentMakeController extends BaseController{
 	public ResultDto insertProductSteelbarSize(ProductSteelbarSize productSteelbarSize) {
 		
 		if(productSteelbarSize.getComponent_id() == null) new ResultDto(2,"param err");
-		int res = productSteelbarSizeDao.insertSelective(productSteelbarSize);		
+		//int res = productSteelbarSizeDao.insertSelective(productSteelbarSize);
+		
+		int res;
+		 if(null == productSteelbarSizeDao.findByComponentId(productSteelbarSize.getComponent_id())) {
+			 res = productSteelbarSizeDao.insertSelective(productSteelbarSize);
+		 } else {
+			 res = productSteelbarSizeDao.updateByPrimaryKeySelective(productSteelbarSize);
+		 }
+		
 		if(res != 0) {
 			return new ResultDto(0,"success");
 		} else {
@@ -383,16 +399,25 @@ public class ComponentMakeController extends BaseController{
 		if(productEmbeddedParts == null ){
 			productEmbeddedParts = new ProductEmbeddedParts();
 		}
+	
 		return new ResultDto(productEmbeddedParts);
 	}
 	/**
-	 * 获取预埋件设置数据(上传预埋件和预留孔洞的允许偏差和检验方法)
+	 * 预埋件设置数据(上传预埋件和预留孔洞的允许偏差和检验方法)
 	 */
 	@RequestMapping(value = "/insertProductEmbeddedParts")
 	@ResponseBody
 	public ResultDto insertProductEmbeddedParts(ProductEmbeddedParts productEmbeddedParts) {
 		if(productEmbeddedParts.getComponent_id() == null) new ResultDto(2,"param err");
-		int res = productEmbeddedPartsDao.insertSelective(productEmbeddedParts);		
+		//int res = productEmbeddedPartsDao.insertSelective(productEmbeddedParts);		
+		
+		int res;
+		 if(null == productEmbeddedPartsDao.findByComponentId(productEmbeddedParts.getComponent_id())) {
+			 res = productEmbeddedPartsDao.insertSelective(productEmbeddedParts);
+		 } else {
+			 res = productEmbeddedPartsDao.updateByPrimaryKeySelective(productEmbeddedParts);
+		 }
+		
 		if(res != 0) {
 			return new ResultDto(0,"success");
 		} else {
@@ -421,7 +446,15 @@ public class ComponentMakeController extends BaseController{
 	@ResponseBody
 	public ResultDto insertProductCuring(ProductCuring productCuring) {
 		if(productCuring.getComponent_id() == null) new ResultDto(2,"param err");
-		int res = productCuringDao.insertSelective(productCuring);		
+		//int res = productCuringDao.insertSelective(productCuring);		
+		
+		int res;
+		 if(null == productCuringDao.findByComponentId(productCuring.getComponent_id())) {
+			 res = productCuringDao.insertSelective(productCuring);
+		 } else {
+			 res = productCuringDao.updateByPrimaryKeySelective(productCuring);
+		 }
+		
 		if(res != 0) {
 			return new ResultDto(0,"success");
 		} else {

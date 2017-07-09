@@ -3,137 +3,137 @@ package com.shfb.rfid.manage.entity;
 public class ReceiptComponentSize {
     private Integer receipt_component_size_id;
 
-    private Integer length_small_pass;
+    private Integer length_small_pass=2;
 
-    private String length_small_mark;
+    private String length_small_mark="";
 
-    private Integer length_middle_pass;
+    private Integer length_middle_pass=2;
 
-    private String length_middle_mark;
+    private String length_middle_mark="";
 
-    private Integer length_big_pass;
+    private Integer length_big_pass=2;
 
-    private String length_big_mark;
+    private String length_big_mark="";
 
-    private Integer height_section_size_pass;
+    private Integer height_section_size_pass=2;
 
-    private String height_section_size_mark;
+    private String height_section_size_mark="";
 
-    private Integer height_thickness_wallboard_pass;
+    private Integer height_thickness_wallboard_pass=2;
 
-    private String height_thickness_wallboard_mark;
+    private String height_thickness_wallboard_mark="";
 
-    private Integer planeness_inner_surface_pass;
+    private Integer planeness_inner_surface_pass=2;
 
-    private String planeness_inner_surface_mark;
+    private String planeness_inner_surface_mark="";
 
-    private Integer planeness_out_surface_pass;
+    private Integer planeness_out_surface_pass=2;
 
-    private String planeness_out_surface_mark;
+    private String planeness_out_surface_mark="";
 
-    private Integer lateral_bending_column_pass;
+    private Integer lateral_bending_column_pass=2;
 
-    private String lateral_bending_column_mark;
+    private String lateral_bending_column_mark="";
 
-    private Integer lateral_bending_wallboard_pass;
+    private Integer lateral_bending_wallboard_pass=2;
 
-    private String lateral_bending_wallboard_mark;
+    private String lateral_bending_wallboard_mark="";
 
-    private Integer warping_plate_pass;
+    private Integer warping_plate_pass=2;
 
-    private String warping_plate_mark;
+    private String warping_plate_mark="";
 
-    private Integer warping_wallboard_pass;
+    private Integer warping_wallboard_pass=2;
 
-    private String warping_wallboard_mark;
+    private String warping_wallboard_mark="";
 
-    private Integer diagonal_difference_plate_pass;
+    private Integer diagonal_difference_plate_pass=2;
 
-    private String diagonal_difference_plate_mark;
+    private String diagonal_difference_plate_mark="";
 
-    private Integer diagonal_difference_wallboard_pass;
+    private Integer diagonal_difference_wallboard_pass=2;
 
-    private String diagonal_difference_wallboard_mark;
+    private String diagonal_difference_wallboard_mark="";
 
-    private Integer deflection_arch_pass;
+    private Integer deflection_arch_pass=2;
 
-    private String deflection_arch_mark;
+    private String deflection_arch_mark="";
 
-    private Integer deflection_drooping_pass;
+    private Integer deflection_drooping_pass=2;
 
-    private String deflection_drooping_mark;
+    private String deflection_drooping_mark="";
 
-    private Integer preformed_hole_centerline_pass;
+    private Integer preformed_hole_centerline_pass=2;
 
-    private String preformed_hole_centerline_mark;
+    private String preformed_hole_centerline_mark="";
 
-    private Integer preformed_hole_holesize_pass;
+    private Integer preformed_hole_holesize_pass=2;
 
-    private String preformed_hole_holesize_mark;
+    private String preformed_hole_holesize_mark="";
 
-    private Integer reserved_hole_centerline_pass;
+    private Integer reserved_hole_centerline_pass=2;
 
-    private String reserved_hole_centerline_mark;
+    private String reserved_hole_centerline_mark="";
 
-    private Integer reserved_hole_entrancesize_pass;
+    private Integer reserved_hole_entrancesize_pass=2;
 
-    private String reserved_hole_entrancesize_mark;
+    private String reserved_hole_entrancesize_mark="";
 
-    private Integer door_window_centerline_pass;
+    private Integer door_window_centerline_pass=2;
 
-    private String door_window_centerline_mark;
+    private String door_window_centerline_mark="";
 
-    private Integer door_window_height_pass;
+    private Integer door_window_height_pass=2;
 
-    private String door_window_height_mark;
+    private String door_window_height_mark="";
 
-    private Integer embedded_parts_anchorcenterline_pass;
+    private Integer embedded_parts_anchorcenterline_pass=2;
 
-    private String embedded_parts_anchorcenterline_mark;
+    private String embedded_parts_anchorcenterline_mark="";
 
-    private Integer embedded_parts_steelbarplane_pass;
+    private Integer embedded_parts_steelbarplane_pass=2;
 
-    private String embedded_parts_steelbarplane_mark;
+    private String embedded_parts_steelbarplane_mark="";
 
-    private Integer embedded_parts_boltcenterline_pass;
+    private Integer embedded_parts_boltcenterline_pass=2;
 
-    private String embedded_parts_boltcenterline_mark;
+    private String embedded_parts_boltcenterline_mark="";
 
-    private Integer embedded_parts_exposedlength_pass;
+    private Integer embedded_parts_exposedlength_pass=2;
 
-    private String embedded_parts_exposedlength_mark;
+    private String embedded_parts_exposedlength_mark="";
 
-    private Integer embedded_parts_nutcenterline_pass;
+    private Integer embedded_parts_nutcenterline_pass=2;
 
-    private String embedded_parts_nutcenterline_mark;
+    private String embedded_parts_nutcenterline_mark="";
 
-    private Integer embedded_parts_concreteheight_pass;
+    private Integer embedded_parts_concreteheight_pass=2;
 
-    private String embedded_parts_concreteheight_mark;
+    private String embedded_parts_concreteheight_mark="";
 
-    private Integer embedded_parts_centrallineposition_pass;
+    private Integer embedded_parts_centrallineposition_pass=2;
 
-    private String embedded_parts_centrallineposition_mark;
+    private String embedded_parts_centrallineposition_mark="";
 
-    private Integer embedded_parts_componentheight_pass;
+    private Integer embedded_parts_componentheight_pass=2;
 
-    private String embedded_parts_componentheight_mark;
+    private String embedded_parts_componentheight_mark="";
 
-    private Integer embedded_reinforcement_centerline_pass;
+    private Integer embedded_reinforcement_centerline_pass=2;
 
-    private String embedded_reinforcement_centerline_mark;
+    private String embedded_reinforcement_centerline_mark="";
 
-    private Integer embedded_reinforcement_length_pass;
+    private Integer embedded_reinforcement_length_pass=2;
 
-    private String embedded_reinforcement_length_mark;
+    private String embedded_reinforcement_length_mark="";
 
-    private Integer keyway_centerline_pass;
+    private Integer keyway_centerline_pass=2;
 
-    private String keyway_centerline_mark;
+    private String keyway_centerline_mark="";
 
-    private Integer keyway_length_pass;
+    private Integer keyway_length_pass=2;
 
-    private String keyway_length_mark;
+    private String keyway_length_mark="";
 
     private Integer component_id;
 

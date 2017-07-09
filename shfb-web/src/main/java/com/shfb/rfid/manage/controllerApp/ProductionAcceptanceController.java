@@ -72,7 +72,13 @@ public class ProductionAcceptanceController {
 		}
 		
 		
-		int res = productComponentSizeDao.insertSelective(productComponentSize);		
+		//int res = productComponentSizeDao.insertSelective(productComponentSize);	
+		int res;
+		 if(null == productComponentSizeDao.findByComponentId(productComponentSize.getComponent_id())) {
+			 res = productComponentSizeDao.insertSelective(productComponentSize);
+		 } else {
+			 res = productComponentSizeDao.updateByPrimaryKeySelective(productComponentSize);
+		 }
 
 		if(res == 1) {
 			return new ResultDto(1, "上传成功");
@@ -117,7 +123,7 @@ public class ProductionAcceptanceController {
 			@RequestParam(value = "file", required = true) MultipartFile[] files, 
 			@RequestParam(value="component_id", required=true) Integer component_id
 			) throws Exception{
-		return appUploadFile(files, component_id, 0);
+		return appUploadFile(files, component_id, 1);
 		
 	}
 	

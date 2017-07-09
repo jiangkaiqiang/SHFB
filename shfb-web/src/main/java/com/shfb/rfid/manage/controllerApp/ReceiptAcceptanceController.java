@@ -74,7 +74,13 @@ public class ReceiptAcceptanceController {
 			updateComProgress(receiptComponentSize.getComponent_id(), sysUser.getUser_name(), "进场");
 		}
 		
-		int res = receiptComponentSizeDao.insertSelective(receiptComponentSize);		
+		//int res = receiptComponentSizeDao.insertSelective(receiptComponentSize);	
+		int res;
+		 if(null == receiptComponentSizeDao.findByComponentId(receiptComponentSize.getComponent_id())) {
+			 res = receiptComponentSizeDao.insertSelective(receiptComponentSize);
+		 } else {
+			 res = receiptComponentSizeDao.updateByPrimaryKeySelective(receiptComponentSize);
+		 }
 
 		if(res == 1) {
 			return new ResultDto(1, "上传成功");
@@ -96,7 +102,7 @@ public class ReceiptAcceptanceController {
 			@RequestParam(value = "file", required = true) MultipartFile[] files, 
 			@RequestParam(value="component_id", required=true) Integer component_id
 			) throws Exception{
-		return appUploadFile(files, component_id, 0);
+		return appUploadFile(files, component_id, 2);
 		
 	}
 	

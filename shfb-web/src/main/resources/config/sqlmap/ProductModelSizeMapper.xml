@@ -300,7 +300,7 @@
         picture = #{picture,jdbcType=VARCHAR},
       </if>
     </set>
-    where product_model_size_id = #{product_model_size_id,jdbcType=INTEGER}
+    where component_id = #{component_id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.shfb.rfid.manage.entity.ProductModelSize" >
     update product_model_size
