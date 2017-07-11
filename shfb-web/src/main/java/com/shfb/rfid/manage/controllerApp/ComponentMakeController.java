@@ -1,5 +1,8 @@
 package com.shfb.rfid.manage.controllerApp;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -15,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+
 
 import com.github.pagehelper.Page;
 import com.shfb.rfid.manage.controller.BaseController;
@@ -46,6 +50,7 @@ import com.shfb.rfid.manage.util.ResponseData;
 import com.shfb.rfid.manage.util.StringUtil;
 import com.shfb.rfid.manage.util.TimeUtil;
 
+import net.sf.json.JSONArray;
 import net.sf.jsqlparser.schema.Server;
 
 
@@ -143,37 +148,43 @@ public class ComponentMakeController extends BaseController{
 	
 	/**
 	 * 客户端下拉框接口(项目)
+	 * @throws UnsupportedEncodingException 
 	 */
 	@RequestMapping(value = "/getSelectProjectForClient")
 	@ResponseBody
-	public Object getSelectProjectForClient(Integer projectID) {
-		Integer userProjectID = projectID;
+	public Object getSelectProjectForClient(String projectID) throws UnsupportedEncodingException {
+		Integer userProjectID = Integer.valueOf(projectID);
 		if (userProjectID==0) {
 			userProjectID = null;
 		}
 		List<Map<String, Object>> projects = projectDao.findProjectNames(userProjectID);
-		return  ResponseData.newSuccess(projects, "查询成功");
+		String prString = URLEncoder.encode(JSONArray.fromObject(projects).toString(), "UTF-8");
+		return prString;
 	}
 	
 	/**
 	 * 客户端下拉框接口(单体)
+	 * @throws UnsupportedEncodingException 
 	 */
 	@RequestMapping(value = "/getSelectSingleForClient")
 	@ResponseBody
-	public Object getSelectSingleForClient(String projectName) {
-		Project project = projectDao.findProjectByName(projectName);
+	public Object getSelectSingleForClient(String projectName) throws UnsupportedEncodingException {
+		Project project = projectDao.findProjectByName(URLDecoder.decode(projectName, "UTF-8"));
 		List<Map<String, Object>> singles = componentDao.findSingle(project.getPro_id());
-		return  ResponseData.newSuccess(singles, "查询成功");
+		String prString = URLEncoder.encode(JSONArray.fromObject(singles).toString(), "UTF-8");
+		return  prString;
 	}
 	/**
 	 * 客户端下拉框接口(楼层)
+	 * @throws UnsupportedEncodingException 
 	 */
 	@RequestMapping(value = "/getSelectFloorForClient")
 	@ResponseBody
-	public Object getSelectFloorForClient(String projectName, String singleName) {
-		Project project = projectDao.findProjectByName(projectName);
-		List<Map<String, Object>> floors = componentDao.findFloor(project.getPro_id(), singleName);
-		return  ResponseData.newSuccess(floors, "查询成功");
+	public Object getSelectFloorForClient(String projectName, String singleName) throws UnsupportedEncodingException {
+		Project project = projectDao.findProjectByName(URLDecoder.decode(projectName, "UTF-8"));
+		List<Map<String, Object>> floors = componentDao.findFloor(project.getPro_id(), URLDecoder.decode(singleName, "UTF-8"));
+		String prString = URLEncoder.encode(JSONArray.fromObject(floors).toString(), "UTF-8");
+		return  prString;
 	}
 	/**
 	 * 客户端下拉框接口(构件)
