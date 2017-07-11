@@ -52,7 +52,8 @@
 						 <input type="checkbox" ng-checked="exists(project, selected)"
                     				ng-click="toggle(project, selected)"/>
 				         </td>
-				         <td>{{project.project.pro_id}}</td>
+				         <!-- <td>{{project.project.pro_id}}</td> -->
+				         <td>{{$index+1}}</td>
 				         <td>{{project.project.pro_name}}</td>
 				         <td>{{project.project.contacts_name}}</td>
 				         <td>{{project.project.contacts_tel}}</td>
@@ -79,7 +80,7 @@
 			<!-- 表格操作区域结束 -->
 			<div class="three">
 				<div class="btn-group" role="group">
-				    <button type="button" class="btn btn-default" ng-click="printReport()">打印报表</button>
+				  <!--   <button type="button" class="btn btn-default" ng-click="printReport()">打印报表</button> -->
 				   <button type="button" class="btn btn-default" ng-click="deleteProjects()">批量删除</button>
 				      <button type="button" class="btn btn-default"  ng-click="importComponent()">导入构件</button>
 				    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#importPic">导入图纸</button>
@@ -102,10 +103,11 @@
 	         <div class="modal-body">
 	            	<form class="form-horizontal" name="projectForm">
 					   <div class="form-group">
-					      <label for="projectname" class="col-sm-2 control-label">名称</label>
+					      <label for="projectname" class="col-sm-2 control-label"><font color="red">*</font>名称</label>
 					      <div class="col-sm-10">
 					         <input type="text" class="form-control" ng-model="proname" name="proname" placeholder="请输入项目名称">
 					      </div>
+					     <!--  <div id="addUserNameError" style="display:none;"> <font color="red"> 用户名不能为空</font></div> -->
 					   </div>
 					   <div class="form-group">
 					      <label for="province" class="col-sm-2 control-label">省市</label>
@@ -131,7 +133,7 @@
 					      </div>
 					   </div>
 					   <div class="form-group">
-					      <label for="contactName" class="col-sm-2 control-label">联系人</label>
+					      <label for="contactName" class="col-sm-2 control-label"><font color="red">*</font>联系人</label>
 					      <div class="col-sm-10">
 					         <input type="text" class="form-control" id="contactName" name="contactName" ng-model="contactName"
 					            placeholder="请输入联系人姓名">
@@ -165,7 +167,7 @@
 	            <button type="button" class="btn btn-default" 
 	               data-dismiss="modal">取消
 	            </button>
-	            <button type="button" ng-click="submit()" class="btn btn-primary" data-dismiss="modal">
+	            <button type="button" ng-click="submit()" class="btn btn-primary">
 	                                                       提交
 	            </button>
 	         </div>
@@ -257,7 +259,7 @@
 	         <div class="modal-body">
 	            	<form class="form-horizontal" name="projectForm">
 					   <div class="form-group">
-					      <label for="projectname" class="col-sm-2 control-label">名称</label>
+					      <label for="projectname" class="col-sm-2 control-label"><font color="red">*</font>名称</label>
 					      <div class="col-sm-10">
 					         <input type="text" class="form-control" ng-model="projectUpdate.pro_name" name="proname" placeholder="请输入项目名称">
 					      </div>
@@ -286,7 +288,7 @@
 					      </div>
 					   </div>
 					   <div class="form-group">
-					      <label for="contactName" class="col-sm-2 control-label">联系人</label>
+					      <label for="contactName" class="col-sm-2 control-label"><font color="red">*</font>联系人</label>
 					      <div class="col-sm-10">
 					         <input type="text" class="form-control" id="contactName" name="contactName" ng-model="projectUpdate.contacts_name"
 					            placeholder="请输入联系人姓名">
@@ -320,7 +322,7 @@
 	            <button type="button" class="btn btn-default" 
 	               data-dismiss="modal">取消
 	            </button>
-	            <button type="button" ng-click="update()" class="btn btn-primary" data-dismiss="modal">
+	            <button type="button" ng-click="update()" class="btn btn-primary" >
 	                                                       更新
 	            </button>
 	         </div>

@@ -287,6 +287,7 @@ coldWeb.controller('projectManage', function ($rootScope, $scope, $state, $cooki
 		 }
 		 
 		 $scope.importComp=function(){
+			 showLoad("正在加载，请稍后......");
 			 $http({
 					url: '/i/project/fileUpload',
 					method: 'POST',
@@ -304,6 +305,7 @@ coldWeb.controller('projectManage', function ($rootScope, $scope, $state, $cooki
 						return formData;
 					}
 				}).success(function (data) {
+					closeLoad();
 					alert(data.message);   //返回上传后所在的路径
 				});
 		 }
@@ -311,6 +313,14 @@ coldWeb.controller('projectManage', function ($rootScope, $scope, $state, $cooki
 		 $scope.totalPicFiles = [];
 		 $scope.addPicFiles = function () {
 				if($scope.picfiles.length==0){return;};
+				var totalsize = 0;
+				for(var i = 0; i < $scope.picfiles.length; i++){
+					totalsize += $scope.picfiles[i].size;
+				}
+				if(totalsize>1024*1024*5){
+					alert("上传的文件总大小不能超过5M");
+					return;
+				}
 				for(var i = 0; i < $scope.picfiles.length; i++){
 					var fileName = $scope.picfiles[i].name;
 					var fileType = (fileName.substring(fileName.lastIndexOf(".")+1,fileName.length)).toLowerCase();
@@ -326,6 +336,7 @@ coldWeb.controller('projectManage', function ($rootScope, $scope, $state, $cooki
 		        $scope.totalPicFiles=allfiles; 
 		    };
 		    $scope.importPic = function() {
+		    	showLoad("正在加载，请稍后......");
 				       /*Upload.upload({
 				                url: '/i/project/importPic',
 				                headers :{ 'Content-Transfer-Encoding': 'utf-8' },
@@ -350,7 +361,92 @@ coldWeb.controller('projectManage', function ($rootScope, $scope, $state, $cooki
 						return formData;
 					}
 				}).success(function (data) {
+					closeLoad();
 					alert(data.message);   //返回上传后所在的路径
 				});
 			};
+			//loading  
+			function showLoad(tipInfo) {  
+			    var iWidth = 120;     //弹出窗口的宽度;  
+			    var iHeight = 0;    //弹出窗口的高度;  
+			    var scrolltop = 0;  
+			    var scrollleft = 0;  
+			    var cheight = 0;  
+			    var cwidth = 0;  
+			    var eTip = document.createElement('div');  
+			    eTip.setAttribute('id', 'tipDiv');  
+			    eTip.style.position = 'absolute';  
+			    eTip.style.display = 'none';  
+			    eTip.style.border = 'solid 0px #D1D1D1';  
+			    eTip.style.backgroundColor = '#4B981D';  
+			    eTip.style.padding = '5px 15px';  
+			  
+			    if(document.body.scrollTop){//这是一个js的兼容  
+			        scrollleft=document.body.scrollLeft;  
+			        scrolltop=document.body.scrollTop;  
+			        cheight=document.body.clientHeight;  
+			        cwidth=document.body.clientWidth;  
+			    }  
+			    else{  
+			        scrollleft=document.documentElement.scrollLeft;  
+			        scrolltop=document.documentElement.scrollTop;  
+			        cheight=document.documentElement.clientHeight;  
+			        cwidth=document.documentElement.clientWidth;  
+			    }  
+			    iHeight = eTip.offsetHeight;  
+			    var v_left=(cwidth-iWidth)/2 + scrollleft; //  
+			    var v_top=(cheight-iHeight)/2+ scrolltop;  
+			    eTip.style.left = v_left + 'px';  
+			    eTip.style.top = v_top + 'px';  
+			  
+			    eTip.innerHTML = '<span style=\'color:#ffffff; font-size:18px\'>' + tipInfo + '</span>';  
+			    try {  
+			        document.body.appendChild(eTip);  
+			    } catch (e) { }  
+			    $("#tipDiv").css("float", "right");  
+			    $("#tipDiv").css("z-index", "99");  
+			    $('#tipDiv').show();  
+			    ShowMark();  
+			}  
+			  
+			function closeLoad() {  
+			    $('#tipDiv').hide();  
+			    HideMark();  
+			}  
+			  
+			  
+			//显示蒙灰层  
+			function ShowMark() {  
+			    var xp_mark = document.getElementById("xp_mark");  
+			    if (xp_mark != null) {  
+			        //设置DIV  
+			        xp_mark.style.left = 0 + "px";  
+			        xp_mark.style.top = 0 + "px";  
+			        xp_mark.style.position = "absolute";  
+			        xp_mark.style.backgroundColor = "#000";  
+			        xp_mark.style.zIndex = "1";  
+			        if (document.all) {  
+			            xp_mark.style.filter = "alpha(opacity=50)";  
+			            var Ie_ver = navigator["appVersion"].substr(22, 1);  
+			            if (Ie_ver == 6 || Ie_ver == 5) { hideSelectBoxes(); }  
+			        }  
+			        else { xp_mark.style.opacity = "0.5"; }  
+			        xp_mark.style.width = "100%";  
+			        xp_mark.style.height = "100%";  
+			        xp_mark.style.display = "block";  
+			    }  
+			    else {  
+			        //页面添加div explainDiv,注意必须是紧跟body 内的第一个元素.否则IE6不正常.  
+			        $("body").prepend("<div id='xp_mark' style='display:none;'></div>");  
+			        ShowMark(); //继续回调自己  
+			    }  
+			}  
+			  
+			//隐藏蒙灰层  
+			function HideMark() {  
+			    var xp_mark = document.getElementById("xp_mark");  
+			    xp_mark.style.display = "none";  
+			    var Ie_ver = navigator["appVersion"].substr(22, 1);  
+			    if (Ie_ver == 6 || Ie_ver == 5) { showSelectBoxes(); }  
+			}  
 });

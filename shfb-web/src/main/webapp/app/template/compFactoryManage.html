@@ -53,7 +53,8 @@
 						 <input type="checkbox" ng-checked="exists(compfactory, selected)"
                     				ng-click="toggle(compfactory, selected)"/>
 				         </td>
-				         <td>{{compfactory.compfactory.comp_factory_id}}</td>
+				        <!--  <td>{{compfactory.compfactory.comp_factory_id}}</td> -->
+				        <td>{{$index+1}}</td>
 				         <td>{{compfactory.compfactory.comp_factory_name}}</td>
 				         <td>{{compfactory.compfactory.contacts_name}}</td>
 				         <td>{{compfactory.compfactory.contacts_tel}}</td>
@@ -80,7 +81,7 @@
 			<!-- 表格操作区域结束 -->
 			<div class="three">
 				<div class="btn-group" role="group">
-				   <button type="button" class="btn btn-default" ng-click="printReport()">打印报表</button>
+				<!--    <button type="button" class="btn btn-default" ng-click="printReport()">打印报表</button> -->
 				   <button type="button" class="btn btn-default" ng-click="deleteCompFactorys()">批量删除</button>
 				</div>
 			</div>
@@ -101,7 +102,7 @@
 	         <div class="modal-body">
 	            	<form class="form-horizontal" name="compfactoryForm">
 					   <div class="form-group">
-					      <label for="compfactoryname" class="col-sm-2 control-label">名称</label>
+					      <label for="compfactoryname" class="col-sm-2 control-label"><font color="red">*</font>名称</label>
 					      <div class="col-sm-10">
 					         <input type="text" class="form-control" ng-model="compfactoryname" name="compfactoryname" placeholder="请输入构件厂名称">
 					      </div>
@@ -130,7 +131,7 @@
 					      </div>
 					   </div>
 					   <div class="form-group">
-					      <label for="contactName" class="col-sm-2 control-label">联系人</label>
+					      <label for="contactName" class="col-sm-2 control-label"><font color="red">*</font>联系人</label>
 					      <div class="col-sm-10">
 					         <input type="text" class="form-control" id="contactName" name="contactName" ng-model="contactName"
 					            placeholder="请输入联系人姓名">
@@ -156,7 +157,7 @@
 	            <button type="button" class="btn btn-default" 
 	               data-dismiss="modal">取消
 	            </button>
-	            <button type="button" ng-click="submit()" class="btn btn-primary" data-dismiss="modal">
+	            <button type="button" ng-click="submit()" class="btn btn-primary">
 	                                                       提交
 	            </button>
 	         </div>
@@ -242,7 +243,7 @@
 	         <div class="modal-body">
 	            	<form class="form-horizontal" name="compfactoryForm">
 					   <div class="form-group">
-					      <label for="compfactoryname" class="col-sm-2 control-label">名称</label>
+					      <label for="compfactoryname" class="col-sm-2 control-label"><font color="red">*</font>名称</label>
 					      <div class="col-sm-10">
 					         <input type="text" class="form-control" ng-model="compfactoryUpdate.comp_factory_name" name="comp_factory_name" placeholder="请输入构件厂名称">
 					      </div>
@@ -271,7 +272,7 @@
 					      </div>
 					   </div>
 					   <div class="form-group">
-					      <label for="contactName" class="col-sm-2 control-label">联系人</label>
+					      <label for="contactName" class="col-sm-2 control-label"><font color="red">*</font>联系人</label>
 					      <div class="col-sm-10">
 					         <input type="text" class="form-control" id="contactName" name="contactName" ng-model="compfactoryUpdate.contacts_name"
 					            placeholder="请输入联系人姓名">
@@ -297,7 +298,7 @@
 	            <button type="button" class="btn btn-default" 
 	               data-dismiss="modal">取消
 	            </button>
-	            <button type="button" ng-click="update()" class="btn btn-primary" data-dismiss="modal">
+	            <button type="button" ng-click="update()" class="btn btn-primary">
 	                                                       更新
 	            </button>
 	         </div>

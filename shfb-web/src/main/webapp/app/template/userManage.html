@@ -84,7 +84,8 @@
 						 <input type="checkbox" ng-checked="exists(user, selected)"
                     				ng-click="toggle(user, selected)"/>
 				         </td>
-				         <td>{{user.sysUser.user_id}}</td>
+				         <!-- <td>{{user.sysUser.user_id}}</td> -->
+				         <td>{{$index+1}}</td>
 				         <td>{{user.sysUser.user_name}}</td>
 				         <td>{{user.sysUser.user_tel}}</td>
 				          <td>{{user.sysUser.company}}</td>
@@ -113,7 +114,7 @@
 			<!-- 表格操作区域结束 -->
 			<div class="three">
 				<div class="btn-group" role="group">
-				<button type="button" class="btn btn-default" ng-click="printReport()">打印报表</button>
+				<!-- <button type="button" class="btn btn-default" ng-click="printReport()">打印报表</button> -->
 				   <button type="button" class="btn btn-default" ng-click="deleteUsers()">批量删除</button>
 				</div>
 			</div>
@@ -134,7 +135,7 @@
 	         <div class="modal-body">
 	            	<form class="form-horizontal" name="userForm">
 					   <div class="form-group">
-					      <label for="firstname" class="col-sm-2 control-label">用户名</label>
+					      <label for="firstname" class="col-sm-2 control-label"><font color="red">*</font>用户名</label>
 					      <div class="col-sm-10">
 					         <input type="text" class="form-control" ng-model="username" name="username"
 					            placeholder="请输入名字" ng-remote-validate="/i/user/checkUserName"
@@ -143,14 +144,14 @@
 					      </div>
 					   </div>
 					   <div class="form-group">
-					      <label for="password" class="col-sm-2 control-label">密码</label>
+					      <label for="password" class="col-sm-2 control-label"><font color="red">*</font>密码</label>
 					      <div class="col-sm-10">
 					         <input type="password" class="form-control" id="password" ng-model="password"
 					            placeholder="请输入密码">
 					      </div>
 					   </div>
 					   <div class="form-group">
-					      <label for="password" class="col-sm-2 control-label">确认密码</label>
+					      <label for="password" class="col-sm-2 control-label"><font color="red">*</font>确认密码</label>
 					      <div class="col-sm-10">
 					         <input type="password" class="form-control" id="password1" ng-model="password1"
 					            placeholder="请确认密码">
@@ -210,7 +211,7 @@
 	            <button type="button" class="btn btn-default" 
 	               data-dismiss="modal">取消
 	            </button>
-	            <button type="button" ng-click="submit()" class="btn btn-primary" data-dismiss="modal">
+	            <button type="button" ng-click="submit()" class="btn btn-primary">
 	                                                       提交
 	            </button>
 	         </div>
@@ -235,7 +236,7 @@
 	         <div class="modal-body">
 	            	<form class="form-horizontal" name="uuserForm">
 					   <div class="form-group">
-					      <label for="firstname" class="col-sm-2 control-label">用户名</label>
+					      <label for="firstname" class="col-sm-2 control-label"><font color="red">*</font>用户名</label>
 					      <div class="col-sm-10">
 					         <input type="text" class="form-control" ng-model="userForUpdate.user_name" name="uusername"
 					            placeholder="请输入名字" ng-remote-validate="/i/user/checkUserName"
@@ -244,14 +245,14 @@
 					      </div>
 					   </div>
 					   <div class="form-group">
-					      <label for="password" class="col-sm-2 control-label">密码</label>
+					      <label for="password" class="col-sm-2 control-label"><font color="red">*</font>密码</label>
 					      <div class="col-sm-10">
 					         <input type="password" class="form-control" id="password" ng-model="passwordForUpdate"
 					            placeholder="请输入密码">
 					      </div>
 					   </div>
 					   <div class="form-group">
-					      <label for="password" class="col-sm-2 control-label">确认密码</label>
+					      <label for="password" class="col-sm-2 control-label"><font color="red">*</font>确认密码</label>
 					      <div class="col-sm-10">
 					         <input type="password" class="form-control" id="password1" ng-model="passwordForUpdate1"
 					            placeholder="请确认密码">
@@ -311,7 +312,7 @@
 	            <button type="button" class="btn btn-default" 
 	               data-dismiss="modal">取消
 	            </button>
-	            <button type="button" ng-click="update()" class="btn btn-primary" data-dismiss="modal">
+	            <button type="button" ng-click="update()" class="btn btn-primary">
 	                                                       更新
 	            </button>
 	         </div>
