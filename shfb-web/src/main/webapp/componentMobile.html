@@ -107,14 +107,22 @@
         };
       }); 
     var requesturl=window.location.href;
-    console.log(requesturl.substring(requesturl.lastIndexOf("/")+1));
+    var comonentNumStr
+    if(requesturl.indexOf("?")>-1){
+    	comonentNumStr=requesturl.substring(requesturl.lastIndexOf("/")+1,requesturl.lastIndexOf("?"));
+    }else{
+    	comonentNumStr=requesturl.substring(requesturl.lastIndexOf("/")+1);
+    }
+    
+    
+    
     $.ajax({
 
         type: 'POST',
 
         url: '/i/componentMake/getComInfo' ,
 
-       data: {comonentNum:requesturl.substring(requesturl.lastIndexOf("/")+1)} ,
+       data: {comonentNum:comonentNumStr} ,
 
        dataType: 'json',
        

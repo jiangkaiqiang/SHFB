@@ -4,6 +4,7 @@
      		border:1px solid white;
      	}
      </style>
+     <link rel="stylesheet" type="text/css" href="../../assets/css/jquery.step.css">
     <div style="padding: 28px 30px 0 30px;background-color: #F1F1F1;" ng-show="ismanageShow">
     	<!-- 按钮操作区域开始 -->
 			<div class="row" style="height:34px">
@@ -145,13 +146,12 @@
 	               	&nbsp;进度<br>
 	    		</h4>
     		</div>
-    		
     		<div class="row" style="padding-left:30px;padding-bottom:15px">
-    			<div class="col-md-1">
+    			<div class="col-md-2">
     				<div class="row">
 					<button class="btn btn-default" disabled="disabled" style="height:50px">
 						初始
-					</button>------>	
+					</button>------	
 					</div>
 					<div class="row">
 						计划开始时间：{{componentInfo.plan_begin_date}}
@@ -164,7 +164,7 @@
 					<div class="row">						
 						<button class="btn btn-default" disabled="disabled" style="height:50px">
 							{{progress.component_status_name}}
-						</button>------>			
+						</button>-----			
 					</div>
 					<div class="row">
 							{{progress.operation_user}}
@@ -550,3 +550,4 @@
 	</div><!-- /.modal -->
 	</div>
 	<!-- 查看二维码模态框end -->
+	<script src="../../assets/js/jquery.step.js"></script>

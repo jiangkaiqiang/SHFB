@@ -551,8 +551,9 @@ public class ComponentMakeController extends BaseController{
 	 */
 	@RequestMapping(value = "/getComInfo")
 	@ResponseBody
-	public ComponentDto insertProductCuring(String comonentNum) {
-		ComponentDto component = componentDao.getComponentInfo(comonentNum);	
+	public ComponentDto insertProductCuring(String comonentNum) {		
+		ComponentDto component = componentDao.getComponentInfo(comonentNum);
+		System.out.println("component");
 		return component;
 	}
 	
@@ -561,13 +562,13 @@ public class ComponentMakeController extends BaseController{
 	 */
 	@RequestMapping(value = "/getCardBindInfo")
 	@ResponseBody
-	public boolean getCardBindInfo(String cardNum) {
+	public String getCardBindInfo(String cardNum) {
 		List<Component> components = componentDao.findComponentByCardNum(cardNum);
 		if (components==null||components.size()==0) {
-			return false;
+			return "";
 		}
 		else {
-			return true;
+			return components.get(0).getComponent_num();
 		}
 	}
 	
