@@ -191,8 +191,9 @@ coldWeb.controller('componentManage', function ($rootScope, $scope, $state, $coo
 					}
 				});
 				if($scope.componentInfo.picture_comp_make != undefined) {
+					console.log($scope.componentInfo.picture_comp_make);
 					$scope.picture_comp_makes=$scope.componentInfo.picture_comp_make.split(";")
-					
+					console.log($scope.picture_comp_makes);
 				}
 				if($scope.componentInfo.picture_product_accept != undefined) {
 					$scope.picture_product_accepts=$scope.componentInfo.picture_product_accept.split(";")
@@ -204,9 +205,11 @@ coldWeb.controller('componentManage', function ($rootScope, $scope, $state, $coo
 					$scope.picture_installs=$scope.componentInfo.picture_install.split(";")
 				}
 				
+				console.log($("#viewer1"));
 				$scope.viewerShow();
 			});
 		}
+	   
 	   
 	   //创建图片查看器
 	   $scope.viewerShow=function(){
@@ -214,8 +217,9 @@ coldWeb.controller('componentManage', function ($rootScope, $scope, $state, $coo
 		  $("#viewer2").viewer();
 		  $("#viewer3").viewer();
 		  $("#viewer4").viewer();
-		  $("#viewer5").viewer();
+		  //$("#viewer5").viewer();
 	   }
+	   $scope.viewerShow();
 	   //返回按钮
 	   $scope.goback=function(){
 		   $state.reload();
@@ -484,7 +488,7 @@ coldWeb.controller('componentManage', function ($rootScope, $scope, $state, $coo
 	    	$('#QRcode').modal('show');
 	    	$("#qrcode").qrcode({
 			    render: "canvas",//二维码生成方式 table/canvas
-			    text: component_num, //二维码的内容
+			    text: "http://wujianbuild.com/n/"+component_num, //二维码的内容
 			    width: 100,//默认生成的二维码大小是 256×256
 			    height: 100
 			});

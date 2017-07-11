@@ -190,6 +190,10 @@ public class ProjectController extends BaseController {
 		@ResponseBody
 		public ResultDto fileUpload(@RequestParam(value = "file", required = false) MultipartFile[] files,
 				Integer pro_id) throws IOException{
+			//上传失败的数据
+			String errStr = "";
+			//上传成功的数量
+			int successCount = 0;
 			/**
 			 * 保存上传的excel
 			 */
@@ -211,23 +215,41 @@ public class ProjectController extends BaseController {
 			 */
 				if( res == true ) {
 					List<Map<String, String>> result = ExcelImportUtil.readExcel(files[0].getInputStream(), 1, 0, 0);
+					successCount = result.size();
 					for (Map<String, String> map : result) {
 						Component component = new Component();
-						//component.setComponent_name(map.get("var0"));
+						
 						if(map.get("var0") == null){
 							continue;
 						}
+						System.out.println(map.get("var0"));
+						List<Component> comlist = componentDao.getComponentBycompNum(map.get("var0")); 
+						//数据库中有该构件
+						if( comlist != null && comlist.size() > 0) {
+							
+							errStr += map.get("var0") + ";";
+							successCount--;
+							continue;
+						}
+						
 						component.setComponent_num(map.get("var0"));
 						component.setSingle_name(map.get("var1"));
 						component.setFloor(map.get("var2"));
 						component.setComponent_type(map.get("var3"));
-						component.setComponent_size(map.get("var4"));
+						component.setDrawing("http://139.196.139.164:65531/shfb/uploadPic/"+map.get("var4").trim());
+						component.setComponent_size(map.get("var5"));
 						component.setPro_id(pro_id);
 						componentDao.insertSelective(component);
 					}
-					return new ResultDto(1,"上传成功");
+					
+					if(!errStr.equals("")) {
+						return new ResultDto(1,"导入成功,数量："+successCount+";以下编号重复:"+errStr);
+					}
+					
+					return new ResultDto(1,"导入成功,数量："+successCount);
+				
 				} else {
-					return new ResultDto(2,"上传失败");
+					return new ResultDto(2,"导入失败");
 				}
 			
 		}

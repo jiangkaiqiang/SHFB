@@ -720,4 +720,8 @@
     	</if>
   </select>
   
+  <select id="getComponentBycompNum" parameterType="String" resultType="com.shfb.rfid.manage.entity.Component">
+  	SELECT component_num from component WHERE component_num=#{component_num}
+  </select>
+  
 </mapper>

@@ -483,8 +483,12 @@ public class ComponentMakeController extends BaseController{
 				String saveName = component_id+"_"+i+"_"+System.currentTimeMillis()
 					+fileName.substring(fileName.lastIndexOf("."));
 				fileEntities.add(new UploadFileEntity(saveName, files[i], ""));
+				if(i!=files.length-1) {
+					picture += (FtpService.FILE_Url + saveName + ";");
+				}else{
+					picture += (FtpService.FILE_Url + saveName );
+				}
 				
-				picture += (FtpService.FILE_Url + saveName + ";");
 			}
 
 			res = ftpservice.uploadFileList(fileEntities);			
