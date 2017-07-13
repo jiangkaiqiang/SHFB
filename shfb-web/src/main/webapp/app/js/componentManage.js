@@ -205,21 +205,20 @@ coldWeb.controller('componentManage', function ($rootScope, $scope, $state, $coo
 					$scope.picture_installs=$scope.componentInfo.picture_install.split(";")
 				}
 				
-				console.log($("#viewer1"));
-				$scope.viewerShow();
 			});
 		}
 	   
 	   
 	   //创建图片查看器
 	   $scope.viewerShow=function(){
+		   console.log($("#viewer1").html());
 		  $("#viewer1").viewer();
 		  $("#viewer2").viewer();
 		  $("#viewer3").viewer();
 		  $("#viewer4").viewer();
-		  //$("#viewer5").viewer();
+		  $("#viewer5").viewer();
 	   }
-	   $scope.viewerShow();
+	   
 	   //返回按钮
 	   $scope.goback=function(){
 		   $state.reload();
