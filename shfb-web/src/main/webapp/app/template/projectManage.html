@@ -63,7 +63,7 @@
 				         <td>
   				            <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#showProject" ng-click="goDetail(project.project.pro_id)">查看</button>
   				            <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#updateProject" ng-click="goUpdate(project.project.pro_id)">更新</button>
-				         	<button class="delete" ng-click="goDeleteProject(project.project.pro_id)"></button>
+				         	<button class="delete" ng-click="goDeleteProject(project.project.pro_id)" ng-if="admin.user_name==root"></button>
 				         </td>
 				      </tr>
 				   </tbody>

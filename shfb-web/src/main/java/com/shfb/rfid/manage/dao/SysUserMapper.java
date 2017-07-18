@@ -10,6 +10,8 @@ import org.apache.ibatis.annotations.Param;
 public interface SysUserMapper {
 	int deleteByPrimaryKey(@Param("user_id") int user_id);
 	
+	int deleteByProId(@Param("pro_id") Integer pro_id);
+	
 	SysUser findUser(@Param("user_name") String username, @Param("password") String password);
 
 	SysUser findUserByName(@Param("user_name") String user_name);

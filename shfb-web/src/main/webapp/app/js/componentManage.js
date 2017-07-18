@@ -35,7 +35,7 @@ coldWeb.controller('componentManage', function ($rootScope, $scope, $state, $coo
 			   $scope.single_namef=$scope.selectSingle.single_name;
 		   }
 		   $scope.floorf="";
-		   if($scope.$scope!=undefined&&$scope.selectFloor.floor!=undefined) {
+		   if($scope.selectFloor!=undefined&&$scope.selectFloor.floor!=undefined) {
 			   $scope.floorf=$scope.selectFloor.floor;
 		   }
 		   $scope.component_typef="";
@@ -514,5 +514,34 @@ coldWeb.controller('componentManage', function ($rootScope, $scope, $state, $coo
 			 
 		 }
 	    
-	     
+	   
+	    $scope.unbundling=function(){
+	    	 if($scope.selectedProject!=undefined && $scope.selectedProject.pro_id!=undefined) {
+			   }else{
+				   alert("请选择项目");
+				   return;
+			   }
+	    	 if($scope.selectType!=undefined && $scope.selectType.component_type!=undefined) {
+			   }else{
+				   alert("请选择类型");
+				   return;
+			   }
+	    	 if (!confirm("确认要解绑"+$scope.selectedProject.pro_name+"-"+$scope.selectType.component_type+"下的构件？")) {
+		            return false;
+		        }
+	    	 //解绑
+	    	 $http.get('/i/component/unbundling', {
+		            params: {
+		                "pro_id": $scope.selectedProject.pro_id,
+		                "component_type":$scope.selectType.component_type
+		            }
+		        }).success(function (data) {
+		        	$scope.getComponents();
+		        	$scope.selected = [];
+		        	alert(data.message);
+		        }); 
+	    	 
+	    }
+	    
+	    
 });

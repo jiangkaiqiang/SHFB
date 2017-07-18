@@ -12,6 +12,8 @@ import com.shfb.rfid.manage.entity.Component;
 
 public interface ComponentMapper {
     int deleteByPrimaryKey(Integer component_id);
+    
+    int deleteByProId(Integer pro_id);
 
     int insert(Component record);
 
@@ -41,7 +43,7 @@ public interface ComponentMapper {
     
     List<Component> findComponentByProID(@Param("pro_id")Integer pro_id);
     
-    List<Component> findComponentBysel(@Param("pro_id")Integer pro_id, @Param("single_name")String single_name, @Param("floor")String floor);
+    List<Component> findComponentBysel(@Param("pro_id")Integer pro_id, @Param("single_name")String single_name, @Param("floor")String floor, @Param("comp_factory_id")Integer comp_factory_id);
     
     List<Component>  findComponentByselForClient(@Param("pro_id")Integer pro_id, @Param("single_name")String single_name, @Param("floor")String floor);
    
@@ -87,5 +89,8 @@ public interface ComponentMapper {
     List<Component> getDrawings(@Param("pro_id")Integer pro_id);
     
     List<Component> getComponentBycompNum(@Param("component_num")String component_num);
+    
+    int unbundling(@Param("pro_id") Integer pro_id, 
+    		@Param("component_type")String component_type);
     
 }
