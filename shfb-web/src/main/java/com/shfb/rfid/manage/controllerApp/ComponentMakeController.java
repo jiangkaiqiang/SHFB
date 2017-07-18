@@ -186,26 +186,71 @@ public class ComponentMakeController extends BaseController{
 		String prString = URLEncoder.encode(JSONArray.fromObject(floors).toString(), "UTF-8");
 		return  prString;
 	}
+	
+	/**
+	 * 查询构件类型为客户端提供服务(为构建类型下拉框服务)
+	 * @throws UnsupportedEncodingException 
+	 */	
+	@RequestMapping(value = "/findComonentTypeForClient")
+	@ResponseBody	
+	public Object findComonentTypeForClient() throws UnsupportedEncodingException {
+		List<Component> components = componentDao.findComponentTypes();
+		String prString = URLEncoder.encode(JSONArray.fromObject(components).toString(), "UTF-8");
+		return prString;
+		//return components;		
+	}
+	
 	/**
 	 * 客户端下拉框接口(构件)
+	 * @throws UnsupportedEncodingException 
 	 */
 	@RequestMapping(value = "/getSelectCompForClient")
 	@ResponseBody
-	public Object getSelectCompForClient(String projectName, String singleName,String floorName) {
+	public Object getSelectCompForClient(String projectName, String singleName,String floorName,String typeName,String bindName) throws UnsupportedEncodingException {
+		boolean bindFlag = true;
+		List<Component> components = null;
 		if (projectName.equals("null")) {
 			projectName = null;
+		}
+		else {
+			projectName = URLDecoder.decode(projectName, "UTF-8");
 		}
 		if (singleName.equals("null")) {
 			singleName = null;
 		}
+		else {
+			 singleName = URLDecoder.decode(singleName, "UTF-8");	
+		}
 		if (floorName.equals("null")) {
 			floorName = null;
+		}
+		else {
+			floorName = URLDecoder.decode(floorName, "UTF-8");	
+		}
+		if (typeName.equals("null")) {
+			typeName = null;
+		}
+		else {
+			typeName = URLDecoder.decode(typeName, "UTF-8");	
+		}
+		if (bindName==null) {
+		}
+		else {
+			bindName = URLDecoder.decode(bindName, "UTF-8");
+			if (bindName.equals("已绑定")) {
+				bindFlag = false;
+			}
 		}
 		Project project = projectDao.findProjectByName(projectName);
 		if (project==null) {
 			project = new Project();
 		}
-		List<Component> components = componentDao.findComponentByselForClient(project.getPro_id(), singleName, floorName);
+		if (bindFlag) {
+			components = componentDao.findComponentByselForClient(project.getPro_id(), singleName, floorName,typeName);	
+		}
+		else {
+			components = componentDao.findComponentByselForClientUnBind(project.getPro_id(), singleName, floorName,typeName);	
+		}
 		return  ResponseData.newSuccess(components, "查询成功");
 	}
 	

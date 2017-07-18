@@ -43,7 +43,11 @@ public interface ComponentMapper {
     
     List<Component> findComponentBysel(@Param("pro_id")Integer pro_id, @Param("single_name")String single_name, @Param("floor")String floor);
     
-    List<Component>  findComponentByselForClient(@Param("pro_id")Integer pro_id, @Param("single_name")String single_name, @Param("floor")String floor);
+    List<Component>  findComponentByselForClient(@Param("pro_id")Integer pro_id, @Param("single_name")String single_name, 
+    		@Param("floor")String floor,@Param("type")String type);
+    
+    List<Component>  findComponentByselForClientUnBind(@Param("pro_id")Integer pro_id, @Param("single_name")String single_name, 
+    		@Param("floor")String floor,@Param("type")String type);
    
     Page<ComponentDto> findComponentPage(@Param("pro_id")Integer pro_id, @Param("single_name")String single_name, 
     		@Param("floor")String floor, @Param("component_type")String component_type, 
