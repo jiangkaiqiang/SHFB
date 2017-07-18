@@ -136,6 +136,20 @@ public class ComponentController extends BaseController {
 		
 	}
 	
+	@RequestMapping(value = "/unbundling")
+	@ResponseBody
+	public Object unbundling(@RequestParam(value="pro_id", required=true) Integer pro_id,@RequestParam(value="component_type", required=true) String component_type){
+		int res = 0;
+		try {
+			res = componentDao.unbundling(pro_id, component_type);
+			return new ResultDto(1, "解绑成功,解绑的构件数:"+res);
+		} catch (Exception e) {
+			return new ResultDto(2, "解绑失败");
+		}
+		
+	}
+	
+	
 	@RequestMapping(value = "/findComponentInfoById", method = RequestMethod.GET)
 	@ResponseBody
 	public ComponentDto findComponentInfoById(@RequestParam(value="component_id",required=true) Integer component_id)  {

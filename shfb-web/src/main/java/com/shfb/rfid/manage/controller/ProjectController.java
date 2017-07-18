@@ -21,6 +21,7 @@ import com.github.pagehelper.PageInfo;
 import com.shfb.rfid.manage.dao.CityMapper;
 import com.shfb.rfid.manage.dao.ComponentMapper;
 import com.shfb.rfid.manage.dao.ProjectMapper;
+import com.shfb.rfid.manage.dao.SysUserMapper;
 import com.shfb.rfid.manage.dto.BaseDto;
 import com.shfb.rfid.manage.dto.ProjectDto;
 import com.shfb.rfid.manage.dto.ResultDto;
@@ -42,6 +43,9 @@ public class ProjectController extends BaseController {
 	private FtpService ftpservice;
 	@Autowired
 	private ComponentMapper componentDao;
+	@Autowired
+	private SysUserMapper SysUserDao;
+	
 	
 	
 	@RequestMapping(value = "/findProjectList", method = RequestMethod.POST)
@@ -121,6 +125,8 @@ public class ProjectController extends BaseController {
 	@ResponseBody
 	public Object deleteProjectByID(Integer projectID) {
 		 projectDao.deleteByPrimaryKey(projectID);
+		 componentDao.deleteByProId(projectID);
+		 SysUserDao.deleteByProId(projectID);
 		 return new BaseDto(0);
 	}
 	
@@ -222,12 +228,13 @@ public class ProjectController extends BaseController {
 						if(map.get("var0") == null){
 							continue;
 						}
-						System.out.println(map.get("var0"));
+						
 						List<Component> comlist = componentDao.getComponentBycompNum(map.get("var0")); 
 						//数据库中有该构件
 						if( comlist != null && comlist.size() > 0) {
 							
 							errStr += map.get("var0") + ";";
+							System.out.println(map.get("var0"));
 							successCount--;
 							continue;
 						}

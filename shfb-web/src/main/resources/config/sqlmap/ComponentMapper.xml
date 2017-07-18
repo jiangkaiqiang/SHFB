@@ -89,6 +89,11 @@
     delete from component
     where component_id = #{component_id,jdbcType=INTEGER}
   </delete>
+  
+  <delete id="deleteByProId" parameterType="java.lang.Integer" >
+  delete FROM component WHERE pro_id=#{pro_id,jdbcType=INTEGER}
+  </delete>
+  
   <insert id="insert" parameterType="com.shfb.rfid.manage.entity.Component" >
     insert into component (component_id, component_name, component_num, 
       component_type, component_size, bind_status, 
@@ -501,6 +506,9 @@
     <if test="expedit_status != null">
     AND expedit_status=#{expedit_status}
     </if>
+    <if test="comp_factory_id != null">
+    AND comp_factory_id=#{comp_factory_id}
+    </if>
     order by component_id desc		
   </select>
   
@@ -605,6 +613,9 @@
   	<if test="floor != null">
   	AND floor=#{floor}
   	</if>
+  	<if test="comp_factory_id != null">
+    AND comp_factory_id=#{comp_factory_id}
+    </if>
   </select>
   
    <select id="findComponentByselForClient" parameterType="java.lang.Integer"  resultType="com.shfb.rfid.manage.entity.Component">
@@ -737,7 +748,7 @@
     </select>
     
   <select id="getDrawings" parameterType="Integer" resultType="com.shfb.rfid.manage.entity.Component">
-  	SELECT drawing FROM component WHERE drawing is not null AND drawing!='' 
+  	SELECT DISTINCT(drawing) FROM component WHERE drawing is not null AND drawing!='' 
   		<if test="pro_id != null and pro_id != ''">
     		and pro_id=#{pro_id}
     	</if>
@@ -746,5 +757,11 @@
   <select id="getComponentBycompNum" parameterType="String" resultType="com.shfb.rfid.manage.entity.Component">
   	SELECT component_num from component WHERE component_num=#{component_num}
   </select>
+    
+  <update id="unbundling" parameterType="String">
+  	update component SET
+  		card_num = ''
+  	where pro_id = #{pro_id} and component_type = #{component_type}
+  </update>
   
 </mapper>

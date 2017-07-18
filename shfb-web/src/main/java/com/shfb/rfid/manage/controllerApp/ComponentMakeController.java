@@ -117,9 +117,14 @@ public class ComponentMakeController extends BaseController{
 	public Object getSelectContent(Integer token) {
 		SysUser sysUser = userDao.findUserById(token);
 		Integer userProjectID = sysUser.getPro_id();
+		Integer comp_factory_id = sysUser.getComp_factory_id();
 		if (userProjectID==0) {
 			userProjectID = null;
 		}
+		if (comp_factory_id==0) {
+			comp_factory_id = null;
+		}
+		
 		List<Map<String, Object>> projects = projectDao.findProjectNames(userProjectID);
 		for (Map<String, Object> project : projects) {
 			Integer pro_id = Integer.valueOf(project.get("pro_id").toString());
@@ -134,7 +139,7 @@ public class ComponentMakeController extends BaseController{
 					if(floor == null ) {
 						continue;
 					}
-					List<Component> components = componentDao.findComponentBysel(pro_id, single_name, floor.get("floor").toString());
+					List<Component> components = componentDao.findComponentBysel(pro_id, single_name, floor.get("floor").toString(), comp_factory_id);
 					floor.put("components", components);
 				}
 				single.put("floors", floors);
@@ -265,9 +270,11 @@ public class ComponentMakeController extends BaseController{
 	public Object findComponentList(Component parm, Integer token) {
 		SysUser sysUser = userDao.findUserById(token);
 		Integer userProjectID = sysUser.getPro_id();
+		Integer comp_factory_id = sysUser.getComp_factory_id();
 		if (userProjectID==0) {
 			userProjectID = null;
 		}
+		parm.setComp_factory_id(comp_factory_id);
 		parm.setPro_id(userProjectID);
 		Page<ComponentDto> components = componentDao.findAllComponent(parm);
 		return  ResponseData.newSuccess(components, "查询成功");

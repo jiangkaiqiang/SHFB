@@ -19,6 +19,11 @@
     delete from sys_user
     where user_id = #{user_id,jdbcType=INTEGER}
   </delete>
+  
+  <delete id="deleteByProId" parameterType="java.lang.Integer">
+  	delete FROM sys_user WHERE pro_id=#{pro_id,jdbcType=INTEGER}
+  </delete>
+  
 	<update id="updateUser" parameterType="SysUser">
 		update sys_user
 		<set >
