@@ -226,14 +226,14 @@ coldWeb.controller('userManage', function ($rootScope, $scope, $state, $cookies,
 	        if ($scope.userForUpdate.user_name == undefined || $scope.userForUpdate.user_name == '') {
 	            flag = false;
 	        }
-	        if ($scope.userForUpdate.password == undefined ||  $scope.userForUpdate.password == '') {
+	       /* if ($scope.userForUpdate.password == undefined ||  $scope.userForUpdate.password == '') {
 	            flag = false;
-	        }
+	        }*/
 	        return flag;
 	    }
 		 $scope.update = function(){
 			 if (checkInputForUpdate()){
-		          if($scope.passwordForUpdate==$scope.passwordForUpdate1){
+		          /*if($scope.passwordForUpdate==$scope.passwordForUpdate1){*/
 		        	var valid;
 		        	if($scope.validforupdate)  valid = 1;
 		        	else  valid = 2;
@@ -243,7 +243,8 @@ coldWeb.controller('userManage', function ($rootScope, $scope, $state, $cookies,
 		    			params:{
 		    				'user_id': $scope.userForUpdate.user_id,
 		    				'user_name': $scope.userForUpdate.user_name,
-		    				'password': $scope.userForUpdate.password,
+		    				'password': '',
+//		    				'password': null,
 		    				'user_role_id' : $scope.userForUpdate.user_role_id,
 		    				'company':  $scope.userForUpdate.company,
 		    				'pro_id' : $scope.userForUpdate.pro_id,
@@ -256,12 +257,12 @@ coldWeb.controller('userManage', function ($rootScope, $scope, $state, $cookies,
 		                 $scope.getUsers();
 		                 $("#updateUser").modal("hide"); 
 		            });
-		           }
+		          /* }
 		          else{
 		        	  alert("两次密码不一致!");
-		           }
+		           }*/
 		          } else {
-		            alert("请填写用户名或密码!");
+		            alert("请填写用户名!");
 		        }
 		    }
 		 $('#datetimepicker1').datetimepicker({  
