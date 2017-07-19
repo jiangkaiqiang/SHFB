@@ -109,9 +109,9 @@
     var requesturl=window.location.href;
     var comonentNumStr
     if(requesturl.indexOf("?")>-1){
-    	comonentNumStr=requesturl.substring(requesturl.lastIndexOf("/")+1,requesturl.lastIndexOf("?"));
+    	comonentNumStr=requesturl.substring(requesturl.lastIndexOf("/n/")+3,requesturl.lastIndexOf("?"));
     }else{
-    	comonentNumStr=requesturl.substring(requesturl.lastIndexOf("/")+1);
+    	comonentNumStr=requesturl.substring(requesturl.lastIndexOf("/n/")+3);
     }
     
     

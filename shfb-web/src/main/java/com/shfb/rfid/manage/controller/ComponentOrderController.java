@@ -82,6 +82,9 @@ public class ComponentOrderController extends BaseController {
 	@RequestMapping(value = "/findComponentOrders", method = RequestMethod.GET)
 	@ResponseBody
 	public List<ComponentOrder> findComponentOrders(@RequestParam(value="userCompFactoryID", required=false) Integer userCompFactoryID) {
+		if(userCompFactoryID==0) {
+			userCompFactoryID=null;
+		}
 		return componentOrderDao.findComponentOrders(userCompFactoryID);
 	}
 	

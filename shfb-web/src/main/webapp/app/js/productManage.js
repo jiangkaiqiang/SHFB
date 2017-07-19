@@ -359,7 +359,7 @@ coldWeb.controller('productManage', function ($rootScope, $scope, $state, $cooki
 	    }
 	    
 	    $scope.modalShow=function(eleId){
-	    	if($scope.selected.length==0) {alert("请选择构件"); return;}
+	    	if($scope.selected.length==0) {alert("请选择构件"); return;}	    	
 	    	$(eleId).modal('show');
 	    	
 	    }

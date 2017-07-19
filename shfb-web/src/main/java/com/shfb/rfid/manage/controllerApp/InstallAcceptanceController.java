@@ -69,11 +69,11 @@ public class InstallAcceptanceController {
 		if(installComponentSize.getComponent_id() == null) return new ResultDto(2, "无法找到构件id", false);
 		
 		SysUser sysUser = userDao.findUserById(token);
-		int resUpdate = updateComStatus(installComponentSize.getComponent_id(), 8, 7);
+		int resUpdate = updateComStatus(installComponentSize.getComponent_id(), 8, null);
 		
-		if(resUpdate == 1) {
+		//if(resUpdate == 1) {
 			updateComProgress(installComponentSize.getComponent_id(), sysUser.getUser_name(), "验收完成");
-		}
+		//}
 		
 		
 		//int res = installComponentSizeDao.insertSelective(installComponentSize);

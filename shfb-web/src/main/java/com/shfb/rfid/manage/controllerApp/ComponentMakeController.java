@@ -330,10 +330,10 @@ public class ComponentMakeController extends BaseController{
 		if(productModelSize.getComponent_id() == null) new ResultDto(2,"param err");
 		
 		SysUser sysUser = userDao.findUserById(token);
-		int resUpdate = updateComStatus(productModelSize.getComponent_id(), 4, 3);
-		if(resUpdate == 1) {
+		int resUpdate = updateComStatus(productModelSize.getComponent_id(), 4, null);
+		//if(resUpdate == 1) {
 			updateComProgress(productModelSize.getComponent_id(), sysUser.getUser_name(), "生产中");
-		}
+		//}
 		
 		 int res;
 		 if(null == productModelSizeDao.findByComponentId(productModelSize.getComponent_id())) {

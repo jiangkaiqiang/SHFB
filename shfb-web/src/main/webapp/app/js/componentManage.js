@@ -485,6 +485,7 @@ coldWeb.controller('componentManage', function ($rootScope, $scope, $state, $coo
 	    $scope.QRcodeShow = function(component_num){
 	    	$("#qrcode").empty();
 	    	$('#QRcode').modal('show');
+	    	$("#componentQRNum").text(component_num);
 	    	$("#qrcode").qrcode({
 			    render: "canvas",//二维码生成方式 table/canvas
 			    text: "http://wujianbuild.com/n/"+component_num, //二维码的内容

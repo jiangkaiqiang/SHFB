@@ -712,7 +712,10 @@
   <update id="updateComStatus" parameterType="com.shfb.rfid.manage.entity.Component">
   	update component SET
   		component_status_id = #{component_status_id}
-  	where component_id = #{component_id} and component_status_id = #{oldcomponent_status_id}
+  	where component_id = #{component_id} 
+  	<if test="oldcomponent_status_id != null">
+  	and component_status_id = #{oldcomponent_status_id}
+  	</if>
   </update>
   
   <select id="findComponentByCardNum" resultType="com.shfb.rfid.manage.entity.Component" parameterType="java.lang.Integer" >

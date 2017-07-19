@@ -66,10 +66,10 @@ public class ProductionAcceptanceController {
 		if(productComponentSize.getComponent_id() == null) return new ResultDto(2, "无法找到构件id", false);
 		
 		SysUser sysUser = userDao.findUserById(token);
-		int resUpdate = updateComStatus(productComponentSize.getComponent_id(), 5, 4);
-		if(resUpdate == 1) {
+		int resUpdate = updateComStatus(productComponentSize.getComponent_id(), 5, null);
+		//if(resUpdate == 1) {
 			updateComProgress(productComponentSize.getComponent_id(), sysUser.getUser_name(), "生产完成");
-		}
+		//}
 		
 		
 		//int res = productComponentSizeDao.insertSelective(productComponentSize);	
