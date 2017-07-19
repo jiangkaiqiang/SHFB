@@ -9,7 +9,7 @@
 			<div class="row" style="height:34px">
 				<div class="col-sm-2">
 					<div class="btn-group pull-left" id="status">
-					项目：<select 
+					项目：<select style="padding-left:0px" 
 					ng-model="selectedProject" ng-options="x.pro_name for x in projects"
 					ng-change="projectChange(selectedProject.pro_id)"
 					>			
@@ -44,7 +44,7 @@
 				</div>
 				<div  class="col-sm-2">								
 					<div class="btn-group pull-left" id="status">
-					订单编号：<select ng-model="selectcomponent_order" ng-options="x.order_num for x in component_orders">
+					订单编号：<select style="padding-left:0px" ng-model="selectcomponent_order" ng-options="x.order_num for x in component_orders">
 					</select>
 					</div>
 				</div>
@@ -63,7 +63,7 @@
 			<div class="row" style="height:8px">
 				<div class="three">
 				<div class="btn-group pull-right" role="group" style="margin-right:10px">
-				    <button type="button" class="btn btn-default" ng-click="modalShow('#productPlan')">提交生产计划</button>
+				    <button type="button" class="btn btn-default" ng-click="modalProduct('#productPlan')">提交生产计划</button>
 				  	<button type="button" class="btn btn-default" ng-click="exportProduct()">导出生产计划</button>
 				</div>
 			</div>	
@@ -362,6 +362,27 @@
 	         </div>
 	         <div class="modal-body">
 	            	<form class="form-horizontal" name="projectForm">
+	            		
+	            		<div class="form-group">
+					      <label for="projectname" class="col-sm-4 control-label">项目名称</label>
+					      <div class="col-sm-8">
+					         {{selectedProject.pro_name}}
+					      </div>
+					   </div>
+					   
+					   <div class="form-group">
+					      <label for="address" class="col-sm-4 control-label">单体名称</label>
+					      <div class="col-sm-8">
+					         {{selectSingle.single_name}}
+					      </div>
+					   </div>
+					   <div class="form-group">
+					      <label for="contactName" class="col-sm-4 control-label">楼层名称</label>
+					      <div class="col-sm-8">
+					        {{selectFloor.floor}}
+					      </div>
+					   </div>
+	            	
 					   <div class="form-group">
 					      <label for="projectname" class="col-sm-4 control-label">生产计划开始日期：</label>
 					      <div class="col-sm-8">
@@ -391,7 +412,7 @@
 					   <div class="form-group">
 					      <label for="contactName" class="col-sm-4 control-label">说明：</label>
 					      <div class="col-sm-8">
-					         <textarea type="text" rows="4" class="form-control" id="contactName" name="contactName" ng-model="product_explain"
+					         <textarea type="text" rows="4" class="form-control" id="product_explain" name="contactName" ng-model="product_explain"
 					            placeholder="请输入说明">
 					            </textarea>
 					      </div>

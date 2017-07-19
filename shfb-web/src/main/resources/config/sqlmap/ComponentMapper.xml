@@ -69,6 +69,7 @@
     AND pro_id=#{pro_id}
     </if>
     AND (card_num IS NULL or card_num =  '')
+    LIMIT 0,200
   </select>
   
   <select id="getComponentInfo" resultType="com.shfb.rfid.manage.dto.ComponentDto" parameterType="String" >
@@ -628,7 +629,29 @@
   	<if test="floor != null">
   	AND floor=#{floor}
   	</if>
+  	<if test="type != null">
+  	AND component_type=#{type}
+  	</if>
   	AND (card_num IS NULL or card_num =  '')
+  	LIMIT 0,200
+  </select>
+  
+  <select id="findComponentByselForClientUnBind" parameterType="java.lang.Integer"  resultType="com.shfb.rfid.manage.entity.Component">
+  	SELECT component_id, component_name,component_num,component_type,card_num FROM component WHERE 1=1
+  	<if test="pro_id != null">
+  	 AND pro_id=#{pro_id}
+  	</if>
+  	<if test="single_name != null">
+  	AND single_name=#{single_name}
+  	</if>
+  	<if test="floor != null">
+  	AND floor=#{floor}
+  	</if>
+  	<if test="type != null">
+  	AND component_type=#{type}
+  	</if>
+  	AND (card_num IS NOT NULL and card_num !=  '')
+  	LIMIT 0,200
   </select>
   
   <select id="findComponentInfoById" parameterType="java.lang.Integer" resultType="com.shfb.rfid.manage.dto.ComponentDto">
@@ -743,5 +766,21 @@
   		card_num = ''
   	where pro_id = #{pro_id} and component_type = #{component_type}
   </update>
+  
+  <select id="getComponentIds" parameterType="String" resultType="java.lang.Integer">
+  	SELECT component_id FROM component 
+  	WHERE 1=1
+  	AND component_status_id=2
+  	AND comp_factory_id=#{comp_factory_id}
+  	<if test="pro_id != null and pro_id != ''">
+  	AND pro_id=#{pro_id} 
+  	</if>
+  	<if  test="single_name != null and single_name != ''">
+  	AND single_name=#{single_name}
+  	</if> 
+  	<if  test="floor != null and floor != ''">
+  	AND floor=#{floor} 
+  	</if>
+  </select>
   
 </mapper>

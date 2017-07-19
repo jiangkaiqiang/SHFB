@@ -12,11 +12,9 @@
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<!-- <property name="url" value="jdbc:mysql://rm-uf6b10v1392fp95m9o.mysql.rds.aliyuncs.com:3306/shfb?zeroDateTimeBehavior=convertToNull&amp;characterEncoding=UTF8" /> --> 
-         <property name="url" value="jdbc:mysql://rm-bp11ttp5x6k061mv7o.mysql.rds.aliyuncs.com:3306/shfb?zeroDateTimeBehavior=convertToNull&amp;characterEncoding=UTF8" /> 
-         <!-- <property name="username" value="build" /> --> 
+         <property name="url" value="jdbc:mysql://rm-bp11ttp5x6k061mv7o.mysql.rds.aliyuncs.com:3306/shfb?zeroDateTimeBehavior=convertToNull&amp;characterEncoding=UTF8" />  
          <property name="username" value="wls" /> 
-         <!-- <property name="password" value="!Buildaliyunmysql#" /> --> 
          <property name="password" value="!@QWaszx" /> 
+
 	</bean>
 </beans>

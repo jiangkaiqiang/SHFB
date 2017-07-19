@@ -364,23 +364,48 @@ coldWeb.controller('productManage', function ($rootScope, $scope, $state, $cooki
 	    	
 	    }
 	    
+	    $scope.modalProduct=function(eleId){
+	    	if($scope.selectedProject!=undefined && $scope.selectedProject.pro_id!=undefined) {
+			   }else{
+				   alert("请选择项目");
+				   return;
+			   }
+			   if($scope.selectSingle!=undefined&&$scope.selectSingle.single_name!=undefined) {
+			   }else{
+				   alert("请选择单体");
+				   return;
+			   }
+	    	$(eleId).modal('show');
+	    }
+	    
 	    /**
 	     * 提交生产计划
 	     */
 	    $scope.submitProductPlan=function(){
-	    	//判断有无选择
-	    	var parmStr = "";
-	    	for(i in $scope.selected){
-	    		parmStr += $scope.selected[i].component_id +","
-	    	}
-	    	
+	    	var pro_ida ="";
+	    	   if($scope.selectedProject!=undefined && $scope.selectedProject.pro_id!=undefined) {
+	    		   pro_ida=$scope.selectedProject.pro_id;
+			   }
+	    	   var single_namea="";
+			   if($scope.selectSingle!=undefined&&$scope.selectSingle.single_name!=undefined) {
+				   single_namea=$scope.selectSingle.single_name;
+			   }
+			   
+			   var floora="";
+			   if($scope.selectFloor!=undefined&&$scope.selectFloor.floor!=undefined) {
+				   floora=$scope.selectFloor.floor;
+			   }
+
 	    	$http.get('/i/component/addProductPlan', {
 	            params: {
-	                component_ids: parmStr,
 	                product_plan_begin_date:$scope.product_plan_begin_date,
 	                product_plan_end_date:$scope.product_plan_end_date,
-	                product_explain:$scope.product_explain,
-	                order_username:$rootScope.admin.user_name
+	                product_explain:$("#product_explain").text(),
+	                order_username:$rootScope.admin.user_name,
+	                comp_factory_id:$rootScope.admin.comp_factory_id,
+	                pro_id:pro_ida,
+	                single_name:single_namea,
+	                floor:floora
 	            }
 	        }).success(function (data) {
 	        	$scope.getComponents();

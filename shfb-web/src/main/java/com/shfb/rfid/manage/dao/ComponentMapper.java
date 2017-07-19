@@ -45,7 +45,11 @@ public interface ComponentMapper {
     
     List<Component> findComponentBysel(@Param("pro_id")Integer pro_id, @Param("single_name")String single_name, @Param("floor")String floor, @Param("comp_factory_id")Integer comp_factory_id);
     
-    List<Component>  findComponentByselForClient(@Param("pro_id")Integer pro_id, @Param("single_name")String single_name, @Param("floor")String floor);
+    List<Component>  findComponentByselForClient(@Param("pro_id")Integer pro_id, @Param("single_name")String single_name, 
+    		@Param("floor")String floor,@Param("type")String type);
+    
+    List<Component>  findComponentByselForClientUnBind(@Param("pro_id")Integer pro_id, @Param("single_name")String single_name, 
+    		@Param("floor")String floor,@Param("type")String type);
    
     Page<ComponentDto> findComponentPage(@Param("pro_id")Integer pro_id, @Param("single_name")String single_name, 
     		@Param("floor")String floor, @Param("component_type")String component_type, 
@@ -92,5 +96,10 @@ public interface ComponentMapper {
     
     int unbundling(@Param("pro_id") Integer pro_id, 
     		@Param("component_type")String component_type);
+    
+    Integer[] getComponentIds(@Param("pro_id") Integer pro_id,
+			@Param("single_name") String single_name,
+			@Param("floor") String floor,
+			@Param("comp_factory_id") Integer comp_factory_id);
     
 }

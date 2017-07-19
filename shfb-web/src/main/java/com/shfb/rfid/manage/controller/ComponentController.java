@@ -387,27 +387,32 @@ public class ComponentController extends BaseController {
 	 * @return
 	 * @throws UnsupportedEncodingException
 	 */
-	@RequestMapping(value = "/addProductPlan", method = RequestMethod.GET)
+	@RequestMapping(value = "/addProductPlan")
 	@ResponseBody
-	public ResultDto addProductPlan( 
-			@RequestParam(value="component_ids", required=true) String component_ids,
+	public ResultDto addProductPlan(
 			@RequestParam(value="product_plan_begin_date", required=true) String product_plan_begin_date,
 			@RequestParam(value="product_plan_end_date", required=false) String product_plan_end_date,
 			@RequestParam(value="product_explain", required=true) String product_explain,
-			@RequestParam(value="order_username",required=true) String order_username
+			@RequestParam(value="order_username",required=true) String order_username,
+			@RequestParam(value="pro_id", required=true) Integer pro_id,
+			@RequestParam(value="single_name", required=true) String single_name,
+			@RequestParam(value="floor", required=false) String floor,
+			@RequestParam(value="comp_factory_id", required=true) Integer comp_factory_id
 			) throws UnsupportedEncodingException {
 				
-				String[] component_idArray = component_ids.split(",");
+				Integer[] component_idArray = componentDao.getComponentIds(pro_id, single_name, floor, comp_factory_id);
+				
+				//String[] component_idArray = component_ids.split(",");
 				int reses = 0;
 				
-				for (String comId : component_idArray) {
-					int res = componentDao.addProductPlan(Integer.valueOf(comId), product_plan_begin_date, product_plan_end_date, product_explain);
+				for (Integer comId : component_idArray) {
+					int res = componentDao.addProductPlan(comId, product_plan_begin_date, product_plan_end_date, product_explain);
 					
 					if(res!=0) {
 						//更新构件状态成功
 						reses += res;
 						//更新构件状态进度
-						updateComProgress(Integer.valueOf(comId), order_username, "已接单");
+						updateComProgress(comId, order_username, "已接单");
 					} else {
 						System.err.println("更新构件状态失败"+comId);
 					}
