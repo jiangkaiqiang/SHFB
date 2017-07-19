@@ -219,8 +219,11 @@ public class UserController extends BaseController {
 	@RequestMapping(value = "/updateUser", method = RequestMethod.GET)
 	@ResponseBody
 	public Object updateUser(SysUser user) throws UnsupportedEncodingException {
-		if (user.getUser_name() == null || user.getPassword() == null) {
+		/*if (user.getUser_name() == null || user.getPassword() == null) {
 			return new ResultDto(-1, "用户名和密码不能为空");
+		}*/
+		if (user.getUser_name() == null) {
+			return new ResultDto(-1, "用户名不能为空");
 		}
 		userDao.updateUser(user);
 		return new ResultDto(0,"更新成功");
