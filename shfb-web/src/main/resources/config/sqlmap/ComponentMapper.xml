@@ -32,12 +32,15 @@
     <result column="picture_install" property="picture_install" jdbcType="VARCHAR" />
     <result column="order_date" property="order_date" jdbcType="VARCHAR" />  
     <result column="product_explain" property="product_explain" jdbcType="VARCHAR" /> 
+    <result column="weight" property="weight" jdbcType="VARCHAR" />
+    <result column="concrete_strength" property="concrete_strength" jdbcType="VARCHAR" />
+    <result column="importDate" property="importDate" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
     component_id, component_name, component_num, component_type, component_size, bind_status, 
     expedit_status, expedit_date, component_status_id, check_res, single_name, pro_id, 
     floor, plan_begin_date, plan_end_date, real_begin_date, real_end_date, order_num, 
-    comp_factory_id, order_user_id, order_time, product_plan_begin_date, product_plan_end_date, drawing
+    comp_factory_id, order_user_id, order_time, product_plan_begin_date, product_plan_end_date, drawing,weight, concrete_strength
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -73,8 +76,12 @@
   </select>
   
   <select id="getComponentInfo" resultType="com.shfb.rfid.manage.dto.ComponentDto" parameterType="String" >
-    SELECT component_num,component_type,component_size,single_name,floor, pro_name from component AS c 
-		LEFT JOIN project AS p ON c.pro_id = p.pro_id WHERE component_num=#{component_num}
+		SELECT c.component_num,c.component_type,c.component_size,c.single_name,c.floor, c.plan_end_date, p.pro_name,
+			c.concrete_strength, c.weight,f.comp_factory_name,f.contacts_name, f.contacts_tel,c.drawing
+ 			from component AS c 
+			LEFT JOIN project AS p ON c.pro_id = p.pro_id 
+			LEFT JOIN comp_factory AS f ON c.comp_factory_id=f.comp_factory_id
+		WHERE c.component_num=#{component_num}
   </select>
   
   
@@ -189,6 +196,15 @@
       <if test="drawing != null" >
         drawing,
       </if>
+      <if test="concrete_strength != null" >
+        concrete_strength,
+      </if>
+      <if test="weight != null" >
+        weight,
+      </if>  
+      <if test="importDate != null" >
+        importDate,
+      </if>   
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="component_id != null" >
@@ -262,6 +278,15 @@
       </if>
       <if test="drawing != null" >
         #{drawing,jdbcType=VARCHAR},
+      </if>
+      <if test="concrete_strength != null" >
+        #{concrete_strength,jdbcType=VARCHAR},
+      </if>
+      <if test="weight != null" >
+        #{weight,jdbcType=VARCHAR},
+      </if>
+      <if test="importDate != null" >
+        #{importDate,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -709,7 +734,7 @@
         		plan_begin_date = CURDATE(),
 				real_begin_date = CURDATE(),
 				order_time = NOW(),
-				expedit_date = #{plan_end_date},
+				plan_end_date = #{plan_end_date},
 				component_status_id = 2,
 				comp_factory_id=#{comp_factory_id},
 				order_user_id=#{order_user_id},
@@ -769,7 +794,7 @@
     
   <update id="unbundling" parameterType="String">
   	update component SET
-  		card_num = ''
+  		card_num = '',bind_status=1
   	where pro_id = #{pro_id} and component_type = #{component_type}
   </update>
   
@@ -788,5 +813,21 @@
   	AND floor=#{floor} 
   	</if>
   </select>
+  
+  <update id="updateByExcelComponentNum" parameterType="Integer" >
+    update component
+    <set >
+      <if test="component_size != null" >
+        component_size = #{component_size,jdbcType=VARCHAR},
+      </if>
+      <if test="concrete_strength != null" >
+        concrete_strength = #{concrete_strength,jdbcType=VARCHAR},
+      </if>
+      <if test="weight != null" >
+        weight = #{weight,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where component_num = #{component_num,jdbcType=INTEGER}
+  </update>
   
 </mapper>

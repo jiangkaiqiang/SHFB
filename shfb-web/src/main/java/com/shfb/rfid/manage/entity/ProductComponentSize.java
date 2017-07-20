@@ -138,8 +138,28 @@ public class ProductComponentSize {
     private Integer component_id;
 
     private String picture;
+    
+    private Integer product_result_pass=2;
+    
+    private String product_result_mark="";
 
-    public Integer getProduct_component_size_id() {
+    public Integer getProduct_result_pass() {
+		return product_result_pass;
+	}
+
+	public void setProduct_result_pass(Integer product_result_pass) {
+		this.product_result_pass = product_result_pass;
+	}
+
+	public String getProduct_result_mark() {
+		return product_result_mark;
+	}
+
+	public void setProduct_result_mark(String product_result_mark) {
+		this.product_result_mark = product_result_mark;
+	}
+
+	public Integer getProduct_component_size_id() {
         return product_component_size_id;
     }
 

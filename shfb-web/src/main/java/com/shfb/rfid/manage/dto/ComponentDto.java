@@ -8,7 +8,27 @@ public class ComponentDto extends Component{
 	private String pro_name;
 	private String comp_factory_name;
 	private String user_name;
+	private String contacts_name;
+	private String contacts_tel;
 	
+	
+	
+	public String getContacts_name() {
+		return contacts_name;
+	}
+
+	public void setContacts_name(String contacts_name) {
+		this.contacts_name = contacts_name;
+	}
+
+	public String getContacts_tel() {
+		return contacts_tel;
+	}
+
+	public void setContacts_tel(String contacts_tel) {
+		this.contacts_tel = contacts_tel;
+	}
+
 	public String getComponent_status_name() {
 		return component_status_name;
 	}

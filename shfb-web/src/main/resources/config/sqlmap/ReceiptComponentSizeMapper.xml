@@ -71,6 +71,8 @@
     <result column="keyway_length_mark" property="keyway_length_mark" jdbcType="VARCHAR" />
     <result column="component_id" property="component_id" jdbcType="INTEGER" />
     <result column="picture" property="picture" jdbcType="VARCHAR" />
+    <result column="receipt_result_pass" property="receipt_result_pass" jdbcType="INTEGER" />
+    <result column="receipt_result_mark" property="receipt_result_mark" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
     receipt_component_size_id, length_small_pass, length_small_mark, length_middle_pass, 
@@ -93,7 +95,7 @@
     embedded_parts_centrallineposition_mark, embedded_parts_componentheight_pass, embedded_parts_componentheight_mark, 
     embedded_reinforcement_centerline_pass, embedded_reinforcement_centerline_mark, embedded_reinforcement_length_pass, 
     embedded_reinforcement_length_mark, keyway_centerline_pass, keyway_centerline_mark, 
-    keyway_length_pass, keyway_length_mark, component_id, picture
+    keyway_length_pass, keyway_length_mark, component_id, picture, receipt_result_pass, receipt_result_mark
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -139,7 +141,7 @@
       embedded_reinforcement_length_pass, embedded_reinforcement_length_mark, 
       keyway_centerline_pass, keyway_centerline_mark, 
       keyway_length_pass, keyway_length_mark, 
-      component_id, picture)
+      component_id, picture, receipt_result_pass, receipt_result_mark)
     values (#{receipt_component_size_id,jdbcType=INTEGER}, #{length_small_pass,jdbcType=INTEGER}, 
       #{length_small_mark,jdbcType=VARCHAR}, #{length_middle_pass,jdbcType=INTEGER}, 
       #{length_middle_mark,jdbcType=VARCHAR}, #{length_big_pass,jdbcType=INTEGER}, #{length_big_mark,jdbcType=VARCHAR}, 
@@ -173,7 +175,7 @@
       #{embedded_reinforcement_length_pass,jdbcType=INTEGER}, #{embedded_reinforcement_length_mark,jdbcType=VARCHAR}, 
       #{keyway_centerline_pass,jdbcType=INTEGER}, #{keyway_centerline_mark,jdbcType=VARCHAR}, 
       #{keyway_length_pass,jdbcType=INTEGER}, #{keyway_length_mark,jdbcType=VARCHAR}, 
-      #{component_id,jdbcType=INTEGER}, #{picture,jdbcType=VARCHAR})
+      #{component_id,jdbcType=INTEGER}, #{picture,jdbcType=VARCHAR}, #{receipt_result_pass,jdbcType=INTEGER}, #{receipt_result_mark,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.shfb.rfid.manage.entity.ReceiptComponentSize" >
     insert into receipt_component_size
@@ -385,6 +387,12 @@
       <if test="picture != null" >
         picture,
       </if>
+      <if test="receipt_result_pass != null" >
+        receipt_result_pass,
+      </if>
+      <if test="receipt_result_mark != null" >
+        receipt_result_mark,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="receipt_component_size_id != null" >
@@ -593,6 +601,12 @@
       </if>
       <if test="picture != null" >
         #{picture,jdbcType=VARCHAR},
+      </if>
+      <if test="receipt_result_pass != null" >
+        #{receipt_result_pass,jdbcType=INTEGER},
+      </if>
+      <if test="receipt_result_mark != null" >
+        #{receipt_result_mark,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -803,6 +817,12 @@
       <if test="picture != null" >
         picture = #{picture,jdbcType=VARCHAR},
       </if>
+      <if test="receipt_result_pass != null" >
+        receipt_result_pass = #{receipt_result_pass,jdbcType=INTEGER},
+      </if>
+      <if test="receipt_result_mark != null" >
+        receipt_result_mark = #{receipt_result_mark,jdbcType=VARCHAR},
+      </if>
     </set>
     where component_id = #{component_id,jdbcType=INTEGER}
   </update>
@@ -875,7 +895,9 @@
       keyway_length_pass = #{keyway_length_pass,jdbcType=INTEGER},
       keyway_length_mark = #{keyway_length_mark,jdbcType=VARCHAR},
       component_id = #{component_id,jdbcType=INTEGER},
-      picture = #{picture,jdbcType=VARCHAR}
+      picture = #{picture,jdbcType=VARCHAR},
+      receipt_result_pass = #{receipt_result_pass,jdbcType=INTEGER},
+      receipt_result_mark = #{receipt_result_mark,jdbcType=VARCHAR}
     where receipt_component_size_id = #{receipt_component_size_id,jdbcType=INTEGER}
   </update>
    <select id="findByComponentId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >

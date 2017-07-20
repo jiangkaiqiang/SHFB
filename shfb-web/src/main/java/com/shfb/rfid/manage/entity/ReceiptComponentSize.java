@@ -138,6 +138,10 @@ public class ReceiptComponentSize {
     private Integer component_id;
 
     private String picture;
+    
+    private Integer receipt_result_pass;
+    
+    private String receipt_result_mark;
 
     public Integer getReceipt_component_size_id() {
         return receipt_component_size_id;
@@ -690,4 +694,22 @@ public class ReceiptComponentSize {
     public void setPicture(String picture) {
         this.picture = picture == null ? null : picture.trim();
     }
+
+	public Integer getReceipt_result_pass() {
+		return receipt_result_pass;
+	}
+
+	public void setReceipt_result_pass(Integer receipt_result_pass) {
+		this.receipt_result_pass = receipt_result_pass;
+	}
+
+	public String getReceipt_result_mark() {
+		return receipt_result_mark;
+	}
+
+	public void setReceipt_result_mark(String receipt_result_mark) {
+		this.receipt_result_mark = receipt_result_mark;
+	}
+    
+    
 }

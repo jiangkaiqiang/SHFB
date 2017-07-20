@@ -211,7 +211,7 @@ coldWeb.controller('componentManage', function ($rootScope, $scope, $state, $coo
 	   
 	   //创建图片查看器
 	   $scope.viewerShow=function(){
-		   console.log($("#viewer1").html());
+		  
 		  $("#viewer1").viewer();
 		  $("#viewer2").viewer();
 		  $("#viewer3").viewer();

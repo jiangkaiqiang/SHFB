@@ -86,7 +86,7 @@
 				         <th>楼层</th>
 						 <th>卡号</th>
 				         <th>已催货</th>
-				         <th>催货交期</th>
+				         <th>计划完成</th>
 				         <th>状态</th>				         
 				         <th>验收结果</th>
 				         <th>操作</th>
@@ -107,7 +107,7 @@
 				         <td>{{component.card_num}}</td>
 				         <td ng-if="component.expedit_status=='1'">未催货</td>
 				         <td ng-if="component.expedit_status=='2'">已催货</td>
-				         <td>{{component.expedit_date}}</td>
+				         <td>{{component.plan_end_date}}</td>
 				         <td>{{component.component_status_name}}</td>
 				         
 				         <td ng-if="component.check_res=='1'">未验收</td>
