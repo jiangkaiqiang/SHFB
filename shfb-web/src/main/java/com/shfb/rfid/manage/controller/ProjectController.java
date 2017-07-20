@@ -1,5 +1,6 @@
 package com.shfb.rfid.manage.controller;
 
+import java.io.Console;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
@@ -210,7 +211,7 @@ public class ProjectController extends BaseController {
 					//获取文件的原始名字
 					String fileName = files[i].getOriginalFilename();
 					//文件保存的名字
-					String saveName = System.currentTimeMillis() + fileName.substring(fileName.lastIndexOf("."));
+					String saveName = System.currentTimeMillis() + fileName;
 					fileEntities.add(new UploadFileEntity(saveName, files[i], "uploadComp"));					
 				}
 				//保存文件
@@ -234,7 +235,7 @@ public class ProjectController extends BaseController {
 						if( comlist != null && comlist.size() > 0) {
 							
 							errStr += map.get("var0") + ";";
-							System.out.println(map.get("var0"));
+							//System.out.println(map.get("var0"));
 							successCount--;
 							continue;
 						}
@@ -243,13 +244,19 @@ public class ProjectController extends BaseController {
 						component.setSingle_name(map.get("var1"));
 						component.setFloor(map.get("var2"));
 						component.setComponent_type(map.get("var3"));
-						component.setDrawing("http://139.196.139.164:65531/shfb/uploadPic/"+map.get("var4").trim());
+						if(map.get("var4") == null) {
+							component.setDrawing("http://139.196.139.164:65531/shfb/uploadPic/blank.png");
+						}else{
+							component.setDrawing("http://139.196.139.164:65531/shfb/uploadPic/"+map.get("var4").trim());
+						}
+						
 						component.setComponent_size(map.get("var5"));
 						component.setPro_id(pro_id);
 						componentDao.insertSelective(component);
 					}
 					
 					if(!errStr.equals("")) {
+						System.out.println("重复构件"+errStr);
 						return new ResultDto(1,"导入成功,数量："+successCount+";以下编号重复:"+errStr);
 					}
 					
