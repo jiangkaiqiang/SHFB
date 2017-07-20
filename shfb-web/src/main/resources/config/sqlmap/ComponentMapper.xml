@@ -632,6 +632,9 @@
   	<if test="type != null">
   	AND component_type=#{type}
   	</if>
+  	<if test="compName != null">
+  	AND component_num=#{compName}
+  	</if>
   	AND (card_num IS NULL or card_num =  '')
   	LIMIT 0,200
   </select>
@@ -649,6 +652,9 @@
   	</if>
   	<if test="type != null">
   	AND component_type=#{type}
+  	</if>
+  	<if test="compName != null">
+  	AND component_num=#{compName}
   	</if>
   	AND (card_num IS NOT NULL and card_num !=  '')
   	LIMIT 0,200

@@ -211,7 +211,8 @@ public class ComponentMakeController extends BaseController{
 	 */
 	@RequestMapping(value = "/getSelectCompForClient")
 	@ResponseBody
-	public Object getSelectCompForClient(String projectName, String singleName,String floorName,String typeName,String bindName) throws UnsupportedEncodingException {
+	public Object getSelectCompForClient(String projectName, String singleName,String floorName,String typeName,String bindName,String compName)
+			throws UnsupportedEncodingException {
 		boolean bindFlag = true;
 		List<Component> components = null;
 		if (projectName.equals("null")) {
@@ -246,15 +247,18 @@ public class ComponentMakeController extends BaseController{
 				bindFlag = false;
 			}
 		}
+		if (compName==null||compName.equals("")) {
+			compName = null;
+		}
 		Project project = projectDao.findProjectByName(projectName);
 		if (project==null) {
 			project = new Project();
 		}
 		if (bindFlag) {
-			components = componentDao.findComponentByselForClient(project.getPro_id(), singleName, floorName,typeName);	
+			components = componentDao.findComponentByselForClient(project.getPro_id(), singleName, floorName,typeName,compName);	
 		}
 		else {
-			components = componentDao.findComponentByselForClientUnBind(project.getPro_id(), singleName, floorName,typeName);	
+			components = componentDao.findComponentByselForClientUnBind(project.getPro_id(), singleName, floorName,typeName,compName);	
 		}
 		return  ResponseData.newSuccess(components, "查询成功");
 	}
