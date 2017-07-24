@@ -36,9 +36,9 @@
       <if test="login_time != null" >
         login_time = #{login_time,jdbcType=TIMESTAMP},
       </if>
-      <!-- <if test="password != null" >
+      <if test="password != null" >
         password = #{password,jdbcType=VARCHAR},
-      </if> -->
+      </if> 
       <if test="user_tel != null" >
         user_tel = #{user_tel,jdbcType=VARCHAR},
       </if>
