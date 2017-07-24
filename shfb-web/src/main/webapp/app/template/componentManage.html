@@ -4,6 +4,7 @@
      		border:1px solid white;
      	}
      </style>
+    
     <div style="padding: 28px 30px 0 30px;background-color: #F1F1F1;" ng-show="ismanageShow">
     	<!-- 按钮操作区域开始 -->
 			<div class="row" style="height:34px">
@@ -146,7 +147,7 @@
 	               	&nbsp;进度<br>
 	    		</h4>
     		</div>
-    		<div class="row" style="padding-left:30px;padding-bottom:15px">
+    		<!-- <div class="row" style="padding-left:30px;padding-bottom:15px">
     			<div class="col-md-2">
     				<div class="row">
 					<button class="btn btn-default" disabled="disabled" style="height:50px">
@@ -173,7 +174,84 @@
 							{{progress.operation_date}}
 					</div>	
 				</div>							
-			</div>
+			</div> -->
+			<div class="row" style="padding-left:30px;padding-bottom:15px">
+    			<div class="col-md-12">
+			<div id="stepBar" class="ui-stepBar-wrap">
+	<div class="ui-stepBar">
+		<div class="ui-stepProcess"></div>
+	</div>
+	<div class="ui-stepInfo-wrap">
+		<table class="ui-stepLayout" border="0" cellpadding="0" cellspacing="0">
+			<tr>
+				<td class="ui-stepInfo">
+					<a class="ui-stepSequence">1</a>
+					<p class="ui-stepName">初始</p>
+					<p>&nbsp;计划开始时间:{{componentInfo.plan_begin_date}}</p>
+					<p>&nbsp;计划完成时间:{{componentInfo.plan_end_date}}</p>
+				</td>
+				<td class="ui-stepInfo">
+					<a class="ui-stepSequence">2</a>
+					<p   class="ui-stepName">已下单</p>
+					<p id="ele2">
+					</p>
+					<p id="eled2">
+					</p>
+				</td>
+				<td class="ui-stepInfo">
+					<a class="ui-stepSequence">3</a>
+					<p class="ui-stepName">已接单</p>
+					<p id="ele3">
+					</p>
+					<p id="eled3">
+					</p>
+				</td>
+				<td class="ui-stepInfo">
+					<a class="ui-stepSequence">4</a>
+					<p class="ui-stepName">生产中</p>
+					<p id="ele4">
+					</p>
+					<p id="eled4">
+					</p>
+				</td>
+				<td class="ui-stepInfo">
+					<a class="ui-stepSequence">5</a>
+					<p class="ui-stepName">生产完成</p>
+					<p id="ele5">
+					</p>
+					<p id="eled5">
+					</p>
+				</td>
+				<td class="ui-stepInfo">
+					<a class="ui-stepSequence">6</a>
+					<p class="ui-stepName">出厂</p>
+					<p id="ele6">
+					</p>
+					<p id="eled6">
+					</p>
+				</td>
+				<td class="ui-stepInfo">
+					<a class="ui-stepSequence">7</a>
+					<p class="ui-stepName">进场</p>
+					<p id="ele7">
+					</p>
+					<p id="eled7">
+					</p>
+				</td>
+				<td class="ui-stepInfo">
+					<a class="ui-stepSequence">8</a>
+					<p class="ui-stepName">验收完成</p>
+					<p id="ele8">
+					</p>
+					<p id="eled8">
+					</p>
+				</td>
+			</tr>
+		</table>
+	</div>
+</div>
+</div>
+</div>
 			
 			<div class="row" style="padding-left:30px;" ng-init="isedit=false">
 				<h4 class="modal-title">
@@ -551,3 +629,12 @@
 	</div><!-- /.modal -->
 	</div>
 	<!-- 查看二维码模态框end -->
+	<script type="text/javascript">
+$(function(){
+	stepBar.init("stepBar", {
+		step : 1,
+		change : true,
+		animation : true
+	});
+});
+</script>
