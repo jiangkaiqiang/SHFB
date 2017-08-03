@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
    <head>
-        <title>精益建造可视化管理平台-适用于装配式建筑建造</title>
+        <title>称重系统</title>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
         <link rel="shortcut icon" href="assets/img/favicon.ico" />
@@ -23,7 +23,7 @@
 			<div class="head">
 				<div class="logoArea pull-left" onclick="location.href='index.html'">
 					<h1 class="logo  pull-left"></h1>
-					<h3 class="manage  pull-left">精益建造可视化管理平台-适用于装配式建筑建造</h3>
+					<h3 class="manage  pull-left">称重系统</h3>
 					<!-- <div class="home  pull-left">
 						<span class="glyphicon glyphicon-home" aria-hidden="true"></span>
 					</div> -->
@@ -50,69 +50,46 @@
     						<span>功能栏目</span>
     					</div>
     					<ul class="list" ng-controller="index">
-    					  <li ng-click="goMenu('home','#/home')" id ="home" ng-show="adminRoleDto.overView">
+    					  <li ng-click="goMenu('home','#/home')" id ="home" >
     							<span class="glyphicon glyphicon-eye-open"></span>
-    							<a>概览</a>
+    							<a>首页</a>
     							<span class="glyphicon glyphicon-chevron-right pull-right"></span>
     							<ul class="liSon">
     								<li ng-click="goMenu('home','#/home')">综合概览</li>
     							</ul>
     						</li>
     						
-    						<li ng-click="goMenu('componentManage','#/componentManage')" id ="componentManage" ng-show="adminRoleDto.compManage || adminRoleDto.processManage">
-    							<span class="glyphicon glyphicon-road"></span>
-    							<a>构件管理</a>
-    							<span class="glyphicon glyphicon-chevron-right pull-right"></span>
-    							<ul class="liSon">
-    								<li  ng-show="adminRoleDto.compManage"><a style="text-decoration:none" href="#/componentManage"><font color="black">构件列表</font></a></li>
-    								<li  ng-show="adminRoleDto.processManage"><a style="text-decoration:none" href="#/componentOrder"><font color="black">进度计划</font></a></li>
-    							</ul>
-    						</li>
-    					
-    					<li ng-click="goMenu('projectManage','#/projectManage')" id="projectManage" ng-show="adminRoleDto.projectManage">
+    					<li ng-click="goMenu('projectManage','#/projectManage')" id="projectManage" >
     							<span class="glyphicon glyphicon-th-list"></span>
-    							<a>项目管理</a>
+    							<a>历史记录</a>
     							<span class="glyphicon glyphicon-chevron-right pull-right"></span>
     							<ul class="liSon">
-    								<li ng-click="goMenu('projectManage','#/projectManage')" ng-show="adminRoleDto.projectManage">项目管理</li>
+    								<li ng-click="goMenu('projectManage','#/projectManage')">项目管理</li>
     							</ul>
     						</li>
-    						<li ng-click="goMenu('compFactoryManage','#/compFactoryManage')" ng-show="adminRoleDto.compFactoryManage" id="compFactoryManage">
+    						<li ng-click="goMenu('compFactoryManage','#/compFactoryManage')"  id="compFactoryManage">
 								<span class="glyphicon glyphicon-home"></span>
-								<a>构件厂管理</a>
+								<a>异常数据</a>
 								<span class="glyphicon glyphicon-chevron-right pull-right"></span>
 								<ul class="liSon">
-									<li ng-click="goMenu('compFactoryManage','#/compFactoryManage')" ng-show="adminRoleDto.compFactoryManage">构件厂管理</li>
+									<li ng-click="goMenu('compFactoryManage','#/compFactoryManage')">构件厂管理</li>
 								</ul>
 							</li>
-    					
-    					<li ng-click="goMenu('userManage','#/userManage')" id ="userManage" ng-show="adminRoleDto.userManage || 
-    					adminRoleDto.roleManage ||adminRoleDto.logManage">
-    							<span class="glyphicon glyphicon-cog"></span>
-    							<a>系统管理</a>
+    					<li ng-click="goMenu('userManage','#/userManage')" id ="userManage" >
+    							<span class="glyphicon glyphicon-pencil"></span>
+    							<a>数据统计</a>
     							<span class="glyphicon glyphicon-chevron-right pull-right"></span>
     							<ul class="liSon">
-    								<li  ng-show="adminRoleDto.userManage"><a style="text-decoration:none" href="#/userManage"><font color="black">用户管理</font></a></li>
-    								<li  ng-show="adminRoleDto.roleManage"><a  style="text-decoration:none"  href="#/userRoleManage"><font color="black">角色管理</font></a></li>
-    								<li  ng-show="adminRoleDto.logManage"><a style="text-decoration:none"  href="#/operationLog"><font color="black">操作日志</font></a></li>
+    								<li ng-click="goMenu('userManage','#/userManage')">数据统计</li>
     							</ul>
     						</li>
-    					
-    					<li ng-click="goMenu('productManage','#/productManage')" id="productManage" ng-show="adminRoleDto.productManage">
-    							<span class="glyphicon glyphicon-th-list"></span>
-    							<a>生产管理</a>
-    							<span class="glyphicon glyphicon-chevron-right pull-right"></span>
-    							<ul class="liSon">
-    								<li ng-click="goMenu('productManage','#/productManage')" ng-show="adminRoleDto.productManage">生产管理</li>
-    							</ul>
-    						</li>
-    					
-    					<li ng-click="goMenu('personalSpace','#/personalSpace')" id ="personalSpace" ng-show="adminRoleDto.personalManage">
+    						
+    					<li ng-click="goMenu('personalSpace','#/personalSpace')" id ="personalSpace" >
     							<span class="glyphicon glyphicon-pencil"></span>
     							<a>个人中心</a>
     							<span class="glyphicon glyphicon-chevron-right pull-right"></span>
     							<ul class="liSon">
-    								<li ng-click="goMenu('personalSpace','#/personalSpace')" ng-show="adminRoleDto.personalManage">个人中心</li>
+    								<li ng-click="goMenu('personalSpace','#/personalSpace')">个人中心</li>
     							</ul>
     						</li>
     					</ul>
@@ -153,17 +130,11 @@
 <script src="app/js/home.js"></script>
 <script src="app/js/projectManage.js"></script>
 <script src="app/js/compFactoryManage.js"></script>
-<script src="app/js/componentManage.js"></script>
-<script src="app/js/operationLog.js"></script>
 <script src="app/js/personalSpace.js"></script>
-<script src="app/js/componentOrder.js"></script>
-<script src="app/js/productManage.js"></script>
 <script src="app/js/userManage.js"></script>
 <!-- viewer -->
 <script src="assets/js/viewer.min.js"></script>
 <!-- qrcode -->
 <script src="assets/js/jquery.qrcode.min.js"></script>
-
-<script src="app/js/userRoleManage.js"></script>
 
 </html>

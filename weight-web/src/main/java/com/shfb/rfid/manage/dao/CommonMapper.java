@@ -5,10 +5,10 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
-
 /**
- * 工具类：提供公共组件数据
- * @author maqiang
+ * 
+ * @author jiangkaiqiang
+ * @version 创建时间：2017-8-3 下午2:52:07 
  *
  */
 public interface CommonMapper {

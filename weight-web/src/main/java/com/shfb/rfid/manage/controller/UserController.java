@@ -1,58 +1,29 @@
 package com.shfb.rfid.manage.controller;
-
 import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
 import java.util.Date;
-
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
-
-import com.github.pagehelper.Page;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
-import com.shfb.rfid.manage.dao.CompFactoryMapper;
-import com.shfb.rfid.manage.dao.ProjectMapper;
 import com.shfb.rfid.manage.dao.SysUserMapper;
-import com.shfb.rfid.manage.dao.UserRoleMapper;
 import com.shfb.rfid.manage.dto.BaseDto;
-import com.shfb.rfid.manage.dto.ProjectDto;
 import com.shfb.rfid.manage.dto.ResultDto;
-import com.shfb.rfid.manage.dto.SysUserDto;
-import com.shfb.rfid.manage.dto.UploadFileEntity;
-import com.shfb.rfid.manage.entity.CityInfo;
-import com.shfb.rfid.manage.entity.CompFactory;
 import com.shfb.rfid.manage.entity.Cookies;
-import com.shfb.rfid.manage.entity.Project;
-import com.shfb.rfid.manage.entity.ProvinceInfo;
 import com.shfb.rfid.manage.entity.SysUser;
-import com.shfb.rfid.manage.entity.UserRole;
 import com.shfb.rfid.manage.service.CookieService;
 import com.shfb.rfid.manage.service.FtpService;
-import com.shfb.rfid.manage.util.EncodeUtil;
 import com.shfb.rfid.manage.util.ResponseData;
 import com.shfb.rfid.manage.util.StringUtil;
-import com.shfb.rfid.manage.dto.NgRemoteValidateDTO;
 @Controller
 @RequestMapping(value = "/user")
 public class UserController extends BaseController {
 	private static String baseDir = "picture";
 	@Autowired
 	private SysUserMapper userDao;
-	@Autowired
-	private ProjectMapper projectDao;
-	@Autowired
-	private UserRoleMapper userRoleDao;
-	@Autowired
-	private CompFactoryMapper compFactoryDao;
 	@Autowired
 	private CookieService cookieService;
 	@Autowired
@@ -76,30 +47,6 @@ public class UserController extends BaseController {
 			return ResponseData.newFailure("用户名和密码不能为空~");
 		}
 		
-	}
-	
-	@RequestMapping(value = "/loginForClient")
-	@ResponseBody
-	public Object loginForClient(HttpServletRequest request, String userName, String password) throws UnsupportedEncodingException {
-		if(StringUtil.isnotNull(userName)&&StringUtil.isnotNull(password)){
-			SysUser user = userDao.findUser(URLDecoder.decode(userName, "UTF-8"), password);
-			if (user != null) {
-	            return  ResponseData.newSuccess(user.getPro_id()+"");
-			}
-			return ResponseData.newFailure("用户名或者密码不正确~");
-		}else{
-			return ResponseData.newFailure("用户名和密码不能为空~");
-		}
-		
-	}
-	
-	@RequestMapping(value = "/findUserByID")
-	@ResponseBody
-	public Object findUserByID(
-			@RequestParam(value="spaceUserID", required=false) Integer spaceUserID
-			) throws UnsupportedEncodingException {
-	     SysUser userEntity = userDao.findUserById(spaceUserID);
-	     return userEntity;
 	}
 	
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
@@ -144,84 +91,10 @@ public class UserController extends BaseController {
 		user = new SysUser();
 		return user;
 	}
-		
-	@RequestMapping(value = "/findUserList", method = RequestMethod.POST)
-	@ResponseBody
-	public Object findUserList(@RequestParam(value="pageNum",required=false) Integer pageNum,
-			@RequestParam(value="pageSize") Integer pageSize, 
-			@RequestParam(value="audit", required=false) Integer audit,
-			@RequestParam(value="startTime", required=false) String startTime,
-			@RequestParam(value="endTime", required=false) String endTime,
-			@RequestParam(value="userProjectID", required=false) Integer userProjectID,
-			@RequestParam(value="keyword", required=false) String keyword) throws UnsupportedEncodingException {
-		if( !(audit == 2 || audit == 1) ){
-			audit = null;
-		}
-		pageNum = pageNum == null? 1:pageNum;
-		pageSize = pageSize==null? 12:pageSize;
-		PageHelper.startPage(pageNum, pageSize);
-		if(keyword.equals("undefined"))
-			keyword = null;
-		else{
-		keyword = URLDecoder.decode(keyword, "UTF-8");
-		}
-		if (userProjectID==null || userProjectID==0) {
-			userProjectID = null;
-		}
-		Page<SysUser> sysUsers = userDao.findAllUser(audit,keyword,startTime, endTime,userProjectID);
-		Page<SysUserDto> sysUserDtos = new Page<SysUserDto>();
-		for (SysUser sysUser : sysUsers) {
-			SysUserDto sysUserDto = new SysUserDto();
-			sysUserDto.setSysUser(sysUser);
-			if (sysUser.getPro_id()!=null) {
-				Project project = projectDao.selectByPrimaryKey(sysUser.getPro_id());
-				if (project!=null) {
-					sysUserDto.setProjectName(project.getPro_name());					
-				}
-			}
-			if (sysUser.getUser_role_id()!=null) {
-				UserRole userRole = userRoleDao.selectByPrimaryKey(sysUser.getUser_role_id());
-				if (userRole!=null) {
-					sysUserDto.setUserRoleName(userRole.getUser_role_name());	
-				}
-			}
-			if (sysUser.getComp_factory_id()!=null) {
-				CompFactory compFactory = compFactoryDao.selectByPrimaryKey(sysUser.getComp_factory_id());
-				if (compFactory==null) {
-						sysUserDto.setCompFactoryName("全部");
-				}
-				else {
-					sysUserDto.setCompFactoryName(compFactory.getComp_factory_name());
-				}
-			}
-			sysUserDtos.add(sysUserDto);
-		}
-		sysUserDtos.setPageSize(sysUsers.getPageSize());
-		sysUserDtos.setPages(sysUsers.getPages());
-		sysUserDtos.setTotal(sysUsers.getTotal());
-		return new PageInfo<SysUserDto>(sysUserDtos);
-		
-	}
-	
-	@RequestMapping(value = "/addUser", method = RequestMethod.GET)
-	@ResponseBody
-	public Object addUser(SysUser user) throws UnsupportedEncodingException {
-		if (user.getUser_name() == null || user.getPassword() == null) {
-			return new ResultDto(-1, "用户名和密码不能为空");
-		}
-		if (userDao.findUserByName(user.getUser_name())!=null) {
-			return new ResultDto(-1, "用户名已存在");
-		}
-		userDao.insert(user);
-		return new ResultDto(0,"添加成功");
-	}
-	
+			
 	@RequestMapping(value = "/updateUser", method = RequestMethod.GET)
 	@ResponseBody
 	public Object updateUser(SysUser user) throws UnsupportedEncodingException {
-		/*if (user.getUser_name() == null || user.getPassword() == null) {
-			return new ResultDto(-1, "用户名和密码不能为空");
-		}*/
 		if (user.getUser_name() == null) {
 			return new ResultDto(-1, "用户名不能为空");
 		}
@@ -240,50 +113,4 @@ public class UserController extends BaseController {
 		logout(request);
 		return new BaseDto(0);
 	}
-	
-	@ResponseBody
-	@RequestMapping(value = "/checkUserName", method = RequestMethod.GET)
-	public Object checkUserName(@RequestParam("value") String username) {
-		username = StringUtils.trimAllWhitespace(username);
-		NgRemoteValidateDTO ngRemoteValidateDTO = new NgRemoteValidateDTO();
-		ngRemoteValidateDTO.setValid(userDao.findUserByName(username)==null? true:false);
-		return ngRemoteValidateDTO;
-	}
-	
-	
-	@RequestMapping(value = "/deleteUserByID")
-	@ResponseBody
-	public Object deleteUserByID(Integer userID) {
-		 userDao.deleteByPrimaryKey(userID);
-		 return new BaseDto(0);
-	}
-	
-	@RequestMapping(value = "/deleteUserByIDs")
-	@ResponseBody
-	public Object deleteUserByIDs(Integer[] userIDs) {
-		for(Integer userID:userIDs){
-			userDao.deleteByPrimaryKey(userID);
-		}
-		return new BaseDto(0);
-	}
-	/*@RequestMapping(value = "/updatePhoto")
-	@ResponseBody
-	public Object updatePhoto(HttpServletRequest request, @RequestParam(required = false) MultipartFile userphoto) {
-		SysUserEntity user = new SysUserEntity();
-		SysUserEntity old_user = (SysUserEntity)request.getSession().getAttribute("user");
-		user.setUser_id(old_user.getUser_id());
-		if(userphoto!=null){
-			String dir = String.format("%s/user/photo/%s", baseDir, user.getUser_id());
-			String fileName = String.format("user%s_%s.%s", user.getUser_id(), new Date().getTime(), "jpg");
-			UploadFileEntity uploadFileEntity = new UploadFileEntity(fileName, userphoto, dir);
-			ftpService.uploadFile(uploadFileEntity);
-			user.setPhoto(FtpService.READ_URL+"data/"+dir + "/" + fileName);//http://42.121.130.177:8089/picture/user/1124/3456789.png
-			this.userDao.updateUser(user);
-			SysUserEntity ol_user = this.userDao.findUserById(user.getUser_id());
-			ol_user.setPassword("********");
-			request.getSession().setAttribute("user",ol_user);
-			return ResponseData.newSuccess(ol_user);
-		}
-		return ResponseData.newFailure();
-	}*/
 }

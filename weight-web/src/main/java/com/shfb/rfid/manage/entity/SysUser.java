@@ -12,8 +12,6 @@ public class SysUser {
 	
 	private String user_name;
 	
-	private Integer user_role_id;
-	
 	private Date login_time;//上次登陆时间
 	
 	private String password;
@@ -22,14 +20,10 @@ public class SysUser {
 	
 	private String company;
 	
-	private Integer pro_id;//关联project主键
-	
 	private Integer valid_status; //是否有效，1有效，2无效
 	
 	private Date create_time; //创建时间
 	
-	private Integer comp_factory_id;
-
 	public Integer getUser_id() {
 		return user_id;
 	}
@@ -44,14 +38,6 @@ public class SysUser {
 
 	public void setUser_name(String user_name) {
 		this.user_name = user_name;
-	}
-
-	public Integer getUser_role_id() {
-		return user_role_id;
-	}
-
-	public void setUser_role_id(Integer user_role_id) {
-		this.user_role_id = user_role_id;
 	}
 
 	public Date getLogin_time() {
@@ -86,14 +72,6 @@ public class SysUser {
 		this.company = company;
 	}
 
-	public Integer getPro_id() {
-		return pro_id;
-	}
-
-	public void setPro_id(Integer pro_id) {
-		this.pro_id = pro_id;
-	}
-
 	public Integer getValid_status() {
 		return valid_status;
 	}
@@ -110,12 +88,4 @@ public class SysUser {
 		this.create_time = create_time;
 	}
 
-	public Integer getComp_factory_id() {
-		return comp_factory_id;
-	}
-
-	public void setComp_factory_id(Integer comp_factory_id) {
-		this.comp_factory_id = comp_factory_id;
-	}
-	
 }

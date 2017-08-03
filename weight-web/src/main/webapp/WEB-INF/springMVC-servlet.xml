@@ -19,32 +19,6 @@
 	<context:annotation-config />
 	<!-- 默认的注解映射的支持 -->  
 	<mvc:annotation-driven />
-	<mvc:interceptors>
-		 <mvc:interceptor>
-			<mvc:mapping path="/project/*"/>
-			<bean class="com.shfb.rfid.manage.intercepter.ProjectLogInterceptor"/>
-		</mvc:interceptor>
-		<mvc:interceptor>
-			<mvc:mapping path="/compfactory/*"/>
-			<bean class="com.shfb.rfid.manage.intercepter.CompFactoryLogInterceptor"/>
-		</mvc:interceptor>
-		<mvc:interceptor>
-			<mvc:mapping path="/component/*"/>
-			<bean class="com.shfb.rfid.manage.intercepter.ComponentLogInterceptor"/>
-		</mvc:interceptor>
-		<mvc:interceptor>
-			<mvc:mapping path="/componentOrder/*"/>
-			<bean class="com.shfb.rfid.manage.intercepter.CompOrderLogInterceptor"/>
-		</mvc:interceptor>
-		<!-- <mvc:interceptor>
-			<mvc:mapping path="/user/*"/>
-			<bean class="com.shfb.rfid.manage.intercepter.UserLogInterceptor"/>
-		</mvc:interceptor> -->
-		<mvc:interceptor>
-			<mvc:mapping path="/userrole/*"/>
-			<bean class="com.shfb.rfid.manage.intercepter.UserRoleLogInterceptor"/>
-		</mvc:interceptor>
-	</mvc:interceptors>
 
 	<!-- 启用默认配置 -->
     <mvc:annotation-driven>

@@ -4,14 +4,13 @@
 
 <mapper namespace="com.shfb.rfid.manage.dao.SysUserMapper">
 	<insert id="insert" parameterType="SysUser">
-		insert into sys_user (user_name, user_role_id,
+		insert into sys_user (user_name,
 		login_time, password, user_tel,
-		company, pro_id, comp_factory_id, valid_status,
+		company, valid_status,
 		create_time)
 		values (#{user_name,jdbcType=VARCHAR},
-		#{user_role_id,jdbcType=INTEGER},
 		#{login_time,jdbcType=TIMESTAMP}, #{password,jdbcType=VARCHAR}, #{user_tel,jdbcType=VARCHAR},
-		#{company,jdbcType=VARCHAR}, #{pro_id,jdbcType=INTEGER}, #{comp_factory_id,jdbcType=INTEGER},
+		#{company,jdbcType=VARCHAR},
 		#{valid_status,jdbcType=INTEGER},
 		now())
 	</insert>
@@ -20,18 +19,11 @@
     where user_id = #{user_id,jdbcType=INTEGER}
   </delete>
   
-  <delete id="deleteByProId" parameterType="java.lang.Integer">
-  	delete FROM sys_user WHERE pro_id=#{pro_id,jdbcType=INTEGER}
-  </delete>
-  
 	<update id="updateUser" parameterType="SysUser">
 		update sys_user
 		<set >
       <if test="user_name != null" >
         user_name = #{user_name,jdbcType=VARCHAR},
-      </if>
-      <if test="user_role_id != null" >
-        user_role_id = #{user_role_id,jdbcType=INTEGER},
       </if>
       <if test="login_time != null" >
         login_time = #{login_time,jdbcType=TIMESTAMP},
@@ -44,12 +36,6 @@
       </if>
       <if test="company != null" >
         company = #{company,jdbcType=VARCHAR},
-      </if>
-      <if test="pro_id != null" >
-        pro_id = #{pro_id,jdbcType=INTEGER},
-      </if>
-       <if test="comp_factory_id != null" >
-        comp_factory_id = #{comp_factory_id,jdbcType=INTEGER},
       </if>
       <if test="valid_status != null" >
         valid_status = #{valid_status,jdbcType=INTEGER},
@@ -73,31 +59,5 @@
 		SELECT
 		u.* FROM sys_user u
 		WHERE u.user_id = #{user_id}
-	</select>
-	<select id="findAllUser" parameterType="int" resultType="SysUser">
-		SELECT * FROM `sys_user`
-		<where>
-			<if test="status != null">
-				valid_status=#{status}
-			</if>
-			<if test="userProjectID != null">
-				AND pro_id=#{userProjectID}
-			</if>
-			<if test="keyword != null">
-				AND user_name like "%"#{keyword}"%"
-			</if>
-			<if test="startTime!=null and startTime!=''">
-                AND create_time &gt;= #{startTime}
-            </if>
-            <if test="endTime!=null and endTime!=''">
-                AND create_time &lt;= #{endTime}
-            </if>
-		</where>
-		order by `create_time` desc
-	</select>
-		<select id="findUsersByRoleID" parameterType="map" resultType="SysUser">
-		SELECT
-		u.* FROM sys_user u
-		WHERE u.user_role_id = #{userRoleID}
 	</select>
 </mapper>
