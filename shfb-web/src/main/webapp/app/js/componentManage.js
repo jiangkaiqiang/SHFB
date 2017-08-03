@@ -172,6 +172,47 @@ coldWeb.controller('componentManage', function ($rootScope, $scope, $state, $coo
 				}
 			}).success(function(data) {
 				$scope.progresses = data;
+				var stepInt=1;
+				for(var i=0;i<data.length;i++){
+					if(data[i].component_status_name=="已下单"){
+						$("#ele2").text(data[i].operation_user);
+						$("#eled2").text(data[i].operation_date);
+						stepInt=stepInt>2?stepInt:2;
+					}
+					if(data[i].component_status_name=="已接单"){
+						$("#ele3").text(data[i].operation_user);
+						$("#eled3").text(data[i].operation_date);
+						stepInt=stepInt>3?stepInt:3;
+					}
+					if(data[i].component_status_name=="生产中"){
+						$("#ele4").text(data[i].operation_user);
+						$("#eled4").text(data[i].operation_date);
+						stepInt=stepInt>4?stepInt:4;
+					}
+					if(data[i].component_status_name=="生产完成"){
+						$("#ele5").text(data[i].operation_user);
+						$("#eled5").text(data[i].operation_date);
+						stepInt=stepInt>5?stepInt:5;
+					}
+					if(data[i].component_status_name=="出厂"){
+						$("#ele6").text(data[i].operation_user);
+						$("#eled6").text(data[i].operation_date);
+						stepInt=stepInt>6?stepInt:6;
+					}
+					if(data[i].component_status_name=="进场"){
+						$("#ele7").text(data[i].operation_user);
+						$("#eled7").text(data[i].operation_date);
+						stepInt=stepInt>7?stepInt:7;
+					}
+					if(data[i].component_status_name=="验收完成"){
+						$("#ele8").text(data[i].operation_user);
+						$("#eled8").text(data[i].operation_date);
+						stepInt=stepInt>8?stepInt:8;
+					}
+				}
+				
+				stepBar.setStep(stepInt);				
+				//console.log(data);
 			});
 		}
 	   //查询构件详细信息
@@ -211,7 +252,7 @@ coldWeb.controller('componentManage', function ($rootScope, $scope, $state, $coo
 	   
 	   //创建图片查看器
 	   $scope.viewerShow=function(){
-		   console.log($("#viewer1").html());
+		  
 		  $("#viewer1").viewer();
 		  $("#viewer2").viewer();
 		  $("#viewer3").viewer();

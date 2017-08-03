@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -33,6 +34,7 @@ import com.shfb.rfid.manage.entity.Project;
 import com.shfb.rfid.manage.entity.ProvinceInfo;
 import com.shfb.rfid.manage.service.FtpService;
 import com.shfb.rfid.manage.util.ExcelImportUtil;
+import com.shfb.rfid.manage.util.TimeUtil;
 @Controller
 @RequestMapping(value = "/project")
 public class ProjectController extends BaseController {
@@ -221,6 +223,7 @@ public class ProjectController extends BaseController {
 			 * 保存成功后解析excel，并将数据存到数据库
 			 */
 				if( res == true ) {
+					String nowDate = TimeUtil.dateFormat.format(new Date());
 					List<Map<String, String>> result = ExcelImportUtil.readExcel(files[0].getInputStream(), 1, 0, 0);
 					successCount = result.size();
 					for (Map<String, String> map : result) {
@@ -235,7 +238,7 @@ public class ProjectController extends BaseController {
 						if( comlist != null && comlist.size() > 0) {
 							
 							errStr += map.get("var0") + ";";
-							//System.out.println(map.get("var0"));
+							componentDao.updateByExcelComponentNum(comlist.get(0).getComponent_num(), map.get("var5"), map.get("var6"), map.get("var7"));
 							successCount--;
 							continue;
 						}
@@ -249,9 +252,11 @@ public class ProjectController extends BaseController {
 						}else{
 							component.setDrawing("http://139.196.139.164:65531/shfb/uploadPic/"+map.get("var4").trim());
 						}
-						
-						component.setComponent_size(map.get("var5"));
+						component.setConcrete_strength(map.get("var5"));
+						component.setWeight(map.get("var6"));
+						component.setComponent_size(map.get("var7"));
 						component.setPro_id(pro_id);
+						component.setImportDate(nowDate);
 						componentDao.insertSelective(component);
 					}
 					

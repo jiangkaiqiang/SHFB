@@ -102,4 +102,7 @@ public interface ComponentMapper {
 			@Param("floor") String floor,
 			@Param("comp_factory_id") Integer comp_factory_id);
     
+    int updateByExcelComponentNum(@Param("component_num")String component_num,@Param("component_size") String component_size,
+			@Param("concrete_strength") String concrete_strength,@Param("weight") String weight);
+    
 }

@@ -61,7 +61,40 @@ public class Component {
 	
 	private String product_explain;
 	
+	private String concrete_strength;
+	
+	private String weight;
+	
 	private String card_num;
+	
+	private String importDate;
+	
+	
+	
+	public String getImportDate() {
+		return importDate;
+	}
+
+	public void setImportDate(String importDate) {
+		this.importDate = importDate;
+	}
+
+	public String getConcrete_strength() {
+		return concrete_strength;
+	}
+
+	public void setConcrete_strength(String concrete_strength) {
+		this.concrete_strength = concrete_strength;
+	}
+
+	public String getWeight() {
+		return weight;
+	}
+
+	public void setWeight(String weight) {
+		this.weight = weight;
+	}
+
 	public Integer getComponent_id() {
 		return component_id;
 	}
