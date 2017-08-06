@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.github.pagehelper.Page;
 import com.shfb.rfid.manage.dto.ComponentDto;
+import com.shfb.rfid.manage.dto.ModelDataDto;
 import com.shfb.rfid.manage.entity.Component;
 
 public interface ComponentMapper {
@@ -105,4 +106,12 @@ public interface ComponentMapper {
     int updateByExcelComponentNum(@Param("component_num")String component_num,@Param("component_size") String component_size,
 			@Param("concrete_strength") String concrete_strength,@Param("weight") String weight);
     
+    List<ModelDataDto> getModelData(
+			@Param("single") String single,
+			@Param("floor") String floor,
+			@Param("state") String state,
+			@Param("project") String project,
+			@Param("component_num") String component_num
+			);
+    		
 }

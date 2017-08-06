@@ -830,4 +830,24 @@
     where component_num = #{component_num,jdbcType=INTEGER}
   </update>
   
+  <select id="getModelData" parameterType="String" resultType="com.shfb.rfid.manage.dto.ModelDataDto">
+  	SELECT component_num as num ,component_type AS type, component_status_id as state,single_name AS single,floor,pro_id AS project from component
+  		WHERE 1=1 
+  		<if test="single != null and single != ''" >
+  		 AND single_name=#{single} 
+  		</if>
+  		<if test="floor != null and floor != ''" >
+  		 AND floor=#{floor} 
+  		</if>
+  		<if test="state != null and state != ''" >
+  		 AND component_status_id=#{state}
+  		</if> 
+  		<if test="project != null and project != ''" >
+  		AND pro_id=#{project}
+  		</if>
+  		<if test="component_num != null and component_num != ''" >
+  		AND component_num=#{component_num}
+  		</if> 		 
+  </select>
+  
 </mapper>
