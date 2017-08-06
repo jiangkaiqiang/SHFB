@@ -1,140 +1,237 @@
-<!doctype html>
-<html>
-   <head>
-        <title>称重系统</title>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-        <link rel="shortcut icon" href="assets/img/favicon.ico" />
-        <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
-        <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-        <link rel="stylesheet" href="assets/css/bootstrap-datetimepicker.min.css">
-        <link rel="stylesheet" type="text/css" href="assets/css/index.css">
-        <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css" />
-        <link rel="stylesheet" type="text/css" href="bower_components/angular-multi-select-master/isteven-multi-select.css" />
-        <!-- viewer -->
-        <link rel="stylesheet" type="text/css" href="assets/css/viewer.min.css" />
-        
-		<script type="text/javascript" src="assets/js/jquery-1.12.0.min.js"></script>
-		<script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
-		<script type="text/javascript" src="assets/js/smartpaginator.js"></script>
-    </head>
-    <body>
-    	<!-- head部分结构开始 -->
-			<div class="head">
-				<div class="logoArea pull-left" onclick="location.href='index.html'">
-					<h1 class="logo  pull-left"></h1>
-					<h3 class="manage  pull-left">称重系统</h3>
-					<!-- <div class="home  pull-left">
-						<span class="glyphicon glyphicon-home" aria-hidden="true"></span>
-					</div> -->
-				</div>
-				<div class="userArea pull-right">
-					<div class="admin  pull-left h4">
-						<span class="hi"><font style="size:14px">您好，</font></span> 
-						<span class="user" ng-model="admin"><font style="size:14px">{{admin.user_name}}</font></span>
-					</div>
-					<!-- <div class="smartColdManage  pull-left h4">链库后台管理</div> -->
-					<div class="back  pull-left">
-						<span class="glyphicon glyphicon-log-out" title="退出登录" aria-hidden="true" ng-click="logout()"></span>
-					</div>
-				</div>
-			</div>
-    	<!-- head部分结构结束 -->
-		
-		<!-- 主体区域结构开始 -->
-    		<div class="content clearfix">
-    			<!-- 侧栏区域结构开始 -->
-    				<div class="sidebar pull-left" >
-    					<div class="functionColumn">
-    						<span class="glyphicon glyphicon-th-large"></span>
-    						<span>功能栏目</span>
-    					</div>
-    					<ul class="list" ng-controller="index">
-    					  <li ng-click="goMenu('home','#/home')" id ="home" >
-    							<span class="glyphicon glyphicon-eye-open"></span>
-    							<a>首页</a>
-    							<span class="glyphicon glyphicon-chevron-right pull-right"></span>
-    							<ul class="liSon">
-    								<li ng-click="goMenu('home','#/home')">综合概览</li>
-    							</ul>
-    						</li>
-    						
-    					<li ng-click="goMenu('projectManage','#/projectManage')" id="projectManage" >
-    							<span class="glyphicon glyphicon-th-list"></span>
-    							<a>历史记录</a>
-    							<span class="glyphicon glyphicon-chevron-right pull-right"></span>
-    							<ul class="liSon">
-    								<li ng-click="goMenu('projectManage','#/projectManage')">项目管理</li>
-    							</ul>
-    						</li>
-    						<li ng-click="goMenu('compFactoryManage','#/compFactoryManage')"  id="compFactoryManage">
-								<span class="glyphicon glyphicon-home"></span>
-								<a>异常数据</a>
-								<span class="glyphicon glyphicon-chevron-right pull-right"></span>
-								<ul class="liSon">
-									<li ng-click="goMenu('compFactoryManage','#/compFactoryManage')">构件厂管理</li>
-								</ul>
-							</li>
-    					<li ng-click="goMenu('userManage','#/userManage')" id ="userManage" >
-    							<span class="glyphicon glyphicon-pencil"></span>
-    							<a>数据统计</a>
-    							<span class="glyphicon glyphicon-chevron-right pull-right"></span>
-    							<ul class="liSon">
-    								<li ng-click="goMenu('userManage','#/userManage')">数据统计</li>
-    							</ul>
-    						</li>
-    						
-    					<li ng-click="goMenu('personalSpace','#/personalSpace')" id ="personalSpace" >
-    							<span class="glyphicon glyphicon-pencil"></span>
-    							<a>个人中心</a>
-    							<span class="glyphicon glyphicon-chevron-right pull-right"></span>
-    							<ul class="liSon">
-    								<li ng-click="goMenu('personalSpace','#/personalSpace')">个人中心</li>
-    							</ul>
-    						</li>
-    					</ul>
-    				</div>
-				<!-- 侧栏区域结构结束-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="Keywords" content="集装箱,集装箱房屋,集装箱建筑,集装箱住宅,集装箱宾馆,集装箱酒店,集装箱公寓,集装箱别墅,集装箱超市,集装箱餐厅,集装箱咖啡馆" />
+    <meta name="Description" content="魔方集装箱网是专业的规划、设计、制造、施工一站式服务提供商,产品包括集装箱住宅,度假屋,旅社,餐厅,超市,购物中心,办公楼,学校,房车,展厅等" />
+    <title>智能建筑-称重系统</title>
+    <style type="text/css">
+        body {
+            margin: 0;
+            padding: 0;
+            color: #000;
+            font-family: "Microsoft YaHei", "宋体";
+            font-size: 100%;
+            line-height: 1.4;
+            overflow-y: scroll;
+        }
+        h1, h2, h3, h4, h5, h6, p {
+            margin-top: 0;
+            padding-right: 15px;
+            padding-left: 15px;
+        }
+        a img {
+            border: none;
+        }
+        a:link {
+            color: #42413C;
+            text-decoration: underline;
+        }
+        a:visited {
+            color: #6E6C64;
+            text-decoration: underline;
+        }
+        a:hover, a:active, a:focus {
+            text-decoration: none;
+        }
 
-				<!-- 内容区域结构开始-->
-    			<div  ui-view style="overflow: hidden">
-	                 </div>
-    			<!-- 内容区域结构结束-->
-    		</div>
-    	<!-- 主体区域结构结束-->
-    	<footer>
-    		<p class="copyRight"><img alt="" src="app/img/20170227204924.png" width="20" height="20">&nbsp;&nbsp;<a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=17030827">沪ICP备17030827号-1</a>|&copy;2017&nbsp;Shanghai Wu Jian&nbsp;&nbsp;&nbsp;&nbsp;</p>
-    	</footer>
-    </body>
+        .Container .content {
+            width: 960px;
+            margin-right: auto;
+            margin-left: auto;
+        }
+        .Container {
+            clear: both;
+        }
+        .Container .content .title .main {
+            float: left;
+            padding-top: 20px;
+        }
+        .Container .content .title .detail {
+
+            margin:0 auto;
+            padding-top: 25px;
+            font-size: 13px;
+            text-align: right;
+        }
+        .Container .content .title {
+            width: 100%;
+            float: left;
+            clear: both;
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+        .Container .content .title .main h2 {
+            font-weight: normal;
+            letter-spacing: 0.1em;
+            font-size: 25px;
+            padding-left: 0px;
+        }
+        .Container .content .title .detail h3 {
+            font-weight: normal;
+            letter-spacing: .1em;
+            padding-right: 0px;
+            padding-top: 8px;
+            font-size: 14px;
+        }
+        .Container .content .Block {
+            width: 223px;
+            padding-right: 6px;
+            padding-left: 6px;
+            float: left;
+            margin-bottom: 15px;
+
+
+        }
+        .Container .content .image {
+            width: 229px;
+            height: 295px;
+            border: 1px solid #ccc;
+            background-color: #fff;
+        }
+        .Container .content .image:hover {
+            width: 229px;
+            background: #6f73a2;
+            color: #fff;
+        }
+        .Container .content .image .topic {
+            font-size: 14px;
+            line-height: 25px;
+            color: #008cd2;
+            height: 50px;
+            padding-right: 10px;
+            padding-left: 10px;
+        }
+        .Container .content .Block .image:hover .topic a{
+            color: #fff;
+        }
+        .Container .content .Block .image .topic a:hover{
+            text-decoration:underline;
+        }
+        .Container .content .image .description {
+            font-size: 12px;
+            line-height: 22px;
+            padding-top: 4px;
+            padding-right: 10px;
+            padding-left: 10px;
+        }
+        .Container .sub01 {
+            clear: both;
+            height: 740px;
+            background-color: #ffffff;
+        }
+        .Container .sub02 {
+            clear: both;
+            height: 740px;
+            background-color: #ffffff;
+        }
+        .Container .sub03 {
+            clear: both;
+            height: 740px;
+            background-color: #ffffff;
+        }
+        .Container .sub04 {
+            clear: both;
+            height: 740px;
+            background-color: #ffffff;
+        }
+        .Container .sub05 {
+            clear: both;
+            height: 740px;
+            background-color: #ffffff;
+        }
+        .Container .sub06 {
+            clear: both;
+            height: 740px;
+            background-color: #ffffff;
+        }
+        .Container .sub07 {
+            clear: both;
+            height: 740px;
+            background-color: #ffffff;
+        }
+
+        .Container .content .Block .image .topic a {
+            color: #008cd2;
+            text-decoration: none;
+        }
+        .Container .content .title .detail h3 a {
+            color: #000;
+            text-decoration: none;
+        }
+        .Container .content .title .detail h3 a:hover {
+            color: #000;
+            text-decoration: underline;
+        }
+        .Container .sub07 .content .News {
+            float: left;
+            width: 35%;
+            border-right-width: 1px;
+            border-right-style: solid;
+            border-right-color: #000;
+        }
+        .Container .sub07 .content .Weibo {
+            float: right;
+            width: 614px;
+        }
+        .Container .sub07 .content .News .List a {
+            text-decoration: none;
+            color: #006;
+            line-height: 30px;
+            font-size: 14px;
+        }
+    </style>
+
+    <!-- Start WOWSlider HEAD section -->
+    <link rel="stylesheet" type="text/css" href="css/homepage/style.css" media="screen" />
+    <script type="text/javascript" src="js/homepage/jquery.js"></script>
+    <!-- End WOWSlider HEAD section -->
+
+</head>
+
+<body ng-app="app"  ng-controller="index">
+
+<iframe frameborder="0" width="100%" height="155" src="template/top.html" scrolling="no"></iframe>
+
+
+<div id="wowslider-container1">
+    <div class="ws_images"><ul>
+        <li><a href="homelink/link2.html" target="_blank"><img src="img/homepage/images/new01+.jpg"/></a></li>
+    </ul>
+    </div>
+</div>
+
 <script src="bower_components/angular/angular.min.js"></script>
-<script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
-<script src="bower_components/angular-cookies/angular-cookies.min.js"></script>
-<script src="bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
-<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js?"></script>
+<script src="bower_components/jquery/dist/jquery.js"></script>
 <script src="bower_components/angular/ng-file-upload.min.js"></script>
-<script src="bower_components/angular/ng-file-upload-shim.min.js"></script>
-<script src="bower_components/highlightjs/highlight.pack.js"></script>
-<script src="bower_components/angular-bootstrap-checkbox/angular-bootstrap-checkbox.js"></script>
-<script src="bower_components/angular-xeditable/dist/js/xeditable.js"></script>
-<script src="bower_components/angular-multi-select-master/isteven-multi-select.js"></script>
-<script src="bower_components/angucomplete/angucomplete.js"></script>
-<script src="bower_components/at-table/dist/angular-table.min.js"></script>
-<!-- <script src="bower_components/jquery/dist/jquery.js"></script> -->
-<script src="bower_components/bootstrap/js/carousel.js"></script>
-<script src="bower_components/bootstrap/js/bootstrap-datetimepicker.min.js"></script>
-<script src="bower_components/angular/ngRemoteValidate.0.6.1.min.js"></script>
-<!-- app js -->
+<script src="js/index.js" type="text/javascript"></script>
+<!-- End WOWSlider BODY section -->
 
-<script src="app/js/app.js"></script>
-<script type="text/javascript" src="app/js/index.js"></script>
-<script src="app/js/home.js"></script>
-<script src="app/js/projectManage.js"></script>
-<script src="app/js/compFactoryManage.js"></script>
-<script src="app/js/personalSpace.js"></script>
-<script src="app/js/userManage.js"></script>
-<!-- viewer -->
-<script src="assets/js/viewer.min.js"></script>
-<!-- qrcode -->
-<script src="assets/js/jquery.qrcode.min.js"></script>
 
+
+
+<div class="Container">
+    <div class="sub01">
+        <div class="content">
+            <div class="title">
+                <div class="main">
+                    <h2>历史记录</h2>
+                </div>
+                <div class="detail">
+                    <h3><a href="zhuZhaiPage.html" target="_blank">更多历史记录>></a></h3>
+                </div>
+            </div>
+            <div class="Block" ng-repeat="case in AllZhuZhaiCases">
+                <div class="image"><a href="detailspage.html?id={{case.id}}" target="_blank"><img src="{{case.img}}" width="229" height="170" alt="集装箱别墅：Infiniski Manifesto House" /></a>
+                    <div class="topic"><strong><a href="detailspage.html?id={{case.id}}" target="_blank">{{case.title}}</a></strong></div>
+                    <div class="description">{{case.introduction}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<iframe frameborder="0" width="100%" height="100" src="template/bottom.html" scrolling="no"></iframe>
+
+</body>
 </html>

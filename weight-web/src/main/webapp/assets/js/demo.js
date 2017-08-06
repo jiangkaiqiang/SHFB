@@ -1,338 +1,178 @@
 /**
- * AdminLTE Demo Menu
- * ------------------
- * You should not use this file in production.
- * This file is for demo purposes only.
- */
-(function ($, AdminLTE) {
+Demo script to handle the theme demo
+**/
+var Demo = function () {
 
-  "use strict";
+    // Handle Theme Settings
+    var handleTheme = function () {
 
-  /**
-   * List of all the available skins
-   *
-   * @type Array
-   */
-  var my_skins = [
-    "skin-blue",
-    "skin-black",
-    "skin-red",
-    "skin-yellow",
-    "skin-purple",
-    "skin-green",
-    "skin-blue-light",
-    "skin-black-light",
-    "skin-red-light",
-    "skin-yellow-light",
-    "skin-purple-light",
-    "skin-green-light"
-  ];
+        var panel = $('.theme-panel');
 
-  //Create the new tab
-  var tab_pane = $("<div />", {
-    "id": "control-sidebar-theme-demo-options-tab",
-    "class": "tab-pane active"
-  });
+        if ($('.page-head > .container-fluid').size() === 1) {
+            $('.theme-setting-layout', panel).val("fluid");
+        } else {
+            $('.theme-setting-layout', panel).val("boxed");
+        }
 
-  //Create the tab button
-  var tab_button = $("<li />", {"class": "active"})
-          .html("<a href='#control-sidebar-theme-demo-options-tab' data-toggle='tab'>"
-                  + "<i class='fa fa-wrench'></i>"
-                  + "</a>");
+        if ($('.top-menu li.dropdown.dropdown-dark').size() > 0) {
+            $('.theme-setting-top-menu-style', panel).val("dark");
+        } else {
+            $('.theme-setting-top-menu-style', panel).val("light");
+        }
 
-  //Add the tab button to the right sidebar tabs
-  $("[href='#control-sidebar-home-tab']")
-          .parent()
-          .before(tab_button);
+        if ($('body').hasClass("page-header-top-fixed")) {
+            $('.theme-setting-top-menu-mode', panel).val("fixed");
+        } else {
+            $('.theme-setting-top-menu-mode', panel).val("not-fixed");
+        }
 
-  //Create the menu
-  var demo_settings = $("<div />");
+        if ($('.hor-menu.hor-menu-light').size() > 0) {
+            $('.theme-setting-mega-menu-style', panel).val("light");
+        } else {
+            $('.theme-setting-mega-menu-style', panel).val("dark");
+        }
 
-  //Layout options
-  demo_settings.append(
-          "<h4 class='control-sidebar-heading'>"
-          + "Layout Options"
-          + "</h4>"
-          //Fixed layout
-          + "<div class='form-group'>"
-          + "<label class='control-sidebar-subheading'>"
-          + "<input type='checkbox' data-layout='fixed' class='pull-right'/> "
-          + "Fixed layout"
-          + "</label>"
-          + "<p>Activate the fixed layout. You can't use fixed and boxed layouts together</p>"
-          + "</div>"
-          //Boxed layout
-          + "<div class='form-group'>"
-          + "<label class='control-sidebar-subheading'>"
-          + "<input type='checkbox' data-layout='layout-boxed'class='pull-right'/> "
-          + "Boxed Layout"
-          + "</label>"
-          + "<p>Activate the boxed layout</p>"
-          + "</div>"
-          //Sidebar Toggle
-          + "<div class='form-group'>"
-          + "<label class='control-sidebar-subheading'>"
-          + "<input type='checkbox' data-layout='sidebar-collapse' class='pull-right'/> "
-          + "Toggle Sidebar"
-          + "</label>"
-          + "<p>Toggle the left sidebar's state (open or collapse)</p>"
-          + "</div>"
-          //Sidebar mini expand on hover toggle
-          + "<div class='form-group'>"
-          + "<label class='control-sidebar-subheading'>"
-          + "<input type='checkbox' data-enable='expandOnHover' class='pull-right'/> "
-          + "Sidebar Expand on Hover"
-          + "</label>"
-          + "<p>Let the sidebar mini expand on hover</p>"
-          + "</div>"
-          //Control Sidebar Toggle
-          + "<div class='form-group'>"
-          + "<label class='control-sidebar-subheading'>"
-          + "<input type='checkbox' data-controlsidebar='control-sidebar-open' class='pull-right'/> "
-          + "Toggle Right Sidebar Slide"
-          + "</label>"
-          + "<p>Toggle between slide over content and push content effects</p>"
-          + "</div>"
-          //Control Sidebar Skin Toggle
-          + "<div class='form-group'>"
-          + "<label class='control-sidebar-subheading'>"
-          + "<input type='checkbox' data-sidebarskin='toggle' class='pull-right'/> "
-          + "Toggle Right Sidebar Skin"
-          + "</label>"
-          + "<p>Toggle between dark and light skins for the right sidebar</p>"
-          + "</div>"
-          );
-  var skins_list = $("<ul />", {"class": 'list-unstyled clearfix'});
+        if ($('body').hasClass("page-header-menu-fixed")) {
+            $('.theme-setting-mega-menu-mode', panel).val("fixed");
+        } else {
+            $('.theme-setting-mega-menu-mode', panel).val("not-fixed");
+        }
 
-  //Dark sidebar skins
-  var skin_blue =
-          $("<li />", {style: "float:left; width: 33.33333%; padding: 5px;"})
-          .append("<a href='javascript:void(0);' data-skin='skin-blue' style='display: block; box-shadow: 0 0 3px rgba(0,0,0,0.4)' class='clearfix full-opacity-hover'>"
-                  + "<div><span style='display:block; width: 20%; float: left; height: 7px; background: #367fa9;'></span><span class='bg-light-blue' style='display:block; width: 80%; float: left; height: 7px;'></span></div>"
-                  + "<div><span style='display:block; width: 20%; float: left; height: 20px; background: #222d32;'></span><span style='display:block; width: 80%; float: left; height: 20px; background: #f4f5f7;'></span></div>"
-                  + "</a>"
-                  + "<p class='text-center no-margin'>Blue</p>");
-  skins_list.append(skin_blue);
-  var skin_black =
-          $("<li />", {style: "float:left; width: 33.33333%; padding: 5px;"})
-          .append("<a href='javascript:void(0);' data-skin='skin-black' style='display: block; box-shadow: 0 0 3px rgba(0,0,0,0.4)' class='clearfix full-opacity-hover'>"
-                  + "<div style='box-shadow: 0 0 2px rgba(0,0,0,0.1)' class='clearfix'><span style='display:block; width: 20%; float: left; height: 7px; background: #fefefe;'></span><span style='display:block; width: 80%; float: left; height: 7px; background: #fefefe;'></span></div>"
-                  + "<div><span style='display:block; width: 20%; float: left; height: 20px; background: #222;'></span><span style='display:block; width: 80%; float: left; height: 20px; background: #f4f5f7;'></span></div>"
-                  + "</a>"
-                  + "<p class='text-center no-margin'>Black</p>");
-  skins_list.append(skin_black);
-  var skin_purple =
-          $("<li />", {style: "float:left; width: 33.33333%; padding: 5px;"})
-          .append("<a href='javascript:void(0);' data-skin='skin-purple' style='display: block; box-shadow: 0 0 3px rgba(0,0,0,0.4)' class='clearfix full-opacity-hover'>"
-                  + "<div><span style='display:block; width: 20%; float: left; height: 7px;' class='bg-purple-active'></span><span class='bg-purple' style='display:block; width: 80%; float: left; height: 7px;'></span></div>"
-                  + "<div><span style='display:block; width: 20%; float: left; height: 20px; background: #222d32;'></span><span style='display:block; width: 80%; float: left; height: 20px; background: #f4f5f7;'></span></div>"
-                  + "</a>"
-                  + "<p class='text-center no-margin'>Purple</p>");
-  skins_list.append(skin_purple);
-  var skin_green =
-          $("<li />", {style: "float:left; width: 33.33333%; padding: 5px;"})
-          .append("<a href='javascript:void(0);' data-skin='skin-green' style='display: block; box-shadow: 0 0 3px rgba(0,0,0,0.4)' class='clearfix full-opacity-hover'>"
-                  + "<div><span style='display:block; width: 20%; float: left; height: 7px;' class='bg-green-active'></span><span class='bg-green' style='display:block; width: 80%; float: left; height: 7px;'></span></div>"
-                  + "<div><span style='display:block; width: 20%; float: left; height: 20px; background: #222d32;'></span><span style='display:block; width: 80%; float: left; height: 20px; background: #f4f5f7;'></span></div>"
-                  + "</a>"
-                  + "<p class='text-center no-margin'>Green</p>");
-  skins_list.append(skin_green);
-  var skin_red =
-          $("<li />", {style: "float:left; width: 33.33333%; padding: 5px;"})
-          .append("<a href='javascript:void(0);' data-skin='skin-red' style='display: block; box-shadow: 0 0 3px rgba(0,0,0,0.4)' class='clearfix full-opacity-hover'>"
-                  + "<div><span style='display:block; width: 20%; float: left; height: 7px;' class='bg-red-active'></span><span class='bg-red' style='display:block; width: 80%; float: left; height: 7px;'></span></div>"
-                  + "<div><span style='display:block; width: 20%; float: left; height: 20px; background: #222d32;'></span><span style='display:block; width: 80%; float: left; height: 20px; background: #f4f5f7;'></span></div>"
-                  + "</a>"
-                  + "<p class='text-center no-margin'>Red</p>");
-  skins_list.append(skin_red);
-  var skin_yellow =
-          $("<li />", {style: "float:left; width: 33.33333%; padding: 5px;"})
-          .append("<a href='javascript:void(0);' data-skin='skin-yellow' style='display: block; box-shadow: 0 0 3px rgba(0,0,0,0.4)' class='clearfix full-opacity-hover'>"
-                  + "<div><span style='display:block; width: 20%; float: left; height: 7px;' class='bg-yellow-active'></span><span class='bg-yellow' style='display:block; width: 80%; float: left; height: 7px;'></span></div>"
-                  + "<div><span style='display:block; width: 20%; float: left; height: 20px; background: #222d32;'></span><span style='display:block; width: 80%; float: left; height: 20px; background: #f4f5f7;'></span></div>"
-                  + "</a>"
-                  + "<p class='text-center no-margin'>Yellow</p>");
-  skins_list.append(skin_yellow);
+        //handle theme layout
+        var resetLayout = function () {
+            $("body").
+            removeClass("page-header-top-fixed").
+            removeClass("page-header-menu-fixed");
 
-  //Light sidebar skins
-  var skin_blue_light =
-          $("<li />", {style: "float:left; width: 33.33333%; padding: 5px;"})
-          .append("<a href='javascript:void(0);' data-skin='skin-blue-light' style='display: block; box-shadow: 0 0 3px rgba(0,0,0,0.4)' class='clearfix full-opacity-hover'>"
-                  + "<div><span style='display:block; width: 20%; float: left; height: 7px; background: #367fa9;'></span><span class='bg-light-blue' style='display:block; width: 80%; float: left; height: 7px;'></span></div>"
-                  + "<div><span style='display:block; width: 20%; float: left; height: 20px; background: #f9fafc;'></span><span style='display:block; width: 80%; float: left; height: 20px; background: #f4f5f7;'></span></div>"
-                  + "</a>"
-                  + "<p class='text-center no-margin' style='font-size: 12px'>Blue Light</p>");
-  skins_list.append(skin_blue_light);
-  var skin_black_light =
-          $("<li />", {style: "float:left; width: 33.33333%; padding: 5px;"})
-          .append("<a href='javascript:void(0);' data-skin='skin-black-light' style='display: block; box-shadow: 0 0 3px rgba(0,0,0,0.4)' class='clearfix full-opacity-hover'>"
-                  + "<div style='box-shadow: 0 0 2px rgba(0,0,0,0.1)' class='clearfix'><span style='display:block; width: 20%; float: left; height: 7px; background: #fefefe;'></span><span style='display:block; width: 80%; float: left; height: 7px; background: #fefefe;'></span></div>"
-                  + "<div><span style='display:block; width: 20%; float: left; height: 20px; background: #f9fafc;'></span><span style='display:block; width: 80%; float: left; height: 20px; background: #f4f5f7;'></span></div>"
-                  + "</a>"
-                  + "<p class='text-center no-margin' style='font-size: 12px'>Black Light</p>");
-  skins_list.append(skin_black_light);
-  var skin_purple_light =
-          $("<li />", {style: "float:left; width: 33.33333%; padding: 5px;"})
-          .append("<a href='javascript:void(0);' data-skin='skin-purple-light' style='display: block; box-shadow: 0 0 3px rgba(0,0,0,0.4)' class='clearfix full-opacity-hover'>"
-                  + "<div><span style='display:block; width: 20%; float: left; height: 7px;' class='bg-purple-active'></span><span class='bg-purple' style='display:block; width: 80%; float: left; height: 7px;'></span></div>"
-                  + "<div><span style='display:block; width: 20%; float: left; height: 20px; background: #f9fafc;'></span><span style='display:block; width: 80%; float: left; height: 20px; background: #f4f5f7;'></span></div>"
-                  + "</a>"
-                  + "<p class='text-center no-margin' style='font-size: 12px'>Purple Light</p>");
-  skins_list.append(skin_purple_light);
-  var skin_green_light =
-          $("<li />", {style: "float:left; width: 33.33333%; padding: 5px;"})
-          .append("<a href='javascript:void(0);' data-skin='skin-green-light' style='display: block; box-shadow: 0 0 3px rgba(0,0,0,0.4)' class='clearfix full-opacity-hover'>"
-                  + "<div><span style='display:block; width: 20%; float: left; height: 7px;' class='bg-green-active'></span><span class='bg-green' style='display:block; width: 80%; float: left; height: 7px;'></span></div>"
-                  + "<div><span style='display:block; width: 20%; float: left; height: 20px; background: #f9fafc;'></span><span style='display:block; width: 80%; float: left; height: 20px; background: #f4f5f7;'></span></div>"
-                  + "</a>"
-                  + "<p class='text-center no-margin' style='font-size: 12px'>Green Light</p>");
-  skins_list.append(skin_green_light);
-  var skin_red_light =
-          $("<li />", {style: "float:left; width: 33.33333%; padding: 5px;"})
-          .append("<a href='javascript:void(0);' data-skin='skin-red-light' style='display: block; box-shadow: 0 0 3px rgba(0,0,0,0.4)' class='clearfix full-opacity-hover'>"
-                  + "<div><span style='display:block; width: 20%; float: left; height: 7px;' class='bg-red-active'></span><span class='bg-red' style='display:block; width: 80%; float: left; height: 7px;'></span></div>"
-                  + "<div><span style='display:block; width: 20%; float: left; height: 20px; background: #f9fafc;'></span><span style='display:block; width: 80%; float: left; height: 20px; background: #f4f5f7;'></span></div>"
-                  + "</a>"
-                  + "<p class='text-center no-margin' style='font-size: 12px'>Red Light</p>");
-  skins_list.append(skin_red_light);
-  var skin_yellow_light =
-          $("<li />", {style: "float:left; width: 33.33333%; padding: 5px;"})
-          .append("<a href='javascript:void(0);' data-skin='skin-yellow-light' style='display: block; box-shadow: 0 0 3px rgba(0,0,0,0.4)' class='clearfix full-opacity-hover'>"
-                  + "<div><span style='display:block; width: 20%; float: left; height: 7px;' class='bg-yellow-active'></span><span class='bg-yellow' style='display:block; width: 80%; float: left; height: 7px;'></span></div>"
-                  + "<div><span style='display:block; width: 20%; float: left; height: 20px; background: #f9fafc;'></span><span style='display:block; width: 80%; float: left; height: 20px; background: #f4f5f7;'></span></div>"
-                  + "</a>"
-                  + "<p class='text-center no-margin' style='font-size: 12px;'>Yellow Light</p>");
-  skins_list.append(skin_yellow_light);
+            $('.page-header-top > .container-fluid').removeClass("container-fluid").addClass('container');
+            $('.page-header-menu > .container-fluid').removeClass("container-fluid").addClass('container');
+            $('.page-head > .container-fluid').removeClass("container-fluid").addClass('container');
+            $('.page-content > .container-fluid').removeClass("container-fluid").addClass('container');
+            $('.page-prefooter > .container-fluid').removeClass("container-fluid").addClass('container');
+            $('.page-footer > .container-fluid').removeClass("container-fluid").addClass('container');              
+        };
 
-  demo_settings.append("<h4 class='control-sidebar-heading'>Skins</h4>");
-  demo_settings.append(skins_list);
+        var setLayout = function () {
 
-  tab_pane.append(demo_settings);
-  $("#control-sidebar-home-tab").after(tab_pane);
+            var layoutMode = $('.theme-setting-layout', panel).val();
+            var headerTopMenuStyle = $('.theme-setting-top-menu-style', panel).val();
+            var headerTopMenuMode = $('.theme-setting-top-menu-mode', panel).val();
+            var headerMegaMenuStyle = $('.theme-setting-mega-menu-style', panel).val();
+            var headerMegaMenuMode = $('.theme-setting-mega-menu-mode', panel).val();
+            
+            resetLayout(); // reset layout to default state
 
-  setup();
+            if (layoutMode === "fluid") {
+                $('.page-header-top > .container').removeClass("container").addClass('container-fluid');
+                $('.page-header-menu > .container').removeClass("container").addClass('container-fluid');
+                $('.page-head > .container').removeClass("container").addClass('container-fluid');
+                $('.page-content > .container').removeClass("container").addClass('container-fluid');
+                $('.page-prefooter > .container').removeClass("container").addClass('container-fluid');
+                $('.page-footer > .container').removeClass("container").addClass('container-fluid');
 
-  /**
-   * Toggles layout classes
-   *
-   * @param String cls the layout class to toggle
-   * @returns void
-   */
-  function change_layout(cls) {
-    $("body").toggleClass(cls);
-    AdminLTE.layout.fixSidebar();
-    //Fix the problem with right sidebar and layout boxed
-    if (cls == "layout-boxed")
-      AdminLTE.controlSidebar._fix($(".control-sidebar-bg"));
-    if ($('body').hasClass('fixed') && cls == 'fixed') {
-      AdminLTE.pushMenu.expandOnHover();
-      AdminLTE.layout.activate();
-    }
-    AdminLTE.controlSidebar._fix($(".control-sidebar-bg"));
-    AdminLTE.controlSidebar._fix($(".control-sidebar"));
-  }
+                //Metronic.runResizeHandlers();
+            }
 
-  /**
-   * Replaces the old skin with the new skin
-   * @param String cls the new skin class
-   * @returns Boolean false to prevent link's default action
-   */
-  function change_skin(cls) {
-    $.each(my_skins, function (i) {
-      $("body").removeClass(my_skins[i]);
-    });
+            if (headerTopMenuStyle === 'dark') {
+                $(".top-menu > .navbar-nav > li.dropdown").addClass("dropdown-dark");
+            } else {
+                $(".top-menu > .navbar-nav > li.dropdown").removeClass("dropdown-dark");
+            }
 
-    $("body").addClass(cls);
-    store('skin', cls);
-    return false;
-  }
+            if (headerTopMenuMode === 'fixed') {
+                $("body").addClass("page-header-top-fixed");
+            } else {
+                $("body").removeClass("page-header-top-fixed");
+            }
 
-  /**
-   * Store a new settings in the browser
-   *
-   * @param String name Name of the setting
-   * @param String val Value of the setting
-   * @returns void
-   */
-  function store(name, val) {
-    if (typeof (Storage) !== "undefined") {
-      localStorage.setItem(name, val);
-    } else {
-      window.alert('Please use a modern browser to properly view this template!');
-    }
-  }
+            if (headerMegaMenuStyle === 'light') {
+                $(".hor-menu").addClass("hor-menu-light");
+            } else {
+                $(".hor-menu").removeClass("hor-menu-light");
+            }
 
-  /**
-   * Get a prestored setting
-   *
-   * @param String name Name of of the setting
-   * @returns String The value of the setting | null
-   */
-  function get(name) {
-    if (typeof (Storage) !== "undefined") {
-      return localStorage.getItem(name);
-    } else {
-      window.alert('Please use a modern browser to properly view this template!');
-    }
-  }
+            if (headerMegaMenuMode === 'fixed') {
+                $("body").addClass("page-header-menu-fixed");
+            } else {
+                $("body").removeClass("page-header-menu-fixed");
+            }          
+        };
 
-  /**
-   * Retrieve default settings and apply them to the template
-   *
-   * @returns void
-   */
-  function setup() {
-    var tmp = get('skin');
-    if (tmp && $.inArray(tmp, my_skins))
-      change_skin(tmp);
+        // handle theme colors
+        var setColor = function (color) {
+            var color_ = (Metronic.isRTL() ? color + '-rtl' : color);
+            $('#style_color').attr("href", Layout.getLayoutCssPath() + 'themes/' + color_ + ".css");
+            $('.page-logo img').attr("src", Layout.getLayoutImgPath() + 'logo-' + color + '.png');
+        };
 
-    //Add the change skin listener
-    $("[data-skin]").on('click', function (e) {
-      e.preventDefault();
-      change_skin($(this).data('skin'));
-    });
+        $('.theme-colors > li', panel).click(function () {
+            var color = $(this).attr("data-theme");
+            setColor(color);
+            $('.theme-colors > li', panel).removeClass("active");
+            $(this).addClass("active");
+        });
 
-    //Add the layout manager
-    $("[data-layout]").on('click', function () {
-      change_layout($(this).data('layout'));
-    });
+        $('.theme-setting-top-menu-mode', panel).change(function(){
+            var headerTopMenuMode = $('.theme-setting-top-menu-mode', panel).val();
+            var headerMegaMenuMode = $('.theme-setting-mega-menu-mode', panel).val();            
 
-    $("[data-controlsidebar]").on('click', function () {
-      change_layout($(this).data('controlsidebar'));
-      var slide = !AdminLTE.options.controlSidebarOptions.slide;
-      AdminLTE.options.controlSidebarOptions.slide = slide;
-      if (!slide)
-        $('.control-sidebar').removeClass('control-sidebar-open');
-    });
+            if (headerMegaMenuMode === "fixed") {
+                alert("The top menu and mega menu can not be fixed at the same time.");
+                $('.theme-setting-mega-menu-mode', panel).val("not-fixed");   
+                headerTopMenuMode = 'not-fixed';
+            }                
+        });
 
-    $("[data-sidebarskin='toggle']").on('click', function () {
-      var sidebar = $(".control-sidebar");
-      if (sidebar.hasClass("control-sidebar-dark")) {
-        sidebar.removeClass("control-sidebar-dark")
-        sidebar.addClass("control-sidebar-light")
-      } else {
-        sidebar.removeClass("control-sidebar-light")
-        sidebar.addClass("control-sidebar-dark")
-      }
-    });
+        $('.theme-setting-mega-menu-mode', panel).change(function(){
+            var headerTopMenuMode = $('.theme-setting-top-menu-mode', panel).val();
+            var headerMegaMenuMode = $('.theme-setting-mega-menu-mode', panel).val();            
 
-    $("[data-enable='expandOnHover']").on('click', function () {
-      $(this).attr('disabled', true);
-      AdminLTE.pushMenu.expandOnHover();
-      if (!$('body').hasClass('sidebar-collapse'))
-        $("[data-layout='sidebar-collapse']").click();
-    });
+            if (headerTopMenuMode === "fixed") {
+                alert("The top menu and mega menu can not be fixed at the same time.");
+                $('.theme-setting-top-menu-mode', panel).val("not-fixed");   
+                headerTopMenuMode = 'not-fixed';
+            }                
+        });
 
-    // Reset options
-    if ($('body').hasClass('fixed')) {
-      $("[data-layout='fixed']").attr('checked', 'checked');
-    }
-    if ($('body').hasClass('layout-boxed')) {
-      $("[data-layout='layout-boxed']").attr('checked', 'checked');
-    }
-    if ($('body').hasClass('sidebar-collapse')) {
-      $("[data-layout='sidebar-collapse']").attr('checked', 'checked');
-    }
+        $('.theme-setting', panel).change(setLayout);
 
-  }
-})(jQuery, $.AdminLTE);
+        $('.theme-setting-layout', panel).change(function(){
+            Index.redrawCharts();  // reload the chart on layout width change
+        });
+    };
+
+    // handle theme style
+    var setThemeStyle = function(style) {
+        var file = (style === 'rounded' ? 'components-rounded' : 'components');
+        file = (Metronic.isRTL() ? file + '-rtl' : file);
+
+        $('#style_components').attr("href", Metronic.getGlobalCssPath() + file + ".css");
+
+        if ($.cookie) {
+            $.cookie('layout-style-option', style);
+        }
+
+
+    };
+
+    return {
+
+        //main function to initiate the theme
+        init: function() {
+            // handles style customer tool
+            handleTheme(); 
+
+            // handle layout style change
+            $('.theme-panel .theme-setting-style').change(function() {
+                 setThemeStyle($(this).val());
+            });
+
+            // set layout style from cookie
+            if ($.cookie && $.cookie('layout-style-option') === 'rounded') {
+                setThemeStyle($.cookie('layout-style-option'));  
+                $('.theme-panel .theme-setting-style').val($.cookie('layout-style-option'));
+            }            
+        }
+    };
+
+}();
