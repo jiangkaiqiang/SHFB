@@ -1,5 +1,11 @@
 angular.module('app', ['ngFileUpload']).controller('index', function ($scope, Upload, $http) { 
-	$scope.getUsers = function() {
+	// 显示最大页数
+    $scope.maxSize = 12;
+    // 总条目数(默认每页十条)
+    $scope.bigTotalItems = 12;
+    // 当前页
+    $scope.bigCurrentPage = 1;
+	$scope.getRecords = function() {
 		$http({
 			method : 'POST',
 			url : '/i/record/findRecordList',
@@ -12,8 +18,8 @@ angular.module('app', ['ngFileUpload']).controller('index', function ($scope, Up
 			}
 		}).success(function(data) {
 			$scope.bigTotalItems = data.total;
-			$scope.Allusers = data.list;
+			$scope.AllRecords = data.list;
 		});
 	}
-	$scope.getZhuZhaiCases();	
+	$scope.getRecords();	
 });

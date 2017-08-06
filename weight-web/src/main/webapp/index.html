@@ -96,9 +96,10 @@
         }
         .Container .content .image .topic {
             font-size: 14px;
+            text-align:center;
             line-height: 25px;
             color: #008cd2;
-            height: 50px;
+            height: 30px;
             padding-right: 10px;
             padding-left: 10px;
         }
@@ -110,42 +111,12 @@
         }
         .Container .content .image .description {
             font-size: 12px;
-            line-height: 22px;
-            padding-top: 4px;
+            line-height: 15px;
+            padding-top: 0px;
             padding-right: 10px;
             padding-left: 10px;
         }
         .Container .sub01 {
-            clear: both;
-            height: 740px;
-            background-color: #ffffff;
-        }
-        .Container .sub02 {
-            clear: both;
-            height: 740px;
-            background-color: #ffffff;
-        }
-        .Container .sub03 {
-            clear: both;
-            height: 740px;
-            background-color: #ffffff;
-        }
-        .Container .sub04 {
-            clear: both;
-            height: 740px;
-            background-color: #ffffff;
-        }
-        .Container .sub05 {
-            clear: both;
-            height: 740px;
-            background-color: #ffffff;
-        }
-        .Container .sub06 {
-            clear: both;
-            height: 740px;
-            background-color: #ffffff;
-        }
-        .Container .sub07 {
             clear: both;
             height: 740px;
             background-color: #ffffff;
@@ -196,7 +167,11 @@
 
 <div id="wowslider-container1">
     <div class="ws_images"><ul>
-        <li><a href="homelink/link2.html" target="_blank"><img src="img/homepage/images/new01+.jpg"/></a></li>
+        <li>
+        <a href="homelink/link2.html" target="_blank">
+        <img src="img/homepage/images/new01+.jpg"/>
+        </a>
+        </li>
     </ul>
     </div>
 </div>
@@ -218,13 +193,17 @@
                     <h2>历史记录</h2>
                 </div>
                 <div class="detail">
-                    <h3><a href="zhuZhaiPage.html" target="_blank">更多历史记录>></a></h3>
+                    <h3><a href="historyPage.html" target="_blank">更多历史记录>></a></h3>
                 </div>
             </div>
-            <div class="Block" ng-repeat="case in AllZhuZhaiCases">
-                <div class="image"><a href="detailspage.html?id={{case.id}}" target="_blank"><img src="{{case.img}}" width="229" height="170" alt="集装箱别墅：Infiniski Manifesto House" /></a>
-                    <div class="topic"><strong><a href="detailspage.html?id={{case.id}}" target="_blank">{{case.title}}</a></strong></div>
-                    <div class="description">{{case.introduction}}</div>
+            <div class="Block" ng-repeat="case in AllRecords">
+                <div class="image"><a href="detailspage.html?id={{case.record_id}}" target="_blank"><img src="{{case.leave_pic}}" width="229" height="170" /></a>
+                    <div class="topic"><strong><a href="detailspage.html?id={{case.id}}" target="_blank">{{case.car_num}}</a></strong></div>
+                    <div class="description">
+                    <p>净重量：{{case.leave_weight-case.entry_weight}}</p>
+                    <p>进入时间：{{case.entry_time}}</p>
+                    <p>离开时间：{{case.leave_time}}</p>
+                    </div>
                 </div>
             </div>
         </div>

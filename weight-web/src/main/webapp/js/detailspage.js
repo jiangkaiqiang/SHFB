@@ -2,13 +2,12 @@ angular.module('app', ['ngFileUpload']).controller('detailspage', function ($sco
 	$scope.getCases = function() {
 		$http({
 			method : 'POST',
-			url : '/i/case/findCaseByID',
+			url : '/i/record/findRecordByID',
 			params : {
-				caseID : getQueryString("id")
+				recordID : getQueryString("id")
 			}
 		}).success(function(data) {
 			$scope.Case = data;
-			document.getElementById("content").innerHTML=$scope.Case.content;
 		});
 	};
 	$scope.getCases();
