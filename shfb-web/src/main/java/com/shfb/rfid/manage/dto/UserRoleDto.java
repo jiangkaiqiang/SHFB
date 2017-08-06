@@ -27,10 +27,9 @@ public class UserRoleDto {
 	
 	private boolean personalManage; 
 	
-    private boolean pcManage;//11
+    private boolean pcManage;//是否构件厂
 	
-	private boolean appManage; //12
-
+	private boolean bindManage;//解绑
 	
 	public UserRole getUserRole() {
 		return userRole;
@@ -136,12 +135,12 @@ public class UserRoleDto {
 		this.pcManage = pcManage;
 	}
 
-	public boolean isAppManage() {
-		return appManage;
+	public boolean isBindManage() {
+		return bindManage;
 	}
 
-	public void setAppManage(boolean appManage) {
-		this.appManage = appManage;
+	public void setBindManage(boolean bindManage) {
+		this.bindManage = bindManage;
 	}
 	
 	

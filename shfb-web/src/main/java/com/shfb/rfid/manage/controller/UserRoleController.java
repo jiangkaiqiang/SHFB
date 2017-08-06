@@ -110,7 +110,7 @@ public class UserRoleController extends BaseController {
 		if (menuList.contains(9)) userRoleDto.setProductManage(true);
 		if (menuList.contains(10)) userRoleDto.setPersonalManage(true);
 		if (menuList.contains(11)) userRoleDto.setPcManage(true);
-		if (menuList.contains(12)) userRoleDto.setAppManage(true);
+		if (menuList.contains(12)) userRoleDto.setBindManage(true);
 		userRoleDto.setUserRole(userRole);
 		/*List<SysUser> sysUsers = userDao.findUsersByRoleID(userRole.getUser_role_id());
 	    userRoleDto.setUserNum(sysUsers.size());*/
