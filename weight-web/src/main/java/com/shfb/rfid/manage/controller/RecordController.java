@@ -30,7 +30,7 @@ public class RecordController extends BaseController {
 	@Autowired
 	private FtpService ftpservice;
 	
-	@RequestMapping(value = "/findRecordList", method = RequestMethod.POST)
+	@RequestMapping(value = "/findRecordList")
 	@ResponseBody
 	public Object findProjectList(@RequestParam(value="pageNum",required=false) Integer pageNum,
 			@RequestParam(value="pageSize") Integer pageSize, 
@@ -40,11 +40,11 @@ public class RecordController extends BaseController {
 		pageNum = pageNum == null? 1:pageNum;
 		pageSize = pageSize==null? 12:pageSize;
 		PageHelper.startPage(pageNum, pageSize);
-		if(keyword.equals("undefined"))
+		/*if("undefined".equals(keyword))
 			keyword = null;
 		else{
 		keyword = URLDecoder.decode(keyword, "UTF-8");
-		}
+		}*/
 		Page<Record> records = recordDao.findAllRecords(keyword,startTime,endTime);
 		return new PageInfo<Record>(records);
 		
