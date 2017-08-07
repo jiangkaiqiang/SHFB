@@ -41,6 +41,10 @@ coldWeb.controller('home', function ($rootScope, $scope, $state, $cookies, $http
 	      	}
 	      });
 	 
+	 $scope.goHome=function(){
+		 $state.reload();
+	 }
+	 
 	 /*$scope.setIframeHeight=function(iframe) {
 			if (iframe) {
 			var iframeWin = iframe.contentWindow || iframe.contentDocument.parentWindow;

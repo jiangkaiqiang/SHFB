@@ -74,4 +74,10 @@
     <include refid="Base_Column_List" />
     from component_status 
   </select>
+  
+  <select id="findStatusName" resultType="String">
+  	select 
+    	component_status_name
+    from component_status 
+  </select>
 </mapper>

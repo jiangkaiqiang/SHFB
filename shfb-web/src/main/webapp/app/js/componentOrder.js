@@ -50,6 +50,11 @@ coldWeb.controller('componentOrder', function ($rootScope, $scope, $state, $cook
 			$scope.componentOrders = data.list;
 		});
 	}
+    
+    $scope.pageChanged = function() {
+    	$scope.getComponentOrders();
+	}
+    
     $scope.getComponentOrders();
 	
 	$scope.showAll = function () {

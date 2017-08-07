@@ -30,7 +30,7 @@ coldWeb.controller('productManage', function ($rootScope, $scope, $state, $cooki
 			   $scope.single_namef=$scope.selectSingle.single_name;
 		   }
 		   $scope.floorf="";
-		   if($scope.$scope!=undefined&&$scope.selectFloor.floor!=undefined) {
+		   if($scope.selectFloor!=undefined&&$scope.selectFloor.floor!=undefined) {
 			   $scope.floorf=$scope.selectFloor.floor;
 		   }
 		   $scope.component_typef="";

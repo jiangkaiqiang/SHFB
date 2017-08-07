@@ -192,7 +192,7 @@ public class ProjectController extends BaseController {
 		}
 	 
 	 /**
-		 *app上传文件()
+		 *导入构件
 	 * @throws IOException 
 		 */
 		@RequestMapping(value="/fileUpload")
@@ -225,6 +225,7 @@ public class ProjectController extends BaseController {
 				if( res == true ) {
 					String nowDate = TimeUtil.dateFormat.format(new Date());
 					List<Map<String, String>> result = ExcelImportUtil.readExcel(files[0].getInputStream(), 1, 0, 0);
+					System.out.println(result.size());
 					successCount = result.size();
 					for (Map<String, String> map : result) {
 						Component component = new Component();
@@ -238,7 +239,13 @@ public class ProjectController extends BaseController {
 						if( comlist != null && comlist.size() > 0) {
 							
 							errStr += map.get("var0") + ";";
-							componentDao.updateByExcelComponentNum(comlist.get(0).getComponent_num(), map.get("var5"), map.get("var6"), map.get("var7"));
+							String drawImg;
+							if(map.get("var4") == null) {
+								drawImg = "http://139.196.139.164:65531/shfb/uploadPic/blank.png";
+							}else{
+								drawImg = "http://139.196.139.164:65531/shfb/uploadPic/"+map.get("var4").trim();
+							}
+							componentDao.updateByExcelComponentNum(comlist.get(0).getComponent_num(), map.get("var5"), map.get("var6"), map.get("var7"), drawImg);
 							successCount--;
 							continue;
 						}
@@ -258,6 +265,7 @@ public class ProjectController extends BaseController {
 						component.setPro_id(pro_id);
 						component.setImportDate(nowDate);
 						componentDao.insertSelective(component);
+					
 					}
 					
 					if(!errStr.equals("")) {

@@ -50,4 +50,11 @@
       </if>
     </trim>
   </insert>
+  
+  <select id="queryProgress" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+  	SELECT * FROM comp_progress 
+  		WHERE 1=1 
+  			AND component_id=#{component_id,jdbcType=INTEGER}
+  		 	AND component_status_name=#{component_status_name,jdbcType=VARCHAR}
+  </select>
 </mapper>

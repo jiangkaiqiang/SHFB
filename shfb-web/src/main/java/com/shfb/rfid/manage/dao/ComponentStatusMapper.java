@@ -18,4 +18,6 @@ public interface ComponentStatusMapper {
     int updateByPrimaryKey(ComponentStatus record);
     
     List<ComponentStatus> findStatus();
+    
+    List<String> findStatusName();
 }

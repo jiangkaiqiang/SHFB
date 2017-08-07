@@ -826,6 +826,9 @@
       <if test="weight != null" >
         weight = #{weight,jdbcType=VARCHAR},
       </if>
+      <if test="drawing != null">
+      	drawing = #{drawing,jdbcType=VARCHAR},
+      </if>
     </set>
     where component_num = #{component_num,jdbcType=INTEGER}
   </update>
@@ -848,6 +851,17 @@
   		<if test="component_num != null and component_num != ''" >
   		AND component_num=#{component_num}
   		</if> 		 
+  </select>
+  
+  <select id="queryCompIds" parameterType="String" resultMap="BaseResultMap">
+  	SELECT component_id, component_status_id, component_num from component 
+  		WHERE pro_id=#{pro_id} 
+  		<if test="single_name != null and single_name != ''" >
+  		AND single_name=#{single_name} 
+  		</if>
+  		<if test="floor != null and floor != ''" >
+  		AND floor=#{floor} 
+  		</if>
   </select>
   
 </mapper>

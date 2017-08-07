@@ -22,6 +22,7 @@ import com.shfb.rfid.manage.dao.CompProgressMapper;
 import com.shfb.rfid.manage.dao.ComponentMapper;
 import com.shfb.rfid.manage.dao.ComponentOrderMapper;
 import com.shfb.rfid.manage.dao.ComponentStatusMapper;
+import com.shfb.rfid.manage.dao.SysUserMapper;
 import com.shfb.rfid.manage.dto.ComponentDto;
 import com.shfb.rfid.manage.dto.ResultDto;
 import com.shfb.rfid.manage.entity.CompProgress;
@@ -35,14 +36,16 @@ import com.shfb.rfid.manage.util.TimeUtil;
 @RequestMapping(value = "/component")
 public class ComponentController extends BaseController {
 	@Autowired
-	private ComponentMapper componentDao;
-	
+	private ComponentMapper componentDao;	
 	@Autowired
 	private ComponentStatusMapper componentStatusDao;
 	@Autowired
 	private ComponentOrderMapper componentOrderDao;
 	@Autowired
 	private CompProgressMapper comProgressDao;
+	@Autowired
+	private SysUserMapper sysUserDao;
+	
 	
 	/**
 	 * 构件管理
@@ -179,6 +182,46 @@ public class ComponentController extends BaseController {
 		} else {
 			return new ResultDto(2, "保存失败");
 		}
+		
+	}
+	@RequestMapping(value = "/updateByPrimaryKey", method = RequestMethod.GET)
+	@ResponseBody
+	public ResultDto updateByPrimaryKey(Component componentParm)  {
+			
+			String userName = sysUserDao.findUserById(componentParm.getOrder_user_id()).getUser_name();
+			
+			componentParm.setOrder_user_id(null);
+						
+			//查询所有状态
+			List<String> statusList = componentStatusDao.findStatusName();
+			
+			String nowDate = TimeUtil.dateToString(new Date(), "yyyy-MM-dd");
+			
+			//查询需要更新的构件id和目前状态
+			Component component = componentDao.selectByPrimaryKey(componentParm.getComponent_id());
+			//更新构件状态添加进度			
+			Integer oldComponetStatusId = component.getComponent_status_id();
+			
+			if (oldComponetStatusId < componentParm.getComponent_status_id()) {
+				//更新页面传过来的数据
+				int res = componentDao.updateByPrimaryKeySelective(componentParm);
+				
+				//添加构件的状态进度
+				for(int i=0; i<componentParm.getComponent_status_id()-oldComponetStatusId; i++) {
+										
+					String statusName = statusList.get(oldComponetStatusId+i);
+					CompProgress progress = new CompProgress();
+					progress.setOperation_date(nowDate);
+					progress.setComponent_id(componentParm.getComponent_id());
+					progress.setComponent_status_name(statusName);
+					progress.setOperation_user(userName);
+					comProgressDao.insertSelective(progress);
+				}
+				return new ResultDto(1, "更新成功");
+			} else {
+				return new ResultDto(2, "更新失败，构件状态有误");
+				
+			}		
 		
 	}
 	
@@ -379,6 +422,69 @@ public class ComponentController extends BaseController {
 	}
 	
 	/**
+	 * 构件状态批量编辑
+	 * @param pageNum
+	 * @param pageSize
+	 * @param pro_id
+	 * @param single_name
+	 * @param floor
+	 * @param component_type
+	 * @param component_status_id
+	 * @return
+	 * @throws UnsupportedEncodingException
+	 */
+	@RequestMapping(value = "/stateEdit", method = RequestMethod.POST)
+	@ResponseBody
+	public ResultDto stateEdit( 
+			@RequestParam(value="pro_id", required=true) Integer pro_id,
+			@RequestParam(value="single_name", required=true) String single_name,
+			@RequestParam(value="floor", required=false) String floor,
+			@RequestParam(value="component_status_id", required=true) Integer component_status_id,
+			@RequestParam(value="order_user_id", required=true) String order_user_id,
+			@RequestParam(value="order_username", required=true)String order_username
+			) throws UnsupportedEncodingException {
+		
+			List<String> statusList = componentStatusDao.findStatusName();
+			String nowDate = TimeUtil.dateToString(new Date(), "yyyy-MM-dd");
+			String compIdsFail = "";
+			//查询需要更新的构件id和目前状态
+			List<Component> components = componentDao.queryCompIds(single_name, floor, pro_id);
+			//更新构件状态添加进度
+			for (Component component : components) {
+				
+				Integer oldComponetStatusId = component.getComponent_status_id();
+				
+				if (oldComponetStatusId < component_status_id) {
+					//更改构件的当前状态
+					componentDao.updateComStatus(component.getComponent_id(), component_status_id, null);
+					//添加构件的状态进度
+					for(int i=0; i<component_status_id-oldComponetStatusId; i++) {
+						
+						String statusName = statusList.get(oldComponetStatusId+i);
+						CompProgress progress = new CompProgress();
+						progress.setOperation_date(nowDate);
+						progress.setComponent_id(component.getComponent_id());
+						progress.setComponent_status_name(statusName);
+						progress.setOperation_user(order_username);
+						comProgressDao.insertSelective(progress);
+					}
+				} else {
+					compIdsFail += component.getComponent_num() + ",";
+					System.out.println("部分构件无法更新进度：" + compIdsFail);
+					
+				}
+				
+			}
+			
+			if("".equals(compIdsFail)) {
+				return new ResultDto(1, "更新成功");
+			} else {
+				return new ResultDto(2, "部分构件无法更新进度：" + compIdsFail);
+			}
+	
+	}
+	
+	/**
 	 * 添加生产计划
 	 * @param component_ids
 	 * @param product_plan_begin_date
@@ -432,8 +538,16 @@ public class ComponentController extends BaseController {
 		compProgress.setOperation_date(TimeUtil.dateToString(new Date(), ""));
 		compProgress.setOperation_user(order_username);
 		compProgress.setComponent_status_name(component_status_name);
-		//更新构件状态进度表
-		int resProgress = comProgressDao.insertSelective(compProgress);
+		
+		List<CompProgress> list = comProgressDao.queryProgress(componentId, component_status_name);
+		int resProgress=2;
+		if(list != null && list.size() > 0) {
+			
+		} else {
+			//更新构件状态进度表
+			resProgress = comProgressDao.insertSelective(compProgress);
+		}
+		
 		return resProgress;
 	}
 	

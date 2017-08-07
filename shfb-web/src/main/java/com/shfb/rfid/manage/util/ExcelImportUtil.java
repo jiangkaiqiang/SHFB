@@ -159,6 +159,7 @@ public class ExcelImportUtil extends AbstractExcelView{
 					varpd.put("var"+j, cellValue);
 					
 				}
+				if("".equals(varpd.get("var0"))) continue;
 				varList.add(varpd);
 			}
 

@@ -292,7 +292,7 @@ coldWeb.controller('componentManage', function ($rootScope, $scope, $state, $coo
 	   $scope.uploadComp=function(){
 		   $http({
 				method : 'GET',
-				url : '/i/component/updateByPrimaryKeySelective',
+				url : '/i/component/updateByPrimaryKey',
 				params : {
 						component_id : $("#component_id").html(),
 						expedit_date : $("#expedit_date").val(),
@@ -302,18 +302,23 @@ coldWeb.controller('componentManage', function ($rootScope, $scope, $state, $coo
 						real_end_date : $("#real_end_date").val(),
 						component_status_id : $("#statusSel").val(),
 						product_plan_begin_date : $("#product_plan_begin_date").val(),
-						product_plan_end_date : $("#product_plan_end_date").val()
+						product_plan_end_date : $("#product_plan_end_date").val(),
+						order_user_id:$rootScope.admin.user_id,
 					}
 			}).success(function(data) {
 				alert(data.message);
-				$scope.componentInfo.component_status_name=$("#statusSel").find("option:selected").text();
-				$scope.componentInfo.expedit_date=$("#expedit_date").val();
-				$scope.componentInfo.plan_begin_date=$("#plan_begin_date").val();
-				$scope.componentInfo.plan_end_date=$("#plan_end_date").val();
-				$scope.componentInfo.real_begin_date=$("#real_begin_date").val();
-				$scope.componentInfo.real_end_date=$("#real_end_date").val();
-				$scope.componentInfo.product_plan_begin_date=$("#product_plan_begin_date").val();
-				$scope.componentInfo.product_plan_end_date=$("#product_plan_end_date").val();
+				if(data.status == '1') {
+					stepBar.setStep($("#statusSel").val());
+					$scope.componentInfo.component_status_name=$("#statusSel").find("option:selected").text();
+					$scope.componentInfo.expedit_date=$("#expedit_date").val();
+					$scope.componentInfo.plan_begin_date=$("#plan_begin_date").val();
+					$scope.componentInfo.plan_end_date=$("#plan_end_date").val();
+					$scope.componentInfo.real_begin_date=$("#real_begin_date").val();
+					$scope.componentInfo.real_end_date=$("#real_end_date").val();
+					$scope.componentInfo.product_plan_begin_date=$("#product_plan_begin_date").val();
+					$scope.componentInfo.product_plan_end_date=$("#product_plan_end_date").val();
+				}
+				
 				
 				$scope.isedit=false;
 				$(".datetimepickerDisplay").css("display","none");
@@ -424,6 +429,28 @@ coldWeb.controller('componentManage', function ($rootScope, $scope, $state, $coo
 			   $('#placeOrder').modal('show');			 
 	    }
 	    
+	    //打开状态编辑模态框
+	    $scope.stateModelOpen = function(){
+	    	 if($scope.selectedProject!=undefined && $scope.selectedProject.pro_id!=undefined) {
+			   }else{
+				   alert("请选择项目");
+				   return;
+			   }
+			   if($scope.selectSingle!=undefined&&$scope.selectSingle.single_name!=undefined) {
+			   }else{
+				   alert("请选择单体");
+				   return;
+			   }
+			   if($scope.selectFloor!=undefined&&$scope.selectFloor.floor!=undefined) {
+			   }else{
+				   alert("请选择楼层");
+				   return;
+			   }
+			   
+			   
+	    	$('#stateEditMod').modal('show');
+	    }
+	    
 	    //点击催货
 	    $scope.good_expe = function(){
 	    	//判断有无选择
@@ -469,6 +496,46 @@ coldWeb.controller('componentManage', function ($rootScope, $scope, $state, $coo
 				floor : floora,
 				comp_factory_id:comp_factory_id,
 				plan_end_date:$scope.plan_end_date,
+				order_user_id:$rootScope.admin.user_id,
+				order_username:$rootScope.admin.user_name
+			}
+		}).success(function(data) {
+			alert(data.message);
+			$scope.getComponents();
+		});
+	    }
+	    
+	  //状态编辑确认
+	    $scope.confirmStateEdit=function(){
+	
+	    	   var pro_ida ="";
+	    	   if($scope.selectedProject!=undefined && $scope.selectedProject.pro_id!=undefined) {
+	    		   pro_ida=$scope.selectedProject.pro_id;
+			   }
+	    	   var single_namea="";
+			   if($scope.selectSingle!=undefined&&$scope.selectSingle.single_name!=undefined) {
+				   single_namea=$scope.selectSingle.single_name;
+			   }
+			   
+			   var floora="";
+			   if($scope.selectFloor!=undefined&&$scope.selectFloor.floor!=undefined) {
+				   floora=$scope.selectFloor.floor;
+			   }
+			   
+			   if($scope.selectStatus!=undefined&&$scope.selectStatus.component_status_id!=undefined) {
+			   }else{
+				   alert("请选择状态");
+				   return;
+			   }
+			   
+	      $http({
+			method : 'POST',
+			url : '/i/component/stateEdit',
+			params : {
+				pro_id : pro_ida,
+				single_name : single_namea,
+				floor : floora,
+				component_status_id:$scope.selectStatus.component_status_id,
 				order_user_id:$rootScope.admin.user_id,
 				order_username:$rootScope.admin.user_name
 			}

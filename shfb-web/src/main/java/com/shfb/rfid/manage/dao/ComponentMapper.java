@@ -104,7 +104,7 @@ public interface ComponentMapper {
 			@Param("comp_factory_id") Integer comp_factory_id);
     
     int updateByExcelComponentNum(@Param("component_num")String component_num,@Param("component_size") String component_size,
-			@Param("concrete_strength") String concrete_strength,@Param("weight") String weight);
+			@Param("concrete_strength") String concrete_strength,@Param("weight") String weight,@Param("drawing") String drawing);
     
     List<ModelDataDto> getModelData(
 			@Param("single") String single,
@@ -113,5 +113,9 @@ public interface ComponentMapper {
 			@Param("project") String project,
 			@Param("component_num") String component_num
 			);
-    		
+    
+    List<Component> queryCompIds(@Param("single_name") String single_name,
+			@Param("floor") String floor,
+			@Param("pro_id") Integer pro_id);
+    
 }
