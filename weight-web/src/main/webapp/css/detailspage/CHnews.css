@@ -1,0 +1,74 @@
+@charset "utf-8";
+body {
+    margin: 0;
+    padding: 0;
+    color: #000;
+    font-family: "Microsoft YaHei", "宋体";
+    font-size: 100%;
+    line-height: 1.4;
+    overflow-y: scroll;
+}
+h1, h2, h3, h4, h5, h6, p {
+    margin-top: 0;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+a img {
+    border: none;
+}
+a:link {
+    color: #42413C;
+    text-decoration: underline;
+}
+a:visited {
+    color: #6E6C64;
+    text-decoration: underline;
+}
+a:hover, a:active, a:focus {
+    text-decoration: none;
+}
+.Container .content {
+    width: 960px;
+    line-height: 27px;
+    margin-right: auto;
+    margin-left: auto;
+}
+.Container {
+    clear: both;
+    float: left;
+    width: 100%;
+    margin-bottom: 30px;
+    margin-top: 30px;
+}
+.Container .content p {
+    text-indent: 2em;
+    font-size: 15px;
+    margin-right: 0px;
+    margin-left: 0px;
+    line-height: 27px;
+}
+.Container .content p a {
+    color: #006;
+    text-decoration: none;
+}
+.Container .content table {
+    font-size: 13px;
+    margin: auto;
+}
+.Container .content #uyan_frame {
+    margin-left: 50px;
+}
+.Container .content h1 {
+    font-size: 22px;
+    text-align: center;
+    padding-top: 20px;
+}
+.Container .content h4,h5 {
+    text-align: center;
+}
+.Container .content .t1 {
+    text-align: left;
+}
+.Container .content .t2 {
+    text-align: center;
+}

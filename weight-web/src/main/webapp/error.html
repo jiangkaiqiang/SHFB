@@ -1,0 +1,180 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="Keywords" content="集装箱,集装箱房屋,集装箱别墅,集装箱住宅,集装箱度假村,集装箱房车,设计案例" />
+    <meta name="Description" content="集装箱房屋设计案例居住空间类：集装箱别墅,集装箱住宅,集装箱度假村,集装箱房车" />
+    <title>智能建筑-称重系统</title>
+    <LINK href="/image/favicon.ico" type="image/x-icon" rel="shortcut icon">
+
+    <style type="text/css">
+        body {
+            margin: 0;
+            padding: 0;
+            color: #000;
+            font-family: "Microsoft YaHei", "宋体";
+            font-size: 100%;
+            line-height: 1.4;
+            overflow-y: scroll;
+        }
+        h1, h2, h3, h4, h5, h6, p {
+            margin-top: 0;
+            padding-right: 15px;
+            padding-left: 15px;
+        }
+        a img {
+            border: none;
+        }
+        a:link {
+            color: #42413C;
+            text-decoration: underline;
+        }
+        a:visited {
+            color: #6E6C64;
+            text-decoration: underline;
+        }
+        a:hover, a:active, a:focus {
+            text-decoration: none;
+            cursor:pointer;
+        }
+
+        .Container .content {
+            width: 960px;
+            margin-right: auto;
+            margin-left: auto;
+        }
+        .Container {
+            clear: both;
+            float: left;
+            width: 100%;
+            margin-bottom: 30px;
+        }
+        .Container .content .title .main {
+            float: left;
+            padding-top: 20px;
+        }
+        .Container .content .title .detail {
+            float: right;
+            padding-top: 25px;
+            font-size: 13px;
+            text-align: right;
+        }
+        .Container .content .title {
+            width: 100%;
+            float: left;
+            clear: both;
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+        .Container .content .title .main h2 {
+            font-weight: normal;
+            letter-spacing: 0.1em;
+            font-size: 25px;
+            padding-left: 0px;
+        }
+        .Container .content .title .detail h3 {
+            font-weight: normal;
+            letter-spacing: .1em;
+            padding-right: 0px;
+            padding-top: 8px;
+            font-size: 14px;
+        }
+        .Container .content .Block {
+            width: 223px;
+            padding-right: 6px;
+            padding-left: 6px;
+            float: left;
+            margin-bottom: 15px;
+
+
+        }
+        .Container .content .image {
+            width: 229px;
+            height: 270px;
+            border: 1px solid #ccc;
+            background-color: #fff;
+        }
+         .Container .content .image .topic {
+            font-size: 14px;
+            text-align:center;
+            line-height: 25px;
+            color: #008cd2;
+            height: 30px;
+            padding-top: 10px;
+            padding-right: 10px;
+            padding-left: 10px;
+        }
+
+        .Container .content .BlockLeft .image .topic a {
+            color: #008cd2;
+            text-decoration: none;
+        }
+        .Container .content .Block .image .topic a {
+            color: #008cd2;
+            text-decoration: none;
+        }
+        .Container .content .BlockRight .image .topic a {
+            color: #008cd2;
+            text-decoration: none;
+        }
+        .Container .content .Block .image:hover .topic a,
+        .Container .content .BlockLeft .image:hover .topic a,
+        .Container .content .BlockRight .image:hover .topic a {
+            color: #fff;
+        }
+        .Container .content .Block .image .topic a:hover,
+        .Container .content .BlockLeft .image .topic a:hover,
+        .Container .content .BlockRight .image .topic a:hover {
+            text-decoration:underline;
+        }
+    </style>
+<link rel="stylesheet" href="assets/css/bootstrap.min.css">
+<script src="bower_components/angular/angular.min.js"></script>
+<script src="bower_components/jquery/dist/jquery.js"></script>
+<script src="bower_components/angular/ng-file-upload.min.js"></script>
+<script src="js/historyPage.js" type="text/javascript"></script>
+</head>
+<body ng-app="app"  ng-controller="history">
+
+<iframe frameborder="0" width="100%" height="160" src="template/top.html" scrolling="no"></iframe>
+
+<div class="Container">
+  
+    <div class="content">
+        <div class="title">
+                <div class="main">
+                    <h2>异常数据</h2>
+                </div>
+            </div>
+        <div class="Block" ng-repeat="case in AllRecords">
+                <div class="image"><img src="{{case.leave_pic}}" width="229" height="170" />
+                    <div class="topic">
+                    <input type="text" ng-model="car_num" class="form-control"  placeholder="请输入车牌号"/>                   
+                     <div  style="padding-top:10px" >
+                     <button type="button" ng-click="submitCarNum()" class="btn btn-primary">
+	                                                       提交车牌号
+	                </button>
+	                </div>
+                    </div>                    
+                </div>
+            </div>    
+    </div>
+ <div class="row" class="col-md-10 col-sm-10 items-info">
+              <div class="col-md-10 col-sm-10">
+                <ul class="pagination pull-right">
+                  <li><a ng-click="firstPage()">首页</a></li>
+                  <li><a ng-click="pagedes()">上一页</a></li>
+                  <li><a>第{{bigCurrentPage}}页</a></li>
+                  <li><a ng-click="pageadd()">下一页</a></li>
+                  <li><a ng-click="endPage()">末页</a></li>
+                </ul>
+              </div>
+            </div> 
+</div>
+
+<iframe frameborder="0" width="100%" height="100" src="template/bottom.html" scrolling="no"></iframe>
+
+
+
+</body>
+</html>
