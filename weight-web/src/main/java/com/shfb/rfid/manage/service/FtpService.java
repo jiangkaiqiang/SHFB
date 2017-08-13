@@ -19,14 +19,14 @@ public interface FtpService {
 
 	public final static int PORT = 21;
 
-	public final static String BASEDIR = "/shfb";
+	public final static String BASEDIR = "/weight";
 
 	public final static int READPORT = 8089;
 	
 	//public final static String READ_URL = "ftp://pwftp:!@QWaszx0o@filestorage-weilanshu.xyz/";
 	
 	public final static String READ_URL = "http://42.121.130.177:8080/";
-	public final static String FILE_Url = "http://139.196.139.164:65531/shfb/";
+	public final static String FILE_Url = "http://139.196.139.164:65531/weight/";
 	
 	//public final static String READ_URL = "http://139.196.189.93:8089/";
 	

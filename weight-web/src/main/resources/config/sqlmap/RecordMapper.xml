@@ -190,4 +190,11 @@
 		</where>
 		order by `leave_time` desc
 	</select>
+	
+	<select id="numEntryStatistics" resultType="com.shfb.rfid.manage.dto.CarNumDto">
+		SELECT LEFT(entry_time,10) AS sta_date, COUNT(entry_time) AS car_num FROM record WHERE entry_time is not null  GROUP BY  LEFT(entry_time,10)
+	</select>
+	<select id="numLeaveStatistics" resultType="com.shfb.rfid.manage.dto.CarNumDto">
+		SELECT LEFT(leave_time,10) AS sta_date, COUNT(leave_time) AS car_num FROM record WHERE leave_time is not null  GROUP BY  LEFT(leave_time,10)
+	</select>
 </mapper>

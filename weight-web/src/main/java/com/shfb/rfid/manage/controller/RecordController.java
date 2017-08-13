@@ -3,7 +3,11 @@ package com.shfb.rfid.manage.controller;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -21,6 +25,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.shfb.rfid.manage.dao.RecordMapper;
 import com.shfb.rfid.manage.dto.BaseDto;
+import com.shfb.rfid.manage.dto.CarNumDto;
 import com.shfb.rfid.manage.dto.ResultDto;
 import com.shfb.rfid.manage.dto.UploadFileEntity;
 import com.shfb.rfid.manage.entity.Record;
@@ -53,6 +58,7 @@ public class RecordController extends BaseController {
 		return new PageInfo<Record>(records);
 		
 	}
+
 	
 	@RequestMapping(value = "/findErrorRecordList", method = RequestMethod.POST)
 	@ResponseBody
@@ -179,6 +185,44 @@ public class RecordController extends BaseController {
 			recordDao.deleteByPrimaryKey(recordID);
 		}
 		return new BaseDto(0);
+	}
+	
+	
+	@RequestMapping(value = "/numStatistics")
+	@ResponseBody
+	public Object numStatistics() {
+		List<CarNumDto> entrylist = recordDao.numEntryStatistics();
+		Map<String, Integer> entryMap = new HashMap<String, Integer>();
+		List<Integer> entryArray = new ArrayList<Integer>();
+		for (CarNumDto carNumDto : entrylist) {
+			entryMap.put(carNumDto.getSta_date(), carNumDto.getCar_num());
+		}
+		
+		List<CarNumDto> leavelist = recordDao.numLeaveStatistics();
+		Map<String, Integer> leaveMap = new HashMap<String, Integer>();
+		List<Integer> leaveArray = new ArrayList<Integer>();
+		for (CarNumDto carNumDto : leavelist) {
+			leaveMap.put(carNumDto.getSta_date(), carNumDto.getCar_num());
+		}
+		
+		Set<String> dateSet = new HashSet<String>();
+		
+		for (CarNumDto carNumsDto : entrylist) {
+			dateSet.add(carNumsDto.getSta_date());
+		}
+		for (CarNumDto carNumDto : leavelist) {
+			dateSet.add(carNumDto.getSta_date());
+		}
+	
+		for (String dateEle : dateSet) {
+			entryArray.add(entryMap.get(dateEle)==null?0:entryMap.get(dateEle));
+			leaveArray.add(leaveMap.get(dateEle)==null?0:leaveMap.get(dateEle));
+		}
+		Map<String,Object> res = new HashMap<String,Object>();
+		res.put("dateRes", dateSet);
+		res.put("entryArray", entryArray);
+		res.put("leaveArray", leaveArray);
+		return new ResultDto(res);
 	}
 
 }

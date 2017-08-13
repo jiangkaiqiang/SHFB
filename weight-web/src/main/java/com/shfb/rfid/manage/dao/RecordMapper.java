@@ -1,7 +1,10 @@
 package com.shfb.rfid.manage.dao;
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 import com.github.pagehelper.Page;
+import com.shfb.rfid.manage.dto.CarNumDto;
 import com.shfb.rfid.manage.entity.Record;
 
 public interface RecordMapper {
@@ -21,5 +24,11 @@ public interface RecordMapper {
 
 	Page<Record> findAllRecords(@Param("keyword")String keyword,@Param("startTime")String startTime, @Param("endTime")String endTime);
 	
+
 	Page<Record> findAllErrorRecords(@Param("keyword")String keyword,@Param("startTime")String startTime, @Param("endTime")String endTime);
+
+	List<CarNumDto> numEntryStatistics();
+	
+	List<CarNumDto> numLeaveStatistics();
+
 }
