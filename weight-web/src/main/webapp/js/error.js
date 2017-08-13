@@ -8,7 +8,7 @@ angular.module('app', ['ngFileUpload']).controller('error', function ($scope, Up
 	$scope.getRecords = function() {
 		$http({
 			method : 'POST',
-			url : '/i/record/findRecordList',
+			url : '/i/record/findErrorRecordList',
 			params : {
 				pageNum : $scope.bigCurrentPage,
 				pageSize : $scope.maxSize,
@@ -48,4 +48,21 @@ angular.module('app', ['ngFileUpload']).controller('error', function ($scope, Up
 		}
 		  
 	};
+	
+	$scope.addCarNumByRecordId = function(recordId,car_num) {
+		if(car_num==undefined ||car_num==""){
+			alert("请输入有效车牌号");
+			return;
+		}
+		$http({
+			method : 'POST',
+			url : '/i/record/addCarNumByRecordIdEntry',
+			params : {
+				recordId :recordId,
+				carNum : encodeURI(car_num,"UTF-8"),
+			}
+		}).success(function(data) {
+			$scope.getRecords();
+		});
+	}
 });

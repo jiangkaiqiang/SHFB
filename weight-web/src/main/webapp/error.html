@@ -132,9 +132,9 @@
 <script src="bower_components/angular/angular.min.js"></script>
 <script src="bower_components/jquery/dist/jquery.js"></script>
 <script src="bower_components/angular/ng-file-upload.min.js"></script>
-<script src="js/historyPage.js" type="text/javascript"></script>
+<script src="js/error.js" type="text/javascript"></script>
 </head>
-<body ng-app="app"  ng-controller="history">
+<body ng-app="app"  ng-controller="error">
 
 <iframe frameborder="0" width="100%" height="160" src="template/top.html" scrolling="no"></iframe>
 
@@ -147,11 +147,11 @@
                 </div>
             </div>
         <div class="Block" ng-repeat="case in AllRecords">
-                <div class="image"><img src="{{case.leave_pic}}" width="229" height="170" />
+                <div class="image"><img src="{{case.entry_pic}}" width="229" height="170" />
                     <div class="topic">
                     <input type="text" ng-model="car_num" class="form-control"  placeholder="请输入车牌号"/>                   
                      <div  style="padding-top:10px" >
-                     <button type="button" ng-click="submitCarNum()" class="btn btn-primary">
+                     <button type="button" ng-click="addCarNumByRecordId(case.record_id,car_num)" class="btn btn-primary">
 	                                                       提交车牌号
 	                </button>
 	                </div>

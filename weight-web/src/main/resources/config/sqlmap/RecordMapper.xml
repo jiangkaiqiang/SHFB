@@ -88,6 +88,7 @@
       </if>
     </trim>
   </insert>
+  
   <update id="updateByPrimaryKeySelective" parameterType="com.shfb.rfid.manage.entity.Record" >
     update record
     <set >
@@ -115,6 +116,35 @@
     </set>
     where record_id = #{record_id,jdbcType=INTEGER}
   </update>
+  
+   <update id="addCarNumByRecordIdEntry" parameterType="com.shfb.rfid.manage.entity.Record" >
+    update record
+    <set >
+      <if test="car_num != null" >
+        car_num = #{car_num,jdbcType=VARCHAR},
+      </if>
+      <if test="entry_time != null" >
+        entry_time = #{entry_time,jdbcType=VARCHAR},
+      </if>
+      <if test="entry_weight != null" >
+        entry_weight = #{entry_weight,jdbcType=VARCHAR},
+      </if>
+      <if test="entry_pic != null" >
+        entry_pic = #{entry_pic,jdbcType=VARCHAR},
+      </if>
+      <if test="leave_time != null" >
+        leave_time = #{leave_time,jdbcType=VARCHAR},
+      </if>
+      <if test="leave_weight != null" >
+        leave_weight = #{leave_weight,jdbcType=VARCHAR},
+      </if>
+      <if test="leave_pic != null" >
+        leave_pic = #{leave_pic,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where record_id = #{record_id,jdbcType=INTEGER}
+  </update>
+  
   <update id="updateByPrimaryKey" parameterType="com.shfb.rfid.manage.entity.Record" >
     update record
     set car_num = #{car_num,jdbcType=VARCHAR},
@@ -139,6 +169,24 @@
             <if test="endTime!=null and endTime!=''">
                 AND leave_time &lt;= #{endTime}
             </if>
+                AND car_num is not NULL AND car_num != ''
+		</where>
+		order by `leave_time` desc
+	</select>
+	
+	 <select id="findAllErrorRecords" parameterType="int" resultType="com.shfb.rfid.manage.entity.Record">
+		SELECT * FROM `record`
+		<where>
+			<if test="keyword != null">
+				car_num like "%"#{keyword}"%"
+			</if>
+			<if test="startTime!=null and startTime!=''">
+                AND leave_time &gt;= #{startTime}
+            </if>
+            <if test="endTime!=null and endTime!=''">
+                AND leave_time &lt;= #{endTime}
+            </if>
+                AND car_num is NULL or car_num = ''
 		</where>
 		order by `leave_time` desc
 	</select>

@@ -14,8 +14,12 @@ public interface RecordMapper {
     Record selectByPrimaryKey(Integer record_id);
 
     int updateByPrimaryKeySelective(Record record);
+    
+    int addCarNumByRecordIdEntry(Record record);
 
     int updateByPrimaryKey(Record record);
 
 	Page<Record> findAllRecords(@Param("keyword")String keyword,@Param("startTime")String startTime, @Param("endTime")String endTime);
+	
+	Page<Record> findAllErrorRecords(@Param("keyword")String keyword,@Param("startTime")String startTime, @Param("endTime")String endTime);
 }
