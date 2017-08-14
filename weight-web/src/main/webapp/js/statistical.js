@@ -10,18 +10,20 @@ angular.module('app', ['ngFileUpload']).controller('index', function ($scope, Up
 	// 基于准备好的dom，初始化echarts实例
     var myChart = echarts.init(document.getElementById('echart1'));
     
+    var myChart2 = echarts.init(document.getElementById('echart2'));
+    
     $scope.initEchart1=function(xArray, enterNum, leaveNum){
 		option = {
-			    backgroundColor: '#394056',
-			    title: {
-			        text: '进出车辆',
-			        textStyle: {
-			            fontWeight: 'normal',
-			            fontSize: 16,
-			            color: '#F1F1F3'
-			        },
-			        left: '6%'
-			    },
+			    //backgroundColor: '#394056',
+//			    title: {
+//			        text: '进出车辆',
+//			        textStyle: {
+//			            fontWeight: 'normal',
+//			            fontSize: 16,
+//			            color: '#FFFFFF'
+//			        },
+//			        left: '6%'
+//			    },
 			    tooltip: {
 			        trigger: 'axis',
 			        axisPointer: {
@@ -31,17 +33,12 @@ angular.module('app', ['ngFileUpload']).controller('index', function ($scope, Up
 			        }
 			    },
 			    legend: {
-			        icon: 'rect',
-			        itemWidth: 14,
-			        itemHeight: 5,
-			        itemGap: 13,
-			        data: ['进入', '离开'],
-			        right: '4%',
-			        textStyle: {
-			            fontSize: 12,
-			            color: '#F1F1F3'
-			        }
-			    },
+    		        x : 'right',
+    		        y : 'top',
+    		        icon: 'rect',
+    		        data:['进入','离开']
+    		    },
+			   
 			    grid: {
 			        left: '3%',
 			        right: '4%',
@@ -172,4 +169,94 @@ angular.module('app', ['ngFileUpload']).controller('index', function ($scope, Up
 	}
     
     $scope.getRecords();
+    
+    
+    $scope.initEchart2=function(xArray, chartData1, chartData2){
+    	option = {
+    		    title : {
+    		        text: '车辆进出统计',
+    		        subtext: '暂时',
+    		        left: '6%'
+    		    },
+    		    tooltip : {
+    		        trigger: 'item',
+    		        formatter: "{a} <br/>{b} : {c} ({d}%)"
+    		    },
+    		    legend: {
+    		        x : 'right',
+    		        y : 'top',
+    		        top: '5%',
+    		        data:['rose1','rose2','rose3','rose4','rose5','rose6','rose7','rose8']
+    		    },
+//    		    toolbox: {
+//    		        show : true,
+//    		        feature : {
+//    		            mark : {show: true},
+//    		            dataView : {show: true, readOnly: false},
+//    		            magicType : {
+//    		                show: true,
+//    		                type: ['pie', 'funnel']
+//    		            },
+//    		            restore : {show: true},
+//    		            saveAsImage : {show: true}
+//    		        }
+//    		    },
+    		    calculable : true,
+    		    series : [
+    		        {
+    		            name:'半径模式',
+    		            type:'pie',
+    		            radius : [20, 110],
+    		            center : ['25%', '50%'],
+    		            roseType : 'radius',
+    		            label: {
+    		                normal: {
+    		                    show: false
+    		                },
+    		                emphasis: {
+    		                    show: true
+    		                }
+    		            },
+    		            lableLine: {
+    		                normal: {
+    		                    show: false
+    		                },
+    		                emphasis: {
+    		                    show: true
+    		                }
+    		            },
+    		            data:[
+    		                {value:10, name:'rose1'},
+    		                {value:5, name:'rose2'},
+    		                {value:15, name:'rose3'},
+    		                {value:25, name:'rose4'},
+    		                {value:20, name:'rose5'},
+    		                {value:35, name:'rose6'},
+    		                {value:30, name:'rose7'},
+    		                {value:30, name:'rose8'}
+    		            ]
+    		        },
+    		        {
+    		            name:'面积模式',
+    		            type:'pie',
+    		            radius : [30, 110],
+    		            center : ['75%', '50%'],
+    		            roseType : 'area',
+    		            data:[
+    		                {value:10, name:'rose1'},
+    		                {value:5, name:'rose2'},
+    		                {value:15, name:'rose3'},
+    		                {value:25, name:'rose4'},
+    		                {value:20, name:'rose5'},
+    		                {value:35, name:'rose6'},
+    		                {value:30, name:'rose7'},
+    		                {value:40, name:'rose8'}
+    		            ]
+    		        }
+    		    ]
+    		};
+		// 使用刚指定的配置项和数据显示图表。
+        myChart2.setOption(option);
+	}
+    $scope.initEchart2();
 });
