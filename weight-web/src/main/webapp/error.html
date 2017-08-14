@@ -138,12 +138,16 @@
 
 <iframe frameborder="0" width="100%" height="160" src="template/top.html" scrolling="no"></iframe>
 
-<div class="Container">
-  
-    <div class="content">
+<div class="Container" id="entryError">
+    <div class="content" >
         <div class="title">
                 <div class="main">
-                    <h2>异常数据</h2>
+                    <h2>车辆进入异常数据</h2>
+                </div>
+                 <div class="detail">
+                     <button type="button" ng-click="goToLeaveError()" id="goToLeave" class="btn btn-primary">
+	                    处理离开异常数据
+	                </button>
                 </div>
             </div>
         <div class="Block" ng-repeat="case in AllRecords">
@@ -152,7 +156,7 @@
                     <input type="text" ng-model="car_num" class="form-control"  placeholder="请输入车牌号"/>                   
                      <div  style="padding-top:10px" >
                      <button type="button" ng-click="addCarNumByRecordId(case.record_id,car_num)" class="btn btn-primary">
-	                                                       提交车牌号
+	                 提交车牌号
 	                </button>
 	                </div>
                     </div>                    
@@ -167,6 +171,41 @@
                   <li><a>第{{bigCurrentPage}}页</a></li>
                   <li><a ng-click="pageadd()">下一页</a></li>
                   <li><a ng-click="endPage()">末页</a></li>
+                </ul>
+              </div>
+            </div> 
+</div>
+
+
+
+<div class="Container" id="leaveError" style="display: none;">
+    <div class="content" >
+        <div class="title">
+                <div class="main">
+                    <h2>车辆离开异常数据</h2>
+                </div>
+            </div>
+        <div class="Block" ng-repeat="case in AllRecordsLeave">
+                <div class="image"><img src="{{case.leave_pic}}" width="229" height="170" />
+                    <div class="topic">
+                    <input type="text" ng-model="car_numLeave" class="form-control"  placeholder="请输入车牌号"/>                   
+                     <div  style="padding-top:10px" >
+                     <button type="button" ng-click="addCarNumByLeaveRecordId(case.record_id,car_numLeave)" class="btn btn-primary">
+	                 提交车牌号
+	                </button>
+	                </div>
+                    </div>                    
+                </div>
+            </div>    
+    </div>
+ <div class="row" class="col-md-10 col-sm-10 items-info">
+              <div class="col-md-10 col-sm-10">
+                <ul class="pagination pull-right">
+                  <li><a ng-click="firstPageLeave()">首页</a></li>
+                  <li><a ng-click="pagedesLeave()">上一页</a></li>
+                  <li><a>第{{bigCurrentPageLeave}}页</a></li>
+                  <li><a ng-click="pageaddLeave()">下一页</a></li>
+                  <li><a ng-click="endPageLeave()">末页</a></li>
                 </ul>
               </div>
             </div> 

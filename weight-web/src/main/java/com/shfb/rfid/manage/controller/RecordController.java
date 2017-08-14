@@ -60,9 +60,9 @@ public class RecordController extends BaseController {
 	}
 
 	
-	@RequestMapping(value = "/findErrorRecordList", method = RequestMethod.POST)
+	@RequestMapping(value = "/findErrorEntryRecordList", method = RequestMethod.POST)
 	@ResponseBody
-	public Object findErrorRecordList(@RequestParam(value="pageNum",required=false) Integer pageNum,
+	public Object findErrorEntryRecordList(@RequestParam(value="pageNum",required=false) Integer pageNum,
 			@RequestParam(value="pageSize") Integer pageSize, 
 			@RequestParam(value="startTime", required=false) String startTime,
 			@RequestParam(value="endTime", required=false) String endTime,
@@ -75,7 +75,27 @@ public class RecordController extends BaseController {
 		else{
 		keyword = URLDecoder.decode(keyword, "UTF-8");
 		}
-		Page<Record> records = recordDao.findAllErrorRecords(keyword,startTime,endTime);
+		Page<Record> records = recordDao.findAllErrorEntryRecords(keyword,startTime,endTime);
+		return new PageInfo<Record>(records);
+		
+	}
+	
+	@RequestMapping(value = "/findErrorLeaveRecordList", method = RequestMethod.POST)
+	@ResponseBody
+	public Object findErrorLeaveRecordList(@RequestParam(value="pageNum",required=false) Integer pageNum,
+			@RequestParam(value="pageSize") Integer pageSize, 
+			@RequestParam(value="startTime", required=false) String startTime,
+			@RequestParam(value="endTime", required=false) String endTime,
+			@RequestParam(value="keyword", required=false) String keyword) throws UnsupportedEncodingException {
+		pageNum = pageNum == null? 1:pageNum;
+		pageSize = pageSize==null? 12:pageSize;
+		PageHelper.startPage(pageNum, pageSize);
+		if(keyword.equals("undefined"))
+			keyword = null;
+		else{
+		keyword = URLDecoder.decode(keyword, "UTF-8");
+		}
+		Page<Record> records = recordDao.findAllErrorLeaveRecords(keyword,startTime,endTime);
 		return new PageInfo<Record>(records);
 		
 	}
@@ -153,6 +173,30 @@ public class RecordController extends BaseController {
 		record.setRecord_id(recordId);
 		record.setCar_num(carNum);
 		recordDao.addCarNumByRecordIdEntry(record);
+		return new BaseDto(0);
+	}
+	
+	@RequestMapping(value = "/addCarNumByRecordIdLeave")
+	@ResponseBody
+	public Object addCarNumByRecordIdLeave(@RequestParam(value="recordId", required=false) Integer recordId,
+			@RequestParam(value="carNum", required=false) String carNum) throws UnsupportedEncodingException{
+		if(carNum.equals("undefined"))
+			carNum = null;
+		else{
+			carNum = URLDecoder.decode(carNum, "UTF-8");
+		}
+		Record leaveRecord =  recordDao.selectByPrimaryKey(recordId);
+		Record mergeRecord = recordDao.findMergeRecord(carNum, leaveRecord.getLeave_time());
+		if (mergeRecord==null) {
+			return new BaseDto(1);
+		}
+		Record updateRecord = new Record();
+		updateRecord.setRecord_id(mergeRecord.getRecord_id());
+		updateRecord.setLeave_pic(leaveRecord.getLeave_pic());
+		updateRecord.setLeave_time(leaveRecord.getLeave_time());
+		updateRecord.setLeave_weight(leaveRecord.getLeave_weight());
+		recordDao.updateByPrimaryKeySelective(updateRecord);
+		recordDao.deleteByPrimaryKey(leaveRecord.getRecord_id());
 		return new BaseDto(0);
 	}
 	

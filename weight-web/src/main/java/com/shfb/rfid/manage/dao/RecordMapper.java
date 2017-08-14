@@ -24,8 +24,11 @@ public interface RecordMapper {
 
 	Page<Record> findAllRecords(@Param("keyword")String keyword,@Param("startTime")String startTime, @Param("endTime")String endTime);
 	
+	Page<Record> findAllErrorEntryRecords(@Param("keyword")String keyword,@Param("startTime")String startTime, @Param("endTime")String endTime);
 
-	Page<Record> findAllErrorRecords(@Param("keyword")String keyword,@Param("startTime")String startTime, @Param("endTime")String endTime);
+	Page<Record> findAllErrorLeaveRecords(@Param("keyword")String keyword,@Param("startTime")String startTime, @Param("endTime")String endTime);
+	
+	Record findMergeRecord(@Param("carNum")String carNum,@Param("leaveTime")String leaveTime);
 
 	List<CarNumDto> numEntryStatistics();
 	

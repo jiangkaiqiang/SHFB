@@ -119,7 +119,7 @@
   
    <update id="addCarNumByRecordIdEntry" parameterType="com.shfb.rfid.manage.entity.Record" >
     update record
-    <set >
+    <set>
       <if test="car_num != null" >
         car_num = #{car_num,jdbcType=VARCHAR},
       </if>
@@ -142,7 +142,7 @@
         leave_pic = #{leave_pic,jdbcType=VARCHAR},
       </if>
     </set>
-    where record_id = #{record_id,jdbcType=INTEGER}
+    where record_id = #{record_id,jdbcType=INTEGER} 
   </update>
   
   <update id="updateByPrimaryKey" parameterType="com.shfb.rfid.manage.entity.Record" >
@@ -169,12 +169,13 @@
             <if test="endTime!=null and endTime!=''">
                 AND leave_time &lt;= #{endTime}
             </if>
-                AND car_num is not NULL AND car_num != ''
+                AND car_num is not NULL AND car_num != '' AND entry_time is not NULL AND entry_time != '' AND
+                leave_time is not NULL AND leave_time != ''
 		</where>
 		order by `leave_time` desc
 	</select>
 	
-	 <select id="findAllErrorRecords" parameterType="int" resultType="com.shfb.rfid.manage.entity.Record">
+	 <select id="findAllErrorEntryRecords" parameterType="int" resultType="com.shfb.rfid.manage.entity.Record">
 		SELECT * FROM `record`
 		<where>
 			<if test="keyword != null">
@@ -186,9 +187,33 @@
             <if test="endTime!=null and endTime!=''">
                 AND leave_time &lt;= #{endTime}
             </if>
-                AND car_num is NULL or car_num = ''
+                AND (car_num is NULL or car_num = '') AND entry_time is not NULL AND entry_time != ''
+                AND (leave_time is NULL or leave_time = '')
 		</where>
 		order by `leave_time` desc
+	</select>
+	
+	 <select id="findAllErrorLeaveRecords" parameterType="int" resultType="com.shfb.rfid.manage.entity.Record">
+		SELECT * FROM `record`
+		<where>
+			<if test="keyword != null">
+				car_num like "%"#{keyword}"%"
+			</if>
+			<if test="startTime!=null and startTime!=''">
+                AND leave_time &gt;= #{startTime}
+            </if>
+            <if test="endTime!=null and endTime!=''">
+                AND leave_time &lt;= #{endTime}
+            </if>
+                AND (car_num is NULL or car_num = '') AND leave_time is not NULL AND leave_time != ''
+                AND (entry_time is NULL or entry_time = '')
+		</where>
+		order by `leave_time` desc
+	</select>
+	
+	<select id="findMergeRecord" parameterType="map" resultType="com.shfb.rfid.manage.entity.Record">
+		SELECT *from record WHERE car_num = #{carNum} AND entry_time is not NULL AND entry_time != '' AND (leave_time is NULL OR leave_time = '')
+		AND entry_time &lt;= #{leaveTime} ORDER BY entry_time DESC limit 0,1
 	</select>
 	
 	<select id="numEntryStatistics" resultType="com.shfb.rfid.manage.dto.CarNumDto">
