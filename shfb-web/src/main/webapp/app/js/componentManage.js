@@ -652,5 +652,16 @@ coldWeb.controller('componentManage', function ($rootScope, $scope, $state, $coo
 	    	 
 	    }
 	    
+	    $scope.showGoujianZhizuo=function(compId){
+	    	 $http.get('/i/componentMake/findProductModelSizeByKey', {
+		            params: {
+		                "component_id": compId
+		            }
+		        }).success(function (data) {
+		        	$scope.productModelSizeInfo=data.data;
+		        	
+		        });
+	    }
+	    
 	    
 });
