@@ -1,0 +1,143 @@
+.header {
+            height: 80px;
+            padding-top: 10px;
+            clear: both;
+            background-color: #ffffff;
+        }
+        .header .content {
+            width: 1160px;
+            margin-right: auto;
+            margin-left: auto;
+        }
+        
+        .header .content .logoimg {
+            font-size: 220%;
+            letter-spacing: 0.4em;
+            padding-top: 0px;
+            float: left;
+            width: 17%;
+            top:0px;
+            position: relative;
+        }
+        .header .content .logo {
+            font-size: 220%;
+            letter-spacing: 0.4em;
+            padding-top: 10px;
+            padding-bottom: 20px;
+            float: left;
+            width: 35%;
+            color:#00FF00;
+        }
+        .header .content .part2 {
+            float: left;
+            width: 40%;
+            text-align: left;
+            line-height: 2em;
+            word-spacing: -.2em;
+            font-family: 宋体;
+            font-size:25px;
+            color:#000;
+        }
+        .header .content .tel {
+            float: left;
+            width: 100%;
+            color:#000
+        }
+        .header.content.tel.graph{
+            width: 50%;
+        }
+        .header.content.contact.word{
+            width:50%;
+        }
+        .header .content.contact img{
+            padding-top: 10px;
+        }
+        .header .content.contact .email {
+            float: left;
+            width: 30%;
+            text-align: left;
+            line-height: 1em;
+            word-spacing: -.2em;
+            font-family: 宋体;
+            font-size:15px;
+            color:#5A5A5A
+        }
+        .header .content .line2 {
+            float: left;
+            width: 55%;
+            color: #e6e600;
+            margin-top: 5px;
+        }
+        .header .content .contact {
+            float: right;
+            width: 30%;
+            color: #000;
+            margin-top: 0px;
+        }
+        .header .content .part1 {
+            float: left;
+            width: 40%;
+            padding-top: 55px;
+            text-align: left;
+            line-height:1em;
+            word-spacing: 0.5em;
+            letter-spacing: 0.2em;
+            font-family: 宋体;
+            color:#000;
+
+        }
+
+        .header .linea{
+            width:100%;
+            height:3px;
+            border:0px solid #fff;
+            background:#4DCFB8;
+            position:absolute;
+            top:98px;
+        }
+        .header .lineb{
+            width:100%;
+            height:3px;
+            border:0px solid #fff;
+            background:#4DCFB8;
+            position:absolute;
+            top:150px;
+        }
+
+        .menu .content {
+            width: 1160px;
+            margin-right: auto;
+            margin-left: auto;
+            overflow: hidden;
+
+        }
+        .menu .content .menubar {
+            float: left;
+            width: 25%;
+            text-align: center;
+            line-height: 60px;
+            font-size:18px;
+            font-family: 华文仿宋;
+        }
+        .menu .content .menubar:hover {
+            background: #fff;
+            font-family: 华文仿宋;
+
+            font-size:22px;
+        }
+        .menu {
+            height: 60px;
+            color: #FFF;
+            clear: both;
+            background-color: #ffffff;
+        }
+
+        .menu .content .menubar a {
+            text-decoration: none;
+            color: #4DCFB8;
+            display: block;
+            font-weight: bold;
+        }
+        .menu .content .menubar:hover a {
+            color: #0097DA;
+        }

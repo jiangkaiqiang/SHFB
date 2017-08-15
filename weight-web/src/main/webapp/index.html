@@ -80,8 +80,6 @@
             padding-left: 6px;
             float: left;
             margin-bottom: 15px;
-
-
         }
         .Container .content .image {
             width: 229px;
@@ -134,27 +132,11 @@
             color: #000;
             text-decoration: underline;
         }
-        .Container .sub07 .content .News {
-            float: left;
-            width: 35%;
-            border-right-width: 1px;
-            border-right-style: solid;
-            border-right-color: #000;
-        }
-        .Container .sub07 .content .Weibo {
-            float: right;
-            width: 614px;
-        }
-        .Container .sub07 .content .News .List a {
-            text-decoration: none;
-            color: #006;
-            line-height: 30px;
-            font-size: 14px;
-        }
     </style>
 
     <!-- Start WOWSlider HEAD section -->
     <link rel="stylesheet" type="text/css" href="css/homepage/style.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="css/top.css" media="screen" />
     <script type="text/javascript" src="js/homepage/jquery.js"></script>
     <!-- End WOWSlider HEAD section -->
 
@@ -162,17 +144,44 @@
 
 <body ng-app="app"  ng-controller="index">
 
-<iframe frameborder="0" width="100%" height="155" src="template/top.html" scrolling="no"></iframe>
+<div class="header">
+    <div class="content">
+        <div class="logoimg"><img src='../img/lastlogo.png' width="180" height="80"></div>
+        <div class="part1"><font color="#8E8E8E"><B>智能建筑-称重系统</B></font></div>
+        <div class="contact">
+            <div class="tel">
+                <div class="graph"><img src='../img/Tel.jpg' width="30" height="40">156-1818-7120</div>
+            </div>
+            <div class="email">
+                <div class="graph"><img src='../img/email.jpg' width="30" height="40">Alvin.liu@fareastcontainers.com</div>
+            </div>
+        </div>
 
+    </div>
+    <!--<div class="linea"></div>-->
 
+    <div class="menu">
+        <div class="content">
+            <div class="menubar"><a href="../index.html"><font color="red">首页</font></a></div>
+            <div class="menubar"><a href="../historyPage.html">历史记录</a></div>
+            <div class="menubar"><a href="../error.html">异常数据</a></div>
+            <div class="menubar"><a href="../statistical.html">数据统计</a></div>
+        </div>
+    </div>
+    <div class="lineb"></div>
+    
 <div id="wowslider-container1">
-    <div class="ws_images"><ul>
-        <li>
-        
-        <img src="img/homepage/images/new01+.jpg"/>
-        
-        </li>
-    </ul>
+    <div class="ws_images">  
+        <div style="width:50%;float:left;padding-left:150px"><img src="{{firstRecord.entry_pic}}"/></div>
+        <div style="width:30%;float:left;">
+        <font style="color: #008cd2;font-size: 30px;"><strong>{{firstRecord.car_num}}</strong></font>
+        <br></br>
+        <p><font style="color: #008cd2;font-size: 20px;">进入重量：{{firstRecord.entry_weight}}</font></p>
+        <br></br>
+        <p><font style="color: #008cd2;font-size: 20px;">进入时间：{{firstRecord.entry_time}}</font></p>
+        <br></br>
+        </div>
+      
     </div>
 </div>
 
@@ -193,12 +202,12 @@
                     <h2>历史记录</h2>
                 </div>
                 <div class="detail">
-                    <h3><a href="historyPage.html" target="_blank">更多历史记录>></a></h3>
+                    <h3><a href="historyPage.html">更多历史记录>></a></h3>
                 </div>
             </div>
             <div class="Block" ng-repeat="case in AllRecords">
-                <div class="image"><a href="detailspage.html?id={{case.record_id}}" target="_blank"><img src="{{case.entry_pic}}" width="229" height="170" /></a>
-                    <div class="topic"><strong><a href="detailspage.html?id={{case.id}}" target="_blank">{{case.car_num}}</a></strong></div>
+                <div class="image"><a href="detailspage.html?id={{case.record_id}}"><img src="{{case.entry_pic}}" width="229" height="170" /></a>
+                    <div class="topic"><strong><a href="detailspage.html?id={{case.id}}">{{case.car_num}}</a></strong></div>
                     <div class="description">
                     <p>净重量：{{case.leave_weight-case.entry_weight}}</p>
                     <p>进入时间：{{case.entry_time}}</p>

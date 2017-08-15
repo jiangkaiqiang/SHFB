@@ -212,8 +212,12 @@
 	</select>
 	
 	<select id="findMergeRecord" parameterType="map" resultType="com.shfb.rfid.manage.entity.Record">
-		SELECT *from record WHERE car_num = #{carNum} AND entry_time is not NULL AND entry_time != '' AND (leave_time is NULL OR leave_time = '')
+		SELECT * from record WHERE car_num = #{carNum} AND entry_time is not NULL AND entry_time != '' AND (leave_time is NULL OR leave_time = '')
 		AND entry_time &lt;= #{leaveTime} ORDER BY entry_time DESC limit 0,1
+	</select>
+	
+	<select id="findFirstRecord" parameterType="map" resultType="com.shfb.rfid.manage.entity.Record">
+		SELECT * from record WHERE entry_time is not NULL AND entry_time != '' ORDER BY entry_time DESC limit 0,1
 	</select>
 	
 	<select id="numEntryStatistics" resultType="com.shfb.rfid.manage.dto.CarNumDto">

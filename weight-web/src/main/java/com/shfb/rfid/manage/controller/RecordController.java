@@ -203,8 +203,9 @@ public class RecordController extends BaseController {
 	@RequestMapping(value = "/findFirstRecord")
 	@ResponseBody
 	public Object findFirstRecord(HttpServletRequest request) {
-		HttpSession session = request.getSession();
-		Record record = (Record) session.getServletContext().getAttribute("firstRecord");
+//		HttpSession session = request.getSession();
+//		Record record = (Record) session.getServletContext().getAttribute("firstRecord");
+		Record record = recordDao.findFirstRecord();
 		return record;
 	}
 	
