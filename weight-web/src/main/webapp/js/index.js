@@ -5,6 +5,20 @@ angular.module('app', ['ngFileUpload']).controller('index', function ($scope, Up
     $scope.bigTotalItems = 12;
     // 当前页
     $scope.bigCurrentPage = 1;
+    function getFirstRecords() {
+      $http({
+		method : 'POST',
+		url : '/i/record/findFirstRecord',
+		params : {
+		}
+	   }).success(function(data) {
+		$scope.firstRecord = data;
+	   });
+    }
+    getFirstRecords();
+    jQuery(document).ready(function(){
+    	    oTimer = setInterval(getFirstRecords,500);
+    });
 	$scope.getRecords = function() {
 		$http({
 			method : 'POST',

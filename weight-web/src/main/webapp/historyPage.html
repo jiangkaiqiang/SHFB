@@ -85,8 +85,6 @@
             padding-left: 6px;
             float: left;
             margin-bottom: 15px;
-
-
         }
         .Container .content .image {
             width: 229px;
@@ -139,6 +137,7 @@
             text-decoration:underline;
         }
     </style>
+<link rel="stylesheet" type="text/css" href="css/top.css" media="screen" />
 <link rel="stylesheet" href="assets/css/bootstrap.min.css">
 <script src="bower_components/angular/angular.min.js"></script>
 <script src="bower_components/jquery/dist/jquery.js"></script>
@@ -147,7 +146,31 @@
 </head>
 <body ng-app="app"  ng-controller="history">
 
-<iframe frameborder="0" width="100%" height="160" src="template/top.html" scrolling="no"></iframe>
+<div class="header">
+    <div class="content">
+        <div class="logoimg"><img src='../img/lastlogo.png' width="180" height="80"></div>
+        <div class="part1"><font color="#8E8E8E"><B>智能建筑-称重系统</B></font></div>
+        <div class="contact">
+            <div class="tel">
+                <div class="graph" style="font-size: 16px;"><img src='../img/Tel.jpg' width="30" height="40">156-1818-7120</div>
+            </div>
+            <div class="email">
+                <div class="graph" style="font-size: 16px;"><img src='../img/email.jpg' width="30" height="40">Alvin.liu@fareastcontainers.com</div>
+            </div>
+        </div>
+
+    </div>
+    <!--<div class="linea"></div>-->
+
+    <div class="menu">
+        <div class="content">
+            <div class="menubar"><a href="../index.html">首页</a></div>
+            <div class="menubar"><a href="../historyPage.html"><font color="red">历史记录</font></a></div>
+            <div class="menubar"><a href="../error.html">异常数据</a></div>
+            <div class="menubar"><a href="../statistical.html">数据统计</a></div>
+        </div>
+    </div>
+    <div class="lineb"></div>
 
 <div class="Container">
   
@@ -158,8 +181,8 @@
                 </div>
             </div>
         <div class="Block" ng-repeat="case in AllRecords">
-                <div class="image"><a href="detailspage.html?id={{case.record_id}}" target="_blank"><img src="{{case.entry_pic}}" width="229" height="170" /></a>
-                    <div class="topic"><strong><a href="detailspage.html?id={{case.id}}" target="_blank">{{case.car_num}}</a></strong></div>
+                <div class="image"><a href="detailspage.html?id={{case.record_id}}"><img src="{{case.entry_pic}}" width="229" height="170" /></a>
+                    <div class="topic"><strong><a href="detailspage.html?id={{case.id}}">{{case.car_num}}</a></strong></div>
                     <div class="description">
                     <p>净重量：{{case.leave_weight-case.entry_weight}}</p>
                     <p>进入时间：{{case.entry_time}}</p>
