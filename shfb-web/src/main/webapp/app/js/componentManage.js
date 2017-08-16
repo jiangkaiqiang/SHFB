@@ -652,13 +652,78 @@ coldWeb.controller('componentManage', function ($rootScope, $scope, $state, $coo
 	    	 
 	    }
 	    
+	    
 	    $scope.showGoujianZhizuo=function(compId){
+	    	 //钢模制作验收
 	    	 $http.get('/i/componentMake/findProductModelSizeByKey', {
 		            params: {
 		                "component_id": compId
 		            }
 		        }).success(function (data) {
 		        	$scope.productModelSizeInfo=data.data;
+		        	
+		        });
+	    	 //钢筋困扎
+	    	 $http.get('/i/componentMake/findProductSteelbarSizeByKey', {
+		            params: {
+		                "component_id": compId
+		            }
+		        }).success(function (data) {
+		        	$scope.productSteelbarSizeInfo=data.data;
+		        	
+		        });
+	    	//预埋件设置
+	    	 $http.get('/i/componentMake/findProductEmbeddedPartsByKey', {
+		            params: {
+		                "component_id": compId
+		            }
+		        }).success(function (data) {
+		        	$scope.productEmbeddedParts=data.data;
+		        	
+		        });
+	    	//混凝土浇筑及养护
+	    	 $http.get('/i/componentMake/findProductCuringByKey', {
+		            params: {
+		                "component_id": compId
+		            }
+		        }).success(function (data) {
+		        	$scope.productCuring=data.data;
+		        	
+		        });
+	    }
+	    
+	    $scope.showShengchaYanshou=function(compId){
+	    	
+	    	 $http.get('/i/productionAcceptance/findProductComponentSizeByKey', {
+		            params: {
+		                "component_id": compId
+		            }
+		        }).success(function (data) {
+		        	$scope.productComponentSize=data.data;
+		        	
+		        });
+	    }
+	   
+	    $scope.showReceiveMod=function(compId){
+	    	
+	    	 $http.get('/i/receiptAcceptance/findReceiptComponentSizeByKey', {
+		            params: {
+		                "component_id": compId
+		            }
+		        }).success(function (data) {
+		        	$scope.receiptComponentSize=data.data;
+		        	
+		        });
+	    }
+	  
+	    $scope.showInstallmodMod=function(compId){
+	    	
+	    	 $http.get('/i/installAcceptance/findInstallComponentSizeByKey', {
+		            params: {
+		                "component_id": compId
+		            }
+		        }).success(function (data) {
+		        	$scope.installComponentSize=data.data;
 		        	
 		        });
 	    }
