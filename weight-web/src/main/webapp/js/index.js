@@ -36,12 +36,11 @@ angular.module('app', ['ngFileUpload']).controller('index', function ($scope, Up
 		});
 	}
 	$scope.getRecords();
-	//$("#viewerimg").viewer();
-	//$(".viewer01").viewer();
+
 	$scope.showView = function(){
-		//console.log($(this));
+		
 		$(".viewer01").viewer();
 	}
-	//$(".viewer01").viewer();
+
 	
 });

@@ -48,4 +48,10 @@ angular.module('app', ['ngFileUpload']).controller('history', function ($scope, 
 		}
 		  
 	};
+	
+
+	$scope.showView = function(){
+		
+		$(".viewer01").viewer();
+	}
 });
