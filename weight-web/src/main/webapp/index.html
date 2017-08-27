@@ -135,6 +135,7 @@
     </style>
 
     <!-- Start WOWSlider HEAD section -->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/homepage/style.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="css/top.css" media="screen" />
     <script type="text/javascript" src="js/homepage/jquery.js"></script>
@@ -173,13 +174,16 @@
 <div id="wowslider-container1">
     <div class="ws_images">  
         <div style="width:50%;float:left;padding-left:150px"><img src="{{firstRecord.entry_pic}}"/></div>
-        <div style="width:30%;float:left;">
-        <font style="color: #008cd2;font-size: 30px;"><strong>{{firstRecord.car_num}}</strong></font>
-        <br></br>
-        <p><font style="color: #008cd2;font-size: 20px;">进入重量：{{firstRecord.entry_weight}}</font></p>
-        <br></br>
-        <p><font style="color: #008cd2;font-size: 20px;">进入时间：{{firstRecord.entry_time}}</font></p>
-        <br></br>
+        <div style="width:30%;float:left;text-align:left">
+        <div style="text-align:center"><font style="color: #000000;font-size: 30px;"><strong>{{firstRecord.car_num}}</strong></font></div>
+        <p><font style="color: #000000;font-size: 20px;">进入重量：{{firstRecord.entry_weight}}</font></p>
+        <p><font style="color: #000000;font-size: 20px;">进入时间：{{firstRecord.entry_time}}</font></p>
+        <p><font style="color: #000000;font-size: 20px;">备用：备用信息1</font></p>
+        <p><font style="color: #000000;font-size: 20px;">备用：备用信息2</font></p>
+        <p><font style="color: #000000;font-size: 20px;">备用：备用信息3</font></p>
+        <p><font style="color: #000000;font-size: 20px;">备用：备用信息4</font></p>
+        <p><font style="color: #000000;font-size: 20px;">备用：备用信息5</font></p>
+        <p><font style="color: #000000;font-size: 20px;">备用：备用信息6</font></p>
         </div>
       
     </div>
@@ -205,7 +209,7 @@
                     <h3><a href="historyPage.html">更多历史记录>></a></h3>
                 </div>
             </div>
-            <div class="Block" ng-repeat="case in AllRecords">
+            <!--  <div class="Block" ng-repeat="case in AllRecords">
                 <div class="image"><a href="detailspage.html?id={{case.record_id}}"><img src="{{case.entry_pic}}" width="229" height="170" /></a>
                     <div class="topic"><strong><a href="detailspage.html?id={{case.id}}">{{case.car_num}}</a></strong></div>
                     <div class="description">
@@ -215,11 +219,51 @@
                     </div>
                 </div>
             </div>
+            -->
+            
+            <table class="table table-striped table-bordered" id="tableArea" ng-model="AllRecords">
+				   <thead>
+				      <tr>
+				         <th>车牌号</th>
+				         <th>进入图片</th>
+				         <th>离开图片</th>
+				         <th>净重量</th>
+				         <th>进入时间</th>
+				         <th>离开时间</th>
+				         <th>备用1</th>
+				         <th>备用2</th>
+				         <th>备用3</th>
+				         <th>备用4</th>
+				      </tr>
+				   </thead>
+				   <tbody>
+				      <tr ng-repeat="case in AllRecords">
+				         <td>{{case.car_num}}</td>
+				         <td style="width:80px;height:50px" > 
+				         <a ng-if="case.entry_pic!=''&&case.entry_pic!=undefined">
+				         <img style="width:80px;height:50px" ng-src="{{case.entry_pic}}" alt="">
+				         </a>
+				         </td>
+				         <td style="width:80px;height:50px" > 
+				         <a ng-if="case.leave_pic!=''&&case.leave_pic!=undefined">
+				         <img style="width:80px;height:50px" ng-src="{{case.leave_pic}}" alt="">
+				         </a>
+				         </td>
+				         <td>{{case.leave_weight-case.entry_weight}}</td>
+				         <td>{{case.entry_time}}</td>
+				         <td>{{case.leave_time}}</td>
+				         <td>备用1</td>
+				         <td>备用2</td>
+				         <td>备用3</td>
+				         <td>备用4</td>
+				      </tr>
+				   </tbody>
+				</table>
         </div>
     </div>
 </div>
 
-<iframe frameborder="0" width="100%" height="100" src="template/bottom.html" scrolling="no"></iframe>
+<iframe frameborder="0" width="100%" height="100" src="template/bottom.html" scrolling="no"></iframe> 
 
 </body>
 </html>
