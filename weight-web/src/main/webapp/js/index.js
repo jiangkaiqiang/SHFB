@@ -17,7 +17,7 @@ angular.module('app', ['ngFileUpload']).controller('index', function ($scope, Up
     }
     getFirstRecords();
     jQuery(document).ready(function(){
-    	    oTimer = setInterval(getFirstRecords,500);
+    	    oTimer = setInterval(getFirstRecords,50000);
     });
 	$scope.getRecords = function() {
 		$http({
@@ -35,5 +35,13 @@ angular.module('app', ['ngFileUpload']).controller('index', function ($scope, Up
 			$scope.AllRecords = data.list;
 		});
 	}
-	$scope.getRecords();	
+	$scope.getRecords();
+	//$("#viewerimg").viewer();
+	//$(".viewer01").viewer();
+	$scope.showView = function(){
+		//console.log($(this));
+		$(".viewer01").viewer();
+	}
+	//$(".viewer01").viewer();
+	
 });

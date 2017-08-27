@@ -140,6 +140,8 @@
     <link rel="stylesheet" type="text/css" href="css/top.css" media="screen" />
     <script type="text/javascript" src="js/homepage/jquery.js"></script>
     <!-- End WOWSlider HEAD section -->
+     <!-- viewer -->
+     <link rel="stylesheet" type="text/css" href="assets/css/viewer.min.css" />
 
 </head>
 
@@ -172,8 +174,12 @@
     <div class="lineb"></div>
     
 <div id="wowslider-container1">
-    <div class="ws_images">  
-        <div style="width:50%;float:left;padding-left:150px"><img src="{{firstRecord.entry_pic}}"/></div>
+    <div class="ws_images" style="top:10px">  
+        <div style="width:50%;float:left;padding-left:150px">
+        	
+								<img src="{{firstRecord.entry_pic}}"/>
+            			
+        </div>
         <div style="width:30%;float:left;text-align:left">
         <div style="text-align:center"><font style="color: #000000;font-size: 30px;"><strong>{{firstRecord.car_num}}</strong></font></div>
         <p><font style="color: #000000;font-size: 20px;">进入重量：{{firstRecord.entry_weight}}</font></p>
@@ -191,6 +197,8 @@
 
 <script src="bower_components/angular/angular.min.js"></script>
 <script src="bower_components/jquery/dist/jquery.js"></script>
+<!-- viewer -->
+<script src="assets/js/viewer.min.js"></script>
 <script src="bower_components/angular/ng-file-upload.min.js"></script>
 <script src="js/index.js" type="text/javascript"></script>
 <!-- End WOWSlider BODY section -->
@@ -240,14 +248,16 @@
 				      <tr ng-repeat="case in AllRecords">
 				         <td>{{case.car_num}}</td>
 				         <td style="width:80px;height:50px" > 
-				         <a ng-if="case.entry_pic!=''&&case.entry_pic!=undefined">
-				         <img style="width:80px;height:50px" ng-src="{{case.entry_pic}}" alt="">
-				         </a>
+				         	<ul class="viewer01" ng-click="showView()">
+            				 <li style="list-style-type:none;">
+            				 	<img ng-if="case.entry_pic!=''&&case.entry_pic!=undefined" style="width:80px;height:50px" src="{{case.entry_pic}}" alt="">
+            				 </li></ul>		         
 				         </td>
 				         <td style="width:80px;height:50px" > 
-				         <a ng-if="case.leave_pic!=''&&case.leave_pic!=undefined">
-				         <img style="width:80px;height:50px" ng-src="{{case.leave_pic}}" alt="">
-				         </a>
+				         <ul class="viewer01" ng-click="showView()">
+            				 <li style="list-style-type:none;">
+				         <img ng-if="case.leave_pic!=''&&case.leave_pic!=undefined" style="width:80px;height:50px" ng-src="{{case.leave_pic}}" alt="">
+				         </ul></li>
 				         </td>
 				         <td>{{case.leave_weight-case.entry_weight}}</td>
 				         <td>{{case.entry_time}}</td>
