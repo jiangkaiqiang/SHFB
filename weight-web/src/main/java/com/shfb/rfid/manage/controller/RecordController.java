@@ -125,8 +125,15 @@ public class RecordController extends BaseController {
 		String[] data = contentStr.split(",");
 		
 		Record record = new Record();
-		record.setCar_num(data[0].trim());
 		
+		String carNumStr = data[0].trim();
+		
+		if("null".equals(carNumStr)) {
+			carNumStr = null;
+		}
+		
+		record.setCar_num(carNumStr);
+		record.hashCode();
 		Date date = TimeUtil.stringToDate(data[1], "yyyyMMddHHmmss");
 		String dateStr = TimeUtil.dateToString(date, "yyyy-MM-dd HH:mm:ss");
 		
