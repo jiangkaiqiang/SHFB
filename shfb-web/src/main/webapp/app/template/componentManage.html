@@ -431,7 +431,7 @@
 			<div class="row">
 				<div class="col-sm-6 col-md-3">
 					<h4 class="page-header" style="background:#F1F1F1;">
-	               		构件制作<img src="../img/canshu.png" data-toggle="modal" data-target="#compMake"  ng-click="showGoujianZhizuo(componentInfo.component_id)"><br>
+	               		构件制作&nbsp;<img src="../app/img/canshu.png" data-toggle="modal" data-target="#compMake"  ng-click="showGoujianZhizuo(componentInfo.component_id)"><br>
 	    			</h4>
 	    			<div class="docs-galley">
           				<ul class="docs-pictures clearfix" id="viewer1">
@@ -444,7 +444,7 @@
 				</div>
 				<div class="col-sm-6 col-md-3">
 					<h4 class="page-header" style="background:#F1F1F1;">
-	               		生产验收<br>
+	               		生产验收&nbsp;<img src="../app/img/canshu.png" data-toggle="modal" data-target="#productRec"  ng-click="showShengchaYanshou(componentInfo.component_id)"><br>
 	    			</h4>
 	    			<div class="docs-galley">
           				<ul class="docs-pictures clearfix" id="viewer2">
@@ -456,7 +456,7 @@
 				</div>
 				<div class="col-sm-6 col-md-3">
 					<h4 class="page-header" style="background:#F1F1F1;">
-	               		收货验收<br>
+	               		收货验收&nbsp;<img src="../app/img/canshu.png" data-toggle="modal" data-target="#receiveCheck"  ng-click="showReceiveMod(componentInfo.component_id)"><br>
 	    			</h4>
 	    			<div class="docs-galley">
           				<ul class="docs-pictures clearfix" id="viewer3">
@@ -468,7 +468,7 @@
 				</div>
 				<div class="col-sm-6 col-md-3">
 					<h4 class="page-header" style="background:#F1F1F1;">
-	               		安装验收<br>
+	               		安装验收&nbsp;<img src="../app/img/canshu.png" data-toggle="modal" data-target="#installmod"  ng-click="showInstallmodMod(componentInfo.component_id)"><br>
 	    			</h4>
 	    			<div class="docs-galley">
           				<ul class="docs-pictures clearfix" id="viewer4">
@@ -810,14 +810,329 @@
 							</tr>
 						</table>
 					</div>
-					<div class="tab-pane" id="panel-m2" style="padding:30px 50px 50px 200px">
-						钢筋困扎
+					<div class="tab-pane" id="panel-m2" style="padding:30px 50px 50px 20px">
+						<table class="table table-striped table-bordered">
+							<tr>
+								<td colspan="7">钢筋制品尺寸允许偏差和检验方法</td>
+							</tr>
+							<tr>
+							    <td colspan="3">项目</td>
+							    <td>允许偏差（mm）</td>
+							    <td>检验方法</td>
+							    <td>是否合格（点选）</td>
+							    <td>备注（填写）</td>
+							</tr>
+							<tr >
+								<td rowspan="2">钢筋网片</td>
+								<td colspan="2">长、宽</td>
+								<td>±5</td>
+								<td>钢尺检查</td>
+								<td><input type="checkbox" ng-checked="productSteelbarSizeInfo.mesh_length_width_pass==1"></td>
+								<td>{{productSteelbarSizeInfo.mesh_length_width_mark}}</td>
+							</tr>
+							<tr>
+								<td colspan="2">网眼尺寸</td>
+								<td>±5</td>
+								<td>钢尺量连续三挡，取最大值</td>
+								<td><input type="checkbox" ng-checked="productSteelbarSizeInfo.mesh_size_pass==1"></td>
+								<td>{{productSteelbarSizeInfo.mesh_size_mark}}</td>
+							</tr>
+							<tr>
+								<td rowspan="2">钢筋骨架</td>
+								<td colspan="2">长</td>
+								<td>±5</td>
+								<td>钢尺检查</td>
+								<td><input type="checkbox" ng-checked="productSteelbarSizeInfo.skeleton_length_pass==1"></td>
+								<td>{{productSteelbarSizeInfo.skeleton_length_mark}}</td>
+							</tr>
+							<tr>
+								<td colspan="2">宽、高</td>
+								<td>±5</td>
+								<td>钢尺检查</td>
+								<td><input type="checkbox" ng-checked="productSteelbarSizeInfo.skeleton_width_high_pass==1"></td>
+								<td>{{productSteelbarSizeInfo.skeleton_width_high_mark}}</td>
+							</tr>
+							<tr>
+								<td rowspan="4">受力钢筋</td>
+								<td colspan="2">间距</td>
+								<td>±5</td>
+								<td rowspan="2">钢尺量两端、中间各一点，取最大值</td>
+								<td><input type="checkbox" ng-checked="productSteelbarSizeInfo.force_bet_spacing_pass==1"></td>
+								<td>{{productSteelbarSizeInfo.force_bet_spacing_mark}}</td>
+							</tr>
+							<tr>
+								<td colspan="2">排距</td>
+								<td>±5</td>
+								<td><input type="checkbox" ng-checked="productSteelbarSizeInfo.force_row_spacing_pass==1"></td>
+								<td>{{productSteelbarSizeInfo.force_row_spacing_mark}}</td>
+							</tr>
+							<tr>
+								<td rowspan="2">保护层</td>
+								<td>柱、梁</td>
+								<td>±5</td>
+								<td>钢尺检查</td>
+								<td><input type="checkbox" ng-checked="productSteelbarSizeInfo.force_column_beam_pass==1"></td>
+								<td>{{productSteelbarSizeInfo.force_column_beam_mark}}</td>
+							</tr>
+							<tr>
+								<td>板、墙</td>
+								<td>±3</td>
+								<td>钢尺检查</td>
+								<td><input type="checkbox" ng-checked="productSteelbarSizeInfo.force_plate_wall_pass==1"></td>
+								<td>{{productSteelbarSizeInfo.force_plate_wall_mark}}</td>
+							</tr>
+							<tr>
+								<td colspan="3">钢筋、横向钢筋间距</td>
+								<td>±5</td>
+								<td>钢尺量连续三挡，取最大值</td>
+								<td><input type="checkbox" ng-checked="productSteelbarSizeInfo.steelbar_spacing_pass==1"></td>
+								<td>{{productSteelbarSizeInfo.steelbar_spacing_mark}}</td>
+							</tr>
+							<tr>
+								<td colspan="3">钢筋弯起点位置</td>
+								<td>15</td>
+								<td>钢尺检查</td>
+								<td><input type="checkbox" ng-checked="productSteelbarSizeInfo.steelbar_start_point_pass==1"></td>
+								<td>{{productSteelbarSizeInfo.steelbar_start_point_mark}}</td>
+							</tr>
+						</table>
 					</div>
-					<div class="tab-pane" id="panel-m3" style="padding:30px 50px 50px 200px">
-						预埋件设置
+					<div class="tab-pane" id="panel-m3" style="padding:30px 50px 10px 20px">
+						<table class="table table-striped table-bordered">
+							<tr>
+								<td colspan="6">预埋件和预留孔洞的允许偏差和检验方法</td>
+							</tr>
+							<tr>
+							    <td colspan="2">项目</td>
+							    <td>允许偏差（mm）</td>
+							    <td>检验方法</td>
+							    <td>是否合格（点选）</td>
+							    <td>备注（填写）</td>
+							</tr>
+							<tr >
+								<td rowspan="2">预埋钢筋锚固板</td>
+								<td>中心线位置</td>
+								<td>3</td>
+								<td>钢尺检查</td>
+								<td><input type="checkbox" ng-checked="productEmbeddedParts.embedded_steelbar_centerline_pass==1"></td>
+								<td>{{productEmbeddedParts.embedded_steelbar_centerline_mark}}</td>
+							</tr>
+							<tr >
+								<td>安装平整度</td>
+								<td>0，-3</td>
+								<td>靠尺和塞尺检查</td>
+								<td><input type="checkbox" ng-checked="productEmbeddedParts.embedded_steelbar_smooth_pass==1"></td>
+								<td>{{productEmbeddedParts.embedded_steelbar_smooth_mark}}</td>
+							</tr>
+							<tr >
+								<td rowspan="2">预埋管、预留孔</td>
+								<td>中心线位置</td>
+								<td>3</td>
+								<td>钢尺检查</td>
+								<td><input type="checkbox" ng-checked="productEmbeddedParts.embedded_tube_centerline_pass==1"></td>
+								<td>{{productEmbeddedParts.embedded_tube_centerline_mark}}</td>
+							</tr>
+							<tr >
+								
+								<td>孔尺寸</td>
+								<td>±3</td>
+								<td>钢尺检查</td>
+								<td><input type="checkbox" ng-checked="productEmbeddedParts.embedded_tube_size_pass==1"></td>
+								<td>{{productEmbeddedParts.embedded_tube_size_mark}}</td>
+							</tr>
+							<tr >
+								<td rowspan="2">门窗口</td>
+								<td>中心线位置</td>
+								<td>3</td>
+								<td>钢尺检查</td>
+								<td><input type="checkbox" ng-checked="productEmbeddedParts.door_centerline_pass==1"></td>
+								<td>{{productEmbeddedParts.door_centerline_mark}}</td>
+							</tr>
+							<tr >
+								
+								<td>宽度、高度</td>
+								<td>±2</td>
+								<td>钢尺检查</td>
+								<td><input type="checkbox" ng-checked="productEmbeddedParts.door_width_high_pass==1"></td>
+								<td>{{productEmbeddedParts.door_width_high_mark}}</td>
+							</tr>
+							<tr >
+								<td rowspan="2">插筋</td>
+								<td>中心线位置</td>
+								<td>3</td>
+								<td>钢尺检查</td>
+								<td><input type="checkbox" ng-checked="productEmbeddedParts.insert_steel_centerline_pass==1"></td>
+								<td>{{productEmbeddedParts.insert_steel_ceterline_mark}}</td>
+							</tr>
+							<tr >
+								
+								<td>外露长度</td>
+								<td>﹢5，0</td>
+								<td>钢尺检查</td>
+								<td><input type="checkbox" ng-checked="productEmbeddedParts.insert_steel_length_pass==1"></td>
+								<td>{{productEmbeddedParts.insert_steel_length_mark}}</td>
+							</tr>
+							<tr >
+								<td rowspan="2">预埋吊环</td>
+								<td>中心线位置</td>
+								<td>3</td>
+								<td>钢尺检查</td>
+								<td><input type="checkbox" ng-checked="productEmbeddedParts.crane_ring_centerline_pass==1"></td>
+								<td>{{productEmbeddedParts.crane_ring_centerline_mark}}</td>
+							</tr>
+							<tr >
+								
+								<td>外露长度</td>
+								<td>﹢8，0</td>
+								<td>钢尺检查</td>
+								<td><input type="checkbox" ng-checked="productEmbeddedParts.crane_ring_length_pass==1"></td>
+								<td>{{productEmbeddedParts.crane_ring_length_mark}}</td>
+							</tr>
+							<tr >
+								<td rowspan="2">预留洞</td>
+								<td>中心线位置</td>
+								<td>3</td>
+								<td>钢尺检查</td>
+								<td><input type="checkbox" ng-checked="productEmbeddedParts.reserved_hole_centerline_pass==1"></td>
+								<td>{{productEmbeddedParts.reserved_hole_centerline_mark}}</td>
+							</tr>
+							<tr >
+								
+								<td>尺寸</td>
+								<td>±3</td>
+								<td>钢尺检查</td>
+								<td><input type="checkbox" ng-checked="productEmbeddedParts.reserved_hole_size_pass==1"></td>
+								<td>{{productEmbeddedParts.reserved_hole_size_mark}}</td>
+							</tr>
+							<tr >
+								<td rowspan="2">预埋螺栓</td>
+								<td>螺栓中心线位置</td>
+								<td>2</td>
+								<td>钢尺检查</td>
+								<td><input type="checkbox" ng-checked="productEmbeddedParts.bolt_centerline_pass==1"></td>
+								<td>{{productEmbeddedParts.bolt_centerline_mark}}</td>
+							</tr>
+							<tr >
+								
+								<td>螺栓外露长度</td>
+								<td>±2</td>
+								<td>钢尺检查</td>
+								<td><input type="checkbox" ng-checked="productEmbeddedParts.bolt_length_pass==1"></td>
+								<td>{{productEmbeddedParts.bolt_length_mark}}</td>
+							</tr>
+							<tr >
+								<td rowspan="2">钢筋套筒</td>
+								<td>中心线位置</td>
+								<td>1</td>
+								<td>钢尺检查</td>
+								<td><input type="checkbox" ng-checked="productEmbeddedParts.sleeve_centerline_pass==1"></td>
+								<td>{{productEmbeddedParts.sleeve_centerline_mark}}</td>
+							</tr>
+							<tr >
+								
+								<td>平整度</td>
+								<td>±1</td>
+								<td>靠尺和塞尺检查</td>
+								<td><input type="checkbox" ng-checked="productEmbeddedParts.sleeve_smooth_pass==1"></td>
+								<td>{{productEmbeddedParts.sleeve_smooth_mark}}</td>
+							</tr>
+						</table>
 					</div>
-					<div class="tab-pane" id="panel-m4" style="padding:30px 50px 50px 200px">
-						混凝土浇筑及养护
+					<div class="tab-pane" id="panel-m4" style="padding:30px 20px 50px 20px">
+						<table class="table table-striped table-bordered">
+							<tr>
+								<td colspan="6">预制构件养护质量</td>
+							</tr>
+							<tr>
+							    <td>名称</td>
+							    <td>现象</td>
+							    <td>严重缺陷</td>
+							    <td>一般缺陷</td>
+							    <td>是否合格（点选）</td>
+							    <td>备注（填写）</td>
+							</tr>
+							<tr >
+								<td>露筋</td>
+								<td>构件内钢筋未被混凝土包裹而外露</td>
+								<td>主筋有露筋</td>
+								<td>其他钢筋有少量露筋</td>
+								<td><input type="checkbox" ng-checked="productCuring.expose_steel_pass==1"></td>
+								<td>{{productCuring.expose_steel_mark}}</td>
+							</tr>
+							<tr >
+								<td>蜂窝</td>
+								<td>混凝土表面缺少水泥砂浆而形成石子外露</td>
+								<td>主筋部位和搁置点位置有蜂窝</td>
+								<td>其他部位有少量蜂窝</td>
+								<td><input type="checkbox" ng-checked="productCuring.honeycomb_pass==1"></td>
+								<td>{{productCuring.honeycomb_mark}}</td>
+							</tr>
+							<tr >
+								<td>孔洞</td>
+								<td>混凝土中孔穴深度和长度均超过保护层厚度</td>
+								<td>构件主要受力部位有孔洞</td>
+								<td>非受力部位有孔洞</td>
+								<td><input type="checkbox" ng-checked="productCuring.hole_pass==1"></td>
+								<td>{{productCuring.hole_mark}}</td>
+							</tr>
+							<tr >
+								<td>夹渣</td>
+								<td>混凝土中夹有杂物且深度超过保护层厚度</td>
+								<td>构件主要受力部位有夹渣</td>
+								<td>其他部位有少量夹渣</td>
+								<td><input type="checkbox" ng-checked="productCuring.hole_mark==1"></td>
+								<td>{{productCuring.slag_mark}}</td>
+							</tr>
+							<tr >
+								<td>疏松</td>
+								<td>混泥土中局部不密实</td>
+								<td>构件主要受力部位有疏松</td>
+								<td>其他部位有少量疏松</td>
+								<td><input type="checkbox" ng-checked="productCuring.loose_pass==1"></td>
+								<td>{{productCuring.loose_mark}}</td>
+							</tr>
+							<tr >
+								<td>裂缝</td>
+								<td>缝隙从混凝土表面延伸至混凝土内部</td>
+								<td>构件主要受力部位有影响结构性能或使用功能的裂缝</td>
+								<td>其他部位有少量不影响结构性能或使用功能的裂缝</td>
+								<td><input type="checkbox" ng-checked="productCuring.crack_seam_pass==1"></td>
+								<td>{{productCuring.crack_seam_mark}}</td>
+							</tr>
+							<tr >
+								<td>裂纹</td>
+								<td>构件表面的裂纹或者龟裂现象</td>
+								<td>预应力构件受拉侧有影响结构性能或使用</td>
+								<td>非预应力构件有表面的裂纹或者龟裂现象</td>
+								<td><input type="checkbox" ng-checked="productCuring.crack_line_pass==1"></td>
+								<td>{{productCuring.crack_line_mark}}</td>
+							</tr>
+							<tr >
+								<td>连接部位缺陷</td>
+								<td>构件连接处混凝土缺陷及连接钢筋、连接件松动、灌浆套筒未保护</td>
+								<td>连接部位有影响结构传力性能的缺陷</td>
+								<td>连接部位有基本不影响结构传力性能的缺陷</td>
+								<td><input type="checkbox" ng-checked="productCuring.connect_defect_pass==1"></td>
+								<td>{{productCuring.connect_defect_mark}}</td>
+							</tr>
+							<tr >
+								<td>外形缺陷</td>
+								<td>内表面缺棱掉角、棱角不直、翘曲不平等；外表面面砖粘结不牢、位置偏差、面砖嵌缝没有达到横平竖直、面砖表面翘曲不平等</td>
+								<td>清水混凝土构件有影响使用功能或装饰效果的外形缺陷</td>
+								<td>其他混凝土构件有不影响使用功能的外形缺陷</td>
+								<td><input type="checkbox" ng-checked="productCuring.appearance_defect_pass==1"></td>
+								<td>{{productCuring.appearance_defect_mark}}</td>
+							</tr>
+							<tr >
+								<td>外表缺陷</td>
+								<td>构件内表面麻面、掉皮、起砂、沾污等；外表面面砖污染、预埋门窗破坏</td>
+								<td>具有重要装饰效果的清水混凝土构件、门窗框有外表缺陷</td>
+								<td>其他混凝土构件有不影响使用功能的外表缺陷，门窗框不宜有外表缺陷</td>
+								<td><input type="checkbox" ng-checked="productCuring.surface_defect_pass==1"></td>
+								<td>{{productCuring.surface_defect_mark}}</td>
+							</tr>
+							
+						</table>
 					</div>
 				</div>
 			</div>
@@ -831,6 +1146,630 @@
 	</div><!-- /.modal -->
 	</div>
 	<!-- 构件制作模态框end -->
+	<!--  生产验收模态框 -->
+   	<div class="modal fade" id="productRec" role="dialog"  aria-labelledby="myModalLabel" aria-hidden="true">
+	   <div class="modal-dialog">
+	      <div class="modal-content">
+	         <div class="modal-header">
+	            <button type="button" class="close" 
+	               data-dismiss="modal" aria-hidden="true">
+	                  &times;
+	            </button>
+	            <h4 class="modal-title" id="myModalLabel">
+	              生产验收
+	            </h4>
+	         </div>
+	         <div class="modal-body" style="text-align:center">
+	            <table class="table table-striped table-bordered">
+							<tr>
+								<td colspan="7">预制构件尺寸允许偏差及检查方法</td>
+							</tr>
+							<tr>
+							    <td colspan="3">项目</td>
+							    <td>允许偏差（mm）</td>
+							    <td>检验方法</td>
+							    <td>是否合格（点选）</td>
+							    <td>备注（填写）</td>
+							</tr>
+							<tr >
+								<td rowspan="3">长度</td>
+								<td rowspan="3">板、梁、柱、桁架</td>
+								<td>＜12m</td>
+								<td>±5</td>
+								<td rowspan="3">尺量检查</td>
+								<td><input type="checkbox" ng-checked="productComponentSize.length_small_pass==1"></td>
+								<td>{{productComponentSize.length_small_mark}}</td>
+							</tr>
+							<tr >
+								<td>≥12m且＜18m</td>
+								<td>±10</td>
+								<td><input type="checkbox" ng-checked="productComponentSize.length_middle_pass==1"></td>
+								<td>{{productComponentSize.length_middle_mark}}</td>
+							</tr>
+							<tr >
+								<td>≥18m</td>
+								<td>±20</td>
+								<td><input type="checkbox" ng-checked="productComponentSize.length_big_pass==1"></td>
+								<td>{{productComponentSize.length_big_mark}}</td>
+							</tr>
+							<tr >
+								<td rowspan="2">宽度、高（厚）度</td>
+								<td colspan="2">板、梁、柱、桁架截面尺寸</td>
+								<td>±5</td>
+								<td rowspan="2">钢尺量一端及中部，取其中偏差绝对值较大处</td>
+								<td><input type="checkbox" ng-checked="productComponentSize.height_section_size_pass==1"></td>
+								<td>{{productComponentSize.height_section_size_mark}}</td>
+							</tr>
+							<tr >
+								<td colspan="2">墙板的高度、厚度</td>
+								<td>±3</td>
+								<td><input type="checkbox" ng-checked="productComponentSize.height_thickness_wallboard_pass==1"></td>
+								<td>{{productComponentSize.height_thickness_wallboard_mark}}</td>
+							</tr>
+							<tr >
+								<td rowspan="2">表面平整度</td>
+								<td colspan="2">板、梁、柱、墙板内表面</td>
+								<td>5</td>
+								<td rowspan="2">2m靠尺和塞尺检查</td>
+								<td><input type="checkbox" ng-checked="productComponentSize.planeness_inner_surface_pass==1"></td>
+								<td>{{productComponentSize.planeness_inner_surface_mark}}</td>
+							</tr>
+							<tr >
+								<td colspan="2">墙板外表面</td>
+								<td>3</td>
+								<td><input type="checkbox" ng-checked="productComponentSize.planeness_out_surface_pass==1"></td>
+								<td>{{productComponentSize.planeness_out_surface_mark}}</td>
+							</tr>
+							<tr >
+								<td rowspan="2">侧向弯曲</td>
+								<td colspan="2">板、梁、柱</td>
+								<td>L/750且≤20</td>
+								<td rowspan="2">拉线、钢尺量最大侧向弯曲处</td>
+								<td><input type="checkbox" ng-checked="productComponentSize.lateral_bending_column_pass==1"></td>
+								<td>{{productComponentSize.lateral_bending_column_mark}}</td>
+							</tr>
+							<tr >
+								<td colspan="2">墙板、桁架</td>
+								<td>L/1000且≤20</td>
+								<td><input type="checkbox" ng-checked="productComponentSize.lateral_bending_wallboard_pass==1"></td>
+								<td>{{productComponentSize.lateral_bending_wallboard_mark}}</td>
+							</tr>
+							<tr >
+								<td rowspan="2">翘曲</td>
+								<td colspan="2">板</td>
+								<td>L/750</td>
+								<td rowspan="2">调平尺在两端量测</td>
+								<td><input type="checkbox" ng-checked="productComponentSize.warping_plate_pass==1"></td>
+								<td>{{productComponentSize.warping_plate_mark}}</td>
+							</tr>
+							<tr >
+								<td colspan="2">墙板</td>
+								<td>L/1000</td>
+								<td><input type="checkbox" ng-checked="productComponentSize.warping_wallboard_pass==1"></td>
+								<td>{{productComponentSize.warping_wallboard_mark}}</td>
+							</tr>
+							
+							<tr >
+								<td rowspan="2">对角线差</td>
+								<td colspan="2">板</td>
+								<td>10</td>
+								<td rowspan="2">拉线、钢尺量最大弯曲处</td>
+								<td><input type="checkbox" ng-checked="productComponentSize.diagonal_difference_plate_pass==1"></td>
+								<td>{{productComponentSize.diagonal_difference_plate_mark}}</td>
+							</tr>
+							<tr >
+								<td colspan="2">墙板、门窗口</td>
+								<td>5</td>
+								<td><input type="checkbox" ng-checked="productComponentSize.diagonal_difference_wallboard_pass==1"></td>
+								<td>{{productComponentSize.diagonal_difference_wallboard_mark}}</td>
+							</tr>
+							<tr >
+								<td rowspan="2">挠度变形</td>
+								<td colspan="2">梁、板、桁架设计起拱</td>
+								<td>±10</td>
+								<td rowspan="2">尺量检查</td>
+								<td><input type="checkbox" ng-checked="productComponentSize.deflection_arch_pass==1"></td>
+								<td>{{productComponentSize.deflection_arch_mark}}</td>
+							</tr>
+							<tr >
+								<td colspan="2">梁、板、桁架下垂</td>
+								<td>0</td>
+								<td><input type="checkbox" ng-checked="productComponentSize.deflection_drooping_pass==1"></td>
+								<td>{{productComponentSize.deflection_drooping_mark}}</td>
+							</tr>
+							<tr >
+								<td rowspan="2">预留孔</td>
+								<td colspan="2">中心线位置</td>
+								<td>5</td>
+								<td rowspan="2">尺量检查</td>
+								<td><input type="checkbox" ng-checked="productComponentSize.preformed_hole_centerline_pass==1"></td>
+								<td>{{productComponentSize.preformed_hole_centerline_mark}}</td>
+							</tr>
+							<tr >
+								<td colspan="2">孔尺寸</td>
+								<td>±5</td>
+								<td><input type="checkbox" ng-checked="productComponentSize.preformed_hole_holesize_pass==1"></td>
+								<td>{{productComponentSize.preformed_hole_holesize_mark}}</td>
+							</tr>
+							<tr >
+								<td rowspan="2">预留洞</td>
+								<td colspan="2">中心线位置</td>
+								<td>5</td>
+								<td rowspan="2">尺量检查</td>
+								<td><input type="checkbox" ng-checked="productComponentSize.reserved_hole_centerline_pass==1"></td>
+								<td>{{productComponentSize.reserved_hole_centerline_mark}}</td>
+							</tr>
+							<tr >
+								<td colspan="2">洞口尺寸、深度</td>
+								<td>±5</td>
+								<td><input type="checkbox" ng-checked="productComponentSize.reserved_hole_entrancesize_pass==1"></td>
+								<td>{{productComponentSize.reserved_hole_entrancesize_mark}}</td>
+							</tr>
+							<tr >
+								<td rowspan="2">门窗口</td>
+								<td colspan="2">中心线位置</td>
+								<td>5</td>
+								<td rowspan="2">尺量检查</td>
+								<td><input type="checkbox" ng-checked="productComponentSize.door_window_centerline_pass==1"></td>
+								<td>{{productComponentSize.door_window_centerline_mark}}</td>
+							</tr>
+							<tr >
+								<td colspan="2">宽度、高度</td>
+								<td>±3</td>
+								<td><input type="checkbox" ng-checked="productComponentSize.door_window_height_pass==1"></td>
+								<td>{{productComponentSize.door_window_height_mark}}</td>
+							</tr>
+							<tr>
+								<td rowspan="8">预埋件</td>
+								<td colspan="2">预埋件钢筋锚固板中心线位置</td>
+								<td>5</td>
+								<td rowspan="8">尺量检查</td>
+								<td><input type="checkbox" ng-checked="productComponentSize.embedded_parts_anchorcenterline_pass==1"></td>
+								<td>{{productComponentSize.embedded_parts_anchorcenterline_mark}}</td>
+							</tr>
+							<tr>
+								<td colspan="2">预埋件钢筋锚固板与混凝土面平面高差</td>
+								<td>0，-5</td>
+								<td><input type="checkbox" ng-checked="productComponentSize.embedded_parts_steelbarplane_pass==1"></td>
+								<td>{{productComponentSize.embedded_parts_steelbarplane_mark}}</td>
+							</tr>
+							<tr>
+								<td colspan="2">预埋螺栓中心线位置</td>
+								<td>2</td>
+								<td><input type="checkbox" ng-checked="productComponentSize.embedded_parts_boltcenterline_pass==1"></td>
+								<td>{{productComponentSize.embedded_parts_boltcenterline_mark}}</td>
+							</tr>
+							<tr>
+								<td colspan="2">预埋螺栓外露长度</td>
+								<td>±5</td>
+								<td><input type="checkbox" ng-checked="productComponentSize.embedded_parts_exposedlength_pass==1"></td>
+								<td>{{productComponentSize.embedded_parts_exposedlength_mark}}</td>
+							</tr>
+							<tr>
+								<td colspan="2">预埋套筒、螺母中心线位置</td>
+								<td>2</td>
+								<td><input type="checkbox" ng-checked="productComponentSize.embedded_parts_nutcenterline_pass==1"></td>
+								<td>{{productComponentSize.embedded_parts_nutcenterline_mark}}</td>
+							</tr>
+							<tr>
+								<td colspan="2">预埋套筒、螺母与混凝土面平面高差</td>
+								<td>0，-5</td>
+								<td><input type="checkbox" ng-checked="productComponentSize.embedded_parts_concreteheight_pass==1"></td>
+								<td>{{productComponentSize.embedded_parts_concreteheight_mark}}</td>
+							</tr>
+							<tr>
+								<td colspan="2">线管、电盒、木砖、吊环在构件平面的中心线位置偏差</td>
+								<td>20</td>
+								<td><input type="checkbox" ng-checked="productComponentSize.embedded_parts_centrallineposition_pass==1"></td>
+								<td>{{productComponentSize.embedded_parts_centrallineposition_mark}}</td>
+							</tr>
+							<tr>
+								<td colspan="2">线管、电盒、木砖、吊环在构件表面混凝土高差</td>
+								<td>0，-10</td>
+								<td><input type="checkbox" ng-checked="productComponentSize.embedded_parts_componentheight_pass==1"></td>
+								<td>{{productComponentSize.embedded_parts_componentheight_mark}}</td>
+							</tr>
+							<tr>
+								<td rowspan="2">预埋插筋</td>
+								<td colspan="2">中心线位置</td>
+								<td>3</td>
+								<td rowspan="2">尺量检查</td>
+								<td><input type="checkbox" ng-checked="productComponentSize.embedded_reinforcement_centerline_pass==1"></td>
+								<td>{{productComponentSize.embedded_reinforcement_centerline_mark}}</td>
+							</tr>
+							<tr>
+								<td colspan="2">外露长度</td>
+								<td>﹢5，0</td>
+								<td><input type="checkbox" ng-checked="productComponentSize.embedded_reinforcement_length_pass==1"></td>
+								<td>{{productComponentSize.embedded_reinforcement_length_mark}}</td>
+							</tr>
+							<tr>
+								<td rowspan="2">键槽</td>
+								<td colspan="2">中心线位置</td>
+								<td>5</td>
+								<td rowspan="2">尺量检查</td>
+								<td><input type="checkbox" ng-checked="productComponentSize.keyway_centerline_pass==1"></td>
+								<td>{{productComponentSize.keyway_centerline_mark}}</td>
+							</tr>
+							<tr>
+								<td colspan="2">长度、宽度、深度</td>
+								<td>±5</td>
+								<td><input type="checkbox" ng-checked="productComponentSize.keyway_length_pass==1"></td>
+								<td>{{productComponentSize.keyway_length_mark}}</td>
+							</tr>
+						</table>	
+	         </div>
+	         <div class="modal-footer">
+	            <button type="button" class="btn btn-default" 
+	               data-dismiss="modal">关闭
+	            </button>
+	         </div>
+	      </div><!-- /.modal-content -->
+	</div><!-- /.modal -->
+	</div>
+	<!-- 生产验收模态框end -->
+	<!--  收货验收模态框 -->
+   	<div class="modal fade" id="receiveCheck" role="dialog"  aria-labelledby="myModalLabel" aria-hidden="true">
+	   <div class="modal-dialog">
+	      <div class="modal-content">
+	         <div class="modal-header">
+	            <button type="button" class="close" 
+	               data-dismiss="modal" aria-hidden="true">
+	                  &times;
+	            </button>
+	            <h4 class="modal-title" id="myModalLabel">
+	              收货验收
+	            </h4>
+	         </div>
+	         <div class="modal-body" style="text-align:center">
+	            <table class="table table-striped table-bordered">
+							<tr>
+								<td colspan="7">预制构件尺寸允许偏差及检查方法</td>
+							</tr>
+							<tr>
+							    <td colspan="3">项目</td>
+							    <td>允许偏差（mm）</td>
+							    <td>检验方法</td>
+							    <td>是否合格（点选）</td>
+							    <td>备注（填写）</td>
+							</tr>
+							<tr >
+								<td rowspan="3">长度</td>
+								<td rowspan="3">板、梁、柱、桁架</td>
+								<td>＜12m</td>
+								<td>±5</td>
+								<td rowspan="3">尺量检查</td>
+								<td><input type="checkbox" ng-checked="receiptComponentSize.length_small_pass==1"></td>
+								<td>{{receiptComponentSize.length_small_mark}}</td>
+							</tr>
+							<tr >
+								<td>≥12m且＜18m</td>
+								<td>±10</td>
+								<td><input type="checkbox" ng-checked="receiptComponentSize.length_middle_pass==1"></td>
+								<td>{{receiptComponentSize.length_middle_mark}}</td>
+							</tr>
+							<tr >
+								<td>≥18m</td>
+								<td>±20</td>
+								<td><input type="checkbox" ng-checked="receiptComponentSize.length_big_pass==1"></td>
+								<td>{{receiptComponentSize.length_big_mark}}</td>
+							</tr>
+							<tr >
+								<td rowspan="2">宽度、高（厚）度</td>
+								<td colspan="2">板、梁、柱、桁架截面尺寸</td>
+								<td>±5</td>
+								<td rowspan="2">钢尺量一端及中部，取其中偏差绝对值较大处</td>
+								<td><input type="checkbox" ng-checked="receiptComponentSize.height_section_size_pass==1"></td>
+								<td>{{receiptComponentSize.height_section_size_mark}}</td>
+							</tr>
+							<tr >
+								<td colspan="2">墙板的高度、厚度</td>
+								<td>±3</td>
+								<td><input type="checkbox" ng-checked="receiptComponentSize.height_thickness_wallboard_pass==1"></td>
+								<td>{{receiptComponentSize.height_thickness_wallboard_mark}}</td>
+							</tr>
+							<tr >
+								<td rowspan="2">表面平整度</td>
+								<td colspan="2">板、梁、柱、墙板内表面</td>
+								<td>5</td>
+								<td rowspan="2">2m靠尺和塞尺检查</td>
+								<td><input type="checkbox" ng-checked="receiptComponentSize.planeness_inner_surface_pass==1"></td>
+								<td>{{receiptComponentSize.planeness_inner_surface_mark}}</td>
+							</tr>
+							<tr >
+								<td colspan="2">墙板外表面</td>
+								<td>3</td>
+								<td><input type="checkbox" ng-checked="receiptComponentSize.planeness_out_surface_pass==1"></td>
+								<td>{{receiptComponentSize.planeness_out_surface_mark}}</td>
+							</tr>
+							<tr >
+								<td rowspan="2">侧向弯曲</td>
+								<td colspan="2">板、梁、柱</td>
+								<td>L/750且≤20</td>
+								<td rowspan="2">拉线、钢尺量最大侧向弯曲处</td>
+								<td><input type="checkbox" ng-checked="receiptComponentSize.lateral_bending_column_pass==1"></td>
+								<td>{{receiptComponentSize.lateral_bending_column_mark}}</td>
+							</tr>
+							<tr >
+								<td colspan="2">墙板、桁架</td>
+								<td>L/1000且≤20</td>
+								<td><input type="checkbox" ng-checked="receiptComponentSize.lateral_bending_wallboard_pass==1"></td>
+								<td>{{receiptComponentSize.lateral_bending_wallboard_mark}}</td>
+							</tr>
+							<tr >
+								<td rowspan="2">翘曲</td>
+								<td colspan="2">板</td>
+								<td>L/750</td>
+								<td rowspan="2">调平尺在两端量测</td>
+								<td><input type="checkbox" ng-checked="receiptComponentSize.warping_plate_pass==1"></td>
+								<td>{{receiptComponentSize.warping_plate_mark}}</td>
+							</tr>
+							<tr >
+								<td colspan="2">墙板</td>
+								<td>L/1000</td>
+								<td><input type="checkbox" ng-checked="receiptComponentSize.warping_wallboard_pass==1"></td>
+								<td>{{receiptComponentSize.warping_wallboard_mark}}</td>
+							</tr>
+							
+							<tr >
+								<td rowspan="2">对角线差</td>
+								<td colspan="2">板</td>
+								<td>10</td>
+								<td rowspan="2">拉线、钢尺量最大弯曲处</td>
+								<td><input type="checkbox" ng-checked="receiptComponentSize.diagonal_difference_plate_pass==1"></td>
+								<td>{{receiptComponentSize.diagonal_difference_plate_mark}}</td>
+							</tr>
+							<tr >
+								<td colspan="2">墙板、门窗口</td>
+								<td>5</td>
+								<td><input type="checkbox" ng-checked="receiptComponentSize.diagonal_difference_wallboard_pass==1"></td>
+								<td>{{receiptComponentSize.diagonal_difference_wallboard_mark}}</td>
+							</tr>
+							<tr >
+								<td rowspan="2">挠度变形</td>
+								<td colspan="2">梁、板、桁架设计起拱</td>
+								<td>±10</td>
+								<td rowspan="2">尺量检查</td>
+								<td><input type="checkbox" ng-checked="receiptComponentSize.deflection_arch_pass==1"></td>
+								<td>{{receiptComponentSize.deflection_arch_mark}}</td>
+							</tr>
+							<tr >
+								<td colspan="2">梁、板、桁架下垂</td>
+								<td>0</td>
+								<td><input type="checkbox" ng-checked="receiptComponentSize.deflection_drooping_pass==1"></td>
+								<td>{{receiptComponentSize.deflection_drooping_mark}}</td>
+							</tr>
+							<tr >
+								<td rowspan="2">预留孔</td>
+								<td colspan="2">中心线位置</td>
+								<td>5</td>
+								<td rowspan="2">尺量检查</td>
+								<td><input type="checkbox" ng-checked="receiptComponentSize.preformed_hole_centerline_pass==1"></td>
+								<td>{{receiptComponentSize.preformed_hole_centerline_mark}}</td>
+							</tr>
+							<tr >
+								<td colspan="2">孔尺寸</td>
+								<td>±5</td>
+								<td><input type="checkbox" ng-checked="receiptComponentSize.preformed_hole_holesize_pass==1"></td>
+								<td>{{receiptComponentSize.preformed_hole_holesize_mark}}</td>
+							</tr>
+							<tr >
+								<td rowspan="2">预留洞</td>
+								<td colspan="2">中心线位置</td>
+								<td>5</td>
+								<td rowspan="2">尺量检查</td>
+								<td><input type="checkbox" ng-checked="receiptComponentSize.reserved_hole_centerline_pass==1"></td>
+								<td>{{receiptComponentSize.reserved_hole_centerline_mark}}</td>
+							</tr>
+							<tr >
+								<td colspan="2">洞口尺寸、深度</td>
+								<td>±5</td>
+								<td><input type="checkbox" ng-checked="receiptComponentSize.reserved_hole_entrancesize_pass==1"></td>
+								<td>{{receiptComponentSize.reserved_hole_entrancesize_mark}}</td>
+							</tr>
+							<tr >
+								<td rowspan="2">门窗口</td>
+								<td colspan="2">中心线位置</td>
+								<td>5</td>
+								<td rowspan="2">尺量检查</td>
+								<td><input type="checkbox" ng-checked="receiptComponentSize.door_window_centerline_pass==1"></td>
+								<td>{{receiptComponentSize.door_window_centerline_mark}}</td>
+							</tr>
+							<tr >
+								<td colspan="2">宽度、高度</td>
+								<td>±3</td>
+								<td><input type="checkbox" ng-checked="receiptComponentSize.door_window_height_pass==1"></td>
+								<td>{{receiptComponentSize.door_window_height_mark}}</td>
+							</tr>
+							<tr>
+								<td rowspan="8">预埋件</td>
+								<td colspan="2">预埋件钢筋锚固板中心线位置</td>
+								<td>5</td>
+								<td rowspan="8">尺量检查</td>
+								<td><input type="checkbox" ng-checked="receiptComponentSize.embedded_parts_anchorcenterline_pass==1"></td>
+								<td>{{receiptComponentSize.embedded_parts_anchorcenterline_mark}}</td>
+							</tr>
+							<tr>
+								<td colspan="2">预埋件钢筋锚固板与混凝土面平面高差</td>
+								<td>0，-5</td>
+								<td><input type="checkbox" ng-checked="receiptComponentSize.embedded_parts_steelbarplane_pass==1"></td>
+								<td>{{receiptComponentSize.embedded_parts_steelbarplane_mark}}</td>
+							</tr>
+							<tr>
+								<td colspan="2">预埋螺栓中心线位置</td>
+								<td>2</td>
+								<td><input type="checkbox" ng-checked="receiptComponentSize.embedded_parts_boltcenterline_pass==1"></td>
+								<td>{{receiptComponentSize.embedded_parts_boltcenterline_mark}}</td>
+							</tr>
+							<tr>
+								<td colspan="2">预埋螺栓外露长度</td>
+								<td>±5</td>
+								<td><input type="checkbox" ng-checked="receiptComponentSize.embedded_parts_exposedlength_pass==1"></td>
+								<td>{{receiptComponentSize.embedded_parts_exposedlength_mark}}</td>
+							</tr>
+							<tr>
+								<td colspan="2">预埋套筒、螺母中心线位置</td>
+								<td>2</td>
+								<td><input type="checkbox" ng-checked="receiptComponentSize.embedded_parts_nutcenterline_pass==1"></td>
+								<td>{{receiptComponentSize.embedded_parts_nutcenterline_mark}}</td>
+							</tr>
+							<tr>
+								<td colspan="2">预埋套筒、螺母与混凝土面平面高差</td>
+								<td>0，-5</td>
+								<td><input type="checkbox" ng-checked="receiptComponentSize.embedded_parts_concreteheight_pass==1"></td>
+								<td>{{receiptComponentSize.embedded_parts_concreteheight_mark}}</td>
+							</tr>
+							<tr>
+								<td colspan="2">线管、电盒、木砖、吊环在构件平面的中心线位置偏差</td>
+								<td>20</td>
+								<td><input type="checkbox" ng-checked="receiptComponentSize.embedded_parts_centrallineposition_pass==1"></td>
+								<td>{{receiptComponentSize.embedded_parts_centrallineposition_mark}}</td>
+							</tr>
+							<tr>
+								<td colspan="2">线管、电盒、木砖、吊环在构件表面混凝土高差</td>
+								<td>0，-10</td>
+								<td><input type="checkbox" ng-checked="receiptComponentSize.embedded_parts_componentheight_pass==1"></td>
+								<td>{{receiptComponentSize.embedded_parts_componentheight_mark}}</td>
+							</tr>
+							<tr>
+								<td rowspan="2">预埋插筋</td>
+								<td colspan="2">中心线位置</td>
+								<td>3</td>
+								<td rowspan="2">尺量检查</td>
+								<td><input type="checkbox" ng-checked="receiptComponentSize.embedded_reinforcement_centerline_pass==1"></td>
+								<td>{{receiptComponentSize.embedded_reinforcement_centerline_mark}}</td>
+							</tr>
+							<tr>
+								<td colspan="2">外露长度</td>
+								<td>﹢5，0</td>
+								<td><input type="checkbox" ng-checked="receiptComponentSize.embedded_reinforcement_length_pass==1"></td>
+								<td>{{receiptComponentSize.embedded_reinforcement_length_mark}}</td>
+							</tr>
+							<tr>
+								<td rowspan="2">键槽</td>
+								<td colspan="2">中心线位置</td>
+								<td>5</td>
+								<td rowspan="2">尺量检查</td>
+								<td><input type="checkbox" ng-checked="receiptComponentSize.keyway_centerline_pass==1"></td>
+								<td>{{receiptComponentSize.keyway_centerline_mark}}</td>
+							</tr>
+							<tr>
+								<td colspan="2">长度、宽度、深度</td>
+								<td>±5</td>
+								<td><input type="checkbox" ng-checked="receiptComponentSize.keyway_length_pass==1"></td>
+								<td>{{receiptComponentSize.keyway_length_mark}}</td>
+							</tr>
+						</table>	
+	         </div>
+	         <div class="modal-footer">
+	            <button type="button" class="btn btn-default" 
+	               data-dismiss="modal">关闭
+	            </button>
+	         </div>
+	      </div><!-- /.modal-content -->
+	</div><!-- /.modal -->
+	</div>
+	<!-- 收货验收模态框end -->
+	<!--  安装验收模态框 -->
+   	<div class="modal fade" id="installmod" role="dialog"  aria-labelledby="myModalLabel" aria-hidden="true">
+	   <div class="modal-dialog">
+	      <div class="modal-content">
+	         <div class="modal-header">
+	            <button type="button" class="close" 
+	               data-dismiss="modal" aria-hidden="true">
+	                  &times;
+	            </button>
+	            <h4 class="modal-title" id="myModalLabel">
+	            安装验收
+	            </h4>
+	         </div>
+	         <div class="modal-body" style="text-align:center">
+	            <table class="table table-striped table-bordered">
+							<tr>
+								<td colspan="5">预制构件安装尺寸允许偏差及检验方法</td>
+							</tr>
+							<tr>
+							    <td>项目</td>
+							    <td>允许偏差（mm）</td>
+							    <td>检验方法</td>
+							    <td>是否合格（点选）</td>
+							    <td>备注（填写）</td>
+							</tr>
+							<tr>
+								<td>轴线位置</td>
+								<td>5</td>
+								<td>钢尺检查</td>
+								<td><input type="checkbox" ng-checked="installComponentSize.axis_position_pass==1"></td>
+								<td>{{installComponentSize.axis_position_mark}}</td>
+							</tr>
+							<tr>
+								<td>底模上表面标高</td>
+								<td>±5</td>
+								<td>水准仪或拉线、钢尺检查</td>
+								<td><input type="checkbox" ng-checked="installComponentSize.upper_surface_pass==1"></td>
+								<td>{{installComponentSize.upper_surface_mark}}</td>
+							</tr>
+							<tr>
+								<td>每块外墙板垂直度</td>
+								<td>5</td>
+								<td>2m拖线板检查（四角预埋件限位）</td>
+								<td><input type="checkbox" ng-checked="installComponentSize.verticality_wall_pass==1"></td>
+								<td>{{installComponentSize.verticality_wall_mark}}</td>
+							</tr>
+							<tr>
+								<td>相邻两板表面高低差</td>
+								<td>2</td>
+								<td>2m靠尺和塞尺检查</td>
+								<td><input type="checkbox" ng-checked="installComponentSize.height_difference_plates_pass==1"></td>
+								<td>{{installComponentSize.height_difference_plates_mark}}</td>
+							</tr>
+							<tr>
+								<td>外墙板外表面平整度（含面砖）</td>
+								<td>3</td>
+								<td>2m靠尺和塞尺检查</td>
+								<td><input type="checkbox" ng-checked="installComponentSize.surface_roughness_pass==1"></td>
+								<td>{{installComponentSize.surface_roughness_mark}}</td>
+							</tr>
+							<tr>
+								<td>空腔处两板对接对缝偏差</td>
+								<td>±3</td>
+								<td>钢尺检查</td>
+								<td><input type="checkbox" ng-checked="installComponentSize.deviation_exterior_pass==1"></td>
+								<td>{{installComponentSize.deviation_exterior_mark}}</td>
+							</tr>
+							<tr>
+								<td>外墙板单边尺寸偏差</td>
+								<td>±3</td>
+								<td>钢尺量一端及中部，取其中较大值</td>
+								<td><input type="checkbox" ng-checked="installComponentSize.connector_position_deviation_pass==1"></td>
+								<td>{{installComponentSize.connector_position_deviation_mark}}</td>
+							</tr>
+							<tr>
+								<td>连接件位置偏差</td>
+								<td>±5</td>
+								<td>钢尺量一端及中部，取其中较大值</td>
+								<td><input type="checkbox" ng-checked="installComponentSize.Deviation_skew_pass==1"></td>
+								<td>{{installComponentSize.Deviation_skew_mark}}</td>
+							</tr>
+							<tr>
+								<td>斜撑杆位置偏差</td>
+								<td>±20</td>
+								<td>钢尺检查</td>
+								<td><input type="checkbox" ng-checked="installComponentSize.cavity_plate_pass==1"></td>
+								<td>{{installComponentSize.cavity_plate_mark}}</td>
+							</tr>
+						</table>	
+	         </div>
+	         <div class="modal-footer">
+	            <button type="button" class="btn btn-default" 
+	               data-dismiss="modal">关闭
+	            </button>
+	         </div>
+	      </div><!-- /.modal-content -->
+	</div><!-- /.modal -->
+	</div>
+	<!-- 安装验收模态框end -->
+	
 	<script type="text/javascript">
 $(function(){
 	stepBar.init("stepBar", {
