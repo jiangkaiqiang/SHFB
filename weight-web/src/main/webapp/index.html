@@ -175,12 +175,12 @@
     
 <div id="wowslider-container1">
     <div class="ws_images" style="top:10px">  
-        <div style="width:50%;float:left;padding-left:150px">
+        <div style="width:60%;float:left;padding-left:150px">
         	
 								<img src="{{firstRecord.entry_pic}}"/>
             			
         </div>
-        <div style="width:30%;float:left;text-align:left">
+        <div style="width:30%;height:400px;float:left;text-align:left;border:3px solid #000">
         <div style="text-align:center"><font style="color: #000000;font-size: 30px;"><strong>{{firstRecord.car_num}}</strong></font></div>
         <p><font style="color: #000000;font-size: 20px;">进入重量：{{firstRecord.entry_weight}}</font></p>
         <p><font style="color: #000000;font-size: 20px;">进入时间：{{firstRecord.entry_time}}</font></p>
@@ -247,13 +247,13 @@
 				   <tbody>
 				      <tr ng-repeat="case in AllRecords">
 				         <td>{{case.car_num}}</td>
-				         <td style="width:80px;height:50px" > 
+				         <td> 
 				         	<ul class="viewer01" ng-click="showView()">
             				 <li style="list-style-type:none;">
             				 	<img ng-if="case.entry_pic!=''&&case.entry_pic!=undefined" style="width:80px;height:50px" src="{{case.entry_pic}}" alt="">
             				 </li></ul>		         
 				         </td>
-				         <td style="width:80px;height:50px" > 
+				         <td> 
 				         <ul class="viewer01" ng-click="showView()">
             				 <li style="list-style-type:none;">
 				         <img ng-if="case.leave_pic!=''&&case.leave_pic!=undefined" style="width:80px;height:50px" ng-src="{{case.leave_pic}}" alt="">
