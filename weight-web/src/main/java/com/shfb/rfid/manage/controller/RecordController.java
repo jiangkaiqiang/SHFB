@@ -1,8 +1,11 @@
 package com.shfb.rfid.manage.controller;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -12,6 +15,7 @@ import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,6 +35,7 @@ import com.shfb.rfid.manage.dto.UploadFileEntity;
 import com.shfb.rfid.manage.entity.Record;
 import com.shfb.rfid.manage.service.FtpService;
 import com.shfb.rfid.manage.util.SessionUtil;
+import com.shfb.rfid.manage.util.TimeUtil;
 @Controller
 @RequestMapping(value = "/record")
 public class RecordController extends BaseController {
@@ -100,33 +105,59 @@ public class RecordController extends BaseController {
 		
 	}
 	
-	@RequestMapping(value = "/addRecordEntry", method = RequestMethod.GET)
+	@RequestMapping(value = "/addRecordEntry")
 	@ResponseBody
-	public Object addRecordEntry(Record record,@RequestParam(value = "files", required = false) MultipartFile[] files) throws UnsupportedEncodingException {
-		/**
-		 * 保存上传的图片
-		 */
-		boolean res=false;
-		if (null != files && files.length>0) {		
-			List<UploadFileEntity> fileEntities = new ArrayList<UploadFileEntity>();				
-			for (int i = 0; i < files.length; i++) {
-				//获取文件的原始名字
-				String fileName = files[i].getOriginalFilename();
-				fileEntities.add(new UploadFileEntity(fileName, files[i], "uploadPic"));					
-				record.setEntry_pic(FtpService.FILE_Url+"uploadPic/"+fileName);
+	public Object addRecordEntry(HttpServletRequest request) throws UnsupportedEncodingException {
+		InputStream is= null; 
+		String contentStr=""; 
+				
+		try {
+			is = request.getInputStream();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}		
+		try {
+			contentStr= IOUtils.toString(is, "utf-8");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		System.out.println(contentStr);
+		String[] data = contentStr.split(",");
+		
+		Record record = new Record();
+		record.setCar_num(data[0].trim());
+		
+		Date date = TimeUtil.stringToDate(data[1], "yyyyMMddHHmmss");
+		String dateStr = TimeUtil.dateToString(date, "yyyy-MM-dd HH:mm:ss");
+		
+		if("进场".equals(data[3])) {
+			record.setEntry_time(dateStr);
+			record.setEntry_weight(data[2]);
+			record.setEntry_pic("http://139.196.139.164:65531/weight/uploadPic/" + data[4]);
+		}
+		if("出场".equals(data[3])) {
+			
+			record.setLeave_time(dateStr);
+			record.setLeave_weight(data[2]);
+			record.setLeave_pic("http://139.196.139.164:65531/weight/uploadPic/" + data[4]);
+			
+			Record recordTem = recordDao.selectEntryRecord(record.getCar_num());
+			
+			if(recordTem != null && (!"".equals(record.getCar_num()))) {
+				record.setRecord_id(recordTem.getRecord_id());
+				recordDao.updateByPrimaryKeySelective(record);
+				return new ResultDto(2,"添加成功");
 			}
-			//保存文件
-			res = ftpservice.uploadFileList(fileEntities);	
-			recordDao.insert(record);
-			}
-			if(res == true ) 
-				return new ResultDto(1,"添加成功");
-			else {
-				return new ResultDto(2,"添加失败");
-			}
+			
+			
+		}
+		recordDao.insert(record);
+		
+		return new ResultDto(2,"添加成功");
+			
 	}
 	
-	@RequestMapping(value = "/addRecordLeave", method = RequestMethod.GET)
+	@RequestMapping(value = "/addRecordLeave")
 	@ResponseBody
 	public Object addRecordLeave(Record record,@RequestParam(value = "files", required = false) MultipartFile[] files) throws UnsupportedEncodingException {
 		/**
@@ -203,6 +234,7 @@ public class RecordController extends BaseController {
 	@RequestMapping(value = "/findFirstRecord")
 	@ResponseBody
 	public Object findFirstRecord(HttpServletRequest request) {
+				
 //		HttpSession session = request.getSession();
 //		Record record = (Record) session.getServletContext().getAttribute("firstRecord");
 		Record record = recordDao.findFirstRecord();

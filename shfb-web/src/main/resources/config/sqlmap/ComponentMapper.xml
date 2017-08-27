@@ -76,7 +76,7 @@
   </select>
   
   <select id="getComponentInfo" resultType="com.shfb.rfid.manage.dto.ComponentDto" parameterType="String" >
-		SELECT c.component_num,c.component_type,c.component_size,c.single_name,c.floor, c.plan_end_date, p.pro_name,
+		SELECT c.component_id, c.component_num,c.component_type,c.component_size,c.single_name,c.floor, c.plan_end_date, p.pro_name,
 			c.concrete_strength, c.weight,f.comp_factory_name,f.contacts_name, f.contacts_tel,c.drawing
  			from component AS c 
 			LEFT JOIN project AS p ON c.pro_id = p.pro_id 

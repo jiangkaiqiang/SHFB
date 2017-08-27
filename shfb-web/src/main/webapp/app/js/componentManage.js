@@ -262,7 +262,10 @@ coldWeb.controller('componentManage', function ($rootScope, $scope, $state, $coo
 	   
 	   //返回按钮
 	   $scope.goback=function(){
-		   $state.reload();
+		   //$state.reload();
+		   $scope.isinfoShow = false;  
+			 $scope.ismanageShow = true;
+			 $scope.getComponents();
 	   }
 	   //查询构件所有状态
 	   $scope.showStatus=function(){
