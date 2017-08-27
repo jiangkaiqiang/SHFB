@@ -49,9 +49,7 @@ angular.module('app', ['ngFileUpload']).controller('history', function ($scope, 
 		  
 	};
 	
-
-	$scope.showView = function(){
-		
+	setTimeout(function(){
 		$(".viewer01").viewer();
-	}
+	},1000);
 });

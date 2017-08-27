@@ -36,11 +36,9 @@ angular.module('app', ['ngFileUpload']).controller('index', function ($scope, Up
 		});
 	}
 	$scope.getRecords();
-
-	$scope.showView = function(){
-		
+	
+	setTimeout(function(){
 		$(".viewer01").viewer();
-	}
-
+	},1000);
 	
 });
