@@ -37,4 +37,6 @@ public interface RecordMapper {
 	List<CarNumDto> numLeaveStatistics();
 	
 	Record selectEntryRecord(String car_num);
+	
+	Record selectCarNum(String car_num);
 }
