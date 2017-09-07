@@ -1,5 +1,15 @@
-angular.module('app', ['ngFileUpload']).controller('index', function ($scope, Upload, $http) { 
-//	// 显示最大页数
+angular.module('app', ['ngFileUpload']).controller('index', function ($scope, Upload, $http,$rootScope) { 
+	$scope.load = function(){
+		 $.ajax({type: "GET",cache: false,dataType: 'json',url: '/i/user/findUser'}).success(function(data){
+			   $rootScope.admin = data;
+				if($rootScope.admin == null||$rootScope.admin ==undefined || $rootScope.admin.user_id == 0 || $rootScope.admin.user_id==undefined ){
+					url = "../login.html";
+					window.location.href = url;
+				}
+		   });
+	};
+	$scope.load();
+	//	// 显示最大页数
 //    $scope.maxSize = 12;
 //    // 总条目数(默认每页十条)
 //    $scope.bigTotalItems = 12;

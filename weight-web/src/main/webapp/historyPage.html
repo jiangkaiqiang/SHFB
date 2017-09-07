@@ -183,6 +183,14 @@
                 <div class="main">
                     <h2>历史记录</h2>
                 </div>
+                 <div  class="col-sm-12">	
+                    <div class="col-sm-8">					
+					<input  type="text" class="form-control" ng-model="keyword" placeholder="请输入车牌号" id="myText" />
+					</div>	
+					<div class="col-sm-4">	
+					<button  type="button" ng-click="goSearch()" class="btn btn-default">查询</button>
+				     </div>
+				</div>
             </div>
         <!--  <div class="Block" ng-repeat="case in AllRecords">
                 <div class="image"><a href="detailspage.html?id={{case.record_id}}"><img src="{{case.entry_pic}}" width="229" height="170" /></a>
