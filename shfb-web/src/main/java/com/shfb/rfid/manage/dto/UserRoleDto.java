@@ -31,6 +31,8 @@ public class UserRoleDto {
 	
 	private boolean bindManage;//解绑
 	
+	private boolean compReadOnlyManage;//构件只读权限
+	
 	public UserRole getUserRole() {
 		return userRole;
 	}
@@ -142,7 +144,12 @@ public class UserRoleDto {
 	public void setBindManage(boolean bindManage) {
 		this.bindManage = bindManage;
 	}
-	
-	
-	
+
+	public boolean isCompReadOnlyManage() {
+		return compReadOnlyManage;
+	}
+
+	public void setCompReadOnlyManage(boolean compReadOnlyManage) {
+		this.compReadOnlyManage = compReadOnlyManage;
+	}
 }

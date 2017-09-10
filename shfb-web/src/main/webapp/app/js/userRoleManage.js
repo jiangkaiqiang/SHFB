@@ -91,6 +91,7 @@ coldWeb.controller('userRoleManage', function ($rootScope, $scope, $state, $cook
         	if($scope.personalManage) menus += "10;";
         	if($scope.pcManage) menus += "11;";
         	if($scope.bindManage) menus += "12;";
+        	if($scope.compReadOnlyManage) menus += "13;";
             $http({
             	method : 'GET',
             	url:'/i/userrole/addUserRole',
@@ -161,6 +162,7 @@ coldWeb.controller('userRoleManage', function ($rootScope, $scope, $state, $cook
 		        	if($scope.userRoleDtoForUpdate.personalManage) menus += "10;";
 		        	if($scope.userRoleDtoForUpdate.pcManage) menus += "11;";
 		        	if($scope.userRoleDtoForUpdate.bindManage) menus += "12;";
+		        	if($scope.userRoleDtoForUpdate.compReadOnlyManage) menus += "13;";
 		            $http({
 		            	method : 'GET',
 		            	url:'/i/userrole/updateUserRole',
