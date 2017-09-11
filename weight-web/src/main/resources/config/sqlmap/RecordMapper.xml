@@ -230,7 +230,7 @@
 		SELECT *from record WHERE car_num=#{car_num} AND leave_time is null ORDER BY entry_time desc LIMIT 0,1;
 	</select>
 	
-	<select id="selectCarNum">
+	<select id="selectCarNum" parameterType="String">
 		SELECT * FROM record WHERE car_num=#{car_num} ORDER BY entry_time DESC LIMIT 0,1
 	</select>
 	

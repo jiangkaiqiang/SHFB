@@ -137,10 +137,19 @@ public class RecordController extends BaseController {
 		Date date = TimeUtil.stringToDate(data[1], "yyyyMMddHHmmss");
 		String dateStr = TimeUtil.dateToString(date, "yyyy-MM-dd HH:mm:ss");
 		
+		Record recordLateLy = recordDao.selectCarNum(carNumStr);
+		if(recordLateLy != null && recordLateLy.getLeave_time() == null) {
+			data[3] = "出场";
+		} else {
+			data[3] = "进场";
+		}
+		
 		if("进场".equals(data[3])) {
 			record.setEntry_time(dateStr);
 			record.setEntry_weight(data[2]);
 			record.setEntry_pic("http://139.196.139.164:65531/weight/uploadPic/" + data[4]);
+			recordDao.insert(record);			
+			return new ResultDto(2,"添加成功");
 		}
 		if("出场".equals(data[3])) {
 			
@@ -158,9 +167,8 @@ public class RecordController extends BaseController {
 			
 			
 		}
-		recordDao.insert(record);
+		 return new ResultDto(3,"添加失败");
 		
-		return new ResultDto(2,"添加成功");
 			
 	}
 	
