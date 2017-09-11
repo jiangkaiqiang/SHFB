@@ -1,11 +1,14 @@
 package com.shfb.rfid.manage.controller;
 
+import java.io.Console;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -186,7 +189,16 @@ public class ComponentController extends BaseController {
 	}
 	@RequestMapping(value = "/updateByPrimaryKey", method = RequestMethod.GET)
 	@ResponseBody
-	public ResultDto updateByPrimaryKey(Component componentParm)  {
+	public ResultDto updateByPrimaryKey(Component componentParm,HttpServletRequest request)  {
+			
+			if(request.getParameter("jurisdictionEdit").equals("false")) {
+				int res = componentDao.updateByPrimaryKeySelective(componentParm);
+				if(res == 1) {
+					return new ResultDto(1, "更新成功");
+				} else {
+					return new ResultDto(2, "更新失败");
+				}
+			}
 			
 			String userName = sysUserDao.findUserById(componentParm.getOrder_user_id()).getUser_name();
 			
