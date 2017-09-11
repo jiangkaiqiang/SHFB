@@ -58,7 +58,7 @@
 				</div>				
 			</div>
 			<br>
-				<div class="three" style="text-align:right">
+				<div class="three" style="text-align:right"  ng-show="!tourist">
 				<div class="btn-group" role="group">
 				<button type="button" class="btn btn-default pull-right" ng-click="loadExe()">读卡下载</button>
 				<button type="button" class="btn btn-default pull-right" ng-click="good_expe()">催货</button>
@@ -118,7 +118,7 @@
 				         <td>
   				            <button class="btn btn-primary btn-sm"  ng-click="showInfo(component.component_id)">查看</button>
 				         	<button class="btn btn-primary btn-sm"  ng-click="QRcodeShow(component.component_num)">二维码</button>
-				         	<button class="delete" ng-click="deleteComp(component.component_id)" ng-show="jurisdiction"></button>
+				         	<button class="delete" ng-click="deleteComp(component.component_id)" ng-show="jurisdiction&&!tourist"></button>
 				         </td>
 				      </tr>
 				   </tbody>
@@ -133,7 +133,7 @@
 	</div>
 			</div>
 			<!-- 表格操作区域结束 -->
-			<div class="three">
+			<div class="three" ng-show="!tourist">
 				<div class="btn-group" role="group">
 				    <button type="button" class="btn btn-default" ng-click="exportComp()">导出构件</button>
 				   <button type="button" class="btn btn-default" ng-click="deleteComps()" ng-show="jurisdiction">批量删除</button>
@@ -482,7 +482,7 @@
 			<div class="three">
 				<div class="btn-group" role="group">
 					<button ng-if="isedit" type="button" class="btn btn-default" ng-click="uploadComp()">保存</button>
-				    <button ng-if="!isedit" type="button" class="btn btn-default" ng-click="editComp()">编辑</button>
+				    <button ng-if="!isedit" type="button" class="btn btn-default" ng-click="editComp()" ng-show="!tourist">编辑</button>
 				   <button type="button" class="btn btn-default" ng-click="goback()">返回</button>
 				</div>
 			</div>

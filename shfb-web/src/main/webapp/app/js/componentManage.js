@@ -25,6 +25,7 @@ coldWeb.controller('componentManage', function ($rootScope, $scope, $state, $coo
 				}).success(function(data) {
 					//console.log(data.bindManage);
 					$scope.jurisdiction=data.bindManage;
+					$scope.tourist=data.compReadOnlyManage;
 				});
 				
 		   });
