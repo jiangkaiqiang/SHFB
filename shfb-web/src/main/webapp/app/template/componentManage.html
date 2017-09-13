@@ -58,13 +58,13 @@
 				</div>				
 			</div>
 			<br>
-				<div class="three" style="text-align:right">
+				<div class="three" style="text-align:right"  ng-show="!tourist">
 				<div class="btn-group" role="group">
 				<button type="button" class="btn btn-default pull-right" ng-click="loadExe()">读卡下载</button>
 				<button type="button" class="btn btn-default pull-right" ng-click="good_expe()">催货</button>
 				<button type="button" class="btn btn-default pull-right" ng-click="placeOrder()">下单</button>
-				<button type="button" class="btn btn-default pull-right" ng-click="unbundling()">解绑</button>
-				<button type="button" class="btn btn-default pull-right" ng-click="stateModelOpen()">状态编辑</button>
+				<button type="button" class="btn btn-default pull-right" ng-click="unbundling()" ng-show="jurisdiction">解绑</button>
+				<button type="button" class="btn btn-default pull-right" ng-click="stateModelOpen()" ng-show="jurisdiction">状态编辑</button>
 				</div>
 				</div>	
 			
@@ -118,7 +118,7 @@
 				         <td>
   				            <button class="btn btn-primary btn-sm"  ng-click="showInfo(component.component_id)">查看</button>
 				         	<button class="btn btn-primary btn-sm"  ng-click="QRcodeShow(component.component_num)">二维码</button>
-				         	<button class="delete" ng-click="deleteComp(component.component_id)"></button>
+				         	<button class="delete" ng-click="deleteComp(component.component_id)" ng-show="jurisdiction&&!tourist"></button>
 				         </td>
 				      </tr>
 				   </tbody>
@@ -133,10 +133,10 @@
 	</div>
 			</div>
 			<!-- 表格操作区域结束 -->
-			<div class="three">
+			<div class="three" ng-show="!tourist">
 				<div class="btn-group" role="group">
 				    <button type="button" class="btn btn-default" ng-click="exportComp()">导出构件</button>
-				   <button type="button" class="btn btn-default" ng-click="deleteComps()">批量删除</button>
+				   <button type="button" class="btn btn-default" ng-click="deleteComps()" ng-show="jurisdiction">批量删除</button>
 				</div>
 			</div>						
     </div>
@@ -352,12 +352,12 @@
 				</div>
 				<div class="col-md-3">
 					<span style="float:left">状态：</span>
-					<span ng-if="isedit">
+					<span ng-if="isedit&&jurisdiction">
 						<select id="statusSel"  class="form-control" style="height:35px;width:100px !important">						
                     	<option ng-repeat="status in statuslist" value="{{status.component_status_id}}">{{status.component_status_name}}</option>
                     	</select>
 					</span>	
-					<span ng-if="!isedit">{{componentInfo.component_status_name}}</span>				
+					<span ng-if="!isedit||!jurisdiction">{{componentInfo.component_status_name}}</span>				
 				</div>
 			</div> 
 			<div class="row" style="margin-top:10px;padding-left:30px;padding-bottom:15px">
@@ -482,7 +482,7 @@
 			<div class="three">
 				<div class="btn-group" role="group">
 					<button ng-if="isedit" type="button" class="btn btn-default" ng-click="uploadComp()">保存</button>
-				    <button ng-if="!isedit" type="button" class="btn btn-default" ng-click="editComp()">编辑</button>
+				    <button ng-if="!isedit" type="button" class="btn btn-default" ng-click="editComp()" ng-show="!tourist">编辑</button>
 				   <button type="button" class="btn btn-default" ng-click="goback()">返回</button>
 				</div>
 			</div>

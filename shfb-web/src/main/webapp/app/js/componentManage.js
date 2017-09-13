@@ -2,13 +2,32 @@ coldWeb.controller('componentManage', function ($rootScope, $scope, $state, $coo
 	
 	 $scope.isinfoShow = false;  
 	 $scope.ismanageShow = true;
+	 //解绑编辑权限
+	 $scope.jurisdiction=true;
+	 //是否为游客
+	 $scope.tourist=false;
 	$scope.load = function(){
 		 $.ajax({type: "GET",cache: false,dataType: 'json',url: '/i/user/findUser'}).success(function(data){
 			   $rootScope.admin = data;
+			   
 				if($rootScope.admin == null || $rootScope.admin.user_id == 0 || admin.user_id==undefined){
 					url = "http://" + $location.host() + ":" + $location.port() + "/login.html";
 					window.location.href = url;
 				}
+				
+				//获取角色权限
+				$http({
+					method : 'POST',
+					url : '/i/userrole/findUserRoleByID',
+					params : {
+						userRoleID : $rootScope.admin.user_role_id,
+					}
+				}).success(function(data) {
+					//console.log(data.bindManage);
+					$scope.jurisdiction=data.bindManage;
+					$scope.tourist=data.compReadOnlyManage;
+				});
+				
 		   });
 	};
 	$scope.load();
@@ -307,11 +326,14 @@ coldWeb.controller('componentManage', function ($rootScope, $scope, $state, $coo
 						product_plan_begin_date : $("#product_plan_begin_date").val(),
 						product_plan_end_date : $("#product_plan_end_date").val(),
 						order_user_id:$rootScope.admin.user_id,
+						jurisdictionEdit:$scope.jurisdiction,
 					}
 			}).success(function(data) {
 				alert(data.message);
 				if(data.status == '1') {
-					stepBar.setStep($("#statusSel").val());
+					if($scope.jurisdiction) {
+						stepBar.setStep($("#statusSel").val());
+					}					
 					$scope.componentInfo.component_status_name=$("#statusSel").find("option:selected").text();
 					$scope.componentInfo.expedit_date=$("#expedit_date").val();
 					$scope.componentInfo.plan_begin_date=$("#plan_begin_date").val();
