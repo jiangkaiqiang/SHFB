@@ -13,9 +13,9 @@ import java.util.Map;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.IOUtils;
+import org.jsoup.Jsoup;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.w3c.dom.css.ElementCSSInlineStyle;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
@@ -34,8 +35,11 @@ import com.shfb.rfid.manage.dto.ResultDto;
 import com.shfb.rfid.manage.dto.UploadFileEntity;
 import com.shfb.rfid.manage.entity.Record;
 import com.shfb.rfid.manage.service.FtpService;
-import com.shfb.rfid.manage.util.SessionUtil;
+import com.shfb.rfid.manage.util.MathUtil;
+import com.shfb.rfid.manage.util.ServerInterface;
 import com.shfb.rfid.manage.util.TimeUtil;
+
+import net.sf.json.JSONObject;
 @Controller
 @RequestMapping(value = "/record")
 public class RecordController extends BaseController {
@@ -122,10 +126,38 @@ public class RecordController extends BaseController {
 			e.printStackTrace();
 		}
 		System.out.println(contentStr);
-		String[] data = contentStr.split(",");
-		
 		Record record = new Record();
 		
+		String[] data;
+		String qrcodeStr = null;
+		if(contentStr.indexOf("{") == -1) {
+			 data = contentStr.split(",");
+		} else {
+			int k = contentStr.indexOf("{");
+			data = contentStr.substring(0, k).split(",");
+			qrcodeStr = contentStr.substring(k);
+		}
+		
+		//二维码信息
+		if(qrcodeStr != null) {
+			JSONObject jb = JSONObject.fromObject(qrcodeStr);
+			String driver = jb.getString("id");
+			String ticketId = jb.getString("ticketId");
+			
+			Map<String, String> res = ServerInterface.getUserInfo(driver);
+			if(res != null) {
+				record.setUserName(res.get("userName"));
+				record.setTel(res.get("tel"));
+				record.setDeliverCompanyName(res.get("deliverCompanyName"));
+				record.setCompanyName(res.get("companyName"));
+				record.setCarVarieties(res.get("carVarieties"));
+				record.setDriverNo(res.get("driverNo"));
+				record.setTicketId(ticketId);
+			}
+			
+		} 
+		
+		//车牌号
 		String carNumStr = data[0].trim();
 		
 		if("null".equals(carNumStr)) {
@@ -148,7 +180,7 @@ public class RecordController extends BaseController {
 			record.setEntry_time(dateStr);
 			record.setEntry_weight(data[2]);
 			record.setEntry_pic("http://139.196.139.164:65531/weight/uploadPic/" + data[4]);
-			recordDao.insert(record);			
+			recordDao.insertSelective(record);			
 			return new ResultDto(2,"添加成功");
 		}
 		if("出场".equals(data[3])) {
@@ -162,6 +194,11 @@ public class RecordController extends BaseController {
 			if(recordTem != null && (!"".equals(record.getCar_num()))) {
 				record.setRecord_id(recordTem.getRecord_id());
 				recordDao.updateByPrimaryKeySelective(record);
+				double qrQuantity = MathUtil.div(Double.parseDouble(recordTem.getEntry_weight()), 2350.0, 2);
+				double hcQuantity = MathUtil.div(Double.parseDouble(data[2]), 2350.0, 2);
+
+				//调用接口修改小票
+				ServerInterface.updataSign(recordTem.getTicketId(), qrQuantity+"", hcQuantity+"");
 				return new ResultDto(2,"添加成功");
 			}
 			
@@ -316,5 +353,7 @@ public class RecordController extends BaseController {
 		res.put("leaveArray", leaveArray);
 		return new ResultDto(res);
 	}
+	
+	
 
 }

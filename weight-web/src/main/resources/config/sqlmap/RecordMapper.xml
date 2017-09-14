@@ -9,7 +9,14 @@
     <result column="entry_pic" property="entry_pic" jdbcType="VARCHAR" />
     <result column="leave_time" property="leave_time" jdbcType="VARCHAR" />
     <result column="leave_weight" property="leave_weight" jdbcType="VARCHAR" />
-    <result column="leave_pic" property="leave_pic" jdbcType="VARCHAR" />
+    <result column="leave_pic" property="leave_pic" jdbcType="VARCHAR" />    
+    <result column="userName" property="userName" jdbcType="VARCHAR" />
+    <result column="tel" property="tel" jdbcType="VARCHAR" />
+    <result column="deliverCompanyName" property="deliverCompanyName" jdbcType="VARCHAR" />
+    <result column="companyName" property="companyName" jdbcType="VARCHAR" />
+    <result column="carVarieties" property="carVarieties" jdbcType="VARCHAR" />
+    <result column="driverNo" property="driverNo" jdbcType="VARCHAR" />
+    <result column="ticketId" property="ticketId" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
     record_id, car_num, entry_time, entry_weight, entry_pic, leave_time, leave_weight, 
@@ -59,7 +66,29 @@
       </if>
       <if test="leave_pic != null" >
         leave_pic,
+      </if>     
+      <if test="userName != null" >
+        userName,
       </if>
+      <if test="tel != null" >
+        tel,
+      </if>
+      <if test="deliverCompanyName != null" >
+        deliverCompanyName,
+      </if>
+      <if test="companyName != null" >
+        companyName,
+      </if>
+      <if test="carVarieties != null" >
+        carVarieties,
+      </if>
+      <if test="driverNo != null" >
+        driverNo,
+      </if>
+      <if test="ticketId != null" >
+        ticketId,
+      </if>
+      
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="record_id != null" >
@@ -85,6 +114,27 @@
       </if>
       <if test="leave_pic != null" >
         #{leave_pic,jdbcType=VARCHAR},
+      </if>     
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="deliverCompanyName != null" >
+        #{deliverCompanyName,jdbcType=VARCHAR},
+      </if>
+      <if test="companyName != null" >
+        #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="carVarieties != null" >
+        #{carVarieties,jdbcType=VARCHAR},
+      </if>
+      <if test="driverNo != null" >
+        #{driverNo,jdbcType=VARCHAR},
+      </if>
+      <if test="ticketId != null" >
+        #{ticketId,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -230,7 +280,7 @@
 		SELECT *from record WHERE car_num=#{car_num} AND leave_time is null ORDER BY entry_time desc LIMIT 0,1;
 	</select>
 	
-	<select id="selectCarNum" parameterType="String">
+	<select id="selectCarNum" resultType="com.shfb.rfid.manage.entity.Record">
 		SELECT * FROM record WHERE car_num=#{car_num} ORDER BY entry_time DESC LIMIT 0,1
 	</select>
 	
