@@ -246,7 +246,7 @@
 				   </thead>
 				   <tbody>
 				      <tr ng-repeat="case in AllRecords">
-				         <td>{{case.car_num}}</td>
+				         <td><a href="detailspage.html?id={{case.record_id}}">{{case.car_num}}</a></td>
 				         <td> 
 				         	<ul class="viewer01" ng-click="showView()">
             				 <li style="list-style-type:none;">

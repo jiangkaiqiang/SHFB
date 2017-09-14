@@ -22,8 +22,8 @@ angular.module('app', ['ngFileUpload']).controller('history', function ($scope, 
 			params : {
 				pageNum : $scope.bigCurrentPage,
 				pageSize : $scope.maxSize,
-				startTime : $scope.startTime,
-				endTime : $scope.endTime,
+				startTime : $("#startTime").val(),
+				endTime : $("#endTime").val(),
 				keyword : encodeURI($scope.keyword,"UTF-8"),
 			}
 		}).success(function(data) {
@@ -40,7 +40,6 @@ angular.module('app', ['ngFileUpload']).controller('history', function ($scope, 
 		$scope.bigCurrentPage = 1;
 		$scope.getRecords();
 	};
-	
 	$scope.endPage = function() {
 		$scope.bigCurrentPage = $scope.numPages;
 		$scope.getRecords();
@@ -65,4 +64,13 @@ angular.module('app', ['ngFileUpload']).controller('history', function ($scope, 
 	setTimeout(function(){
 		$(".viewer01").viewer();
 	},1000);
+	
+	$('#datetimepicker1').datetimepicker({  
+    	autoclose:true
+    }).on('dp.change', function (e) {  
+    });  
+ $('#datetimepicker2').datetimepicker({  
+    	autoclose:true
+    }).on('dp.change', function (e) {  
+    });  
 });
