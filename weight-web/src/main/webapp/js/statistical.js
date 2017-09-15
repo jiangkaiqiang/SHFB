@@ -9,20 +9,155 @@ angular.module('app', ['ngFileUpload']).controller('index', function ($scope, Up
 		   });
 	};
 	$scope.load();
-	//	// 显示最大页数
-//    $scope.maxSize = 12;
-//    // 总条目数(默认每页十条)
-//    $scope.bigTotalItems = 12;
-//    // 当前页
-//    $scope.bigCurrentPage = 1;
-	
-//	$scope.getRecords();
+
 	// 基于准备好的dom，初始化echarts实例
     var myChart = echarts.init(document.getElementById('echart1'));
     
-    var myChart2 = echarts.init(document.getElementById('echart2'));
+    //var myChart2 = echarts.init(document.getElementById('echart2'));
+    
+    var myChart3 = echarts.init(document.getElementById('echart3'));
     
     $scope.initEchart1=function(xArray, enterNum, leaveNum){
+		option = {
+			    //backgroundColor: '#394056',
+			    title: {
+			        text: '车辆进出统计',
+			        textStyle: {
+			            fontWeight: 'normal',
+			            fontSize: 16,
+			            color: '#FFFFFF'
+			        },
+			        left: '6%'
+			    },
+			    tooltip: {
+			        trigger: 'axis',
+			        axisPointer: {
+			            lineStyle: {
+			                color: '#57617B'
+			            }
+			        }
+			    },
+			    legend: {
+    		        x : 'right',
+    		        y : 'top',
+    		        icon: 'rect',
+    		        data:['进入','离开']
+    		    },
+			   
+			    grid: {
+			        left: '3%',
+			        right: '4%',
+			        bottom: '3%',
+			        containLabel: true
+			    },
+			    xAxis: [{
+			        type: 'category',
+			        boundaryGap: false,
+			        axisLine: {
+			            lineStyle: {
+			                color: '#57617B'
+			            }
+			        },
+			        data: xArray
+			    }],
+			    yAxis: [{
+			        type: 'value',
+			        name: '数量（辆）',
+			        axisTick: {
+			            show: false
+			        },
+			        axisLine: {
+			            lineStyle: {
+			                color: '#57617B'
+			            }
+			        },
+			        axisLabel: {
+			            margin: 10,
+			            textStyle: {
+			                fontSize: 14
+			            }
+			        },
+			        splitLine: {
+			            lineStyle: {
+			                color: '#57617B'
+			            }
+			        }
+			    }],
+			    series: [{
+			        name: '进入',
+			        type: 'line',
+			        smooth: true,
+			        symbol: 'circle',
+			        symbolSize: 5,
+			        showSymbol: false,
+			        lineStyle: {
+			            normal: {
+			                width: 1
+			            }
+			        },
+//			        areaStyle: {
+//			            normal: {
+//			                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+//			                    offset: 0,
+//			                    color: 'rgba(137, 189, 27, 0.3)'
+//			                }, {
+//			                    offset: 0.8,
+//			                    color: 'rgba(137, 189, 27, 0)'
+//			                }], false),
+//			                shadowColor: 'rgba(0, 0, 0, 0.1)',
+//			                shadowBlur: 10
+//			            }
+//			        },
+			        itemStyle: {
+			        	normal: {
+
+			                color: 'rgb(102,102,102)',
+			                borderColor: 'rgba(102,102,102,0.2)',
+			                borderWidth: 12
+			            }
+			        },
+			        data: enterNum
+			    }, {
+			        name: '离开',
+			        type: 'line',
+			        smooth: true,
+			        symbol: 'circle',
+			        symbolSize: 5,
+			        showSymbol: false,
+			        lineStyle: {
+			            normal: {
+			                width: 1
+			            }
+			        },
+//			        areaStyle: {
+//			            normal: {
+//			                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+//			                    offset: 0,
+//			                    color: 'rgba(0, 136, 212, 0.3)'
+//			                }, {
+//			                    offset: 0.8,
+//			                    color: 'rgba(0, 136, 212, 0)'
+//			                }], false),
+//			                shadowColor: 'rgba(0, 0, 0, 0.1)',
+//			                shadowBlur: 10
+//			            }
+//			        },
+			        itemStyle: {
+			        	 normal: {
+
+				                color: 'rgb(0, 204, 153)',
+				                borderColor: 'rgba(0, 204, 153,0.2)',
+				                borderWidth: 12
+				            }
+			        },
+			        data: leaveNum
+			    }]
+			};
+		// 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+	}
+    //进出重量统计
+    $scope.initEchart3=function(xArray, enterNum, leaveNum){
 		option = {
 			    //backgroundColor: '#394056',
 //			    title: {
@@ -67,7 +202,7 @@ angular.module('app', ['ngFileUpload']).controller('index', function ($scope, Up
 			    }],
 			    yAxis: [{
 			        type: 'value',
-			        name: '数量（辆）',
+			        name: '重量（KG）',
 			        axisTick: {
 			            show: false
 			        },
@@ -159,9 +294,10 @@ angular.module('app', ['ngFileUpload']).controller('index', function ($scope, Up
 			    }]
 			};
 		// 使用刚指定的配置项和数据显示图表。
-        myChart.setOption(option);
+        myChart3.setOption(option);
 	}
     
+    //从服务器获取进出车辆
     $scope.getRecords = function() {
 		$http({
 			method : 'POST',
@@ -171,14 +307,31 @@ angular.module('app', ['ngFileUpload']).controller('index', function ($scope, Up
 			}
 		}).success(function(res) {
 			var ele = res.data;
-			console.log(ele.dateRes);
-			console.log(ele.entryArray);
-			console.log(ele.leaveArray);
+//			console.log(ele.dateRes);
+//			console.log(ele.entryArray);
+//			console.log(ele.leaveArray);
 			$scope.initEchart1(ele.dateRes,ele.entryArray,ele.leaveArray);
 		});
 	}
     
     $scope.getRecords();
+    
+    
+  //从服务器获取进出车辆的重量
+    $scope.getRecordWeight = function() {
+		$http({
+			method : 'POST',
+			url : '/i/record/weightStatistics',
+			params : {
+				
+			}
+		}).success(function(res) {
+			var ele = res.data;
+			$scope.initEchart3(ele.dateRes,ele.entryArray,ele.leaveArray);
+		});
+	}
+    
+    $scope.getRecordWeight();
     
     
     $scope.initEchart2=function(xArray, chartData1, chartData2){
@@ -268,5 +421,5 @@ angular.module('app', ['ngFileUpload']).controller('index', function ($scope, Up
 		// 使用刚指定的配置项和数据显示图表。
         myChart2.setOption(option);
 	}
-    $scope.initEchart2();
+    //$scope.initEchart2();
 });

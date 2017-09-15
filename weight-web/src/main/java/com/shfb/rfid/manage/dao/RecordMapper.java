@@ -37,4 +37,8 @@ public interface RecordMapper {
 	Record selectEntryRecord(String car_num);
 	
 	Record selectCarNum(String car_num);
+	
+	List<CarNumDto> weightEntryStatistics();
+	
+	List<CarNumDto> weightLeaveStatistics();
 }

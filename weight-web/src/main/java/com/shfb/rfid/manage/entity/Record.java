@@ -150,5 +150,4 @@ public class Record {
 	public void setTicketId(String ticketId) {
 		this.ticketId = ticketId;
 	}
-    
 }

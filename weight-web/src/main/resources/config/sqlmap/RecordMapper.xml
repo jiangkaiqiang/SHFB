@@ -44,6 +44,7 @@
       #{driverNo,jdbcType=VARCHAR}, #{ticketId,jdbcType=VARCHAR})
   </insert>
   
+  
   <update id="updateByPrimaryKeySelective" parameterType="com.shfb.rfid.manage.entity.Record" >
     update record
     <set >
@@ -219,8 +220,15 @@
 		SELECT *from record WHERE car_num=#{car_num} AND leave_time is null ORDER BY entry_time desc LIMIT 0,1;
 	</select>
 	
-	<select id="selectCarNum" parameterType="String">
+	<select id="selectCarNum" resultType="com.shfb.rfid.manage.entity.Record">
 		SELECT * FROM record WHERE car_num=#{car_num} ORDER BY entry_time DESC LIMIT 0,1
+	</select>
+	
+	<select id="weightEntryStatistics" resultType="com.shfb.rfid.manage.dto.CarNumDto">
+		SELECT LEFT(entry_time,10) AS sta_date, SUM(entry_weight) AS car_num FROM record WHERE entry_time is not null  GROUP BY  LEFT(entry_time,10)
+	</select>
+	<select id="weightLeaveStatistics" resultType="com.shfb.rfid.manage.dto.CarNumDto">
+		SELECT LEFT(leave_time,10) AS sta_date, SUM(leave_weight) AS car_num FROM record WHERE leave_time is not null  GROUP BY  LEFT(leave_time,10)
 	</select>
 	
 </mapper>
