@@ -11,6 +11,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeSet;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -334,7 +335,44 @@ public class RecordController extends BaseController {
 			leaveMap.put(carNumDto.getSta_date(), carNumDto.getCar_num());
 		}
 		
-		Set<String> dateSet = new HashSet<String>();
+		Set<String> dateSet = new TreeSet<String>();
+		
+		for (CarNumDto carNumsDto : entrylist) {
+			dateSet.add(carNumsDto.getSta_date());
+		}
+		for (CarNumDto carNumDto : leavelist) {
+			dateSet.add(carNumDto.getSta_date());
+		}
+	
+		for (String dateEle : dateSet) {
+			entryArray.add(entryMap.get(dateEle)==null?0:entryMap.get(dateEle));
+			leaveArray.add(leaveMap.get(dateEle)==null?0:leaveMap.get(dateEle));
+		}
+		Map<String,Object> res = new HashMap<String,Object>();
+		res.put("dateRes", dateSet);
+		res.put("entryArray", entryArray);
+		res.put("leaveArray", leaveArray);
+		return new ResultDto(res);
+	}
+	
+	@RequestMapping(value = "/weightStatistics")
+	@ResponseBody
+	public Object weightStatistics() {
+		List<CarNumDto> entrylist = recordDao.weightEntryStatistics();
+		Map<String, Integer> entryMap = new HashMap<String, Integer>();
+		List<Integer> entryArray = new ArrayList<Integer>();
+		for (CarNumDto carNumDto : entrylist) {
+			entryMap.put(carNumDto.getSta_date(), carNumDto.getCar_num());
+		}
+		
+		List<CarNumDto> leavelist = recordDao.weightLeaveStatistics();
+		Map<String, Integer> leaveMap = new HashMap<String, Integer>();
+		List<Integer> leaveArray = new ArrayList<Integer>();
+		for (CarNumDto carNumDto : leavelist) {
+			leaveMap.put(carNumDto.getSta_date(), carNumDto.getCar_num());
+		}
+		
+		Set<String> dateSet = new TreeSet<String>();
 		
 		for (CarNumDto carNumsDto : entrylist) {
 			dateSet.add(carNumsDto.getSta_date());
