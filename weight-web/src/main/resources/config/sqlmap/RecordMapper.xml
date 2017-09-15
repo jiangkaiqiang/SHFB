@@ -10,10 +10,17 @@
     <result column="leave_time" property="leave_time" jdbcType="VARCHAR" />
     <result column="leave_weight" property="leave_weight" jdbcType="VARCHAR" />
     <result column="leave_pic" property="leave_pic" jdbcType="VARCHAR" />
+    <result column="userName" property="userName" jdbcType="VARCHAR" />
+    <result column="tel" property="tel" jdbcType="VARCHAR" />
+    <result column="deliverCompanyName" property="deliverCompanyName" jdbcType="VARCHAR" />
+    <result column="companyName" property="companyName" jdbcType="VARCHAR" />
+    <result column="carVarieties" property="carVarieties" jdbcType="VARCHAR" />
+    <result column="driverNo" property="driverNo" jdbcType="VARCHAR" />
+    <result column="ticketId" property="ticketId" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
     record_id, car_num, entry_time, entry_weight, entry_pic, leave_time, leave_weight, 
-    leave_pic
+    leave_pic, userName, tel, deliverCompanyName, companyName, carVarieties, driverNo, ticketId
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -28,65 +35,13 @@
   <insert id="insert" parameterType="com.shfb.rfid.manage.entity.Record" >
     insert into record (car_num, entry_time, 
       entry_weight, entry_pic, leave_time, 
-      leave_weight, leave_pic)
+      leave_weight, leave_pic, userName, tel, deliverCompanyName, companyName, carVarieties, driverNo, ticketId)
     values (#{car_num,jdbcType=VARCHAR}, #{entry_time,jdbcType=VARCHAR}, 
       #{entry_weight,jdbcType=VARCHAR}, #{entry_pic,jdbcType=VARCHAR}, #{leave_time,jdbcType=VARCHAR}, 
-      #{leave_weight,jdbcType=VARCHAR}, #{leave_pic,jdbcType=VARCHAR})
-  </insert>
-  <insert id="insertSelective" parameterType="com.shfb.rfid.manage.entity.Record" >
-    insert into record
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="record_id != null" >
-        record_id,
-      </if>
-      <if test="car_num != null" >
-        car_num,
-      </if>
-      <if test="entry_time != null" >
-        entry_time,
-      </if>
-      <if test="entry_weight != null" >
-        entry_weight,
-      </if>
-      <if test="entry_pic != null" >
-        entry_pic,
-      </if>
-      <if test="leave_time != null" >
-        leave_time,
-      </if>
-      <if test="leave_weight != null" >
-        leave_weight,
-      </if>
-      <if test="leave_pic != null" >
-        leave_pic,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="record_id != null" >
-        #{record_id,jdbcType=INTEGER},
-      </if>
-      <if test="car_num != null" >
-        #{car_num,jdbcType=VARCHAR},
-      </if>
-      <if test="entry_time != null" >
-        #{entry_time,jdbcType=VARCHAR},
-      </if>
-      <if test="entry_weight != null" >
-        #{entry_weight,jdbcType=VARCHAR},
-      </if>
-      <if test="entry_pic != null" >
-        #{entry_pic,jdbcType=VARCHAR},
-      </if>
-      <if test="leave_time != null" >
-        #{leave_time,jdbcType=VARCHAR},
-      </if>
-      <if test="leave_weight != null" >
-        #{leave_weight,jdbcType=VARCHAR},
-      </if>
-      <if test="leave_pic != null" >
-        #{leave_pic,jdbcType=VARCHAR},
-      </if>
-    </trim>
+      #{leave_weight,jdbcType=VARCHAR}, #{leave_pic,jdbcType=VARCHAR}
+      ,#{userName,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR}, 
+      #{deliverCompanyName,jdbcType=VARCHAR}, #{companyName,jdbcType=VARCHAR}, #{carVarieties,jdbcType=VARCHAR}, 
+      #{driverNo,jdbcType=VARCHAR}, #{ticketId,jdbcType=VARCHAR})
   </insert>
   
   <update id="updateByPrimaryKeySelective" parameterType="com.shfb.rfid.manage.entity.Record" >
@@ -112,6 +67,27 @@
       </if>
       <if test="leave_pic != null" >
         leave_pic = #{leave_pic,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        userName = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        tel = #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="deliverCompanyName != null" >
+        deliverCompanyName = #{deliverCompanyName,jdbcType=VARCHAR},
+      </if>
+      <if test="companyName != null" >
+        companyName = #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="carVarieties != null" >
+        carVarieties = #{carVarieties,jdbcType=VARCHAR},
+      </if>
+      <if test="driverNo != null" >
+        driverNo = #{driverNo,jdbcType=VARCHAR},
+      </if>
+      <if test="ticketId != null" >
+        ticketId = #{ticketId,jdbcType=VARCHAR},
       </if>
     </set>
     where record_id = #{record_id,jdbcType=INTEGER}
@@ -141,20 +117,29 @@
       <if test="leave_pic != null" >
         leave_pic = #{leave_pic,jdbcType=VARCHAR},
       </if>
+      <if test="userName != null" >
+        userName = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        tel = #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="deliverCompanyName != null" >
+        deliverCompanyName = #{deliverCompanyName,jdbcType=VARCHAR},
+      </if>
+      <if test="companyName != null" >
+        companyName = #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="carVarieties != null" >
+        carVarieties = #{carVarieties,jdbcType=VARCHAR},
+      </if>
+      <if test="driverNo != null" >
+        driverNo = #{driverNo,jdbcType=VARCHAR},
+      </if>
+      <if test="ticketId != null" >
+        ticketId = #{ticketId,jdbcType=VARCHAR},
+      </if>
     </set>
     where record_id = #{record_id,jdbcType=INTEGER} 
-  </update>
-  
-  <update id="updateByPrimaryKey" parameterType="com.shfb.rfid.manage.entity.Record" >
-    update record
-    set car_num = #{car_num,jdbcType=VARCHAR},
-      entry_time = #{entry_time,jdbcType=VARCHAR},
-      entry_weight = #{entry_weight,jdbcType=VARCHAR},
-      entry_pic = #{entry_pic,jdbcType=VARCHAR},
-      leave_time = #{leave_time,jdbcType=VARCHAR},
-      leave_weight = #{leave_weight,jdbcType=VARCHAR},
-      leave_pic = #{leave_pic,jdbcType=VARCHAR}
-    where record_id = #{record_id,jdbcType=INTEGER}
   </update>
   
   <select id="findAllRecords" parameterType="int" resultType="com.shfb.rfid.manage.entity.Record">
@@ -218,6 +203,10 @@
 	
 	<select id="findFirstRecord" parameterType="map" resultType="com.shfb.rfid.manage.entity.Record">
 		SELECT * from record WHERE entry_time is not NULL AND entry_time != '' ORDER BY entry_time DESC limit 0,1
+	</select>
+	
+	<select id="findFirstLeaveRecord" parameterType="map" resultType="com.shfb.rfid.manage.entity.Record">
+		SELECT * from record WHERE leave_time is not NULL AND leave_time != '' ORDER BY leave_time DESC limit 0,1
 	</select>
 	
 	<select id="numEntryStatistics" resultType="com.shfb.rfid.manage.dto.CarNumDto">

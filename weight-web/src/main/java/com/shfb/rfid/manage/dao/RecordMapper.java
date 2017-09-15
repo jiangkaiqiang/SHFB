@@ -12,16 +12,12 @@ public interface RecordMapper {
 
     int insert(Record record);
 
-    int insertSelective(Record record);
-
     Record selectByPrimaryKey(Integer record_id);
 
     int updateByPrimaryKeySelective(Record record);
     
     int addCarNumByRecordIdEntry(Record record);
-
-    int updateByPrimaryKey(Record record);
-
+    
 	Page<Record> findAllRecords(@Param("keyword")String keyword,@Param("startTime")String startTime, @Param("endTime")String endTime);
 	
 	Page<Record> findAllErrorEntryRecords(@Param("keyword")String keyword,@Param("startTime")String startTime, @Param("endTime")String endTime);
@@ -31,6 +27,8 @@ public interface RecordMapper {
 	Record findMergeRecord(@Param("carNum")String carNum,@Param("leaveTime")String leaveTime);
 	
 	Record findFirstRecord();
+	
+	Record findFirstLeaveRecord();
 
 	List<CarNumDto> numEntryStatistics();
 	

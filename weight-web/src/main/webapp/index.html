@@ -181,15 +181,22 @@
             			
         </div>
         <div style="width:30%;height:400px;float:left;text-align:left;border:3px solid #f0f0f0">
-        <div style="text-align:center"><font style="color: #000000;font-size: 30px;"><strong>{{firstRecord.car_num}}</strong></font></div>
-        <p><font style="color: #000000;font-size: 20px;">进入重量：{{firstRecord.entry_weight}}</font></p>
-        <p><font style="color: #000000;font-size: 20px;">进入时间：{{firstRecord.entry_time}}</font></p>
-        <p><font style="color: #000000;font-size: 20px;">备用：备用信息1</font></p>
-        <p><font style="color: #000000;font-size: 20px;">备用：备用信息2</font></p>
-        <p><font style="color: #000000;font-size: 20px;">备用：备用信息3</font></p>
-        <p><font style="color: #000000;font-size: 20px;">备用：备用信息4</font></p>
-        <p><font style="color: #000000;font-size: 20px;">备用：备用信息5</font></p>
-        <p><font style="color: #000000;font-size: 20px;">备用：备用信息6</font></p>
+        <div style="text-align:center"><font style="color: #000000;font-size: 25px;"><strong>{{firstRecord.car_num}}</strong></font></div>
+        <p ng-if="firstRecord.entry_weight!=null&&firstRecord.entry_weight!=''"><font style="color: #000000;font-size: 16px;">
+        进入重量：{{firstRecord.entry_weight}}</font></p>
+        <p ng-if="firstRecord.entry_time!=null&&firstRecord.entry_time!=''"><font style="color: #000000;font-size: 16px;">
+        进入时间：{{firstRecord.entry_time}}</font></p>
+        <p ng-if="firstRecord.leave_weight!=null&&firstRecord.leave_weight!=''"><font style="color: #000000;font-size: 16px;">
+        离开重量：{{firstRecord.leave_weight}}</font></p>
+        <p ng-if="firstRecord.leave_time!=null&&firstRecord.leave_time!=''"><font style="color: #000000;font-size: 16px;">
+        离开时间：{{firstRecord.leave_time}}</font></p>
+        <p><font style="color: #000000;font-size: 16px;">用户名：{{firstRecord.userName}}</font></p>
+        <p><font style="color: #000000;font-size: 16px;">手机号：{{firstRecord.tel}}</font></p>
+        <p><font style="color: #000000;font-size: 16px;">交付公司名称：{{firstRecord.deliverCompanyName}}</font></p>
+        <p><font style="color: #000000;font-size: 16px;">公司名称：{{firstRecord.companyName}}</font></p>
+        <p><font style="color: #000000;font-size: 16px;">卡类型：{{firstRecord.carVarieties}}</font></p>
+        <p><font style="color: #000000;font-size: 16px;">司机编号：{{firstRecord.driverNo}}</font></p>
+        <p><font style="color: #000000;font-size: 16px;">票号：{{firstRecord.ticketId}}</font></p>
         </div>
       
     </div>
@@ -238,10 +245,13 @@
 				         <th>净重量</th>
 				         <th>进入时间</th>
 				         <th>离开时间</th>
-				         <th>备用1</th>
-				         <th>备用2</th>
-				         <th>备用3</th>
-				         <th>备用4</th>
+				         <th>用户名</th>
+				         <th>手机号</th>
+				         <th>交付公司名称</th>
+				         <th>公司名称</th>
+				         <th>卡类型</th>
+				         <th>司机编号</th>
+				         <th>票号</th>
 				      </tr>
 				   </thead>
 				   <tbody>
@@ -262,10 +272,13 @@
 				         <td>{{case.leave_weight-case.entry_weight}}</td>
 				         <td>{{case.entry_time}}</td>
 				         <td>{{case.leave_time}}</td>
-				         <td>备用1</td>
-				         <td>备用2</td>
-				         <td>备用3</td>
-				         <td>备用4</td>
+				         <td>{{case.userName}}</td>
+				         <td>{{case.tel}}</td>
+				         <td>{{case.deliverCompanyName}}</td>
+				         <td>{{case.companyName}}</td>
+				         <td>{{case.carVarieties}}</td>
+				         <td>{{case.driverNo}}</td>
+				         <td>{{case.ticketId}}</td>
 				      </tr>
 				   </tbody>
 				</table>

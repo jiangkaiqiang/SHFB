@@ -16,6 +16,20 @@ public class Record {
     private String leave_weight;
 
     private String leave_pic;
+    
+    private String userName;
+    
+    private String tel;
+    
+    private String deliverCompanyName;
+    
+    private String companyName;
+    
+    private String carVarieties;
+    
+    private String driverNo;
+    
+    private String ticketId;
 
     public Integer getRecord_id() {
         return record_id;
@@ -80,4 +94,61 @@ public class Record {
     public void setLeave_pic(String leave_pic) {
         this.leave_pic = leave_pic == null ? null : leave_pic.trim();
     }
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public String getTel() {
+		return tel;
+	}
+
+	public void setTel(String tel) {
+		this.tel = tel;
+	}
+
+	public String getDeliverCompanyName() {
+		return deliverCompanyName;
+	}
+
+	public void setDeliverCompanyName(String deliverCompanyName) {
+		this.deliverCompanyName = deliverCompanyName;
+	}
+
+	public String getCompanyName() {
+		return companyName;
+	}
+
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
+	}
+
+	public String getCarVarieties() {
+		return carVarieties;
+	}
+
+	public void setCarVarieties(String carVarieties) {
+		this.carVarieties = carVarieties;
+	}
+
+	public String getDriverNo() {
+		return driverNo;
+	}
+
+	public void setDriverNo(String driverNo) {
+		this.driverNo = driverNo;
+	}
+
+	public String getTicketId() {
+		return ticketId;
+	}
+
+	public void setTicketId(String ticketId) {
+		this.ticketId = ticketId;
+	}
+    
 }

@@ -28,6 +28,7 @@ angular.module('app', ['ngFileUpload']).controller('index', function ($scope, Up
     getFirstRecords();
     jQuery(document).ready(function(){
     	    oTimer = setInterval(getFirstRecords,500);
+    	    oTimer2 = setInterval(getRecords,500);
     });
 	$scope.getRecords = function() {
 		$http({

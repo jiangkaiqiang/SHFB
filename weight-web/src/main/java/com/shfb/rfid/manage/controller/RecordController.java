@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -201,7 +203,7 @@ public class RecordController extends BaseController {
 	@RequestMapping(value = "/updateRecord")
 	@ResponseBody
 	public Object updateRecord(Record record){
-		recordDao.updateByPrimaryKey(record);
+		recordDao.updateByPrimaryKeySelective(record);
 		return new BaseDto(0);
 	}
 	
@@ -252,8 +254,17 @@ public class RecordController extends BaseController {
 				
 //		HttpSession session = request.getSession();
 //		Record record = (Record) session.getServletContext().getAttribute("firstRecord");
-		Record record = recordDao.findFirstRecord();
-		return record;
+		Record recordEntry = recordDao.findFirstRecord();
+		Record recordLeave = recordDao.findFirstLeaveRecord();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		try {
+			if (sdf.parse(recordEntry.getEntry_time()).getTime() >= sdf.parse(recordLeave.getLeave_time()).getTime()) {
+				return recordEntry;
+			}
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return recordLeave;
 	}
 	
 	@RequestMapping(value = "/findRecordByID")
