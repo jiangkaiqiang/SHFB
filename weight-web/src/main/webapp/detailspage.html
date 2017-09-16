@@ -48,20 +48,19 @@
 
 <div class="Container">
     <!-- InstanceBeginEditable name="content" -->
-    <div class="content">
+    <div class="content" align="center">
         <h1 align="center">{{Case.car_num}}</h1>
          <p>进入时重量：{{Case.leave_weight}}</p>
          <p>离开时重量：{{Case.entry_weight}}</p>
-         <p>净重量：{{Case.leave_weight-Case.entry_weight}}</p>
+         <p>净重量：{{case.entry_weight-case.leave_weight}}</p>
          <p>进入时间：{{Case.entry_time}}</p>
          <p>进入时间：{{Case.leave_time}}</p>
-         <p>用户名：{{Case.userName}}</p>
-         <p>手机号：{{Case.tel}}</p>
-         <p>交付公司名称：{{Case.deliverCompanyName}}</p>
-         <p>公司名称：{{Case.companyName}}</p>
-         <p>卡类型：{{Case.carVarieties}}</p>
-         <p>司机编号：{{Case.driverNo}}</p>
-         <p>票号：{{Case.ticketId}}</p>
+         <p>驾驶员姓名：{{Case.userName}}</p>
+         <p>驾驶员联系方式：{{Case.tel}}</p>
+         <p>发货单位：{{Case.deliverCompanyName}}</p>
+         <p>所属单位：{{Case.companyName}}</p>
+         <p>汽车规格型号：{{Case.carVarieties}}</p>
+         <p>驾照号：{{Case.driverNo}}</p>
         <div style="text-align:center">
                 <img src="{{Case.entry_pic}}" width="400" height="380" />
                 <img src="{{Case.leave_pic}}" width="400" height="380" />                        

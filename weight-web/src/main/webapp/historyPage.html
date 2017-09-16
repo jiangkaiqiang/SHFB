@@ -242,13 +242,12 @@
 				         <th>净重量</th>
 				         <th>进入时间</th>
 				         <th>离开时间</th>
-				         <th>用户名</th>
-				         <th>手机号</th>
-				         <th>交付公司名称</th>
-				         <th>公司名称</th>
-				         <th>卡类型</th>
-				         <th>司机编号</th>
-				         <th>票号</th>
+				         <th>驾驶员姓名</th>
+				         <th>驾驶员联系方式</th>
+				         <th>发货单位</th>
+				         <th>所属单位</th>
+				         <th>汽车规格型号</th>
+				         <th>驾照号</th>
 				      </tr>
 				   </thead>
 				   <tbody>
@@ -266,7 +265,7 @@
 				         <img ng-if="case.leave_pic!=''&&case.leave_pic!=undefined" style="width:80px;height:50px" src="{{case.leave_pic}}" alt="">
 				          </li></ul>
 				         </td>
-				         <td>{{case.leave_weight-case.entry_weight}}</td>
+				         <td>{{case.entry_weight-case.leave_weight}}</td>
 				         <td>{{case.entry_time}}</td>
 				         <td>{{case.leave_time}}</td>
 				         <td>{{case.userName}}</td>
@@ -275,7 +274,6 @@
 				         <td>{{case.companyName}}</td>
 				         <td>{{case.carVarieties}}</td>
 				         <td>{{case.driverNo}}</td>
-				         <td>{{case.ticketId}}</td>
 				      </tr>
 				   </tbody>
 				</table>  

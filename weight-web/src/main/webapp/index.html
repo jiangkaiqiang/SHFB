@@ -175,10 +175,13 @@
     
 <div id="wowslider-container1">
     <div class="ws_images" style="top:10px">  
-        <div style="width:60%;float:left;padding-left:150px">
-        	
-								<img src="{{firstRecord.entry_pic}}"/>
-            			
+        <div style="width:60%;float:left;padding-left:150px" ng-if="firstRecord.entry_pic!=null
+        &&firstRecord.entry_pic!=''">
+			<img src="{{firstRecord.entry_pic}}"/>
+        </div>
+        <div style="width:60%;float:left;padding-left:150px" ng-if="firstRecord.entry_pic==null
+        ||firstRecord.entry_pic==''">
+			<img src=""/>
         </div>
         <div style="width:30%;height:400px;float:left;text-align:left;border:3px solid #f0f0f0">
         <div style="text-align:center"><font style="color: #000000;font-size: 25px;"><strong>{{firstRecord.car_num}}</strong></font></div>
@@ -190,13 +193,12 @@
         离开重量：{{firstRecord.leave_weight}}</font></p>
         <p ng-if="firstRecord.leave_time!=null&&firstRecord.leave_time!=''"><font style="color: #000000;font-size: 16px;">
         离开时间：{{firstRecord.leave_time}}</font></p>
-        <p><font style="color: #000000;font-size: 16px;">用户名：{{firstRecord.userName}}</font></p>
-        <p><font style="color: #000000;font-size: 16px;">手机号：{{firstRecord.tel}}</font></p>
-        <p><font style="color: #000000;font-size: 16px;">交付公司名称：{{firstRecord.deliverCompanyName}}</font></p>
-        <p><font style="color: #000000;font-size: 16px;">公司名称：{{firstRecord.companyName}}</font></p>
-        <p><font style="color: #000000;font-size: 16px;">卡类型：{{firstRecord.carVarieties}}</font></p>
-        <p><font style="color: #000000;font-size: 16px;">司机编号：{{firstRecord.driverNo}}</font></p>
-        <p><font style="color: #000000;font-size: 16px;">票号：{{firstRecord.ticketId}}</font></p>
+        <p><font style="color: #000000;font-size: 16px;">驾驶员姓名：{{firstRecord.userName}}</font></p>
+        <p><font style="color: #000000;font-size: 16px;">驾驶员联系方式：{{firstRecord.tel}}</font></p>
+        <p><font style="color: #000000;font-size: 16px;">发货单位：{{firstRecord.deliverCompanyName}}</font></p>
+        <p><font style="color: #000000;font-size: 16px;">所属单位：{{firstRecord.companyName}}</font></p>
+        <p><font style="color: #000000;font-size: 16px;">汽车规格型号：{{firstRecord.carVarieties}}</font></p>
+        <p><font style="color: #000000;font-size: 16px;">驾照号：{{firstRecord.driverNo}}</font></p>
         </div>
       
     </div>
@@ -245,13 +247,12 @@
 				         <th>净重量</th>
 				         <th>进入时间</th>
 				         <th>离开时间</th>
-				         <th>用户名</th>
-				         <th>手机号</th>
-				         <th>交付公司名称</th>
-				         <th>公司名称</th>
-				         <th>卡类型</th>
-				         <th>司机编号</th>
-				         <th>票号</th>
+				         <th>驾驶员姓名</th>
+				         <th>驾驶员联系方式</th>
+				         <th>发货单位</th>
+				         <th>所属单位</th>
+				         <th>汽车规格型号</th>
+				         <th>驾照号</th>
 				      </tr>
 				   </thead>
 				   <tbody>
@@ -269,7 +270,7 @@
 				         <img ng-if="case.leave_pic!=''&&case.leave_pic!=undefined" style="width:80px;height:50px" ng-src="{{case.leave_pic}}" alt="">
 				         </ul></li>
 				         </td>
-				         <td>{{case.leave_weight-case.entry_weight}}</td>
+				         <td>{{case.entry_weight-case.leave_weight}}</td>
 				         <td>{{case.entry_time}}</td>
 				         <td>{{case.leave_time}}</td>
 				         <td>{{case.userName}}</td>
@@ -278,7 +279,6 @@
 				         <td>{{case.companyName}}</td>
 				         <td>{{case.carVarieties}}</td>
 				         <td>{{case.driverNo}}</td>
-				         <td>{{case.ticketId}}</td>
 				      </tr>
 				   </tbody>
 				</table>
