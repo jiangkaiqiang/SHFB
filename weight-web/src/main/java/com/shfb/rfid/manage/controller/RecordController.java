@@ -46,6 +46,8 @@ import net.sf.json.JSONObject;
 @Controller
 @RequestMapping(value = "/record")
 public class RecordController extends BaseController {
+	public static String weightDiff = ""; //总的重量差值
+	public static String timeDiff = ""; //总的时间差值
 	@Autowired
 	private RecordMapper recordDao;
 	@Autowired

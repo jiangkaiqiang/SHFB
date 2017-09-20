@@ -20,6 +20,19 @@ angular.module('app', ['ngFileUpload']).controller('detailspage', function ($sco
 			$scope.Case = data;
 		});
 	};
+	$scope.update = function() {
+		$http({
+			method : 'POST',
+			url : '/i/record/updateRecord',
+			params : {
+				record_id : getQueryString("id"),
+				companyName : $scope.Case.companyName,
+				material : $scope.Case.material
+			}
+		}).success(function(data) {
+			window.location.reload();
+		});
+	};
 	$scope.getCases();
 	function getQueryString(name) { 
 		var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i"); 

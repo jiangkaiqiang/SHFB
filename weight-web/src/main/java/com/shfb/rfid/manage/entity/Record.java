@@ -30,6 +30,8 @@ public class Record {
     private String driverNo;
     
     private String ticketId;
+    
+    private String material;
 
     public Integer getRecord_id() {
         return record_id;
@@ -150,4 +152,13 @@ public class Record {
 	public void setTicketId(String ticketId) {
 		this.ticketId = ticketId;
 	}
+
+	public String getMaterial() {
+		return material;
+	}
+
+	public void setMaterial(String material) {
+		this.material = material;
+	}
+	
 }

@@ -17,14 +17,14 @@
     <result column="carVarieties" property="carVarieties" jdbcType="VARCHAR" />
     <result column="driverNo" property="driverNo" jdbcType="VARCHAR" />
     <result column="ticketId" property="ticketId" jdbcType="VARCHAR" />
+    <result column="material" property="ticketId" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
     record_id, car_num, entry_time, entry_weight, entry_pic, leave_time, leave_weight, 
-    leave_pic, userName, tel, deliverCompanyName, companyName, carVarieties, driverNo, ticketId
+    leave_pic, userName, tel, deliverCompanyName, companyName, carVarieties, driverNo, ticketId, material
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
+    select *
     from record
     where record_id = #{record_id,jdbcType=INTEGER}
   </select>
@@ -35,13 +35,13 @@
   <insert id="insert" parameterType="com.shfb.rfid.manage.entity.Record" >
     insert into record (car_num, entry_time, 
       entry_weight, entry_pic, leave_time, 
-      leave_weight, leave_pic, userName, tel, deliverCompanyName, companyName, carVarieties, driverNo, ticketId)
+      leave_weight, leave_pic, userName, tel, deliverCompanyName, companyName, carVarieties, driverNo, ticketId, material)
     values (#{car_num,jdbcType=VARCHAR}, #{entry_time,jdbcType=VARCHAR}, 
       #{entry_weight,jdbcType=VARCHAR}, #{entry_pic,jdbcType=VARCHAR}, #{leave_time,jdbcType=VARCHAR}, 
       #{leave_weight,jdbcType=VARCHAR}, #{leave_pic,jdbcType=VARCHAR}
       ,#{userName,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR}, 
       #{deliverCompanyName,jdbcType=VARCHAR}, #{companyName,jdbcType=VARCHAR}, #{carVarieties,jdbcType=VARCHAR}, 
-      #{driverNo,jdbcType=VARCHAR}, #{ticketId,jdbcType=VARCHAR})
+      #{driverNo,jdbcType=VARCHAR}, #{ticketId,jdbcType=VARCHAR}, #{material,jdbcType=VARCHAR})
   </insert>
   
   
@@ -89,6 +89,9 @@
       </if>
       <if test="ticketId != null" >
         ticketId = #{ticketId,jdbcType=VARCHAR},
+      </if>
+      <if test="material != null" >
+        material = #{material,jdbcType=VARCHAR},
       </if>
     </set>
     where record_id = #{record_id,jdbcType=INTEGER}
@@ -138,6 +141,9 @@
       </if>
       <if test="ticketId != null" >
         ticketId = #{ticketId,jdbcType=VARCHAR},
+      </if>
+      <if test="material != null" >
+        material = #{material,jdbcType=VARCHAR},
       </if>
     </set>
     where record_id = #{record_id,jdbcType=INTEGER} 

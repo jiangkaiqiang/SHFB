@@ -156,7 +156,7 @@
     <div class="content">
         <div class="logoimg"><img src='../img/lastlogo.png' width="180" height="80"></div>
         <div class="part1"><font color="#8E8E8E"><B>智能建筑-称重系统</B></font></div>
-        <div class="contact">
+         <!-- <div class="contact">
             <div class="tel">
                 <div class="graph" style="font-size: 16px;"><img src='../img/Tel.jpg' width="30" height="40">156-1818-7120</div>
             </div>
@@ -165,7 +165,7 @@
             </div>
         </div>
 
-    </div>
+    </div>-->
     <!--<div class="linea"></div>-->
 
     <div class="menu">
@@ -186,14 +186,25 @@
                     <h2>历史记录</h2>
                 </div>
                  <div  class="col-sm-12">	
-                    <div class="col-sm-8">					
+                    <div class="col-sm-2">					
 					<input  type="text" class="form-control" ng-model="keyword" placeholder="请输入车牌号" id="myText" />
 					</div>	
-					<div class="col-sm-4">	
+					<div class="col-sm-2">	
+					<button  type="button" ng-click="goSearch()" class="btn btn-default">查询</button>
+				     </div>
+				      <div class="col-sm-2">					
+					<input  type="text" class="form-control" ng-model="material" placeholder="请输入材料" id="myText" />
+					</div>	
+					<div class="col-sm-2">	
+					<button  type="button" ng-click="goSearch()" class="btn btn-default">查询</button>
+				     </div>
+				     <div class="col-sm-2">					
+					<input  type="text" class="form-control" ng-model="companyName" placeholder="请输入公司名" id="myText" />
+					</div>	
+					<div class="col-sm-2">	
 					<button  type="button" ng-click="goSearch()" class="btn btn-default">查询</button>
 				     </div>
 				</div>
-				
 				<div class="col-sm-12" style="height:50px">
 				<p></p>
 			    <div  class="col-sm-4">	
@@ -209,6 +220,35 @@
                 <!--指定 date标记-->  
                 <div class='input-group date' id='datetimepicker2'>  
                     <input type='text' class="form-control" id = "endTime" placeholder="结束离开时间" ng-model="endTime" />  
+                    <span class="input-group-addon">  
+                        <span class="glyphicon glyphicon-calendar"></span>  
+                    </span>  
+                </div> 
+                </div>
+                <div  class="col-sm-2">	
+			<button type="button" class="btn btn-default pull-right" ng-click="goSearch()">
+					日期查询
+				</button>	
+				</div>
+               <div  class="col-sm-2">	
+				</div>
+			</div>
+			
+			<div class="col-sm-12" style="height:50px">
+				<p></p>
+			    <div  class="col-sm-4">	
+                <!--指定 date标记-->  
+                <div class='input-group date' id='datetimepicker1'>  
+                    <input type='text' class="form-control" id = "startEntryTime" placeholder="开始进入时间" ng-model="startTime" />  
+                    <span class="input-group-addon">  
+                        <span class="glyphicon glyphicon-calendar"></span>  
+                    </span>  
+                </div>  
+                </div>
+                <div  class="col-sm-4">	
+                <!--指定 date标记-->  
+                <div class='input-group date' id='datetimepicker2'>  
+                    <input type='text' class="form-control" id = "endEntryTime" placeholder="结束进入时间" ng-model="endTime" />  
                     <span class="input-group-addon">  
                         <span class="glyphicon glyphicon-calendar"></span>  
                     </span>  
@@ -248,11 +288,12 @@
 				         <th>所属单位</th>
 				         <th>汽车规格型号</th>
 				         <th>驾照号</th>
+				         <th>编辑</th>
 				      </tr>
 				   </thead>
 				   <tbody>
 				      <tr ng-repeat="case in AllRecords">
-				         <td><a href="detailspage.html?id={{case.record_id}}">{{case.car_num}}</a></td>
+				         <td style="width:100px"><a href="detailspage.html?id={{case.record_id}}">{{case.car_num}}</a></td>
 				         <td style="width:80px;height:50px" > 
 				         <ul class="viewer01" ng-click="showView()">
             				 <li style="list-style-type:none;">
@@ -266,14 +307,15 @@
 				          </li></ul>
 				         </td>
 				         <td>{{case.entry_weight-case.leave_weight}}</td>
-				         <td>{{case.entry_time}}</td>
-				         <td>{{case.leave_time}}</td>
+				         <td style="width:150px">{{case.entry_time}}</td>
+				         <td style="width:150px">{{case.leave_time}}</td>
 				         <td>{{case.userName}}</td>
 				         <td>{{case.tel}}</td>
 				         <td>{{case.deliverCompanyName}}</td>
 				         <td>{{case.companyName}}</td>
 				         <td>{{case.carVarieties}}</td>
 				         <td>{{case.driverNo}}</td>
+				         <td style="width:100px"><a href="detailspage.html?id={{case.record_id}}">编辑</a></td>
 				      </tr>
 				   </tbody>
 				</table>  
@@ -290,10 +332,6 @@
               </div>
             </div> 
 </div>
-
 <iframe frameborder="0" width="100%" height="100" src="template/bottom.html" scrolling="no"></iframe>
-
-
-
 </body>
 </html>

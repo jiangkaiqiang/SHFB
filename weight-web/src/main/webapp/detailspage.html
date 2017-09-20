@@ -17,6 +17,7 @@
       }
       </style>
       <link rel="stylesheet" type="text/css" href="css/top.css" media="screen" />
+      <link rel="stylesheet" href="assets/css/bootstrap.min.css">
 </head>
 <body ng-app="app"  ng-controller="detailspage">
 
@@ -24,7 +25,7 @@
     <div class="content">
         <div class="logoimg"><img src='../img/lastlogo.png' width="180" height="80"></div>
         <div class="part1"><font color="#8E8E8E"><B>智能建筑-称重系统</B></font></div>
-        <div class="contact">
+        <!--  <div class="contact">
             <div class="tel">
                 <div class="graph"><img src='../img/Tel.jpg' width="30" height="40">156-1818-7120</div>
             </div>
@@ -50,6 +51,10 @@
     <!-- InstanceBeginEditable name="content" -->
     <div class="content" align="center">
         <h1 align="center">{{Case.car_num}}</h1>
+        <div style="text-align:center">
+                <img src="{{Case.entry_pic}}" width="400" height="380" />
+                <img src="{{Case.leave_pic}}" width="400" height="380" />                        
+         </div>
          <p>进入时重量：{{Case.leave_weight}}</p>
          <p>离开时重量：{{Case.entry_weight}}</p>
          <p>净重量：{{case.entry_weight-case.leave_weight}}</p>
@@ -58,13 +63,13 @@
          <p>驾驶员姓名：{{Case.userName}}</p>
          <p>驾驶员联系方式：{{Case.tel}}</p>
          <p>发货单位：{{Case.deliverCompanyName}}</p>
-         <p>所属单位：{{Case.companyName}}</p>
          <p>汽车规格型号：{{Case.carVarieties}}</p>
          <p>驾照号：{{Case.driverNo}}</p>
-        <div style="text-align:center">
-                <img src="{{Case.entry_pic}}" width="400" height="380" />
-                <img src="{{Case.leave_pic}}" width="400" height="380" />                        
-        </div>
+         <p>所属单位：<input type="text" style="width:200px"  ng-model="Case.companyName"></input></p>
+         <p>材料：<input type="text" style="width:200px" ng-model="Case.material"></input></p>
+         <button type="button" ng-click="update()" class="btn btn-primary">
+	             更新
+	     </button>
         <!--文字class="t1",图片和图片说明class="t2"-->
     </div>
     <!-- InstanceEndEditable -->
