@@ -18,7 +18,9 @@ public interface RecordMapper {
     
     int addCarNumByRecordIdEntry(Record record);
     
-	Page<Record> findAllRecords(@Param("keyword")String keyword,@Param("startTime")String startTime, @Param("endTime")String endTime);
+	Page<Record> findAllRecords(@Param("keyword")String keyword,@Param("startTime")String startTime, @Param("endTime")String endTime
+			,@Param("startEntryTime")String startEntryTime, @Param("endEntryTime")String endEntryTime,@Param("material")String material,
+			@Param("companyName")String companyName);
 	
 	Page<Record> findAllErrorEntryRecords(@Param("keyword")String keyword,@Param("startTime")String startTime, @Param("endTime")String endTime);
 

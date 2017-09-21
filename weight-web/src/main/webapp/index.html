@@ -175,32 +175,38 @@
     <div class="lineb"></div>
     
 <div id="wowslider-container1">
-    <div class="ws_images" style="top:10px">  
-    <div style="width:30%;height:420px;float:left;text-align:left;border:3px solid #f0f0f0">
+    <div class="ws_images" style="top:10px;">  
+    <div style="width:50%;height:420px;float:left;text-align:left;border:3px solid #f0f0f0">
         <p ng-if="firstRecord.car_num!=null&&firstRecord.car_num!=''"><font style="color: #000000;font-size: 16px;">
-        车号：<input type="text" style="width:200px"  value="{{firstRecord.car_num}}"></input></font></p>
+        车号：<input type="text" style="width:300px"  value="{{firstRecord.car_num}}"></input></font></p>
+        <p><font style="color: #000000;font-size: 16px;">物品：
+        <input type="text" style="width:300px"  value=""></input></font></p>
         <p><font style="color: #000000;font-size: 16px;">发货单位：
-        <input type="text" style="width:200px"  value="{{firstRecord.deliverCompanyName}}"></input></font></p>
+        <input type="text" style="width:300px"  value="{{firstRecord.deliverCompanyName}}"></input></font></p>
+        <p><font style="color: #000000;font-size: 16px;">所属单位：
+        <input type="text" style="width:300px"  value="{{firstRecord.companyName}}"></input></font></p>
         <p ng-if="firstRecord.entry_time!=null&&firstRecord.entry_time!=''"><font style="color: #000000;font-size: 16px;">
-        进入时间：<input type="text" style="width:200px"  value="{{firstRecord.entry_time}}"></input></font></p>
+        进入时间：<input type="text" style="width:300px"  value="{{firstRecord.entry_time}}"></input></font></p>
         <p ng-if="firstRecord.entry_weight!=null&&firstRecord.entry_weight!=''"><font style="color: #000000;font-size: 16px;">
-        进入重量：<input type="text" style="width:200px"  value="{{firstRecord.entry_weight}}"></input></font></p>
+        进入重量：<input type="text" style="width:300px"  value="{{firstRecord.entry_weight}}"></input></font></p>
         <p ng-if="firstRecord.leave_time!=null&&firstRecord.leave_time!=''"><font style="color: #000000;font-size: 16px;">
-        出去时间：<input type="text" style="width:200px"  value="{{firstRecord.leave_time}}"></input></font></p>
+        出去时间：<input type="text" style="width:300px"  value="{{firstRecord.leave_time}}"></input></font></p>
         <p ng-if="firstRecord.leave_weight!=null&&firstRecord.leave_weight!=''"><font style="color: #000000;font-size: 16px;">
         出去重量：<input type="text" style="width:200px"  value="{{firstRecord.leave_weight}}"></input></font></p>
-        <p><font style="color: #000000;font-size: 16px;">驾驶员姓名：
-        <input type="text" style="width:200px"  value="{{firstRecord.userName}}"></input></font></p>
+        <p ng-if="firstRecord.leave_weight!=null&&firstRecord.leave_weight!=''&&firstRecord.entry_weight!=null&&firstRecord.entry_weight!=''"><font style="color: #000000;font-size: 16px;">
+        净重量：<input type="text" style="width:200px"  value="{{case.entry_weight-case.leave_weight}}"></input></font></p>
+       <!--  <p><font style="color: #000000;font-size: 16px;">驾驶员姓名：
+        <input type="text" style="width:300px"  value="{{firstRecord.userName}}"></input></font></p>
         <p><font style="color: #000000;font-size: 16px;">驾驶员联系方式：
-        <input type="text" style="width:150px"  value="{{firstRecord.tel}}"></input></font></p>
+        <input type="text" style="width:250px"  value="{{firstRecord.tel}}"></input></font></p>
         <p><font style="color: #000000;font-size: 16px;">所属单位：
-        <input type="text" style="width:200px"  value="{{firstRecord.companyName}}"></input></font></p>
+        <input type="text" style="width:300px"  value="{{firstRecord.companyName}}"></input></font></p>
         <p><font style="color: #000000;font-size: 16px;">汽车规格型号：
-        <input type="text" style="width:150px"  value="{{firstRecord.carVarieties}}"></input></font></p>
+        <input type="text" style="width:250px"  value="{{firstRecord.carVarieties}}"></input></font></p>
         <p><font style="color: #000000;font-size: 16px;">驾照号：
-         <input type="text" style="width:100px"  value="{{firstRecord.driverNo}}"></input></font></p>
+         <input type="text" style="width:300px"  value="{{firstRecord.driverNo}}"></input></font></p> -->
         </div>
-        <div style="width:60%;float:left;padding-left:150px;height:420px" ng-if="firstRecord.entry_pic!=null
+        <div style="width:50%;float:left;padding-left:50px;height:420px" ng-if="firstRecord.entry_pic!=null
         &&firstRecord.entry_pic!=''">
 			<img src="{{firstRecord.entry_pic}}"/>
         </div>
@@ -249,24 +255,30 @@
 				   <thead>
 				      <tr>
 				         <th>序号</th>
-				         <th>车牌号</th>
-				         <th>进入图片</th>
-				         <th>离开图片</th>
-				         <th>净重量</th>
-				         <th>进入时间</th>
-				         <th>离开时间</th>
-				         <th>驾驶员姓名</th>
-				         <th>驾驶员联系方式</th>
 				         <th>发货单位</th>
 				         <th>所属单位</th>
+				         <th>车牌号</th>
+				         <th>材料</th>
+				         <th>进入图片</th>
+				         <th>离开图片</th>
+				         <th>进入时间</th>
+				         <th>进入重量</th>
+				         <th>离开时间</th>
+				         <th>离开重量</th>
+				         <th>净重量</th>
+				         <!-- <th>驾驶员姓名</th>
+				         <th>驾驶员联系方式</th>
 				         <th>汽车规格型号</th>
-				         <th>驾照号</th>
+				         <th>驾照号</th> -->
 				      </tr>
 				   </thead>
 				   <tbody>
 				      <tr ng-repeat="case in AllRecords">
 				         <td>{{$index+1}}</td>
+				         <td>{{case.deliverCompanyName}}</td>
+				         <td>{{case.companyName}}</td>
 				         <td style="width:100px"><a href="detailspage.html?id={{case.record_id}}">{{case.car_num}}</a></td>
+				         <td>{{case.material}}</td>
 				         <td> 
 				         	<ul class="viewer01" ng-click="showView()">
             				 <li style="list-style-type:none;">
@@ -279,22 +291,22 @@
 				         <img ng-if="case.leave_pic!=''&&case.leave_pic!=undefined" style="width:80px;height:50px" ng-src="{{case.leave_pic}}" alt="">
 				         </ul></li>
 				         </td>
-				         <td>{{case.entry_weight-case.leave_weight}}</td>
-				         <td style="width:150px">{{case.entry_time}}</td>
+				         <td style="width:200px">{{case.entry_time}}</td>
+				         <td style="width:150px">{{case.entry_weight}}</td>
 				         <td style="width:150px">{{case.leave_time}}</td>
-				         <td>{{case.userName}}</td>
+				         <td style="width:150px">{{case.leave_weight}}</td>
+				         <td>{{case.entry_weight-case.leave_weight}}</td>
+				         <!-- <td>{{case.userName}}</td>
 				         <td>{{case.tel}}</td>
-				         <td>{{case.deliverCompanyName}}</td>
-				         <td>{{case.companyName}}</td>
 				         <td>{{case.carVarieties}}</td>
-				         <td>{{case.driverNo}}</td>
+				         <td>{{case.driverNo}}</td> -->
 				      </tr>
 				   </tbody>
 				</table>
         </div>
     </div>
 </div>
-<div style="padding-top:200px">
+<div style="padding-top:250px">
 <iframe frameborder="0" width="100%" height="100" src="template/bottom.html" scrolling="no"></iframe> 
 </div>
 </body>

@@ -175,7 +175,7 @@
 	                </button>
                 </div>
             </div>
-        <div class="Block" ng-repeat="case in AllRecords">
+        <!-- <div class="Block" ng-repeat="case in AllRecords">
                 <div class="image"><img src="{{case.entry_pic}}" width="229" height="170" />
                     <div class="topic">
                     <input type="text" ng-model="car_num" class="form-control"  placeholder="请输入车牌号"/>                   
@@ -186,7 +186,35 @@
 	                </div>
                     </div>                    
                 </div>
-            </div>    
+            </div>  -->   
+            
+            <table class="table table-striped table-bordered" id="tableArea">
+				   <thead>
+				      <tr>
+				         <th>序号</th>
+				         <th>进入图片</th>
+				         <th>车牌号</th>
+				         <th>提交</th>
+				      </tr>
+				   </thead>
+				   <tbody>
+				      <tr ng-repeat="case in AllRecords">
+				         <td>{{$index+1}}</td>
+				         <td style="width:80px;height:50px" > 
+				         <ul class="viewer01" ng-click="showView()">
+            				 <li style="list-style-type:none;">
+				         <img ng-if="case.entry_pic!=''&&case.entry_pic!=undefined" style="width:80px;height:50px" src="{{case.entry_pic}}" alt="">
+				         </li></ul>
+				         </td>
+				         <td><input type="text" ng-model="car_num" class="form-control"  placeholder="请输入车牌号"/></td>
+				         <td>
+				         <button type="button" ng-click="addCarNumByRecordId(case.record_id,car_num)" class="btn btn-primary">
+	                     提交车牌号
+	                     </button>
+				         </td>
+				      </tr>
+				   </tbody>
+				</table>  
     </div>
  <div class="row" class="col-md-10 col-sm-10 items-info">
               <div class="col-md-10 col-sm-10">
@@ -210,7 +238,7 @@
                     <h2>车辆离开异常数据</h2>
                 </div>
             </div>
-        <div class="Block" ng-repeat="case in AllRecordsLeave">
+       <!--  <div class="Block" ng-repeat="case in AllRecordsLeave">
                 <div class="image"><img src="{{case.leave_pic}}" width="229" height="170" />
                     <div class="topic">
                     <input type="text" ng-model="car_numLeave" class="form-control"  placeholder="请输入车牌号"/>                   
@@ -221,7 +249,33 @@
 	                </div>
                     </div>                    
                 </div>
-            </div>    
+            </div>     -->
+            <table class="table table-striped table-bordered" id="tableArea">
+				   <thead>
+				      <tr>
+				         <th>序号</th>
+				         <th>离开图片</th>
+				         <th>车牌号</th>
+				         <th>提交</th>
+				      </tr>
+				   </thead>
+				   <tbody>
+				      <tr ng-repeat="case in AllRecordsLeave">
+				         <td>{{$index+1}}</td>
+				         <td style="width:80px;height:50px" > 
+				         <ul class="viewer01" ng-click="showView()">
+            				 <li style="list-style-type:none;">
+				         <img ng-if="case.leave_pic!=''&&case.leave_pic!=undefined" style="width:80px;height:50px" src="{{case.leave_pic}}" alt="">
+				         </li></ul>
+				         </td>
+				         <td><input type="text" ng-model="car_numLeave" class="form-control"  placeholder="请输入车牌号"/></td>
+				         <td>
+				         <button type="button" ng-click="addCarNumByLeaveRecordId(case.record_id,car_numLeave)" class="btn btn-primary">提交车牌号
+	                     </button>
+				         </td>
+				      </tr>
+				   </tbody>
+				</table>  
     </div>
  <div class="row" class="col-md-10 col-sm-10 items-info">
               <div class="col-md-10 col-sm-10">

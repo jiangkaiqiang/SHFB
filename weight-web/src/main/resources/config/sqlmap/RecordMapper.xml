@@ -17,7 +17,7 @@
     <result column="carVarieties" property="carVarieties" jdbcType="VARCHAR" />
     <result column="driverNo" property="driverNo" jdbcType="VARCHAR" />
     <result column="ticketId" property="ticketId" jdbcType="VARCHAR" />
-    <result column="material" property="ticketId" jdbcType="VARCHAR" />
+    <result column="material" property="material" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
     record_id, car_num, entry_time, entry_weight, entry_pic, leave_time, leave_weight, 
@@ -161,6 +161,18 @@
             <if test="endTime!=null and endTime!=''">
                 AND leave_time &lt;= #{endTime}
             </if>
+            <if test="startEntryTime!=null and startEntryTime!=''">
+                AND entry_time &gt;= #{startEntryTime}
+            </if>
+            <if test="endEntryTime!=null and endEntryTime!=''">
+                AND entry_time &lt;= #{endEntryTime}
+            </if>
+            <if test="material != null">
+				material like "%"#{material}"%"
+			</if>
+			<if test="companyName != null">
+				companyName like "%"#{companyName}"%"
+			</if>
                 AND car_num is not NULL AND car_num != '' AND entry_time is not NULL AND entry_time != '' AND
                 leave_time is not NULL AND leave_time != ''
 		</where>

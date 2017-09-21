@@ -26,8 +26,8 @@ angular.module('app', ['ngFileUpload']).controller('detailspage', function ($sco
 			url : '/i/record/updateRecord',
 			params : {
 				record_id : getQueryString("id"),
-				companyName : $scope.Case.companyName,
-				material : $scope.Case.material
+				companyName : encodeURI($scope.Case.companyName,"UTF-8"),
+				material : encodeURI($scope.Case.material,"UTF-8")
 			}
 		}).success(function(data) {
 			window.location.reload();

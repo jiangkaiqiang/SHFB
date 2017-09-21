@@ -153,7 +153,9 @@ angular.module('app', ['ngFileUpload']).controller('error', function ($scope, Up
 		}
 		  
 	};
-	
+	setTimeout(function(){
+		$(".viewer01").viewer();
+	},1000);
 	$scope.addCarNumByLeaveRecordId = function(recordId,car_num) {
 		if(car_num==undefined ||car_num==""){
 			alert("请输入有效车牌号");

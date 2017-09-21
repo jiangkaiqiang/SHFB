@@ -24,7 +24,11 @@ angular.module('app', ['ngFileUpload']).controller('history', function ($scope, 
 				pageSize : $scope.maxSize,
 				startTime : $("#startTime").val(),
 				endTime : $("#endTime").val(),
+				startEntryTime : $("#startEntryTime").val(),
+				endEntryTime : $("#endEntryTime").val(),
 				keyword : encodeURI($scope.keyword,"UTF-8"),
+				material : encodeURI($scope.material,"UTF-8"),
+				companyName : encodeURI($scope.companyName,"UTF-8"),
 			}
 		}).success(function(data) {
 			$scope.bigTotalItems = data.total;
@@ -69,8 +73,16 @@ angular.module('app', ['ngFileUpload']).controller('history', function ($scope, 
     	autoclose:true
     }).on('dp.change', function (e) {  
     });  
- $('#datetimepicker2').datetimepicker({  
+   $('#datetimepicker2').datetimepicker({  
     	autoclose:true
     }).on('dp.change', function (e) {  
     });  
+   $('#datetimepicker3').datetimepicker({  
+ 	autoclose:true
+   }).on('dp.change', function (e) {  
+   });  
+   $('#datetimepicker4').datetimepicker({  
+ 	autoclose:true
+   }).on('dp.change', function (e) {  
+   });  
 });

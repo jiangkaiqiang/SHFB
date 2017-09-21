@@ -59,7 +59,11 @@ public class RecordController extends BaseController {
 			@RequestParam(value="pageSize") Integer pageSize, 
 			@RequestParam(value="startTime", required=false) String startTime,
 			@RequestParam(value="endTime", required=false) String endTime,
-			@RequestParam(value="keyword", required=false) String keyword) throws UnsupportedEncodingException {
+			@RequestParam(value="startEntryTime", required=false) String startEntryTime,
+			@RequestParam(value="endEntryTime", required=false) String endEntryTime,
+			@RequestParam(value="keyword", required=false) String keyword,
+			@RequestParam(value="material", required=false) String material,
+			@RequestParam(value="companyName", required=false) String companyName) throws UnsupportedEncodingException {
 		pageNum = pageNum == null? 1:pageNum;
 		pageSize = pageSize==null? 12:pageSize;
 		PageHelper.startPage(pageNum, pageSize);
@@ -68,7 +72,17 @@ public class RecordController extends BaseController {
 		else{
 		keyword = URLDecoder.decode(keyword, "UTF-8");
 		}
-		Page<Record> records = recordDao.findAllRecords(keyword,startTime,endTime);
+		if(null==material||material.equals("undefined"))
+			material = null;
+		else{
+			material = URLDecoder.decode(material, "UTF-8");
+		}
+		if(null==companyName||companyName.equals("undefined"))
+			companyName = null;
+		else{
+			companyName = URLDecoder.decode(companyName, "UTF-8");
+		}
+		Page<Record> records = recordDao.findAllRecords(keyword,startTime,endTime,startEntryTime,endEntryTime,material,companyName);
 		return new PageInfo<Record>(records);
 		
 	}
@@ -242,7 +256,9 @@ public class RecordController extends BaseController {
 	
 	@RequestMapping(value = "/updateRecord")
 	@ResponseBody
-	public Object updateRecord(Record record){
+	public Object updateRecord(Record record) throws UnsupportedEncodingException{
+		record.setCompanyName(URLDecoder.decode(record.getCompanyName(), "UTF-8"));
+		record.setMaterial(URLDecoder.decode(record.getMaterial(), "UTF-8"));
 		recordDao.updateByPrimaryKeySelective(record);
 		return new BaseDto(0);
 	}
