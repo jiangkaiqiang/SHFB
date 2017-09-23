@@ -176,25 +176,27 @@
     
 <div id="wowslider-container1">
     <div class="ws_images" style="top:10px;">  
-    <div style="width:50%;height:420px;float:left;text-align:left;border:3px solid #f0f0f0">
+    <div style="background:#E0E0E0;width:50%;height:400px;float:left;text-align:left;border:3px solid #f0f0f0">
         <p ng-if="firstRecord.car_num!=null&&firstRecord.car_num!=''"><font style="color: #000000;font-size: 16px;">
-        车号：<input type="text" style="width:300px"  value="{{firstRecord.car_num}}"></input></font></p>
-        <p><font style="color: #000000;font-size: 16px;">物品：
+        车号：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="text" style="width:300px"  value="{{firstRecord.car_num}}"></input></font></p>
+        <p><font style="color: #000000;font-size: 16px;" value="{{firstRecord.material}}">物品：
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <input type="text" style="width:300px"  value=""></input></font></p>
-        <p><font style="color: #000000;font-size: 16px;">发货单位：
+        <p><font style="color: #000000;font-size: 16px;">客户公司：
         <input type="text" style="width:300px"  value="{{firstRecord.deliverCompanyName}}"></input></font></p>
-        <p><font style="color: #000000;font-size: 16px;">所属单位：
-        <input type="text" style="width:300px"  value="{{firstRecord.companyName}}"></input></font></p>
+       <!--  <p><font style="color: #000000;font-size: 16px;">所属单位：
+        <input type="text" style="width:300px"  value="{{firstRecord.companyName}}"></input></font></p> -->
         <p ng-if="firstRecord.entry_time!=null&&firstRecord.entry_time!=''"><font style="color: #000000;font-size: 16px;">
-        进入时间：<input type="text" style="width:300px"  value="{{firstRecord.entry_time}}"></input></font></p>
+        进入时间：&nbsp;<input type="text" style="width:300px"  value="{{firstRecord.entry_time}}"></input></font></p>
         <p ng-if="firstRecord.entry_weight!=null&&firstRecord.entry_weight!=''"><font style="color: #000000;font-size: 16px;">
-        进入重量：<input type="text" style="width:300px"  value="{{firstRecord.entry_weight}}"></input></font></p>
+        进入重量：&nbsp;<input type="text" style="width:300px"  value="{{firstRecord.entry_weight}}"></input></font></p>
         <p ng-if="firstRecord.leave_time!=null&&firstRecord.leave_time!=''"><font style="color: #000000;font-size: 16px;">
-        出去时间：<input type="text" style="width:300px"  value="{{firstRecord.leave_time}}"></input></font></p>
+        出去时间：&nbsp;<input type="text" style="width:300px"  value="{{firstRecord.leave_time}}"></input></font></p>
         <p ng-if="firstRecord.leave_weight!=null&&firstRecord.leave_weight!=''"><font style="color: #000000;font-size: 16px;">
-        出去重量：<input type="text" style="width:200px"  value="{{firstRecord.leave_weight}}"></input></font></p>
+        出去重量：&nbsp;<input type="text" style="width:200px"  value="{{firstRecord.leave_weight}}"></input></font></p>
         <p ng-if="firstRecord.leave_weight!=null&&firstRecord.leave_weight!=''&&firstRecord.entry_weight!=null&&firstRecord.entry_weight!=''"><font style="color: #000000;font-size: 16px;">
-        净重量：<input type="text" style="width:200px"  value="{{case.entry_weight-case.leave_weight}}"></input></font></p>
+        净重量：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" style="width:200px"  value="{{firstRecord.entry_weight-firstRecord.leave_weight}}"></input></font></p>
        <!--  <p><font style="color: #000000;font-size: 16px;">驾驶员姓名：
         <input type="text" style="width:300px"  value="{{firstRecord.userName}}"></input></font></p>
         <p><font style="color: #000000;font-size: 16px;">驾驶员联系方式：

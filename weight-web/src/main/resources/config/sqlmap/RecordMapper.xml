@@ -215,6 +215,24 @@
 		order by `leave_time` desc
 	</select>
 	
+	 <select id="findAllErrorTimeRecords" parameterType="int" resultType="com.shfb.rfid.manage.entity.Record">
+		SELECT * FROM `record`
+		<where>
+			<if test="keyword != null">
+				car_num like "%"#{keyword}"%"
+			</if>
+			<if test="startTime!=null and startTime!=''">
+                AND leave_time &gt;= #{startTime}
+            </if>
+            <if test="endTime!=null and endTime!=''">
+                AND leave_time &lt;= #{endTime}
+            </if>
+                AND entry_time is not NULL AND entry_time != ''
+                AND (leave_time is NULL or leave_time = '')  AND entry_time &lt;= date_sub(curdate(),interval 1 day)
+		</where>
+		order by `entry_time` desc
+	</select>
+	
 	<select id="findMergeRecord" parameterType="map" resultType="com.shfb.rfid.manage.entity.Record">
 		SELECT * from record WHERE car_num = #{carNum} AND entry_time is not NULL AND entry_time != '' AND (leave_time is NULL OR leave_time = '')
 		AND entry_time &lt;= #{leaveTime} ORDER BY entry_time DESC limit 0,1

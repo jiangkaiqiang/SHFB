@@ -177,4 +177,75 @@ angular.module('app', ['ngFileUpload']).controller('error', function ($scope, Up
 			}
 		});
 	}
+	
+	// 显示最大页数
+    $scope.maxSizeTime = 12;
+    // 总条目数(默认每页十条)
+    $scope.bigTotalItemsTime = 12;
+    // 当前页
+    $scope.bigCurrentPageTime = 1;
+	$scope.getTimeRecords = function() {
+		$http({
+			method : 'POST',
+			url : '/i/record/findErrorTimeRecordList',
+			params : {
+				pageNum : $scope.bigCurrentPageTime,
+				pageSize : $scope.maxSizeTime,
+				startTime : $scope.startTimeTime,
+				endTime : $scope.endTimeTime,
+				keyword : encodeURI($scope.keywordTime,"UTF-8"),
+			}
+		}).success(function(data) {
+			$scope.bigTotalItemsTime = data.total;
+			$scope.AllRecordsTime = data.list;
+			$scope.numPagesTime = data.pages;
+		});
+	}
+	$scope.getTimeRecords();
+	
+	$scope.deleteRecordById = function(recordID) {
+		if(delcfm()){
+	    	$http.get('/i/record/deleteRecordByID', {
+	            params: {
+	                "recordID": recordID
+	            }
+	        }).success(function (data) {
+	        	$scope.getTimeRecords();
+	        	alert("删除成功");
+	        });
+	    	}
+	}
+	
+	function delcfm() {
+        if (!confirm("确认要删除？")) {
+            return false;
+        }
+        return true;
+    }
+	
+	$scope.firstPageTime = function() {
+		$scope.bigCurrentPageTime = 1;
+		$scope.getTimeRecords();
+	};
+	
+	$scope.endPageTime = function() {
+		$scope.bigCurrentPageTime = $scope.numPagesTime;
+		$scope.getTimeRecords();
+	};
+	
+	$scope.pagedesTime = function() {
+		if($scope.bigCurrentPageTime>1){
+			$scope.bigCurrentPageTime = $scope.bigCurrentPageTime-1;
+			$scope.getTimeRecords();
+		}
+		   
+	};
+	
+	$scope.pageaddTime = function() {
+		if($scope.bigCurrentPageTime<$scope.numPagesTime){
+			$scope.bigCurrentPageTime = $scope.bigCurrentPageTime+1;
+			$scope.getTimeRecords();
+		}
+		  
+	};
 });
