@@ -26,6 +26,8 @@ public interface RecordMapper {
 
 	Page<Record> findAllErrorLeaveRecords(@Param("keyword")String keyword,@Param("startTime")String startTime, @Param("endTime")String endTime);
 	
+	Page<Record> findAllErrorTimeRecords(@Param("keyword")String keyword,@Param("startTime")String startTime, @Param("endTime")String endTime);
+	
 	Record findMergeRecord(@Param("carNum")String carNum,@Param("leaveTime")String leaveTime);
 	
 	Record findFirstRecord();

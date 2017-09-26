@@ -128,6 +128,27 @@ public class RecordController extends BaseController {
 		
 	}
 	
+	@RequestMapping(value = "/findErrorTimeRecordList", method = RequestMethod.POST)
+	@ResponseBody
+	public Object findErrorTimeRecordList(@RequestParam(value="pageNum",required=false) Integer pageNum,
+			@RequestParam(value="pageSize") Integer pageSize, 
+			@RequestParam(value="startTime", required=false) String startTime,
+			@RequestParam(value="endTime", required=false) String endTime,
+			@RequestParam(value="keyword", required=false) String keyword) throws UnsupportedEncodingException {
+		pageNum = pageNum == null? 1:pageNum;
+		pageSize = pageSize==null? 12:pageSize;
+		PageHelper.startPage(pageNum, pageSize);
+		if(keyword.equals("undefined"))
+			keyword = null;
+		else{
+		keyword = URLDecoder.decode(keyword, "UTF-8");
+		}
+		Page<Record> records = recordDao.findAllErrorTimeRecords(keyword,startTime,endTime);
+		return new PageInfo<Record>(records);
+		
+	}
+	
+	
 	@RequestMapping(value = "/addRecordEntry")
 	@ResponseBody
 	public Object addRecordEntry(HttpServletRequest request) throws UnsupportedEncodingException {
