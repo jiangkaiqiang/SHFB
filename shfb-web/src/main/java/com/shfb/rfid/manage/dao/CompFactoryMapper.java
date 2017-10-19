@@ -20,7 +20,7 @@ public interface CompFactoryMapper {
 
     int updateByPrimaryKey(CompFactory record);
     
-    Page<CompFactory> findAllCompFactory(@Param("pr_id")Integer pr_id, @Param("keyword")String keyword);
+    Page<CompFactory> findAllCompFactory(@Param("pr_id")Integer pr_id, @Param("keyword")String keyword,@Param("userCompFactoryID")Integer userCompFactoryID);
     
     List<CompFactory> findCompFactorys();
     

@@ -37,6 +37,7 @@ public class CompFactoryController extends BaseController {
 	public Object findCompFactoryList(@RequestParam(value="pageNum",required=false) Integer pageNum,
 			@RequestParam(value="pageSize") Integer pageSize, 
 			@RequestParam(value="provinceid", required=false) Integer provinceid,
+			@RequestParam(value="userCompFactoryID", required=false) Integer userCompFactoryID,
 			@RequestParam(value="keyword", required=false) String keyword) throws UnsupportedEncodingException {
 		pageNum = pageNum == null? 1:pageNum;
 		pageSize = pageSize==null? 12:pageSize;
@@ -46,7 +47,10 @@ public class CompFactoryController extends BaseController {
 		else{
 		keyword = URLDecoder.decode(keyword, "UTF-8");
 		}
-		Page<CompFactory> compFactories = compfactoryDao.findAllCompFactory(provinceid,keyword);
+		if (userCompFactoryID==0) {
+			userCompFactoryID = null;
+		}
+		Page<CompFactory> compFactories = compfactoryDao.findAllCompFactory(provinceid,keyword,userCompFactoryID);
 		Page<CompFactoryDto> compFactoryDtos = new Page<CompFactoryDto>();
 		for (CompFactory compFactory : compFactories) {
 			CompFactoryDto compFactoryDto = new CompFactoryDto();

@@ -134,6 +134,9 @@
 			<if test="pr_id != null">
 				pr_id=#{pr_id}
 			</if>
+			<if test="userCompFactoryID != null">
+				AND comp_factory_id=#{userCompFactoryID}
+			</if>
 			<if test="keyword != null">
 				AND comp_factory_name like "%"#{keyword}"%"
 			</if>

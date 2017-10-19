@@ -27,6 +27,7 @@ coldWeb.controller('compFactoryManage', function ($rootScope, $scope, $state, $c
 				pageNum : $scope.bigCurrentPage,
 				pageSize : $scope.maxSize,
 				provinceid : $scope.searchprovinceid,
+				userCompFactoryID : $rootScope.admin.comp_factory_id,
 				keyword : encodeURI($scope.keyword,"UTF-8"),
 			}
 		}).success(function(data) {
